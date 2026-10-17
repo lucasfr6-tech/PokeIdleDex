@@ -8612,7 +8612,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 {const m0=modal;modal=function(){let S=[];try{S=[".pqbd",".pqa"].map(q=>{const e=document.querySelector("#md "+q);return[q,e?e.scrollTop:0]})}catch(e){}const r=m0.apply(this,arguments);try{S.forEach(([q,y])=>{if(!y)return;const e=document.querySelector("#md "+q);if(e)e.scrollTop=y})}catch(e){}return r}}
 /* ===== v119 : Tower jusqu'a l'etage 200, IA et equipes strategiques, prix de boutique ===== */
 function kxPm(i){const n=i&&i.n||"",c=i&&i.c||"";
- if(c=="Poké Balls")return n=="Master Ball"?1:2.5;
+ if(c=="Poké Balls")return(n=="Poké Ball"||n=="Super Ball"||n=="Hyper Ball"||n=="Honor Ball")?2.5:1;
  if(c=="Vitamines")return 5;
  if(n=="Bouchon Bonus"||n=="Super Bonus"||n=="Patch Talent")return 6;
  if(n=="Capsule Talent")return 4;
