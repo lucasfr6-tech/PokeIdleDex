@@ -3060,6 +3060,7 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .tum h2{margin:6px 0 8px;font-size:24px}.tum p{margin:0 auto;max-width:36ch;color:#b6c0d1;font-size:14.5px;line-height:1.55}.tud{display:flex;justify-content:center;gap:7px;margin:20px 0}.tud i{width:8px;height:8px;border-radius:99px;background:#ffffff2a;transition:.2s}.tud i.on{width:24px;background:#f59e0b}.tud i.ok{background:#f59e0b88}
 .tub{display:flex;justify-content:space-between;gap:10px}.tup{padding:11px 18px;border-radius:12px;border:1px solid #ffffff22;background:transparent;color:#cbd5e1;font-weight:700;cursor:pointer}.tun{flex:1;padding:11px 20px;border-radius:12px;border:0;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#1c1004;font-weight:800;cursor:pointer}
 @media(max-width:700px){.nwg{grid-template-columns:1fr}.nwh{padding:22px 18px 12px}.nwb{padding:4px 18px}.nwo{padding:12px 18px}.nwtut{font-size:12px;padding:8px 10px}}
+.tmsb button.on b{text-decoration:line-through;opacity:.6}.tmsb button.on small{color:#fbbf24}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -9043,7 +9044,7 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  const pk=pkItem;
  pkItem=function(id){let h=pk(id);const c=G.col[id],m=tmMove(id);if(!m)return h;
   const b=f(id).slice(0,4),s=slotOf(id);
-  const blk=`<div class="pqc tmsl"><h3>${LS("CT apprise","Learned TM")} · ${esc(m.n)}</h3><small>${LS("Elle remplace cette attaque pendant les raids :","It replaces this move in raids:")}</small><div class="tmsb">${b.map((x,j)=>`<button class="${j==s?"on":""}" data-tms="${id}" data-j="${j}" style="--tc:${TC[x.t]}"><b>${esc(x.n)}</b><small>${x.c=="u"?LS("Soutien","Support"):x.p}</small></button>`).join("")}</div></div>`;
+  const blk=`<div class="pqc tmsl"><h3>${LS("CT apprise","Learned TM")} · ${esc(m.n)}</h3><small>${LS("Choisis l'attaque que la CT remplace. Elle disparaît tant que la CT est apprise.","Pick the move the TM replaces. It is gone while the TM is learned.")}</small><div class="tmsb">${b.map((x,j)=>`<button class="${j==s?"on":""}" data-tms="${id}" data-j="${j}" style="--tc:${TC[x.t]}"><b>${esc(x.n)}</b><small>${j==s?LS("Remplacée par la CT","Replaced by the TM"):x.c=="u"?LS("Soutien","Support"):x.p}</small></button>`).join("")}</div></div>`;
   return h+blk};
  /* les CT échangées sont rendues : on n'en perd plus une en la remplaçant */
  document.addEventListener("change",e=>{const t=e.target;if(!t||!t.matches)return;
@@ -9067,7 +9068,7 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
   else if(t.dataset.cts!=null){const id=t.dataset.cts,c=G.col[id];if(!c)return;c.tms=+t.value;if(G.rd&&G.rd.mv)G.rd.mv[id]=c.tms;save();rdtRender()}
  });
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tms]");if(!b)return;
-  const id=b.dataset.tms,c=G.col[id];if(!c)return;c.tms=+b.dataset.j;save();show()});
+  e.stopPropagation();e.preventDefault();const id=b.dataset.tms,c=G.col[id];if(!c)return;c.tms=+b.dataset.j;save();try{modal()}catch(x){show()}},true);
 })();
 
 /* ===== Pokédex : une méga / primo forme est cochée dès qu'on la possède (Méga-Perle dans le sac ou équipée) ===== */
