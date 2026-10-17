@@ -3061,6 +3061,22 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .tub{display:flex;justify-content:space-between;gap:10px}.tup{padding:11px 18px;border-radius:12px;border:1px solid #ffffff22;background:transparent;color:#cbd5e1;font-weight:700;cursor:pointer}.tun{flex:1;padding:11px 20px;border-radius:12px;border:0;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#1c1004;font-weight:800;cursor:pointer}
 @media(max-width:700px){.nwg{grid-template-columns:1fr}.nwh{padding:22px 18px 12px}.nwb{padding:4px 18px}.nwo{padding:12px 18px}.nwtut{font-size:12px;padding:8px 10px}}
 .tmsb button.on b{text-decoration:line-through;opacity:.6}.tmsb button.on small{color:#fbbf24}
+/* v147 Courrier + boss monde */
+#mlr{position:fixed;inset:0;z-index:99989;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,6,23,.72);backdrop-filter:blur(6px)}#mlr.on{display:flex}
+.mlm{position:relative;display:flex;flex-direction:column;width:min(620px,100%);max-height:min(86vh,780px);border-radius:24px;background:linear-gradient(180deg,#16213a,#0c1426);border:1px solid #ffffff1f;box-shadow:0 30px 80px #000a;overflow:hidden}
+.mlh{display:flex;align-items:center;gap:14px;padding:22px 64px 14px 24px;background:radial-gradient(120% 140% at 0 0,#f59e0b33,transparent 60%)}.mlh h2{margin:0;font-size:24px}.mlh p{margin:2px 0 0;color:var(--mu,#94a3b8);font-size:13px}
+.mli{flex:none;width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,#f59e0b,#c2410c)}.mlall{margin-left:auto;padding:9px 14px;border-radius:12px;border:0;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#1c1004;font-weight:800;cursor:pointer}
+.mlb{padding:6px 20px 10px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:10px}.mlc{padding:13px 14px;border-radius:16px;background:#ffffff0a;border:1px solid #ffffff14;display:flex;flex-direction:column;gap:9px}.mlc.new{border-color:#f59e0b66;background:#f59e0b12}.mlc.done{opacity:.62}
+.mlt{display:flex;align-items:center;gap:11px}.mlt b{display:block;font-size:14.5px}.mlt small{color:#94a3b8;font-size:12px}.mlt em{margin-left:auto;font-style:normal;font-size:11px;font-weight:800;color:#4ade80;text-transform:uppercase}.mlg{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fbbf24;background:#f59e0b1f}
+.mlc p{margin:0;font-size:13px;color:#b6c0d1}.mlr{display:flex;flex-wrap:wrap;gap:6px}.mlcl{align-self:flex-start;padding:9px 20px}
+.mle{display:flex;flex-direction:column;align-items:center;gap:6px;padding:34px 10px;text-align:center;color:#94a3b8}.mle svg{width:42px;height:42px;opacity:.6}.mle b{color:#e2e8f0}
+.mlf{padding:12px 20px 16px;border-top:1px solid #ffffff14;background:#0a1120;display:flex;flex-direction:column;gap:8px}.mlcode{display:flex;gap:8px}.mlcode input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid #ffffff22;background:#ffffff0d;color:inherit;text-transform:uppercase;letter-spacing:.06em}.mlcode button{padding:10px 18px;border-radius:12px;border:0;background:#334155;color:#fff;font-weight:700;cursor:pointer}
+.mlmsg{color:#fbbf24}.mlclr{align-self:flex-start;background:none;border:0;color:#94a3b8;cursor:pointer;text-decoration:underline;font-size:12px;padding:0}
+#mlbtn.dot{position:relative}#mlbtn.dot::after{content:"";position:absolute;right:6px;top:6px;width:11px;height:11px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 2px #0f172a,0 0 10px #ef4444}
+.wbr{position:relative;z-index:2;grid-column:1/-1;display:flex;flex-direction:column;gap:8px;margin-top:10px;padding:12px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid var(--ln,#ffffff22)}.wbr>b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}.wbr>small{color:var(--mu);font-size:12px}
+.wbg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.wbt{padding:9px;border-radius:12px;background:#ffffff0a;border:1px solid #ffffff14;display:flex;flex-direction:column;gap:6px;min-width:0}.wbt.ok{border-color:#4ade8088;background:#4ade8012}.wbh{display:flex;flex-direction:column;position:relative}.wbh b{font-size:13px}.wbh small{color:var(--mu);font-size:11px}.wbh i{position:absolute;right:0;top:0;color:#4ade80;width:16px;height:16px}
+.wbi{display:flex;flex-direction:column;gap:3px;font-size:11.5px}.wbi span{display:flex;align-items:center;gap:5px}.wbi img,.wbi .i{width:18px;height:18px}
+@media(max-width:900px){.wbg{grid-template-columns:1fr 1fr}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -5299,7 +5315,7 @@ const RT=[
  {n:["Impossible","Impossible"],c:"#c084fc",L:100,hp:52000,am:0.56,cr:.1,rp:500,sec:86400,cap:.018,pool:[90003,90002,491,491],sh:1,f:"sp",rec:100}];
 /* boss monde (change chaque semaine) */
 const RW=[[890,"etern"],[384,"mega"],[493,"n"],[383,"prim"],[382,"prim"],[150,"mega"]];
-const RWHP=4e6;const WBAM=.8;
+const RWHP=8e6;const WBAM=.8;
 
 /* ---- sprites pixel (2D) ---- */
 const GMX={3:10195,6:10196,9:10197,12:10198,68:10201,94:10202,131:10204,143:10206};
@@ -5556,11 +5572,11 @@ const wbTiers=d=>WBT.filter(x=>d>=x).length;
 async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
  if(kind=="cur"){if(w.k!=rdWeekK()||w.cl)return;d=w.d;k=w.k;killed=wbShared()>=RWHP}else{const p=w.pe;if(!p)return;d=p.d;k=p.k;try{if(LB.ok){const s=await LB.db.collection("wb").where("k","==",k).get();killed=s.docs.reduce((a,x)=>a+(+x.data().d||0),0)>=RWHP}}catch(e){}}
  const n=wbTiers(d);if(!n){toast(LS("Pas assez de dégâts pour une récompense (15 000 minimum).","Not enough damage for a reward (15,000 minimum)."));if(kind=="cur")w.cl=1;else w.pe=null;save();show();return}
- const items=[];for(let i=0;i<n;i++)WBR[i].forEach(([key,q])=>{const kk=key=="#pearl"?rdPearlKey():key;if(IT[kk]){G.inv[kk]=(G.inv[kk]||0)+q;const e=items.find(x=>x.k==kk);if(e)e.n+=q;else items.push({k:kk,n:q})}});
- const rp=n*120;r.rp+=rp;if(kind=="cur")w.cl=1;else w.pe=null;save();
+ const items=[];for(let i=0;i<n;i++)WBR[i].forEach(([key,q])=>{const kk=key=="#pearl"?rdPearlKey():key;if(IT[kk]){const e=items.find(x=>x.k==kk);if(e)e.n+=q;else items.push({k:kk,n:q})}});
+ const rp=n*120;try{mailAdd(LS("Boss monde","World boss"),LS("Récompenses de la semaine","Weekly rewards"),items.map(x=>["i",x.k,x.n]),fmt(d)+" "+LS("dégâts · palier ","damage · tier ")+n+" / 5")}catch(e){}r.rp+=rp;if(kind=="cur")w.cl=1;else w.pe=null;save();
  const o=$("rdb");RCX.boss=rdWBossOf(k);RCX.tier=5;RCX.wb=1;RCX.n=1;RCX.cap=killed?.03+.025*n:0;RCX.done=!killed;RCX.ok=0;RCX.busy=false;
  const item=x=>`<div class="rdri">${ic(x.k,IT[x.k].img)}<b>${IT[x.k].n}</b><em>×${x.n}</em></div>`;
- o.className="on";o.innerHTML=`<div class="rdrs" id="rdRes" style="--c:#a78bfa"><div class="rdrh w"><h2>${killed?LS("Boss monde vaincu !","World boss defeated!"):LS("Récompenses de la semaine","Weekly rewards")}</h2><small>${fmt(d)} ${LS("dégâts","damage")} · ${n} / 5 ${LS("paliers","tiers")}</small></div>
+ o.className="on";o.innerHTML=`<div class="rdrs" id="rdRes" style="--c:#a78bfa"><div class="rdrh w"><h2>${killed?LS("Boss monde vaincu !","World boss defeated!"):LS("Récompenses de la semaine","Weekly rewards")}</h2><small>${fmt(d)} ${LS("dégâts","damage")} · ${n} / 5 ${LS("paliers","tiers")} · ${LS("récompenses dans ton courrier","rewards sent to your mail")}</small></div>
  <div class="rdrw"><div class="rdrl"><div class="rdri"><i>${ico("trophy")}</i><b>${rp} ${LS("Points Raid","Raid Points")}</b></div>${items.map(item).join("")}</div>${killed?"":`<small>${LS("Le boss n'a pas été vaincu cette semaine : pas de capture.","The boss was not defeated: no capture.")}</small>`}</div>
  ${killed?`<div class="rdcpw">${rdCapHtml()}</div>`:`<div class="rdcpc"><button class="go" data-rd="dn">${LS("Continuer","Continue")}</button></div>`}</div>`;sfx("shiny")}
 function rdWBossOf(k){const w=RW[(Math.floor(new Date(k.split("-")[0],k.split("-")[1]-1,k.split("-")[2]).getTime()/6048e5))%RW.length]||RW[0];return rdBossMake(w[0],w[1],110,RWHP,WBAM,.1,"wb")}
@@ -9097,6 +9113,30 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
  const NEW={b:1.5,s:4,o:10,p:60};
  Object.keys(NEW).forEach(k=>{const t=CP[k];if(!t)return;const e=t.find(x=>x[1]=="sp");if(!e)return;const d=e[0]-NEW[k];e[0]=NEW[k];const n=t.find(x=>x[1]=="n");if(n)n[0]+=d});
 })();
+
+/* ===== Capsules d'argent et d'or : les gains (raids, tour, quêtes, pass, casino…) sont divisés par 5 ; les achats ne changent pas ===== */
+(function(){
+ const K=.2,KEYS={"bottle-cap":1,"gold-bottle-cap":1};let OK=0;
+ const W=n=>{const f=window[n];if(typeof f!="function")return;window[n]=function(){OK++;try{return f.apply(this,arguments)}finally{OK--}}};
+ ["bqBuy","pvBuy"].forEach(W);
+ {const f=window.act;if(typeof f=="function")window.act=function(a){if(a!="buy")return f.apply(this,arguments);OK++;try{return f.apply(this,arguments)}finally{OK--}}}
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-rd="buy"]');if(b){OK++;setTimeout(()=>{OK--},0)}},true);
+ const MK=new WeakSet();
+ const wrap=()=>{try{if(!G||!G.inv||MK.has(G.inv))return;const p=new Proxy(G.inv,{set(t,k,v){if(KEYS[k]&&!OK&&typeof v=="number"){const o=t[k]||0;if(v>o){const d=(v-o)*K;v=o+Math.floor(d)+(Math.random()<d%1?1:0)}}t[k]=v;return true}});MK.add(p);MK.add(G.inv);G.inv=p}catch(e){}};
+ setInterval(wrap,300);wrap();
+})();
+
+/* ===== Tour : une récompense tous les 10 étages (au lieu de 5), capsules fortement réduites ===== */
+(function(){
+ try{
+  Object.keys(TWRW).forEach(k=>{const f=+k;if(f%10!=0){delete TWRW[k];return}
+   const r=TWRW[k];r.it=r.it.map(x=>(x[0]=="bottle-cap"||x[0]=="gold-bottle-cap")?[x[0],Math.floor(x[1]/2)]:x).filter(x=>x[1]>0)});
+  const fx=(n,pairs)=>{try{let s=(0,eval)(n+".toString()");pairs.forEach(p=>{s=s.split(p[0]).join(p[1])});(0,eval)("("+s.replace(/^function\s+\w+/,"function")+")");return (0,eval)("("+s.replace(/^function\s+\w+/,"function")+")")}catch(e){return null}};
+  const a=fx("twNextMs",[["/5)*5+5","/10)*10+10"],["m+=5","m+=10"]]);if(a)window.twNextMs=a;
+  const b=fx("twMilesBar",[["m=5;","m=10;"],["m+=5","m+=10"]]);if(b)window.twMilesBar=b;
+  const c=fx("twViewRw",[["m=5;","m=10;"],["m+=5","m+=10"],["tous les 5 étages","tous les 10 étages"],["Les étages 25, 50, 75 et 100","Les étages 50 et 100"]]);if(c)window.twViewRw=c;
+ }catch(e){}
+})();
 /* ===== v146 : page Nouveautés + tutoriel de premier lancement ===== */
 (function(){
  const NEWS_V="2026-10-18";
@@ -9124,7 +9164,12 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
   ["new","book","Pokédex : formes cochées automatiquement","Les Méga-évolutions et les Primo-formes se cochent dès que tu possèdes la Méga-Perle correspondante."],
   ["new","bolt","Pass de combat : plus d'XP","Un Pokémon vaincu ou capturé sur deux donne 1 XP, et la capture d'un UR en rapporte 5."],
   ["new","map","Récap des expéditions","À la fin d'une expédition, même en automatique, un récap te dit si tu as obtenu le Pokémon visé. La barre de progression ne repart plus à zéro."],
+  ["new","gift","Courrier","Un nouveau bouton en haut à droite : les récompenses du boss monde, des défis de guilde et des codes cadeaux arrivent dans ton courrier. Tu peux aussi y entrer un code cadeau."],
+  ["new","shield","Boss monde renforcé","Le boss monde a 2 fois plus de points de vie (8 millions), et les récompenses de chaque palier sont maintenant visibles avant le combat."],
+  ["imp","star","Tour : récompenses tous les 10 étages","Une récompense tous les 10 étages au lieu de 5, avec beaucoup moins de capsules."],
   ["new","bug","Signaler un bug","Un nouveau bouton dans les Paramètres t'envoie directement sur notre Discord pour décrire le problème."],
+  ["imp","star","Capsules d'argent et d'or plus rares","Les gains de capsules (raids, Tour, quêtes, Pass de combat, Casino) sont divisés par 5. Les achats en boutique ne changent pas."],
+  ["imp","ghost","Exclusifs du Casino moins fréquents","Le taux d'obtention des formes spéciales exclusives au Casino est divisé par 2."],
   ["imp","coin","Prix fixes partout","Les tickets du Casino et l'invocation d'équipement ont un prix fixe, qui ne dépend plus de ta progression."],
   ["imp","gift","Boutique rééquilibrée","Vitamines, objets IV et talents et bonbons coûtent maintenant 4 fois plus cher."],
   ["imp","shield","Raids sans exclusifs","Les Pokémon exclusifs n'apparaissent plus dans les raids. Le raid Impossible propose 8 légendaires à taux égal."],
@@ -9185,6 +9230,69 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
   const b=document.createElement("button");b.id="tutb";b.className="fsb";b.innerHTML=`${IC.play}<span><b>${LS("Revoir le tutoriel","Replay the tutorial")}</b><small>${LS("Un rappel rapide des bases","A quick reminder of the basics")}</small></span>`;
   b.onclick=tutOpen;f.insertAdjacentElement("afterend",b)}catch(e){}};
  setInterval(inj,1000);
+})();
+/* ===== v147 : Courrier (récompenses du boss monde, défis de guilde, codes cadeaux) + paliers du boss monde ===== */
+const GIFT_CODES={
+ /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",100],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
+};
+function mailBox(){G.mail=G.mail||[];return G.mail}
+function mailUnread(){return mailBox().filter(m=>!m.c).length}
+function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:title,f:from||"",x:txt||"",d:Date.now(),rw:rw||[],c:rw&&rw.length?0:1,r:0});if(L.length>80)L.length=80;try{save()}catch(e){}try{mailDot()}catch(e){}}
+(function(){
+ const P=(d)=>`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+ const MI=P('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/>');
+ const GI=P('<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18v-3H3zM12 6v14M12 6c-1-3-5-3-4.5 0M12 6c1-3 5-3 4.5 0"/>');
+ let ST={code:"",msg:""};
+ const when=t=>{const d=new Date(t),n=Date.now(),m=Math.floor((n-t)/6e4);if(m<1)return LS("À l'instant","Just now");if(m<60)return LS("Il y a "+m+" min",m+" min ago");if(m<1440)return LS("Il y a "+Math.floor(m/60)+" h",Math.floor(m/60)+" h ago");return d.toLocaleDateString(SG&&SG.lang=="en"?"en-GB":"fr-FR",{day:"numeric",month:"short"})};
+ const chips=rw=>rw.map(r=>{try{return bpChip(r)}catch(e){return""}}).join("");
+ const root=()=>{let o=document.getElementById("mlr");if(!o){o=document.createElement("div");o.id="mlr";document.body.appendChild(o)}return o};
+ const body=()=>{const L=mailBox(),un=L.filter(m=>!m.c).length;
+  return `<div class="mlm"><button class="nwx" data-ml="x" aria-label="${LS("Fermer","Close")}">${P('<path d="M6 6l12 12M18 6L6 18"/>')}</button>
+  <header class="mlh"><span class="mli">${MI}</span><div><h2>${LS("Courrier","Mail")}</h2><p>${un?`${un} ${LS("à récupérer","to claim")}`:LS("Rien à récupérer","Nothing to claim")}</p></div>${un>1?`<button class="mlall" data-ml="all">${LS("Tout récupérer","Claim all")}</button>`:""}</header>
+  <div class="mlb">${L.length?L.map(m=>`<article class="mlc ${m.c?"done":"new"}"><div class="mlt"><span class="mlg">${GI}</span><div><b>${esc(m.t)}</b><small>${esc(m.f||"")}${m.f?" · ":""}${when(m.d)}</small></div>${m.c?`<em>${m.rw&&m.rw.length?LS("Récupéré","Claimed"):LS("Lu","Read")}</em>`:""}</div>${m.x?`<p>${esc(m.x)}</p>`:""}${m.rw&&m.rw.length?`<div class="mlr">${chips(m.rw)}</div>`:""}${!m.c&&m.rw&&m.rw.length?`<button class="go mlcl" data-ml="c" data-i="${m.id}">${LS("Récupérer","Claim")}</button>`:""}</article>`).join(""):`<div class="mle">${MI}<b>${LS("Ton courrier est vide","Your mail is empty")}</b><small>${LS("Les récompenses du boss monde, des défis de guilde et des codes cadeaux arrivent ici.","World boss, guild challenge and gift code rewards arrive here.")}</small></div>`}</div>
+  <footer class="mlf"><div class="mlcode"><input id="mlin" type="text" placeholder="${LS("Entrer un code cadeau","Enter a gift code")}" value="${esc(ST.code)}" maxlength="32" autocomplete="off" spellcheck="false"><button data-ml="code">${LS("Valider","Redeem")}</button></div>${ST.msg?`<small class="mlmsg">${ST.msg}</small>`:""}${L.some(m=>m.c)?`<button class="mlclr" data-ml="clr">${LS("Supprimer les messages lus","Delete read messages")}</button>`:""}</footer></div>`};
+ const render=()=>{const o=document.getElementById("mlr");if(o&&o.className=="on")o.innerHTML=body()};
+ function mailOpen(){ST.msg="";const o=root();o.className="on";o.innerHTML=body()}
+ function mailClose(){const o=document.getElementById("mlr");if(o){o.className="";o.innerHTML=""}}
+ async function claim(m){if(!m||m.c)return;m.c=1;save();try{const out=await bpGive(m.rw);bpPop(m.t,LS("Courrier","Mail"),out)}catch(e){}save();mailDot();render();try{ui()}catch(e){}}
+ window.mailOpen=mailOpen;
+ document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-ml]");if(!t)return;const k=t.dataset.ml;
+  if(k=="open"){mailOpen();return}
+  if(k=="x"){mailClose();return}
+  if(k=="c"){await claim(mailBox().find(m=>m.id==t.dataset.i))}
+  else if(k=="all"){const L=mailBox().filter(m=>!m.c&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await bpGive(m.rw))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
+  else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
+  else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
+   const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c];G.codes=G.codes||{};
+   if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");
+   else{G.codes[c]=1;mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"");ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}
+   render();mailDot()}
+ });
+ document.addEventListener("keydown",e=>{if(e.key=="Escape")mailClose();if(e.key=="Enter"&&e.target&&e.target.id=="mlin"){const b=document.querySelector('[data-ml="code"]');if(b)b.click()}});
+ document.addEventListener("click",e=>{if(e.target&&e.target.id=="mlr")mailClose()});
+ /* bouton en haut à droite (colonne Amis / Chat) */
+ window.mailDot=()=>{const b=document.getElementById("mlbtn");if(!b)return;const n=mailUnread();b.classList.toggle("dot",n>0);const s=b.querySelector("small");if(s)s.textContent=n?n+" "+LS("nouveau"+(n>1?"x":""),"new"):LS("Aucun nouveau","No new")};
+ const add=()=>{try{const c=document.getElementById("sc");if(!c)return;if(document.getElementById("mlbtn")){mailDot();return}
+  const b=document.createElement("button");b.id="mlbtn";b.className="qkb";b.setAttribute("data-ml","open");
+  b.innerHTML=`<span class="qki" style="--c1:#f59e0b;--c2:#c2410c">${MI}</span><span class="qkt"><b>${LS("Courrier","Mail")}</b><small></small></span>`;c.insertBefore(b,c.firstChild);mailDot()}catch(e){}};
+ setInterval(add,1000);setTimeout(add,400);
+ /* message de bienvenue pour une partie neuve */
+ setTimeout(()=>{try{if(!G.mailw){G.mailw=1;if(!mailBox().length&&(G.caps||0)<30)mailAdd(LS("Bienvenue sur PokeIdleDex","Welcome to PokeIdleDex"),"PokeIdleDex",[],LS("Les récompenses du boss monde, des défis de guilde et tes codes cadeaux arriveront ici.","World boss, guild challenge rewards and your gift codes will arrive here."));save()}}catch(e){}},2500);
+
+ /* défis de guilde : la récompense arrive par courrier */
+ glClaim=async function(ch){const g=glS();if(!ch.done||g.cl[ch.id]||!ch.mine)return;g.cl[ch.id]=1;g.gx+=ch.per=="d"?80:300;
+  mailAdd(LS("Défi de guilde réussi","Guild challenge complete"),LS("Guilde","Guild")+" · "+LS(CHT[ch.k].n[0],CHT[ch.k].n[1]),ch.rw.slice(),"");
+  toast(LS("Récompense envoyée dans ton courrier.","Reward sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
+ glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B||!B.dead||g.bcl[B.wk]||!(g.bs.dmg>0))return;g.bcl[B.wk]=1;
+  const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",40],["i","master-ball",1]]:rk==1?[["g",25]]:rk==2?[["g",15]]:[]);g.gx+=500;
+  mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS("Récompenses de la semaine.","This week's rewards."));
+  toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
+
+ /* boss monde : paliers et récompenses visibles */
+ const wb0=rhWb;
+ rhWb=function(){let h=wb0.apply(this,arguments);try{const my=wbMy(),R=WBR.map((L,j)=>{const ok=my>=WBT[j];return `<div class="wbt ${ok?"ok":""}"><div class="wbh"><b>${LS("Palier","Tier")} ${j+1}</b><small>${fmt(WBT[j])} ${LS("dégâts","dmg")}</small>${ok?`<i>${ico("check")}</i>`:""}</div><div class="wbi">${L.map(([k,q])=>{if(k=="#pearl")return `<span title="${LS("Méga-Perle au hasard","Random Mega Pearl")}">${LS("Méga-Perle","Mega Pearl")} ×${q}</span>`;const it=IT[k];return it?`<span>${ic(k,it.img)}${esc(it.n)} ×${q}</span>`:""}).join("")}<span>${LS("120 Points Raid","120 Raid Points")}</span></div></div>`}).join("");
+  const blk=`<div class="wbr"><b>${LS("Récompenses par palier","Rewards per tier")}</b><small>${LS("Les paliers se cumulent : atteindre le palier 3 donne aussi les paliers 1 et 2. Les récompenses arrivent dans ton courrier.","Tiers stack: reaching tier 3 also gives tiers 1 and 2. Rewards arrive in your mail.")}</small><div class="wbg">${R}</div></div>`;
+  const i=h.lastIndexOf("</section>");if(i>0)h=h.slice(0,i)+blk+h.slice(i)}catch(e){}return h};
 })();
 
 /* ============ DÉMARRAGE ============ */
