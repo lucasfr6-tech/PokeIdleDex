@@ -4534,8 +4534,8 @@ const CT=[
 const CP={
  b:[[2000,"m",.5],[1400,"m",1],[600,"m",2],[120,"m",5],[500,"i","great-ball",15],[350,"i","ultra-ball",4],[200,"i","max-potion",4],[100,"st",1],[120,"v",2],[250,"i","dream-ball",2],[150,"i","max-revive",3]],
  s:[[2000,"m",.5],[1400,"m",1],[750,"m",2],[180,"m",5],[25,"m",10],[450,"i","ultra-ball",10],[250,"i","dream-ball",3],[250,"st",2],[120,"i","bottle-cap",1],[120,"i","ability-capsule",1],[150,"v",3],[5,"mp"]],
- o:[[1800,"m",.5],[1250,"m",1],[800,"m",2],[280,"m",5],[60,"m",10],[400,"st",3],[250,"i","bottle-cap",2],[120,"i","gold-bottle-cap",1],[80,"i","ability-patch",1],[250,"i","dream-ball",8],[20,"mp"],[10,"mb"]],
- p:[[1600,"m",.5],[1200,"m",1],[800,"m",2],[350,"m",5],[80,"m",10],[450,"st",5],[250,"i","gold-bottle-cap",2],[150,"i","ability-patch",2],[250,"i","dream-ball",12],[90,"mp"],[40,"mb"],[180,"sp"]]};
+ o:[[1800,"m",.5],[1250,"m",1],[800,"m",2],[280,"m",5],[60,"m",10],[400,"st",3],[250,"i","bottle-cap",2],[120,"i","gold-bottle-cap",1],[10,"i","ability-patch",1],[70,"i","bottle-cap",2],[250,"i","dream-ball",8],[20,"mp"],[10,"mb"]],
+ p:[[1600,"m",.5],[1200,"m",1],[800,"m",2],[350,"m",5],[80,"m",10],[450,"st",5],[250,"i","gold-bottle-cap",2],[10,"i","ability-patch",1],[140,"i","bottle-cap",3],[250,"i","dream-ball",12],[90,"mp"],[40,"mb"],[180,"sp"]]};
 Object.keys(CP).forEach(k=>{const s=CP[k].reduce((a,x)=>a+x[0],0);CP[k].unshift([10000-s,"n"])});
 const PITY=100;
 const casH=()=>qcps()*3600;
@@ -5294,9 +5294,9 @@ const RLOOT=[
  [["great-ball",2,4,1],["super-potion",3,5,.8],["bottle-cap",1,1,.04]],
  [["ultra-ball",2,4,1],["hyper-potion",2,4,.8],["max-potion",1,2,.3],["bottle-cap",1,1,.1],["ability-capsule",1,1,.06]],
  [["ultra-ball",3,6,1],["max-potion",2,3,.8],["max-revive",1,2,.5],["bottle-cap",1,2,.25],["ability-capsule",1,1,.15],["#pearl",1,1,.06]],
- [["quick-ball",3,6,1],["dusk-ball",3,6,.7],["full-restore",2,3,.8],["max-revive",2,3,.7],["bottle-cap",1,3,.5],["gold-bottle-cap",1,1,.06],["ability-patch",1,1,.08],["#pearl",1,1,.12],["master-ball",1,1,.01]],
- [["dream-ball",2,4,1],["full-restore",3,5,1],["max-revive",3,5,.9],["bottle-cap",2,4,.7],["gold-bottle-cap",1,1,.2],["ability-patch",1,1,.2],["#pearl",1,1,.3],["master-ball",1,1,.05],["life-orb",1,1,.05]],
- [["dream-ball",4,6,1],["full-restore",5,8,1],["max-revive",5,8,1],["gold-bottle-cap",1,2,.6],["ability-patch",1,2,.5],["#pearl",1,2,.7],["master-ball",1,1,.25],["choice-band",1,1,.15],["life-orb",1,1,.15]]];
+ [["quick-ball",3,6,1],["dusk-ball",3,6,.7],["full-restore",2,3,.8],["max-revive",2,3,.7],["bottle-cap",1,3,.5],["gold-bottle-cap",1,1,.06],["ability-patch",1,1,.01],["#pearl",1,1,.12],["master-ball",1,1,.01]],
+ [["dream-ball",2,4,1],["full-restore",3,5,1],["max-revive",3,5,.9],["bottle-cap",2,4,.7],["gold-bottle-cap",1,1,.2],["ability-patch",1,1,.03],["#pearl",1,1,.3],["master-ball",1,1,.05],["life-orb",1,1,.05]],
+ [["dream-ball",4,6,1],["full-restore",5,8,1],["max-revive",5,8,1],["gold-bottle-cap",1,2,.6],["ability-patch",1,1,.08],["#pearl",1,2,.7],["master-ball",1,1,.25],["choice-band",1,1,.15],["life-orb",1,1,.15]]];
 const rdPearlKey=()=>{const m=MGD[Math.random()*MGD.length|0];return "mp"+m[0]};
 function rdRollLoot(tier,first){const out=[];const T=RLOOT[tier]||[];T.forEach(([k,a,b,p])=>{if(Math.random()<Math.min(1,p*(first?1.5:1))){const kk=k=="#pearl"?rdPearlKey():k;if(IT[kk])out.push({k:kk,n:a+(Math.random()*(b-a+1)|0)})}});
  if(first&&tier>=1&&!out.some(x=>x.k=="bottle-cap"||x.k=="gold-bottle-cap"))out.push({k:tier>=3?"gold-bottle-cap":"bottle-cap",n:1});return out}
@@ -5370,7 +5370,7 @@ async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
 function rdWBossOf(k){const w=RW[(Math.floor(new Date(k.split("-")[0],k.split("-")[1]-1,k.split("-")[2]).getTime()/6048e5))%RW.length]||RW[0];return rdBossMake(w[0],w[1],110,RWHP,WBAM,.1,"wb")}
 /* ============ v23 : RAIDS — onglet, équipe, boutique, actions ============ */
 const RTB={kind:"raid",tier:0,team:[],q:"",s:"adv",boss:null};
-const RSHOP=[["master-ball",1,450],["ultra-ball",10,25],["quick-ball",10,30],["dusk-ball",10,30],["hyper-potion",10,30],["max-revive",3,35],["full-restore",5,60],["bottle-cap",1,90],["ability-capsule",1,120],["gold-bottle-cap",1,600],["ability-patch",1,900],["#pearl",1,400],["life-orb",1,700],["choice-band",1,700]];
+const RSHOP=[["master-ball",1,450],["ultra-ball",10,25],["quick-ball",10,30],["dusk-ball",10,30],["hyper-potion",10,30],["max-revive",3,35],["full-restore",5,60],["bottle-cap",1,90],["ability-capsule",1,120],["gold-bottle-cap",1,600],["ability-patch",1,3600],["#pearl",1,400],["life-orb",1,700],["choice-band",1,700]];
 const rdMS=n=>{n=Math.max(0,Math.ceil(n/1000));const h=n/3600|0,m=(n%3600)/60|0,s=n%60;return (h?h+" h ":"")+(h?String(m).padStart(2,"0")+" min":m+" min "+String(s).padStart(2,"0")+" s")};
 const rdUntilMidnight=()=>{const d=new Date();d.setHours(24,0,0,0);return d-Date.now()};
 const rdUntilMonday=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+(8-((d.getDay()+6)%7+1)));return d-Date.now()};
@@ -6554,10 +6554,10 @@ function pvRows(idx){idx=idx==null?pvIdx():idx;const cur=idx==pvIdx(),p=pvS(),re
 
 /* ---------- récompenses par palier ---------- */
 const PVR=[
- {a:1,b:1,n:"Top 1",c:"#fbbf24",h:36,it:[["master-ball",3],["gold-bottle-cap",6],["ability-patch",4],["dream-ball",12],["max-revive",10]]},
- {a:2,b:2,n:"Top 2",c:"#e5e7eb",h:24,it:[["master-ball",2],["gold-bottle-cap",4],["ability-patch",3],["dream-ball",8],["max-revive",8]]},
- {a:3,b:3,n:"Top 3",c:"#e0a062",h:18,it:[["master-ball",1],["gold-bottle-cap",3],["ability-patch",2],["dream-ball",6],["max-revive",6]]},
- {a:4,b:10,n:"Top 4 à 10",c:"#c084fc",h:10,it:[["gold-bottle-cap",2],["ability-patch",1],["dream-ball",4],["max-revive",4],["full-restore",5]]},
+ {a:1,b:1,n:"Top 1",c:"#fbbf24",h:36,it:[["master-ball",3],["gold-bottle-cap",6],["ability-patch",1],["dream-ball",12],["max-revive",10]]},
+ {a:2,b:2,n:"Top 2",c:"#e5e7eb",h:24,it:[["master-ball",2],["gold-bottle-cap",4],["bottle-cap",3],["dream-ball",8],["max-revive",8]]},
+ {a:3,b:3,n:"Top 3",c:"#e0a062",h:18,it:[["master-ball",1],["gold-bottle-cap",3],["bottle-cap",2],["dream-ball",6],["max-revive",6]]},
+ {a:4,b:10,n:"Top 4 à 10",c:"#c084fc",h:10,it:[["gold-bottle-cap",2],["bottle-cap",2],["dream-ball",4],["max-revive",4],["full-restore",5]]},
  {a:11,b:25,n:"Top 11 à 25",c:"#60a5fa",h:6,it:[["gold-bottle-cap",1],["bottle-cap",3],["quick-ball",8],["max-revive",3],["full-restore",3]]},
  {a:26,b:50,n:"Top 26 à 50",c:"#34d399",h:3,it:[["bottle-cap",2],["ultra-ball",10],["max-revive",2],["full-restore",2]]},
  {a:51,b:100,n:"Top 51 à 100",c:"#94a3b8",h:1.5,it:[["bottle-cap",1],["ultra-ball",5],["hyper-potion",5]]}];
@@ -6940,7 +6940,7 @@ function pvDQ(){const g=G.dq=G.dq||{},d=pvDayK();if(g.d!=d){g.d=d;g.n={pvp:0,rai
 const dqDone=()=>{const g=pvDQ();return DQL.every(x=>(g.n[x[0]]||0)>=x[2])};
 const dqReady=()=>{const g=pvDQ();return !g.c&&dqDone()};
 function dqAdd(k,n){const g=pvDQ(),L=DQL.find(x=>x[0]==k);if(!L||g.c)return;const was=dqDone();g.n[k]=Math.min(L[2],(g.n[k]||0)+(n==null?1:n));if(!was&&dqDone()){toast("Objectifs du jour terminés : ton coffre t'attend dans l'onglet JCJ");sfx("pvready")}}
-const DQR=s=>({coins:Math.floor(qcps()*900*(1+.35*s)),ins:4+2*s,it:[["ultra-ball",3+s]].concat(s==3?[["bottle-cap",2]]:s==5?[["ability-patch",1]]:s==7?[["master-ball",1],["gold-bottle-cap",3]]:[]),eq:s==7?2:0});
+const DQR=s=>({coins:Math.floor(qcps()*900*(1+.35*s)),ins:4+2*s,it:[["ultra-ball",3+s]].concat(s==3?[["bottle-cap",2]]:s==5?[["bottle-cap",3]]:s==7?[["master-ball",1],["gold-bottle-cap",3]]:[]),eq:s==7?2:0});
 function dqClaim(){const g=pvDQ();if(g.c||!dqDone())return;const ns=g.cd==pvYest()?(g.s%7)+1:1,R=DQR(ns);g.s=ns;g.cd=pvDayK();g.c=1;
  G.m+=kxI("dq",R.coins);G.gain+=R.coins;pvIns(R.ins);R.it.forEach(([k,n])=>{if(IT[k])G.inv[k]=(G.inv[k]||0)+n});let eq=null;if(R.eq)eq=pvEqGrant(R.eq);
  save();sfx("pvwin");toast("Coffre du jour (série "+ns+") : +"+fmt(R.coins)+" ₽, "+R.ins+" insignes"+(eq?" et "+eq.n:""));show()}
@@ -6950,8 +6950,8 @@ function pvEqGrant(r){const e=E_(),L=EQBR[r];if(!L||!L.length)return null;const 
 {const f=eSummon;eSummon=function(){const m0=G.m,r=f.apply(this,arguments);try{if(G.m<m0)dqAdd("gear",1)}catch(e){}return r}}
 
 /* ---------- boutique d'insignes et récompenses de ligue ---------- */
-const PVSH=[["Master Ball",45,["master-ball",1],"master-ball"],["Capsule d'Or",25,["gold-bottle-cap",1],"gold-bottle-cap"],["Patch Capacité",20,["ability-patch",1],"ability-patch"],["Hyper Balls x10",8,["ultra-ball",10],"ultra-ball"],["Rappels Max x5",6,["max-revive",5],"max-revive"],["Objet de dresseur rare+",30,null,"",2],["Objet de dresseur épique+",90,null,"",3],["Objet de dresseur UR",260,null,"",4]];
-const PVL=[null,{ins:10,it:[["ultra-ball",8]],eq:1},{ins:20,it:[["max-revive",5]],eq:2},{ins:35,it:[["gold-bottle-cap",1]],eq:3},{ins:60,it:[["ability-patch",2]],eq:3},{ins:100,it:[["master-ball",1]],eq:4}];
+const PVSH=[["Master Ball",45,["master-ball",1],"master-ball"],["Capsule d'Or",25,["gold-bottle-cap",1],"gold-bottle-cap"],["Patch Capacité",90,["ability-patch",1],"ability-patch"],["Hyper Balls x10",8,["ultra-ball",10],"ultra-ball"],["Rappels Max x5",6,["max-revive",5],"max-revive"],["Objet de dresseur rare+",30,null,"",2],["Objet de dresseur épique+",90,null,"",3],["Objet de dresseur UR",260,null,"",4]];
+const PVL=[null,{ins:10,it:[["ultra-ball",8]],eq:1},{ins:20,it:[["max-revive",5]],eq:2},{ins:35,it:[["gold-bottle-cap",1]],eq:3},{ins:60,it:[["ability-patch",1]],eq:3},{ins:100,it:[["master-ball",1]],eq:4}];
 function pvBuy(i){const x=PVSH[i];if(!x||(G.ins||0)<x[1]){toast("Il te manque des insignes.");sfx("err");return}G.ins-=x[1];let msg=x[0];if(x[2]){G.inv[x[2][0]]=(G.inv[x[2][0]]||0)+x[2][1]}else{const o=pvEqGrant(x[4]);msg=o?o.n+" ("+ER[o.r][0]+")":x[0]}save();sfx("pvbuy");toast("Acheté : "+msg);show()}
 function pvLeagueGrant(t){const p=pvS(),got=[];p.lr=p.lr|0;while(p.lr<t){p.lr++;const L=PVL[p.lr];if(!L)continue;pvIns(L.ins);L.it.forEach(([k,n])=>{if(IT[k])G.inv[k]=(G.inv[k]||0)+n});const o=L.eq?pvEqGrant(L.eq):null;got.push({t:p.lr,L,o})}return got}
 const pvIiHtml=u=>`<img class="pvii pvsm ${u.used?"pvud":""}" src="${ITM+u.it}.png" alt="${esc(PVIM[u.it][1])}" title="${esc(PVIM[u.it][1])}" onerror="this.style.display='none'">`;
@@ -8614,16 +8614,18 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function kxPm(i){const n=i&&i.n||"",c=i&&i.c||"";
  if(c=="Poké Balls")return(n=="Poké Ball"||n=="Super Ball"||n=="Hyper Ball"||n=="Honor Ball")?2.5:1;
  if(c=="Vitamines")return 5;
- if(n=="Bouchon Bonus"||n=="Super Bonus"||n=="Patch Talent")return 6;
- if(n=="Capsule Talent")return 4;
+ if(n=="Capsule d'Argent"||n=="Capsule d'Or"||n=="Bouchon Bonus"||n=="Super Bonus")return 30;if(n=="Patch Talent")return 6;
+ if(n=="Capsule Talent"||n=="Pilule Talent")return 4;
  return 1}
 /* recompenses 105 a 200 (le Pikachu passe a l'etage 200) */
-(function(){delete TWRW[100].sp;TWRW[100].gem=60;TWRW[100].ban=8;
- const it=(f)=>{const k=(f-100)/5,L=[["master-ball",Math.min(10,1+(k/4|0))],["gold-bottle-cap",6+k],["ability-patch",3+(k/2|0)],["dream-ball",12+k*2],["max-revive",8+(k/2|0)],["rare-candy",5+k*2]];return L};
+(function(){const PM={25:1,50:1,75:2,100:2,125:2,150:3,175:3,200:5};
+ for(const f in TWRW){const r=TWRW[f];r.it=r.it.map(x=>x[0]=='ability-patch'?(PM[f]?['ability-patch',PM[f]]:['bottle-cap',3]):x)}
+ delete TWRW[100].sp;TWRW[100].gem=60;TWRW[100].ban=8;
+ const it=(f)=>{const k=(f-100)/5,L=[["master-ball",Math.min(10,1+(k/4|0))],["gold-bottle-cap",6+k],["ability-patch",1],["dream-ball",12+k*2],["max-revive",8+(k/2|0)],["rare-candy",5+k*2]];return L};
  for(let f=105;f<=200;f+=5){const k=(f-100)/5,big=f%25==0;
-  TWRW[f]={h:22+k*3,s:2200+k*260,big:big?1:0,it:it(f)};
+  TWRW[f]={h:22+k*3,s:2200+k*260,big:big?1:0,it:it(f).map(x=>x[0]=='ability-patch'?(big?['ability-patch',PM[f]||1]:['bottle-cap',3]):x)};
   if(big){TWRW[f].gem=60+(f-100)/25*20;TWRW[f].ban=8}}
- TWRW[200]={h:120,s:15000,big:1,ban:8,gem:200,sp:90004,it:[["master-ball",12],["gold-bottle-cap",30],["ability-patch",15],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
+ TWRW[200]={h:120,s:15000,big:1,ban:8,gem:200,sp:90004,it:[["master-ball",12],["gold-bottle-cap",30],["ability-patch",5],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
 /* equipe adverse strategique (etages 101 a 200) : elle s'adapte a ton equipe */
 function twListS(f){const P=pvPool(),R=rng(f*977+13),gd=TWG[f],big=f%5==0,t=twS();
  const mt=(t.tm||[]).filter(id=>G.col[id]).map(id=>pvNoMf(id,()=>tp(id)));
