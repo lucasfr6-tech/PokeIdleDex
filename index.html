@@ -3034,7 +3034,7 @@ const $=id=>document.getElementById(id),fmt=n=>n>=1e12?(n/1e12).toFixed(1)+"T":n
 const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
-const HPK=1.36,BOSS_PV=2.275;
+const HPK=.8,BOSS_PV=2.275;
 const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1+(G.pt||0)*.03;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*(1-.02*PL("pe"))*kxEco());
@@ -3097,7 +3097,7 @@ const STG={};const stage=id=>STG[id]||(STG[id]=(()=>{const L=EVC[I(id).ch]||[];l
 const clearSTG=()=>{for(const k in STG)delete STG[k]};
 const stM=id=>id>9e4?6.4:1+.3*(stage(id)-1);
 const base=id=>{const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
-const coin=id=>{const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*3};
+const coin=id=>{const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
  let m=base(id)*Math.max(.25,e)*(mv?1+mv[2]/200:1)*(c.wa&&c.wa===W.k?1.4:1)*(EVF.d||1)*BIF.d;
@@ -3162,7 +3162,7 @@ function rulesHtml(){const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.in
  return `<label><b ${j<4?`class="rty r${j}"`:""}>${t}</b><select data-a="rule" data-t="${k}"><option value="">Ne pas lancer</option>${L.map(b=>`<option value="${b}" ${b==cur?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select></label>`}).join("")}</div>`}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=G.fl+2+(boss?3:0);let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
- const sz=wp(SZ,x=>SZ.indexOf(x)>=3?1+.1*PL("pz"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1}),hp=Math.floor(hpF(G.fl)*(1+L/40)*(sz[2]>1?1+(sz[2]-1)*.4:sz[2])*(1+(mu[2]-1)*.7/6)*(boss?BOSS_PV:1));
+ const sz=wp(SZ,x=>SZ.indexOf(x)>=3?1+.1*PL("pz"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1}),hp=Math.floor(hpF(G.fl)*(1+L/40)*(sz[2]>1?1+(sz[2]-1)*.4:sz[2])*(1+(mu[2]-1)*.7/6)*([.75,.8,.95,1][pr(id)]||1)*(boss?BOSS_PV:1));
  FID++;E={id,d,L,boss,t:30,sz,mu,mi:MU.findIndex(m=>m[0]==mu[0]),hp,max:hp,atk:Math.floor((L*1.1+4)*(1+G.fl/110)*(mu[2]>1?1.3:1)*(boss?1.8:1)),r:pr(id),ph:phy(id)};busy=false;spawnFx()}
 function pop(t,c,x){const f=$("fx");if(!f)return;const d=document.createElement("div");d.className="pp "+c;d.textContent=t;d.style.left=x+"%";f.appendChild(d);setTimeout(()=>d.remove(),1100)}
 function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
@@ -3170,7 +3170,7 @@ function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
  else if(c.h<m*.4){const hs=POTS.filter(p=>p[3]>0&&G.inv[p[0]]>0).sort((a,b)=>a[3]-b[3]),k=hs.find(p=>p[3]>=m-c.h)||hs[hs.length-1];if(k){G.inv[k[0]]--;c.h=Math.min(m,c.h+k[3])}}}}
 const tgtF=()=>Math.ceil((.65*(G.cl+1)+3+7*zoneOf(G.cl+1))*(1+.03*PL("px")));const tgtL=()=>Math.min(100,tgtF());
 function lvUp(c,tg){const mx=c.mx||100,t=mx>100?Math.min(mx,tgtF()):tg;if(c.l>=t||c.l>=mx)return;const s=Math.max(1,Math.ceil((t-c.l)/9*(c.xm||1)*(EVF.x||1)*BIF.x*(1+.5*(c.st||0))));c.l=Math.min(t,mx,c.l+s)}
-function win(){const L=E.L,b=E.boss,g=Math.floor(16*([1,1.8,3.5,9][E.r|0]||1)*L*Math.pow(1.06,G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb")):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c),tg=tgtL();
+function win(){const L=E.L,b=E.boss,g=Math.floor(12*([1,1.8,3.5,9][E.r|0]||1)*L*Math.pow(1.06,G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb")):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c),tg=tgtL();
  G.m+=kxI("kill",g);G.gain+=g;G.ko++;if(b)G.boss++;pop("+"+fmt(g)+" ₽","sup",22);sfx("coin");$("rw")&&($("rw").innerHTML=`<span>NIVEAU CIBLE <b>${tg}</b></span>`);
  ids().forEach(i=>{const c=G.col[i];lvUp(c,tg);const h=c.he;if(h&&h.pw!==undefined&&Math.random()<.5)addEV(c,h.pw>=6?Math.random()*6|0:h.pw,1)});
  const bl=pickBall(E);if(!bl)noBallFx(E);
@@ -3235,7 +3235,7 @@ const EXT=[
  {n:"Forêt profonde",z:"Sous-bois",lv:24,r:2,ch:.22,du:480,rq:3.5,col:["#38bdf8","#1e3a8a"],pool:[25,58,63,66,77,81,92,95,104,109,111,114,120,133,138,140,179,203,215,246]},
  {n:"Cimes orageuses",z:"Haute montagne",lv:48,r:3,ch:.09,du:1200,rq:12,col:["#c084fc","#581c87"],pool:[65,68,94,112,130,131,134,135,136,142,143,196,197,212,214,229,230,282,306,373,376,445,448,468,635,706,784,887,998]},
  {n:"Sanctuaire oublié",z:"Ruines légendaires",lv:75,r:4,ch:.025,du:2700,rq:45,col:["#fbbf24","#7c2d12"],pool:[144,145,146,150,243,244,245,249,250,380,381,382,383,384,483,484,487,643,644,646,716,717,791,792,889,890,1007,1008]}];
-EXT.push({n:"Chasse Méga",z:"Anomalie méga",lv:90,r:4,ch:.07,du:10800,rq:60,col:["#f472b6","#4c1d95"],mega:1,pool:[]});
+EXT.push({n:"Chasse Méga",z:"Anomalie méga",lv:90,r:4,ch:.07,du:5400,rq:60,col:["#f472b6","#4c1d95"],mega:1,pool:[]});
 const exSeed=()=>Math.floor(Date.now()/216e5),exNext=()=>(exSeed()+1)*216e5;
 const exCur=()=>{const sd=exSeed();return EXT.map((t,i)=>{if(t.mega)return mgCur(t,i);const R=rng(sd*131+i*977+5);R();return {...t,i,sd,id:t.pool[R()*t.pool.length|0]}})};
 const exRef=()=>{const F=Math.max(8,G.bf||0,G.cl);return 28*Math.pow(1.11,F-1)+12*F};
@@ -3939,10 +3939,10 @@ rarity:()=>`<h1>${TT("Raretés","Rarities")}</h1><p class="lead">${TT("Chaque zo
 ${tbl([TT("Rareté","Rarity"),TT("Par zone","Per zone"),TT("Apparition (par Pokémon)","Spawn (each)"),TT("Apparition (au total)","Spawn (total)"),TT("Capture de base","Base catch")],[0,1,2,3].map(r=>[rtag(r),[9,4,4,3][r],prc(RW2[r]/96),prc(RW2[r]*[9,4,4,3][r]/96),prc(CAPB[r])]))}
 <p>${TT("Les Pokémon trop puissants (légendaires, pseudo-légendaires évolués, Ultra-Chimères, Paradoxes, plus de 520 de stats) n'apparaissent <b>pas</b> sur les étages : "+EXC.size+" espèces ne s'obtiennent que par les expéditions rares. Les étages restent infinis : après la dernière zone, les zones se recomposent avec les mêmes espèces.","Pokémon that are too strong (legendaries, evolved pseudo-legendaries, Ultra Beasts, Paradox, over 520 stats) do <b>not</b> appear on the floors: "+EXC.size+" species can only be obtained through rare expeditions. Floors stay infinite: after the last zone, zones are rebuilt from the same species.")}</p>`,
 sizes:()=>{const t=SZ.reduce((s,x)=>s+x[4],0);return `<h1>${TT("Tailles","Sizes")}</h1><p class="lead">${TT("Chaque Pokémon qui apparaît a une taille. Les tailles hors norme sont rares, plus solides, et rapportent plus de pièces. Les grandes tailles (Imposant et plus) sont <b>conservées à la capture</b> et donnent un bonus permanent de dégâts à ce Pokémon.","Every Pokémon that appears has a size. Odd sizes are rare, tougher, and pay more coins. Large sizes (Imposing and above) are <b>kept when caught</b> and give that Pokémon a permanent damage bonus.")}</p>
-${tbl([TT("Taille","Size"),TT("Probabilité","Chance"),TT("Taille à l'écran","On-screen size"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],SZ.map((z,i)=>[`<b style="color:${SZC[i]||"inherit"}">${z[0]}</b>`,(z[4]/t>.5?pcs(z[4]/t)+" %":"1 / "+Math.round(t/z[4])+" ("+pcs(z[4]/t)+" %)"),"×"+z[1],"×"+z[2],"×"+z[3],i>=3?"×"+(SZD[i]||z[1])+TT(" dégâts"," damage"):"—"]))}
+${tbl([TT("Taille","Size"),TT("Probabilité","Chance"),TT("Taille à l'écran","On-screen size"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],SZ.map((z,i)=>[`<b style="color:${SZC[i]||"inherit"}">${z[0]}</b>`,(z[4]/t>.5?pcs(z[4]/t)+" %":"1 / "+Math.round(t/z[4])+" ("+pcs(z[4]/t)+" %)"),"×"+z[1],"×"+kxF(kxHpS(z[2])),"×"+z[3],i>=3?"×"+(SZD[i]||z[1])+TT(" dégâts"," damage"):"—"]))}
 <p>${TT("Les tailles Colossal et Titanesque déclenchent une alerte sonore et visuelle. L'amélioration de prestige « Colosses » et l'événement Éclipse (×3) augmentent leur fréquence. Lilliputien et Menu sont plus faciles à tuer mais rapportent moins.","Colossal and Titanic sizes trigger a sound and visual alert. The “Colossi” prestige upgrade and the Eclipse event (×3) make them more frequent. Tiny and Small are easier to kill but pay less.")}</p>`},
 mut:()=>{const t=MU.reduce((s,x)=>s+x[4],0);return `<h1>${TT("Mutations et chromatiques","Mutations & shinies")}</h1><p class="lead">${TT("Un Pokémon peut apparaître <b>muté</b> : aura colorée, beaucoup plus de PV, mais une récompense bien plus grande. Un mutant capturé garde sa mutation (couleur visible dans ta liste) et gagne un bonus permanent de dégâts. Capturer un mutant compte pour 2 captures.","A Pokémon can appear <b>mutated</b>: a coloured aura, a lot more HP, but a much bigger reward. A caught mutant keeps its mutation (visible colour in your list) and gains a permanent damage bonus. Catching a mutant counts as 2 catches.")}</p>
-${tbl([TT("Mutation","Mutation"),TT("Probabilité","Chance"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],MU.map((m,i)=>[m,i-1]).slice(1).filter(x=>x[1]!=6).map(([m,i])=>[`<b style="color:${MUC[i+1]}">${m[0]}</b>`,"1 / "+Math.round(t/m[4])+" ("+pcs(m[4]/t)+" %)","×"+m[2],"×"+m[2],"×"+m[1]+TT(" dégâts"," damage")]))}
+${tbl([TT("Mutation","Mutation"),TT("Probabilité","Chance"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],MU.map((m,i)=>[m,i-1]).slice(1).filter(x=>x[1]!=6).map(([m,i])=>[`<b style="color:${MUC[i+1]}">${m[0]}</b>`,"1 / "+Math.round(t/m[4])+" ("+pcs(m[4]/t)+" %)","×"+kxF(kxHpM(m[2])),"×"+m[2],"×"+m[1]+TT(" dégâts"," damage")]))}
 <h3>${TT("Chromatiques","Shinies")}</h3><p>${TT("Le taux de base est de <b>1 sur 4096</b>, comme dans les jeux. Le <b>Charme chroma</b> (boutique du Prestige) le triple ; l'amélioration « Éclat » ajoute +25 % par niveau (jusqu'à 20 niveaux) ; l'événement Éclipse le multiplie par 3. Un chromatique a un sprite doré, un bonus permanent de +50 % de dégâts et une alerte spéciale.","The base rate is <b>1 in 4096</b>, like in the games. The <b>Shiny Charm</b> (Prestige shop) triples it; the “Shine” upgrade adds +25% per level (up to 20 levels); the Eclipse event multiplies it by 3. A shiny has a golden sprite, a permanent +50% damage bonus and a special alert.")}</p>
 ${cal("",TT("<b>À savoir :</b> un Pokémon est soit muté, soit chromatique (pas les deux). Les mutations et chromatiques sont réservés au combat sur les étages ; les expéditions donnent des Pokémon normaux.","<b>Good to know:</b> a Pokémon is either mutated or shiny (not both). Mutations and shinies only appear in floor battles; expeditions give normal Pokémon."))}`},
 forms:()=>`<h1>${TT("Formes : méga, Primo, Dynamax","Forms: Mega, Primal, Dynamax")}</h1><p class="lead">${TT("Le jeu contient les 1025 espèces des 9 générations, "+MGD.length+" méga-formes et formes primales, et le Dynamax.","The game contains all 1025 species from the 9 generations, "+MGD.length+" Mega and Primal forms, and Dynamax.")}</p>
@@ -4196,13 +4196,13 @@ function vVar(){const isS=DX.cat=="size",ref=(G.col[25]?25:ids()[0]||25);
  if(isS){const tw=SZ.reduce((a,x)=>a+x[4],0);
   cards=SZ.map((z,k)=>{const big=k>=3,col=SZC[k]||"#94a3b8",n=own(c=>c.zi==k);
    return `<div class="vrc" style="--c:${col}"><div class="vrs"><span class="vrp" style="--sc:${z[1]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${z[0]}</b><em>${prc(z[4]/tw)}</em></div><p>${LS(SZTX[k][0],SZTX[k][1])}</p>
-   <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(z[2]),z[2]>1?"m":z[2]<1?"p":"n")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(z[3]),z[3]>1?"p":z[3]<1?"m":"n")}</div>
+   <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(kxHpS(z[2])),z[2]>1?"m":z[2]<1?"p":"n")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(z[3]),z[3]>1?"p":z[3]<1?"m":"n")}</div>
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${big?chip(LS("Dégâts ","Damage ")+xr(z[1])+LS(" (définitif)"," (permanent)"),"p"):chip(LS("La taille n'est pas conservée","Size is not kept"),"n")}</div>
    ${big?`<div class="vown">${ico("book")} ${LS("Tu en possèdes ","You own ")}<b>${n}</b></div>`:""}</div></div>`}).join("")}
  else{const tw=MU.reduce((a,x)=>a+x[4],0),shw=1/4096;
   cards=MU.map((u,k)=>{if(!k||k==7)return"";const n=own(c=>c.mi==k);
    return `<div class="vrc" style="--c:${MUC[k]}"><div class="vrs"><span class="vrp" style="${u[3]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${u[0]}</b><em>${prc(u[4]/tw)}</em></div><p>${LS(MUTX[k][0],MUTX[k][1])}</p>
-   <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(u[2]),"m")}${chip(LS("Attaque ennemie ","Enemy attack ")+"×1,3".replace(",",SG.lang=="en"?".":","),"m")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(u[2]),"p")}</div>
+   <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(kxHpM(u[2])),"m")}${chip(LS("Attaque ennemie ","Enemy attack ")+"×1,3".replace(",",SG.lang=="en"?".":","),"m")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(u[2]),"p")}</div>
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${chip(LS("Dégâts ","Damage ")+xr(u[1])+LS(" (définitif)"," (permanent)"),"p")}</div>
    <div class="vown">${ico("book")} ${LS("Tu en possèdes ","You own ")}<b>${n}</b></div></div></div>`}).join("")+
   `<div class="vrc shiny" style="--c:#fde047"><div class="vrs"><span class="vrp">${sp(ref,1)}</span></div><div class="vrb"><div class="vrh"><b>${LS("Chromatique classique","Classic shiny")}</b><em>${PL("pcs")?LS("3 / 4096","3 / 4096"):"1 / 4096"}</em></div><p>${LS("Les couleurs changent, comme dans les jeux. Aucune mutation en même temps : un Pokémon est muté ou chromatique.","The colours change, like in the games. Never together with a mutation: a Pokémon is mutated or shiny.")}</p>
@@ -7156,7 +7156,7 @@ const TWRW={
  95:{h:10,s:1800,it:[["master-ball",2],["gold-bottle-cap",5],["ability-patch",3],["max-revive",10]]},
  100:{h:20,s:4000,big:1,ban:8,gem:50,sp:90004,it:[["master-ball",5],["gold-bottle-cap",12],["ability-patch",8],["dream-ball",30],["max-revive",12]]}};
 const twRwItems=r=>r.it.filter(x=>IT[x[0]]);
-function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(qcps()*100*r.h),got=[];
+function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(qcps()*20*r.h),got=[];
  G.m+=kxI("tw",coins);G.gain+=coins;t.sc+=r.s;twRwItems(r).forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n;got.push([k,n])});
  let gem=0,sp=0;if(r.gem){try{BPS()}catch(e){}G.gem=(G.gem||0)+r.gem;gem=r.gem}
  if(r.sp){G.sp=G.sp||{};if(!G.sp[r.sp]){spGrant(r.sp);sp=r.sp}}
@@ -7316,7 +7316,7 @@ function twViewUp(){const t=twS();
 function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m;
  return `<div class="twrc ${r.big?"twmaj":""} ${got?"twdn":""} ${cur?"twnx":""}"><div class="twrh"><b>Étage ${m}</b><em>${got?"Récupérée":t.b>=m?"Prête":r.big?"Majeure":""}</em></div>
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
-  <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*100*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
+  <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*20*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
 function twViewRw(){const L=[];for(let m=5;m<=100;m+=5)L.push(m);
  return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 100</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 100</span>`}</div></div></div>
   <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75 et 100 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
@@ -8556,6 +8556,10 @@ function kxLog(){let o=$("klo");if(!o){o=document.createElement("div");o.id="klo
 function kxLogClose(){const o=$("klo");if(o)o.classList.remove("on");document.body.classList.remove("kxlock")}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl=open]");if(b){e.stopPropagation();kxLog()}},true);
 setInterval(()=>{const o=$("klo");if(!o||!o.classList.contains("on"))return;const m=o.querySelector(".kxm"),y=m?m.scrollTop:0;o.innerHTML=kxLogHtml();const n=o.querySelector(".kxm");if(n)n.scrollTop=y},1000);
+
+function kxHpS(z){return z>1?1+(z-1)*.4:z}
+function kxHpM(m){return 1+(m-1)*.7/6}
+function kxF(x){return +x.toFixed(2)}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
