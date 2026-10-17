@@ -4713,8 +4713,8 @@ function spGen(x,sh,mf){return new Promise((res,rej)=>{const im=new Image();im.c
  {let x0=W,x1=-1,y0=H,y1=-1;for(let y=0;y<H;y++)for(let xx=0;xx<W;xx++){if(a[(y*W+xx)*4+3]>40){if(xx<x0)x0=xx;if(xx>x1)x1=xx;if(y<y0)y0=y;if(y>y1)y1=y}}
   const u=c.toDataURL("image/png");if(x1>=0)HVF.set(u,{w:c.width,h:c.height,x0:x0+P,x1:x1+1+P,y0:y0+P,y1:y1+1+P});res(u)}}catch(e){rej(e)}};im.onerror=()=>rej(new Error("img"));im.src=ART+(sh?"shiny/":"")+(mf||x.base)+".png"})}
 function spApply(im,u){im.addEventListener("load",()=>{im.style.visibility=""},{once:true});im.src=u}
-document.addEventListener("error",e=>{const im=e.target;if(!im||im.tagName!="IMG")return;const src=im.src||"";if(src.startsWith("data:"))return;const m=/\/(shiny\/)?(900[01]\d)(?:m(\d+))?\.(png|gif)$/.exec(src);if(!m||!SPM[m[2]])return;
- const x=SPM[m[2]],sh=!!m[1],mf=m[3]?+m[3]:0,key=m[2]+(mf?"m"+mf:"")+(sh?"s":""),u=SPU.get(key),bs0=mf||x.base,fb=i=>{i.style.filter="hue-rotate("+(sh?x.hue2:x.hue)+"deg) drop-shadow(0 0 10px "+x.au+")";i.src=i.src.replace(/900[01]\d(m\d+)?\.(png|gif)$/,bs0+".$2")};
+document.addEventListener("error",e=>{const im=e.target;if(!im||im.tagName!="IMG")return;const src=im.src||"";if(src.startsWith("data:"))return;const m=/\/(shiny\/)?(900[01]\d)(?:m(\d+))?\.(png|gif|webp)$/.exec(src);if(!m||!SPM[m[2]])return;
+ const x=SPM[m[2]],sh=!!m[1],mf=m[3]?+m[3]:0,key=m[2]+(mf?"m"+mf:"")+(sh?"s":""),u=SPU.get(key),bs0=mf||x.base,fb=i=>{i.style.filter="hue-rotate("+(sh?x.hue2:x.hue)+"deg) drop-shadow(0 0 10px "+x.au+")";i.src=i.src.replace(/900[01]\d(m\d+)?\.(png|gif|webp)$/,bs0+".$2")};
  if(typeof u=="string"&&u!="fail"){spApply(im,u);return}
  if(u=="fail"){fb(im);return}
  let w=SPW.get(key);if(!w){w=new Set();SPW.set(key,w);spGen(x,sh,mf).then(d=>{SPU.set(key,d);w.forEach(i=>{spApply(i,d)});SPW.delete(key)}).catch(()=>{SPU.set(key,"fail");w.forEach(fb);SPW.delete(key)})}
@@ -4733,7 +4733,7 @@ const CP={
  o:[[1800,"m",.5],[1250,"m",1],[800,"m",2],[280,"m",5],[60,"m",10],[400,"st",3],[250,"i","bottle-cap",2],[120,"i","gold-bottle-cap",1],[10,"i","ability-patch",1],[70,"i","bottle-cap",2],[250,"i","dream-ball",8],[20,"mp"],[10,"mb"]],
  p:[[1600,"m",.5],[1200,"m",1],[800,"m",2],[350,"m",5],[80,"m",10],[450,"st",5],[250,"i","gold-bottle-cap",2],[10,"i","ability-patch",1],[140,"i","bottle-cap",3],[250,"i","dream-ball",12],[90,"mp"],[40,"mb"],[180,"sp"]]};
 Object.keys(CP).forEach(k=>{const s=CP[k].reduce((a,x)=>a+x[0],0);CP[k].unshift([10000-s,"n"])});
-const PITY=100;
+const PITY=1e15;
 const casH=()=>qcps()*3600;
 const casPrice=k=>{const t=CT.find(x=>x.id==k);return qnice(Math.max(t.fl,casH()*t.mult))};
 const VITK=["hp-up","protein","iron","calcium","zinc","carbos"];
@@ -4742,7 +4742,7 @@ function casLab(p,pr){switch(p[1]){case"n":return LS("Rien","Nothing");case"m":r
 /* rareté d'un résultat : 0 rien, 1 commun, 2 bien, 3 rare, 4 très rare, 5 jackpot */
 function casRar(p){switch(p[1]){case"n":return 0;case"m":return p[2]<=1?1:p[2]<5?2:3;case"i":return IT[p[2]].p>=500000?3:IT[p[2]].p>=4000*3?2:1;case"st":return p[2]>=3?3:2;case"v":return 2;case"mp":case"mb":return 4;case"sp":return 5}return 1}
 function casRoll(k){G.cs=G.cs||{};let p;
- if(k=="p"){G.cs.pity=(G.cs.pity||0)+1;if(G.cs.pity>=PITY)p=CP.p.find(x=>x[1]=="sp")}
+ 
  if(!p){let r=Math.random()*10000;for(const x of CP[k]){r-=x[0];if(r<0){p=x;break}}p=p||CP[k][0]}
  const pr=casPrice(k),o={k,p,r:casRar(p),lab:casLab(p),items:[],coins:0};
  switch(p[1]){case"m":o.coins=Math.floor(pr*p[2]);G.m+=kxI("inv",o.coins);break;
@@ -4781,7 +4781,7 @@ function casReveal(R,k,top){const T=CT.find(x=>x.id==k),st=$("csst");if(!st)retu
 function casStats(){const cs=G.cs,e=$("csstat");if(e)e.innerHTML=casStatHtml();const w=$("cswal");if(w)w.textContent=fmt(G.m);const h=$("cshist");if(h)h.innerHTML=casHist();document.querySelectorAll(".cstier").forEach(el=>{const k=el.dataset.k,pr=casPrice(k);el.querySelectorAll("[data-i]").forEach(b=>b.disabled=G.m<pr*(+b.dataset.i))});const pb=$("cspity");if(pb)pb.innerHTML=casPity()}
 const casStatHtml0=()=>{const cs=G.cs||{};return `<span class="chip qbc"><i>${ico("ticket")}</i>${LS("Tickets","Tickets")} <b>${fmt(cs.t||0)}</b></span><span class="chip qbc"><i>${ico("coin")}</i>${LS("Misé","Bet")} <b>${fmt(cs.sp||0)}</b></span><span class="chip qbc"><i>${ico("gift")}</i>${LS("Gagné en pièces","Won in coins")} <b>${fmt(cs.w||0)}</b></span>`};
 const casHist0=()=>{const h=(G.cs||{}).h||[];return h.length?h.map(x=>`<span class="csh r${x.r}" style="--c1:${CT.find(t=>t.id==x.k).c1}"><i></i>${x.l}</span>`).join(""):`<small>${LS("Aucun ticket joué pour l'instant.","No ticket played yet.")}</small>`};
-const casPity0=()=>{const n=(G.cs||{}).pity||0;return `<small>${LS("Garantie de forme spéciale (ticket Platine) :","Special form guarantee (Platinum ticket):")} <b>${n} / ${PITY}</b></small><div class="qbar"><i style="width:${Math.min(100,n/PITY*100)}%"></i><span></span></div>`};
+const casPity0=()=>{return "";return `<small>${LS("Garantie de forme spéciale (ticket Platine) :","Special form guarantee (Platinum ticket):")} <b>${n} / ${PITY}</b></small><div class="qbar"><i style="width:${Math.min(100,n/PITY*100)}%"></i><span></span></div>`};
 function vCas(){const cs=G.cs=G.cs||{};
  return `<div class="box cashero"><div class="chh"><div class="chi">${ico("dice")}</div><div><h2>Casino</h2><small>${LS("Mise des pièces, gagne des objets rares. Beaucoup de tickets ne rapportent rien : joue avec mesure.","Bet coins, win rare items. Many tickets win nothing: play wisely.")}</small></div></div><span class="wal">${ico("coin")}<b id="cswal">${fmt(G.m)}</b></span></div>
  <div class="qbon" id="csstat" style="margin:10px 0">${casStatHtml()}</div>
@@ -4932,7 +4932,7 @@ function casPlay(k,n){if(CAS.busy)return;const pr=casPrice(k)*n;if(G.m<pr){toast
 function casStats(){const w=$("cswal");if(w)w.textContent=fmt(G.m);const e=$("csstat");if(e)e.innerHTML=casStatHtml();const h=$("cshist");if(h)h.innerHTML=casHist();document.querySelectorAll(".cxtk").forEach(el=>{const k=el.dataset.k,pr=casPrice(k);el.querySelectorAll("[data-i]").forEach(b=>b.disabled=G.m<pr*(+b.dataset.i));const pe=el.querySelector(".cxpr");if(pe)pe.textContent=fmt(pr)});const pb=$("cspity");if(pb)pb.innerHTML=casPity()}
 const casStatHtml=()=>{const cs=G.cs||{};return `<span title="${LS("Tickets joués","Tickets played")}">${ico("ticket")}<b>${fmt(cs.t||0)}</b></span><span title="${LS("Gagné en pièces","Won in coins")}">${ico("coin")}<b>${fmt(cs.w||0)}</b></span>`};
 const casHist=()=>{const h=(G.cs||{}).h||[];return h.length?h.map(x=>`<i class="cxh r${x.r}" style="--c1:${CXM[x.k][0]}" title="${esc(x.l)}"></i>`).join(""):""};
-const casPity=()=>{const n=(G.cs||{}).pity||0;return `<div class="cxpt" title="${LS("Forme spéciale garantie au bout de "+PITY+" tickets Platine","Special form guaranteed after "+PITY+" Platinum tickets")}">${ico("sparkle")}<div class="cxpb"><i style="width:${Math.min(100,n/PITY*100)}%"></i></div><b>${n}/${PITY}</b></div>`};
+const casPity=()=>{return "";return `<div class="cxpt" title="${LS("Forme spéciale garantie au bout de "+PITY+" tickets Platine","Special form guaranteed after "+PITY+" Platinum tickets")}">${ico("sparkle")}<div class="cxpb"><i style="width:${Math.min(100,n/PITY*100)}%"></i></div><b>${n}/${PITY}</b></div>`};
 function cxShow(k){return CP[k].filter(x=>x[1]!="n"&&x[1]!="m"&&x[1]!="sp").sort((a,b)=>casRar(b)-casRar(a)||IT[b[2]]&&IT[a[2]]?(casRar(b)-casRar(a))||(a[0]-b[0]):0).slice(0,3)}
 function cxPrizeIc(x){switch(x[1]){case"mb":return ic("master-ball",IT["master-ball"].img);case"mp":return ico("star");case"st":return ico("spark");case"i":return ic(x[2],IT[x[2]].img);case"sp":return ico("sparkle")}return ico("gift")}
 function vCas(){const cs=G.cs=G.cs||{};
@@ -7701,7 +7701,7 @@ function cxoCard(x,pr,cls){
 function cxoSp(T){
  const sp0=CP[T].find(x=>x[1]=="sp");if(!sp0)return "";
  const L=SPS.filter(x=>x.cas!==0),p=sp0[0]/10000/L.length;
- return `<div class="cxosp">${L.map(x=>`<div class="cxopk" title="${esc(x.n)}"><div class="cxopi">${sp(x.id,0,1)}</div><em>${prc(p)}</em></div>`).join("")}<div class="cxopy" title="${LS("Garanti au bout de "+PITY+" tickets","Guaranteed after "+PITY+" tickets")}">${ico("sparkle")}<b>${PITY}</b>${ico("ticket")}</div></div>`}
+ return `<div class="cxosp">${L.map(x=>`<div class="cxopk" title="${esc(x.n)}"><div class="cxopi">${sp(x.id,0,1)}</div><em>${prc(p)}</em></div>`).join("")}</div>`}
 function cxoPanel(k){
  const pr=casPrice(k),L=CP[k],g=t=>L.filter(x=>t.includes(x[1]));
  const isT=x=>x[1]=="i"&&x[2]=="bp-ticket",rare=g(["mb","mp"]).concat(L.filter(isT)),coins=g(["m"]),items=g(["i","st","v"]).filter(x=>!isT(x)),nn=L.find(x=>x[1]=="n");
@@ -9090,6 +9090,12 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
   f.insertAdjacentElement("afterend",b)}catch(e){}};
  const s=show;show=function(){const r=s.apply(this,arguments);inj();return r};
  setInterval(inj,1000);
+})();
+
+/* ===== Casino : taux des formes spéciales exclusives divisés par 2 (le reste de la table ne change pas) ===== */
+(function(){
+ const NEW={b:1.5,s:4,o:10,p:60};
+ Object.keys(NEW).forEach(k=>{const t=CP[k];if(!t)return;const e=t.find(x=>x[1]=="sp");if(!e)return;const d=e[0]-NEW[k];e[0]=NEW[k];const n=t.find(x=>x[1]=="n");if(n)n[0]+=d});
 })();
 /* ===== v146 : page Nouveautés + tutoriel de premier lancement ===== */
 (function(){
