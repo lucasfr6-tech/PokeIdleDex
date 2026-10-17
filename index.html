@@ -3065,7 +3065,7 @@ let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPK=.5,BOSS_PV=2.275;
 const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1+(G.pt||0)*.03;
-const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*(1-.02*PL("pe"))*kxEco());
+const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
 const pdx=()=>1+dxn()*.004,am=()=>1+Object.keys(G.ach).length*.005+tlv().l*.004+TBV;
 let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*(1+.06*PL("ps"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
@@ -3087,7 +3087,7 @@ function rq(id){const c=G.col[id];if(!c)return 1;ens(id);
  let h=it&&it.h?it.h:null;if(h&&h.sp&&!h.sp.includes(id))h=null;if(h&&h.ot&&!tp(id).includes(h.ot))h=null;c.he=h;
  c.df=(h&&h.df||1)*(h&&h.ev&&evOpts(id).length?h.ev:1);c.co=h&&h.co||1;c.xm=h&&h.xp||1;
  const a=Math.max(c.iv[1]+c.ev[1]/8,c.iv[3]+c.ev[3]/8)/62.5,o=(c.iv[4]+c.iv[5])/62*.05+(c.ev[4]+c.ev[5])/504*.15,hh=c.ha&&abl(id)[1]?.1:0;c.wa=WAB[abn(id)]||"";
- let q=1+a*.5+o+hh;if(c.mf)q*=1.5;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.5;if(kxDiv(id))q*=3;if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=(typeof SZD!='undefined'&&SZD[c.zi])||SZ[c.zi][1];return c.q=q}
+ let q=1+a*.5+o+hh;if(c.mf)q*=1.5;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.5;if(kxDiv(id))q*=1.6;if(id>9e4)q*=2.6;if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=(typeof SZD!='undefined'&&SZD[c.zi])||SZ[c.zi][1];return c.q=q}
 const calc=(id,k)=>{const c=G.col[id],B=ST(id)[k],v=Math.floor((2*B+c.iv[k]+(c.ev[k]>>2))*c.l/100);return k==0?v+c.l+10:v+5};
 function train(id,k){const c=G.col[id];if(!c)return;ens(id);for(let j=0;j<k;j++){
  const a=[0,1,2,3,4,5].filter(x=>c.iv[x]<31);if(a.length)c.iv[a[Math.random()*a.length|0]]++;
@@ -5147,7 +5147,7 @@ function rdDamage(a,d,m,mult){const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:
 let RB2=null;
 const rdSleep=ms=>RB2&&RB2.fast?Promise.resolve():new Promise(r=>setTimeout(r,ms/(RB2?RB2.sp:1)));
 async function rdWait(){while(RB2&&RB2.pause&&!RB2.over)await new Promise(r=>setTimeout(r,120))}
-function rdNew(kind,tier,team){const boss=kind=="wb"?rdWBoss():rdBossOf(tier),T=team.map(rdUnit),pw=kind=="wb"?36:[30,30,32,34,36,36][tier];
+function rdNew(kind,tier,team){const boss=kind=="wb"?rdWBoss():rdBossOf(tier),T=team.map(rdUnit),pw=50;
  T.forEach((u,i)=>u.i=i);return{kind,tier,boss,team:T,ai:0,swReq:null,pick:null,round:0,max:pw,gauge:0,guard:0,gcd:0,gleft:3,items:kind=="wb"?8:6,sp:gpRaidSp(),auto:true,pause:false,over:false,dealt:0,log:[],charge:0,ws:{},enr:0,fusions:0,ko:0}}
 function rdAlive(R){return R.team.filter(u=>!u.dead)}
 function rdHeal(u,v){u.hp=Math.min(u.max,u.hp+Math.floor(v))}
@@ -5480,7 +5480,7 @@ function rdMig(){const r=rdState();return r}
 WSEC.push(["raid","Raids","Raids","skull"]);
 wkBody.raid=()=>`<h1>Raids</h1><p class="lead">${TT("Six raids sont proposés chaque jour (nouveaux boss à minuit), de <b>Facile</b> à <b>Impossible</b>. Tu choisis une équipe de 4 Pokémon, leurs attaques, puis ils affrontent le boss <b>un par un</b> dans un combat plein écran : tu peux changer de Pokémon, choisir toi-même les attaques ou laisser le mode Auto jouer. Tu peux lancer <b>3 raids par heure</b>.","Six raids are offered each day (new bosses at midnight), from <b>Easy</b> to <b>Impossible</b>. You pick a team of 4 Pokémon and their moves, then they face the boss <b>one at a time</b> in a full-screen battle: you can switch Pokémon, pick moves yourself, or let Auto play. You can start <b>3 raids per hour</b>.")}</p>
 ${tbl([TT("Raid","Raid"),TT("Niveau du boss","Boss level"),TT("Niveau conseillé","Advised level"),TT("Capture (par lancer, Poké Ball)","Catch (per throw, Poké Ball)"),TT("Points Raid","Raid Points")],RT.map(t=>[LS(t.n[0],t.n[1]),t.L,t.rec,(t.cap*100).toFixed(t.cap<.1?1:0).replace(".",",")+" %",t.rp]))}
-<h3>${TT("Le combat","The battle")}</h3><p>${TT("Chaque Pokémon a quatre vraies attaques (les attaques emblématiques pour les Pokémon connus, sinon des attaques réelles choisies selon ses types et ses stats). Les dégâts suivent la formule des jeux : types, STAB, critiques, brûlure. Tous les 4 tours, le boss <b>accumule de l'énergie</b> puis lance une attaque dévastatrice : utilise la <b>Garde</b> (3 fois par raid). Une jauge se remplit en combattant : à 100 %, l'<b>Attaque Fusion</b> fait frapper toute l'équipe avec ses meilleures attaques. À mi-vie, le boss entre en fureur. Tu as 30 à 36 tours pour le vaincre.","Each Pokémon has four real moves (signature moves for well-known Pokémon, otherwise real moves picked from its types and stats). Damage follows the games' formula: types, STAB, crits, burn. Every 4 turns the boss <b>charges up</b> then unleashes a devastating attack: use <b>Guard</b> (3 per raid). A gauge fills as you fight: at 100% the <b>Fusion attack</b> makes the whole team strike with its best moves. At half HP the boss enrages. You have 24 to 30 rounds to win.")}</p>
+<h3>${TT("Le combat","The battle")}</h3><p>${TT("Chaque Pokémon a quatre vraies attaques (les attaques emblématiques pour les Pokémon connus, sinon des attaques réelles choisies selon ses types et ses stats). Les dégâts suivent la formule des jeux : types, STAB, critiques, brûlure. Tous les 4 tours, le boss <b>accumule de l'énergie</b> puis lance une attaque dévastatrice : utilise la <b>Garde</b> (3 fois par raid). Une jauge se remplit en combattant : à 100 %, l'<b>Attaque Fusion</b> fait frapper toute l'équipe avec ses meilleures attaques. À mi-vie, le boss entre en fureur. Tu as 50 tours pour le vaincre.","Each Pokémon has four real moves (signature moves for well-known Pokémon, otherwise real moves picked from its types and stats). Damage follows the games' formula: types, STAB, crits, burn. Every 4 turns the boss <b>charges up</b> then unleashes a devastating attack: use <b>Guard</b> (3 per raid). A gauge fills as you fight: at 100% the <b>Fusion attack</b> makes the whole team strike with its best moves. At half HP the boss enrages. You have 24 to 30 rounds to win.")}</p>
 <h3>${TT("Objets","Items")}</h3><p>${TT("Les <b>potions et Rappels</b> ne servent que dans les raids (6 utilisations par raid). Les <b>Poké Balls</b> servent à capturer le boss vaincu : un seul lancer, la Master Ball ne rate jamais. Le boss capturé est un <b>Alpha</b>, avec une chance de mutation et de grande taille qui augmente avec la difficulté.","<b>Potions and Revives</b> are only used in raids (6 uses per raid). <b>Poké Balls</b> are used to catch the defeated boss: a single throw, the Master Ball never fails. The captured boss is an <b>Alpha</b>, with a mutation and size chance that rises with difficulty.")}</p>
 <h3>${TT("Récompenses","Rewards")}</h3><p>${TT("Victoire : pièces, Points Raid, objets (Bonus, Capsules, Patchs, Méga-Perles, Master Ball selon la difficulté). La première victoire du jour de chaque raid donne <b>×1,5 Points Raid</b> et un objet d'entraînement garanti. Une série de victoires ajoute jusqu'à +50 %. Les Points Raid s'échangent dans la boutique en bas de l'onglet.","Win: coins, Raid Points, items (Bottle Caps, Capsules, Patches, Mega Pearls, Master Ball depending on difficulty). The first win of the day on each raid gives <b>×1.5 Raid Points</b> and a guaranteed training item. A win streak adds up to +50%. Raid Points are spent in the shop at the bottom of the tab.")}</p>
 <h3>${TT("Boss monde","World boss")}</h3><p>${TT("Un seul boss géant pour tout le serveur, renouvelé chaque lundi. Tous les joueurs attaquent la <b>même barre de PV</b> : 3 essais par jour. Plus tu infliges de dégâts, plus tu atteins de paliers (5 au total). Quand la barre est vide, tu réclames tes récompenses et tu as une chance de <b>capturer le boss</b>, avec mutation possible. Si le boss n'est pas vaincu, tu réclames quand même les paliers la semaine suivante, sans capture. Hors ligne, seuls tes propres dégâts comptent.","One giant boss for the whole server, renewed every Monday. Every player attacks the <b>same HP bar</b>: 3 tries per day. The more damage you deal, the more tiers you reach (5 in total). When the bar is empty you claim your rewards and get a chance to <b>catch the boss</b>, mutation possible. If the boss isn't defeated you still claim your tiers next week, without a capture. Offline, only your own damage counts.")}</p>
@@ -7095,7 +7095,7 @@ function twWings(g,x,bx0,bx1,by0,by1,S,sh){const w=bx1-bx0,h=by1-by0,cx=(bx0+bx1
  g.restore()}
 
 /* ---------- état ---------- */
-const TWN=100;
+const TWN=200;
 function twS(){const t=G.tw=G.tw||{};
  if(t.f==null)Object.assign(t,{f:1,b:0,tm:[],au:0,af:"nx",fm:0,sc:0,up:{},cl:{},w:0,l:0,ls:0,ap:0,bt:0,tt:0,nt:{}});
  t.up=t.up||{};t.cl=t.cl||{};t.nt=t.nt||{};t.tm=(t.tm||[]).filter(id=>G.col[id]).slice(0,3);
@@ -7111,15 +7111,15 @@ const TWZ=[
  {n:"Crypte Ombrée",t:["ghost","dark"],c:["#a78bfa","#2e1065"]},
  {n:"Observatoire Mystique",t:["psychic","fairy"],c:["#f0abfc","#701a75"]},
  {n:"Sommet des Dragons",t:["dragon","dragon"],c:["#818cf8","#1e1b4b"]}];
-const twZone=f=>TWZ[Math.min(9,Math.floor((f-1)/10))];
-const twZi=f=>Math.min(9,Math.floor((f-1)/10));
+const twZone=f=>TWZ[Math.floor((f-1)/10)%10];
+const twZi=f=>Math.floor((f-1)/10)%10;
 /* nombre d'ennemis : 1-2 au début, puis 3-4, puis 5, 6 au maximum */
 const twCount=f=>f>=100?6:f<=3?1:f<=10?2:f<=20?3:f<=35?3+(f%2==0?1:0):f<=50?4:f<=65?4+(f%2==0?1:0):f<=80?5:5+(f%5==0?1:0);
-const TWG={25:145,50:150,75:384,100:90004};
+const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:90004};
 /* courbe de puissance des ennemis (réglée par simulation) */
-const TWSC={a0:.9,a1:.3,p:1.0,h:1.18,d:.9,s:.72,s1:.0032};
+const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 const twSc=f=>{const a=TWSC.a0+TWSC.a1*Math.pow(f/100,TWSC.p);return{a,h:a*TWSC.h,d:a*TWSC.d+.08,p:TWSC.s+TWSC.s1*f}};
-function twList(f){const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
+function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
  const hasZ=id=>pvNoMf(id,()=>tp(id)).some(t=>Z.t.includes(t)),shuf=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
@@ -7133,7 +7133,7 @@ function twList(f){const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=tw
  return out}
 /* niveau des ennemis : monte avec l'étage (boss un peu plus haut) ; IV : progressifs aussi, jamais tous au maximum */
 const twLvl=(f,boss)=>Math.max(1,Math.min(100,Math.round(6+.94*f+(boss==2?5:boss?3:0))));
-const twIvBase=f=>Math.round(2+.22*f);
+const twIvBase=f=>f>100?36:Math.round(2+.22*f);
 function twFoe(e,f){const u=pvMake(e.id),s=twSc(f),b=e.boss==2?1.3:e.boss?1.2:1,k=e.boss?1.08:1,L=twLvl(f,e.boss),R=rng(f*7919+e.id*31+(e.boss||0)),iv=Array.from({length:6},()=>Math.max(0,Math.min(31,Math.round(twIvBase(f)+(R()-.5)*10)))),S=pvNoMf(e.id,()=>ST(e.id));
  const st=i=>Math.floor((2*S[i]+iv[i])*L/100),hp=st(0)+L+10;
  u.lv=L;u.iv=iv;u.max=u.hp=Math.max(20,Math.round(hp*s.h*b));u.atk=Math.round((st(1)+5)*s.a*k);u.spa=Math.round((st(3)+5)*s.a*k);u.def=Math.round((st(2)+5)*s.d*k);u.spd=Math.round((st(4)+5)*s.d*k);u.spe=Math.max(10,Math.round((st(5)+5)*s.p));u.boss=e.boss;u.it=null;return u}
@@ -7196,7 +7196,7 @@ async function twSim(f,opt){opt=opt||{};const t=twS(),pv=pvS(),mine=twTeamU(opt.
  const B={tw:f,opp:{r:0},m:{n:"A",r:0,tm:mine,a:0},f:{n:"B",r:0,tm:foes,a:0},round:0,log:[],sp:1,fast:true,over:null,sw:{m:0,f:0}},sk=twSk(f);
  const keep=PB;PB=null;try{while(!B.over&&B.round<90){await pvTurn(B,pvAIpick(B,"m",.92),pvAIpick(B,"f",sk))}}finally{PB=keep}
  return{res:B.over||"draw",rounds:B.round,B}}
-const twSk=f=>Math.min(.93,.4+f*.0055);
+const twSk=f=>f>100?1:Math.min(.95,.45+f*.0055);
 /* ---------- résultat d'un combat (visible ou en arrière-plan) ---------- */
 function twApply(res,f,o){o=o||{};const t=twS(),win=res=="win",out={win,f,first:0,rw:null,sc:0,coins:0,up:[],back:0,nf:t.f};t.tt=Date.now();
  if(win){t.w++;t.ls=0;const first=f>t.b;out.first=first;
@@ -7243,7 +7243,7 @@ const twIc=(n,c)=>IP[n]?ico(n):"";
 const twTower=sz=>`<svg viewBox="0 0 24 24" width="${sz}" height="${sz}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${IP.tower}</svg>`;
 const twDate=t=>{try{return new Date(t).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(e){return""}};
 const twSec=s=>Math.max(0,Math.ceil(s));
-function twNextMs(){const t=twS();for(let m=Math.floor(t.b/5)*5+5;m<=100;m+=5)if(TWRW[m]&&!t.cl[m])return m;return 0}
+function twNextMs(){const t=twS();for(let m=Math.floor(t.b/5)*5+5;m<=TWN;m+=5)if(TWRW[m]&&!t.cl[m])return m;return 0}
 
 /* ---------- décor pixel : la Tour géante derrière tout l'écran ---------- */
 function twScene(cv,zi,b){const W=256,H=144,c=cv.getContext("2d"),Z=TWZ[zi],R=gRnd(77+zi*5);c.imageSmoothingEnabled=false;
@@ -7287,8 +7287,8 @@ const twChips=ids=>tchips(ids);
 function twTeamSlots(){const t=twS();const sl=[0,1,2].map(i=>{const id=t.tm[i];if(!id)return `<button class="twsl twe" data-tw="v:team"><span class="twsp">+</span><b>Emplacement ${i+1}</b><small>Choisir un Pokémon</small></button>`;
   const ty=pvNoMf(id,()=>tp(id));return `<div class="twsl"><i class="twbd">${i+1}</i>${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(ty)}</span><em class="twlv">Niv. ${G.col[id].l}</em></div>`}).join("");return `<div class="twsls">${sl}</div>`}
 function twFoeCards(f){const L=twList(f);return `<div class="twfg">${L.map(e=>{const ty=pvNoMf(e.id,()=>tp(e.id));return `<div class="twfc ${e.boss?"twbs":""}">${e.boss?`<em class="twbo">${e.boss==2?"Gardien":"Boss"}</em>`:""}${pvImg(e.id,"big")}<b>${esc(pvNm(e.id))}</b><span class="pvty">${tchips(ty)}</span><em class="twlv">Niv. ${twLvl(f,e.boss)}</em></div>`}).join("")}</div>`}
-function twMilesBar(){const t=twS(),ms=[];for(let m=5;m<=100;m+=5)ms.push(m);
- return `<div class="twmb"><i style="width:${Math.min(100,t.b)}%"></i>${ms.map(m=>`<span class="${TWRW[m]&&TWRW[m].big?"bg":""} ${t.b>=m?"on":""}" style="left:${m}%"></span>`).join("")}</div>`}
+function twMilesBar(){const t=twS(),ms=[];for(let m=5;m<=TWN;m+=5)ms.push(m);
+ return `<div class="twmb"><i style="width:${Math.min(100,t.b/TWN*100)}%"></i>${ms.map(m=>`<span class="${TWRW[m]&&TWRW[m].big?"bg":""} ${t.b>=m?"on":""}" style="left:${m/TWN*100}%"></span>`).join("")}</div>`}
 const twSwitch=(k,on,tt,d)=>`<button class="twsw ${on?"on":""}" data-tw="tgl:${k}" role="switch" aria-checked="${on?"true":"false"}"><span class="twtg"><i></i></span><span class="twsx"><b>${tt}</b><small>${d}</small></span></button>`;
 
 /* ---------- vue principale ---------- */
@@ -7345,9 +7345,9 @@ function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m
  return `<div class="twrc ${r.big?"twmaj":""} ${got?"twdn":""} ${cur?"twnx":""}"><div class="twrh"><b>Étage ${m}</b><em>${got?"Récupérée":t.b>=m?"Prête":r.big?"Majeure":""}</em></div>
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
   <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*20*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
-function twViewRw(){const L=[];for(let m=5;m<=100;m+=5)L.push(m);
- return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 100</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 100</span>`}</div></div></div>
-  <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75 et 100 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
+function twViewRw(){const L=[];for(let m=5;m<=TWN;m+=5)L.push(m);
+ return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 200</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 200</span>`}</div></div></div>
+  <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75, 100, 125, 150, 175 et 200 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
 
 /* ---------- classement ---------- */
 function twPodium(R){const p=R.slice(0,3),one=(r,k)=>r?`<div class="pvpd q${k}" data-tw="prof:${esc(r.id)}">${k==1?`<span class="pvcr">${pvIc("crown")}</span>`:""}<span class="pvpr">${k}</span>${pvAvatar(r,"md")}<b>${esc(r.n)}${r.me?" (toi)":""}</b><span class="twfl">${twTower(14)} Étage ${r.b}</span></div>`:`<div class="pvpd q${k} e"></div>`;
@@ -7361,7 +7361,7 @@ function twViewRank(){const R=twRows(),me=R.find(x=>x.me),top=R.slice(0,50);
 function vTwr(){twS();twFetch();const t=twS(),V=TWX.v;
  const tabs=[["tour","tower","Tour"],["team","team","Équipe"],["up","bolt","Améliorations"],["rw","gift","Récompenses"],["rank","trophy","Classement"]];
  const body=V=="team"?twViewTeam():V=="up"?twViewUp():V=="rw"?twViewRw():V=="rank"?twViewRank():twViewTour();
- return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>100 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
+ return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>200 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
   <div class="twtabs">${tabs.map(([k,i,n])=>`<button class="${V==k?"on":""}" data-tw="v:${k}">${twIc(i)}<span>${n}</span></button>`).join("")}</div>${body}</div>`}
 /* mises à jour douces (sans tout redessiner) */
 function twRefresh(full){twHud();if(tab!="twr"||PB)return;if($("pvm")&&$("pvm").classList.contains("on"))return;const sy=window.scrollY;
@@ -7978,7 +7978,7 @@ const WKM={
  items:["Objets tenus","Le catalogue complet des objets à équiper, avec recherche","bag"],
  exp:["Expéditions","Des missions qui tournent pendant que tu joues","compass"],
  raid:["Raids","Boss plein écran, récompenses et boss mondial","skull"],
- twr:["Tower","100 étages, Sceaux, améliorations et Pikachu Zénith","tower"],
+ twr:["Tower","200 étages, Sceaux, améliorations et Pikachu Zénith","tower"],
  pvp:["JCJ : arène classée","6 contre 6, ligues, saisons et insignes","shield"],
  gld:["Guildes","Rejoindre ou créer une équipe, défis, boss hebdomadaire et entraide","frs"],
  shop:["Boutique et Sac","Acheter, vendre et ranger tes objets","bag"],
@@ -8114,12 +8114,12 @@ ${wsx("Fonctionnement",`<ol class="wks"><li>Ouvre l'onglet <b>Pension</b> (caté
 ${wn("tip","Qui y mettre ?","Les Pokémon que tu veux le plus rendre précieux : un chromatique ou un Colossal donne un bonus permanent de dégâts à tout le Pokémon.")}`;
 
 wkBody.twr=()=>{
- return `<p class="lead">La Tower est un mode à part : <b>100 étages</b> répartis en 10 zones, affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
+ return `<p class="lead">La Tower est un mode à part : <b>200 étages</b> répartis en 10 zones (les étages 101 à 200 reprennent les zones, avec des adversaires niveau 100 et des équipes choisies pour contrer la tienne), affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
  ${wf([["Débloquée à l'étage",LOCKS.twr],["Étages",TWN],["Équipe","3 Pokémon"],["Récompense finale","Pikachu Zénith"]])}
  ${wsx("Les onglets",wg([["tower","Tour","Monte étage après étage et lance les combats."],["team","Équipe","Choisis tes 3 Pokémon, leurs attaques et leur objet."],["flask","Améliorations","Dépense tes Sceaux pour renforcer toute l'équipe."],["gift","Récompenses","Une récompense tous les 5 étages."],["trophy","Classement","Compare ton étage max à celui des autres."]]))}
  ${wsx("Sceaux et améliorations",`<p>Tu gagnes des <b>Sceaux</b> à chaque victoire, et beaucoup plus à la <b>première victoire</b> d'un étage. Ils achètent huit améliorations :</p>${tbl(["Amélioration","Effet","Niveau max"],[["Vitalité","PV de toute l'équipe",20],["Force","Attaque physique",20],["Carapace","Défense physique",20],["Esprit","Attaque spéciale",20],["Aura","Défense spéciale",20],["Élan","Vitesse",20],["Cadence","Combat de farm plus rapide : −0,2 s par niveau (6,0 s au départ)",20],["Butin","Plus de Sceaux par victoire",10]])}<p>L'<b>achat automatique</b> dépense tes Sceaux dans l'amélioration la moins chère disponible.</p>`)}
  ${wsx("Mode farm",`<p>Quand un étage est vaincu, tu peux le refaire en <b>mode farm</b>, un combat rapide qui rapporte des Sceaux. Attention : deux défaites d'affilée en farm te ramènent d'un étage en arrière.</p>`)}
- ${wsx("Récompenses",`<p>Une récompense tous les 5 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75 et 100</b> sont des paliers majeurs. À l'étage 100, tu obtiens <b>Pikachu Zénith</b>, un Pokémon spécial Électrik/Vol, sans évolution.</p>`)}
+ ${wsx("Récompenses",`<p>Une récompense tous les 5 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75, 100, 125, 150, 175 et 200</b> sont des paliers majeurs. Après l'étage 100, tous les adversaires sont niveau 100 et leur équipe est choisie pour contrer la tienne. À l'étage 200, tu obtiens <b>Pikachu Zénith</b>, un Pokémon spécial Électrik/Vol, sans évolution.</p>`)}
  ${wn("tip","Conseil","Améliore d'abord Force et Esprit pour passer les étages, puis Cadence et Butin pour farmer plus vite.")}`};
 
 wkBody.pvp=()=>{
@@ -8157,7 +8157,7 @@ wkBody.inv=()=>{
  ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie Divin","350"]])}
  ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque invocation a aussi <b>1,5 %</b> de chance de donner une mutation ou une grande taille.</p>`)}
  ${wsx("Garanties",`<ul class="wks2"><li><b>Divin</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
- ${wsx("Prix et lots",`<p>Une invocation coûte <b>72 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>3 fois plus puissants</b> que la normale.</p>`)}
+ ${wsx("Prix et lots",`<p>Une invocation coûte <b>72 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
  ${wn("info","Doublons","Chaque copie compte pour les étoiles (page Ascensions).")}`};
 
 wkBody.cas=()=>{
@@ -8610,6 +8610,34 @@ function tcRender(){const o=$("tco");if(!o||!o.classList.contains("on"))return;c
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tc=open]");if(b){e.stopPropagation();tcOpen()}},true);
 /* garde la position de défilement dans la fiche d'un Pokémon (vitamines, bonbons...) */
 {const m0=modal;modal=function(){let S=[];try{S=[".pqbd",".pqa"].map(q=>{const e=document.querySelector("#md "+q);return[q,e?e.scrollTop:0]})}catch(e){}const r=m0.apply(this,arguments);try{S.forEach(([q,y])=>{if(!y)return;const e=document.querySelector("#md "+q);if(e)e.scrollTop=y})}catch(e){}return r}}
+/* ===== v119 : Tower jusqu'a l'etage 200, IA et equipes strategiques, prix de boutique ===== */
+function kxPm(i){const n=i&&i.n||"",c=i&&i.c||"";
+ if(c=="Poké Balls")return n=="Master Ball"?1:2.5;
+ if(c=="Vitamines")return 5;
+ if(n=="Bouchon Bonus"||n=="Super Bonus"||n=="Patch Talent")return 6;
+ if(n=="Capsule Talent")return 4;
+ return 1}
+/* recompenses 105 a 200 (le Pikachu passe a l'etage 200) */
+(function(){delete TWRW[100].sp;TWRW[100].gem=60;TWRW[100].ban=8;
+ const it=(f)=>{const k=(f-100)/5,L=[["master-ball",Math.min(10,1+(k/4|0))],["gold-bottle-cap",6+k],["ability-patch",3+(k/2|0)],["dream-ball",12+k*2],["max-revive",8+(k/2|0)],["rare-candy",5+k*2]];return L};
+ for(let f=105;f<=200;f+=5){const k=(f-100)/5,big=f%25==0;
+  TWRW[f]={h:22+k*3,s:2200+k*260,big:big?1:0,it:it(f)};
+  if(big){TWRW[f].gem=60+(f-100)/25*20;TWRW[f].ban=8}}
+ TWRW[200]={h:120,s:15000,big:1,ban:8,gem:200,sp:90004,it:[["master-ball",12],["gold-bottle-cap",30],["ability-patch",15],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
+/* equipe adverse strategique (etages 101 a 200) : elle s'adapte a ton equipe */
+function twListS(f){const P=pvPool(),R=rng(f*977+13),gd=TWG[f],big=f%5==0,t=twS();
+ const mt=(t.tm||[]).filter(id=>G.col[id]).map(id=>pvNoMf(id,()=>tp(id)));
+ const top=P.slice(-90).map(x=>x[0]).filter(id=>id!=gd);
+ const ty=id=>pvNoMf(id,()=>tp(id)),bst=id=>pvPow(id);
+ const off=id=>mt.reduce((s,m)=>s+Math.max(...ty(id).map(a=>eff(a,m))),0),def=id=>mt.reduce((s,m)=>s+Math.max(...m.map(a=>eff(a,ty(id)))),0);
+ const sc=id=>(mt.length?off(id)*1.1-def(id)*.9:0)+bst(id)/180+(R()-.5)*.6;
+ const n=6-(big?1:0),out=[],used=new Set(),cnt={};
+ const pool=top.slice().sort((a,b)=>sc(b)-sc(a));
+ for(const id of pool){if(out.length>=n)break;const k=ty(id)[0];if(cnt[k]>=2)continue;const key=ty(id).join();if(used.has(key))continue;used.add(key);cnt[k]=(cnt[k]||0)+1;out.push({id,boss:0})}
+ for(const id of pool){if(out.length>=n)break;if(!out.some(e=>e.id==id))out.push({id,boss:0})}
+ out.sort((a,b)=>bst(a.id)-bst(b.id));
+ if(big){let bid=gd;if(!bid){bid=pool.find(x=>!out.some(e=>e.id==x))||pool[0]}out.push({id:bid,boss:gd?2:1})}
+ return out}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
