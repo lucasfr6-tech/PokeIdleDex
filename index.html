@@ -3078,6 +3078,7 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .wbi{display:flex;flex-direction:column;gap:3px;font-size:11.5px}.wbi span{display:flex;align-items:center;gap:5px}.wbi img,.wbi .i{width:18px;height:18px}
 @media(max-width:900px){.wbg{grid-template-columns:1fr 1fr}}
 .mlhint{color:#94a3b8;font-size:12px}.mlhint .mlclr{display:inline;margin-left:6px;color:#fbbf24}
+.wbcp{font-size:11.5px;color:#a5b4fc;background:#6366f114;border-radius:8px;padding:3px 7px}.wbcp b{color:#c7d2fe}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -5575,7 +5576,7 @@ async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
  const n=wbTiers(d);if(!n){toast(LS("Pas assez de dégâts pour une récompense (15 000 minimum).","Not enough damage for a reward (15,000 minimum)."));if(kind=="cur")w.cl=1;else w.pe=null;save();show();return}
  const items=[];for(let i=0;i<n;i++)WBR[i].forEach(([key,q])=>{const kk=key=="#pearl"?rdPearlKey():key;if(IT[kk]){const e=items.find(x=>x.k==kk);if(e)e.n+=q;else items.push({k:kk,n:q})}});
  const rp=n*120;try{mailAdd(LS("Boss monde","World boss"),LS("Récompenses de la semaine","Weekly rewards"),items.map(x=>["i",x.k,x.n]),fmt(d)+" "+LS("dégâts · palier ","damage · tier ")+n+" / 5")}catch(e){}r.rp+=rp;if(kind=="cur")w.cl=1;else w.pe=null;save();
- const o=$("rdb");RCX.boss=rdWBossOf(k);RCX.tier=5;RCX.wb=1;RCX.n=1;RCX.cap=killed?.03+.025*n:0;RCX.done=!killed;RCX.ok=0;RCX.busy=false;
+ const o=$("rdb");RCX.boss=rdWBossOf(k);RCX.def=RCX.boss;RCX.tier=5;RCX.wb=1;RCX.n=killed?3:1;if(killed){G.inv["great-ball"]=(G.inv["great-ball"]||0)+3;RCX.ball="great-ball"}RCX.cap=killed?.03+.025*n:0;RCX.done=!killed;RCX.ok=0;RCX.busy=false;
  const item=x=>`<div class="rdri">${ic(x.k,IT[x.k].img)}<b>${IT[x.k].n}</b><em>×${x.n}</em></div>`;
  o.className="on";o.innerHTML=`<div class="rdrs" id="rdRes" style="--c:#a78bfa"><div class="rdrh w"><h2>${killed?LS("Boss monde vaincu !","World boss defeated!"):LS("Récompenses de la semaine","Weekly rewards")}</h2><small>${fmt(d)} ${LS("dégâts","damage")} · ${n} / 5 ${LS("paliers","tiers")} · ${LS("récompenses dans ton courrier","rewards sent to your mail")}</small></div>
  <div class="rdrw"><div class="rdrl"><div class="rdri"><i>${ico("trophy")}</i><b>${rp} ${LS("Points Raid","Raid Points")}</b></div>${items.map(item).join("")}</div>${killed?"":`<small>${LS("Le boss n'a pas été vaincu cette semaine : pas de capture.","The boss was not defeated: no capture.")}</small>`}</div>
@@ -8916,6 +8917,7 @@ const kxBatSvg=`<svg viewBox="0 0 40 20" class="hwbt"><path d="M20 10c-2-5-6-9-1
 const hwArr=d=>`<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="${d?"M9 5l7 7-7 7":"M15 5l-7 7 7 7"}"/></svg>`;
 /* ---------- état ---------- */
 const HW={i:0,v:0,sh:0,busy:0};
+const HWSH=.05; /* chance d'obtenir la version chromatique à l'achat */
 const hwOwn=id=>!!(G.sp&&G.sp[id]);
 const hwImg=(id,mf,sh)=>`<img class="hwsp" alt="" draggable="false" decoding="async" src="${IMG}${sh?"shiny/":""}${id}${mf?"m"+mf:""}.png">`;
 const hwVarName=(x,k)=>{if(!k)return LS("Normal","Normal");const mg=kxHwMg(x.id),w=(MGM[mg[k-1]].n.match(/ (\S+)$/)||[])[1];return "Méga"+(w?" "+w:"")};
@@ -8925,13 +8927,13 @@ function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=g
  const vars=[0].concat(mg.map((_,k)=>k+1)).map(k=>`<button class="${HW.v==k?"on":""}" data-hw="var" data-k="${k}">${hwVarName(x,k)}</button>`).join("");
  const ladder=HWI.map((y,j)=>`<i class="${j==i?"on":j<i?"lo":""}" style="--h:${Math.round(Math.pow(1.2,j)/mx*100)}%"></i>`).join("");
  return `<div class="hwpg" style="--a:${x.au};--b:${x.au2}">
- <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique","Shiny")}</span></button></div><small class="hwhint">${LS("Glisse pour faire tourner · double-clic pour un tour complet","Drag to rotate · double-click for a full spin")}</small></div>
+ <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique","Shiny")} · ${Math.round(HWSH*100)} %</span></button></div><small class="hwhint">${LS("Glisse pour faire tourner · double-clic pour un tour complet","Drag to rotate · double-click for a full spin")}</small></div>
  <div class="hwinfo"><div class="hwk">${LS("EXCLUSIVITÉ HALLOWEEN","HALLOWEEN EXCLUSIVE")}</div><h2>${esc(x.n)}</h2>
   <div class="hwtr"><span class="vb vhw">${ico("spark")}Halloween</span>${tchips(x.t)}</div>
   <p class="hwfl">${esc(LS(x.fr,x.en))}</p>
   <div class="hwcols"><div class="hwbox"><h4>${LS("Statistiques","Stats")}<em>${x.s.reduce((a,b)=>a+b,0)}</em></h4>${stats}<div class="hwab"><small>${LS("Talent","Ability")}</small><b>${esc(x.ab[0])}${x.ha?` <i>/ ${esc(x.ha)}</i>`:""}</b></div></div>
   <div class="hwbox hwpwb"><h4>${LS("Puissance","Power")}</h4><div class="hwbig">×${pw.toFixed(2).replace(".",",")}</div><div class="hwlad">${ladder}</div><small>${i?LS("+20 % de dégâts par rapport à "+HWI[i-1].n,"+20% damage over "+HWI[i-1].n):LS("Aussi fort qu'Ectoplasma Crépuscule","As strong as Dusk Gengar")}</small>${mg.length?`<div class="hwmb">${ico("bolt")} ${LS("Méga-Évolution : "+mg.length+" forme"+(mg.length>1?"s":""),"Mega Evolution: "+mg.length+" form"+(mg.length>1?"s":""))}</div>`:""}</div></div>
-  ${own?`<div class="hwbuy done">${ico("check")}<span>${LS("Dans ta collection","In your collection")}</span></div>`:`<button class="hwbuy${ok?"":" no"}" data-hw="buy"><span class="hwbg">${ico("gem")}<b>${fmt(x.p)}</b></span><span class="hwbl">${ok?LS("Acheter","Buy now"):LS("Il manque "+fmt(x.p-gem)+" gemmes","Missing "+fmt(x.p-gem)+" gems")}</span><i class="hwsh2"></i></button>`}
+  ${own?`<div class="hwbuy done">${ico("check")}<span>${LS("Dans ta collection","In your collection")} ×${(G.col[x.id]||{}).n||1}</span></div>`:""}<button class="hwbuy${ok?"":" no"}" data-hw="buy"><span class="hwbg">${ico("gem")}<b>${fmt(x.p)}</b></span><span class="hwbl">${ok?(own?LS("Acheter un exemplaire de plus","Buy another copy"):LS("Acheter","Buy now")):LS("Il manque "+fmt(x.p-gem)+" gemmes","Missing "+fmt(x.p-gem)+" gems")}</span><i class="hwsh2"></i></button>
  </div></div>`}
 function hwThumbs(){return HWI.map((x,i)=>{const own=hwOwn(x.id);return `<button class="hwth${i==HW.i?" on":""}${own?" own":""}" data-hw="go" data-k="${i}" style="--a:${x.au}"><span class="hwti">${hwImg(x.id,0,0)}</span><span class="hwtn"><b>${esc(x.n.split(" ")[0])}</b><small>${own?LS("Possédé","Owned"):fmt(x.p)+" "+LS("gemmes","gems")}</small></span></button>`}).join("")}
 function hwRender(anim){const o=$("hwm");if(!o)return;const gem=G.gem||0;
@@ -8964,8 +8966,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(a=="prev")hwGo(HW.i-1,-1);else if(a=="next")hwGo(HW.i+1,1);else if(a=="go")hwGo(+b.dataset.k);
  else if(a=="var"){HW.v=+b.dataset.k;hwRender("pop")}
  else if(a=="shiny"){HW.sh=HW.sh?0:1;hwRender("pop")}
- else if(a=="buy"){const x=HWI[HW.i];if(!x||hwOwn(x.id))return;if((G.gem||0)<x.p){toast(LS("Il te manque "+fmt(x.p-(G.gem||0))+" gemmes","You are missing "+fmt(x.p-(G.gem||0))+" gems"));return}
-  G.gem-=x.p;spGrant(x.id);try{G.col[x.id].hw=1;sfx("prest");checkAch()}catch(_){}toast(LS(x.n+" rejoint ton équipe !",x.n+" joins your team!"));save();hwRender("pop");hwBurst(x);try{ui()}catch(_){}}},true);
+ else if(a=="buy"){const x=HWI[HW.i];if(!x)return;if((G.gem||0)<x.p){toast(LS("Il te manque "+fmt(x.p-(G.gem||0))+" gemmes","You are missing "+fmt(x.p-(G.gem||0))+" gems"));return}
+  G.gem-=x.p;spGrant(x.id);try{if(Math.random()<HWSH){const c=G.col[x.id];if(c&&!c.sh){c.sh=1;rq(x.id);toast(LS("Chromatique ! "+x.n+" brille d'un éclat rare.","Shiny! "+x.n+" shines with a rare glow."));sfx("shiny")}}}catch(_){}try{G.col[x.id].hw=1;sfx("prest");checkAch()}catch(_){}toast(LS(x.n+" rejoint ton équipe !",x.n+" joins your team!"));save();hwRender("pop");hwBurst(x);try{ui()}catch(_){}}},true);
 document.addEventListener("keydown",e=>{const o=$("hwm");if(!o||o.className!="on")return;if(e.key=="Escape")hwClose();else if(e.key=="ArrowRight")hwGo(HW.i+1,1);else if(e.key=="ArrowLeft")hwGo(HW.i-1,-1)});
 {let sx=0,sy=0;document.addEventListener("touchstart",e=>{const o=$("hwm");if(!o||o.className!="on")return;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
  document.addEventListener("touchend",e=>{const o=$("hwm");if(!o||o.className!="on"||(e.target.closest&&e.target.closest(".hwstage")))return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6)hwGo(HW.i+(dx<0?1:-1),dx<0?1:-1)},{passive:true})}
@@ -9165,6 +9167,8 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
   ["new","book","Pokédex : formes cochées automatiquement","Les Méga-évolutions et les Primo-formes se cochent dès que tu possèdes la Méga-Perle correspondante."],
   ["new","bolt","Pass de combat : plus d'XP","Un Pokémon vaincu ou capturé sur deux donne 1 XP, et la capture d'un UR en rapporte 5."],
   ["new","map","Récap des expéditions","À la fin d'une expédition, même en automatique, un récap te dit si tu as obtenu le Pokémon visé. La barre de progression ne repart plus à zéro."],
+  ["new","ghost","Exclusifs Halloween rachetables","Tu peux racheter un exemplaire d'un Pokémon Halloween que tu possèdes déjà : chaque copie le rend plus fort."],
+  ["new","shield","Capture du boss monde","Quand le boss monde est vaincu, tu reçois 3 Super Balls pour tenter de le capturer. La chance affichée dépend de ton palier."],
   ["new","gift","Courrier","Un nouveau bouton en haut à droite : les récompenses du boss monde, des défis de guilde et des codes cadeaux arrivent dans ton courrier. Tu peux aussi y entrer un code cadeau."],
   ["new","shield","Boss monde renforcé","Le boss monde a 2 fois plus de points de vie (8 millions), et les récompenses de chaque palier sont maintenant visibles avant le combat."],
   ["imp","star","Tour : récompenses tous les 10 étages","Une récompense tous les 10 étages au lieu de 5, avec beaucoup moins de capsules."],
@@ -9293,8 +9297,8 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
 
  /* boss monde : paliers et récompenses visibles */
  const wb0=rhWb;
- rhWb=function(){let h=wb0.apply(this,arguments);try{const my=wbMy(),R=WBR.map((L,j)=>{const ok=my>=WBT[j];return `<div class="wbt ${ok?"ok":""}"><div class="wbh"><b>${LS("Palier","Tier")} ${j+1}</b><small>${fmt(WBT[j])} ${LS("dégâts","dmg")}</small>${ok?`<i>${ico("check")}</i>`:""}</div><div class="wbi">${L.map(([k,q])=>{if(k=="#pearl")return `<span title="${LS("Méga-Perle au hasard","Random Mega Pearl")}">${LS("Méga-Perle","Mega Pearl")} ×${q}</span>`;const it=IT[k];return it?`<span>${ic(k,it.img)}${esc(it.n)} ×${q}</span>`:""}).join("")}<span>${LS("120 Points Raid","120 Raid Points")}</span></div></div>`}).join("");
-  const blk=`<div class="wbr"><b>${LS("Récompenses par palier","Rewards per tier")}</b><small>${LS("Les paliers se cumulent : atteindre le palier 3 donne aussi les paliers 1 et 2. Les récompenses arrivent dans ton courrier.","Tiers stack: reaching tier 3 also gives tiers 1 and 2. Rewards arrive in your mail.")}</small><div class="wbg">${R}</div></div>`;
+ rhWb=function(){let h=wb0.apply(this,arguments);try{const my=wbMy(),R=WBR.map((L,j)=>{const ok=my>=WBT[j];return `<div class="wbt ${ok?"ok":""}"><div class="wbh"><b>${LS("Palier","Tier")} ${j+1}</b><small>${fmt(WBT[j])} ${LS("dégâts","dmg")}</small>${ok?`<i>${ico("check")}</i>`:""}</div><div class="wbcp">${LS("Capture du boss","Boss capture")} : <b>${Math.round(Math.min(.95,(.03+.025*(j+1))*(BM["great-ball"]||1)*(1+.08*PL("pk")))*100)} %</b> ${LS("par lancer","per throw")}</div><div class="wbi">${L.map(([k,q])=>{if(k=="#pearl")return `<span title="${LS("Méga-Perle au hasard","Random Mega Pearl")}">${LS("Méga-Perle","Mega Pearl")} ×${q}</span>`;const it=IT[k];return it?`<span>${ic(k,it.img)}${esc(it.n)} ×${q}</span>`:""}).join("")}<span>${LS("120 Points Raid","120 Raid Points")}</span></div></div>`}).join("");
+  const blk=`<div class="wbr"><b>${LS("Récompenses par palier","Rewards per tier")}</b><small>${LS("Les paliers se cumulent : atteindre le palier 3 donne aussi les paliers 1 et 2. Les récompenses arrivent dans ton courrier. Si le boss est vaincu, tu reçois 3 Super Balls pour tenter de le capturer : plus ton palier est haut, plus la chance est grande.","Tiers stack: reaching tier 3 also gives tiers 1 and 2. Rewards arrive in your mail. If the boss is defeated you get 3 Great Balls to try to catch it: the higher your tier, the better the odds.")}</small><div class="wbg">${R}</div></div>`;
   const i=h.lastIndexOf("</section>");if(i>0)h=h.slice(0,i)+blk+h.slice(i)}catch(e){}return h};
 })();
 
