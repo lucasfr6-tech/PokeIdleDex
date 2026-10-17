@@ -3077,6 +3077,7 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .wbg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.wbt{padding:9px;border-radius:12px;background:#ffffff0a;border:1px solid #ffffff14;display:flex;flex-direction:column;gap:6px;min-width:0}.wbt.ok{border-color:#4ade8088;background:#4ade8012}.wbh{display:flex;flex-direction:column;position:relative}.wbh b{font-size:13px}.wbh small{color:var(--mu);font-size:11px}.wbh i{position:absolute;right:0;top:0;color:#4ade80;width:16px;height:16px}
 .wbi{display:flex;flex-direction:column;gap:3px;font-size:11.5px}.wbi span{display:flex;align-items:center;gap:5px}.wbi img,.wbi .i{width:18px;height:18px}
 @media(max-width:900px){.wbg{grid-template-columns:1fr 1fr}}
+.mlhint{color:#94a3b8;font-size:12px}.mlhint .mlclr{display:inline;margin-left:6px;color:#fbbf24}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -9233,6 +9234,7 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
 })();
 /* ===== v147 : Courrier (récompenses du boss monde, défis de guilde, codes cadeaux) + paliers du boss monde ===== */
 const GIFT_CODES={
+ "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",100],["i","master-ball",2]]},
  /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",100],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
 function mailBox(){G.mail=G.mail||[];return G.mail}
@@ -9250,7 +9252,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   return `<div class="mlm"><button class="nwx" data-ml="x" aria-label="${LS("Fermer","Close")}">${P('<path d="M6 6l12 12M18 6L6 18"/>')}</button>
   <header class="mlh"><span class="mli">${MI}</span><div><h2>${LS("Courrier","Mail")}</h2><p>${un?`${un} ${LS("à récupérer","to claim")}`:LS("Rien à récupérer","Nothing to claim")}</p></div>${un>1?`<button class="mlall" data-ml="all">${LS("Tout récupérer","Claim all")}</button>`:""}</header>
   <div class="mlb">${L.length?L.map(m=>`<article class="mlc ${m.c?"done":"new"}"><div class="mlt"><span class="mlg">${GI}</span><div><b>${esc(m.t)}</b><small>${esc(m.f||"")}${m.f?" · ":""}${when(m.d)}</small></div>${m.c?`<em>${m.rw&&m.rw.length?LS("Récupéré","Claimed"):LS("Lu","Read")}</em>`:""}</div>${m.x?`<p>${esc(m.x)}</p>`:""}${m.rw&&m.rw.length?`<div class="mlr">${chips(m.rw)}</div>`:""}${!m.c&&m.rw&&m.rw.length?`<button class="go mlcl" data-ml="c" data-i="${m.id}">${LS("Récupérer","Claim")}</button>`:""}</article>`).join(""):`<div class="mle">${MI}<b>${LS("Ton courrier est vide","Your mail is empty")}</b><small>${LS("Les récompenses du boss monde, des défis de guilde et des codes cadeaux arrivent ici.","World boss, guild challenge and gift code rewards arrive here.")}</small></div>`}</div>
-  <footer class="mlf"><div class="mlcode"><input id="mlin" type="text" placeholder="${LS("Entrer un code cadeau","Enter a gift code")}" value="${esc(ST.code)}" maxlength="32" autocomplete="off" spellcheck="false"><button data-ml="code">${LS("Valider","Redeem")}</button></div>${ST.msg?`<small class="mlmsg">${ST.msg}</small>`:""}${L.some(m=>m.c)?`<button class="mlclr" data-ml="clr">${LS("Supprimer les messages lus","Delete read messages")}</button>`:""}</footer></div>`};
+  <footer class="mlf"><div class="mlcode"><input id="mlin" type="text" placeholder="${LS("Entrer un code cadeau","Enter a gift code")}" value="${esc(ST.code)}" maxlength="32" autocomplete="off" spellcheck="false"><button data-ml="code">${LS("Valider","Redeem")}</button></div>${ST.msg?`<small class="mlmsg">${ST.msg}</small>`:""}<small class="mlhint">${LS("Les codes cadeaux sont donnés sur notre Discord.","Gift codes are shared on our Discord.")} <button class="mlclr" data-ml="disc">${LS("Rejoindre le Discord","Join the Discord")}</button></small>${L.some(m=>m.c)?`<button class="mlclr" data-ml="clr">${LS("Supprimer les messages lus","Delete read messages")}</button>`:""}</footer></div>`};
  const render=()=>{const o=document.getElementById("mlr");if(o&&o.className=="on")o.innerHTML=body()};
  function mailOpen(){ST.msg="";const o=root();o.className="on";o.innerHTML=body()}
  function mailClose(){const o=document.getElementById("mlr");if(o){o.className="";o.innerHTML=""}}
@@ -9261,6 +9263,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   if(k=="x"){mailClose();return}
   if(k=="c"){await claim(mailBox().find(m=>m.id==t.dataset.i))}
   else if(k=="all"){const L=mailBox().filter(m=>!m.c&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await bpGive(m.rw))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
+  else if(k=="disc"){const u=window.PID_DISCORD||BUG_URL;if(u)window.open(u,"_blank","noopener")}
   else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
    const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c];G.codes=G.codes||{};
