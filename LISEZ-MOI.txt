@@ -1,0 +1,148 @@
+PokeIdleDex - GUIDE DE MISE EN LIGNE
+====================================
+
+CE QUE CONTIENT CE DOSSIER
+  index.html          le jeu
+  img/                les images (environ 125 Mo). Toujours à côté de index.html.
+  config.js, shim.js, sw.js, manifest.webmanifest, icônes   le nécessaire du site
+  legal.html          mentions légales (à remplir)
+  server/server.js    le serveur en ligne : comptes, amis, chat, classements,
+                      JCJ, Tower, guildes, boss mondial. Il sert aussi le jeu.
+  release.py          régénère index.html après une mise à jour du jeu
+
+CHOISIS TON CAS
+  CAS 1  Solo, gratuit, 5 minutes   (pas de vrais joueurs entre eux)
+  CAS 2  En ligne sur un VPS        (classements, guildes, JCJ, chat réels)
+
+--------------------------------------------------------------------
+AVANT TOUT : REMPLIS legal.html
+--------------------------------------------------------------------
+  Ouvre legal.html dans un éditeur de texte et mets ton pseudo, un e-mail de
+  contact et le nom de l'hébergeur. Le jeu est un fan-game gratuit et non
+  officiel : ne vends rien (ni accès, ni gemmes), n'ajoute pas de publicité.
+
+--------------------------------------------------------------------
+CAS 1 : SOLO SUR NETLIFY (le plus simple)
+--------------------------------------------------------------------
+  1. Va sur app.netlify.com/drop (crée un compte gratuit).
+  2. Glisse le dossier "release" dedans. Supprime d'abord le sous-dossier
+     "server", il ne sert pas ici.
+  3. Netlify te donne une adresse. Tu peux la renommer dans les réglages.
+  Alternatives équivalentes : Cloudflare Pages, GitHub Pages.
+  Attention : le dossier img (125 Mo) doit rester à côté de index.html.
+  Si l'hébergeur refuse la taille, utilise le CAS 2.
+
+--------------------------------------------------------------------
+CAS 2 : EN LIGNE SUR UN VPS (Linux)
+--------------------------------------------------------------------
+  Prix : environ 4 à 6 euros par mois (Hetzner, OVH, Scaleway...).
+  Choisis Ubuntu 22.04 ou 24.04, 1 Go de RAM suffit pour commencer.
+
+  ETAPE 1 - Louer le serveur
+    Crée le VPS chez l'hébergeur. Note son adresse IP, et prépare la clé SSH
+    ou le mot de passe root qu'il te donne.
+
+  ETAPE 2 - Acheter un nom de domaine (facultatif mais recommandé)
+    Chez OVH, Gandi, Namecheap... Ajoute un enregistrement DNS de type A qui
+    pointe vers l'IP du VPS (exemple : jeu.tondomaine.fr -> 203.0.113.10).
+    Sans domaine, tu peux jouer via http://IP:3000 mais sans HTTPS (peu sûr,
+    et certains navigateurs bloquent des fonctions).
+
+  ETAPE 3 - Se connecter et installer Node.js
+    Depuis ton ordinateur :
+        ssh root@IP_DU_SERVEUR
+    Puis sur le serveur :
+        apt update && apt install -y curl unzip
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+        apt install -y nodejs
+        node -v            (doit afficher v20 ou plus)
+
+  ETAPE 4 - Envoyer le jeu
+    Depuis ton ordinateur (dans le dossier qui contient release.zip) :
+        scp release.zip root@IP_DU_SERVEUR:/root/
+    Sur le serveur :
+        mkdir -p /opt/jeu && cd /opt/jeu
+        unzip /root/release.zip
+        mv release/* . && rmdir release
+        ls                  (tu dois voir index.html, img, server...)
+
+  ETAPE 5 - Tester à la main
+        mkdir -p /opt/jeu-data
+        cd /opt/jeu
+        PORT=3000 DATA_FILE=/opt/jeu-data/data.json node server/server.js
+    Ouvre http://IP_DU_SERVEUR:3000 : le jeu doit s'afficher. Arrête avec Ctrl+C.
+
+  ETAPE 6 - Le laisser tourner en permanence (service systemd)
+    Crée le fichier /etc/systemd/system/pokeidle.service avec :
+
+        [Unit]
+        Description=PokeIdleDex
+        After=network.target
+        [Service]
+        WorkingDirectory=/opt/jeu
+        Environment=PORT=3000
+        Environment=DATA_FILE=/opt/jeu-data/data.json
+        ExecStart=/usr/bin/node server/server.js
+        Restart=always
+        [Install]
+        WantedBy=multi-user.target
+
+    Puis :
+        systemctl daemon-reload
+        systemctl enable --now pokeidle
+        systemctl status pokeidle        (doit afficher "active (running)")
+    Les données des joueurs sont dans /opt/jeu-data/data.json. Elles restent
+    même si tu mets le jeu à jour.
+
+  ETAPE 7 - HTTPS avec Caddy (certificat automatique)
+        apt install -y debian-keyring debian-archive-keyring apt-transport-https
+        curl -1sLf https://dl.cloudsmith.io/public/caddy/stable/gpg.key | gpg --dearmor -o /usr/share/keyrings/caddy.gpg
+        curl -1sLf https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt > /etc/apt/sources.list.d/caddy.list
+        apt update && apt install -y caddy
+    Remplace le contenu de /etc/caddy/Caddyfile par (avec TON domaine) :
+
+        jeu.tondomaine.fr {
+            reverse_proxy localhost:3000
+        }
+
+    Puis :  systemctl restart caddy
+    Ouvre https://jeu.tondomaine.fr : c'est en ligne.
+    Ouvre aussi les ports 80 et 443 si le pare-feu de l'hébergeur les bloque.
+
+  ETAPE 8 - Sauvegardes (important)
+    Les comptes et classements sont dans /opt/jeu-data/data.json.
+    Copie ce fichier régulièrement, par exemple chaque nuit :
+        crontab -e
+        0 4 * * * cp /opt/jeu-data/data.json /opt/jeu-data/sauvegarde-$(date +\%a).json
+    Garde aussi une copie sur ton ordinateur de temps en temps (scp).
+
+--------------------------------------------------------------------
+METTRE LE JEU A JOUR PLUS TARD
+--------------------------------------------------------------------
+  1. Je te donne un nouveau release.zip.
+  2. Envoie-le sur le serveur (scp), puis :
+        cd /opt/jeu && unzip -o /root/release.zip
+        cp -r release/* . && rm -rf release
+        systemctl restart pokeidle
+  Les données de /opt/jeu-data ne sont pas touchées. Les joueurs récupèrent
+  la nouvelle version en rechargeant la page.
+
+--------------------------------------------------------------------
+BON A SAVOIR
+--------------------------------------------------------------------
+  - Les sauvegardes de partie sont dans le navigateur du joueur (et en ligne
+    pour les classements). Un joueur motivé peut tricher sur les classements.
+  - Le serveur limite la taille des documents et leur nombre, mais ce n'est
+    pas une protection complète. Surveille de temps en temps.
+  - Si ton site et ton serveur sont séparés (site sur Netlify, serveur
+    ailleurs) : mets l'adresse du serveur dans config.js
+        window.PID_API="https://ton-serveur";
+    et lance le serveur avec ALLOWED_ORIGIN=https://ton-site
+  - Après un changement de nom de domaine, relance :
+        SITE_URL=https://jeu.tondomaine.fr python3 release.py
+    (cela met la bonne adresse dans les aperçus de partage).
+  - Logo : remplace icon-192.png, icon-512.png, icon-maskable-512.png,
+    apple-touch-icon.png et og-image.png (1200x630).
+  - Pokémon est une marque de Nintendo / Creatures / GAME FREAK. Ce projet
+    est un fan-game gratuit : ne le monétise jamais, et retire-le si les
+    ayants droit le demandent.
