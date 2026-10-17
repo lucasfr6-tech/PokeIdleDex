@@ -3026,6 +3026,8 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 #utl .utb b{font-size:10.5px;font-weight:800}
 #utl .utb.on{border-color:var(--c1);box-shadow:0 0 12px color-mix(in srgb,var(--c1) 55%,transparent)}
 @media(max-width:900px){#utl{right:8px;bottom:92px;padding:5px;gap:5px}#utl .utb{width:52px;padding:5px 2px}#utl .utb b{font-size:9px}}
+@media(max-width:760px){#hwb{width:48px;height:50px;padding:3px 1px;border-radius:12px}#hwb .hwpk{width:20px;height:20px}#hwb b{font-size:7px;letter-spacing:0}
+#utl{right:auto;left:3px;top:232px;bottom:auto;flex-direction:column;padding:3px;gap:4px;border-radius:14px}#utl .utb{width:42px;padding:5px 1px}#utl .utb b{display:none}#utl .utb svg{width:20px;height:20px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -8960,6 +8962,17 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  ["exStart","exClaim","qPClaim","qClaim1","qClaimN","qBonus"].forEach(W);
  window.addEventListener("pagehide",()=>{try{save()}catch(e){}});
  document.addEventListener("visibilitychange",()=>{if(document.hidden){try{save()}catch(e){}}});
+})();
+
+/* ---------- les Pokémon divins (légendaires, fabuleux…) ne s'obtiennent que par Invocation ---------- */
+(function(){
+ const ok=i=>!kxDiv(i);
+ const np=[...EXC].filter(i=>ok(i)&&i<=1025).sort((a,b)=>a-b);
+ const sx=EXT.find(t=>t.n=="Sanctuaire oublié");if(sx&&np.length)sx.pool=np;
+ const base=mgCur;
+ mgCur=function(t,i){const sd=mgSeed(),L=MGX().filter(f=>MGM[f]&&ok(MGM[f].s));if(!L.length)return base.apply(this,arguments);const R=rng(sd*7919+13);R();const f=L[R()*L.length|0],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}};
+ const c0=exClaim;
+ exClaim=function(r,auto){try{if(r&&r.ok&&!ok(r.id)){const L=sx?sx.pool:np;r.id=L[Math.random()*L.length|0];r.mf=0}}catch(e){}return c0.apply(this,arguments)};
 })();
 
 /* ============ DÉMARRAGE ============ */
