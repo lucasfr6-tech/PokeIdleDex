@@ -2865,6 +2865,22 @@ body.kxlock{overflow:hidden}
 .cxopk em{font-style:normal;font-weight:900;font-size:16px;color:#fff}
 .cxopy{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:84px;padding:12px;border-radius:18px;border:2px dashed #ffffff30;color:#cbd5e1}.cxopy svg{width:22px;height:22px;color:var(--c1)}.cxopy b{font-size:20px;color:#fff}
 @media(max-width:560px){.cxot{gap:8px}.cxop{padding:12px}.cxog{grid-template-columns:repeat(3,1fr);gap:8px}.cxog.big{grid-template-columns:repeat(2,1fr)}.cxopk{min-width:110px}}
+/* ===== v133 : Pokémon actif en combat ===== */
+#as{scale:var(--zs,1);transform-origin:50% 100%}
+#aw.kmu::before,#aw.ksh::before{content:"";position:absolute;left:50%;bottom:-2%;width:90%;height:34%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--mc,#fde047) 70%,transparent),transparent 70%);filter:blur(6px);animation:kaa 2.2s ease-in-out infinite;pointer-events:none;z-index:0}
+#aw.ksh:not(.kmu){--mc:#fde047}
+#aw.kmu::after,#aw.ksh::after{content:"";position:absolute;inset:-8% 4% 0;background:
+radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radial-gradient(circle at 80% 22%,var(--mc,#fde047) 0 2px,transparent 3px),radial-gradient(circle at 70% 68%,var(--mc,#fde047) 0 1.5px,transparent 2.5px),radial-gradient(circle at 26% 74%,var(--mc,#fde047) 0 1.5px,transparent 2.5px);animation:kas 2.6s ease-in-out infinite;pointer-events:none;z-index:5}
+@keyframes kaa{50%{opacity:.55;transform:translateX(-50%) scale(1.12)}}
+@keyframes kas{0%,100%{opacity:.2;transform:translateY(4px)}50%{opacity:1;transform:translateY(-8px)}}
+#as{z-index:1}
+.kar{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 2px}
+.kac{display:inline-flex;align-items:baseline;gap:5px;padding:3px 9px;border-radius:9px;border:1.5px solid var(--mc);background:color-mix(in srgb,var(--mc) 18%,rgba(0,0,0,.5));box-shadow:0 0 10px color-mix(in srgb,var(--mc) 35%,transparent);font-size:12px;line-height:1.2}
+.kac i{font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.kac b{font-weight:900;color:var(--mc);filter:brightness(1.25)}
+.kac em{font-style:normal;font-weight:800;opacity:.9}
+.kac.kx{background:linear-gradient(90deg,color-mix(in srgb,var(--mc) 30%,rgba(0,0,0,.5)),rgba(0,0,0,.45))}
+@media(max-width:760px){.kac{font-size:10px;padding:2px 6px}.kac i{display:none}.kar{margin:4px 0 0;gap:4px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -8640,6 +8656,31 @@ function twListS(f){const P=pvPool(),R=rng(f*977+13),gd=TWG[f],big=f%5==0,t=twS(
  out.sort((a,b)=>bst(a.id)-bst(b.id));
  if(big){let bid=gd;if(!bid){bid=pool.find(x=>!out.some(e=>e.id==x))||pool[0]}out.push({id:bid,boss:gd?2:1})}
  return out}
+/* ===== v133 : le Pokémon qui combat montre sa mutation, sa taille, son statut ===== */
+function kxAllyFx(id,c){const mi=c.mi&&MU[c.mi]?c.mi:0,nm=mi?MU[mi][0]:"",zi=c.zi!=null&&SZ[c.zi]?c.zi:2;
+ let col=mi?(MUCOL[nm]||"#fff"):"",fx=mi?(MUFX[nm]||MU[mi][3]):"";
+ if(c.sh){if(!col)col="#fde047";if(!fx)fx="filter:drop-shadow(0 0 12px #fde047) drop-shadow(0 0 26px #facc15)"}
+ const s=SZ[zi][1],sc=s<1?.72+.28*(s-.6)/.4:1+(s-1)*.6;
+ return {mi,nm,zi,col,fx,sc}}
+function kxAllyChips(id,c,f){const o=[];
+ if(f.mi&&f.mi!=7)o.push(`<span class="kac" style="--mc:${f.col}"><i>${LS("Mutation","Mutation")}</i><b>${f.nm}</b><em>×${MU[f.mi][1]}</em></span>`);
+ if(c.sh)o.push(`<span class="kac" style="--mc:#fde047"><i>${LS("Statut","Status")}</i><b>${LS("Chromatique","Shiny")}</b><em>×1,5</em></span>`);
+ if(f.zi!=2){const sc=SZC[f.zi]||"#94a3b8",d=(typeof SZD!="undefined"&&SZD[f.zi])||1;o.push(`<span class="kac" style="--mc:${sc||"#94a3b8"}"><i>${LS("Taille","Size")}</i><b>${SZ[f.zi][0]}</b><em>×${d}</em></span>`)}
+ if(id>9e4)o.push(`<span class="kac kx" style="--mc:#7ee8fa"><i>${LS("Forme","Form")}</i><b>${LS("Exclusif","Exclusive")}</b></span>`);
+ else if(c.dy)o.push(`<span class="kac kx" style="--mc:#ff5d73"><i>${LS("Forme","Form")}</i><b>Gigamax</b></span>`);
+ else if(c.mf)o.push(`<span class="kac kx" style="--mc:#f472b6"><i>${LS("Forme","Form")}</i><b>${LS("Méga","Mega")}</b></span>`);
+ else if(typeof kxDiv=="function"&&kxDiv(id))o.push(`<span class="kac kx" style="--mc:#fbbf24"><i>${LS("Rang","Rank")}</i><b>${LS("Divin","Divine")}</b></span>`);
+ return o.join("")}
+{const u0=ldUi0;ldUi0=function(){u0.apply(this,arguments);try{const w=$("aw"),id=LDC,c=id&&G.col[id];if(!w||!c)return;
+  const f=kxAllyFx(id,c),key=id+"|"+f.mi+"|"+f.zi+"|"+(c.sh?1:0)+"|"+(c.mf||0)+"|"+(c.dy?1:0)+"|"+c.l;
+  if(w.dataset.kx===key)return;w.dataset.kx=key;
+  const im=$("as");w.style.setProperty("--mc",f.col||"transparent");w.style.setProperty("--zs",f.sc);
+  w.classList.toggle("kmu",!!f.col);w.classList.toggle("ksh",!!c.sh);
+  im.style.filter=f.fx?f.fx.replace(/^filter:/,"")+" drop-shadow(0 16px 8px rgba(0,0,0,.5))":"";
+  const h=$("ahud"),ch=kxAllyChips(id,c,f);let r=h.querySelector(".kar");if(r)r.remove();
+  if(ch){r=document.createElement("div");r.className="kar";r.innerHTML=ch;const a=h.querySelector(".aty");if(a)a.after(r);else h.appendChild(r)}
+  if(f.col)h.style.borderRightColor=f.col;else h.style.borderRightColor="";
+ }catch(e){window.__kaErr=e}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
