@@ -2881,6 +2881,9 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .kac em{font-style:normal;font-weight:800;opacity:.9}
 .kac.kx{background:linear-gradient(90deg,color-mix(in srgb,var(--mc) 30%,rgba(0,0,0,.5)),rgba(0,0,0,.45))}
 @media(max-width:760px){.kac{font-size:10px;padding:2px 6px}.kac i{display:none}.kar{margin:4px 0 0;gap:4px}}
+.ldc.kmc{border-color:var(--mc);box-shadow:0 0 14px color-mix(in srgb,var(--mc) 40%,transparent),inset 0 0 22px color-mix(in srgb,var(--mc) 14%,transparent)}
+.kam{justify-content:center;gap:3px;margin:5px 0 0}
+.kam .kac{font-size:10px;padding:1px 6px;gap:3px}.kam .kac i{display:none}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -8681,6 +8684,11 @@ function kxAllyChips(id,c,f){const o=[];
   if(ch){r=document.createElement("div");r.className="kar";r.innerHTML=ch;const a=h.querySelector(".aty");if(a)a.after(r);else h.appendChild(r)}
   if(f.col)h.style.borderRightColor=f.col;else h.style.borderRightColor="";
  }catch(e){window.__kaErr=e}}}
+/* sélecteur : mutation, taille et statut visibles sur chaque carte */
+{const r0=ldRender;ldRender=function(){r0.apply(this,arguments);try{document.querySelectorAll("#ldm .ldc").forEach(b=>{const id=+b.dataset.i,c=G.col[id];if(!c||b.dataset.kx)return;b.dataset.kx=1;
+  const f=kxAllyFx(id,c),ch=kxAllyChips(id,c,f);if(f.col){b.style.setProperty("--mc",f.col);b.classList.add("kmc")}
+  const im=b.querySelector("img");if(im&&f.fx)im.style.filter=f.fx.replace(/^filter:/,"");
+  if(ch){const d=document.createElement("div");d.className="kar kam";d.innerHTML=ch;b.appendChild(d)}})}catch(e){window.__kaErr=e}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
