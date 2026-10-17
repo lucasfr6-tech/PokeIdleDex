@@ -3028,6 +3028,13 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 @media(max-width:900px){#utl{right:8px;bottom:92px;padding:5px;gap:5px}#utl .utb{width:52px;padding:5px 2px}#utl .utb b{font-size:9px}}
 @media(max-width:760px){#hwb{width:48px;height:50px;padding:3px 1px;border-radius:12px}#hwb .hwpk{width:20px;height:20px}#hwb b{font-size:7px;letter-spacing:0}
 #utl{right:auto;left:3px;top:232px;bottom:auto;flex-direction:column;padding:3px;gap:4px;border-radius:14px}#utl .utb{width:42px;padding:5px 1px}#utl .utb b{display:none}#utl .utb svg{width:20px;height:20px}}
+#exrc{display:none;position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:70;width:min(430px,94vw);max-height:62vh;overflow:auto;padding:10px;border-radius:18px;background:rgba(7,11,34,.94);border:1px solid #34d399;box-shadow:0 12px 36px rgba(0,0,0,.55),0 0 18px rgba(52,211,153,.3);backdrop-filter:blur(8px)}
+#exrc .exh{display:flex;align-items:center;gap:8px;margin-bottom:8px}#exrc .exh b{flex:1;font-size:15px}#exrc .exh em{font-style:normal;font-size:12px;opacity:.8}
+#exrc .exh button{border:0;border-radius:10px;padding:6px 14px;font-weight:800;background:#34d399;color:#04231a;cursor:pointer}
+#exrc .exi{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:12px;margin-top:5px;background:rgba(255,255,255,.05);border-left:4px solid #64748b}
+#exrc .exi.w{border-left-color:#34d399;background:rgba(52,211,153,.1)}#exrc .exi.l{border-left-color:#f87171}
+#exrc .exs{flex:none;width:46px;height:46px;display:grid;place-items:center}#exrc .exs img{max-width:46px;max-height:46px;object-fit:contain}#exrc .exs.off img{filter:grayscale(1) brightness(.55)}
+#exrc .exi div{flex:1;min-width:0}#exrc .exi b{display:block;font-size:13px}#exrc .exi small{display:block;font-size:11px;opacity:.75}#exrc .exi em{font-style:normal;font-size:12px;font-weight:800;color:#fbbf24;white-space:nowrap}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -8973,6 +8980,20 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  mgCur=function(t,i){const sd=mgSeed(),L=MGX().filter(f=>MGM[f]&&ok(MGM[f].s));if(!L.length)return base.apply(this,arguments);const R=rng(sd*7919+13);R();const f=L[R()*L.length|0],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}};
  const c0=exClaim;
  exClaim=function(r,auto){try{if(r&&r.ok&&!ok(r.id)){const L=sx?sx.pool:np;r.id=L[Math.random()*L.length|0];r.mf=0}}catch(e){}return c0.apply(this,arguments)};
+})();
+
+/* ---------- récap de fin d'expédition (aussi en mode auto) ---------- */
+(function(){
+ const Q=[];
+ const el=()=>{let e=$("exrc");if(!e){e=document.createElement("div");e.id="exrc";document.body.appendChild(e);e.addEventListener("click",ev=>{if(ev.target.closest("[data-exrc]")){Q.length=0;draw()}})}return e};
+ const nm=x=>x.mf&&MGM[x.mf]?MGM[x.mf].n:I(x.id).n;
+ function draw(){const e=el();if(!Q.length){e.style.display="none";e.innerHTML="";return}
+  const ok=Q.filter(x=>x.ok).length;
+  e.style.display="block";
+  e.innerHTML=`<div class="exh"><b>${LS("Expéditions terminées","Expeditions finished")}</b><em>${ok} / ${Q.length} ${LS("capturé(s)","caught")}</em><button data-exrc>OK</button></div><div class="exl">${Q.slice(-10).reverse().map(x=>`<div class="exi ${x.ok?"w":"l"}"><span class="exs${x.ok?"":" off"}">${sp(x.id,0)}</span><div><b>${x.ok?(x.nw?LS("Nouveau : ","New: "):LS("Capturé : ","Caught: ")):LS("Échappé : ","Escaped: ")}${nm(x)}</b><small>${x.ok?LS("Il rejoint ta collection","Joins your collection")+(x.mf?" · "+LS("Méga-Perle","Mega Pearl"):""):LS("Il t'a échappé cette fois","It got away this time")} · ${x.z}</small></div><em>+${fmt(x.g)} ₽</em></div>`).join("")}</div>`}
+ const c1=exClaim;
+ exClaim=function(r,auto){let f=null;try{if(r&&r.ok!==undefined){const t=EXT[r.i];f={ok:!!r.ok,id:r.id,mf:r.mf|0,g:r.g,z:t?t.n:"",nw:!!r.ok&&!G.col[r.id]}}}catch(e){}
+  const o=c1.apply(this,arguments);if(f){Q.push(f);try{draw()}catch(e){}}return o};
 })();
 
 /* ============ DÉMARRAGE ============ */
