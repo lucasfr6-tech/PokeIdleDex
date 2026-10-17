@@ -2839,6 +2839,32 @@ body.kxlock{overflow:hidden}
 .lgx.kmx b{letter-spacing:.03em!important;font-size:clamp(26px,6.5vw,60px)!important;text-align:center;max-width:92vw}
 .tcb{margin:0 0 10px}.tcbtn{display:inline-flex;align-items:center;gap:8px;font-weight:800}.tcbtn svg{width:18px;height:18px}
 .tcm .bsr img.ic,.tcm .bsr .pearl{width:44px;height:44px}
+.cxod{border:1px solid var(--ln);border-radius:16px;padding:10px 14px;background:#0000002a}.cxod summary{cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:800}.cxod summary svg{width:18px;height:18px}
+.cxodg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:10px}.cxodg h3{display:flex;align-items:center;gap:8px;color:var(--c1);margin:0 0 6px}
+.cxod{padding:14px 16px}.cxod summary{font-size:16px}
+.cxow{margin-top:16px;display:flex;flex-direction:column;gap:18px}
+.cxot{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cxot button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px;border-radius:18px;border:2px solid #ffffff14;background:#0000002e;color:#cbd5e1;cursor:pointer;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.cxot button span{display:flex;align-items:center;gap:5px;font-weight:800;font-size:13px}.cxot button span svg{width:15px;height:15px}
+.cxot button:hover{transform:translateY(-2px)}
+.cxot button.on2{border-color:var(--c1);background:linear-gradient(160deg,#ffffff14,#0000002e);box-shadow:0 0 0 3px #0000,0 8px 24px -10px var(--c1);color:#fff}
+.cxop{display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:20px;background:#00000030;border:1px solid #ffffff10}
+.cxop.cxin{animation:cxin .28s ease}@keyframes cxin{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cxos{display:flex;align-items:center;gap:12px;color:var(--c1);margin-top:6px}.cxos svg{width:20px;height:20px}.cxos:after{content:"";flex:1;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--c1),transparent);opacity:.35}
+.cxog{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px}.cxog.big{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.cxoc{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 8px 16px;border-radius:16px;background:#ffffff0b;border:1px solid #ffffff12;overflow:hidden;min-height:112px;justify-content:center}
+.cxoc .cxoi{width:46px;height:46px;display:flex;align-items:center;justify-content:center}.cxoc .cxoi img{width:42px;height:42px;object-fit:contain}.cxoc .cxoi>svg{width:34px;height:34px;color:var(--c1)}
+.cxoc b{font-size:17px;font-weight:900;color:#fff}.cxoc em{font-style:normal;font-size:13px;font-weight:800;color:#cbd5e1}
+.cxoc .cxob{position:absolute;left:0;bottom:0;height:4px;width:var(--w);background:var(--c1);border-radius:0 4px 0 0;opacity:.8}
+.cxoc.rr{border-color:var(--c1);background:linear-gradient(160deg,#ffffff14,#ffffff05);min-height:136px}.cxoc.rr .cxoi{width:60px;height:60px}.cxoc.rr .cxoi img{width:56px;height:56px}
+.cxoc.nn{opacity:.55}.cxoc.nn .cxoi>svg{color:#94a3b8}
+.cxoms{display:flex}.cxoms img{width:24px!important;height:24px!important;margin-left:-6px}.cxoms img:first-child{margin-left:0}
+.cxosp{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.cxopk{flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px;border-radius:18px;border:2px solid var(--c1);background:radial-gradient(circle at 50% 35%,#ffffff22,#ffffff05 70%);box-shadow:0 10px 28px -14px var(--c1)}
+.cxopi{width:96px;height:96px;display:flex;align-items:center;justify-content:center}.cxopi img{width:96px;height:96px;object-fit:contain;image-rendering:pixelated}
+.cxopk em{font-style:normal;font-weight:900;font-size:16px;color:#fff}
+.cxopy{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:84px;padding:12px;border-radius:18px;border:2px dashed #ffffff30;color:#cbd5e1}.cxopy svg{width:22px;height:22px;color:var(--c1)}.cxopy b{font-size:20px;color:#fff}
+@media(max-width:560px){.cxot{gap:8px}.cxop{padding:12px}.cxog{grid-template-columns:repeat(3,1fr);gap:8px}.cxog.big{grid-template-columns:repeat(2,1fr)}.cxopk{min-width:110px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -3036,7 +3062,7 @@ const $=id=>document.getElementById(id),fmt=n=>n>=1e12?(n/1e12).toFixed(1)+"T":n
 const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
-const HPK=.8,BOSS_PV=2.275;
+const HPK=.5,BOSS_PV=2.275;
 const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1+(G.pt||0)*.03;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*(1-.02*PL("pe"))*kxEco());
@@ -3164,7 +3190,7 @@ function rulesHtml(){const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.in
  return `<label><b ${j<4?`class="rty r${j}"`:""}>${t}</b><select data-a="rule" data-t="${k}"><option value="">Ne pas lancer</option>${L.map(b=>`<option value="${b}" ${b==cur?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select></label>`}).join("")}</div>`}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=G.fl+2+(boss?3:0);let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
- const sz=wp(SZ,x=>SZ.indexOf(x)>=3?1+.1*PL("pz"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1}),hp=Math.floor(hpF(G.fl)*(1+L/40)*(sz[2]>1?1+(sz[2]-1)*.4:sz[2])*(1+(mu[2]-1)*.7/6)*([.75,.8,.95,1][pr(id)]||1)*(boss?BOSS_PV:1));
+ const sz=wp(SZ,x=>SZ.indexOf(x)>=3?1+.1*PL("pz"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1}),hp=Math.floor(hpF(G.fl)*(1+L/40)*(sz[2]>1?1+(sz[2]-1)*.3:sz[2])*(1+(mu[2]-1)*.7/8)*([.5,.55,.7,.8][pr(id)]||1)*(boss?BOSS_PV:1));
  FID++;E={id,d,L,boss,t:30,sz,mu,mi:MU.findIndex(m=>m[0]==mu[0]),hp,max:hp,atk:Math.floor((L*1.1+4)*(1+G.fl/110)*(mu[2]>1?1.3:1)*(boss?1.8:1)),r:pr(id),ph:phy(id)};busy=false;spawnFx()}
 function pop(t,c,x){const f=$("fx");if(!f)return;const d=document.createElement("div");d.className="pp "+c;d.textContent=t;d.style.left=x+"%";f.appendChild(d);setTimeout(()=>d.remove(),1100)}
 function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
@@ -8559,8 +8585,8 @@ function kxLogClose(){const o=$("klo");if(o)o.classList.remove("on");document.bo
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl=open]");if(b){e.stopPropagation();kxLog()}},true);
 setInterval(()=>{const o=$("klo");if(!o||!o.classList.contains("on"))return;const m=o.querySelector(".kxm"),y=m?m.scrollTop:0;o.innerHTML=kxLogHtml();const n=o.querySelector(".kxm");if(n)n.scrollTop=y},1000);
 
-function kxHpS(z){return z>1?1+(z-1)*.4:z}
-function kxHpM(m){return 1+(m-1)*.7/6}
+function kxHpS(z){return z>1?1+(z-1)*.3:z}
+function kxHpM(m){return 1+(m-1)*.7/8}
 function kxF(x){return +x.toFixed(2)}
 /* ===== v119 : chariot dans l'onglet Entraînement d'un Pokémon ===== */
 const TCG=()=>[
@@ -8582,6 +8608,8 @@ function tcClose(){const o=$("tco");if(o)o.classList.remove("on");document.body.
 function tcRender(){const o=$("tco");if(!o||!o.classList.contains("on"))return;const m=o.querySelector(".kxm"),y=m?m.scrollTop:0;o.innerHTML=tcHtml();const n=o.querySelector(".kxm");if(n)n.scrollTop=y}
 {const pt=pkTrain;pkTrain=function(id){return `<div class="row tcb"><button class="tcbtn" data-tc="open">${ico("cart")} ${LS("Acheter des objets d'entraînement","Buy training items")}</button></div>`+pt(id)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tc=open]");if(b){e.stopPropagation();tcOpen()}},true);
+/* garde la position de défilement dans la fiche d'un Pokémon (vitamines, bonbons...) */
+{const m0=modal;modal=function(){let S=[];try{S=[".pqbd",".pqa"].map(q=>{const e=document.querySelector("#md "+q);return[q,e?e.scrollTop:0]})}catch(e){}const r=m0.apply(this,arguments);try{S.forEach(([q,y])=>{if(!y)return;const e=document.querySelector("#md "+q);if(e)e.scrollTop=y})}catch(e){}return r}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
