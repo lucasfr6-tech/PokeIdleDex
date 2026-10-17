@@ -9079,7 +9079,7 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
 })();
 
 /* ===== Paramètres : signaler un bug (lien Discord) ===== */
-const BUG_URL="";/* colle ici le lien d'invitation Discord, ex. "https://discord.gg/xxxxxxx" */
+const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation Discord, ex. "https://discord.gg/xxxxxxx" */
 (function(){
  const url=()=>window.PID_DISCORD||BUG_URL;
  const inj=()=>{try{if(tab!="set")return;const f=document.querySelector(".fsb");if(!f||document.getElementById("bugb"))return;
