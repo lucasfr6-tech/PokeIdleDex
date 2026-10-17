@@ -2823,7 +2823,7 @@ function rq(id){const c=G.col[id];if(!c)return 1;ens(id);
  let h=it&&it.h?it.h:null;if(h&&h.sp&&!h.sp.includes(id))h=null;if(h&&h.ot&&!tp(id).includes(h.ot))h=null;c.he=h;
  c.df=(h&&h.df||1)*(h&&h.ev&&evOpts(id).length?h.ev:1);c.co=h&&h.co||1;c.xm=h&&h.xp||1;
  const a=Math.max(c.iv[1]+c.ev[1]/8,c.iv[3]+c.ev[3]/8)/62.5,o=(c.iv[4]+c.iv[5])/62*.05+(c.ev[4]+c.ev[5])/504*.15,hh=c.ha&&abl(id)[1]?.1:0;c.wa=WAB[abn(id)]||"";
- let q=1+a*.5+o+hh;if(c.mf)q*=1.5;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.25;if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=SZ[c.zi][1];return c.q=q}
+ let q=1+a*.5+o+hh;if(c.mf)q*=1.5;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.5;if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=SZ[c.zi][1];return c.q=q}
 const calc=(id,k)=>{const c=G.col[id],B=ST(id)[k],v=Math.floor((2*B+c.iv[k]+(c.ev[k]>>2))*c.l/100);return k==0?v+c.l+10:v+5};
 function train(id,k){const c=G.col[id];if(!c)return;ens(id);for(let j=0;j<k;j++){
  const a=[0,1,2,3,4,5].filter(x=>c.iv[x]<31);if(a.length)c.iv[a[Math.random()*a.length|0]]++;
@@ -3706,8 +3706,8 @@ sizes:()=>{const t=SZ.reduce((s,x)=>s+x[4],0);return `<h1>${TT("Tailles","Sizes"
 ${tbl([TT("Taille","Size"),TT("Probabilité","Chance"),TT("Taille à l'écran","On-screen size"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],SZ.map((z,i)=>[`<b style="color:${SZC[i]||"inherit"}">${z[0]}</b>`,(z[4]/t>.5?pcs(z[4]/t)+" %":"1 / "+Math.round(t/z[4])+" ("+pcs(z[4]/t)+" %)"),"×"+z[1],"×"+z[2],"×"+z[3],i>=3?"×"+z[1]+TT(" dégâts"," damage"):"—"]))}
 <p>${TT("Les tailles Colossal et Titanesque déclenchent une alerte sonore et visuelle. L'amélioration de prestige « Colosses » et l'événement Éclipse (×3) augmentent leur fréquence. Lilliputien et Menu sont plus faciles à tuer mais rapportent moins.","Colossal and Titanic sizes trigger a sound and visual alert. The “Colossi” prestige upgrade and the Eclipse event (×3) make them more frequent. Tiny and Small are easier to kill but pay less.")}</p>`},
 mut:()=>{const t=MU.reduce((s,x)=>s+x[4],0);return `<h1>${TT("Mutations et chromatiques","Mutations & shinies")}</h1><p class="lead">${TT("Un Pokémon peut apparaître <b>muté</b> : aura colorée, beaucoup plus de PV, mais une récompense bien plus grande. Un mutant capturé garde sa mutation (couleur visible dans ta liste) et gagne un bonus permanent de dégâts. Capturer un mutant compte pour 2 captures.","A Pokémon can appear <b>mutated</b>: a coloured aura, a lot more HP, but a much bigger reward. A caught mutant keeps its mutation (visible colour in your list) and gains a permanent damage bonus. Catching a mutant counts as 2 catches.")}</p>
-${tbl([TT("Mutation","Mutation"),TT("Probabilité","Chance"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],MU.slice(1).map((m,i)=>[`<b style="color:${MUC[i+1]}">${m[0]}</b>`,"1 / "+Math.round(t/m[4])+" ("+pcs(m[4]/t)+" %)","×"+m[2],"×"+m[2],"×"+m[1]+TT(" dégâts"," damage")]))}
-<h3>${TT("Chromatiques","Shinies")}</h3><p>${TT("Le taux de base est de <b>1 sur 4096</b>, comme dans les jeux. Le <b>Charme chroma</b> (boutique du Prestige) le triple ; l'amélioration « Éclat » ajoute +25 % par niveau (jusqu'à 20 niveaux) ; l'événement Éclipse le multiplie par 3. Un chromatique a un sprite doré, un bonus permanent de +25 % de dégâts et une alerte spéciale.","The base rate is <b>1 in 4096</b>, like in the games. The <b>Shiny Charm</b> (Prestige shop) triples it; the “Shine” upgrade adds +25% per level (up to 20 levels); the Eclipse event multiplies it by 3. A shiny has a golden sprite, a permanent +25% damage bonus and a special alert.")}</p>
+${tbl([TT("Mutation","Mutation"),TT("Probabilité","Chance"),TT("PV adverses","Enemy HP"),TT("Pièces","Coins"),TT("Bonus permanent","Permanent bonus")],MU.map((m,i)=>[m,i-1]).slice(1).filter(x=>x[1]!=6).map(([m,i])=>[`<b style="color:${MUC[i+1]}">${m[0]}</b>`,"1 / "+Math.round(t/m[4])+" ("+pcs(m[4]/t)+" %)","×"+m[2],"×"+m[2],"×"+m[1]+TT(" dégâts"," damage")]))}
+<h3>${TT("Chromatiques","Shinies")}</h3><p>${TT("Le taux de base est de <b>1 sur 4096</b>, comme dans les jeux. Le <b>Charme chroma</b> (boutique du Prestige) le triple ; l'amélioration « Éclat » ajoute +25 % par niveau (jusqu'à 20 niveaux) ; l'événement Éclipse le multiplie par 3. Un chromatique a un sprite doré, un bonus permanent de +50 % de dégâts et une alerte spéciale.","The base rate is <b>1 in 4096</b>, like in the games. The <b>Shiny Charm</b> (Prestige shop) triples it; the “Shine” upgrade adds +25% per level (up to 20 levels); the Eclipse event multiplies it by 3. A shiny has a golden sprite, a permanent +50% damage bonus and a special alert.")}</p>
 ${cal("",TT("<b>À savoir :</b> un Pokémon est soit muté, soit chromatique (pas les deux). Les mutations et chromatiques sont réservés au combat sur les étages ; les expéditions donnent des Pokémon normaux.","<b>Good to know:</b> a Pokémon is either mutated or shiny (not both). Mutations and shinies only appear in floor battles; expeditions give normal Pokémon."))}`},
 forms:()=>`<h1>${TT("Formes : méga, Primo, Dynamax","Forms: Mega, Primal, Dynamax")}</h1><p class="lead">${TT("Le jeu contient les 1025 espèces des 9 générations, "+MGD.length+" méga-formes et formes primales, et le Dynamax.","The game contains all 1025 species from the 9 generations, "+MGD.length+" Mega and Primal forms, and Dynamax.")}</p>
 <h3>${TT("Méga-évolution et Primo-résurgence","Mega Evolution & Primal Reversion")}</h3><p>${TT("Un Pokémon qui tient sa <b>Méga-Perle</b> change de forme pour toujours : nouvelles stats, nouveaux types, nouveau talent, et puissance ×1,5. Les perles des Pokémon des étages se vendent en boutique (onglet « Méga et Dynamax »). Celles des Pokémon d'élite (Mewtwo, Rayquaza, Latios…) ne se gagnent que par l'<b>expédition Méga</b>, qui change tous les 3 jours.","A Pokémon holding its <b>Mega Pearl</b> changes form for good: new stats, new types, new ability and power ×1.5. Pearls for floor Pokémon are sold in the shop (“Mega and Dynamax” tab). Those of elite Pokémon (Mewtwo, Rayquaza, Latios…) can only be won in the <b>Mega hunt</b> expedition, which changes every 3 days.")}</p>
@@ -3964,7 +3964,7 @@ function vVar(){const isS=DX.cat=="size",ref=(G.col[25]?25:ids()[0]||25);
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${big?chip(LS("Dégâts ","Damage ")+xr(z[1])+LS(" (définitif)"," (permanent)"),"p"):chip(LS("La taille n'est pas conservée","Size is not kept"),"n")}</div>
    ${big?`<div class="vown">${ico("book")} ${LS("Tu en possèdes ","You own ")}<b>${n}</b></div>`:""}</div></div>`}).join("")}
  else{const tw=MU.reduce((a,x)=>a+x[4],0),shw=1/4096;
-  cards=MU.map((u,k)=>{if(!k)return"";const n=own(c=>c.mi==k);
+  cards=MU.map((u,k)=>{if(!k||k==7)return"";const n=own(c=>c.mi==k);
    return `<div class="vrc" style="--c:${MUC[k]}"><div class="vrs"><span class="vrp" style="${u[3]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${u[0]}</b><em>${prc(u[4]/tw)}</em></div><p>${LS(MUTX[k][0],MUTX[k][1])}</p>
    <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(u[2]),"m")}${chip(LS("Attaque ennemie ","Enemy attack ")+"×1,3".replace(",",SG.lang=="en"?".":","),"m")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(u[2]),"p")}</div>
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${chip(LS("Dégâts ","Damage ")+xr(u[1])+LS(" (définitif)"," (permanent)"),"p")}</div>
@@ -4683,7 +4683,7 @@ function lose(){G.fl=Math.max(1,G.fl-1);G.k=0;E=null}
 /* ---- migration v23 ---- */
 function v23mig(){G.auto=true;G.rv=0;NFC.forEach(c=>{if(SG["nf_"+c[0]]===undefined)SG["nf_"+c[0]]=1});if(SG.nfOff===undefined)SG.nfOff=0;if(SG.bkOn===undefined)SG.bkOn=1;if(!SG.bkMin)SG.bkMin=15;
  G.sp=G.sp||{};Object.keys(G.sp).forEach(id=>{if(G.col[id])G.col[id].spc=1});
- if(!G.v23mp){G.v23mp=1;MGD.forEach(x=>{const k="mp"+x[0];if(IT[k]&&!(G.inv[k]>0)&&!ids().some(i=>G.col[i].it==k))G.inv[k]=1});}
+ if(!G.v111mp){G.v111mp=1;MGD.forEach(x=>{const k="mp"+x[0];if(G.inv[k]===1&&!ids().some(i=>G.col[i].it==k))delete G.inv[k]});}
  if(!G.v23){G.v23=1;healAll();if(G.q)for(const p of["d","w","m"]){const I=G.q[p];if(!I||!I.tg)continue;I.ids.forEach(id=>{const d=qDef(id);if(!d||I.cl[id]||d.t[p]===undefined)return;const v=d.t[p],n=qnice(typeof v=="function"?v():v);if(n>I.tg[id])I.tg[id]=n})}}}
 /* ---- Wiki : raretés, Alpha ---- */
 wkBody.rarity=()=>`<h1>${TT("Raretés","Rarities")}</h1><p class="lead">${TT("Chaque zone compte <b>20 Pokémon</b> : 9 N, 4 SR, 4 SSR et 3 UR. La rareté dépend de la popularité de l'espèce et de la puissance de sa lignée. Elle décide de la fréquence d'apparition et de la difficulté de capture.","Each zone has <b>20 Pokémon</b>: 9 N, 4 SR, 4 SSR and 3 UR. Rarity depends on how popular the species is and how strong its line is. It sets how often it appears and how hard it is to catch.")}</p>
@@ -7081,7 +7081,7 @@ function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
   <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*3600*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
 function twViewRw(){const L=[];for(let m=5;m<=100;m+=5)L.push(m);
- return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 100</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<button class="pvgo sm" data-tw="gpk">${twIc("gift")} Débloquer maintenant (test)</button>`}</div></div></div>
+ return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 100</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 100</span>`}</div></div></div>
   <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75 et 100 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
 
 /* ---------- classement ---------- */
@@ -7196,7 +7196,7 @@ document.addEventListener("click",ev=>{const t0=ev.target.closest&&ev.target.clo
  if(k=="next"){pvReset();twStart(t.f);return}
  if(k=="again"){const f=PB&&PB.tw?PB.tw:t.f;pvReset();twStart(f);return}
  if(k=="leave"){pvLeave();return}
- if(k=="gpk"){G.sp=G.sp||{};if(!G.sp[90004]){spGrant(90004);save();toast("Pikachu Zénith ajouté à ta collection");sfx("shiny")}show();return}
+
  if(k=="stopfm"){t.fm=0;save();twCancel();const e=document.querySelector(".twcw");if(e)e.remove();return}
 },true);
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-pv="auto2"]');if(b&&PB&&PB.tw){twS().au=PB.auto?1:0;save()}},true);
@@ -7558,7 +7558,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(k=="gv"){const er=glGive(a,+c);if(er){toast(er);sfx("err")}else{sfx("prest");toast(LS("Carte donnée.","Card given."))}rf()}
  else if(k=="tk"){const er=glTake(a);if(er){toast(er);sfx("err")}else{sfx("prest");toast(LS("Échange effectué.","Trade done."))}rf()}},true);
 /* ---------- navigation ---------- */
-NAVX.push(["gld","team","Guilde","#f59e0b","#b45309"]);NENG.gld="Guild";LOCKS.gld=6;{const c=NCAT[0][6],i=c.indexOf("twr");c.splice(i>=0?i+1:c.length,0,"gld")}
+NAVX.push(["gld","team","Guilde","#f59e0b","#b45309"]);NENG.gld="Guild";LOCKS.gld=20;{const c=NCAT[0][6],i=c.indexOf("twr");c.splice(i>=0?i+1:c.length,0,"gld")}
 /* ===== v98 : suppression Game Pass + boutique à gemmes ; onglet Social (Guilde, JCJ, Classements) ===== */
 G.gp={};
 {const c=NCAT.find(x=>x[0]=="c_play")[6];["pvp","gld"].forEach(t=>{const i=c.indexOf(t);if(i>=0)c.splice(i,1)})}
@@ -7959,7 +7959,7 @@ function bonusCard(id){
   else if(LEG.has(id))add("Légendaire","",f(legM(id)),"#f59e0b");
   if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");
   if(c.al)add("Alpha","",f(1.3),"#ef4444");
-  if(c.sh)add("Chromatique","",f(1.25),"#facc15");
+  if(c.sh)add("Chromatique","",f(1.5),"#facc15");
   if(c.mi)add("Mutation",MU[c.mi][0],f(MU[c.mi][1]),(typeof MUC!="undefined"&&MUC[c.mi])||"#22d3ee");
   if(c.zi&&c.zi!=2)add("Taille",SZ[c.zi][0],f(SZ[c.zi][1]),(typeof SZC!="undefined"&&SZC[c.zi])||"#60a5fa");
   if(c.mf)add("Méga / Primo","",f(1.5),"#a78bfa");
@@ -7990,7 +7990,7 @@ const MUFX={Glacial:"filter:hue-rotate(165deg) saturate(1.7) drop-shadow(0 0 10p
 {const f0=pkModal;pkModal=function(){let h=f0.apply(this,arguments);const id=OPEN,c=id&&G.col[id];if(!h||!c)return h;
  const chips=[];let col="",fx="";
  if(c.mi&&MU[c.mi]){const nm=MU[c.mi][0];col=MUCOL[nm]||"#fff";fx=MUFX[nm]||MU[c.mi][3];chips.push(`<span class="mub" style="--mc:${col}"><b>Mutation</b> ${nm}<small>×${MU[c.mi][1]} dégâts à vie</small></span>`)}
- if(c.sh){if(!col)col="#fde047";if(!fx)fx="filter:drop-shadow(0 0 12px #fde047) drop-shadow(0 0 26px #facc15)";chips.push(`<span class="mub" style="--mc:#fde047"><b>Statut</b> Chromatique<small>×1,25 dégâts à vie</small></span>`)}
+ if(c.sh){if(!col)col="#fde047";if(!fx)fx="filter:drop-shadow(0 0 12px #fde047) drop-shadow(0 0 26px #facc15)";chips.push(`<span class="mub" style="--mc:#fde047"><b>Statut</b> Chromatique<small>×1,5 dégâts à vie</small></span>`)}
  if(c.zi>=3&&SZ[c.zi]){const sc=SZC[c.zi]||"#94a3b8";if(!col)col=sc;chips.push(`<span class="mub" style="--mc:${sc}"><b>Taille</b> ${SZ[c.zi][0]}<small>×${SZ[c.zi][1]} dégâts à vie</small></span>`)}
  if(!chips.length)return h;
  h=h.replace('<div class="pqst">',`<div class="pqst pqmu${c.mi&&MU[c.mi][0]=="Cristallin"?" cris":""}" style="--mc:${col}">`);
