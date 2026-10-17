@@ -3462,7 +3462,7 @@ function exUi(){if(tab!="exp"||!$("exrot"))return;const n=Date.now(),sig=exSeed(
 const exTeam=a=>`<div class="ext">${a.map(i=>`<span>${sp(i,G.col[i]&&G.col[i].sh)}</span>`).join("")}</div>`;
 const vExp=()=>{const cur=exCur(),run=G.ex||[],free=exFree(),best=free.slice(0,4),full=run.length>=3;
  const runHtml=(r,k)=>{const t=EXT[r.i],d=I(r.id),done=r.ok!==undefined;return `<div class="exu" style="--c1:${t.col[0]};--c2:${t.col[1]}"><div class="exs2">${sp(r.mf||r.id,0,1)}</div><div class="exb"><div class="row sp2"><b>${t.n}</b><small>Cible : ${r.mf?MGM[r.mf].n:d.n} niv. ${r.lv}</small></div>${exTeam(r.tm)}
-  ${done?`<div class="exres ${r.ok?"ok":""}">${r.ok?ico("star")+" "+d.n+" capturé !":"Le Pokémon s'est échappé"} · +${fmt(r.g)} ₽</div>`:`<div class="bar"><i id="exb${k}" style="width:0%;background:linear-gradient(90deg,#2dd4bf,#3b82f6)"></i></div><small>Retour dans <b id="exr${k}"></b> · capture ${(r.ch*100).toFixed(1)} %</small>`}</div>
+  ${done?`<div class="exres ${r.ok?"ok":""}">${r.ok?ico("star")+" "+d.n+" capturé !":"Le Pokémon s'est échappé"} · +${fmt(r.g)} ₽</div>`:`<div class="bar"><i id="exb${k}" style="width:${Math.min(100,(1-Math.max(0,r.end-Date.now())/(r.du*1000))*100)}%;background:linear-gradient(90deg,#2dd4bf,#3b82f6)"></i></div><small>Retour dans <b id="exr${k}">${hms(Math.max(0,r.end-Date.now())/1000)}</b> · capture ${(r.ch*100).toFixed(1)} %</small>`}</div>
   <div class="exa">${done?`<button class="go" data-a="exget" data-i="${k}">Récupérer</button>`:""}<button class="${r.au?"on":""}" data-a="exau" data-i="${k}" title="Relance automatiquement avec la même équipe">Auto ${r.au?"activé":"désactivé"}</button>${done?"":`<button class="exx2" data-a="excx" data-i="${k}">Annuler</button>`}</div></div>`};
  const card=t=>{const req=exReq(t),dps=exDps(best),ok=best.length==4&&dps>=req,ch=exCh(t,Math.max(dps,req)),d=I(t.id),can=best.length>=4&&!full;
   return `<div class="exc" style="--c1:${t.col[0]};--c2:${t.col[1]};--rc:${RC[t.r]}"><div class="exz"><span>${t.z}</span><b>Niv. ${t.lv}</b></div><div class="exsp">${sp(t.id,0,1)}</div>
@@ -8998,6 +8998,9 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  exClaim=function(r,auto){let f=null;try{if(r&&r.ok!==undefined){const t=EXT[r.i];f={ok:!!r.ok,id:r.id,mf:r.mf|0,g:r.g,z:t?t.n:"",nw:!!r.ok&&!G.col[r.id]}}}catch(e){}
   const o=c1.apply(this,arguments);if(f){Q.push(f);try{draw()}catch(e){}}return o};
 })();
+
+/* ---------- les Pokémon exclusifs ne sont jamais des boss ni des captures de raid (Casino ou gemmes uniquement) ---------- */
+(function(){RT.forEach(t=>{if(t.pool&&t.pool.some(x=>x>9e4))t.pool=[491,888,487,484,483,249,250,718].filter(x=>RB[x])})})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
