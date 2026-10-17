@@ -2397,6 +2397,7 @@ body.kxlock{overflow:hidden}
 .twjc button.on{background:#fbbf24;color:#111;border-color:#fbbf24}
 .twjc label{display:flex;align-items:center;gap:8px;margin-left:auto;font:800 12.5px Nunito,system-ui,sans-serif;color:#fff}
 .twjc input[type=number]{width:74px;padding:6px 8px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3);color:#fff;font:800 14px Nunito,system-ui,sans-serif;text-align:center}
+.kxnow{display:block;width:100%;margin-top:12px;padding:11px 14px;border-radius:14px;background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.5);color:#fde68a;font:800 13.5px Nunito,system-ui,sans-serif}.kxnow:hover{background:rgba(251,191,36,.26)}
 .bpfree{display:flex;flex-direction:column;gap:6px;min-width:220px;flex:1}.bpfree b{display:flex;align-items:center;gap:6px;font-size:13px}.bpfree b svg{width:16px;height:16px}
 /* ===== GUILDES ===== */
 .glx-p{max-width:1240px;gap:26px!important;padding-bottom:64px}
@@ -2690,6 +2691,7 @@ body.kxlock{overflow:hidden}
 .twjc button.on{background:#fbbf24;color:#111;border-color:#fbbf24}
 .twjc label{display:flex;align-items:center;gap:8px;margin-left:auto;font:800 12.5px Nunito,system-ui,sans-serif;color:#fff}
 .twjc input[type=number]{width:74px;padding:6px 8px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3);color:#fff;font:800 14px Nunito,system-ui,sans-serif;text-align:center}
+.kxnow{display:block;width:100%;margin-top:12px;padding:11px 14px;border-radius:14px;background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.5);color:#fde68a;font:800 13.5px Nunito,system-ui,sans-serif}.kxnow:hover{background:rgba(251,191,36,.26)}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -2890,7 +2892,7 @@ let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPK=1.36,BOSS_PV=2.275;
 const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1+(G.pt||0)*.03;
-const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0),shopP=i=>Math.ceil(i.p*6*(1-.02*PL("pe")));
+const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*(1-.02*PL("pe")));
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
 const pdx=()=>1+dxn()*.004,am=()=>1+Object.keys(G.ach).length*.005+tlv().l*.004+TBV;
 let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*(1+.06*PL("ps"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
@@ -3859,7 +3861,7 @@ image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r
 trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
 plus2:'<path d="M12 5v14M5 12h14"/>'});
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const bfl=()=>Math.max(G.cl,G.bf||0);
+const bfl=()=>Math.max(G.cl,G.bf||0,G.fl||0);
 const LOCKS={exp:15,gacha:30,reb:15,pen:30},BFL=[30,30,50,70,90];
 const lockOf=t=>LOCKS[t]&&bfl()<LOCKS[t]?LOCKS[t]:0;
 const lockTxt=n=>LS("Se débloque à l'étage "+n+" · meilleur étage : "+bfl(),"Unlocks at floor "+n+" · best floor: "+bfl());
@@ -8141,10 +8143,22 @@ function kxAuto(e,k,live){const c=KX(),P=KXP[c.prof],p0=kxP0(),ceil=P.c[k]*p0,tg
  if(live&&!s.own){const n=Math.max(1,Math.min(c.lot,Math.floor((G.m-c.res)*.25/s.price)));const cost=s.price*n;
   if(G.m<cost)return null;G.m-=cost;G.inv[s.b]=(G.inv[s.b]||0)+n;c.sp=(c.sp||0)+cost;c.nb=(c.nb||0)+n;try{qadd("buy",n);qadd("spend",cost)}catch(x){}s.own=1}
  return s}
+function kxFix(r){const c=KX(),it=IT[r];if(!it||!it.m||r=="master-ball")return null;if((G.inv[r]||0)>0)return r;
+ if(c.rb&&it.p&&uf()>=(it.r||0)){const price=shopP(it);if(G.m-price>=c.res){const n=Math.max(1,Math.min(c.lot,Math.floor((G.m-c.res)*.25/price))),cost=price*n;
+  if(G.m>=cost){G.m-=cost;G.inv[r]=(G.inv[r]||0)+n;c.sp=(c.sp||0)+cost;c.nb=(c.nb||0)+n;try{qadd("buy",n);qadd("spend",cost)}catch(x){}return r}}}
+ return null}
+/* rachat proactif : on remplit le stock avant la rencontre, pas pendant */
+let KXT=0;
+function kxClsWanted(){const c=KX(),all=["r0","r1","r2","r3","sp","boss"];return c.mode=="all"||c.mode=="smart"||c.mode=="coll"?all:c.mode=="elite"?["r2","r3","sp","boss"]:(c.sh?["sp"]:[])}
+function kxRestock(force){const c=KX();if(!c.rb)return 0;const n0=c.nb||0;
+ kxClsWanted().forEach(k=>{const r=kxRule(k);if(r==="auto")kxAuto(kxSynth(k),k,true);else if(r)kxFix(r)});
+ return (c.nb||0)-n0}
 function pickBall(e){const c=KX();
+ if(Date.now()>KXT){KXT=Date.now()+4000;try{kxRestock()}catch(x){}}
  if(!kxWant(e)){e.skip=1;return null}
  const k=kxCls(e),r=kxRule(k);
  if(r==="auto"){const s=kxAuto(e,k,true);return s?s.b:null}
+ if(r){const f=kxFix(r);if(f)return f}
  return pickBall0(e)}
 let NBT2=0;function noBallFx(e){if(e&&e.skip)return;const t=Date.now();if(t<NBT2)return;NBT2=t+15000;const f=$("fx");if(!f)return;const c=KX();
  const d=document.createElement("div");d.className="pp dmg";d.textContent=kxRule(kxCls(e))===""?LS("Capture désactivée (règles)","Capture off (rules)"):c.rb?LS("Plus de Balls, plus assez d'argent","Out of Balls and short on coins"):LS("Plus de Balls !","Out of Balls!");d.style.left="50%";f.appendChild(d);setTimeout(()=>d.remove(),1400)}
@@ -8154,14 +8168,15 @@ function kxLine(k){const e=kxSynth(k),r=kxRule(k);
  try{if(r==="auto"){const c=KX();if(!kxWant(Object.assign({},e,k=="sp"?{}:{}))&&c.mode=="none")return["",LS("Aucun lancer","No throw")];const s=kxAuto(e,k,false);return s?[s.b,s,s.own]:["",LS("Aucune ball adaptée","No fitting ball")]}
   if(!r)return["",LS("Ne pas lancer","No throw")];
   const own=G.inv[r]||0;return[r,{pc:capPct(e,r),own:own>0?1:0,price:0},own>0]}catch(x){return["",""]}}
+function kxAllBalls(cur){const L=Object.keys(IT).filter(b=>IT[b]&&IT[b].m&&b!="master-ball"&&!IT[b].mf&&!IT[b].dy&&((G.inv[b]||0)>0||IT[b].p||b==cur));return L.sort((a,b)=>(IT[a].p||0)-(IT[b].p||0))}
 const kxIm=b=>ITM+((IT[b]&&IT[b].img)||b)+".png";
 const kxSw=(key,on,lab,sub)=>`<button class="kxsw${on?" on":""}" data-kx="${key}"><span><b>${lab}</b>${sub?`<small>${sub}</small>`:""}</span><i></i></button>`;
 function kxHtml(){const c=KX(),own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.inv[k]>0).sort((a,b)=>IT[b].m-IT[a].m);
  const modes=KXM.map(m=>`<button class="kxm1${c.mode==m[0]?" on":""}" data-kx="mode" data-v="${m[0]}"><i>${ico(m[5])}</i><b>${LS(m[1],m[2])}</b><small>${LS(m[3],m[4])}</small></button>`).join("");
  const profs=Object.keys(KXP).map(k=>`<button class="kxpf${c.prof==k?" on":""}" data-kx="prof" data-v="${k}"><b>${LS(KXP[k].n[0],KXP[k].n[1])}</b><small>${LS(KXP[k].d[0],KXP[k].d[1])}</small></button>`).join("");
- const rows=KXK.map(([k,fr,en],j)=>{const r=kxRule(k),L=[...new Set([...own,...(r&&r!="auto"&&IT[r]?[r]:[])])],ln=kxLine(k),s=ln[1];
+ const rows=KXK.map(([k,fr,en],j)=>{const r=kxRule(k),L=kxAllBalls(r),ln=kxLine(k),s=ln[1];
   const res=ln[0]&&s&&typeof s=="object"?`<span class="kxrs"><img src="${kxIm(ln[0])}" alt=""><b>${IT[ln[0]].n}</b>${s.own?`<em>×${fmt(G.inv[ln[0]]||0)}</em>`:`<em class="bu">${LS("à racheter","to rebuy")}</em>`}<u>${prc(s.pc)}</u></span>`:`<span class="kxrs off">${typeof ln[1]=="string"?ln[1]:""}</span>`;
-  return `<div class="kxr"><b ${j<4?`class="rty r${j}"`:`class="kxsp"`}>${LS(fr,en)}</b><select data-kxr="${k}"><option value="auto" ${r==="auto"?"selected":""}>${LS("Automatique","Automatic")}</option><option value="" ${r===""?"selected":""}>${LS("Ne pas lancer","No throw")}</option>${L.map(b=>`<option value="${b}" ${b==r?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select>${res}</div>`}).join("");
+  return `<div class="kxr"><b ${j<4?`class="rty r${j}"`:`class="kxsp"`}>${LS(fr,en)}</b><select data-kxr="${k}"><option value="auto" ${r==="auto"?"selected":""}>${LS("Automatique","Automatic")}</option><option value="" ${r===""?"selected":""}>${LS("Ne pas lancer","No throw")}</option>${L.map(b=>{const o=(G.inv[b]||0)>0,lk=!o&&uf()<(IT[b].r||0);return `<option value="${b}" ${b==r?"selected":""} ${lk?"disabled":""}>${IT[b].n} · ${o?"×"+G.inv[b]:lk?LS("verrouillée","locked")+" ("+LS("étage ","floor ")+IT[b].r+")":fmt(shopP(IT[b]))+" ₽"}</option>`}).join("")}</select>${res}</div>`}).join("");
  const stock=own.length?own.map(b=>`<span class="kxst" title="${IT[b].n}"><img src="${kxIm(b)}" alt=""><b>${fmt(G.inv[b])}</b></span>`).join(""):`<small>${LS("Aucune ball en stock.","No Balls in stock.")}</small>`;
  const resv=[0,10000,50000,250000,1000000].map(v=>`<button class="kxch${c.res==v?" on":""}" data-kx="res" data-v="${v}">${v?fmt(v)+" ₽":LS("Aucune","None")}</button>`).join("");
  const lots=[5,10,25,50].map(v=>`<button class="kxch${c.lot==v?" on":""}" data-kx="lot" data-v="${v}">×${v}</button>`).join("");
@@ -8175,11 +8190,13 @@ function kxHtml(){const c=KX(),own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&
  <h4>${LS("Rachat automatique","Automatic restock")}</h4>
  ${kxSw("rb",c.rb,LS("Racheter les balls utiles","Rebuy useful Balls"),LS("Quand la meilleure ball pour une cible n'est pas en stock, le jeu l'achète à la boutique.","When the best Ball for a target is not in stock, the game buys it from the shop."))}
  <div class="kxfl"><div><small>${LS("Réserve d'argent intouchable","Untouchable coin reserve")}</small><div class="kxcs">${resv}</div></div><div><small>${LS("Lot de rachat","Restock batch")}</small><div class="kxcs">${lots}</div></div></div>
+ <button class="kxnow" data-kx="now">${LS("Racheter maintenant les balls manquantes","Restock missing Balls now")}</button>
  <div class="kxsm"><span>${LS("Balls rachetées","Balls rebought")} <b>${fmt(c.nb||0)}</b></span><span>${LS("Dépensé","Spent")} <b>${fmt(c.sp||0)} ₽</b></span></div>
  <h4>${LS("Stock","Stock")}</h4><div class="kxsk">${stock}</div></div>`}
 function kxOpen(){let o=$("kxo");if(!o){o=document.createElement("div");o.id="kxo";o.className="kxo";document.body.appendChild(o);
   o.addEventListener("click",ev=>{if(ev.target===o){kxClose();return}const b=ev.target.closest&&ev.target.closest("[data-kx]");if(!b)return;const c=KX(),a=b.dataset.kx,v=b.dataset.v;
    if(a=="close")return kxClose();
+   if(a=="now"){const n=kxRestock(true);try{toast(n?LS("Balls rachetées : ","Balls bought: ")+n:LS("Rien à racheter : stock suffisant, argent insuffisant ou balls verrouillées","Nothing to buy: stock fine, not enough coins or Balls locked"))}catch(x){}try{save()}catch(x){}return kxRender()}
    if(a=="mode"||a=="prof")c[a]=v;else if(a=="res"||a=="lot")c[a]=+v;else c[a]=c[a]?0:1;
    try{save()}catch(x){}kxRender()});
   o.addEventListener("change",ev=>{const s=ev.target.closest&&ev.target.closest("[data-kxr]");if(!s)return;G.rules=G.rules||{};G.rules[s.dataset.kxr]=s.value;try{save()}catch(x){}kxRender()})}
@@ -8199,6 +8216,13 @@ function twJump(n){const t=twS();n=Math.max(1,Math.min(TWN,t.b+1,Math.round(+n)|
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-twj=to],[data-twj=by]");if(!b||b.disabled)return;const t=twS();twJump(b.dataset.twj=="to"?+b.dataset.v:t.f+(+b.dataset.v))});
 document.addEventListener("input",e=>{const r=e.target;if(r&&r.dataset&&r.dataset.twj=="rg"){const el=$("twFl");if(el)el.textContent=r.value}});
 document.addEventListener("change",e=>{const r=e.target;if(r&&r.dataset&&(r.dataset.twj=="rg"||r.dataset.twj=="num"))twJump(r.value)});
+
+/* ---- capsule d'argent : prix x6 ---- */
+if(IT["bottle-cap"])IT["bottle-cap"].p*=6;
+/* ---- déblocages : avertissement et rafraîchissement dès l'étage atteint ---- */
+let KXU;setInterval(()=>{try{const u=bfl();if(KXU===undefined){KXU=u;return}if(u<=KXU){KXU=u;return}
+ const nw=Object.keys(LOCKS).filter(k=>LOCKS[k]>KXU&&LOCKS[k]<=u&&NG(k)).map(k=>NG(k)[2]);KXU=u;
+ if(nw.length){toast(LS("Débloqué : ","Unlocked: ")+nw.join(", "));try{sfx("shiny")}catch(x){}if(tab!="pan"&&!PB)show()}}catch(x){}},700);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
