@@ -6422,7 +6422,7 @@ function eqTot(){const e=E_(),T=[0,0,0,0,0,0];for(const s in e.e){const o=EQM[e.
 function eqEff(){const T=eqTot(),K=[.6,.35,.5,.5],d=i=>{const S=T[i+2]/100;return K[i]*(1-Math.exp(-S/K[i]))};return{dmg:T[0]/100,coin:T[1]/100,luck:d(0),spd:d(1),cap:d(2),xp:d(3),T}}
 {const rc0=recomp;recomp=function(){rc0.apply(this,arguments);try{const b=eqEff();GM[0]*=1+b.dmg;GM[1]*=1+b.coin}catch(e){}}}
 {const bf0=biFlags;biFlags=function(){bf0();try{const b=eqEff();BIF.m+=b.luck;BIF.d*=1+b.spd;BIF.k*=1+b.cap;BIF.x*=1+b.xp}catch(e){}}}
-const ePrice=()=>Math.round(36000*Math.pow(1.085,Math.max(bfl(),8)));
+const ePrice=()=>10000000;
 const ERT=[52,29,14,4.2,.8],EPS=45,EPU=150;
 function ePull(n){const e=E_(),out=[];
  for(let j=0;j<n;j++){let r=0,x=Math.random()*100;for(let q=0;q<5;q++){if(x<ERT[q]){r=q;break}x-=ERT[q];r=q}
@@ -8310,7 +8310,7 @@ wkBody.gld=()=>{
  let cost="";try{cost=fN(glCost())+" ₽"}catch(e){cost="variable"}
  return `<p class="lead">Une guilde regroupe jusqu'à <b>${GLMAX} joueurs</b>. Ensemble, vous accomplissez des défis, battez un boss hebdomadaire et vous entraidez. En échange, la guilde donne des bonus permanents à tous ses membres.</p>
  ${wf([["Débloquée à l'étage",LOCKS.gld],["Membres max",GLMAX],["Niveaux",GLT.length],["Après avoir quitté","6 h d'attente"]])}
- ${wsx("Rejoindre ou créer",`<ul class="wks2"><li><b>Rejoindre</b> : parcours les guildes ouvertes ou demande à entrer.</li><li><b>Créer</b> : le coût est de ${cost} aujourd'hui (environ 12 heures de revenus, avec un minimum de 2M ₽).</li><li><b>Quitter</b> : à tout moment, avec le bouton visible dans l'en-tête de la guilde. Tu dois ensuite attendre <b>6 heures</b> avant d'en rejoindre une autre.</li></ul>`)}
+ ${wsx("Rejoindre ou créer",`<ul class="wks2"><li><b>Rejoindre</b> : parcours les guildes ouvertes ou demande à entrer.</li><li><b>Créer</b> : le coût est fixe : ${cost}.</li><li><b>Quitter</b> : à tout moment, avec le bouton visible dans l'en-tête de la guilde. Tu dois ensuite attendre <b>6 heures</b> avant d'en rejoindre une autre.</li></ul>`)}
  ${wsx("Niveaux et bonus",`<p>Chaque défi rapporte de l'expérience de guilde. Plus la guilde monte, plus les bonus sont grands pour tous :</p>${tbl(["Niveau","XP de guilde","Pièces","Dégâts","Expérience","Capture"],lv)}`)}
  ${wsx("Défis",`<p>Des défis <b>quotidiens et hebdomadaires</b> comptent les actions de tous les membres : captures, combats gagnés, boss vaincus, mutations trouvées, étages de la Tower, victoires JCJ, cartes données.</p>`)}
  ${wsx("Boss hebdomadaire",`<p>Un boss de guilde est renouvelé chaque semaine. Tu peux l'attaquer <b>3 fois par jour</b> avec une fenêtre de combat qui utilise tes 3 meilleurs Pokémon, comme dans la Tower. Tes dégâts s'ajoutent à ceux de la guilde.</p>`)}
@@ -9001,6 +9001,12 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
 
 /* ---------- les Pokémon exclusifs ne sont jamais des boss ni des captures de raid (Casino ou gemmes uniquement) ---------- */
 (function(){RT.forEach(t=>{if(t.pool&&t.pool.some(x=>x>9e4))t.pool=[491,888,487,484,483,249,250,718].filter(x=>RB[x])})})();
+
+/* ---------- prix FIXES : plus aucun prix ne dépend du revenu ou de la progression ---------- */
+(function(){
+ const FIX={b:5000000,s:20000000,o:60000000,p:100000000}; /* tickets du Casino : Bronze, Argent, Or, Platine */
+ CT.forEach(t=>{if(FIX[t.id]){t.fl=FIX[t.id];t.mult=0}});
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
