@@ -7156,7 +7156,7 @@ const TWRW={
  95:{h:10,s:1800,it:[["master-ball",2],["gold-bottle-cap",5],["ability-patch",3],["max-revive",10]]},
  100:{h:20,s:4000,big:1,ban:8,gem:50,sp:90004,it:[["master-ball",5],["gold-bottle-cap",12],["ability-patch",8],["dream-ball",30],["max-revive",12]]}};
 const twRwItems=r=>r.it.filter(x=>IT[x[0]]);
-function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(qcps()*540*r.h),got=[];
+function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(qcps()*100*r.h),got=[];
  G.m+=kxI("tw",coins);G.gain+=coins;t.sc+=r.s;twRwItems(r).forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n;got.push([k,n])});
  let gem=0,sp=0;if(r.gem){try{BPS()}catch(e){}G.gem=(G.gem||0)+r.gem;gem=r.gem}
  if(r.sp){G.sp=G.sp||{};if(!G.sp[r.sp]){spGrant(r.sp);sp=r.sp}}
@@ -7173,7 +7173,7 @@ const twSk=f=>Math.min(.93,.4+f*.0055);
 function twApply(res,f,o){o=o||{};const t=twS(),win=res=="win",out={win,f,first:0,rw:null,sc:0,coins:0,up:[],back:0,nf:t.f};t.tt=Date.now();
  if(win){t.w++;t.ls=0;const first=f>t.b;out.first=first;
   out.sc=Math.round((2+f*.6)*(1+.05*(t.up.ch||0))*(first?3:1));t.sc+=out.sc;
-  out.coins=Math.floor(qcps()*.4*(1+f/100)*(.3+Math.min(1,(()=>{try{const L=(t.tm||[]).map(i=>G.col[i]&&G.col[i].l||0);return L.length?L.reduce((x,y)=>x+y,0)/L.length/100:0}catch(e){return .5}})())));G.m+=kxI("tw",out.coins);G.gain+=out.coins;
+  out.coins=Math.floor(qcps()*.08*(1+f/100)*(.3+Math.min(1,(()=>{try{const L=(t.tm||[]).map(i=>G.col[i]&&G.col[i].l||0);return L.length?L.reduce((x,y)=>x+y,0)/L.length/100:0}catch(e){return .5}})())));G.m+=kxI("tw",out.coins);G.gain+=out.coins;
   if(first){t.b=f;t.bt=Date.now();if(TWRW[f]&&!t.cl[f])out.rw=twGrant(f);twPush(1)}
   const nf=t.af=="rp"?f:Math.min(TWN,f+1);t.f=Math.max(1,Math.min(nf,t.b+1,TWN));if(t.af=="st"&&o.bg)t.fm=0;out.nf=t.f}
  else{t.l++;t.ls=(t.ls||0)+1;if(t.fm&&t.ls>=2&&t.f>1){t.f--;t.ls=0;out.back=1;out.nf=t.f}}
@@ -7316,7 +7316,7 @@ function twViewUp(){const t=twS();
 function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m;
  return `<div class="twrc ${r.big?"twmaj":""} ${got?"twdn":""} ${cur?"twnx":""}"><div class="twrh"><b>Étage ${m}</b><em>${got?"Récupérée":t.b>=m?"Prête":r.big?"Majeure":""}</em></div>
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
-  <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*540*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
+  <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(qcps()*100*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
 function twViewRw(){const L=[];for(let m=5;m<=100;m+=5)L.push(m);
  return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 100</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 100</span>`}</div></div></div>
   <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75 et 100 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
