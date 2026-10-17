@@ -2837,6 +2837,8 @@ body.kxlock{overflow:hidden}
 .kll{display:grid;gap:3px;max-height:34vh;overflow:auto}.klr{display:grid;grid-template-columns:78px 1fr auto;gap:8px;font-size:13px;padding:4px 6px;border-radius:8px;background:rgba(255,255,255,.04)}
 .klr span{opacity:.65}.klr em{font-style:normal;color:#fbbf24;font-weight:800}.klr.up{background:rgba(74,222,128,.07)}
 .lgx.kmx b{letter-spacing:.03em!important;font-size:clamp(26px,6.5vw,60px)!important;text-align:center;max-width:92vw}
+.tcb{margin:0 0 10px}.tcbtn{display:inline-flex;align-items:center;gap:8px;font-weight:800}.tcbtn svg{width:18px;height:18px}
+.tcm .bsr img.ic,.tcm .bsr .pearl{width:44px;height:44px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -3239,12 +3241,12 @@ EXT.push({n:"Chasse Méga",z:"Anomalie méga",lv:90,r:4,ch:.07,du:5400,rq:60,col
 const exSeed=()=>Math.floor(Date.now()/216e5),exNext=()=>(exSeed()+1)*216e5;
 const exCur=()=>{const sd=exSeed();return EXT.map((t,i)=>{if(t.mega)return mgCur(t,i);const R=rng(sd*131+i*977+5);R();return {...t,i,sd,id:t.pool[R()*t.pool.length|0]}})};
 const exRef=()=>{const F=Math.max(8,G.bf||0,G.cl);return 28*Math.pow(1.11,F-1)+12*F};
-const exReq=t=>Math.ceil(t.rq*exRef()/6);
+const exRef2=F=>28*Math.pow(1.11,F-1)+12*F;const exReq=t=>Math.ceil(t.rq*exRef2(t.lv||90)/6);
 const exBusy=()=>{const b=new Set();(G.ex||[]).forEach(r=>r.tm.forEach(i=>b.add(i)));if(G.pen&&G.pen.sl)G.pen.sl.forEach(i=>b.add(i));return b};
 const exFree=()=>{const b=exBusy();return ids().filter(i=>!b.has(i)).sort((a,c)=>base(c)-base(a))};
 const exDps=a=>a.reduce((s,i)=>s+base(i),0);
 const exCh=(t,d)=>Math.min(.95,t.ch*(1+Math.min(.5,Math.max(0,d/exReq(t)-1)*.25))*(1+.08*PL("pk")));
-const exGold=(t,a)=>Math.floor(a.reduce((s,i)=>s+coin(i),0)*t.du*.6);
+const exGold=(t,a)=>Math.floor(t.rq*exRef2(t.lv||90)*t.du*.0012);
 const hms=t=>{t=Math.max(0,Math.ceil(t));const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return (h?h+":":"")+String(m).padStart(h?2:1,"0")+":"+String(s).padStart(2,"0")};
 const dur=d=>d<3600?d/60+" min":(d/3600).toFixed(d%3600?2:0).replace(/\.?0+$/,"")+" h";
 function exGet(id,lv){const nw=!G.col[id],c=G.col[id]||(G.col[id]={n:0,l:lv,x:0,h:-1});c.n+=1;if(nw){ens(id);if(abl(id)[1]&&Math.random()<.06*(1+.2*PL("pt")))c.ha=1;rq(id)}else train(id,1);c.l=Math.max(c.l,Math.min(lv,tgtL()+8));G.dx[id]=1;G.caps++;IDC=null;chain(id);c.h=mhp(id)}
@@ -7569,7 +7571,7 @@ const GLBS=[150,249,250,384,483,484,487,644,646,716,717,791,792,800,888,889,890]
 const GLN=["Les Flamboyants","Mer Profonde","Aube Dorée","Néo Kanto","Brume Écarlate","Tempête Nocturne","Les Gardiens du Jade","Cercle des Champions"],GLT2=["FLM","MPR","AUB","KNT","BRM","TMP","JDE","CCH"];
 const GLX={docs:[],gl:[],ts:0,busy:0,st:null,stt:0,v:"home",hist:[]};
 function glS(){const g=G.gl=G.gl||{};if(g.id==null)Object.assign(g,{id:"",jd:0,gx:0,last:null,ct:{wk:"",w:{},dk:"",d:{}},cl:{},rq:null,gv:[],rc:[],of:null,ac:[],ok:{},bs:{wk:"",dmg:0,n:0,dk:"",dn:0},ch:[],dn:{dk:"",n:0},rqd:"",sg:null,sgs:{},px:[],pend:0,a:0,gd:null,lv:1,mod:{acc:[],kick:[]},bcl:{}});return g}
-const glCost=()=>Math.max(2000000,qnice(qcps()*3600*12));
+const glCost=()=>150000000;
 let glPwC=[0,0];
 const glPw=()=>{if(Date.now()-glPwC[0]<20000&&glPwC[1])return glPwC[1];let v=0;try{v=ids().map(i=>{try{return dmg(i)}catch(e){return 0}}).sort((a,b)=>b-a).slice(0,6).reduce((a,b)=>a+b,0)}catch(e){}glPwC=[Date.now(),Math.max(1,Math.floor(v))];return glPwC[1]};
 const glMet=()=>({cap:G.caps||0,ko:G.ko||0,boss:G.boss||0,gain:G.gain||0,mut:G.mut||0,twr:(G.tw&&G.tw.b)||0,pvw:(G.pv&&G.pv.w)||0});
@@ -8560,6 +8562,26 @@ setInterval(()=>{const o=$("klo");if(!o||!o.classList.contains("on"))return;cons
 function kxHpS(z){return z>1?1+(z-1)*.4:z}
 function kxHpM(m){return 1+(m-1)*.7/6}
 function kxF(x){return +x.toFixed(2)}
+/* ===== v119 : chariot dans l'onglet Entraînement d'un Pokémon ===== */
+const TCG=()=>[
+ [LS("Bonbons","Candies"),CDY.map(x=>x.k)],
+ [LS("Vitamines (+10 EV)","Vitamins (+10 EV)"),VIT.map(v=>v[0])],
+ [LS("Baies (-10 EV)","Berries (-10 EV)"),BER.map(v=>v[0])],
+ [LS("IV et talents","IVs and abilities"),["bottle-cap","gold-bottle-cap","ability-capsule","ability-patch"]],
+ [LS("Entraînement+","Training+"),Object.keys(IT).filter(k=>IT[k].c=="Entraînement+")]
+].map(g=>[g[0],g[1].filter(k=>IT[k])]).filter(g=>g[1].length);
+function tcHtml(){const Q=[1,5,10];return `<div class="kxm bsm tcm"><button class="kxx" data-tc="x" aria-label="close">${ico("x")}</button><div class="kxh"><h2>${LS("Boutique d'entraînement","Training shop")}</h2><p>${LS("Achète ici sans quitter la fiche du Pokémon.","Buy here without leaving the Pokémon screen.")} <span class="bsg">${LS("Argent","Coins")} <b>${fmt(G.m)} ₽</b></span></p></div>
+ ${TCG().map(([t,L])=>`<h3 class="klh">${t}</h3><div class="bsl">${L.map(k=>{const it=IT[k],p=shopP(it),lk=uf()<(it.r||0),n=G.inv[k]||0;
+  return `<div class="bsr" style="--c:#60a5fa">${ic(k,it.img)}<div class="bst"><b>${it.n}</b><small>${typeof shopDesc=="function"?shopDesc(k,it):(it.d||"")}</small><em>${LS("En stock","Owned")} ${fmt(n)}</em></div><div class="bsb">${lk?`<span class="bsl2">${LS("Étage ","Floor ")}${it.r}</span>`:Q.map(q=>{const c=p*q,ok=G.m>=c;return `<button data-tc="buy" data-k="${k}" data-q="${q}" ${ok?"":"disabled"}><b>×${q}</b><small>${fmt(c)} ₽</small></button>`}).join("")}</div></div>`}).join("")}</div>`).join("")}</div>`}
+function tcOpen(){let o=$("tco");if(!o){o=document.createElement("div");o.id="tco";o.className="kxo";document.body.appendChild(o);
+ o.addEventListener("click",ev=>{if(ev.target===o||(ev.target.closest&&ev.target.closest("[data-tc=x]")))return tcClose();const b=ev.target.closest&&ev.target.closest("[data-tc=buy]");if(!b)return;
+  const k=b.dataset.k,q=+b.dataset.q,it=IT[k],p=it?shopP(it)*q:0;if(!it||uf()<(it.r||0)||G.m<p){try{sfx("err")}catch(e){}return}
+  G.m-=p;G.inv[k]=(G.inv[k]||0)+q;try{qadd("spend",p)}catch(e){}try{sfx("coin")}catch(e){}try{save()}catch(e){}tcRender();try{modal()}catch(e){}})}
+ o.innerHTML=tcHtml();o.classList.add("on");document.body.classList.add("kxlock")}
+function tcClose(){const o=$("tco");if(o)o.classList.remove("on");document.body.classList.remove("kxlock")}
+function tcRender(){const o=$("tco");if(!o||!o.classList.contains("on"))return;const m=o.querySelector(".kxm"),y=m?m.scrollTop:0;o.innerHTML=tcHtml();const n=o.querySelector(".kxm");if(n)n.scrollTop=y}
+{const pt=pkTrain;pkTrain=function(id){return `<div class="row tcb"><button class="tcbtn" data-tc="open">${ico("cart")} ${LS("Acheter des objets d'entraînement","Buy training items")}</button></div>`+pt(id)}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tc=open]");if(b){e.stopPropagation();tcOpen()}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
