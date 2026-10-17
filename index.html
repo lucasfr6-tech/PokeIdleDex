@@ -2081,7 +2081,8 @@ body.pvon2{overflow:hidden}
 .pvbc .pvi{width:44px;height:44px}.pvbc b{font:800 11px Nunito,system-ui,sans-serif;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pvbc .pvhp{width:90%}
 .pvbc:hover:not(:disabled){border-color:#38bdf8;transform:translateY(-2px)}
 .pvbc.cur{border-color:#fbbf24;box-shadow:0 0 14px #fbbf2466}.pvbc.ko{opacity:.35;filter:grayscale(1)}.pvbc:disabled{cursor:default}
-.pvbc.rp:not(:disabled){border-color:#4ade80;animation:pvPulse 1s infinite}
+.pvbc.pvsw:not(:disabled){border-color:#4ade80;background:linear-gradient(180deg,#0f2a2a,#0a0f26);animation:pvSw 1.4s ease-in-out infinite}
+@keyframes pvSw{50%{box-shadow:0 0 0 2px #4ade8055,0 0 16px #4ade8044}}
 .pvub{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end}
 .pvub button{padding:9px 18px;border-radius:11px;border:1px solid #3a4aa0;background:#141c4c;color:#fff;font:800 13px Nunito,system-ui,sans-serif;cursor:pointer;transition:.15s}.pvub button:hover{background:#243080}.pvub button.on{background:#0d9488;border-color:#2dd4bf}.pvub .red{border-color:#be123c;color:#fda4af}.pvub .red:hover{background:#7f1d3a}
 /* résultat */
@@ -2386,6 +2387,16 @@ body.kxlock{overflow:hidden}
 .kxm .kxsw.on{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));color:var(--tx);text-shadow:none}
 .kxm .kxsw.on b{color:#fff}.kxm .kxsw.on small{color:#cbd5e1}
 .kxm .kxch.on{color:#111}
+
+/* ---- Tower : sélecteur d'étage ---- */
+.twjp{display:flex;flex-direction:column;gap:10px;margin:2px 0 12px}
+.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
+.twjc{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.twjc button{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font:800 12.5px Nunito,system-ui,sans-serif}
+.twjc button:hover:not(:disabled){background:rgba(255,255,255,.26)}.twjc button:disabled{opacity:.4}
+.twjc button.on{background:#fbbf24;color:#111;border-color:#fbbf24}
+.twjc label{display:flex;align-items:center;gap:8px;margin-left:auto;font:800 12.5px Nunito,system-ui,sans-serif;color:#fff}
+.twjc input[type=number]{width:74px;padding:6px 8px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3);color:#fff;font:800 14px Nunito,system-ui,sans-serif;text-align:center}
 .bpfree{display:flex;flex-direction:column;gap:6px;min-width:220px;flex:1}.bpfree b{display:flex;align-items:center;gap:6px;font-size:13px}.bpfree b svg{width:16px;height:16px}
 /* ===== GUILDES ===== */
 .glx-p{max-width:1240px;gap:26px!important;padding-bottom:64px}
@@ -2669,6 +2680,16 @@ body.kxlock{overflow:hidden}
 .kxm .kxsw.on{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));color:var(--tx);text-shadow:none}
 .kxm .kxsw.on b{color:#fff}.kxm .kxsw.on small{color:#cbd5e1}
 .kxm .kxch.on{color:#111}
+
+/* ---- Tower : sélecteur d'étage ---- */
+.twjp{display:flex;flex-direction:column;gap:10px;margin:2px 0 12px}
+.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
+.twjc{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.twjc button{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font:800 12.5px Nunito,system-ui,sans-serif}
+.twjc button:hover:not(:disabled){background:rgba(255,255,255,.26)}.twjc button:disabled{opacity:.4}
+.twjc button.on{background:#fbbf24;color:#111;border-color:#fbbf24}
+.twjc label{display:flex;align-items:center;gap:8px;margin-left:auto;font:800 12.5px Nunito,system-ui,sans-serif;color:#fff}
+.twjc input[type=number]{width:74px;padding:6px 8px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3);color:#fff;font:800 14px Nunito,system-ui,sans-serif;text-align:center}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
@@ -6650,7 +6671,7 @@ function pvU_upd(B){if(!$("pvA"))return;
  $("pvRd").textContent="Tour "+B.round;
  const u=pvAct(B,"m"),o=pvAct(B,"f"),can=B.phase=="pick"&&!B.over;
  $("pvMv").innerHTML=pvMvHtml(B,u,o,can);
- $("pvBench").innerHTML=B.m.tm.map((x,i)=>{const q=Math.max(0,x.hp/x.max),cur=i==B.m.a,dis=x.dead||cur||!(B.phase=="pick"||B.phase=="repl");return `<button class="pvbc ${cur?"cur":""} ${x.dead?"ko":""} ${B.phase=="repl"&&!x.dead?"rp":""}" data-pv="sw:${i}" ${dis?"disabled":""}>${pvImg(x.id)}<b>${esc(x.name)}</b><div class="pvhp s"><i class="${pvHc(q)}" style="width:${q*100}%"></i></div></button>`}).join("");
+ $("pvBench").innerHTML=B.m.tm.map((x,i)=>{const q=Math.max(0,x.hp/x.max),cur=i==B.m.a,dis=x.dead||cur||!(B.phase=="pick"||B.phase=="repl");return `<button class="pvbc ${cur?"cur":""} ${x.dead?"ko":""} ${B.phase=="repl"&&!x.dead?"pvsw":""}" data-pv="sw:${i}" ${dis?"disabled":""}>${pvImg(x.id)}<b>${esc(x.name)}</b><div class="pvhp s"><i class="${pvHc(q)}" style="width:${q*100}%"></i></div></button>`}).join("");
  $("pvHint").textContent=pvHintTxt(B);
  $("pvAu").classList.toggle("on",!!B.auto);$("pvSp").textContent="×"+B.sp}
 function pvUiSay(B,t){const m=$("pvMt");if(!m)return;m.textContent=t;const w=$("pvMsg");w.classList.remove("n");void w.offsetWidth;w.classList.add("n")}
@@ -7102,6 +7123,7 @@ function twViewTour(){const t=twS(),f=t.f,Z=twZone(f),zi=twZi(f)+1,nm=twNextMs()
   <div class="twbx twhero" style="--c1:${Z.c[0]};--c2:${Z.c[1]}">
    <div class="twzn"><span>ZONE ${zi} sur 10</span><b>${Z.n}</b></div>
    ${nav}
+   ${twJmp(f,t)}
    <div class="twst"><span><b>${t.b}</b>Record</span><span><b>${rk?"#"+rk:"-"}</b>Classement</span><span><b>${fmt(t.w)}</b>Victoires</span></div>
    ${twMilesBar()}
    <div class="twmn">${nm?`Prochaine récompense à l'étage <b>${nm}</b>${TWRW[nm].big?" · récompense majeure":""}`:"Toutes les récompenses ont été récupérées"}</div>
@@ -7193,12 +7215,12 @@ function twLvUi(B){["m","f"].forEach(s=>{const u=pvAct(B,s),e=document.querySele
 function twIntro(f){const n=twCount(f),b=twList(f).some(e=>e.boss);return (b?"Un boss garde l'étage ":"Étage ")+f+" : "+n+" adversaire"+(n>1?"s":"")+" !"}
 function twNew(f){const t=twS(),pv=pvS(),mine=twTeamU(t.tm,pv.mv,pv.it);twBuff(mine);const foes=twFoes(f);
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foes.forEach((u,i)=>{u.i=i;u.s="f"});
- return{tw:f,opp:{id:"tw"+f,n:"Étage "+f,r:0,tm:foes.map(u=>u.id)},m:{n:G.name||"Moi",r:0,tm:mine,a:0},f:{n:"Étage "+f,r:0,tm:foes,a:0},round:0,log:[],sp:1,auto:!!(t.au||t.fm),fast:false,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:twSk(f),tuto:false,friendly:false,prev:{w:0,l:0,d:0}}}
+ return{tw:f,opp:{id:"tw"+f,n:"Étage "+f,r:0,tm:foes.map(u=>u.id)},m:{n:G.name||"Moi",r:0,tm:mine,a:0},f:{n:"Étage "+f,r:0,tm:foes,a:0},round:0,log:[],sp:3,auto:!!(t.au||t.fm),fast:false,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:twSk(f),tuto:false,friendly:false,prev:{w:0,l:0,d:0}}}
 function twWin(B){pvBuild(B);const o=$("pvb"),Z=twZone(B.tw);o.classList.add("tw");o.style.setProperty("--zc",Z.c[0]);twArena($("pvbg"),B.tw);
  const L=o.querySelector(".pvpn.m"),Rr=o.querySelector(".pvpn.f");
  [L,Rr].forEach(p=>{const s=p.querySelector("svg");if(s)s.outerHTML=twTower(30)});
  L.querySelector("small").textContent="Équipe de 3";Rr.querySelector("small").textContent=Z.n;
- const ub=o.querySelector(".pvub");if(ub){ub.insertAdjacentHTML("afterbegin",`<button data-tw="min" title="Le combat se termine tout seul, la Tower continue en arrière-plan">Réduire</button><button id="twFm" class="${twS().fm?"on":""}" data-tw="fmw">Farm</button>`)}}
+ const ub=o.querySelector(".pvub");if(ub){const sb=ub.querySelector("[data-pv=spd]");if(sb){sb.textContent="×3";sb.disabled=true;sb.title="La Tower est toujours à ×3"}ub.insertAdjacentHTML("afterbegin",`<button data-tw="min" title="Le combat se termine tout seul, la Tower continue en arrière-plan">Réduire</button><button id="twFm" class="${twS().fm?"on":""}" data-tw="fmw">Farm</button>`)}}
 async function twStart(f){const t=twS();if(PB)return;if(t.tm.length<3){toast("Choisis d'abord 3 Pokémon pour ta Tower.");TWX.v="team";if(tab!="twr")tab="twr";show();return}
  f=Math.max(1,Math.min(f||t.f,t.b+1,TWN));t.f=f;twCancel();
  const B=twNew(f);B.intro=1;PB=B;twWin(B);document.body.classList.add("pvon2");twHud();
@@ -8168,6 +8190,15 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 document.addEventListener("keydown",e=>{if(e.key=="Escape")kxClose()});
 /* ---- migration : réglages automatiques pour tous, une seule fois ---- */
 function kxMig(){if(!G.kxv){G.kxv=1;G.rules={};KX()}else KX()}
+
+/* ---- Tower : saut direct vers n'importe quel étage ---- */
+function twJmp(f,t){const mx=Math.min(TWN,t.b+1);if(mx<2)return"";
+ const q=[1,10,25,50,75,100].filter(x=>x<=mx&&x!=mx);
+ return `<div class="twjp"><input type="range" class="twrg" min="1" max="${mx}" value="${f}" data-twj="rg" aria-label="Étage"><div class="twjc"><button data-twj="by" data-v="-10" ${f<=1?"disabled":""}>-10</button><button data-twj="by" data-v="10" ${f>=mx?"disabled":""}>+10</button>${q.map(x=>`<button data-twj="to" data-v="${x}" class="${x==f?"on":""}">${x}</button>`).join("")}<button data-twj="to" data-v="${mx}" class="${mx==f?"on":""}">${LS("Record","Record")} ${mx}</button><label>${LS("Aller à","Go to")}<input type="number" min="1" max="${mx}" value="${f}" data-twj="num" inputmode="numeric"></label></div></div>`}
+function twJump(n){const t=twS();n=Math.max(1,Math.min(TWN,t.b+1,Math.round(+n)||1));t.f=n;try{save()}catch(x){}try{const ae=document.activeElement;if(ae&&ae.blur)ae.blur()}catch(x){}show()}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-twj=to],[data-twj=by]");if(!b||b.disabled)return;const t=twS();twJump(b.dataset.twj=="to"?+b.dataset.v:t.f+(+b.dataset.v))});
+document.addEventListener("input",e=>{const r=e.target;if(r&&r.dataset&&r.dataset.twj=="rg"){const el=$("twFl");if(el)el.textContent=r.value}});
+document.addEventListener("change",e=>{const r=e.target;if(r&&r.dataset&&(r.dataset.twj=="rg"||r.dataset.twj=="num"))twJump(r.value)});
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
