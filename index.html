@@ -5967,7 +5967,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 IP.summon='<circle cx="12" cy="12" r="8.5"/><path d="M12 6.5l1.7 3.8 3.8 1.7-3.8 1.7L12 17.5l-1.7-3.8L6.5 12l3.8-1.7z"/>';
 NAV2.push(["inv","summon","Invocation","#22d3ee","#155e75"]);NENG.inv="Summon";LOCKS.inv=20;
 (function(){const n=NAV2.find(x=>x[0]=="inv");if(n&&!NAVX.includes(n))NAVX.unshift(n)})();
-const IVSL=3*3600*1000,IV_UR=150,IV_D=350,IVT=["D","UR","SSR","SR","N"];
+const IVSL=2*3600*1000,IV_UR=150,IV_D=350,IVT=["D","UR","SSR","SR","N"];
 const IVC={D:"#22d3ee",UR:"#ff6bd6",SSR:"#ffd23f",SR:"#cdd5e3",N:"#b9814a"};
 const IVNM={D:["Divin","Divine"],UR:["UR","UR"],SSR:["SSR","SSR"],SR:["SR","SR"],N:["N","N"]};
 const IVRT={D:.5,UR:2.5,SSR:9,SR:25,N:63};
@@ -8125,8 +8125,8 @@ ${wn("tip","Vendre sans regret","Les soins ne servent qu'aux raids : garde-en un
 wkBody.inv=()=>{
  const N={D:"Divin",UR:"UR",SSR:"SSR",SR:"SR",N:"N"};
  const rt=["D","UR","SSR","SR","N"].map(k=>[N[k],IVRT[k].toString().replace(".",",")+" %"]);
- return `<p class="lead">L'Invocation fait apparaître des Pokémon d'un <b>pool dédié</b> de 26 Pokémon, rotatif toutes les 3 heures avec une bannière mise en avant.</p>
- ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 3 h"],["Garantie Divin","350"]])}
+ return `<p class="lead">L'Invocation fait apparaître des Pokémon d'un <b>pool dédié</b> de 26 Pokémon, rotatif toutes les 2 heures avec une bannière mise en avant.</p>
+ ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie Divin","350"]])}
  ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque invocation a aussi <b>1,5 %</b> de chance de donner une mutation ou une grande taille.</p>`)}
  ${wsx("Garanties",`<ul class="wks2"><li><b>Divin</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
  ${wsx("Prix et lots",`<p>Une invocation coûte <b>72 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>3 fois plus puissants</b> que la normale.</p>`)}
