@@ -13,7 +13,7 @@ const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token','Access-Control-Allow-Methods':'GET,PUT,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
-const clean=v=>{if(typeof v=='string')return v.slice(0,2000);if(Array.isArray(v))return v.slice(0,500).map(clean);if(v&&typeof v=='object'){const o={};for(const k of Object.keys(v).slice(0,200)){if(k=='__proto__'||k=='constructor'||k=='prototype')continue;o[k]=clean(v[k])}return o}return v};
+const clean=v=>{if(typeof v=='string')return v.slice(0,2000);if(Array.isArray(v))return v.slice(0,500).map(clean);if(v&&typeof v=='object'){const o={};for(const k of Object.keys(v).slice(0,200)){if(k=='__proto__'||k=='constructor'||k=='prototype')continue;o[k]=(k=='ai'&&typeof v[k]=='string'&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]*$/.test(v[k]))?v[k].slice(0,9000):clean(v[k])}return o}return v};
 http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x'),ip=(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();
  if(req.method=='OPTIONS'){send(res,204,{});return}

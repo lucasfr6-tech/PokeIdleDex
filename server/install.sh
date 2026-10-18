@@ -30,6 +30,7 @@ $D {
 }
 EOF
 systemctl daemon-reload
-systemctl enable --now pid
+systemctl enable pid
+systemctl restart pid
 systemctl restart caddy
 echo "OK : teste https://$D/api/health"
