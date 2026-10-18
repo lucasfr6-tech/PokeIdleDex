@@ -3161,12 +3161,17 @@ body.lndon{overflow:hidden}
 
 /* v149 : bouton Tour dans la colonne de droite */
 #sc>#twh{position:relative;right:auto;top:auto;width:auto;min-width:74px;align-self:stretch;z-index:auto;margin:0 0 4px}
+
+.lncont{margin-top:12px;display:block;margin-left:auto;margin-right:auto;background:#ffffff14;border:1px solid #ffffff40;color:#fff;font-weight:800;font-size:16px;border-radius:14px;padding:13px 26px;cursor:pointer}
+.lncont:hover{background:#ffffff26}
+.accf small{display:block;opacity:.75;margin:6px 0;font-size:12px}
+.accf input{margin-bottom:6px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="70ead4a047"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=70ead4a047"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bf2d4849de"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=bf2d4849de"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4064,7 +4069,7 @@ function vSetg(){const acc=accNow();return `<div class="stg">
  <div class="box scd"><h3>${ico("globe")} Langue</h3><div class="seg"><button class="${SG.lang=="fr"?"on":""}" data-a="lang" data-t="fr"><b>FR</b>Français</button><button class="${SG.lang=="en"?"on":""}" data-a="lang" data-t="en"><b>EN</b>English</button></div></div>
  <div class="box scd"><h3>${ico("monitor")} Affichage</h3>${fsBtn()}<div class="seg th"><button class="${SG.theme=="night"?"on":""}" data-a="theme" data-t="night"><i class="tn"></i>${ico("moon")} Nuit</button><button class="${SG.theme=="day"?"on":""}" data-a="theme" data-t="day"><i class="td"></i>${ico("sun")} Jour</button></div>
   ${tgl("perf","Mode performance (moins d'effets)","bolt")}${tgl("fly","Pokémon dans le ciel","wind")}${tgl("stars","Étoiles filantes","star")}${tgl("anim","Animations de l'interface","spark")}${tgl("alert","Alertes de spawn rare","crown")}${tgl("cmp","Affichage compact","team")}${sld("ui","Taille de l'interface","monitor",80,120," %")}</div>
- ${vNf()}${vBk()}<div class="box scd"><h3>${ico("key")} Compte</h3>${acc?`<div class="accn">${ico("user")}<div><b>${acc}</b><small>Compte local actif</small></div><button class="mini" data-a="alogout">Déconnexion</button></div>`:`<div class="accf"><input type="email" id="acm" placeholder="E-mail" autocomplete="email"><input type="password" id="acp" placeholder="Mot de passe (6 car. min.)" autocomplete="current-password"><div class="row"><button class="go" data-a="alogin">Connexion</button><button data-a="acreate">Créer le compte</button></div></div>`}
+ ${vNf()}${vBk()}<div class="box scd"><h3>${ico("key")} Compte</h3>${window.pcOn&&window.pidAccBox?window.pidAccBox():acc?`<div class="accn">${ico("user")}<div><b>${acc}</b><small>Compte local actif</small></div><button class="mini" data-a="alogout">Déconnexion</button></div>`:`<div class="accf"><input type="email" id="acm" placeholder="E-mail" autocomplete="email"><input type="password" id="acp" placeholder="Mot de passe (6 car. min.)" autocomplete="current-password"><div class="row"><button class="go" data-a="alogin">Connexion</button><button data-a="acreate">Créer le compte</button></div></div>`}
   <div class="oauth"><button disabled title="Nécessite un serveur d'authentification">${ico("globe")} Google</button><button disabled title="Nécessite un serveur d'authentification">${ico("user")} Discord</button></div>
   <div class="accs">${LB.ok?`${ico("wifi")} Classement en ligne actif`:`${ico("wifioff")} Classement en ligne indisponible ici`}</div></div>
  <div class="box scd"><h3>${ico("download")} Sauvegarde</h3><div class="row"><button data-a="expsv">${ico("download")} Exporter</button><button data-a="impsv">${ico("upload")} Importer</button></div><textarea id="imp" placeholder="Colle ici ton code de sauvegarde" rows="2"></textarea></div></div>${vSet()}`}
@@ -9455,14 +9460,19 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
   d.innerHTML=`<div class="tcm"><button class="tcx" aria-label="${LS("Fermer","Close")}">×</button>
   <div class="tcc"><img src="${BALL}" alt=""><div class="tcn"><small>${LS("CARTE DE DRESSEUR","TRAINER CARD")}</small><b id="tcn">${LS("Dresseur","Trainer")}</b><span>${LS("Niveau 0 · Novice","Level 0 · Novice")}</span></div><i class="tcs"></i></div>
   <label for="tci">${LS("Choisis ton nom","Choose your name")}</label><input id="tci" maxlength="16" autocomplete="off" spellcheck="false" placeholder="${LS("Ex. Sacha","E.g. Ash")}">
+  ${window.pcOn?`<label for="tcpw">${LS("Mot de passe (facultatif)","Password (optional)")}</label><input id="tcpw" type="password" maxlength="64" autocomplete="new-password" placeholder="${LS("Pour reprendre ta partie sur un autre appareil","To continue your game on another device")}">`:""}
   <div class="tce" id="tce"></div>
   <button class="go tcg">${LS("Commencer l'aventure","Start the adventure")}</button><button class="tca">${LS("Passer, je choisirai plus tard","Skip, I will choose later")}</button>
-  <p>${LS("Pas de mot de passe ni d'e-mail : ta partie est enregistrée sur cet appareil.","No password or e-mail: your game is saved on this device.")}</p></div>`;
+  <p>${window.pcOn?LS("Sans mot de passe, ta partie reste sur cet appareil.","Without a password, your game stays on this device."):LS("Pas de mot de passe ni d'e-mail : ta partie est enregistrée sur cet appareil.","No password or e-mail: your game is saved on this device.")}</p></div>`;
   document.getElementById("lnd").appendChild(d);
   const i=d.querySelector("#tci"),nm=d.querySelector("#tcn");setTimeout(()=>i.focus(),60);
   i.addEventListener("input",()=>{nm.textContent=i.value.trim()||LS("Dresseur","Trainer")});
   const go=skip=>{const v=(i.value||"").replace(/[<>"'&]/g,"").replace(/\s+/g," ").trim().slice(0,16);
-   if(!skip){if(v.length<2){d.querySelector("#tce").textContent=LS("Entre au moins 2 caractères.","Enter at least 2 characters.");return}G.name=v;try{save()}catch(e){}}close()};
+   if(!skip){if(v.length<2){d.querySelector("#tce").textContent=LS("Entre au moins 2 caractères.","Enter at least 2 characters.");return}G.name=v;try{save()}catch(e){}
+    const pw=(d.querySelector("#tcpw")||{}).value||"";
+    if(pw&&window.pcRegister){if(pw.length<4){d.querySelector("#tce").textContent=LS("Mot de passe : 4 caractères minimum.","Password: 4 characters minimum.");return}
+     const b=d.querySelector(".tcg");b.disabled=true;window.pcRegister(v,pw).then(j=>{b.disabled=false;if(j.ok)close();else d.querySelector("#tce").textContent=j.e=="taken"?LS("Ce pseudo est déjà pris.","This name is already taken."):j.e=="net"||!j.e?LS("Serveur injoignable.","Server unreachable."):LS("Pseudo ou mot de passe invalide.","Invalid name or password.")});return}}
+   close()};
   d.querySelector(".tcg").onclick=()=>go(0);d.querySelector(".tca").onclick=()=>go(1);d.querySelector(".tcx").onclick=()=>d.remove();
   i.addEventListener("keydown",e=>{if(e.key=="Enter")go(0)});d.addEventListener("click",e=>{if(e.target==d)d.remove()})}
  async function open(){
@@ -9476,6 +9486,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
    <h1 class="lnt">Poke<em>Idle</em>Dex</h1>
    <p class="lntg">${LS("Capture, entraîne, collectionne.","Catch, train, collect.")}</p>
    <button class="go lnplay">${LS("Nouvelle partie","New game")}</button>
+   ${window.pcOn?`<button class="lncont">${LS("Continuer ma partie","Continue my game")}</button>`:""}
    <button class="lndc">${DI}<span>${LS("Rejoindre le Discord","Join the Discord")}</span></button>
    <div class="lnsp">${STEPS.map(s=>`<div class="lnsq"><b>${s[0]}</b><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("")}</div>
    <div class="lntk"><div>${tk}${tk}</div></div>
@@ -9483,6 +9494,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
   const lg=o.querySelector(".lnlg");lg.textContent=SG&&SG.lang=="en"?"FR":"EN";
   lg.onclick=()=>{try{const t=document.createElement("button");t.dataset.a="lang";t.dataset.t=SG.lang=="en"?"fr":"en";t.style.display="none";document.body.appendChild(t);t.click();t.remove()}catch(e){}open()};
   o.querySelector(".lnplay").onclick=card;
+  const lc=o.querySelector(".lncont");if(lc)lc.onclick=()=>window.pcLoginModal&&window.pcLoginModal();
   o.querySelector(".lndc").onclick=()=>{const u=url();if(u)window.open(u,"_blank","noopener")}}
  const tryOpen=()=>{try{if(get()&&!window.PID_LAND_FORCE)return;if(!fresh()){set();return}open()}catch(e){}};
  setTimeout(tryOpen,700);
@@ -9493,6 +9505,67 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
  const mk=()=>{try{if(!G.avm||!G.avi||key===G.avi)return;key=G.avi;small="";const im=new Image();
   im.onload=()=>{try{const c=document.createElement("canvas");c.width=c.height=64;const x=c.getContext("2d");x.fillStyle="#0e1440";x.fillRect(0,0,64,64);x.drawImage(im,0,0,64,64);small=c.toDataURL("image/jpeg",.72);if(typeof lbPush=="function")lbPush(true)}catch(e){}};im.src=G.avi}catch(e){}};
  lbDoc=function(){const d=f.apply(this,arguments);mk();if(d&&d.ai)d.ai=small||"";return d};
+})();
+/* ===== v150 : comptes en ligne (pseudo + mot de passe) + sauvegarde dans le cloud ===== */
+(function(){
+ const API=(window.PID_API||"").replace(/\/$/,"");
+ const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+ const ER={taken:LS("Ce pseudo est déjà pris.","This name is already taken."),name:LS("Pseudo : 2 à 16 caractères (lettres, chiffres, espace, - _).","Name: 2 to 16 characters (letters, digits, space, - _)."),pw:LS("Mot de passe : 4 caractères minimum.","Password: 4 characters minimum."),bad:LS("Pseudo ou mot de passe incorrect.","Wrong name or password."),rate:LS("Trop d'essais, réessaie dans une minute.","Too many tries, retry in a minute."),size:LS("Sauvegarde trop grosse.","Save too large."),full:LS("Serveur plein.","Server full."),id:LS("Identifiant invalide, recharge la page.","Invalid id, reload the page.")};
+ async function post(act,body,tok){
+  try{const h={"Content-Type":"application/json"};if(tok)h["X-Token"]=tok;
+   const r=await fetch(API+"/api/acc/"+act,{method:"POST",headers:h,body:JSON.stringify(body)});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}
+  catch(e){return{e:"net",st:0}}}
+ const msg=j=>ER[j.e]||LS("Serveur injoignable, réessaie plus tard.","Server unreachable, try again later.");
+ const acc=()=>ls("pid_acc");
+ let last="";
+ async function push(force){
+  const a=acc();if(!API||!a||NOSAVE)return false;
+  try{save()}catch(e){}
+  const s=ls(SK);if(!s||(!force&&s===last))return false;
+  const j=await post("save",{name:a,save:s},ls("pid_tok"));
+  if(j.ok){last=s;ls("pid_sync",String(Date.now()));return true}
+  return false}
+ async function register(name,pw){
+  try{save()}catch(e){}
+  const j=await post("register",{name,pw,uid:ls("pid_uid"),save:ls(SK)||""},ls("pid_tok"));
+  if(j.ok){ls("pid_acc",name);last=ls(SK)||"";ls("pid_sync",String(Date.now()))}
+  return j}
+ async function login(name,pw){
+  const j=await post("login",{name,pw});
+  if(!j.ok)return j;
+  NOSAVE=true;
+  ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");
+  if(j.save)ls("idle3",j.save);
+  setTimeout(()=>location.reload(),150);
+  return j}
+ window.pcRegister=register;window.pcLogin=login;window.pcOn=!!API;
+ function modal(html){const o=document.createElement("div");o.id="lndp";o.style.zIndex=100020;o.innerHTML='<div class="tcm"><button class="tcx" aria-label="x">×</button>'+html+'</div>';document.body.appendChild(o);
+  o.querySelector(".tcx").onclick=()=>o.remove();o.addEventListener("click",e=>{if(e.target==o)o.remove()});return o}
+ window.pcLoginModal=function(){
+  if(!API)return;
+  const o=modal(`<div class="tcc"><div class="tcn"><small>${LS("COMPTE EN LIGNE","ONLINE ACCOUNT")}</small><b>${LS("Continuer ma partie","Continue my game")}</b></div></div>
+  <label for="pcn">${LS("Pseudo","Name")}</label><input id="pcn" maxlength="16" autocomplete="username" spellcheck="false">
+  <label for="pcp">${LS("Mot de passe","Password")}</label><input id="pcp" type="password" autocomplete="current-password">
+  <div class="tce" id="pce"></div><button class="go tcg">${LS("Retrouver ma partie","Load my game")}</button>`);
+  const n=o.querySelector("#pcn"),p=o.querySelector("#pcp"),e=o.querySelector("#pce"),b=o.querySelector(".tcg");setTimeout(()=>n.focus(),60);
+  const go=async()=>{const nm=n.value.trim();if(nm.length<2||p.value.length<4){e.textContent=LS("Entre ton pseudo et ton mot de passe.","Enter your name and password.");return}
+   b.disabled=true;e.textContent="...";const j=await login(nm,p.value);if(!j.ok){b.disabled=false;e.textContent=msg(j)}else e.textContent=LS("Partie trouvée, chargement...","Game found, loading...")};
+  b.onclick=go;p.addEventListener("keydown",k=>{if(k.key=="Enter")go()})};
+ window.pidAccBox=function(){
+  const a=acc(),t=+ls("pid_sync")||0,when=t?new Date(t).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):"";
+  if(a)return `<div class="accn"><div><b>${a}</b><small>${LS("Sauvegarde en ligne active","Online save active")}${when?" · "+when:""}</small></div><button class="mini" data-pc="out">${LS("Déconnexion","Sign out")}</button></div><div class="row"><button class="go" data-pc="sync">${LS("Sauvegarder maintenant","Save now")}</button></div>`;
+  return `<div class="accf"><small>${LS("Crée un compte pour reprendre ta partie sur un autre appareil.","Create an account to continue your game on another device.")}</small><input type="text" id="pcn" maxlength="16" placeholder="${LS("Pseudo","Name")}" value="${(G.name&&G.name!="Dresseur"?G.name:"").replace(/["<>&]/g,"")}" autocomplete="username"><input type="password" id="pcp" placeholder="${LS("Mot de passe (4 car. min.)","Password (4 chars min.)")}" autocomplete="new-password"><div class="row"><button class="go" data-pc="reg">${LS("Créer le compte","Create account")}</button><button data-pc="log">${LS("Se connecter","Sign in")}</button></div><small>${LS("Se connecter remplace la partie de cet appareil.","Signing in replaces the game on this device.")}</small></div>`};
+ document.addEventListener("click",async ev=>{
+  const b=ev.target.closest&&ev.target.closest("[data-pc]");if(!b)return;
+  const k=b.dataset.pc,n=document.getElementById("pcn"),p=document.getElementById("pcp");
+  if(k=="out"){try{await push(true)}catch(e){}NOSAVE=true;ls("pid_acc",null);ls("pid_sync",null);location.reload();return}
+  if(k=="sync"){b.disabled=true;const ok=await push(true);b.disabled=false;toast(ok?LS("Sauvegarde envoyée","Save sent"):LS("Échec de la sauvegarde","Save failed"));try{show()}catch(e){}return}
+  if(!n||!p)return;const nm=n.value.trim();
+  if(k=="reg"){b.disabled=true;const j=await register(nm,p.value);b.disabled=false;if(j.ok){G.name=G.name&&G.name!="Dresseur"?G.name:nm;try{save()}catch(e){}toast(LS("Compte créé, ta partie est sauvegardée en ligne","Account created, your game is saved online"))}else{toast(msg(j));try{sfx("err")}catch(e){}}try{show()}catch(e){}return}
+  if(k=="log"){b.disabled=true;const j=await login(nm,p.value);if(!j.ok){b.disabled=false;toast(msg(j));try{sfx("err")}catch(e){}}else toast(LS("Partie trouvée, chargement...","Game found, loading..."))}});
+ if(API){setInterval(()=>{if(!document.hidden)push(false)},90000);
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)push(false)});
+  setTimeout(()=>push(false),8000)}
 })();
 
 /* ============ DÉMARRAGE ============ */
