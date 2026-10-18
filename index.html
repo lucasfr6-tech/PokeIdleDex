@@ -3258,8 +3258,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="aeb168d100"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=aeb168d100"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5129548efc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5129548efc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4158,7 +4158,7 @@ function vSetg(){const acc=accNow();return `<div class="stg">
  <div class="box scd"><h3>${ico("monitor")} Affichage</h3>${fsBtn()}<div class="seg th"><button class="${SG.theme=="night"?"on":""}" data-a="theme" data-t="night"><i class="tn"></i>${ico("moon")} Nuit</button><button class="${SG.theme=="day"?"on":""}" data-a="theme" data-t="day"><i class="td"></i>${ico("sun")} Jour</button></div>
   ${tgl("perf","Mode performance (moins d'effets)","bolt")}${tgl("fly","Pokémon dans le ciel","wind")}${tgl("stars","Étoiles filantes","star")}${tgl("anim","Animations de l'interface","spark")}${tgl("alert","Alertes de spawn rare","crown")}${tgl("cmp","Affichage compact","team")}${sld("ui","Taille de l'interface","monitor",80,120," %")}</div>
  ${vNf()}${vBk()}<div class="box scd"><h3>${ico("key")} Compte</h3>${window.pcOn&&window.pidAccBox?window.pidAccBox():acc?`<div class="accn">${ico("user")}<div><b>${acc}</b><small>Compte local actif</small></div><button class="mini" data-a="alogout">Déconnexion</button></div>`:`<div class="accf"><input type="email" id="acm" placeholder="E-mail" autocomplete="email"><input type="password" id="acp" placeholder="Mot de passe (6 car. min.)" autocomplete="current-password"><div class="row"><button class="go" data-a="alogin">Connexion</button><button data-a="acreate">Créer le compte</button></div></div>`}
-  <div class="oauth"><button disabled title="Nécessite un serveur d'authentification">${ico("globe")} Google</button><button disabled title="Nécessite un serveur d'authentification">${ico("user")} Discord</button></div>
+  <div class="oauth"><button disabled title="Nécessite un serveur d'authentification">${ico("globe")} Google</button><button data-dc="go" title="Continuer avec Discord">${ico("user")} Discord</button></div>
   <div class="accs">${LB.ok?`${ico("wifi")} Classement en ligne actif`:`${ico("wifioff")} Classement en ligne indisponible ici`}</div></div>
  <div class="box scd"><h3>${ico("download")} Sauvegarde</h3><div class="row"><button data-a="expsv">${ico("download")} Exporter</button><button data-a="impsv">${ico("upload")} Importer</button></div><textarea id="imp" placeholder="Colle ici ton code de sauvegarde" rows="2"></textarea></div></div>${vSet()}`}
 /* ---------- prestige : visuel ---------- */
@@ -10053,9 +10053,6 @@ const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null
 const IC='';
 const rnd=()=>Array.from(crypto.getRandomValues(new Uint8Array(12))).map(x=>x.toString(16).padStart(2,"0")).join("");
 const btn=lab=>`<button class="go dcbtn" data-dc="go">${IC}${lab}</button>`;
-const _ab=window.pidAccBox;
-window.pidAccBox=function(){const h=_ab?_ab.apply(this,arguments):"";const a=ls("pid_acc");
- return h+`<div class="dcbx"><small>${a?LS("Lie ton compte à Discord pour te reconnecter en un clic.","Link your account to Discord to sign in with one click."):LS("Ou continue directement avec Discord, sans mot de passe.","Or continue with Discord, no password.")}</small>${btn(a?LS("Lier Discord","Link Discord"):LS("Continuer avec Discord","Continue with Discord"))}</div>`};
 const _lm=window.pcLoginModal;
 if(_lm)window.pcLoginModal=function(){_lm.apply(this,arguments);const o=document.getElementById("lndp");if(o){const b=o.querySelector(".tcg");if(b)b.insertAdjacentHTML("afterend",`<div class="dcbx">${btn(LS("Continuer avec Discord","Continue with Discord"))}</div>`)}};
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-dc="go"]');if(!b)return;e.stopPropagation();
