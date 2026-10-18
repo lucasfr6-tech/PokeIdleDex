@@ -3247,8 +3247,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="021d8cbc73"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=021d8cbc73"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a5a3f245a3"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a5a3f245a3"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7596,7 +7596,7 @@ setInterval(twBg,1000);
 const TWX={rows:[],ts:0,busy:0,v:"tour",q:"",pg:1,pf:null};
 const twLvMap=tm=>{const o={};tm.forEach(id=>{if(G.col[id])o[id]=G.col[id].l});return o};
 const twSxMap=tm=>{const o={};tm.forEach(id=>{if(G.col[id]){try{ens(id);o[id]=[0,1,2,3,4,5].map(k=>calc(id,k))}catch(e){}}});return o};
-const twDoc=()=>{const t=twS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",b:t.b,bt:t.bt||0,tm:t.tm.slice(0,3),mv:pvPick(pvS().mv,t.tm),it:pvPick(pvS().it,t.tm),lv:twLvMap(t.tm),sx:twSxMap(t.tm),up:Object.values(t.up).reduce((a,b)=>a+b,0),t:Date.now()}};
+const twDoc=()=>{const t=twS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",b:t.bs|0,bt:t.bt||0,tm:t.tm.slice(0,3),mv:pvPick(pvS().mv,t.tm),it:pvPick(pvS().it,t.tm),lv:twLvMap(t.tm),sx:twSxMap(t.tm),up:Object.values(t.up).reduce((a,b)=>a+b,0),t:Date.now()}};
 let twPT=null;
 function twPush(now){if(!(LB&&LB.ok&&LB.db))return;const t=twS();if(!t.b||t.tm.length<3)return;clearTimeout(twPT);twPT=setTimeout(async()=>{try{await LB.db.doc("twr/"+LB.uid).set(twDoc())}catch(e){}},now?500:4000)}
 async function twFetch(force){if(!(LB&&LB.ok&&LB.db)||TWX.busy)return;if(!force&&Date.now()-TWX.ts<20000)return;TWX.busy=1;
@@ -9894,6 +9894,12 @@ function twAutoApply(f){const t=twS();if(!t.aa)return;const r=twPick(f);if(r&&r.
  kxI=function(s,a){try{if(!(a>0)||!isFinite(a))return a;const T=G.kls=G.kls||{p:0,o:0};
   if(PK[s]){T.p+=a;return k0(s,a)}
   if(OT[s]){const room=Math.max(0,.12/.88*T.p-T.o),b=Math.min(a,Math.floor(room+2000));T.o+=b;return k0(s,b)}}catch(e){}return k0(s,a)}}
+/* ===== saison de classement : remise a zero des classements etages / JCJ / Tower / guilde (Pokedex et chromatiques intacts) ===== */
+const RKSEASON=1;
+function rkInit(){try{if(!G||G.rks===RKSEASON)return;G.rks=RKSEASON;G.bfs=0;try{twS().bs=0}catch(e){}try{const p=pvS();p.r=PVN;p.w=0;p.l=0;p.pf=0;p.pr=0}catch(e){}try{if(G.gl&&G.gl.id){G.gl.gx=0}}catch(e){}save()}catch(e){}}
+rkInit();setTimeout(rkInit,1500);
+{const o=lbDoc;lbDoc=function(){rkInit();const d=o.apply(this,arguments);G.bfs=Math.max(G.bfs|0,G.cl|0);d.bf=G.bfs;return d}}
+{const o=twApply;twApply=function(res,f,opt){const r=o.apply(this,arguments);try{if(res=="win"){const t=twS();t.bs=Math.max(t.bs|0,f)}}catch(e){}return r}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();

@@ -44,7 +44,13 @@ let db={};try{db=JSON.parse(fs.readFileSync(DATA,'utf8'))}catch(e){db={}}
 for(const c in COLS)db[c]=db[c]||{};
 db.acc=db.acc||{};
 db.meta=db.meta||{};
-let resetChat=0;if(db.meta.chatReset!==CHAT_RESET){db.chat={};db.meta.chatReset=CHAT_RESET;resetChat=1}
+var resetChat=0;if(db.meta.chatReset!==CHAT_RESET){db.chat={};db.meta.chatReset=CHAT_RESET;resetChat=1}
+const RANK_RESET=1;
+if(db.meta.rankReset!==RANK_RESET){ // remise a zero unique : etages (lb.bf), JCJ, Tower, XP de guilde ; Pokedex et chromatiques intacts
+ for(const k in db.lb){if(db.lb[k]&&typeof db.lb[k]=='object')db.lb[k].bf=0}
+ db.pvp={};db.twr={};
+ for(const k in db.glm){if(db.glm[k]&&typeof db.glm[k]=='object')db.glm[k].gx=0}
+ db.meta.rankReset=RANK_RESET;resetChat=1}
 const pwh=(pw,salt)=>crypto.scryptSync(String(pw),salt,32).toString('hex');
 const NAME=/^[\p{L}\p{N}_ -]{2,16}$/u;
 let dirty=resetChat;const flush=()=>{if(!dirty)return;dirty=0;try{fs.writeFileSync(DATA+'.tmp',JSON.stringify(db));fs.renameSync(DATA+'.tmp',DATA)}catch(e){console.error('save',e.message)}};
