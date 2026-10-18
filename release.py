@@ -27,6 +27,8 @@ window.addEventListener("offline",function(){if(!document.getElementById("pidw")
 rep('</body>',post)
 import hashlib
 H=hashlib.md5((s+open(os.path.join(D,'config.js'),encoding='utf8').read()).encode('utf8')).hexdigest()[:10]
-rep('<script src="config.js"></script>','<script>window.PID_BUILD="'+H+'"</script><script src="config.js"></script>')
+CFG=open(os.path.join(D,'config.js'),encoding='utf8').read()
+rep('<script src="config.js"></script>','<script>window.PID_BUILD="'+H+'"</script><script>'+CFG+'</script>')
+rep('<script src="shim.js"></script>','<script src="shim.js?v='+H+'"></script>')
 open(os.path.join(D,'version.json'),'w').write('{"v":"'+H+'"}')
 open(os.path.join(D,'index.html'),'w',encoding='utf8').write(s);print('index.html',len(s))

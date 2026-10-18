@@ -3158,11 +3158,15 @@ body.lndon{overflow:hidden}
 .tcm .go{width:100%;padding:14px;font-size:16px}
 .tca{width:100%;margin-top:8px;padding:11px;border-radius:12px;background:none;border:0;color:#aab1e8;font-weight:700;cursor:pointer}
 .tcm p{margin-top:8px;text-align:center;font-size:12px;color:#7d84bb;line-height:1.45}
+
+/* v149 : bouton Tour dans la colonne de droite */
+#sc>#twh{position:relative;right:auto;top:auto;width:auto;min-width:74px;align-self:stretch;z-index:auto;margin:0 0 4px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="486ab695f8"</script><script src="config.js"></script><script src="shim.js"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2c4f74f77a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2c4f74f77a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9379,6 +9383,12 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
  rhWb=function(){let h=wb0.apply(this,arguments);try{const my=wbMy(),R=WBR.map((L,j)=>{const ok=my>=WBT[j];return `<div class="wbt ${ok?"ok":""}"><div class="wbh"><b>${LS("Palier","Tier")} ${j+1}</b><small>${fmt(WBT[j])} ${LS("dégâts","dmg")}</small>${ok?`<i>${ico("check")}</i>`:""}</div><div class="wbcp">${LS("Capture du boss","Boss capture")} : <b>${Math.round(Math.min(.95,(.03+.025*(j+1))*(BM["great-ball"]||1)*(1+.08*PL("pk")))*100)} %</b> ${LS("par lancer","per throw")}</div><div class="wbi">${L.map(([k,q])=>{if(k=="#pearl")return `<span title="${LS("Méga-Perle au hasard","Random Mega Pearl")}">${LS("Méga-Perle","Mega Pearl")} ×${q}</span>`;const it=IT[k];return it?`<span>${ic(k,it.img)}${esc(it.n)} ×${q}</span>`:""}).join("")}<span>${LS("120 Points Raid","120 Raid Points")}</span></div></div>`}).join("");
   const blk=`<div class="wbr"><b>${LS("Récompenses par palier","Rewards per tier")}</b><small>${LS("Les paliers se cumulent : atteindre le palier 3 donne aussi les paliers 1 et 2. Les récompenses arrivent dans ton courrier. Si le boss est vaincu, tu reçois 3 Super Balls pour tenter de le capturer : plus ton palier est haut, plus la chance est grande.","Tiers stack: reaching tier 3 also gives tiers 1 and 2. Rewards arrive in your mail. If the boss is defeated you get 3 Great Balls to try to catch it: the higher your tier, the better the odds.")}</small><div class="wbg">${R}</div></div>`;
   const i=h.lastIndexOf("</section>");if(i>0)h=h.slice(0,i)+blk+h.slice(i)}catch(e){}return h};
+})();
+
+/* colonne de droite : le bouton Tour rejoint la colonne (plus de chevauchement avec Courrier / Amis / Chat) */
+(function(){
+ const fix=()=>{try{const sc=document.getElementById("sc"),t=document.getElementById("twh");if(!sc||!t)return;if(t.parentElement!==sc)sc.insertBefore(t,sc.firstChild)}catch(e){}};
+ setInterval(fix,700);setTimeout(fix,500);
 })();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
