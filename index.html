@@ -3248,8 +3248,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="44b100ead5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=44b100ead5"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2a0b51b279"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2a0b51b279"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8011,7 +8011,7 @@ function glState(){const now=Date.now();if(GLX.st&&now-GLX.stt<700)return GLX.st
  if(mine){st.isLead=mine.lead.id==glMe();const w=glBossPlan(mine);st.boss=w}
  GLX.st=st;GLX.stt=now;return st}
 /* ---------- boss de guilde ---------- */
-function glBossPlan(M){const wk=glWk(Date.now()),sp=GLBS[glH(M.gd.id+wk)%GLBS.length],pwS=M.v.reduce((a,m)=>a+(m.pw||0),0),hp=Math.max(4e6,Math.floor(pwS/Math.max(1,M.v.length)*630*8*(1+.04*M.lv)));
+function glBossPlan(M){const wk=glWk(Date.now()),sp=GLBS[glH(M.gd.id+wk)%GLBS.length],pwS=M.v.reduce((a,m)=>a+(m.pw||0),0),hp=Math.max(2e6,Math.floor(pwS/Math.max(1,M.v.length)*630*8*.78*(.55+.12*M.lv)));
  const dm=M.v.map(m=>({id:m.id,n:m.n,av:m.av,avs:m.avs,d:m.bs&&m.bs.wk==wk?m.bs.dmg||0:0})).sort((a,b)=>b.d-a.d),tot=dm.reduce((a,b)=>a+b.d,0);
  return{wk,sp,hp,dm,tot,dead:tot>=hp,end:glDs(wk)+7*864e5}}
 const glLeft=()=>{const g=glS();glRoll();return Math.max(0,3-(g.bs.dn||0))};
