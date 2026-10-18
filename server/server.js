@@ -58,6 +58,10 @@ setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});proc
 /* guildes vides : supprimees automatiquement (aucun membre, doc inchange depuis 1 h) */
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
 setInterval(gldClean,6e5);setTimeout(gldClean,15000);
+/* connexion Discord (OAuth2) : le secret reste dans l'environnement du serveur (DISCORD_SECRET), jamais dans le jeu */
+const DC_ID=process.env.DISCORD_ID||'1561441130355237014',DC_SECRET=process.env.DISCORD_SECRET||'',DC_RED='https://api.pokeidledex.com/api/oauth/discord',SITE=process.env.SITE_URL||'https://pokeidledex.com';
+const pendO=new Map();setInterval(()=>{const n=Date.now();pendO.forEach((v,k)=>{if(n-v.ts>6e5)pendO.delete(k)})},6e4);
+const hreq=(url,opt,body)=>new Promise((ok,ko)=>{const r=require('https').request(url,opt,s=>{let x='';s.on('data',c=>x+=c);s.on('end',()=>{try{ok(JSON.parse(x))}catch(e){ko(new Error('json'))}})});r.on('error',ko);r.setTimeout(8000,()=>r.destroy(new Error('timeout')));if(body)r.write(body);r.end()});
 const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
@@ -70,6 +74,17 @@ http.createServer((req,res)=>{
  if(req.method=='OPTIONS'){send(res,204,{});return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
 
+ if(u.pathname=='/api/oauth/discord'&&req.method=='GET'){
+  const back=q=>{res.writeHead(302,{Location:SITE+'/?'+q});res.end()};
+  const code=u.searchParams.get('code')||'',st=u.searchParams.get('state')||'';
+  if(limited(ip+'o',20)||!code||!/^[A-Za-z0-9]{16,64}$/.test(st)||!DC_SECRET){back('dcerr=1');return}
+  (async()=>{try{
+   const tk=await hreq('https://discord.com/api/oauth2/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'}},new URLSearchParams({client_id:DC_ID,client_secret:DC_SECRET,grant_type:'authorization_code',code,redirect_uri:DC_RED}).toString());
+   if(!tk.access_token){back('dcerr=2');return}
+   const me=await hreq('https://discord.com/api/users/@me',{headers:{Authorization:'Bearer '+tk.access_token}});
+   if(!me.id){back('dcerr=3');return}
+   pendO.set(st,{id:String(me.id),un:String(me.global_name||me.username||'Dresseur'),ts:Date.now()});back('dc='+st)
+  }catch(e){back('dcerr=4')}})();return}
  if(u.pathname.startsWith('/api/acc/')&&req.method=='POST'){
   const act=u.pathname.slice(9);
   if(limited(ip+'a',12)){send(res,429,{e:'rate'});return}
@@ -94,6 +109,17 @@ http.createServer((req,res)=>{
     if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
     if(typeof d.save!='string'||d.save.length>=MAXSAVE){send(res,400,{e:'size'});return}
     a.save=d.save;a.t=Date.now();dirty=1;send(res,200,{ok:1});return}
+   if(act=='oauth'){
+    const p=pendO.get(String(d.state||''));if(!p){send(res,400,{e:'state'});return}pendO.delete(String(d.state));
+    for(const kk in db.acc){const a=db.acc[kk];if(a.dc==p.id){send(res,200,{ok:1,exists:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||''});return}}
+    if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a.dc){a.dc=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
+    if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
+    if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
+    let base=p.un.replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,' ').trim().slice(0,12);if(base.length<2||pidCensor(base)!==base)base='Dresseur';
+    let n2=base,i=0;while(db.acc[n2.toLowerCase()]){i++;n2=base+(1000+Math.floor(Math.random()*9000))}
+    const salt=crypto.randomBytes(12).toString('hex');
+    db.acc[n2.toLowerCase()]={n:n2,salt,ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',dc:p.id,t:Date.now()};dirty=1;
+    send(res,200,{ok:1,created:1,name:n2});return}
    send(res,404,{e:'act'})});
   return}
  const m=/^\/api\/(c|d)\/(\w+)(?:\/([^/]+))?$/.exec(u.pathname);
