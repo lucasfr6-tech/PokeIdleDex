@@ -3079,11 +3079,38 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 @media(max-width:900px){.wbg{grid-template-columns:1fr 1fr}}
 .mlhint{color:#94a3b8;font-size:12px}.mlhint .mlclr{display:inline;margin-left:6px;color:#fbbf24}
 .wbcp{font-size:11.5px;color:#a5b4fc;background:#6366f114;border-radius:8px;padding:3px 7px}.wbcp b{color:#c7d2fe}
+
+/* v148 : cadeau de bienvenue animé + alerte de mise à jour */
+#wmr{position:fixed;inset:0;z-index:100003;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#2a2160ee 0,#0a0b1cf5 70%);backdrop-filter:blur(4px)}
+#wmr.on{display:flex}
+.wmbox{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100vw;padding:12px}
+.wmt{font-size:22px;font-weight:800;color:#fde68a;letter-spacing:.5px;text-align:center}
+.wmst{position:relative;max-width:96vw;max-height:70vh;display:flex;align-items:center;justify-content:center}
+.wmgl{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,#fde68a66,#ff3b4f22 55%,transparent 72%);animation:wmpulse 1.4s ease-in-out infinite}
+.wms{position:absolute;left:50%;top:50%;margin:-0px 0 0 0;display:flex;align-items:center;justify-content:center;will-change:transform,filter;translate:-50% -50%}
+.wms img,.wmfin img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.wmfin{position:absolute;left:50%;top:50%;translate:-50% -50%;opacity:0;transform:scale(.2);display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 0 30px #fde68a)}
+.wmfin.show{animation:wmin .7s cubic-bezier(.2,1.4,.4,1) forwards}
+.wmst.flash::after{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,#fff,#fff0 60%);animation:wmflash .8s ease-out forwards;pointer-events:none}
+.wmres{text-align:center;opacity:0;transform:translateY(10px);transition:.5s;min-height:120px}
+.wmres.show{opacity:1;transform:none}
+.wmn{font-size:34px;font-weight:900;color:#fff}
+.wmsh{display:inline-block;margin:6px 0 14px;padding:4px 16px;border-radius:99px;background:linear-gradient(90deg,#fde68a,#fbbf24);color:#422006;font-weight:800;letter-spacing:1px}
+.wmok{min-width:160px}
+@keyframes wmpulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.1);opacity:1}}
+@keyframes wmin{to{opacity:1;transform:scale(1)}}
+@keyframes wmflash{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.4)}}
+#upd{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:100002;display:flex;align-items:center;gap:12px;max-width:min(560px,94vw);padding:12px 14px;border-radius:16px;background:#1e1b4bf2;border:1px solid #6366f1;box-shadow:0 10px 40px #000a;color:#fff;animation:updin .4s ease}
+#upd span{display:flex;flex-direction:column;gap:2px}#upd small{opacity:.8;font-size:12px}
+#upd .go{white-space:nowrap}#upd .updx{background:none;border:0;color:#fff;font-size:22px;opacity:.7;cursor:pointer;padding:0 4px}
+@keyframes updin{from{opacity:0;transform:translate(-50%,20px)}}
+.wmres{display:flex;flex-direction:column;align-items:center;margin-top:-70px;position:relative;z-index:2}
+.wmsh{display:block}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script src="config.js"></script><script src="shim.js"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3abcfa550a"</script><script src="config.js"></script><script src="shim.js"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9250,7 +9277,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
  const GI=P('<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18v-3H3zM12 6v14M12 6c-1-3-5-3-4.5 0M12 6c1-3 5-3 4.5 0"/>');
  let ST={code:"",msg:""};
  const when=t=>{const d=new Date(t),n=Date.now(),m=Math.floor((n-t)/6e4);if(m<1)return LS("À l'instant","Just now");if(m<60)return LS("Il y a "+m+" min",m+" min ago");if(m<1440)return LS("Il y a "+Math.floor(m/60)+" h",Math.floor(m/60)+" h ago");return d.toLocaleDateString(SG&&SG.lang=="en"?"en-GB":"fr-FR",{day:"numeric",month:"short"})};
- const chips=rw=>rw.map(r=>{try{return bpChip(r)}catch(e){return""}}).join("");
+ const chips=rw=>rw.map(r=>{try{if(r[0]=="wm")return `<span class="qr bpbg">${ico("crown")}<span><b>${LS("Pokémon chromatique","Shiny Pokémon")}</b><small>${LS("aléatoire, starter ou autre bon Pokémon","random starter or other strong Pokémon")}</small></span></span>`;return bpChip(r)}catch(e){return""}}).join("");
  const root=()=>{let o=document.getElementById("mlr");if(!o){o=document.createElement("div");o.id="mlr";document.body.appendChild(o)}return o};
  const body=()=>{const L=mailBox(),un=L.filter(m=>!m.c).length;
   return `<div class="mlm"><button class="nwx" data-ml="x" aria-label="${LS("Fermer","Close")}">${P('<path d="M6 6l12 12M18 6L6 18"/>')}</button>
@@ -9260,13 +9287,13 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
  const render=()=>{const o=document.getElementById("mlr");if(o&&o.className=="on")o.innerHTML=body()};
  function mailOpen(){ST.msg="";const o=root();o.className="on";o.innerHTML=body()}
  function mailClose(){const o=document.getElementById("mlr");if(o){o.className="";o.innerHTML=""}}
- async function claim(m){if(!m||m.c)return;m.c=1;save();try{const out=await bpGive(m.rw);bpPop(m.t,LS("Courrier","Mail"),out)}catch(e){}save();mailDot();render();try{ui()}catch(e){}}
+ async function claim(m){if(!m||m.c)return;if(m.wm&&window.wmClaim){mailClose();window.wmClaim(m);return}m.c=1;save();try{const out=await bpGive(m.rw);bpPop(m.t,LS("Courrier","Mail"),out)}catch(e){}save();mailDot();render();try{ui()}catch(e){}}
  window.mailOpen=mailOpen;
  document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-ml]");if(!t)return;const k=t.dataset.ml;
   if(k=="open"){mailOpen();return}
   if(k=="x"){mailClose();return}
   if(k=="c"){await claim(mailBox().find(m=>m.id==t.dataset.i))}
-  else if(k=="all"){const L=mailBox().filter(m=>!m.c&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await bpGive(m.rw))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
+  else if(k=="all"){const L=mailBox().filter(m=>!m.c&&!m.wm&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await bpGive(m.rw))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
   else if(k=="disc"){const u=window.PID_DISCORD||BUG_URL;if(u)window.open(u,"_blank","noopener")}
   else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
@@ -9284,7 +9311,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   b.innerHTML=`<span class="qki" style="--c1:#f59e0b;--c2:#c2410c">${MI}</span><span class="qkt"><b>${LS("Courrier","Mail")}</b><small></small></span>`;c.insertBefore(b,c.firstChild);mailDot()}catch(e){}};
  setInterval(add,1000);setTimeout(add,400);
  /* message de bienvenue pour une partie neuve */
- setTimeout(()=>{try{if(!G.mailw){G.mailw=1;if(!mailBox().length&&(G.caps||0)<30)mailAdd(LS("Bienvenue sur PokeIdleDex","Welcome to PokeIdleDex"),"PokeIdleDex",[],LS("Les récompenses du boss monde, des défis de guilde et tes codes cadeaux arriveront ici.","World boss, guild challenge rewards and your gift codes will arrive here."));save()}}catch(e){}},2500);
+ setTimeout(()=>{try{if(!G.mailw){G.mailw=1;if(!mailBox().length&&(G.caps||0)<30){mailAdd(LS("Bienvenue sur PokeIdleDex","Welcome to PokeIdleDex"),"PokeIdleDex",[["wm"]],LS("Voici ton premier Pokémon, et il est chromatique ! Récupère-le pour découvrir lequel. Les récompenses du boss monde, des défis de guilde et tes codes cadeaux arriveront aussi ici.","Here is your first Pokémon, and it is shiny! Claim it to find out which one. World boss, guild challenge rewards and your gift codes will also arrive here."));mailBox()[0].wm=1}save();try{mailDot()}catch(e){}}}catch(e){}},2500);
 
  /* défis de guilde : la récompense arrive par courrier */
  glClaim=async function(ch){const g=glS();if(!ch.done||g.cl[ch.id]||!ch.mine)return;g.cl[ch.id]=1;g.gx+=ch.per=="d"?80:300;
@@ -9300,6 +9327,51 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
  rhWb=function(){let h=wb0.apply(this,arguments);try{const my=wbMy(),R=WBR.map((L,j)=>{const ok=my>=WBT[j];return `<div class="wbt ${ok?"ok":""}"><div class="wbh"><b>${LS("Palier","Tier")} ${j+1}</b><small>${fmt(WBT[j])} ${LS("dégâts","dmg")}</small>${ok?`<i>${ico("check")}</i>`:""}</div><div class="wbcp">${LS("Capture du boss","Boss capture")} : <b>${Math.round(Math.min(.95,(.03+.025*(j+1))*(BM["great-ball"]||1)*(1+.08*PL("pk")))*100)} %</b> ${LS("par lancer","per throw")}</div><div class="wbi">${L.map(([k,q])=>{if(k=="#pearl")return `<span title="${LS("Méga-Perle au hasard","Random Mega Pearl")}">${LS("Méga-Perle","Mega Pearl")} ×${q}</span>`;const it=IT[k];return it?`<span>${ic(k,it.img)}${esc(it.n)} ×${q}</span>`:""}).join("")}<span>${LS("120 Points Raid","120 Raid Points")}</span></div></div>`}).join("");
   const blk=`<div class="wbr"><b>${LS("Récompenses par palier","Rewards per tier")}</b><small>${LS("Les paliers se cumulent : atteindre le palier 3 donne aussi les paliers 1 et 2. Les récompenses arrivent dans ton courrier. Si le boss est vaincu, tu reçois 3 Super Balls pour tenter de le capturer : plus ton palier est haut, plus la chance est grande.","Tiers stack: reaching tier 3 also gives tiers 1 and 2. Rewards arrive in your mail. If the boss is defeated you get 3 Great Balls to try to catch it: the higher your tier, the better the odds.")}</small><div class="wbg">${R}</div></div>`;
   const i=h.lastIndexOf("</section>");if(i>0)h=h.slice(0,i)+blk+h.slice(i)}catch(e){}return h};
+})();
+/* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
+const WMPOOL=[3,6,9,154,157,160,254,257,260,389,392,395,497,500,503,652,655,658,724,727,730,812,815,818,908,911,914,25,94,130,131,143,149,248,282,376,445,448];
+(function(){
+ const pool=()=>WMPOOL.filter(i=>true);
+ const root=()=>{let o=document.getElementById("wmr");if(!o){o=document.createElement("div");o.id="wmr";document.body.appendChild(o)}return o};
+ const grant=id=>{const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());c.sh=1;ens(id);G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);recomp();return c};
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ let busy=0;
+ window.wmClaim=async function(m){if(busy||!m||m.c)return;busy=1;
+  const P=pool(),fin=P[Math.random()*P.length|0],o=root();
+  o.className="on";o.innerHTML=`<div class="wmbox"><div class="wmt">${LS("Un cadeau t'attend…","A gift awaits…")}</div></div>`;
+  try{await preload(P)}catch(e){}
+  /* le Pokémon est attribué tout de suite : fermer la fenêtre ne le fait pas perdre */
+  try{grant(fin);m.c=1;save();try{mailDot()}catch(e){}}catch(e){m.c=0;o.className="";o.innerHTML="";busy=0;return}
+  const N=10,R=Math.min(Math.round(innerWidth*.34),230),size=Math.round(R*.62);
+  const pick=()=>P[Math.random()*P.length|0];
+  o.innerHTML=`<div class="wmbox"><div class="wmt" id="wmt">${LS("Un cadeau t'attend…","A gift awaits…")}</div><div class="wmst" style="width:${R*2+size}px;height:${R*2+size}px"><div class="wmgl"></div>${Array.from({length:N},(_,i)=>`<div class="wms" data-i="${i}" style="width:${size}px;height:${size}px">${sp(pick(),1)}</div>`).join("")}<div class="wmfin" id="wmfin" style="width:${size*1.6}px;height:${size*1.6}px">${sp(fin,1)}</div></div><div class="wmres" id="wmres"></div></div>`;
+  const S=[...o.querySelectorAll(".wms")],box=o.querySelector(".wmst"),T=3600;let t0=0,ang=0,last=0,done=0;
+  const frame=t=>{if(!t0){t0=t;last=t}const e=t-t0,dt=Math.min(50,t-last);last=t;const k=Math.min(1,e/T);
+   const v=.9*(1-k)*(1-k)*(1-k)+.02;ang+=v*dt;const bl=Math.max(0,9*(1-k)-.5),rr=R*(1-.12*k*k);
+   S.forEach((n,i)=>{const a=(ang+i*360/N)*Math.PI/180;n.style.transform=`translate(${Math.cos(a)*rr}px,${Math.sin(a)*rr}px) scale(${1-.35*k})`;n.style.filter=`blur(${bl}px)`;n.style.opacity=String(1-.85*k*k)});
+   if(e<T&&document.getElementById("wmr")){requestAnimationFrame(frame);return}
+   /* révélation */
+   const f=document.getElementById("wmfin"),r=document.getElementById("wmres");if(!f||!r)return;
+   S.forEach(n=>n.style.opacity="0");box.classList.add("flash");f.classList.add("show");
+   r.innerHTML=`<div class="wmn">${esc(dn(fin))}</div><div class="wmsh">${LS("Chromatique","Shiny")}</div><button class="go wmok" id="wmok">${LS("Super !","Great!")}</button>`;r.classList.add("show");
+   const tt=document.getElementById("wmt");if(tt)tt.textContent=LS("Ton premier Pokémon","Your first Pokémon");
+   try{sfx("prest")}catch(x){}
+   const ok=document.getElementById("wmok");if(ok)ok.onclick=()=>{o.className="";o.innerHTML="";busy=0;try{mailDot()}catch(x){};try{tab="col"}catch(x){};try{show()}catch(x){};save()}};
+  requestAnimationFrame(frame)};
+})();
+
+/* ===== alerte de mise à jour (site public uniquement : version.json comparé à la version chargée) ===== */
+(function(){
+ const B=window.PID_BUILD;if(!B||location.protocol.indexOf("http")!==0)return;
+ let shown=0;
+ const show1=()=>{if(shown)return;shown=1;const d=document.createElement("div");d.id="upd";
+  d.innerHTML=`<span><b>${LS("Mise à jour disponible","Update available")}</b><small>${LS("Recharge pour profiter des nouveautés. Ta progression est conservée.","Reload to get the latest changes. Your progress is kept.")}</small></span><button class="go" id="updgo">${LS("Recharger","Reload")}</button><button class="updx" id="updx" aria-label="${LS("Plus tard","Later")}">×</button>`;
+  document.body.appendChild(d);
+  document.getElementById("updgo").onclick=()=>{try{save()}catch(e){}location.reload()};
+  document.getElementById("updx").onclick=()=>{d.remove();setTimeout(()=>{shown=0},10*60*1000)}};
+ const chk=async()=>{if(shown)return;try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(j&&j.v&&j.v!==B)show1()}catch(e){}};
+ setInterval(chk,5*60*1000);setTimeout(chk,60*1000);
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden)chk()});
 })();
 
 /* ============ DÉMARRAGE ============ */

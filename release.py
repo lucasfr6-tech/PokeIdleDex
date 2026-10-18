@@ -25,4 +25,8 @@ else{try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persi
 if("serviceWorker"in navigator&&location.protocol.indexOf("http")===0&&!window.PID_OLD){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
 window.addEventListener("offline",function(){if(!document.getElementById("pidw"))warn("Tu es hors ligne : le jeu continue, mais images et classement peuvent manquer.")})})()</script></body>'''
 rep('</body>',post)
+import hashlib
+H=hashlib.md5(s.encode('utf8')).hexdigest()[:10]
+rep('<script src="config.js"></script>','<script>window.PID_BUILD="'+H+'"</script><script src="config.js"></script>')
+open(os.path.join(D,'version.json'),'w').write('{"v":"'+H+'"}')
 open(os.path.join(D,'index.html'),'w',encoding='utf8').write(s);print('index.html',len(s))
