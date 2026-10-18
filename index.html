@@ -3441,8 +3441,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9416e4d7ab"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=9416e4d7ab"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5911c6df71"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5911c6df71"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10124,7 +10124,7 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
 /* ===== identifiant joueur (#1234567) + ordres d'administration du créateur ===== */
 const pidOf=u=>{let h=2166136261;for(const c of String(u||"")){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return "#"+(1000000+h%9000000)};
 const myPid=()=>pidOf((LB&&LB.uid)||(G.fd&&G.fd.id)||"");
-const ADM_SET=new Set(["name","st","pt","pp","bf","tt","fl","cl"]);
+const ADM_SET=new Set(["name","m","st","pt","pp","bf","tt","fl","cl"]);
 function admApply(c){try{
  switch(c.op){
   case"coin":if(isFinite(c.n))G.m=Math.max(0,(G.m||0)+c.n);break;
