@@ -3338,8 +3338,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6157b7b436"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=6157b7b436"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3946439496"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=3946439496"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10303,13 +10303,13 @@ NAV2.push(["town","town","Hôtel de ville","#f59e0b","#78350f"]);NENG.town="Town
 const TNLS=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 const TNMAX=30,tnNeed=n=>n<=1?0:Math.floor(2*Math.pow(n-1,1.6));
 const TNT=[
- {l:1,fr:"Marchand débutant",en:"Novice merchant",c:"#9aa9c8",q:2,f:10,cap:150},
- {l:5,fr:"Marchand amateur",en:"Amateur merchant",c:"#4ade80",q:4,f:8,cap:250},
- {l:10,fr:"Marchand confirmé",en:"Seasoned merchant",c:"#60a5fa",q:6,f:7,cap:400},
- {l:15,fr:"Marchand expert",en:"Expert merchant",c:"#c084fc",q:9,f:6,cap:600},
- {l:20,fr:"Maître marchand",en:"Master merchant",c:"#ffcb3d",q:12,f:5,cap:900},
- {l:25,fr:"Grand marchand",en:"Grand merchant",c:"#fb923c",q:16,f:4,cap:1300},
- {l:30,fr:"Légende du marché",en:"Market legend",c:"#ff6bd6",q:20,f:3,cap:2000}];
+ {l:1,fr:"Marchand débutant",en:"Novice merchant",c:"#9aa9c8",q:2,f:10,cap:300},
+ {l:5,fr:"Marchand amateur",en:"Amateur merchant",c:"#4ade80",q:4,f:8,cap:450},
+ {l:10,fr:"Marchand confirmé",en:"Seasoned merchant",c:"#60a5fa",q:6,f:7,cap:700},
+ {l:15,fr:"Marchand expert",en:"Expert merchant",c:"#c084fc",q:9,f:6,cap:1000},
+ {l:20,fr:"Maître marchand",en:"Master merchant",c:"#ffcb3d",q:12,f:5,cap:1500},
+ {l:25,fr:"Grand marchand",en:"Grand merchant",c:"#fb923c",q:16,f:4,cap:2200},
+ {l:30,fr:"Légende du marché",en:"Market legend",c:"#ff6bd6",q:20,f:3,cap:3200}];
 const tnTier=l=>{let t=TNT[0];TNT.forEach(x=>{if(l>=x.l)t=x});return t};
 function tnS(){const t=G.tn=G.tn||{};
  if(t.j==null)Object.assign(t,{j:0,xs:0,ap:{},m:{},h:[],st:{sold:0,bought:0,earn:0,spent:0,shop:0},d:{},q:{}});
@@ -10322,18 +10322,18 @@ function tnLvl(){const x=tnS().xs;let l=1;while(l<TNMAX&&x>=tnNeed(l+1))l++;retu
 function tnXp(n){const t=tnS(),a=tnLvl();t.xs+=n;const b=tnLvl();if(b>a){const A=tnTier(a),B=tnTier(b);setTimeout(()=>{try{sfx("prest");toast(LS("Niveau marchand "+b+(B!==A?" : "+B.fr:"")+" !","Merchant level "+b+(B!==A?": "+B.en:"")+"!"))}catch(e){}},400)}}
 const tnHist=(k,n,j)=>{const t=tnS();t.h.unshift({t:Date.now(),k,n,j});t.h.length=Math.min(t.h.length,40)};
 /* ---- valeurs estimées ---- */
-const TNB=[8,30,110,400],TNMU=[1,2,2.5,2.5,3.5,5,6],TNZ={3:2,4:4,5:10};
+const TNB=[10,40,150,500],TNMU=[1,2.5,3.5,3.5,6,10,14],TNZ={3:3,4:6,5:15};
 function tnFlags(id){const c=G.col[id]||{};return{sh:c.sh?1:0,mi:c.mi>0&&c.mi<7?c.mi:0,zi:c.zi>=3?c.zi:0,al:c.al?1:0}}
 function tnMonV(id,f){f=f||{};let r=0;try{r=pr(id)}catch(e){}
  const b=r>=4?900:TNB[Math.max(0,Math.min(3,r))];
- let m=1;if(f.sh)m*=8;if(f.mi)m*=TNMU[Math.min(6,f.mi)]||6;if(f.zi)m*=TNZ[f.zi]||2;if(f.al)m*=5;
+ let m=1;if(f.sh)m*=12;if(f.mi)m*=TNMU[Math.min(6,f.mi)]||14;if(f.zi)m*=TNZ[f.zi]||3;if(f.al)m*=8;
  return Math.max(5,Math.round(b*m))}
 function tnItV(k){const i=IT[k];if(!i)return 0;const fb=i.m?30000:i.dy||/dynamax|band|bracelet|mega|méga|pearl|perle/i.test((i.n||"")+k)?25000:3000;const p=i.p||fb;
  return Math.max(1,Math.min(900,Math.round(Math.pow(p/1000,.62)*1.4)))}
 const tnShopUnit=v=>Math.max(1,Math.floor(v*.35));
 function tnShopLeft(){const t=tnS();return Math.max(0,tnTier(tnLvl()).cap-t.d.shj)}
 const tnQuota=()=>Math.max(0,tnTier(tnLvl()).q-tnS().d.l);
-const tnMinP=v=>Math.max(1,Math.ceil(v*.5)),tnMaxP=v=>Math.max(5,Math.floor(v*5));
+const tnMinP=(v,hv)=>Math.max(1,Math.ceil(v*(hv?.75:.5))),tnMaxP=v=>Math.max(5,Math.floor(v*5));
 /* ---- ce que le joueur peut vendre ---- */
 function tnMons(){const out=[];ids().forEach(id=>{if(id>1025)return;const c=G.col[id];if(!c)return;const f=tnFlags(id),hv=f.sh||f.mi||f.zi||f.al,n=c.n|0;
  if(n-1>0)out.push({id,v:0,f:{sh:0,mi:0,zi:0,al:0},q:n-1,val:tnMonV(id,{})});
@@ -10354,8 +10354,8 @@ const tnItName=it=>it.t=="m"?dn(it.id):(IT[it.k]?IT[it.k].n:it.k)+(it.q>1?" ×"+
 /* ---- vente à la boutique ---- */
 function tnShopSell(s,q){const t=tnS();q=Math.max(1,q|0);
  const val=s.k!=null?tnItV(s.k):tnMonV(s.id,s.v?tnFlags(s.id):{}),unit=tnShopUnit(val),left=tnShopLeft();
- if(left<1){toast(LS("Plafond de ventes du jour atteint.","Daily shop limit reached."));sfx("err");return false}
- q=Math.max(1,Math.min(q,Math.floor(left/unit)));
+ q=Math.min(q,Math.floor(left/unit));
+ if(q<1){toast(unit>left?LS("Cette vente dépasserait ton plafond du jour.","This sale would exceed your daily limit."):LS("Plafond de ventes du jour atteint.","Daily shop limit reached."));sfx("err");return false}
  if(!tnTake(s,q)){toast(LS("Vente impossible.","Cannot sell."));sfx("err");return false}
  const gain=unit*q;t.j+=gain;t.d.shj+=gain;t.d.sh+=q;tnXp(.2*q);t.st.shop+=q;t.st.earn+=gain;
  tnHist("shop",s.k!=null?(IT[s.k]?IT[s.k].n:s.k)+(q>1?" ×"+q:""):dn(s.id),gain);
@@ -10468,10 +10468,10 @@ function tnSellRows(){const q=norm(TN.vq);let L;
  else L=tnItems().map(x=>Object.assign({},x,{nm:IT[x.k].n,it:{t:"i",k:x.k,q:1}}));
  L=L.filter(x=>!q||norm(x.nm).includes(q));
  const f={val:(a,b)=>b.val-a.val,name:(a,b)=>a.nm.localeCompare(b.nm,"fr"),qty:(a,b)=>(b.q||b.n)-(a.q||a.n)}[TN.vs]||((a,b)=>0);L.sort(f);return L}
-function tnRowHtml(x,i){const it=x.it,isM=it.t=="m",avail=isM?x.q:x.n,unit=tnShopUnit(x.val),left=tnShopLeft(),can=left>=1;
+function tnRowHtml(x,i){const it=x.it,isM=it.t=="m",avail=isM?x.q:x.n,unit=tnShopUnit(x.val),left=tnShopLeft(),can=unit<=left;
  return `<div class="tn-row"><div class="tn-rv">${tnVis(it)}</div><div class="tn-rb"><b>${esc(x.nm)}</b>${isM?tnRar(it):""}<div class="tn-ch">${tnChips(it)}</div><small>${isM&&!x.v?LS("Exemplaires en double","Spare copies")+" ×"+avail:isM?LS("Variante unique","Unique variant"):LS("En stock","In stock")+" ×"+fmt(avail)}</small></div>
  <div class="tn-rval"><small>${LS("Valeur estimée","Estimated value")}</small>${tnTok(x.val)}</div>
- <div class="tn-ra"><button class="${can?"go":""}" data-tn="ss:${i}" ${can?"":"disabled"}>${LS("Boutique","Shop")} <b>+${unit}</b></button><button data-tn="sm:${i}" ${tnOn()?"":"disabled"}>${LS("Marché","Market")}</button></div></div>`}
+ <div class="tn-ra"><button class="${can?"go":""}" data-tn="ss:${i}" ${can?"":"disabled"} ${can?"":`title="${LS("Dépasse ton plafond restant du jour","Exceeds your remaining daily limit")}"`}>${LS("Boutique","Shop")} <b>+${unit}</b></button><button data-tn="sm:${i}" ${tnOn()?"":"disabled"}>${LS("Marché","Market")}</button></div></div>`}
 function tnSellList(){const L=tnSellRows();TN.rows=L;
  if(!L.length)return `<div class="tn-empty">${ico("bag")}<b>${TN.vt=="m"?LS("Aucun Pokémon à vendre","No Pokémon to sell"):LS("Aucun objet à vendre","No items to sell")}</b><small>${TN.vt=="m"?LS("Tu ne peux vendre que tes doublons : la ville te laisse toujours au moins un exemplaire de chaque espèce.","You can only sell spares: you always keep at least one copy of each species."):LS("Ton sac est vide.","Your bag is empty.")}</small></div>`;
  return `<div class="tn-rows">${L.slice(0,150).map(tnRowHtml).join("")}</div>${L.length>150?`<small class="tn-more">${LS("Affine ta recherche pour voir les "+(L.length-150)+" autres.","Refine your search to see the other "+(L.length-150)+".")}</small>`:""}`}
@@ -10498,8 +10498,8 @@ function tnQuestV(){const t=tnS(),Q=tnQuests(),now=new Date(),nx=new Date(now.ge
   <div class="tn-mc">${M.L.map((L,i)=>{const k=M.g+":"+i,got=t.m[k],ok=v>=L[0];return `<button class="${got?"got":ok?"ok":""}" data-tn="mc:${M.g}:${i}" ${ok&&!got?"":"disabled"}><span>${M.lab?M.lab(L[0]):L[0]}</span><b>${got?ico("check"):"+"+L[1]}</b></button>`}).join("")}</div></div>`}).join("")}</div></section></div>`}
 /* ---- fenêtres : vente boutique, annonce, achat ---- */
 function tnPrev(s){const it=s.it;return `<div class="tn-pv"><div class="tn-rv big">${tnVis(it)}</div><div><b>${esc(tnName(it))}</b>${it.t=="m"?tnRar(it):""}<div class="tn-ch">${tnChips(it)}</div></div></div>`}
-function tnQtyMax(s,mode){const isM=s.it.t=="m",av=isM?s.q:s.n;if(mode=="mk")return isM?1:av;const u=tnShopUnit(s.val);return tnShopLeft()<1?0:Math.max(1,Math.min(av,Math.floor(tnShopLeft()/u)))}
-function tnShopOpen(i){const s=TN.rows&&TN.rows[i];if(!s)return;const mx=tnQtyMax(s,"ss");if(mx<1){toast(LS("Plafond de ventes du jour atteint.","Daily shop limit reached."));sfx("err");return}
+function tnQtyMax(s,mode){const isM=s.it.t=="m",av=isM?s.q:s.n;if(mode=="mk")return isM?1:av;const u=tnShopUnit(s.val);return Math.max(0,Math.min(av,Math.floor(tnShopLeft()/u)))}
+function tnShopOpen(i){const s=TN.rows&&TN.rows[i];if(!s)return;const mx=tnQtyMax(s,"ss");if(mx<1){toast(LS("Cette vente dépasserait ton plafond du jour.","This sale would exceed your daily limit."));sfx("err");return}
  TN.sel={mode:"ss",s,q:1};tnModal(`<button class="tn-x" data-tn="mc0">${ico("x")}</button><h3>${LS("Vendre à la boutique","Sell to the shop")}</h3>${tnPrev(s)}
  <div class="tn-fm">${s.it.t=="m"&&!s.v||s.it.t=="i"?`<label>${LS("Quantité","Quantity")}<div class="tn-qt"><button data-tn="q-">−</button><input id="tnqty" type="number" min="1" max="${mx}" value="1" data-tn="qi"><button data-tn="q+">+</button><button data-tn="qm">Max</button></div></label>`:""}
  <div class="tn-sum"><div><small>${LS("Prix unitaire (35 %)","Unit price (35 %)")}</small>${tnTok(tnShopUnit(s.val))}</div><div><small>${LS("Tu reçois","You get")}</small><span id="tnsg">${tnTok(tnShopUnit(s.val))}</span></div><div><small>${LS("Plafond restant","Limit left")}</small>${tnTok(tnShopLeft())}</div></div></div>
@@ -10511,13 +10511,13 @@ function tnMkOpen(i){const s=TN.rows&&TN.rows[i];if(!s)return;if(tnQuota()<1){to
  tnModal(`<button class="tn-x" data-tn="mc0">${ico("x")}</button><h3>${LS("Mettre en vente","List for sale")}</h3>${tnPrev(s)}
  <div class="tn-fm">${isM?"":`<label>${LS("Quantité du lot","Lot size")}<div class="tn-qt"><button data-tn="q-">−</button><input id="tnqty" type="number" min="1" max="${s.n}" value="1" data-tn="qi"><button data-tn="q+">+</button><button data-tn="qm">Max</button></div></label>`}
  <label>${LS("Ton prix","Your price")}<div class="tn-pi"><i>${ico("tntok")}</i><input id="tnpx" type="number" min="1" value="${s.val}" data-tn="pi"></div></label>
- <div class="tn-qk">${[[.8,"−20 %"],[1,LS("Estimation","Estimate")],[1.25,"+25 %"],[2,"+100 %"]].map(x=>`<button data-tn="pk:${x[0]}">${x[1]}</button>`).join("")}</div>
- <div class="tn-sum"><div><small>${LS("Estimation","Estimate")}</small><span id="tnev"></span></div><div><small id="tnfl"></small><span id="tnnet"></span></div><div><small>${LS("Annonces restantes","Listings left")}</small><b>${tnQuota()} / ${tnTier(tnLvl()).q}</b></div></div><p class="tn-hint" id="tnhint"></p></div>
+ <div class="tn-qk">${[["min",LS("Minimum","Minimum")],[1,LS("Estimation","Estimate")],[1.25,"+25 %"],[2,"+100 %"]].map(x=>`<button data-tn="pk:${x[0]}">${x[1]}</button>`).join("")}</div>
+ <div class="tn-sum"><div><small>${LS("Estimation","Estimate")}</small><span id="tnev"></span></div><div><small>${LS("Prix minimum obligatoire","Required minimum price")}</small><span id="tnmin"></span></div><div><small id="tnfl"></small><span id="tnnet"></span></div><div><small>${LS("Annonces restantes","Listings left")}</small><b>${tnQuota()} / ${tnTier(tnLvl()).q}</b></div></div><p class="tn-hint" id="tnhint"></p></div>
  <button class="go tn-big" id="tnmkok" data-tn="mkok">${LS("Mettre en vente","List it")}</button>`);tnMkUpd()}
 function tnMkUpd(){const S=TN.sel;if(!S||S.mode!="mk")return;const s=S.s,isM=s.it.t=="m",q=isM?1:S.q,est=s.val*q,px=$("tnpx");let p=Math.floor(+(px?px.value:est))||0;S.p=p;
- const lo=tnMinP(est),hi=tnMaxP(est),ok=p>=lo&&p<=hi,fee=tnTier(tnLvl()).f;
+ const hv=isM&&!!(s.it.sh||s.it.mi||s.it.zi||s.it.al),lo=tnMinP(est,hv),hi=tnMaxP(est),ok=p>=lo&&p<=hi,fee=tnTier(tnLvl()).f;const mn=$("tnmin");if(mn)mn.innerHTML=tnTok(lo);
  const a=$("tnev");if(a)a.innerHTML=tnTok(est);const b=$("tnfl");if(b)b.textContent=LS("Tu reçois (frais "+fee+" %)","You get ("+fee+" % fee)");const c=$("tnnet");if(c)c.innerHTML=tnTok(Math.floor(p*(100-fee)/100));
- const h=$("tnhint");if(h){h.textContent=ok?"":LS("Le prix doit être entre "+lo+" et "+hi+" Jetons.","Price must be between "+lo+" and "+hi+" Tokens.");h.className="tn-hint"+(ok?"":" bad")}
+ const h=$("tnhint");if(h){h.textContent=ok?"":LS("Le prix doit être entre "+lo+" (minimum) et "+hi+" Jetons.","Price must be between "+lo+" and "+hi+" Tokens.");h.className="tn-hint"+(ok?"":" bad")}
  const k=$("tnmkok");if(k)k.disabled=!ok}
 function tnBuyOpen(id){const l=(TN.list||[]).find(x=>x.id==id);if(!l)return;const t=tnS(),ok=t.j>=l.p;
  tnModal(`<button class="tn-x" data-tn="mc0">${ico("x")}</button><h3>${LS("Acheter","Buy")}</h3>${tnPrev({it:l.it})}
@@ -10532,7 +10532,7 @@ async function tnBuyOk(id){if(TN.busy)return;const l=(TN.list||[]).find(x=>x.id=
   sfx("prest");toast(LS("Acheté : ","Bought: ")+tnItName(r.it));tnModal("");show()}
  else{toast(tnErr(r));sfx("err");if(r.e=="gone"||r.e=="price"){TN.list=(TN.list||[]).filter(x=>x.id!=id);if(r.e=="price")tnLoad(true)}tnModal("");show()}}
 async function tnListOk(){const S=TN.sel;if(!S||S.mode!="mk"||TN.busy)return;const s=S.s,isM=s.it.t=="m",q=isM?1:S.q,est=s.val*q,p=S.p|0;
- if(p<tnMinP(est)||p>tnMaxP(est)||tnQuota()<1)return;
+ if(p<tnMinP(est,isM&&!!(s.it.sh||s.it.mi||s.it.zi||s.it.al))||p>tnMaxP(est)||tnQuota()<1)return;
  const it=isM?{t:"m",id:s.it.id,sh:s.it.sh,mi:s.it.mi,zi:s.it.zi,al:s.it.al,r:Math.min(5,s.it.r|0),v:est}:{t:"i",k:s.it.k,q,v:est};
  TN.busy=1;if(!tnTake(isM?{id:s.id,v:s.v}:{k:s.k},q)){TN.busy=0;toast(LS("Vente impossible.","Cannot sell."));sfx("err");return}
  save();const r=await tnReq("list",{it,p});TN.busy=0;
@@ -10557,7 +10557,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(k=="qc"){tnQClaim(+a);show()}else if(k=="mc"){tnMClaim(a,+c);show()}
  else if(k=="mc0")tnModal("")
  else if(k=="q-"||k=="q+"||k=="qm"){const el=$("tnqty");if(!el)return;const mx=tnQtyMax(TN.sel.s,TN.sel.mode);el.value=k=="qm"?mx:Math.max(1,Math.min(mx,(+el.value||1)+(k=="q+"?1:-1)));tnQtyUpd()}
- else if(k=="pk"){const S=TN.sel,el=$("tnpx");if(!S||!el)return;const q=S.s.it.t=="m"?1:S.q;el.value=Math.max(1,Math.round(S.s.val*q*parseFloat(a)));tnMkUpd()}},true);
+ else if(k=="pk"){const S=TN.sel,el=$("tnpx");if(!S||!el)return;const q=S.s.it.t=="m"?1:S.q;const est=S.s.val*q,hv=S.s.it.t=="m"&&!!(S.s.it.sh||S.s.it.mi||S.s.it.zi||S.s.it.al);el.value=a=="min"?tnMinP(est,hv):Math.max(1,Math.round(est*parseFloat(a)));tnMkUpd()}},true);
 document.addEventListener("input",e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.tn)return;const k=t.dataset.tn;
  if(k=="q"){TN.q=t.value;const g=$("tng");if(g)g.innerHTML=tnGrid()}
  else if(k=="vq"){TN.vq=t.value;const g=$("tnsl");if(g)g.innerHTML=tnSellList()}
