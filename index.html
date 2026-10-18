@@ -3257,8 +3257,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3f6d7a0e1a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=3f6d7a0e1a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f15f2199ce"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=f15f2199ce"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5147,7 +5147,7 @@ function fidGen(){let s="";try{const a=new Uint32Array(8);crypto.getRandomValues
 const fidFmt=s=>s?s.slice(0,4)+"-"+s.slice(4):"";
 const FRB=()=>1+.01*Math.min(FRCAP,(G.fd&&G.fd.n)||0);
 function v22mig(){if(!BAN[G.ban]||!BAN[G.ban].ok())G.ban=0;
- if(!G.fd||typeof G.fd!="object")G.fd={};const d=G.fd;if(!d.id)d.id=fidGen();d.l=Array.isArray(d.l)?d.l.slice(0,60):[];d.n=d.n|0;d.mb=d.mb|0;d.cs=d.cs|0;d.blk=Array.isArray(d.blk)?d.blk.slice(0,60):[]}
+ if(!G.fd||typeof G.fd!="object")G.fd={};const d=G.fd;if(!d.id)d.id=fidGen();d.l=Array.isArray(d.l)?d.l.slice(0,60):[];d.n=d.n|0;d.mb=d.mb|0;d.cs=+d.cs||0;d.blk=Array.isArray(d.blk)?d.blk.slice(0,60):[]}
 const FD={all:{},inc:[],mut:[],info:{},ready:0,tab:"my",msg:""};
 const CH={docs:new Map(),view:[],rp:null,last:0,busy:0,tab:"g",un:0,ready:0};
 const SCP={o:""};
@@ -5206,7 +5206,7 @@ function chRender(full){const p=$("chp");if(!p||SCP.o!="ch")return;chBuild();con
 async function chSend(){const t=$("chin");if(!t)return;if(!LB.ok){toast(LS("Chat hors ligne : il fonctionne quand le jeu est ouvert depuis claude.ai","Chat offline: it works when the game is opened from claude.ai"));return}if(tlv().l<CHMIN){toast(LS("Niveau "+CHMIN+" requis","Level "+CHMIN+" required"));return}
  const x=pidCensor(t.value.replace(/\s+/g," ").trim().slice(0,300));if(!x)return;const now=Date.now();if(now-CH.last<3000){toast(LS("Doucement : un message toutes les 3 secondes.","Slow down: one message every 3 seconds."));return}
  if(CH.busy)return;const old=(CH.docs.get(LB.uid)||{}).m||[];if(old.length&&old[old.length-1].x==x&&now-old[old.length-1].t<30000){toast(LS("Message déjà envoyé.","Message already sent."));return}
- const m=old.filter(q=>q&&now-q.t<864e5).slice(-9),e={t:now,x};if(CH.rp)e.rp={n:CH.rp.n,x:CH.rp.x};m.push(e);
+ const m=old.filter(q=>q&&now-q.t<432e5).slice(-9),e={t:now,x};if(CH.rp)e.rp={n:CH.rp.n,x:CH.rp.x};m.push(e);
  const c=G.col[G.av]?G.av:ids()[0]||19,cc=G.col[c]||{},doc={n:G.name.slice(0,16),tl:tlv().l,av:spf(c),avs:cc.sh?1:0,tt:G.tt||"t0",fr:G.fr||"f0",st:G.st|0,m};
  CH.busy=1;try{await LB.db.doc("chat/"+LB.uid).set(doc);CH.last=now;CH.docs.set(LB.uid,doc);CH.rp=null;t.value="";chRender(false);const f=$("chf");if(f)f.dataset.s="";chRender(false);const l=$("chl");if(l)l.scrollTop=l.scrollHeight;}catch(er){toast(LS("Message non envoyé.","Message not sent."))}CH.busy=0}
 function chUnread(){const seen=G.fd.cs||0;return CH.view.filter(m=>m.u!=LB.uid&&m.t>seen).length}
@@ -10030,6 +10030,13 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
  b.disabled=true;const ok=await nameFree(v);b.disabled=false;
  if(!ok){const er=w&&w.querySelector("#tce");if(er)er.textContent=TAKEN();return}
  b.dataset.nok=1;b.click();delete b.dataset.nok},true);
+})();
+
+/* --- chat : messages masques apres 12 h, notifications lues persistantes --- */
+(function(){
+const _cb=chBuild;chBuild=function(){_cb.apply(this,arguments);const n=Date.now();CH.view=CH.view.filter(m=>n-m.t<432e5)};
+const _so=scOpen;scOpen=function(t){const r=_so.apply(this,arguments);if(t=="ch"){G.fd.cs=Date.now();try{save()}catch(e){}}return r};
+const _sc=scClose;scClose=function(){const w=SCP.o;const r=_sc.apply(this,arguments);if(w=="ch"){G.fd.cs=Date.now();try{save()}catch(e){}}return r};
 })();
 
 /* ============ DÉMARRAGE ============ */
