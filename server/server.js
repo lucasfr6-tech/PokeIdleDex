@@ -118,6 +118,9 @@ const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const PRES=new Map();
+const LAST=new Map();
+const SEEN_PID='#1397371';
+const pidOfS=u=>{let h=2166136261;for(const c of String(u)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return '#'+(1000000+h%9000000)};
 const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token','Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
 const CK=new Set(['n','x','nm','name','desc','tag','motd','bio','t0']);
@@ -125,11 +128,20 @@ const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.
 http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x'),ip=(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();
  if(req.method=='OPTIONS'){send(res,204,{});return}
+ if(u.pathname=='/api/seen'&&req.method=='POST'){
+  if(limited(ip+'s',60)){send(res,429,{e:'rate'});return}
+  let b='';req.on('data',c=>{b+=c;if(b.length>4000)req.destroy()});
+  req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
+   const me=d&&mkAuth(d.uid,req.headers['x-token']);if(!me||pidOfS(me)!==SEEN_PID){send(res,403,{e:'no'});return}
+   const now=Date.now(),on=new Set();for(const[k,v]of PRES){if(v.u&&now-v.t<=25000)on.add(v.u)}
+   const out={};(Array.isArray(d.ids)?d.ids:[]).slice(0,500).forEach(id=>{id=String(id);if(!ID.test(id))return;const l=db.lb[id];const t=Math.max(LAST.get(id)||0,(l&&l.t)||0);out[id]={t,o:on.has(id)?1:0}});
+   send(res,200,{ok:1,m:out})});return}
  if(u.pathname=='/api/online'&&req.method=='GET'){
   if(limited(ip+'o',150)){send(res,429,{e:'rate'});return}
   const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();const lst=!!u.searchParams.get('l');
-  if(u.searchParams.get('x')){PRES.delete(sid);send(res,200,{n:0});return}
+  if(u.searchParams.get('x')){const pv=PRES.get(sid);if(pv&&pv.u)LAST.set(pv.u,now);PRES.delete(sid);send(res,200,{n:0});return}
   if(!lst&&/^[a-z0-9]{8,24}$/.test(sid)&&(PRES.size<20000||PRES.has(sid)))PRES.set(sid,{t:now,u:/^u?[A-Za-z0-9_-]{6,40}$/.test(uid)?uid:''});
+  if(!lst&&uid&&/^u?[A-Za-z0-9_-]{6,40}$/.test(uid)&&(LAST.size<60000||LAST.has(uid)))LAST.set(uid,now);
   const seen=new Set(),L=[];let anon=0;
   for(const[k,v]of PRES){if(now-v.t>25000){PRES.delete(k);continue}
    const r=v.u&&db.lb[v.u]&&db.lb[v.u].d;const nm=r&&typeof r.n=='string'?r.n.slice(0,16):'';
