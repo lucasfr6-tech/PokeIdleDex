@@ -3189,12 +3189,15 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 #pfb button{background:#ffffff14;border:1px solid #ffffff30;color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer}
 #pfb button.go{background:linear-gradient(135deg,#fde047,#f59e0b);color:#2a1b00;border:0}
 @keyframes pfin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.pmn{display:flex;flex-direction:column;gap:4px;margin:0 0 12px;padding:12px 14px;font-size:13px;color:#cdd3ff;line-height:1.4}
+.pmn b{color:#fbbf24;font-size:14px}
+.pmn em{color:#fde047;font-style:normal;font-weight:800}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1e3b348cea"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=1e3b348cea"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8ee5df6050"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=8ee5df6050"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3529,7 +3532,7 @@ function win(){const L=E.L,b=E.boss,g=Math.floor(12*([1,1.8,3.5,9][E.r|0]||1)*L*
  const bl=pickBall(E);if(!bl)noBallFx(E);
  if(bl){G.inv[bl]--;{const pc=capPct(E,bl);qadd("thr",1);if(Math.random()<pc)catchIt(E,bl,pc);else missFx(E,bl,pc)}}
  if(b&&Math.random()<.004+.0004*PL("pb")){G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;pop("Master Ball obtenue","cap",50)}
- if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;if(G.auto)G.fl++}E=null}
+ if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;pmChk();if(G.auto)G.fl++}E=null}
 function catchIt(e,bl,pc){const n=1+(e.mi>0?1:0)+(e.boss?1:0),nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt")))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(e.mi>0)c.mi=Math.max(c.mi||0,e.mi);{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
 function flee(){sfx("flee");pop("Trop tard ! Il s'enfuit","dmg",45);toast("Le Pokémon s'est enfui : il fallait le battre en 30 secondes");if(E.boss)G.k=Math.min(G.k,5);E=null}
 function capFx(e,bl,nw,pc){try{capFx0(e,bl,nw,pc)}catch(x){}}
@@ -3570,7 +3573,7 @@ function openBooster(k){const B=BOOST[k];if(G.m<B.p){toast("Il te manque "+fmt(B
 const ppGain=()=>Math.floor(Math.floor(G.cl/8)*8*kxSecP());
 function prestige(sel){const g=ppGain();if(g<1||!sel)return;sel=sel.slice();ids().forEach(i=>{if(i>9e4&&sel.indexOf(i)<0)sel.push(i)});const nc={};
  sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:c.ev,ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0}});
- Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:1,k:0,cl:0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
+ Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:1,k:0,cl:0,pm:0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
 function resetAll(){const n=G.name;G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
 function delAccount(){NOSAVE=true;try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
 const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,1.3],["ps","Cadence d'attaque","Coups plus rapides : dégâts par seconde",l=>"+"+l*6+" %",40,3,1.3],
@@ -4100,7 +4103,7 @@ function vSetg(){const acc=accNow();return `<div class="stg">
 const PUI={pd:["sword","#ef4444"],ps:["bolt","#f59e0b"],pc:["coin","#eab308"],px:["book","#22c55e"],ph:["heart","#f43f5e"],pk:["target","#06b6d4"],pm:["spark","#a855f7"],psh:["star","#fde047"],pcs:["spark","#facc15"],pz:["crown","#fb923c"],pb:["skull","#94a3b8"],pt:["key","#14b8a6"],pg:["team","#3b82f6"],po:["clock","#8b5cf6"],pn:["cards","#ec4899"],pe:["bag","#10b981"]};
 const fi=(ic,t,c)=>`<div class="pfi" style="--c:${c}"><i>${ico(ic)}</i><span>${t}</span></div>`;
 const vReb=()=>{const g=ppGain(),nx=(g/8+1)*8,pr=g<1?G.cl/15:Math.min(1,(G.cl-g/8*8)/8);
- return `<div class="prx"><div class="prh"><div class="orb"><span>${ico("spark")}</span><b>${fmt(G.pp||0)}</b><small>points</small></div>
+ return `${pmLine()}<div class="prx"><div class="prh"><div class="orb"><span>${ico("spark")}</span><b>${fmt(G.pp||0)}</b><small>points</small></div>
  <div class="prg"><div class="gn ${g>=1?"on":""}">+${g}</div><small>${ico("crown")} Étage ${G.cl}</small><div class="bar"><i style="width:${Math.max(0,Math.min(100,pr*100))}%;background:linear-gradient(90deg,#ec4899,#fbbf24)"></i></div><small>Prochain point : étage ${nx}</small></div>
  <button class="go prb" data-a="ps" ${g>=1?"":"disabled"}>${ico("spark")}<span>PRESTIGE</span></button></div>
  <div class="flow"><div class="pfc lose"><h4>Perdu</h4>${fi("crown","Étages","#ef4444")}${fi("coin","Argent","#f59e0b")}${fi("bag","Sac","#fb923c")}${fi("team","Équipe*","#3b82f6")}</div><div class="fa">${ico("chevr")}</div>
@@ -9663,6 +9666,17 @@ function pidCensor(t){
  setTimeout(()=>show(TIP),12*60000);
  setInterval(()=>{if(!document.hidden)show(TIP)},40*60000);
 })();
+/* ===== v152 : paliers d'étage = points de prestige (5 x racine(étage/10)) ===== */
+const pmPts=f=>Math.max(1,Math.round(5*Math.sqrt(f/10)));
+function pmChk(){
+ const c=G.cl|0;let m=G.pm|0,tot=0,last=0;
+ while(m+10<=c){m+=10;tot+=pmPts(m);last=m}
+ if(tot>0){const n=(m-(G.pm|0))/10;G.pm=m;G.pt=(G.pt||0)+tot;G.pp=(G.pp||0)+tot;
+  try{toast(n>1?LS("Paliers d'étage : +"+tot+" points de prestige","Floor milestones: +"+tot+" prestige points"):LS("Étage "+last+" atteint : +"+tot+" points de prestige","Floor "+last+" reached: +"+tot+" prestige points"));sfx("big")}catch(e){}
+  try{save()}catch(e){}}}
+function pmLine(){
+ const nx=((G.pm|0)+10),p=pmPts(nx),p2=pmPts(nx+10);
+ return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 10 étages, tu gagnes des points de prestige en plus.","Every 10 floors you earn extra prestige points.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+10}).</span></div>`}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
