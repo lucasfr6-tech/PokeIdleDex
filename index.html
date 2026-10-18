@@ -3247,8 +3247,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="cde9027a87"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=cde9027a87"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f3a83ac280"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=f3a83ac280"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9875,7 +9875,7 @@ glChal=function(c){const g=glS(),cl=g.cl[c.id],pc=Math.min(100,Math.floor(c.got/
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
 
-G.dx=G.dx||{};G.ex=G.ex||[];ids().forEach(i=>G.dx[i]=1);G.mg=G.mg||{};G.pl=G.pl||{};if(!G.mig){G.mig=1;if(G.st>0){G.pp=(G.pp||0)+G.st*3;G.pt=(G.pt||0)+G.st*3}}G.bf=Math.max(G.bf||0,G.cl);fixHp();v19mig();v20mig();v21mig();v22mig();v23mig();socMount();
+G.dx=G.dx||{};G.ex=G.ex||[];ids().forEach(i=>G.dx[i]=1);G.mg=G.mg||{};G.pl=G.pl||{};if(!G.mig){G.mig=1;}G.bf=Math.max(G.bf||0,G.cl);fixHp();v19mig();v20mig();v21mig();v22mig();v23mig();socMount();
 if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=ids().reduce((t,i)=>t+coin(i),0)*s*Math.min(1,.5+.05*PL("po"));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
 setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(Math.random()*120|0);topInit();dailyCheck();recomp();show();lbInit();trSwitch();if(OFFMSG)toast(OFFMSG);bulk().then(()=>{z22fin();fixHp();info(19)});setInterval(tick,1000);
 </script><script>(function(){function warn(t){var d=document.createElement("div");d.id="pidw";d.innerHTML="<span>"+t+"</span><button type=button>OK</button>";d.querySelector("button").onclick=function(){d.remove()};document.body.appendChild(d)}
