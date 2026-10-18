@@ -3234,12 +3234,19 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pidu .pidr em{grid-column:auto;text-align:right;opacity:.9;font-size:12.5px;color:#a7f3d0}
 .pnlock{opacity:.7;filter:grayscale(.6)}
 .pnlock .pni{background:#475569}
+.cp-fl{position:relative}
+.x2b{margin-left:8px;padding:6px 12px;border-radius:12px;border:2px solid #64748b;background:#1e293b;color:#cbd5e1;font:800 15px "Baloo 2",Nunito,sans-serif;cursor:pointer;align-self:center;min-width:46px}
+.x2b.on{border-color:#fbbf24;background:linear-gradient(180deg,#fde047,#f59e0b);color:#422006;box-shadow:0 0 14px #fbbf2488}
+.x2b.off{opacity:.45}
+.glx-goal{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;margin:4px 0 6px;font-size:13px;opacity:.95}
+.glx-goal b{color:#fde68a;font-size:15px}
+.glx-goal .glx-pc{margin-left:auto;font-weight:800;color:#86efac}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="eb2d25cfbf"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=eb2d25cfbf"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e03814081e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=e03814081e"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3434,11 +3441,11 @@ const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPK=.5,BOSS_PV=2.275;
 const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
-const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1+(G.pt||0)*.03;
+const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
 const pdx=()=>1+dxn()*.004,am=()=>1+Object.keys(G.ach).length*.005+tlv().l*.004+TBV;
-let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*(1+.06*PL("ps"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
+let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
 /* ============ STATS, IV, EV, TALENTS ============ */
 const mfo=id=>{const c=G.col[id];return c&&c.mf?MGM[c.mf]:null};
 const tp=id=>{const m=mfo(id);return m?(id>9e4&&SPM[id]?I(id).t:m.t):I(id).t};
@@ -3612,9 +3619,9 @@ function openBooster(k){const B=BOOST[k];if(G.m<B.p){toast("Il te manque "+fmt(B
  const cards=[];for(let i=0;i<B.cnt;i++){let q=draw();if(i==B.cnt-1)while(q<B.min)q=draw();const L=CBY[q],id=L[Math.random()*L.length|0];cards.push({id,nw:!G.cards[id]});G.cards[id]=(G.cards[id]||0)+1}
  cards.sort((a,b)=>crd(a.id)-crd(b.id));PACK=cards;OP={k,cards,ph:0,rev:cards.map(()=>false)};checkAch();save();
  preload(cards.map(x=>x.id)).then(()=>{if(OP)modal()});modal();setTimeout(()=>{if(OP&&OP.ph==0){OP.ph=1;modal()}},1700)}
-const ppGain=()=>Math.floor(Math.floor(G.cl/8)*8*kxSecP());
+const ppGain=()=>Math.floor(Math.floor(G.cl/8)*8*kxSecP()*ppMul());
 function prestige(sel){const g=ppGain();if(g<1||!sel)return;sel=sel.slice();ids().forEach(i=>{if(i>9e4&&sel.indexOf(i)<0)sel.push(i)});const nc={};
- sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:c.ev,ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0}});
+ sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:(c.ev||[0,0,0,0,0,0]).map(()=>0),ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0,spc:c.spc||0,al:c.al||0,it:(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))?c.it:undefined}});
  Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:1,k:0,cl:0,pm:0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
 function resetAll(){const n=G.name;G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
 function delAccount(){NOSAVE=true;try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
@@ -3625,7 +3632,7 @@ const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,
 ["pz","Colosses","Apparition des tailles imposantes et colossales",l=>"+"+l*10+" %",25,5,1.38],["pb","Chasseur de boss","Pièces des boss et butin de Master Ball",l=>"+"+l*15+" % · +"+(l*.5).toFixed(1)+" %",20,6,1.4],
 ["pt","Talents cachés","Chance d'obtenir un talent caché",l=>"+"+l*20+" %",20,6,1.4],["pg","Génétique","EV gagnés à chaque capture en double",l=>"+"+l,8,10,1.6],
 ["po","Mémoire du dresseur","Gains hors ligne (de 50 % jusqu'à 100 %)",l=>Math.min(100,50+l*5)+" %",10,5,1.5],["pn","Collectionneur","Bonus des cartes Pokémon",l=>"+"+l*10+" %",30,4,1.33],
-["pe","Économie","Réduction des prix de la boutique",l=>"-"+l*2+" %",25,5,1.35],["pn2","Deuxième pension","Débloque un second lot de 10 Pokémon dans la Pension",l=>l?"Débloqué":"Verrouillé",1,120,1]];
+["pe","Économie","Réduction des prix de la boutique",l=>"-"+l*2+" %",25,5,1.35],["pn2","Deuxième pension","Débloque un second lot de 10 Pokémon dans la Pension",l=>l?"Débloqué":"Verrouillé",1,120,1],["ppp","Récolte de prestige","Points de prestige gagnés (paliers d'étage et prestige)",l=>"+"+l*25+" %",10,15,1.5]];
 const puC=(u,l)=>Math.ceil(u[5]*Math.pow(u[6],l));
 /* ============ EXPÉDITIONS : 4 destinations qui tournent toutes les 6 heures ============ */
 const EXT=[
@@ -4901,7 +4908,7 @@ const CP={
  b:[[2000,"m",.5],[1400,"m",1],[600,"m",2],[120,"m",5],[500,"i","great-ball",15],[350,"i","ultra-ball",4],[200,"i","max-potion",4],[100,"st",1],[120,"v",2],[250,"i","dream-ball",2],[150,"i","max-revive",3]],
  s:[[2000,"m",.5],[1400,"m",1],[750,"m",2],[180,"m",5],[25,"m",10],[450,"i","ultra-ball",10],[250,"i","dream-ball",3],[250,"st",2],[120,"i","bottle-cap",1],[120,"i","ability-capsule",1],[150,"v",3],[5,"mp"]],
  o:[[1800,"m",.5],[1250,"m",1],[800,"m",2],[280,"m",5],[60,"m",10],[400,"st",3],[250,"i","bottle-cap",2],[120,"i","gold-bottle-cap",1],[10,"i","ability-patch",1],[70,"i","bottle-cap",2],[250,"i","dream-ball",8],[20,"mp"],[10,"mb"]],
- p:[[1600,"m",.5],[1200,"m",1],[800,"m",2],[350,"m",5],[80,"m",10],[450,"st",5],[250,"i","gold-bottle-cap",2],[10,"i","ability-patch",1],[140,"i","bottle-cap",3],[250,"i","dream-ball",12],[90,"mp"],[40,"mb"],[180,"sp"]]};
+ p:[[1600,"m",.5],[1200,"m",1],[800,"m",2],[350,"m",5],[80,"m",10],[450,"st",5],[250,"i","gold-bottle-cap",2],[10,"i","ability-patch",1],[140,"i","bottle-cap",3],[250,"i","dream-ball",12],[90,"mp"],[40,"mb"],[12,"sp"]]};
 Object.keys(CP).forEach(k=>{const s=CP[k].reduce((a,x)=>a+x[0],0);CP[k].unshift([10000-s,"n"])});
 const PITY=1e15;
 const casH=()=>qcps()*3600;
@@ -5668,7 +5675,7 @@ function rdRollLoot(tier,first){const out=[];const T=RLOOT[tier]||[];T.forEach((
  if(first&&tier>=1&&!out.some(x=>x.k=="bottle-cap"||x.k=="gold-bottle-cap"))out.push({k:tier>=3?"gold-bottle-cap":"bottle-cap",n:1});return out}
 function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdDayK(),first=win&&r.cl.d==dk&&!(r.cl.t||[]).includes(R.tier)||win&&r.cl.d!=dk;
  const sb=win?Math.min(.5,r.st*.05):0;let rp=win?Math.round(t.rp*(1+sb)*(first?1.5:1)):Math.floor(t.rp*.2*Math.min(1,R.dealt/R.boss.max)),
- coins=win?Math.max(t.rp*2000,qcps()*t.sec):Math.floor(Math.max(t.rp*2000,qcps()*t.sec)*.1*Math.min(1,R.dealt/R.boss.max));
+ coins=win?t.rp*500:Math.floor(t.rp*500*.1*Math.min(1,R.dealt/R.boss.max));
  return{rp,coins,items:win?rdRollLoot(R.tier,first):[],first,sb}}
 /* ---- capture ---- */
 const RCX={ball:"poke-ball",n:0,cap:0,boss:null,tier:0,busy:false,done:false,ok:0,wb:0};
@@ -5678,8 +5685,8 @@ function rdCapGrant(){const b=RCX.boss,t=RCX.tier;let note="";
  if(b.sp>9e4){spGrant(b.sp);note=spRoll(b.sp);if(b.sh&&!G.col[b.sp].sh){G.col[b.sp].sh=1;rq(b.sp);note+=" · Chromatique"}return {name:b.name,note}}
  const f=RCX.wb?8:1+t*1.2,mu=wp(MU,x=>x[0]==""?1:f),mi=b.sh?7:MU.indexOf(mu),sz=wp(SZ,x=>SZ.indexOf(x)>=3?(RCX.wb?6:1+t*1.5):1),L=Math.max(5,Math.min(100,tgtL()));
  catchIt({id:b.sp,L,mi,sz,boss:1,r:Math.min(5,3+(t>3?1:0))},RCX.ball,false);
- {const c=G.col[b.sp],key=b.mf?"mp"+b.mf:b.form=="dyn"?"dynamax-band":"";if(c&&key&&IT[key]&&(b.mf||canDyn(b.sp))&&!(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))){if(c.it)G.inv[c.it]=(G.inv[c.it]||0)+1;c.it=key;rq(b.sp);c.h=mhp(b.sp);note+=" · "+(b.mf?LS("Méga","Mega"):b.gm?"Gigamax":"Dynamax")}}
- return{name:I(b.sp).n,note:note+(mi>0?" · "+(mi==7?"Chromatique":mu[0]):"")+(SZ.indexOf(sz)>=3?" · "+sz[0]:"")}}
+ {const c=G.col[b.sp],key=b.mf?"mp"+b.mf:b.form=="dyn"?"dynamax-band":"";if(c&&key&&IT[key]&&(b.mf||canDyn(b.sp))&&!(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))){if(c.it)G.inv[c.it]=(G.inv[c.it]||0)+1;c.it=key;rq(b.sp);c.h=mhp(b.sp);note+=" · "+(b.mf?(String(b.name).startsWith("Primo")?LS("Primale","Primal"):LS("Méga","Mega")):b.gm?"Gigamax":"Dynamax")}}
+ return{name:(b.mf?b.name:I(b.sp).n),note:note+(mi>0?" · "+(mi==7?"Chromatique":mu[0]):"")+(SZ.indexOf(sz)>=3?" · "+sz[0]:"")}}
 function rdCapHtml(){const b=RCX.boss,B=rdBalls();if(RCX.done)return "";
  if(!B.length)return `<div class="rdcp"><b>${LS("Capture impossible","Cannot capture")}</b><small>${LS("Tu n'as plus de Poké Ball. Achète-en à la boutique ou gagnes-en en raid.","You have no Poké Balls left. Buy some in the shop or win them in raids.")}</small><button data-rd="dn" class="go">${LS("Continuer","Continue")}</button></div>`;
  if(!B.some(x=>x[0]==RCX.ball)||(RCX.def!==RCX.boss&&B.length>1)){RCX.def=RCX.boss;RCX.ball=(B.find(x=>x[0]!="master-ball")||B[0])[0]}
@@ -5727,7 +5734,7 @@ async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
  if(kind=="cur"){if(w.k!=rdWeekK()||w.cl)return;d=w.d;k=w.k;killed=wbShared()>=RWHP}else{const p=w.pe;if(!p)return;d=p.d;k=p.k;try{if(LB.ok){const s=await LB.db.collection("wb").where("k","==",k).get();killed=s.docs.reduce((a,x)=>a+(+x.data().d||0),0)>=RWHP}}catch(e){}}
  const n=wbTiers(d);if(!n){toast(LS("Pas assez de dégâts pour une récompense (15 000 minimum).","Not enough damage for a reward (15,000 minimum)."));if(kind=="cur")w.cl=1;else w.pe=null;save();show();return}
  const items=[];for(let i=0;i<n;i++)WBR[i].forEach(([key,q])=>{const kk=key=="#pearl"?rdPearlKey():key;if(IT[kk]){const e=items.find(x=>x.k==kk);if(e)e.n+=q;else items.push({k:kk,n:q})}});
- const rp=n*120;try{mailAdd(LS("Boss monde","World boss"),LS("Récompenses de la semaine","Weekly rewards"),items.map(x=>["i",x.k,x.n]),fmt(d)+" "+LS("dégâts · palier ","damage · tier ")+n+" / 5")}catch(e){}r.rp+=rp;if(kind=="cur")w.cl=1;else w.pe=null;save();
+ const rp=n*300;try{mailAdd(LS("Boss monde","World boss"),LS("Récompenses de la semaine","Weekly rewards"),items.map(x=>["i",x.k,x.n]),fmt(d)+" "+LS("dégâts · palier ","damage · tier ")+n+" / 5")}catch(e){}r.rp+=rp;if(kind=="cur")w.cl=1;else w.pe=null;save();
  const o=$("rdb");RCX.boss=rdWBossOf(k);RCX.def=RCX.boss;RCX.tier=5;RCX.wb=1;RCX.n=killed?3:1;if(killed){G.inv["great-ball"]=(G.inv["great-ball"]||0)+3;RCX.ball="great-ball"}RCX.cap=killed?.03+.025*n:0;RCX.done=!killed;RCX.ok=0;RCX.busy=false;
  const item=x=>`<div class="rdri">${ic(x.k,IT[x.k].img)}<b>${IT[x.k].n}</b><em>×${x.n}</em></div>`;
  o.className="on";o.innerHTML=`<div class="rdrs" id="rdRes" style="--c:#a78bfa"><div class="rdrh w"><h2>${killed?LS("Boss monde vaincu !","World boss defeated!"):LS("Récompenses de la semaine","Weekly rewards")}</h2><small>${fmt(d)} ${LS("dégâts","damage")} · ${n} / 5 ${LS("paliers","tiers")} · ${LS("récompenses dans ton courrier","rewards sent to your mail")}</small></div>
@@ -5998,23 +6005,23 @@ const BPXP=1000,BPMAX=50,BPPRICE=600,BPLVP=80;
 const BPS=()=>{const b=G.bp=G.bp||{};if(b.xp==null){b.xp=0;b.pm=0;b.f={};b.p={};b.d=null;b.w=null}if(G.gem==null)G.gem=0;return b};
 const bpLvl=()=>Math.min(BPMAX,Math.floor(BPS().xp/BPXP));
 /* ---------- récompenses ---------- */
-const bpMon=(l,k)=>["m",Math.max(30000*k*(1+l/5),Math.floor(qcps()*600*k*(1+l/25)))];
+const bpMon=(l,k)=>["m",Math.floor(30000*k*(1+l/5))];
 const BPFI=[["ultra-ball",10],["hyper-potion",8],["max-revive",3],["protein",2],["iron",2],["calcium",2],["zinc",2],["carbos",2],["hp-up",2],["max-potion",8]];
 const BPPI=[["bottle-cap",1],["ability-capsule",1],["max-revive",4],["protein",3],["hp-up",3],["dream-ball",6],["iron",3],["zinc",3],["calcium",3],["carbos",3]];
 function bpRw(tr,l){const u=Math.floor(l/10);
  if(tr=="f"){
-  if(l==50)return[["leg"],["g",100],["i","master-ball",2]];
+  if(l==50)return[["leg"],["g",30],["i","master-ball",2]];
   if(l==25)return[["leg0"],bpMon(l,3)];
-  if(l%10==0)return[["g",40],["i","dream-ball",10],["i","bottle-cap",2]];
+  if(l%10==0)return[["g",12],["i","dream-ball",10],["i","bottle-cap",2]];
   if(l%5==0)return[bpMon(l,3),["st",2]];
   if(l%2==1)return[bpMon(l,1)];
   const x=BPFI[(l/2-1)%10];return[["i",x[0],x[1]+u*(x[1]>3?2:0)+(x[1]<=3?Math.floor(u/2):0)]]}
- if(l==50)return[["sp"],["g",150],["i","master-ball",3]];
- if(l==25)return[["leg"],["g",100]];
- if(l%10==0)return[["i","bi-find",10],["i","bi-mut",10],["g",50],["i","gold-bottle-cap",2]];
+ if(l==50)return[["sp"],["g",45],["i","master-ball",3]];
+ if(l==25)return[["leg"],["g",30]];
+ if(l%10==0)return[["i","bi-find",10],["i","bi-mut",10],["g",15],["i","gold-bottle-cap",2]];
  if(l%5==0)return[bpMon(l,6),["i","bi-atk",5],["i","bi-xp",5],["i","bi-coin",5]];
  const r=l%2?[bpMon(l,2),["i","dream-ball",3+u]]:[["st",1+Math.floor(l/20)],["i",BPPI[(l/2-1)%10][0],BPPI[(l/2-1)%10][1]]];
- if(l%3==0)r.push(["g",10]);return r}
+ if(l%3==0)r.push(["g",3]);return r}
 /* légendaire chromatique muté aléatoire */
 const BPLEG=[144,145,146,150,243,244,245,249,250,377,378,379,380,381,382,383,384,480,481,482,483,484,485,486,487,488,638,639,640,641,642,643,644,645,646,716,717,718,785,786,787,788,791,792,800,888,889,890];
 function bpLeg(plain,mo){const id=BPLEG[Math.random()*BPLEG.length|0],mi=plain?0:1+(Math.random()*6|0);
@@ -6040,7 +6047,7 @@ const BQD=[
 {id:"cs",k:"cas",ic:"dice",f:["Jouer {n} tickets au casino","Play {n} casino tickets"],t:{d:12,w:100},ok:()=>bfl()>=15},
 {id:"ex",k:"exp",ic:"compass",f:["Terminer {n} expéditions","Complete {n} expeditions"],t:{d:3,w:25},ok:()=>bfl()>=15},
 {id:"sd",k:"spend",ic:"bag",f:["Dépenser {n} ₽ à la boutique","Spend {n} ₽ in the shop"],t:{d:()=>Math.max(30000,qcps()*14400),w:()=>Math.max(300000,qcps()*172800)}}];
-const BQP={d:{n:["Journalières","Daily"],cnt:5,xp:200,bx:300,bg:0,c1:"#38bdf8",c2:"#0369a1"},w:{n:["Hebdomadaires","Weekly"],cnt:6,xp:1000,bx:2000,bg:30,c1:"#a78bfa",c2:"#5b21b6"}};
+const BQP={d:{n:["Journalières","Daily"],cnt:5,xp:200,bx:300,bg:0,c1:"#38bdf8",c2:"#0369a1"},w:{n:["Hebdomadaires","Weekly"],cnt:6,xp:1000,bx:2000,bg:8,c1:"#a78bfa",c2:"#5b21b6"}};
 function bqGen(p){const k=qKey(p),R=rng([...k].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,11)+({d:5,w:9})[p]*999983);
  const A=BQD.filter(q=>q.t[p]!==undefined&&(!q.ok||q.ok()));for(let i=A.length-1;i>0;i--){const j=R()*(i+1)|0;[A[i],A[j]]=[A[j],A[i]]}
  const pick=A.slice(0,BQP[p].cnt),tg={};pick.forEach(q=>{const v=q.t[p];tg[q.id]=qnice(typeof v=="function"?v():v)});
@@ -6180,7 +6187,7 @@ const sdP=v=>"+"+(v*100).toFixed(1).replace(".",SG.lang=="en"?".":",")+" %";
 function sdRows(k){const d=k=="d",pu=u=>{const x=PU.find(y=>y[0]==u);return x?x[1]:u},lv=PL;
  const ach=Object.keys(G.ach).length,tl=tlv().l,fr=(G.fd&&G.fd.n)||0;
  const R=[];const add=(grp,ic,col,t,desc,v,det)=>R.push({grp,ic,col,t,desc,v,det});
- add(LS("Progression permanente","Permanent progression"),"spark","#ec4899",LS("Points de prestige","Prestige points"),LS("Chaque point de prestige donne +3 % sur tout.","Each prestige point gives +3% on everything."),sm(),(G.pt||0)+LS(" points"," points"));
+ add(LS("Progression permanente","Permanent progression"),"spark","#ec4899",LS("Points de prestige","Prestige points"),LS("Les points de prestige se dépensent dans la boutique de prestige : ils ne donnent plus de bonus direct.","Prestige points are spent in the prestige shop: they no longer give a direct bonus."),sm(),(G.pt||0)+LS(" points"," points"));
  add(LS("Progression permanente","Permanent progression"),"book","#10b981","Pokédex",LS("+0,4 % par espèce découverte.","+0.4% per discovered species."),pdx(),dxn()+LS(" espèce(s)"," species"));
  add(LS("Progression permanente","Permanent progression"),"trophy","#eab308",LS("Succès, niveau de dresseur et titre","Achievements, trainer level and title"),LS("Trois bonus additionnés : succès (+0,5 % chacun), niveau de dresseur (+0,4 % par niveau) et bonus du titre équipé.","Three summed bonuses: achievements (+0.5% each), trainer level (+0.4% per level) and the equipped title."),am(),ach+LS(" succès · niv. "," achievements · lv. ")+tl+" · "+LS("titre ","title ")+sdP(TBV));
  add(LS("Collection","Collection"),"cards","#a855f7",LS("Cartes Pokémon","Pokémon cards"),LS("Chaque carte rapporte un bonus selon sa rareté, et ses doublons l'augmentent.","Each card gives a bonus by rarity, and duplicates increase it."),cb(d?0:1),Object.keys(G.cards).length+LS(" cartes"," cards"));
@@ -6219,20 +6226,20 @@ setInterval(()=>{if(SDO){try{sdRender()}catch(e){}}},1500);
 /* ============ v57 : PALIERS DU POKÉDEX ============ */
 const DXT=[
  {n:10,b:[["d",1]],r:[["mh",1],["i","ultra-ball",15]]},
- {n:25,b:[["c",1]],r:[["mh",2],["i","great-ball",20],["g",10]]},
- {n:50,b:[["k",2]],r:[["i","rare-candy",1],["i","ultra-ball",25],["g",20]]},
- {n:100,b:[["d",2]],r:[["mh",4],["i","bottle-cap",1],["g",30]]},
- {n:150,b:[["c",2]],r:[["i","exp-candy-m",3],["i","dream-ball",10],["g",30]]},
- {n:200,b:[["k",3]],r:[["mh",8],["i","protein",3],["i","hp-up",3],["g",40]]},
- {n:300,b:[["d",3]],r:[["i","rare-candy",2],["i","bottle-cap",2],["g",50]]},
- {n:400,b:[["c",3]],r:[["mh",12],["i","exp-candy-l",3],["g",60]]},
- {n:500,b:[["k",4]],r:[["i","dream-ball",25],["i","bi-cap",5],["g",80]]},
- {n:600,b:[["d",4]],r:[["mh",16],["i","gold-bottle-cap",1],["g",100]]},
- {n:700,b:[["c",4]],r:[["i","exp-candy-xl",3],["i","bi-atk",10],["g",120]]},
- {n:800,b:[["k",5]],r:[["mh",24],["i","master-ball",2],["g",150]]},
- {n:900,b:[["d",5]],r:[["i","rare-candy",5],["i","gold-bottle-cap",2],["g",200]]},
- {n:1000,b:[["c",5]],r:[["mh",48],["i","master-ball",3],["g",300]]},
- {n:1025,b:[["d",5],["c",5],["k",5]],r:[["i","gold-bottle-cap",3],["i","master-ball",5],["g",500]]}];
+ {n:25,b:[["c",1]],r:[["mh",2],["i","great-ball",20],["g",3]]},
+ {n:50,b:[["k",2]],r:[["i","rare-candy",1],["i","ultra-ball",25],["g",6]]},
+ {n:100,b:[["d",2]],r:[["mh",4],["i","bottle-cap",1],["g",9]]},
+ {n:150,b:[["c",2]],r:[["i","exp-candy-m",3],["i","dream-ball",10],["g",9]]},
+ {n:200,b:[["k",3]],r:[["mh",8],["i","protein",3],["i","hp-up",3],["g",12]]},
+ {n:300,b:[["d",3]],r:[["i","rare-candy",2],["i","bottle-cap",2],["g",15]]},
+ {n:400,b:[["c",3]],r:[["mh",12],["i","exp-candy-l",3],["g",18]]},
+ {n:500,b:[["k",4]],r:[["i","dream-ball",25],["i","bi-cap",5],["g",24]]},
+ {n:600,b:[["d",4]],r:[["mh",16],["i","gold-bottle-cap",1],["g",30]]},
+ {n:700,b:[["c",4]],r:[["i","exp-candy-xl",3],["i","bi-atk",10],["g",36]]},
+ {n:800,b:[["k",5]],r:[["mh",24],["i","master-ball",2],["g",45]]},
+ {n:900,b:[["d",5]],r:[["i","rare-candy",5],["i","gold-bottle-cap",2],["g",60]]},
+ {n:1000,b:[["c",5]],r:[["mh",48],["i","master-ball",3],["g",90]]},
+ {n:1025,b:[["d",5],["c",5],["k",5]],r:[["i","gold-bottle-cap",3],["i","master-ball",5],["g",150]]}];
 const dxtS=()=>G.dxt=G.dxt||{};
 function dxBon(){const o={d:1,c:1,k:1},S=dxtS();DXT.forEach(t=>{if(S[t.n])t.b.forEach(([k,v])=>{o[k]+=v/100})});return o}
 const qbCalc0=qbCalc;qbCalc=function(){qbCalc0();const b=dxBon();QB.d*=b.d;QB.c*=b.c;QB.k*=b.k};
@@ -6353,7 +6360,7 @@ openBooster=function(k){const B=BOOST[k],n=BNP,t=B.p*n;if(G.m<t){toast("Il te ma
  preload(cards.map(x=>x.id)).then(()=>{if(OP&&OP.ph==1)modal()});modal();setTimeout(()=>{if(OP&&OP.ph==0){OP.ph=1;modal()}},n>1?3600:4400)};
 const vGacha0=vGacha;
 vGacha=function(){const s=vGacha0();if(CS.tab=="coll")return s;const i=s.indexOf('<div class="boosters">');
- const bar=`<div class="box row bnbar"><b>${LS("Ouvrir par","Open by")}</b>${[1,5,10].map(n=>`<button data-bn="${n}" class="${BNP==n?"on":""}">×${n}</button>`).join("")}<small>${LS("Les cartes de tous les boosters s'ouvrent ensemble.","Cards from all boosters open together.")}</small></div>`;
+ const bar=`<div class="box row bnbar"><b>${LS("Ouvrir par","Open by")}</b>${[1,5].map(n=>`<button data-bn="${n}" class="${BNP==n?"on":""}">×${n}</button>`).join("")}<small>${LS("Les cartes de tous les boosters s'ouvrent ensemble.","Cards from all boosters open together.")}</small></div>`;
  return i<0?s:s.slice(0,i)+bar+s.slice(i)};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-bn]");if(!t)return;e.stopPropagation();BNP=+t.dataset.bn;show()},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=revall]");if(b&&OP&&OP.cards.length>30){e.stopImmediatePropagation();e.stopPropagation();OP.rev=OP.rev.map(()=>true);document.querySelectorAll(".fc").forEach((f,k)=>setTimeout(()=>f.classList.add("on"),Math.min(k*25,1500)))}},true);
@@ -6535,7 +6542,7 @@ ctile=function(id,n,o){o=o||{};const v=cval(id),r=v.r,own=n>0,show=own||o.show,T
 /* ouverture */
 const PKF=["none","none","none","none","none"];
 function opHtml0(B,st){const n=OP.n||1,K=OP.k;return `<div class="mb"></div><div class="opn k${K}" data-a="skip" style="${st};--T:${n>1?3.6:4.4}s;--c:${B.c}"><i class="pk3f"></i><div class="pk3"><i class="pk3g"></i><div class="pk3p"><div class="pk3k">${[0,1,2,3,4].map(i=>`<i style="--i:${i}"></i>`).join("")}</div><div class="pk3b"></div><div class="pk3t"></div><i class="pk3r"></i></div>${n>1?`<span class="pk3x">×${n}</span>`:""}<div class="pk3q">${Array.from({length:18},(_,i)=>`<i style="--a:${i*20}deg;--r:${160+((i*37)%9)*22}px"></i>`).join("")}</div></div><div class="pk3c"><b>Booster ${B.n}</b><small>${OP.cards.length/n} ${LS("cartes","cards")}${n>1?" × "+n:""}</small></div><small class="pk2h">${LS("Clique pour passer","Click to skip")}</small></div>`}
-function opHtml1(B,st){const n=OP.cards.length;const nd=OP._r1;OP._r1=1;return `<div class="mb"></div><div class="opw" style="${st}"><h2 class="opt">${LS("Booster","Booster")} ${B.n}</h2><small>${LS("Clique sur une carte pour la retourner","Click a card to flip it")}</small><div class="ocards${nd?" nd":""}" style="--n:${n}">${OP.cards.map((c,i)=>`<div class="fc g${crd(c.id)} ${OP.rev[i]?"on":""}" style="--i:${i};--c:${B.c}" data-a="flip" data-i="${i}"><div class="fi"><div class="ff fb"><span></span><i class="fbs"></i></div><div class="ff fr">${ctile(c.id,G.cards[c.id],{show:1,nw:c.nw})}</div></div></div>`).join("")}</div><div class="row" style="justify-content:center"><button class="go" data-a="revall">${LS("Tout révéler","Reveal all")}</button><button data-a="oclose">${LS("Terminer","Done")}</button><button data-a="again" data-i="${OP.k}" ${G.m>=B.p*BNP?"":"disabled"}>${LS("Rouvrir","Open again")} (${fmt(B.p*BNP)} ₽)</button></div></div>`}
+function opHtml1(B,st){const n=OP.cards.length;const nd=OP._r1;OP._r1=1;return `<div class="mb"></div><div class="opw" style="${st}"><h2 class="opt">${LS("Booster","Booster")} ${B.n}</h2><small>${LS("Clique sur une carte pour la retourner","Click a card to flip it")}</small><div class="ocards${nd?" nd":""}" style="--n:${n}">${OP.cards.map((c,i)=>`<div class="fc g${crd(c.id)} ${OP.rev[i]?"on":""}" style="--i:${i};--c:${B.c}" data-a="flip" data-i="${i}"><div class="fi"><div class="ff fb"><span></span><i class="fbs"></i></div><div class="ff fr">${ctile(c.id,G.cards[c.id],{show:1,nw:c.nw})}</div></div></div>`).join("")}</div><div class="row" style="justify-content:center"><button class="go" data-a="revall">${LS("Tout révéler","Reveal all")}</button><button data-a="oclose">${LS("Terminer","Done")}</button></div></div>`}
 function opFx(r){const w=document.querySelector(".opw");if(!w)return;const d=document.createElement("div");d.className="lgx"+(r<4?" ep":"");
  d.innerHTML=r>=4?`<i class="lgr"></i><i class="lgr b"></i><i class="lgc"></i><b>${LS("LÉGENDAIRE !","LEGENDARY!")}</b>${Array.from({length:18},(_,i)=>`<s style="--a:${i*20}deg;--d:${(i*53)%40+40}px;--w:${(i%5)*.06}s"></s>`).join("")}`:`<i class="lgc"></i>${Array.from({length:10},(_,i)=>`<s style="--a:${i*36}deg;--d:${50}px;--w:0s"></s>`).join("")}`;
  w.appendChild(d);setTimeout(()=>d.remove(),r>=4?2600:1100);try{sfx(r>=4?"prest":"big")}catch(e){}}
@@ -6907,8 +6914,8 @@ async function pvFetch(force){if(!(LB&&LB.ok&&LB.db)||PVX.busy)return;if(!force&
 /* tout le classement d'une saison (joueurs réels + IA qui complètent jusqu'à 100) */
 function pvRows(idx){idx=idx==null?pvIdx():idx;const cur=idx==pvIdx(),p=pvS(),real=[];
  PVX.rows.forEach(x=>{if(!x.n||x.id==(LB&&LB.uid)||!Array.isArray(x.tm)||!x.tm.length)return;
-  if(x.k==idx&&(x.w||0)+(x.l||0)>0)real.push(Object.assign({},x,{r:+x.r||PVN,f:(x.w||0)+(x.l||0)}));
-  else if(x.pk==idx&&(x.pf||0)>0)real.push(Object.assign({},x,{r:+x.pr||PVN,f:x.pf,w:0,l:0}))});
+  if(x.k==idx&&(cur||(x.w||0)+(x.l||0)>0))real.push(Object.assign({},x,{r:+x.r||PVN,f:(x.w||0)+(x.l||0)}));
+  else if(x.pk==idx&&(x.pf||0)>0)real.push(Object.assign({},x,{r:+x.pr||PVN,f:x.pf,w:0,l:0}));else if(cur)real.push(Object.assign({},x,{r:PVN,f:0,w:0,l:0}))});
  const nb=Math.max(30,100-real.length),rows=real.slice();
  /* plus de bots : seulement des joueurs en ligne */
  const d=lbDoc();let me=null;
@@ -7548,7 +7555,7 @@ const TWRW={
  85:{h:7,s:1200,it:[["master-ball",1],["gold-bottle-cap",3],["max-revive",8]]},
  90:{h:8,s:1500,it:[["master-ball",1],["gold-bottle-cap",4],["ability-patch",3],["dream-ball",12]]},
  95:{h:10,s:1800,it:[["master-ball",2],["gold-bottle-cap",5],["ability-patch",3],["max-revive",10]]},
- 100:{h:20,s:4000,big:1,ban:8,gem:50,sp:90004,it:[["master-ball",5],["gold-bottle-cap",12],["ability-patch",8],["dream-ball",30],["max-revive",12]]}};
+ 100:{h:20,s:4000,big:1,ban:8,gem:15,sp:90004,it:[["master-ball",5],["gold-bottle-cap",12],["ability-patch",8],["dream-ball",30],["max-revive",12]]}};
 const twRwItems=r=>r.it.filter(x=>IT[x[0]]);
 function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(qcps()*20*r.h),got=[];
  G.m+=kxI("tw",coins);G.gain+=coins;t.sc+=r.s;twRwItems(r).forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n;got.push([k,n])});
@@ -8009,12 +8016,12 @@ function glAtk(fr){const g=glS(),S=glState();if(!S.inG||!S.boss||S.boss.dead||gl
  const L=ids().map(i=>({i,d:(()=>{try{return dmg(i)}catch(e){return 0}})()})).sort((a,b)=>b.d-a.d).slice(0,6);if(!L.length)return null;
  const sum=L.reduce((a,b)=>a+b.d,0)||1,cap=glPw()*30,tot=fr==null?cap*(.85+.3*Math.random()):Math.max(1,Math.min(fr,cap*2.5)),hits=[];for(let k=0;k<10;k++){const u=L[k%L.length];hits.push({i:u.i,v:Math.floor(tot/10*(.8+.4*Math.random())*(u.d/(sum/L.length)))})}
  const t=hits.reduce((a,b)=>a+b.v,0);g.bs.dmg+=t;g.bs.at=Date.now();g.bs.n++;g.bs.dn++;g.gx+=60;glPush(1);GLX.st=null;save();return{hits,t}}
-function glBossRw(S){const q=qcps(),r=[["m",Math.max(200000,q*10800)],["g",60],["i","dream-ball",10]];return r}
+function glBossRw(S){const q=qcps(),r=[["m",300000],["g",18],["i","dream-ball",10]];return r}
 /* ---------- défis ---------- */
 function glChals(M){const n=Date.now(),res=[];["d","w"].forEach(per=>{const key=per=="d"?glDk(n):glWk(n),pool=CHK.slice().sort((a,b)=>glH(M.gd.id+key+a)-glH(M.gd.id+key+b)),N=Math.max(3,M.n);
   pool.slice(0,3).forEach((k,j)=>{let tg;if(k=="gain")tg=Math.max(1,Math.floor(M.v.reduce((a,m)=>a+(m.ig||0),0)*(per=="d"?1800:14400)*.6));else tg=Math.max(2,Math.round(CHT[k][per]*N*.7));
    const got=M.v.reduce((a,m)=>a+(m.ct&&m.ct[per]&&((per=="d"&&m.ct.dk==key)||(per=="w"&&m.ct.wk==key))?m.ct[per][k]||0:0),0),mine=glS().ct[per][k]||0,q=qcps();
-   const rw=per=="d"?[["m",Math.max(20000,q*300)],["g",6+j*2]]:[["m",Math.max(200000,q*3600)],["g",30+j*10],j==2?["i","gold-bottle-cap",1]:["i","ultra-ball",8]];
+   const rw=per=="d"?[["m",20000],["g",2+j]]:[["m",200000],["g",9+j*3],j==2?["i","gold-bottle-cap",1]:["i","ultra-ball",8]];
    res.push({id:per+key+k,per,k,tg,got:Math.min(got,tg*2),done:got>=tg,mine,rw,key})})});return res}
 /* ---------- synchronisation en ligne ---------- */
 let glPT=null;
@@ -8061,7 +8068,7 @@ function glUnoffer(){const g=glS();if(!g.of)return;G.cards[g.of.g]=(G.cards[g.of
 function glTake(uid){const S=glState(),M=S.mine,g=glS();if(!M)return "";const o=M.v.find(m=>m.id==uid);if(!o||!o.of)return LS("Offre disparue.","Offer gone.");if((G.cards[o.of.w]||0)<2)return LS("Il te faut un double de la carte demandée.","You need a spare copy of the wanted card.");
  G.cards[o.of.w]--;G.cards[o.of.g]=(G.cards[o.of.g]||0)+1;g.ac=(g.ac||[]).filter(e=>Date.now()-e.ts<6048e5).concat([{o:uid,ts:o.of.ts,w:o.of.w}]).slice(-20);g.px.push({o:uid,ts:o.of.ts,w:o.of.w,g:o.of.g});glPush(1);GLX.st=null;save();return ""}
 async function glClaim(ch){const g=glS();if(!ch.done||g.cl[ch.id]||!ch.mine)return;g.cl[ch.id]=1;g.gx+=ch.per=="d"?80:300;const out=await bpGive(ch.rw);bpPop(LS("Défi de guilde","Guild challenge"),LS(CHT[ch.k].n[0],CHT[ch.k].n[1]),out);save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)}
-async function glClaimBoss(){const S=glState(),B=S.boss,g=glS();if(!B||!B.dead||g.bcl[B.wk]||!(g.bs.dmg>0))return;g.bcl[B.wk]=1;const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",40],["i","master-ball",1]]:rk==1?[["g",25]]:rk==2?[["g",15]]:[]);g.gx+=500;const out=await bpGive(rw);bpPop(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Récompenses de la semaine","This week's rewards"),out);save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)}
+async function glClaimBoss(){const S=glState(),B=S.boss,g=glS();if(!B||!B.dead||g.bcl[B.wk]||!(g.bs.dmg>0))return;g.bcl[B.wk]=1;const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",12],["i","master-ball",1]]:rk==1?[["g",8]]:rk==2?[["g",5]]:[]);g.gx+=500;const out=await bpGive(rw);bpPop(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Récompenses de la semaine","This week's rewards"),out);save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)}
 /* bonus de guilde sur les gains */
 {const f0=biFlags;biFlags=function(){f0();const l=(G.gl&&G.gl.id&&G.gl.lv)||1;if(l>1){const p=glPerks(l);BIF.d*=p.d;BIF.c*=p.c;BIF.x*=p.x;BIF.k*=p.k}}}
 const glReady=()=>{try{const g=glS();if(!g.id||g.pend)return false;const S=glState();if(!S.inG)return false;if(S.boss&&!S.boss.dead&&glLeft()>0)return true;if(S.boss&&S.boss.dead&&!g.bcl[S.boss.wk]&&g.bs.dmg>0)return true;return glChals(S.mine).some(c=>c.done&&!g.cl[c.id]&&c.mine>0)}catch(e){return false}};
@@ -8991,8 +8998,8 @@ function kxPm0(i){const n=i&&i.n||"",c=i&&i.c||"";
  const it=(f)=>{const k=(f-100)/5,L=[["master-ball",Math.min(10,1+(k/4|0))],["gold-bottle-cap",6+k],["ability-patch",1],["dream-ball",12+k*2],["max-revive",8+(k/2|0)],["rare-candy",5+k*2]];return L};
  for(let f=105;f<=200;f+=5){const k=(f-100)/5,big=f%25==0;
   TWRW[f]={h:22+k*3,s:2200+k*260,big:big?1:0,it:it(f).map(x=>x[0]=='ability-patch'?(big?['ability-patch',PM[f]||1]:['bottle-cap',3]):x)};
-  if(big){TWRW[f].gem=60+(f-100)/25*20;TWRW[f].ban=8}}
- TWRW[200]={h:120,s:15000,big:1,ban:8,gem:200,sp:90004,it:[["master-ball",12],["gold-bottle-cap",30],["ability-patch",5],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
+  if(big){TWRW[f].gem=15+(f-100)/25*5;TWRW[f].ban=8}}
+ TWRW[200]={h:120,s:15000,big:1,ban:8,gem:50,sp:90004,it:[["master-ball",12],["gold-bottle-cap",30],["ability-patch",5],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
 /* equipe adverse strategique (etages 101 a 200) : elle s'adapte a ton equipe */
 function twListS(f){const P=pvPool(),R=rng(f*977+13),gd=TWG[f],big=f%5==0,t=twS();
  const mt=(t.tm||[]).filter(id=>G.col[id]).map(id=>pvNoMf(id,()=>tp(id)));
@@ -9129,11 +9136,11 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
 /* ===== v137 : des gemmes à farmer (tour, JCJ), en petites quantités ===== */
 (function(){
  /* Tour : un peu de gemmes à chaque palier, davantage aux grandes étapes */
- try{for(const k in TWRW){const f=+k,r=TWRW[k];if(f>=100)continue;const add=f==25?30:f==50?50:f==75?70:6;r.gem=(r.gem||0)+add}}catch(e){}
- try{for(const k in TWRW){const f=+k,r=TWRW[k];if(f>100&&f<200&&!r.big)r.gem=(r.gem||0)+6}}catch(e){}
+ try{for(const k in TWRW){const f=+k,r=TWRW[k];if(f>=100)continue;const add=f==25?8:f==50?12:f==75?18:2;r.gem=(r.gem||0)+add}}catch(e){}
+ try{for(const k in TWRW){const f=+k,r=TWRW[k];if(f>100&&f<200&&!r.big)r.gem=(r.gem||0)+2}}catch(e){}
  /* JCJ : classement de saison */
  const PG={1:400,2:300,3:220};
- PVR.forEach(r=>{r.g=r.a==1?400:r.a==2?300:r.a==3?220:r.a==4?150:r.a==11?90:r.a==26?50:25});
+ PVR.forEach(r=>{r.g=r.a==1?120:r.a==2?90:r.a==3?65:r.a==4?45:r.a==11?25:r.a==26?15:8});
  const gAdd=n=>{G.gem=(G.gem||0)+n};
  {const c0=pvClaim;pvClaim=function(){const q=pvPending(),w=q&&q.rw&&q.rw.g||0;c0.apply(this,arguments);if(w){gAdd(w);try{toast(LS("+"+w+" gemmes (classement)","+"+w+" gems (ranking)"))}catch(e){}}}}
  {const h0=pvRwHtml;pvRwHtml=function(rw,sm){let h=h0.apply(this,arguments);if(rw&&rw.g&&h){const i=h.lastIndexOf("</div>");if(i>0)h=h.slice(0,i)+`<span class="pvcn">${ico("gem")} ${rw.g}</span>`+h.slice(i)}return h}}
@@ -9265,7 +9272,7 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
 
 /* ===== Casino : taux des formes spéciales exclusives divisés par 2 (le reste de la table ne change pas) ===== */
 (function(){
- const NEW={b:1.5,s:4,o:10,p:60};
+ const NEW={b:.3,s:.8,o:2,p:6};
  Object.keys(NEW).forEach(k=>{const t=CP[k];if(!t)return;const e=t.find(x=>x[1]=="sp");if(!e)return;const d=e[0]-NEW[k];e[0]=NEW[k];const n=t.find(x=>x[1]=="n");if(n)n[0]+=d});
 })();
 
@@ -9390,8 +9397,8 @@ const BUG_URL="https://discord.gg/a722SaApE";/* colle ici le lien d'invitation D
 })();
 /* ===== v147 : Courrier (récompenses du boss monde, défis de guilde, codes cadeaux) + paliers du boss monde ===== */
 const GIFT_CODES={
- "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",100],["i","master-ball",2]]},
- /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",100],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
+ "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",30],["i","master-ball",2]]},
+ /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",30],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
 function mailBox(){G.mail=G.mail||[];return G.mail}
 function mailUnread(){return mailBox().filter(m=>!m.c).length}
@@ -9443,7 +9450,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   mailAdd(LS("Défi de guilde réussi","Guild challenge complete"),LS("Guilde","Guild")+" · "+LS(CHT[ch.k].n[0],CHT[ch.k].n[1]),ch.rw.slice(),"");
   toast(LS("Récompense envoyée dans ton courrier.","Reward sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
  glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B||!B.dead||g.bcl[B.wk]||!(g.bs.dmg>0))return;g.bcl[B.wk]=1;
-  const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",40],["i","master-ball",1]]:rk==1?[["g",25]]:rk==2?[["g",15]]:[]);g.gx+=500;
+  const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",12],["i","master-ball",1]]:rk==1?[["g",8]]:rk==2?[["g",5]]:[]);g.gx+=500;
   mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS("Récompenses de la semaine.","This week's rewards."));
   toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
 
@@ -9709,16 +9716,17 @@ function pidCensor(t){
  setInterval(()=>{if(!document.hidden)show(TIP)},40*60000);
 })();
 /* ===== v152 : paliers d'étage = points de prestige (5 x racine(étage/10)) ===== */
-const pmPts=f=>Math.max(1,Math.round(5*Math.sqrt(f/10)));
+const ppMul=()=>(1+.25*PL("ppp"))*(1+Math.min(1,(G.st|0)*.05));
+const pmPts=f=>Math.max(1,Math.round((5+2*(f/8-1))*ppMul()));
 function pmChk(){
- const c=G.cl|0;let m=G.pm|0,tot=0,last=0;
- while(m+10<=c){m+=10;tot+=pmPts(m);last=m}
- if(tot>0){const n=(m-(G.pm|0))/10;G.pm=m;G.pt=(G.pt||0)+tot;G.pp=(G.pp||0)+tot;
+ const c=G.cl|0;let m=Math.floor((G.pm|0)/8)*8,tot=0,last=0;
+ while(m+8<=c){m+=8;tot+=pmPts(m);last=m}
+ if(tot>0){const n=Math.round((m-(G.pm|0))/8);G.pm=m;G.pt=(G.pt||0)+tot;G.pp=(G.pp||0)+tot;
   try{toast(n>1?LS("Paliers d'étage : +"+tot+" points de prestige","Floor milestones: +"+tot+" prestige points"):LS("Étage "+last+" atteint : +"+tot+" points de prestige","Floor "+last+" reached: +"+tot+" prestige points"));sfx("big")}catch(e){}
   try{save()}catch(e){}}}
 function pmLine(){
- const nx=((G.pm|0)+10),p=pmPts(nx),p2=pmPts(nx+10);
- return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 10 étages, tu gagnes des points de prestige en plus.","Every 10 floors you earn extra prestige points.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+10}).</span></div>`}
+ const nx=Math.floor((G.pm|0)/8)*8+8,p=pmPts(nx),p2=pmPts(nx+8);
+ return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 8 étages, tu gagnes des points de prestige en plus, et le montant augmente à chaque palier.","Every 8 floors you earn extra prestige points, and the amount grows with each milestone.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+8}).</span></div>`}
 
 /* prix des packs de cartes x12 */
 BOOST.forEach(b=>{b.p*=12});
@@ -9816,6 +9824,41 @@ function vPen(){
 setInterval(()=>{if(tab!="pen"||PNM||!G.pen2||!G.pen2.t0)return;const left=Math.max(0,PEN_T-(Date.now()-G.pen2.t0));
  if(left<=0){if(!P2R){P2R=1;show()}return}
  const t=$("pnct2"),c=$("pnr2");if(t)t.textContent=hms(left/1000);if(c)c.style.setProperty("--p",((1-left/PEN_T)*100).toFixed(1))},1000);
+/* ===== v158 : vitesse d'attaque, x2, raids, guilde, équipement, quêtes fixes, boss monde ===== */
+/* --- vitesse d'attaque (prestige) + x2 après un prestige : coups supplémentaires, dégâts uniquement --- */
+const x2Ok=()=>(G.st|0)>0&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0);
+const x2On=()=>x2Ok()&&SG.x2!==0;
+let XACC=0,XLAST=Date.now();
+function xHit(){const al=ids();if(!al.length||!E)return;let d=0;
+ al.forEach(i=>{const k=G.col[i],h=k.he;let x=dmg(i)*(i==LDC?1.5:1);if(Math.random()<(h&&h.cr||.0417))x*=1.5;if(h&&h.qc&&Math.random()<h.qc)x*=2;d+=x});
+ E.hp-=d;if(tab=="adv"&&Math.random()<.35){try{pop("-"+fmt(d),"dmg",42+Math.random()*16)}catch(e){}}
+ if(E.hp<=0)win();else if(--E.t<=0)flee()}
+setInterval(()=>{const now=Date.now(),dt=Math.min(2,(now-XLAST)/1000);XLAST=now;
+ if(document.hidden||!E||G.rv>0)return;
+ const rate=.06*PL("ps")+(x2On()?1:0);if(rate<=0){XACC=0;return}
+ XACC+=rate*dt;let n=0;while(XACC>=1&&n<4&&E){XACC-=1;n++;try{xHit()}catch(e){XACC=0;break}}},200);
+function x2Inj(){if(tab!="adv"||!(G.st>0))return;const f=document.querySelector(".cp-fl");if(!f)return;let b=f.querySelector(".x2b");if(!b){b=document.createElement("button");b.className="x2b";b.dataset.x2="1";f.appendChild(b)}
+ const ok=x2Ok(),on=SG.x2!==0;b.className="x2b"+(on&&ok?" on":"")+(ok?"":" off");b.textContent="x2";
+ b.title=ok?LS("Combats deux fois plus rapides sur les étages déjà faits avant ton prestige.","Battles twice as fast on floors you already cleared before prestige."):LS("x2 : disponible sur les étages déjà atteints avant ton prestige.","x2: available on floors you reached before prestiging.")}
+setInterval(()=>{try{x2Inj()}catch(e){}},1000);
+{const s0=show;show=function(){const r=s0.apply(this,arguments);try{x2Inj()}catch(e){}return r}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-x2]");if(!b)return;e.stopPropagation();e.preventDefault();SG.x2=SG.x2===0?1:0;try{svs()}catch(_){}x2Inj();sfx("click")},true);
+/* --- prestige : les Pokémon spéciaux gardent leur statut, les EV sont remis à zéro --- */
+{const p0=prestige;prestige=function(sel){p0.apply(this,arguments);try{ids().forEach(i=>{try{rq(i)}catch(e){}});recomp();save()}catch(e){}}}
+/* --- raids : l'affichage des tentatives se met à jour tout seul --- */
+setInterval(()=>{if(tab!="raid")return;try{const at=rdAtt();document.querySelectorAll(".rhs1 > span:first-child b").forEach(b=>{const t=at.left+" / 3";if(/^\d+ \/ 3$/.test(b.textContent)&&b.textContent!=t){b.textContent=t;const sm=b.parentNode.querySelector("small");if(sm)sm.innerHTML=at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}})}catch(e){}},1000);
+/* --- boss monde : récompenses plus généreuses --- */
+try{WBR.forEach(t=>t.forEach(x=>{x[1]*=2}));WBR[2].push(["dream-ball",6]);WBR[3].push(["master-ball",1]);WBR[4].push(["master-ball",1],["gold-bottle-cap",2])}catch(e){}
+/* --- défis de guilde : objectif et progression bien visibles --- */
+glChal=function(c){const g=glS(),cl=g.cl[c.id],pc=Math.min(100,Math.floor(c.got/c.tg*100)),d=c.per=="d",end=d?glDs(c.key)+864e5:glDs(c.key)+7*864e5,nm=LS(CHT[c.k].n[0],CHT[c.k].n[1]);
+ return `<div class="glx-ch ${c.done?"done":""}"><div class="glx-ci">${glIc(CHT[c.k].ic)}</div><div class="glx-cb"><b>${nm}</b><div class="glx-goal"><span>${LS("Objectif","Goal")} : <b>${fmt(c.tg)}</b></span><span>${LS("Fait","Done")} : <b>${fmt(Math.min(c.got,c.tg))}</b></span><span class="glx-pc">${pc} %</span></div><div class="glx-bar big"><i style="width:${pc}%"></i><span>${fmt(Math.min(c.got,c.tg))} / ${fmt(c.tg)}</span></div><div class="glx-cm"><small>${LS("Ma part","My share")} : <b>${fmt(c.mine)}</b></small><div class="qrw">${c.rw.map(glRw).join("")}</div></div></div>
+  <div class="glx-ca">${cl?`<span class="glx-ok">${ico("check")}${LS("Récupéré","Claimed")}</span>`:c.done?(c.mine>0?`<button class="go" data-gl="cl:${c.id}">${ico("gift")} ${LS("Récupérer","Claim")}</button>`:`<small>${LS("Contribue un peu pour récupérer","Contribute to claim")}</small>`):`<small>${ico("clock")} ${glDur(end-Date.now())}</small>`}</div></div>`};
+/* --- invocation d'équipement : petit délai entre deux invocations --- */
+{let CD=0;try{const f=eSummon;eSummon=function(n){const t=Date.now();if(t<CD){try{toast(LS("Doucement, laisse l'invocation précédente se terminer.","Easy, let the previous summon finish."))}catch(e){}return}CD=t+(+n>=10?3500:2000);return f.apply(this,arguments)}}catch(e){}}
+/* --- quêtes : pièces de récompense fixes (ne dépendent plus du revenu) --- */
+{const QF={d:15000,w:120000,m:900000};
+ qRew=function(d,p){const r=[["m",QF[p]||15000]],a=d.it&&d.it[{d:1,w:2,m:3}[p]];if(a)r.push(["i",d.it[0],a]);return r};
+ qBRew=function(p){const B=QBN[p];return [["m",(QF[p]||15000)*3]].concat(B.i.map(x=>["i",x[0],x[1]]))}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
