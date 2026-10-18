@@ -3245,12 +3245,13 @@ a.qkb.qkdc{text-decoration:none;color:inherit;background:linear-gradient(160deg,
 a.qkb.qkdc .qki{color:#fff}
 .lav .pkb{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;padding:0;background:#fff;border-radius:50%} .glx-av .pkb{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
 .chn .ttp{margin-left:6px;padding:1px 7px;font-size:10px;transform:scale(.92);transform-origin:left center}.chn .ttp i{display:none}
+.vph .pidn{position:absolute;left:12px;top:10px;z-index:3;font-size:11px;font-weight:700;letter-spacing:.04em;color:#e2e8f0;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:10px}.pidn2{color:var(--y);font-weight:800}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="892a98d4f7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=892a98d4f7"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="729997f485"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=729997f485"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4123,7 +4124,7 @@ function lbRefresh(){const R=lbRows(),el=$("lbl");if(el){el.innerHTML=lbList(R);
 /* ---------- profil public d'un joueur ---------- */
 function vpModal(m){const R=lbRows(),r=R.find(x=>x.id==VP);if(!r){VP=null;m.innerHTML="";m.className="";return}const b=BAN[r.ban]||BAN[0],rk=R.indexOf(r)+1;
  m.className="on";m.innerHTML=`<div class="mb" data-a="vpx"></div><div class="mc vpm"><button class="x" data-a="vpx">${ico("x")}</button>
- <div class="vph" style="background:${b.css}"><div class="vpi">${ava2(r,"big")}<div><h2>${r.n}</h2><div>${lbBadges(r)}</div></div></div><span class="vpr">#${rk}</span></div>
+ <div class="vph" style="background:${b.css}"><span class="pidn" title="ID">${pidOf(r.id)}</span><div class="vpi">${ava2(r,"big")}<div><h2>${r.n}</h2><div>${lbBadges(r)}</div></div></div><span class="vpr">#${rk}</span></div>
  <div class="vpt">${(r.fav||[]).map((x,k)=>`<div class="vpf"><div class="p3s">${p3d(x.f,x.sh,7)}</div><div class="ped"><i></i></div><b>${x.n}</b><small>Niv. ${x.l}</small></div>`).join("")||"<small>Aucun Pokémon.</small>"}</div>
  <div class="vsg"><div>${ico("crown")}<b>${r.bf||0}</b><small>Étage max</small></div><div>${ico("book")}<b>${r.dx||0}</b><small>Espèces</small></div><div>${ico("target")}<b>${r.caps||0}</b><small>Captures</small></div><div>${ico("star")}<b>${r.sh||0}</b><small>Chromatiques</small></div></div></div>`}
 /* ---------- compte local ---------- */
@@ -5268,7 +5269,7 @@ function cropOpen(){let o=$("crp");if(!o){o=document.createElement("div");o.id="
 function cropClose(){CR.on=0;CR.img=null;const o=$("crp");if(o){o.className="";o.innerHTML=""}}
 function cropOk(){if(!CR.img)return;try{const S=128,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d");x.fillStyle="#0e1440";x.fillRect(0,0,S,S);cropPaint(x,S,S/CRC);const u=c.toDataURL("image/jpeg",.84);if(!IMGOK(u)){toast(LS("Image trop lourde.","Image too heavy."));return}G.avi=u;G.avm=1;PCK="";save();lbPush(true);toast(LS("Photo de profil mise à jour","Profile picture updated"));sfx("big");cropClose();show()}catch(e){toast(LS("Image illisible.","Unreadable image."))}}
 /* ---- ID dans le profil ---- */
-function idChip(){return `<div class="fridc pfid"><small>${LS("Mon ID ami","My friend ID")}</small><div class="fridv"><b>${fidFmt(G.fd.id)}</b><button class="frab" data-a="fcp">${ico("copy")} ${LS("Copier","Copy")}</button><button class="frab" data-a="sc" data-t="fr">${ico("frs")} ${LS("Amis","Friends")}</button></div></div>`}
+function idChip(){return `<div class="fridc pfid"><small>${LS("Mon ID ami","My friend ID")} · <b class="pidn2">${myPid()}</b></small><div class="fridv"><b>${fidFmt(G.fd.id)}</b><button class="frab" data-a="fcp">${ico("copy")} ${LS("Copier","Copy")}</button><button class="frab" data-a="sc" data-t="fr">${ico("frs")} ${LS("Amis","Friends")}</button></div></div>`}
 /* ---- profil du classement : Panthéon animé ---- */
 function vpStatue(x,k){const c=TC[(x.ty||["normal"])[0]]||"#888";return `<div class="vpf pst r${k}" style="--tc:${c}"><div class="p3s"><div class="p3m">${aSpr(x.f,x.sh)}</div></div><div class="ped"><i></i><i></i></div><b>${esc(x.n)}${x.sh?starI():""}</b><small>${LS("Niv.","Lv.")} ${(+x.l||0)|0}</small></div>`}
 
@@ -9916,6 +9917,27 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
   if(h===OWNER_H){G.own=1;G.tt="own";save();try{lbPush(true)}catch(x){}toast("Titre Owner débloqué et équipé");sfx("big");if(i)i.value="";try{show()}catch(x){}}}catch(x){}
 },true);
 const ctt=id=>{const t=TIT.find(x=>x[0]==id);return t&&id!="t0"?`<span class="ttp" style="--t1:${t[3][0]};--t2:${t[3][1]}"><b class="ttl">${LS(t[1],t[2])}</b></span>`:""};
+/* ===== identifiant joueur (#1234567) + ordres d'administration du créateur ===== */
+const pidOf=u=>{let h=2166136261;for(const c of String(u||"")){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return "#"+(1000000+h%9000000)};
+const myPid=()=>pidOf((LB&&LB.uid)||(G.fd&&G.fd.id)||"");
+const ADM_SET=new Set(["name","st","pt","pp","bf","tt","fl","cl"]);
+function admApply(c){try{
+ switch(c.op){
+  case"coin":if(isFinite(c.n))G.m=Math.max(0,(G.m||0)+c.n);break;
+  case"gem":if(isFinite(c.n))G.gem=Math.max(0,(G.gem||0)+c.n);break;
+  case"item":if(typeof c.k=="string"&&isFinite(c.n)&&c.k!="__proto__")G.inv[c.k]=Math.max(0,(G.inv[c.k]||0)+c.n);break;
+  case"mon":{const id=+c.id;if(id>0){ens(id);const o=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});o.n=(o.n||0)+1;if(c.sh)o.sh=1;G.dx[id]=1;IDC=null;rq(id);o.h=mhp(id)}break}
+  case"rmmon":{const id=+c.id;if(G.col[id]){delete G.col[id];IDC=null}break}
+  case"set":if(ADM_SET.has(c.k)){G[c.k]=c.v}break;
+  case"title":if(typeof c.id=="string")G.tt=c.id;break;
+  case"msg":mailAdd("Message du créateur","TS4",[],String(c.x||"").slice(0,300));break;
+  case"reset":resetAll();break;
+ }try{fixHp()}catch(e){}try{recomp()}catch(e){}}catch(e){}}
+let admBusy=0;
+async function admPoll(){if(admBusy||!(LB&&LB.ok&&LB.db))return;admBusy=1;try{const s=await LB.db.doc("adm/"+LB.uid).get();const d=s&&s.exists?s.data():null;if(d&&Array.isArray(d.c)){G.admDone=G.admDone||{};let n=0;d.c.forEach(c=>{if(c&&c.i&&!G.admDone[c.i]){G.admDone[c.i]=1;admApply(c);n++}});
+  const ks=Object.keys(G.admDone);if(ks.length>200)ks.slice(0,ks.length-200).forEach(k=>delete G.admDone[k]);
+  if(n){save();try{lbPush(true)}catch(e){}toast(LS("Le créateur a mis à jour ton compte.","The creator updated your account."));try{show()}catch(e){}}}}catch(e){}admBusy=0}
+setInterval(admPoll,45000);setTimeout(admPoll,6000);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();

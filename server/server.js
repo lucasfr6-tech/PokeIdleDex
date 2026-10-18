@@ -3,7 +3,7 @@
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
 const PORT=+process.env.PORT||3000,DATA=process.env.DATA_FILE||path.join(__dirname,'data.json');
 const ORIGIN=process.env.ALLOWED_ORIGIN||'*',STATIC=process.env.STATIC_DIR||path.join(__dirname,'..');
-const COLS={lb:1,fr:1,chat:1,wb:1,pvp:1,twr:1,gld:1,glm:1},MAXSAVE=4000000,MAXDOC=16384,MAXDOCS=50000,ID=/^[A-Za-z0-9_-]{6,64}$/;
+const COLS={lb:1,fr:1,chat:1,wb:1,pvp:1,twr:1,gld:1,glm:1,adm:1},ADMIN_KEY=process.env.ADMIN_KEY||'',MAXSAVE=4000000,MAXDOC=16384,MAXDOCS=50000,ID=/^[A-Za-z0-9_-]{6,64}$/;
 /*CENSOR_BEGIN*/
 function pidCensor(t){
  if(typeof t!="string"||!t)return t;
@@ -111,11 +111,12 @@ http.createServer((req,res)=>{
    if(req.method=='PUT'){
     if(limited(ip+'w',40)){send(res,429,{e:'rate'});return}
     const tok=req.headers['x-token'];if(!tok||tok.length<16||tok.length>100){send(res,401,{e:'token'});return}
+    if(m[2]=='adm'&&(!ADMIN_KEY||ADMIN_KEY.length<12||req.headers['x-admin']!==ADMIN_KEY)){send(res,403,{e:'admin'});return}
     let b='';req.on('data',c=>{b+=c;if(b.length>MAXDOC){req.destroy()}});
     req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
      if(!d||typeof d!='object'||Array.isArray(d)){send(res,400,{e:'obj'});return}
      const x=col[m[3]],h=sha(tok);
-     if(x&&x.h!==h){send(res,403,{e:'owner'});return}
+     if(x&&x.h!==h&&m[2]!='adm'){send(res,403,{e:'owner'});return}
      if(!x&&Object.keys(col).length>=MAXDOCS){send(res,507,{e:'full'});return}
      col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;send(res,200,{ok:1})});
     return}
