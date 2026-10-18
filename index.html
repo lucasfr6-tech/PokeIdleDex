@@ -3436,8 +3436,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ece920034d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=ece920034d"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f96596e935"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=f96596e935"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3824,7 +3824,7 @@ const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,
 ["pt","Talents cachés","Chance d'obtenir un talent caché",l=>"+"+l*20+" %",20,6,1.4],["pg","Génétique","EV gagnés à chaque capture en double",l=>"+"+l,8,10,1.6],
 ["po","Mémoire du dresseur","Gains hors ligne (de 50 % jusqu'à 100 %)",l=>Math.min(100,50+l*5)+" %",10,5,1.5],["pn","Collectionneur","Bonus des cartes Pokémon",l=>"+"+l*10+" %",30,4,1.33],
 ["pe","Économie","Réduction des prix de la boutique",l=>"-"+l*2+" %",25,5,1.35],["pn2","Deuxième pension","Débloque un second lot de 10 Pokémon dans la Pension",l=>l?"Débloqué":"Verrouillé",1,120,1],["ppp","Récolte de prestige","Points de prestige gagnés (paliers d'étage et prestige)",l=>"+"+l*15+" %",10,15,1.5]];
-const puC=(u,l)=>Math.ceil(u[5]*Math.pow(u[6],l));
+const puC=(u,l)=>Math.ceil(u[5]*1.5*Math.pow(u[6],l));
 /* ============ EXPÉDITIONS : 4 destinations qui tournent toutes les 6 heures ============ */
 const EXT=[
  {n:"Sentier des débutants",z:"Prairie",lv:8,r:0,ch:.40,du:120,rq:1,col:["#4ade80","#166534"],pool:[19,16,10,13,21,41,161,163,165,167,183,187,263,265,396,399,401,403,506,519,522]},
