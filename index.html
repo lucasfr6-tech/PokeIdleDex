@@ -3402,8 +3402,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c12b379a40"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c12b379a40"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d903c6f794"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=d903c6f794"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3789,7 +3789,7 @@ const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,
 ["pz","Colosses","Apparition des tailles imposantes et colossales",l=>"+"+l*10+" %",25,5,1.38],["pb","Chasseur de boss","Pièces des boss et butin de Master Ball",l=>"+"+l*15+" % · +"+(l*.5).toFixed(1)+" %",20,6,1.4],
 ["pt","Talents cachés","Chance d'obtenir un talent caché",l=>"+"+l*20+" %",20,6,1.4],["pg","Génétique","EV gagnés à chaque capture en double",l=>"+"+l,8,10,1.6],
 ["po","Mémoire du dresseur","Gains hors ligne (de 50 % jusqu'à 100 %)",l=>Math.min(100,50+l*5)+" %",10,5,1.5],["pn","Collectionneur","Bonus des cartes Pokémon",l=>"+"+l*10+" %",30,4,1.33],
-["pe","Économie","Réduction des prix de la boutique",l=>"-"+l*2+" %",25,5,1.35],["pn2","Deuxième pension","Débloque un second lot de 10 Pokémon dans la Pension",l=>l?"Débloqué":"Verrouillé",1,120,1],["ppp","Récolte de prestige","Points de prestige gagnés (paliers d'étage et prestige)",l=>"+"+l*25+" %",10,15,1.5]];
+["pe","Économie","Réduction des prix de la boutique",l=>"-"+l*2+" %",25,5,1.35],["pn2","Deuxième pension","Débloque un second lot de 10 Pokémon dans la Pension",l=>l?"Débloqué":"Verrouillé",1,120,1],["ppp","Récolte de prestige","Points de prestige gagnés (paliers d'étage et prestige)",l=>"+"+l*15+" %",10,15,1.5]];
 const puC=(u,l)=>Math.ceil(u[5]*Math.pow(u[6],l));
 /* ============ EXPÉDITIONS : 4 destinations qui tournent toutes les 6 heures ============ */
 const EXT=[
@@ -9875,7 +9875,7 @@ function pidCensor(t){
  setInterval(()=>{if(!document.hidden)show(TIP)},40*60000);
 })();
 /* ===== v152 : paliers d'étage = points de prestige (5 x racine(étage/10)) ===== */
-const ppMul=()=>(1+.25*PL("ppp"))*(1+Math.min(1,(G.st|0)*.05));
+const ppMul=()=>(1+.15*PL("ppp"))*(1+Math.min(1,(G.st|0)*.05));
 const pmPts=f=>Math.max(1,Math.round((5+2*(f/8-1))*ppMul()));
 function pmChk(){
  const c=G.cl|0;let m=Math.floor((G.pmT|0)/8)*8,tot=0,last=0;if(m<Math.floor((G.pm|0)/8)*8)m=Math.floor((G.pm|0)/8)*8;
