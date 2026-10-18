@@ -3251,12 +3251,13 @@ a.qkb.qkdc .qki{color:#fff}
 .gbc{position:relative;width:min(92vw,420px);background:#111a33;border:1px solid var(--ln);border-radius:18px;padding:18px;box-shadow:0 20px 60px #000a}.gbc h3{margin:0 0 6px;font-size:19px}.gbc p{margin:0 0 12px;font-size:13px;color:var(--mu)}
 .gbl{display:grid;grid-template-columns:1fr 1fr;gap:8px}.gbl button{display:flex;align-items:center;gap:8px;padding:11px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--bc);color:#fff;font-weight:700}.gbl button .i{color:var(--bc)}.gbl button:hover{background:rgba(255,255,255,.1)}
 .gbx{margin-top:10px;width:100%;padding:8px;border-radius:10px;background:transparent;border:1px solid var(--ln);color:var(--mu)}
+.gqb{display:flex;gap:8px;margin-top:8px}.gqb button{flex:1;padding:8px 10px;border-radius:10px;font-weight:700}.gqr{background:rgba(255,255,255,.08);color:#fca5a5;border:1px solid rgba(248,113,113,.4)}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c27a1b1614"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c27a1b1614"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="eb8e1e07e4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=eb8e1e07e4"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9964,6 +9965,35 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  if(k=="open"){if(!document.getElementById("gbm"))document.body.insertAdjacentHTML("beforeend",gbestHtml());return}
  const m=document.getElementById("gbm");if(m)m.remove();if(k=="x")return;
  const r=gbestPick(+k),c=CTY[+k];toast(r.tot?LS("Équipement best : "+c[1]+" ("+r.n+" pièce"+(r.n>1?"s":"")+" changée"+(r.n>1?"s":"")+")","Best gear: "+c[2]+" ("+r.n+" changed)"):LS("Aucune pièce avec ce bonus pour l'instant.","No piece with this bonus yet."));try{sfx(r.tot?"big":"err")}catch(x){}try{show()}catch(x){}},true);
+/* --- demandes de guilde reçues dans le Courrier (accepter / refuser) --- */
+(function(){
+const rejOf=lead=>((lead&&lead.mod&&lead.mod.rej)||[]);
+const isRej=(lead,m)=>rejOf(lead).some(k=>k.u==m.id&&(m.jd||0)<=k.ts);
+const _gi=glInfo;
+glInfo=function(e){const r=_gi(e);try{r.pend=r.pend.filter(m=>!isRej(r.lead,m))}catch(x){}return r};
+window.glRej=function(uid){const g=glS();g.mod.rej=(g.mod.rej||[]).filter(k=>k.u!=uid).concat([{u:uid,ts:Date.now()}]).slice(-40);glPush(1);GLX.st=null;save()};
+const _gs=glSync;
+glSync=function(){try{const g=glS();if(g.id&&g.pend){const S=glState(),M=S.mine;if(M&&M.lead.id!=S.me&&rejOf(M.lead).some(k=>k.u==S.me&&(g.jd||0)<=k.ts)){toast(LS("Ta demande a été refusée.","Your request was declined."));glDrop();return}}}catch(x){}return _gs.apply(this,arguments)};
+function scan(){try{const g=glS();if(!g.id||!g.a)return;const S=glState();if(!S.isLead||!S.mine)return;G.glNt=G.glNt||{};let n=0;
+ S.mine.pend.forEach(m=>{if(m.id==S.me)return;const k=m.id+":"+(m.jd||0);if(G.glNt[k])return;G.glNt[k]=1;n++;
+  mailAdd(LS("Demande de guilde","Guild request"),"["+S.mine.gd.tag+"] "+S.mine.gd.n,[],LS(m.n+" veut rejoindre ta guilde.",m.n+" wants to join your guild."));
+  const L=mailBox();L[0].gq=m.id;L[0].gn=m.n;L[0].c=0;toast(LS("Demande de guilde : "+m.n,"Guild request: "+m.n))});
+ if(n){save();try{mailDot()}catch(x){}}}catch(x){}}
+setInterval(scan,20000);setTimeout(scan,9000);
+function pendNow(uid){try{const S=glState();return !!(S.mine&&S.isLead&&S.mine.pend.some(m=>m.id==uid))}catch(x){return false}}
+function inj(){const o=document.getElementById("mlr");if(!o||o.className!="on")return;const cs=o.querySelectorAll("article.mlc"),L=mailBox();let ch=0;
+ cs.forEach((a,i)=>{const m=L[i];if(!m||!m.gq||a.querySelector(".gqb"))return;
+  if(!m.c&&!pendNow(m.gq)){m.c=1;ch=1;return}
+  if(m.c)return;const d=document.createElement("div");d.className="gqb";
+  d.innerHTML=`<button class="go" data-gq="acc" data-u="${m.gq}">${LS("Accepter","Accept")}</button><button class="gqr" data-gq="rej" data-u="${m.gq}">${LS("Refuser","Decline")}</button>`;a.appendChild(d)});
+ if(ch){save();try{mailDot()}catch(x){}}}
+new MutationObserver(()=>{if(inj.t)return;inj.t=1;setTimeout(()=>{inj.t=0;inj()},30)}).observe(document.body,{childList:true,subtree:true});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gq]");if(!b)return;e.stopPropagation();const u=b.dataset.u;
+ if(b.dataset.gq=="acc")glAccept(u);else glRej(u);
+ mailBox().forEach(m=>{if(m.gq==u)m.c=1});save();try{mailDot()}catch(x){}
+ toast(b.dataset.gq=="acc"?LS("Demande acceptée.","Request accepted."):LS("Demande refusée.","Request declined."));
+ try{mailOpen()}catch(x){}},true);
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
