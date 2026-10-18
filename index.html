@@ -3170,8 +3170,8 @@ body.lndon{overflow:hidden}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bf2d4849de"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=bf2d4849de"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="af04951422"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=af04951422"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9566,6 +9566,12 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
  if(API){setInterval(()=>{if(!document.hidden)push(false)},90000);
   document.addEventListener("visibilitychange",()=>{if(document.hidden)push(false)});
   setTimeout(()=>push(false),8000)}
+})();
+/* ===== les visiteurs qui n'ont encore rien fait n'apparaissent pas au classement ===== */
+(function(){
+ const idle=d=>!!d&&/^(Dresseur|Trainer)$/i.test(d.n||"Dresseur")&&(+d.bf||0)<=1&&(+d.caps||0)<=30;
+ try{const p=lbPush;lbPush=function(force){try{if(idle(lbDoc()))return}catch(e){}return p.apply(this,arguments)}}catch(e){}
+ try{const r=lbRows;lbRows=function(){return r.apply(this,arguments).filter(x=>x.me||!idle(x))}}catch(e){}
 })();
 
 /* ============ DÉMARRAGE ============ */
