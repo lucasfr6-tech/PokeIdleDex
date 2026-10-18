@@ -3419,12 +3419,17 @@ a.qkb.qkdc .qki{color:#fff}
 .trfi b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .trfi.out{opacity:0;transform:translateY(-8px);transition:.5s}
 @keyframes trfin{from{opacity:0;transform:translateY(-14px) scale(.8)}to{opacity:1;transform:none}}
+
+.tr-so{display:flex;gap:8px;margin-bottom:8px}.tr-so select{flex:1;min-width:0}
+.tr-rv2{width:44px;height:44px;flex:none;border-radius:12px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;display:grid;place-items:center;cursor:pointer}.tr-rv2.on{background:#3b82f655;border-color:#60a5fa}.tr-rv2 svg{width:20px;height:20px}
+.plsb{background:none;border:0;color:#cbd5e1;cursor:pointer;vertical-align:middle;padding:2px 4px;margin-left:6px}.plsb svg{width:18px;height:18px}.plsb:hover{color:#fff}
+.plsrch{padding:0 0 8px}.plqi{width:100%;box-sizing:border-box;height:38px;border-radius:10px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;padding:0 12px;font:600 14px Nunito,system-ui,sans-serif}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f5e57fa109"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f5e57fa109"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6ef7f9e2d5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=6ef7f9e2d5"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3947,9 +3952,9 @@ function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids()
  $("tlf").style.width=Math.min(100,((G.fl-1)%10+G.k/10)/9*100)+"%";
  const wk=W.k+"|"+EV.k;if(WXK!==wk){WXK=wk;$("wxc").innerHTML=wxCard();$("evc2").innerHTML=evCard();$("wx").className="wx "+W.k;$("wxp").innerHTML=ico(WX[W.k].i)+" "+WX[W.k].n;$("evp").innerHTML=EV.k?ico(EVT[EV.k].i)+" "+EVT[EV.k].n:"";$("evp").style.display=EV.k?"":"none"}
  $("wxt").textContent=mmss(W.t);if(EV.k&&$("evt")){$("evt").textContent=mmss(EV.t);$("evb").style.width=EV.t/EV.dd*100+"%"}
- const psig=ids().length+"|"+(G.sort||"atk")+"|"+G.rev+"|"+ids().reduce((a,i)=>a+G.col[i].l*7+G.col[i].n+(G.col[i].mf||0)+(G.col[i].dy?5:0)+(G.col[i].mi||0)*13+(G.col[i].zi||0)*17,0);
+ const psig=ids().length+"|"+(G.sort||"atk")+"|"+G.rev+"|"+ids().reduce((a,i)=>a+G.col[i].l*7+G.col[i].n+(G.col[i].mf||0)+(G.col[i].dy?5:0)+(G.col[i].mi||0)*13+(G.col[i].zi||0)*17,0)+"|"+PLQ;
  if(PSIG!==psig||!$("plist").innerHTML){PSIG=psig;const el=$("plist"),top=el.scrollTop,S=G.sort||"atk",f={atk:i=>base(i),lv:i=>G.col[i].l,n:i=>G.col[i].n,coin:i=>coin(i),rar:i=>pr(i)*1e4+I(i).b,num:i=>-i};
-  let L=ids().sort(S=="name"?(a,b)=>I(a).n.localeCompare(I(b).n):(a,b)=>f[S](b)-f[S](a));if(G.rev)L.reverse();
+  let L=ids().filter(i=>!PLQ||norm(dn(i)).includes(norm(PLQ))||String(i)==PLQ.trim()).sort(S=="name"?(a,b)=>I(a).n.localeCompare(I(b).n):(a,b)=>f[S](b)-f[S](a));if(G.rev)L.reverse();
   plPatch(el,L.slice(0,150));el.scrollTop=top;plResizer()}}
 const maxZ=()=>zoneOf(G.cl+1);
 const vAdv=()=>`<div class="layout"><div class="main">
@@ -3967,7 +3972,7 @@ const vAdv=()=>`<div class="layout"><div class="main">
 <div class="tc" style="--bg:rgba(148,163,184,.35)"><i>${ico("skull")}</i><div><small>Mis K.O.</small><b id="kos" style="color:#ff7a7a"></b></div></div>
 <div class="tc" style="--bg:rgba(168,85,247,.4)"><i>${ico("crown")}</i><div><small>Boss vaincus</small><b id="bos"></b></div></div></div></div>
 <div class="wxr"><div class="wcd" id="wxc"></div><div class="wcd" id="evc2"></div></div></div>
-<div class="plist"><div class="box"><h2 style="text-align:center">Pokémon List</h2><div class="pl-h"><select data-a="sort">${[["atk","Attaque"],["lv","Niveau"],["n","Captures"],["coin","Pièces/s"],["rar","Rareté"],["num","N° Pokédex"],["name","Nom"]].map(([v,t])=>`<option value="${v}" ${(G.sort||"atk")==v?"selected":""}>${t}</option>`).join("")}</select><button data-a="rev" title="Inverser l'ordre">${ico("sort")}</button></div><div id="plist" style="${SG.plh?`max-height:${SG.plh}px;height:${SG.plh}px`:""}"></div><div class="plrs" id="plrs" title="${LS("Glisse pour agrandir ou réduire la liste (double-clic : taille par défaut)","Drag to resize the list (double-click: default size)")}"><span></span></div></div></div></div>`;
+<div class="plist"><div class="box"><h2 style="text-align:center">Pokémon List<button class="plsb" data-a="plsq" title="Rechercher un Pokémon">${ico("search")}</button></h2><div class="plsrch" style="display:${PLSO?"block":"none"}"><input id="plqi" class="plqi" type="search" placeholder="Rechercher un Pokémon…" autocomplete="off" value="${esc(PLQ)}"></div><div class="pl-h"><select data-a="sort">${[["atk","Attaque"],["lv","Niveau"],["n","Captures"],["coin","Pièces/s"],["rar","Rareté"],["num","N° Pokédex"],["name","Nom"]].map(([v,t])=>`<option value="${v}" ${(G.sort||"atk")==v?"selected":""}>${t}</option>`).join("")}</select><button data-a="rev" title="Inverser l'ordre">${ico("sort")}</button></div><div id="plist" style="${SG.plh?`max-height:${SG.plh}px;height:${SG.plh}px`:""}"></div><div class="plrs" id="plrs" title="${LS("Glisse pour agrandir ou réduire la liste (double-clic : taille par défaut)","Drag to resize the list (double-click: default size)")}"><span></span></div></div></div></div>`;
 
 /* ============ MES POKÉMON ============ */
 const MN={q:"",gen:-1,sh:0,fav:0,evo:0,ha:0,rar:-1,ty:"",sort:"atk",rev:0,lim:120,mg:0,dy:0};
@@ -10665,7 +10670,9 @@ const TRMODES=[["ev","EV","EVs","Gagne des EV sur la stat choisie"],["mu","Mutat
 const trMult=m=>m=="all"?.6:1;
 const trP=(h,m)=>{const x=h*trMult(m);return 1-Math.pow(1-x,1/TRKPH)};
 function trS(){if(!G.trn||typeof G.trn!="object")G.trn={};const t=G.trn;if(t.m==null)t.m="ev";if(t.e==null)t.e=1;if(!t.s)t.s={k:0,ev:0,sz:0,mu:0,al:0,sh:0};if(!t.lg)t.lg=[];if(t.on==null)t.on=1;if(!t.ea)t.ea=0;if(!t.kc)t.kc=0;if(!t.cr)t.cr=0;return t}
-const TRX={q:"",pk:0,li:-1,ph:-1};
+const TRX={q:"",pk:0,li:-1,ph:-1,so:"best",rv:0};
+const TRSO=[["best","Meilleurs d'abord","Best first"],["atk","Attaque","Attack"],["mu","Mutation (la plus forte)","Mutation (strongest)"],["sz","Taille (la plus grande)","Size (biggest)"],["al","Alpha","Alpha"],["sh","Chromatique","Shiny"],["lv","Niveau","Level"],["st","Étoiles","Stars"],["n","Captures","Catches"],["ev","EV déjà gagnés","EVs earned"],["num","N° Pokédex","Pokédex no."],["name","Nom","Name"]];
+const trKey=(k,i)=>{const c=G.col[i];switch(k){case"atk":return calc(i,0);case"mu":return c.mi>0&&MU[c.mi]?MU[c.mi][2]:0;case"sz":return c.zi>=3?c.zi-2:0;case"al":return c.al?1:0;case"sh":return c.sh?1:0;case"lv":return c.l;case"st":return typeof starC=="function"?starC(c):(c.n||0);case"n":return c.n||0;case"ev":return(c.ev||[]).reduce((a,b)=>a+b,0);case"num":return -i;default:return(c.sh?3:0)+(c.al?3:0)+(c.mi?2:0)+(c.zi>=3?1:0)}};
 const trRoll=(L,w)=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[L.length-1]};
 const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(MU[k]&&MU[k][4]>0)o.push(k);return o};
 function trLog(t,x,c){t.lg.unshift({t:Date.now(),x,c});if(t.lg.length>10)t.lg.length=10}
@@ -10764,12 +10771,13 @@ setInterval(()=>{try{trAnim()}catch(e){}},100);
 function trModal(h){let o=$("trm");if(!o){if(!h)return;o=document.createElement("div");o.id="trm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o)trModal("")})}
  o.className=h?"on":"";o.innerHTML=h?`<div class="tr-mdl">${h}</div>`:""}
 function trList(){const q=norm(TRX.q),t=trS();
- const A=ids().filter(i=>G.col[i]&&(!q||norm(dn(i)).includes(q)||String(i)==q)).sort((a,b)=>{const x=G.col[a],y=G.col[b],s=c=>(c.sh?3:0)+(c.al?3:0)+(c.mi?2:0)+(c.zi>=3?1:0);return s(y)-s(x)||y.l-x.l||a-b}).slice(0,80);
+ let A=ids().filter(i=>G.col[i]&&(!q||norm(dn(i)).includes(q)||String(i)==q)).sort((a,b)=>{if(TRX.so=="name"){return dn(a).localeCompare(dn(b))}const d=trKey(TRX.so,b)-trKey(TRX.so,a);return d||trKey("best",b)-trKey("best",a)||G.col[b].l-G.col[a].l||a-b});if(TRX.rv)A.reverse();A.splice(150);
  return A.length?A.map(i=>{const c=G.col[i];return `<button class="tr-it${t.i==i?" on":""}" data-tr="p:${i}"><span class="tr-rv">${trVis(i,c,0)}</span><div><b>${esc(dn(i))}</b><div class="tn-ch">${trChips(c)}</div><small>${LS("Niv.","Lv.")} ${c.l}</small></div></button>`}).join(""):`<div class="tr-no">${LS("Aucun résultat.","No result.")}</div>`}
-function trOpen(){TRX.q="";trModal(`<button class="tn-x" data-tr="mc">${ico("x")}</button><h3>${LS("Choisir le Pokémon à entraîner","Choose the Pokémon to train")}</h3><input id="trq" class="tr-q" type="search" placeholder="${LS("Rechercher un nom…","Search a name…")}" autocomplete="off"><div class="tr-lst" id="trl">${trList()}</div>`)}
+function trOpen(){TRX.q="";TRX.rv=0;trModal(`<button class="tn-x" data-tr="mc">${ico("x")}</button><h3>${LS("Choisir le Pokémon à entraîner","Choose the Pokémon to train")}</h3><div class="tr-so"><select id="trs" class="tr-q">${TRSO.map(o=>`<option value="${o[0]}"${TRX.so==o[0]?" selected":""}>${LS(o[1],o[2])}</option>`).join("")}</select><button class="tr-rv2" id="trd" data-tr="rv" title="${LS("Inverser l'ordre","Reverse order")}">${ico("sort")}</button></div><input id="trq" class="tr-q" type="search" placeholder="${LS("Rechercher un nom…","Search a name…")}" autocomplete="off"><div class="tr-lst" id="trl">${trList()}</div>`)}
+document.addEventListener("change",e=>{if(e.target&&e.target.id=="trs"){TRX.so=e.target.value;const l=$("trl");if(l)l.innerHTML=trList()}});
 document.addEventListener("input",e=>{if(e.target&&e.target.id=="trq"){TRX.q=e.target.value;const l=$("trl");if(l)l.innerHTML=trList()}});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tr]");if(!b)return;const [k,a]=b.dataset.tr.split(":");
- if(k=="pick")trOpen();else if(k=="mc")trModal("");else if(k=="p")trPick(+a);else if(k=="m")trSet("m",a);else if(k=="e")trSet("e",+a);else if(k=="tog")trTog()});
+ if(k=="pick")trOpen();else if(k=="mc")trModal("");else if(k=="p")trPick(+a);else if(k=="m")trSet("m",a);else if(k=="e")trSet("e",+a);else if(k=="tog")trTog();else if(k=="rv"){TRX.rv=TRX.rv?0:1;const l=$("trl");if(l)l.innerHTML=trList();const d=$("trd");if(d)d.classList.toggle("on",!!TRX.rv)}});
 /* ===== Tower : étages 201 à 300, Pikachu Zénith à l'étage 300 (une récompense tous les 10 étages) ===== */
 (function(){
  if(TWRW[200]){delete TWRW[200].sp;TWRW[200].gem=50;TWRW[200].ban=8;TWRW[200].big=1}
@@ -10878,6 +10886,12 @@ function trFlSync(){const a=document.getElementById("trar"),n=Date.now();TRFL=TR
  const sg=TRFL.map(f=>f.n+f.x).join("|");if(!w){w=document.createElement("div");w.className="trfl";a.appendChild(w)}
  if(w.dataset.s!==sg){w.dataset.s=sg;w.innerHTML=TRFL.map(f=>`<div class="trfi" style="--c:${f.c}"><i></i><b>${esc(f.x)}</b></div>`).join("")}}
 setInterval(()=>{try{trFlSync()}catch(e){}},150);
+
+/* ---------- Pokémon List : loupe pour chercher un Pokémon que l'on possède ---------- */
+var PLQ="",PLSO=0;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=plsq]");if(!b)return;e.stopPropagation();PLSO=PLSO?0:1;
+ const w=document.querySelector(".plsrch");if(w){w.style.display=PLSO?"block":"none";const i=document.getElementById("plqi");if(PLSO&&i)i.focus();else if(!PLSO){PLQ="";if(i)i.value="";PSIG="";try{ui()}catch(x){}}}},true);
+document.addEventListener("input",e=>{if(e.target&&e.target.id=="plqi"){PLQ=e.target.value;PSIG="";try{ui()}catch(x){}}});
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
