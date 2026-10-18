@@ -3262,8 +3262,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="aaf0df1bcf"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=aaf0df1bcf"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="815cc5c41a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=815cc5c41a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9516,17 +9516,18 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
   requestAnimationFrame(frame)};
 })();
 
-/* ===== alerte de mise à jour (site public uniquement : version.json comparé à la version chargée) ===== */
+/* ===== mise à jour automatique : version.json comparé à la version chargée, rechargement tout seul ===== */
 (function(){
  const B=window.PID_BUILD;if(!B||location.protocol.indexOf("http")!==0)return;
  let shown=0;
+ const busy=()=>{try{return document.body.classList.contains("pvon2")||(document.getElementById("rdb")&&document.getElementById("rdb").className=="on")||(typeof PB!="undefined"&&PB&&!PB.over)}catch(e){return false}};
+ const go=()=>{if(busy()){setTimeout(go,20000);return}try{save()}catch(e){}try{const d=document.getElementById("upd");if(d&&Date.now()-(+sessionStorage.getItem("pid_upd")||0)<18e4)d.remove()}catch(e){}
+  try{const t=+sessionStorage.getItem("pid_upd")||0;if(Date.now()-t<18e4){shown=0;return}sessionStorage.setItem("pid_upd",String(Date.now()))}catch(e){}location.reload()};
  const show1=()=>{if(shown)return;shown=1;const d=document.createElement("div");d.id="upd";
-  d.innerHTML=`<span><b>${LS("Mise à jour disponible","Update available")}</b><small>${LS("Recharge pour profiter des nouveautés. Ta progression est conservée.","Reload to get the latest changes. Your progress is kept.")}</small></span><button class="go" id="updgo">${LS("Recharger","Reload")}</button><button class="updx" id="updx" aria-label="${LS("Plus tard","Later")}">×</button>`;
-  document.body.appendChild(d);
-  document.getElementById("updgo").onclick=()=>{try{save()}catch(e){}location.reload()};
-  document.getElementById("updx").onclick=()=>{d.remove();setTimeout(()=>{shown=0},10*60*1000)}};
+  d.innerHTML=`<span><b>${LS("Mise à jour disponible","Update available")}</b><small>${LS("Rechargement automatique dans quelques secondes. Ta progression est conservée.","Reloading automatically in a few seconds. Your progress is kept.")}</small></span>`;
+  document.body.appendChild(d);setTimeout(go,5000)};
  const chk=async()=>{if(shown)return;try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(j&&j.v&&j.v!==B)show1()}catch(e){}};
- setInterval(chk,5*60*1000);setTimeout(chk,60*1000);
+ setInterval(chk,2*60*1000);setTimeout(chk,20*1000);
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)chk()});
 })();
 /* ===== v149 : écran de démarrage de première visite + carte de dresseur ===== */
