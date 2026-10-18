@@ -115,11 +115,21 @@ http.createServer((req,res)=>{
     if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a.dc){a.dc=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
     if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
     if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
+    const want=String(d.want||'').replace(/\s+/g,' ').trim();
+    if(NAME.test(want)&&pidCensor(want)===want&&!db.acc[want.toLowerCase()]){
+     const salt0=crypto.randomBytes(12).toString('hex');
+     db.acc[want.toLowerCase()]={n:want,salt:salt0,ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',dc:p.id,t:Date.now()};dirty=1;
+     send(res,200,{ok:1,created:1,named:1,name:want});return}
     let base=p.un.replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,' ').trim().slice(0,12);if(base.length<2||pidCensor(base)!==base)base='Dresseur';
     let n2=base,i=0;while(db.acc[n2.toLowerCase()]){i++;n2=base+(1000+Math.floor(Math.random()*9000))}
     const salt=crypto.randomBytes(12).toString('hex');
     db.acc[n2.toLowerCase()]={n:n2,salt,ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',dc:p.id,t:Date.now()};dirty=1;
     send(res,200,{ok:1,created:1,name:n2});return}
+   if(act=='rename'){
+    const a=db.acc[k];if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
+    const nn=String(d.nn||'').replace(/\s+/g,' ').trim();if(!NAME.test(nn)||pidCensor(nn)!==nn){send(res,400,{e:'name'});return}
+    const k2=nn.toLowerCase();if(k2!=k&&db.acc[k2]){send(res,409,{e:'taken'});return}
+    delete db.acc[k];a.n=nn;db.acc[k2]=a;dirty=1;send(res,200,{ok:1,name:nn});return}
    send(res,404,{e:'act'})});
   return}
  const m=/^\/api\/(c|d)\/(\w+)(?:\/([^/]+))?$/.exec(u.pathname);
