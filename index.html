@@ -3441,8 +3441,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d1729c5a74"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=d1729c5a74"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9416e4d7ab"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=9416e4d7ab"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4105,7 +4105,7 @@ function statsHtml(id){const c=G.col[id];ens(id);const S=ST(id),a=abl(id),nl=a[0
 function modal0(m){
  if(PNM){penModal(m);return}
  if(PS){const n=PS.sel.length,need10=Math.min(SLN(),pIds().length);m.className="on";
-  m.innerHTML=`<div class="mb" data-a="psx"></div><div class="mc" style="max-width:780px"><button class="x" data-a="psx">${ico("x")}</button><h2>Choisis tes ${need10} Pokémon de départ</h2><small>Tu repars de l'étage 1 avec 15 % de ton argent et toutes tes Balls. ${LS("Seuls ces Pokémon te suivent, en un seul exemplaire (niveau 1, sans doublons ni étoiles, EV à 0). Tout le reste est perdu : objets, autres Pokémon, doublons, étoiles.","Only these Pokémon follow you, as a single copy (level 1, no duplicates or stars, EVs at 0). Everything else is lost: items, other Pokémon, duplicates, stars.")} Gain : <b class="g">+${ppGain()} point${ppGain()>1?"s":""} de prestige</b>.</small>
+  m.innerHTML=`<div class="mb" data-a="psx"></div><div class="mc" style="max-width:780px"><button class="x" data-a="psx">${ico("x")}</button><h2>Choisis tes ${need10} Pokémon de départ</h2><small>Tu repars de l'étage 1 avec 15 % de ton argent et toutes tes Balls. ${LS("Seuls ces Pokémon te suivent, en un seul exemplaire (niveau 1, sans doublons ni étoiles, EV à 0). Tout le reste est perdu : objets, autres Pokémon, doublons, étoiles. Tu gardes seulement 1 % de tes pièces.","Only these Pokémon follow you, as a single copy (level 1, no duplicates or stars, EVs at 0). Everything else is lost: items, other Pokémon, duplicates, stars. You keep only 1% of your coins.")} Gain : <b class="g">+${ppGain()} point${ppGain()>1?"s":""} de prestige</b>.</small>
   <div class="psl">${Array.from({length:need10},(_,k)=>{const i=PS.sel[k];return i?`<div class="pss on" data-a="psel" data-i="${i}">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pss"><small>${k+1}</small></div>`}).join("")}</div>
   <div class="row" style="margin:10px 0"><button data-a="psbest">Prendre les ${need10} plus forts</button><button data-a="psclr">Vider</button></div>
   <input type="search" id="pss" data-a="pss" placeholder="Rechercher dans tes Pokémon" value="${PSQ}" style="width:100%"><div class="zl" id="psg" style="margin-top:12px">${psGrid()}</div>
@@ -10968,6 +10968,9 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* gain d'une victoire : +2 % tous les 3 étages jusqu'à l'étage 100, puis +0,6 % tous les 3 étages ; plafond de 200 millions par victoire */
 const kxFlg=f=>f<=100?Math.pow(1.02,f/3):Math.pow(1.02,100/3)*Math.pow(1.006,(f-100)/3);
+
+/* prestige : on conserve 1 % des pièces possédées avant le prestige */
+{const pX=prestige;prestige=function(sel){const m0=G.m||0,s0=G.st;pX.call(this,sel);if(G.st>s0){G.m=Math.floor(m0*.01);try{save()}catch(e){}}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
