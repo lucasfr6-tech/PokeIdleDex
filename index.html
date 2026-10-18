@@ -3259,12 +3259,13 @@ a.qkb.qkdc .qki{color:#fff}
 #dcpk input{width:100%;margin:8px 0}
 .ggw{background:#fff!important;color:#1f2937!important}.ggbtn{background:#fff!important;color:#1f2937!important}
 .glx-pips{display:flex;gap:3px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.glx-pips i{width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,.14)}.glx-pips i.on{background:#34d399}.glx-pips i.cur{background:#fbbf24;box-shadow:0 0 6px #fbbf24}
+.glx-clk{cursor:pointer}.glx-clk:hover b{text-decoration:underline}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a23ec9c982"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=a23ec9c982"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6e2561b35c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=6e2561b35c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10178,6 +10179,20 @@ glBossV=function(S){const B=S.boss,g=glS(),left=glLeft(),pct=Math.max(0,100-B.to
 /* difficulte : les boss gagnent en puissance avec l'etage */
 const _gbn=glBNew;
 glBNew=function(S){const B=_gbn.apply(this,arguments),u=B.f.tm[0],f=1+.02*((S.boss.st||1)-1);u.atk=Math.round(u.atk*f);u.spa=Math.round(u.spa*f);return B};
+/* detail d'une guilde : membres + DPS */
+(function(){
+const ob=glBrowse;
+glBrowse=function(S){let h=ob(S);
+ h=h.replace(/<div class="glx-rl">((?:(?!glx-row)[\s\S])*?)data-gl="join:([^"]+)"/g,(m,mid,id)=>m.replace('<div class="glx-rl">','<div class="glx-rl glx-clk" data-gl="gv:'+id+'">'));
+ return h};
+function show1(id){const S=glState(),e=S.L.find(x=>String(x.gd.id)==String(id));if(!e)return;
+ const rows=(e.v||[]).slice().sort((a,b)=>(b.pw||0)-(a.pw||0)),tot=rows.reduce((a,m)=>a+(m.pw||0),0),lead=e.lead&&e.lead.id;
+ glModal(`<button class="glx-x" data-gl="mc">${ico("x")}</button><div class="glx-pv">${glEm(e.gd.em,64)}<div><b>${esc(e.gd.n)}</b><i>[${esc(e.gd.tag)}]</i></div></div>
+ <p class="glx-p">${esc(e.ds||"")}</p>
+ <div class="glx-sub" style="margin:6px 0">${LS("Niv.","Lv.")} ${e.lv} · ${e.n} / ${GLMAX} · ${fmt(tot)} ${LS("dégâts/s au total","dmg/s total")}</div>
+ <div class="glx-mem">${rows.map(m=>`<div class="glx-mr">${glAvT(m)}<div class="glx-mn"><b>${esc(m.n)}${m.id==lead?`<span class="glx-cr">${glIc("crown")}${LS("Chef","Leader")}</span>`:""}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1}</small></div><div class="glx-mp"><b>${fmt(m.pw||0)}</b><small>${LS("dégâts/s","dmg/s")}</small></div></div>`).join("")||`<div class="glx-empty"><span>${LS("Aucun membre.","No member.")}</span></div>`}</div>`)}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-gl^="gv:"]');if(!b)return;ev.stopPropagation();show1(b.dataset.gl.slice(3))},true);
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
