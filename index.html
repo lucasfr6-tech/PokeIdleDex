@@ -3247,8 +3247,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a5a3f245a3"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=a5a3f245a3"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a40f5afe90"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a40f5afe90"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9900,6 +9900,8 @@ function rkInit(){try{if(!G||G.rks===RKSEASON)return;G.rks=RKSEASON;G.bfs=0;try{
 rkInit();setTimeout(rkInit,1500);
 {const o=lbDoc;lbDoc=function(){rkInit();const d=o.apply(this,arguments);G.bfs=Math.max(G.bfs|0,G.cl|0);d.bf=G.bfs;return d}}
 {const o=twApply;twApply=function(res,f,opt){const r=o.apply(this,arguments);try{if(res=="win"){const t=twS();t.bs=Math.max(t.bs|0,f)}}catch(e){}return r}}
+/* réinitialisation de la progression : on garde la liste d'amis et on redonne le Pokémon chromatique de départ */
+{const r0=resetAll;resetAll=function(){const fd=G.fd?JSON.parse(JSON.stringify(G.fd)):null;r0.apply(this,arguments);try{if(fd)G.fd=fd;G.mailw=1;if(!mailBox().some(m=>m.wm)){mailAdd(LS("Bienvenue sur PokeIdleDex","Welcome to PokeIdleDex"),"PokeIdleDex",[["wm"]],LS("Voici ton premier Pokémon, et il est chromatique ! Récupère-le pour découvrir lequel. Les récompenses du boss monde, des défis de guilde et tes codes cadeaux arriveront aussi ici.","Here is your first Pokémon, and it is shiny! Claim it to find out which one. World boss, guild challenge rewards and your gift codes will also arrive here."));mailBox()[0].wm=1}save();try{mailDot()}catch(e){}}catch(e){}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
