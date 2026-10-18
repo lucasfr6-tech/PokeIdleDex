@@ -3250,8 +3250,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c61d4d320e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c61d4d320e"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="417b8ca3c8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=417b8ca3c8"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5685,7 +5685,7 @@ function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdDayK(),first=win&&
 /* ---- capture ---- */
 const RCX={ball:"poke-ball",n:0,cap:0,boss:null,tier:0,busy:false,done:false,ok:0,wb:0};
 const rdBalls=()=>BALLS.filter(b=>G.inv[b[0]]>0).sort((a,b)=>(BM[b[0]]||1)-(BM[a[0]]||1));
-const rdCapP=ball=>ball=="master-ball"?.45:Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk")));
+const rdCapP=ball=>ball=="master-ball"?1:Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk")));
 function rdCapGrant(){const b=RCX.boss,t=RCX.tier;let note="";
  if(b.sp>9e4){spGrant(b.sp);note=spRoll(b.sp);if(b.sh&&!G.col[b.sp].sh){G.col[b.sp].sh=1;rq(b.sp);note+=" · Chromatique"}return {name:b.name,note}}
  const f=RCX.wb?8:1+t*1.2,mu=wp(MU,x=>x[0]==""?1:f),mi=b.sh?7:MU.indexOf(mu),sz=wp(SZ,x=>SZ.indexOf(x)>=3?(RCX.wb?6:1+t*1.5):1),L=Math.max(5,Math.min(100,tgtL()));
