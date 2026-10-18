@@ -3400,12 +3400,21 @@ a.qkb.qkdc .qki{color:#fff}
 .dmpv{display:flex;gap:6px;align-items:center;color:#94a3b8;font-size:11.5px;padding:6px 4px}.dmpv svg{width:13px;height:13px}.dmsn{display:block;text-align:right;color:#86efac;font-size:10.5px;margin-top:2px}
 #vtag{position:fixed;top:4px;right:10px;z-index:45;font:700 9px/1 Nunito,system-ui,sans-serif;letter-spacing:.06em;color:#cbd5e1;opacity:.55;pointer-events:none;user-select:none}
 @media(max-width:700px){#vtag{top:2px;right:6px;font-size:8px}}
+
+.chon{cursor:pointer}
+#onlp{position:absolute;top:56px;right:10px;z-index:20;width:min(240px,calc(100% - 20px));max-height:60%;display:flex;flex-direction:column;background:#101a33;border:1px solid rgba(148,163,184,.3);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#onlp .onh{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(148,163,184,.2)}
+#onlp .onh button{background:none;border:0;color:#cbd5e1;font-size:18px;cursor:pointer;padding:0 4px}
+#onlp .onb{overflow:auto;padding:6px 8px;display:flex;flex-direction:column;gap:2px}
+#onlp .onr{display:flex;align-items:center;gap:8px;padding:4px 6px;border-radius:8px;font-size:13px}
+#onlp .onr i{width:8px;height:8px;border-radius:50%;background:#34d399;flex:none}
+#onlp .onr.an{color:#94a3b8}#onlp .onr.an i{background:#64748b}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="897e95490f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=897e95490f"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b9dc9cff51"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=b9dc9cff51"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10829,12 +10838,23 @@ var ONLN=0;
 (function(){const sid=Math.random().toString(36).slice(2,12)+Date.now().toString(36).slice(-6);
  const show=()=>{try{document.querySelectorAll(".chon.on").forEach(e=>{e.textContent=LS("En ligne","Online")+(ONLN>0?" · "+ONLN:"")})}catch(e){}};
  const ping=()=>{try{if(document.hidden)return;const a=(window.PID_API||"").replace(/\/$/,"");if(!a)return;
-  fetch(a+"/api/online?s="+sid).then(r=>r.json()).then(j=>{if(j&&typeof j.n=="number"){ONLN=j.n;show()}}).catch(()=>{})}catch(e){}};
+  fetch(a+"/api/online?s="+sid+(TNLS("pid_uid")?"&u="+encodeURIComponent(TNLS("pid_uid")):"")).then(r=>r.json()).then(j=>{if(j&&typeof j.n=="number"){ONLN=j.n;show()}}).catch(()=>{})}catch(e){}};
  setTimeout(ping,2500);setInterval(ping,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)ping()});
  document.addEventListener("click",e=>{try{if(e.target.closest&&e.target.closest("[data-a=ch],[data-a=chat]"))setTimeout(ping,300)}catch(x){}});
 })();
 /* ---------- animation de capture (Poké Ball) plus rapide : ×1,8 ---------- */
 {const f0=capFx0;capFx0=function(){f0.apply(this,arguments);try{const L=document.querySelectorAll(".capfx"),w=L[L.length-1];if(w&&w.getAnimations)w.getAnimations({subtree:true}).forEach(x=>{x.playbackRate=1.8})}catch(e){}}}
+
+/* clic sur « En ligne · N » : liste des joueurs connectés */
+(function(){
+ const sid2=()=>{const a=(window.PID_API||"").replace(/\/$/,"");return a};
+ async function open(){const p=document.getElementById("chp");if(!p)return;let b=document.getElementById("onlp");if(b){b.remove();return}
+  b=document.createElement("div");b.id="onlp";b.innerHTML=`<div class="onh"><b>${LS("Joueurs en ligne","Players online")}</b><button data-onx>×</button></div><div class="onb"><small>${LS("Chargement…","Loading…")}</small></div>`;p.appendChild(b);
+  try{const a=sid2();const r=await fetch(a+"/api/online?l=1&s="+Math.random().toString(36).slice(2,12)+"zz");const j=await r.json();const L=(j.l||[]).map(x=>`<div class="onr"><i></i><span>${esc(typeof pidCensor=="function"?pidCensor(x.n):x.n)}</span></div>`).join("");
+   const an=j.a|0;b.querySelector(".onb").innerHTML=(L||"")+(an?`<div class="onr an"><i></i><span>${an} ${LS(an>1?"joueurs sans compte":"joueur sans compte",an>1?"players without account":"player without account")}</span></div>`:"")||`<small>${LS("Personne pour le moment.","Nobody right now.")}</small>`}
+  catch(e){const o=b.querySelector(".onb");if(o)o.innerHTML=`<small>${LS("Indisponible.","Unavailable.")}</small>`}}
+ document.addEventListener("click",e=>{const t=e.target;if(!t.closest)return;if(t.closest(".chon"))open();else if(t.closest("[data-onx]")){const b=document.getElementById("onlp");if(b)b.remove()}});
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
