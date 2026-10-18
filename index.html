@@ -3257,8 +3257,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f15f2199ce"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f15f2199ce"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7f868acf51"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=7f868acf51"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10037,6 +10037,12 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
 const _cb=chBuild;chBuild=function(){_cb.apply(this,arguments);const n=Date.now();CH.view=CH.view.filter(m=>n-m.t<432e5)};
 const _so=scOpen;scOpen=function(t){const r=_so.apply(this,arguments);if(t=="ch"){G.fd.cs=Date.now();try{save()}catch(e){}}return r};
 const _sc=scClose;scClose=function(){const w=SCP.o;const r=_sc.apply(this,arguments);if(w=="ch"){G.fd.cs=Date.now();try{save()}catch(e){}}return r};
+})();
+
+/* --- guildes vides : masquees de la liste (le serveur les supprime ensuite) --- */
+(function(){
+const _ga=glAll;glAll=function(){const L=_ga.apply(this,arguments);if(glSrc()!="on")return L;const me=glS().id;return L.filter(x=>x.docs.length>0||x.gd.id==me)};
+const _gd=glDrop;glDrop=function(){try{if(glSrc()=="on"){const S=glState(),M=S.mine;if(M&&!M.docs.some(m=>m.id!=S.me)){const id=M.gd.id;try{Promise.resolve(LB.db.doc("gld/"+id).delete()).catch(()=>{})}catch(e){}if(GLX.gl)GLX.gl=GLX.gl.filter(x=>x.id!=id)}}}catch(e){}return _gd.apply(this,arguments)};
 })();
 
 /* ============ DÉMARRAGE ============ */

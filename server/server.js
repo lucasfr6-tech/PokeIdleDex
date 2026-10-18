@@ -55,6 +55,9 @@ const pwh=(pw,salt)=>crypto.scryptSync(String(pw),salt,32).toString('hex');
 const NAME=/^[\p{L}\p{N}_ -]{2,16}$/u;
 let dirty=resetChat;const flush=()=>{if(!dirty)return;dirty=0;try{fs.writeFileSync(DATA+'.tmp',JSON.stringify(db));fs.renameSync(DATA+'.tmp',DATA)}catch(e){console.error('save',e.message)}};
 setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});process.on('SIGINT',()=>{flush();process.exit(0)});
+/* guildes vides : supprimees automatiquement (aucun membre, doc inchange depuis 1 h) */
+const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
+setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
