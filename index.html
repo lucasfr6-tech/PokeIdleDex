@@ -3442,8 +3442,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="69e1ea840c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=69e1ea840c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="712b702702"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=712b702702"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10974,10 +10974,10 @@ const kxFlg=f=>f<=100?Math.pow(1.02,f/3):Math.pow(1.02,100/3)*Math.pow(1.006,(f-
 {const pX=prestige;prestige=function(sel){const m0=G.m||0,s0=G.st;pX.call(this,sel);if(G.st>s0){G.m=Math.floor(m0*.01);try{save()}catch(e){}}}}
 /* ---------- Classement : dernière connexion + pastille verte « en ligne » (réservé à l'identifiant #1397371) ---------- */
 (function(){
- const A=(typeof API!="undefined"?API:"https://api.pokeidledex.com");let SEEN={},lastF=0,busy=0;
+ const A=()=>tnAPI()||"https://api.pokeidledex.com";let SEEN={},lastF=0,busy=0;
  const ok=()=>{try{return myPid()=="#1397371"}catch(e){return false}};
  const ago=t=>{if(!t)return LS("jamais vu","never seen");const s=Math.max(0,(Date.now()-t)/1000);if(s<90)return LS("à l'instant","just now");if(s<3600)return LS("il y a ","")+Math.round(s/60)+LS(" min"," min ago");if(s<86400)return LS("il y a ","")+Math.floor(s/3600)+LS(" h"," h ago");return LS("il y a ","")+Math.floor(s/86400)+LS(" j"," d ago")};
- async function fetchSeen(ids){if(busy)return;busy=1;try{const r=await fetch(A+"/api/seen",{method:"POST",headers:{"Content-Type":"application/json","X-Token":localStorage.getItem("pid_tok")||""},body:JSON.stringify({uid:localStorage.getItem("pid_uid")||"",ids})});const j=await r.json();if(j&&j.ok){SEEN=j.m||{};lastF=Date.now()}}catch(e){}busy=0}
+ async function fetchSeen(ids){if(busy)return;busy=1;try{const r=await fetch(A()+"/api/seen",{method:"POST",headers:{"Content-Type":"application/json","X-Token":localStorage.getItem("pid_tok")||""},body:JSON.stringify({uid:localStorage.getItem("pid_uid")||"",ids})});const j=await r.json();if(j&&j.ok){SEEN=j.m||{};lastF=Date.now()}}catch(e){}busy=0}
  function patch(){const rows=document.querySelectorAll(".lrow[data-t]");rows.forEach(w=>{const id=w.getAttribute("data-t"),s=w.querySelector(".lid small");if(!s||!SEEN[id])return;const z=(s.getAttribute("data-z")||s.textContent.split(" · ")[0]);s.setAttribute("data-z",z);const v=SEEN[id];s.innerHTML="";s.appendChild(document.createTextNode(z+" · "));if(v.o){const d=document.createElement("i");d.className="onlg";d.title=LS("En ligne","Online");s.appendChild(d)}else s.appendChild(document.createTextNode(ago(v.t)))})}
  setInterval(()=>{try{if(!ok())return;const rows=document.querySelectorAll(".lrow[data-t]");if(!rows.length)return;if(Date.now()-lastF>10000){fetchSeen([...rows].map(w=>w.getAttribute("data-t")))}patch()}catch(e){}},1500);
 })();
