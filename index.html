@@ -3264,8 +3264,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1233d79432"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=1233d79432"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="394ed630bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=394ed630bc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10158,13 +10158,13 @@ glAtk=function(){const S0=glState(),c0=S0.boss?S0.boss.cleared:0,g=glS(),r=_gatk
  return r};
 const _gmd=glMyDoc;
 glMyDoc=function(){const d=_gmd.apply(this,arguments),g=glS();d.bs.bt=Math.floor(g.bs.bt!=null?g.bs.bt:(g.bs.dmg||0));return d};
-function glStRw(s){const q=qcps(),f=1+.2*(s-1),r=[["m",Math.floor(Math.max(200000,q*10800)*f)],["g",60+4*(s-1)],["i","dream-ball",10]];
+function glStRw(s){const r=[["m",Math.round(5e6*Math.pow(30,(s-1)/19)/1e5)*1e5],["i","dream-ball",10]];
  if(s%5==0)r.push(["i","master-ball",s==20?3:1]);if(s==10||s==15)r.push(["i","gold-bottle-cap",2]);if(s==20)r.push(["i","ability-patch",2]);return r}
 glBossRw=function(S){return glStRw(S.boss?S.boss.st:1)};
 glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B||g.bs.bt==null&&!(g.bs.dmg>0)||!(glBt({bs:g.bs})>0))return;
  if(g.bcs==null)g.bcs=0;const n=B.cleared-g.bcs;if(n<=0)return;
  let rw=[];for(let s=g.bcs+1;s<=B.cleared;s++)rw=rw.concat(glStRw(s));const mg={};rw.forEach(x=>{const k=x[0]+(x[1]&&x[0]=="i"?":"+x[1]:"");if(mg[k])mg[k][x[0]=="i"?2:1]+=x[x.length-1];else mg[k]=x.slice()});rw=Object.values(mg);
- const rk=B.dm.findIndex(x=>x.id==S.me);rw=rw.concat(rk==0?[["g",40*n],["i","master-ball",1]]:rk==1?[["g",25*n]]:rk==2?[["g",15*n]]:[]);
+ const rk=B.dm.findIndex(x=>x.id==S.me);rw=rw.concat(rk==0?[["i","master-ball",1]]:[]);
  g.bcs=B.cleared;g.gx+=500*n;
  mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
  toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
