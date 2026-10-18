@@ -3404,8 +3404,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8277a8cac1"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=8277a8cac1"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5a5ec86ba2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5a5ec86ba2"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3746,14 +3746,14 @@ function flee(){sfx("flee");pop("Trop tard ! Il s'enfuit","dmg",45);toast("Le Po
 function capFx(e,bl,nw,pc){try{capFx0(e,bl,nw,pc)}catch(x){}}
 function capFx0(e,bl,nw,pc){const a=$("ar");if(!a||tab!="adv"||!a.animate)return;const w=document.createElement("div");w.className="capfx";
  w.innerHTML=`<img class="cb" alt="" src="${ITM+(bl||"poke-ball")}.png"><div class="cst"></div>${pc!=null?`<div class="cp">${IT[bl||"poke-ball"].n} <em>${prc(pc)}</em></div>`:""}<img class="cs" alt="" src="${IMG+(e.mi==7?"shiny/":"")+e.id}.png"><b class="cl">${nw?"Nouveau Pokémon !":"Capturé !"}</b>`;a.appendChild(w);
- const B=w.querySelector(".cb"),S=w.querySelector(".cs"),T=w.querySelector(".cl"),R=w.querySelector(".cst"),o={fill:"both"};CAPU=Date.now()+2950;{const P=w.querySelector(".cp");if(P)P.animate([{opacity:0,translate:"-50% 10px",scale:".7"},{opacity:1,translate:"-50% 0",scale:"1",offset:.15},{opacity:1,offset:.8},{opacity:0,translate:"-50% -6px"}],{...o,duration:1300,delay:380,easing:"ease-out"})}
+ const B=w.querySelector(".cb"),S=w.querySelector(".cs"),T=w.querySelector(".cl"),R=w.querySelector(".cst"),o={fill:"both"};CAPU=Date.now()+1700;{const P=w.querySelector(".cp");if(P)P.animate([{opacity:0,translate:"-50% 10px",scale:".7"},{opacity:1,translate:"-50% 0",scale:"1",offset:.15},{opacity:1,offset:.8},{opacity:0,translate:"-50% -6px"}],{...o,duration:1300,delay:380,easing:"ease-out"})}
  B.animate([{translate:"-50% -260%",scale:".4",opacity:0},{translate:"-50% -50%",scale:"1",opacity:1}],{...o,duration:380,easing:"cubic-bezier(.3,1.4,.5,1)"});
  B.animate([{rotate:"0deg"},{rotate:"-24deg"},{rotate:"24deg"},{rotate:"0deg"},{rotate:"-18deg"},{rotate:"18deg"},{rotate:"0deg"},{rotate:"-12deg"},{rotate:"12deg"},{rotate:"0deg"}],{...o,duration:900,delay:420});
  B.animate([{scale:"1",opacity:1,filter:"brightness(1)"},{scale:"1.5",opacity:0,filter:"brightness(3)"}],{...o,duration:260,delay:1330});
  for(let k=0;k<12;k++){const i=document.createElement("i"),an=k/12*6.283,r=95+(k%2)*35;R.appendChild(i);i.animate([{translate:"0 0",opacity:0,scale:".3"},{translate:Math.cos(an)*r*.7+"px "+Math.sin(an)*r*.7+"px",opacity:1,scale:"1",offset:.4},{translate:Math.cos(an)*r+"px "+Math.sin(an)*r+"px",opacity:0,scale:".2"}],{...o,duration:850,delay:1330,easing:"ease-out"})}
  S.animate([{scale:".2",opacity:0,translate:"-50% -50%"},{scale:"1.1",opacity:1,translate:"-50% -55%",offset:.3},{scale:"1",opacity:1,translate:"-50% -60%",offset:.7},{scale:"1",opacity:0,translate:"-50% -95%"}],{...o,duration:1300,delay:1330});
  T.animate([{opacity:0,translate:"-50% 20px"},{opacity:1,translate:"-50% 0",offset:.25},{opacity:1,offset:.8},{opacity:0,translate:"-50% -14px"}],{...o,duration:1300,delay:1400});
- setTimeout(()=>w.remove(),2900)}
+ setTimeout(()=>w.remove(),1700)}
 function lose(){sfx("lose");G.auto=false;G.fl=Math.max(1,G.fl-1);G.k=0;E=null;G.rv=4}
 let TK=0,TSC=[0,0,-1],STK='',PSIG='',HUDK='',TOF=null,TV=[];
 function tick(){TK++;tick21();capUpd();recomp();wxTick();exTick();if(G.rv>0){if(--G.rv==0)ids().forEach(i=>G.col[i].h=mhp(i));ui();return}
@@ -10833,6 +10833,8 @@ var ONLN=0;
  setTimeout(ping,2500);setInterval(ping,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)ping()});
  document.addEventListener("click",e=>{try{if(e.target.closest&&e.target.closest("[data-a=ch],[data-a=chat]"))setTimeout(ping,300)}catch(x){}});
 })();
+/* ---------- animation de capture (Poké Ball) plus rapide : ×1,8 ---------- */
+{const f0=capFx0;capFx0=function(){f0.apply(this,arguments);try{const L=document.querySelectorAll(".capfx"),w=L[L.length-1];if(w&&w.getAnimations)w.getAnimations({subtree:true}).forEach(x=>{x.playbackRate=1.8})}catch(e){}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
