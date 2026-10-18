@@ -3262,8 +3262,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="124546a465"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=124546a465"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="edc3ff2303"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=edc3ff2303"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5980,7 +5980,7 @@ const BIT=[
  {k:"bi-find",n:["Dowsing Machine","Dowsing Machine"],c:"#a8b3c4",s:["SSR ×2 · UR ×3","SSR ×2 · UR ×3"],d:["Un objet : pendant 1 minute, la chance d'apparition des Pokémon SSR de la zone est multipliée par 2 et celle des UR par 3 (par exemple SSR de 10 % à 18 % et UR de 3 % à 8 % dans une zone type).","One item: for 1 minute, the spawn chance of the zone's SSR Pokémon is doubled and UR tripled (for example SSR from 10% to 18% and UR from 3% to 8% in a typical zone)."],p:6000000},
  {k:"bi-mut",n:["Mutation Collector","Mutation Collector"],c:"#34d399",s:["+20 % mutations","+20% mutations"],d:["Un objet : +20 % de chance de mutation (et de chromatique) pendant 1 minute.","One item: +20% mutation (and shiny) chance for 1 minute."],p:12000000},
  {k:"bi-cap",n:["Catching Charm","Catching Charm"],c:"#f59e0b",s:["+30 % capture","+30% catch"],d:["Un objet : +30 % de chances de capture pendant 1 minute.","One item: +30% catch chance for 1 minute."],p:6000000}];
-BIT.forEach((x,i)=>{IT[x.k]={n:x.n[0],p:x.p,r:IR(x.p/10),c:"Bonus de combat",du:BII[i],d:LS(x.d[0],x.d[1]),bi:1}});
+BIT.forEach((x,i)=>{IT[x.k]={n:x.n[0],p:x.p*4,r:IR(x.p/10),c:"Bonus de combat",du:BII[i],d:LS(x.d[0],x.d[1]),bi:1}});
 STABS.push(["bi","Bonus","Bonus de combat"]);SHI.bi="bolt";
 const BS=()=>{const b=G.bi||(G.bi={a:1,q:1,e:[0,0,0,0,0,0]});while(b.e.length<6)b.e.push(0);return b};
 const biLeft=i=>Math.max(0,Math.ceil((BS().e[i]-Date.now())/1000));
