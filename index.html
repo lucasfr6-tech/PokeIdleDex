@@ -3196,8 +3196,8 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fd3a62b03d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=fd3a62b03d"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4b79a9cd44"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=4b79a9cd44"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3340,7 +3340,7 @@ const RMP={};
 })();
 
 HID.forEach(h=>{IT[h[0]]={n:h[1],p:h[3],r:IR(h[3]),c:h[2],h:h[4],hold:1}});
-MGD.forEach(m=>{const b=MGM[m[0]].b,p=Math.round((5e6+(b-480)*8e3)/1e5)*1e5,pr=m[2].startsWith("Primo-");IT["mp"+m[0]]={n:(pr?"Perle Primale · ":"Méga-Perle · ")+m[2].replace(/^(Méga|Primo)-/,""),p,r:IR(p),c:"Méga et Dynamax",mf:m[0],hold:1}});
+MGD.forEach(m=>{const b=MGM[m[0]].b,p0=Math.round((5e6+(b-480)*8e3)/1e5)*1e5,p=p0*10,pr=m[2].startsWith("Primo-");IT["mp"+m[0]]={n:(pr?"Perle Primale · ":"Méga-Perle · ")+m[2].replace(/^(Méga|Primo)-/,""),p,r:IR(p0),c:"Méga et Dynamax",mf:m[0],hold:1}});
 IT["dynamax-band"]={n:"Poignet Dynamax",p:12e6,r:IR(12e6),c:"Méga et Dynamax",dy:1,hold:1};
 IT["bottle-cap"].n="Capsule d'Argent";IT["gold-bottle-cap"].n="Capsule d'Or";IT["ability-capsule"].n="Pilule Talent";
 const STABS=[["balls","Poké Balls","Poké Balls"],["heal","Soins","Soins"],["stone","Évolution","Pierres d'évolution"],["vit","Vitamines","Vitamines"],["trn","IV et talents","Entraînement"],["hold","Équipement","Objets de combat"],["typ","Types","Objets de type"],["ber","Baies","Baies"],["tra","Entraînement+","Objets d'entraînement"],["spc","Spécifiques","Objets spécifiques"],["mega","Méga et Dynamax","Méga et Dynamax"],["tm","CT","CT (capacités)"]];
@@ -9677,6 +9677,9 @@ function pmChk(){
 function pmLine(){
  const nx=((G.pm|0)+10),p=pmPts(nx),p2=pmPts(nx+10);
  return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 10 étages, tu gagnes des points de prestige en plus.","Every 10 floors you earn extra prestige points.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+10}).</span></div>`}
+
+/* prix des packs de cartes x12 */
+BOOST.forEach(b=>{b.p*=12});
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
