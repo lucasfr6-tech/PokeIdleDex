@@ -3193,8 +3193,8 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="68703257cc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=68703257cc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1e3b348cea"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1e3b348cea"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4416,11 +4416,7 @@ const wi=w=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<w.length;k
 function penGo(){if(!PNM||PNM.mode!="pick"||!PNM.sel.length||(G.pen&&G.pen.t0))return;G.pen={sl:PNM.sel.filter(i=>G.col[i]).slice(0,10),t0:Date.now()};PNM=null;PENR=false;sfx("click");save()}
 function penClaim(){const p=G.pen;if(!p||Date.now()-p.t0<PEN_T)return;qadd("pen",1);const out=[];
  for(const i of p.sl){const c=G.col[i];if(!c)continue;const o={i,k:""};
-  if(Math.random()<PEN_P){const r=Math.random();
-   if(r<PEN_W[0]){const L=[3,4,5,6];o.v=L[wi(L.map(k=>SZ[k][4]))];o.k="sz";c.zi=o.v}
-   else if(r<PEN_W[0]+PEN_W[1]){const L=[1,2,3,4,5,6,7,8,9,10];o.v=L[wi(L.map(k=>MU[k][4]))];o.k="mu";c.mi=o.v}
-   else{o.k="sh";c.sh=1}
-   rq(i)}
+  const gz=Math.random()<.03,gm=Math.random()<.03,gh=Math.random()<.01;if(gz){const L=[3,4,5,6];o.v=L[wi(L.map(k=>SZ[k][4]))];o.k="sz";c.zi=o.v}if(gm){const L=[1,2,3,4,5,6,7,8,9,10];o.v=L[wi(L.map(k=>MU[k][4]))];o.k="mu";c.mi=o.v}if(gh){o.k="sh";c.sh=1}if(gz||gm||gh)rq(i)
   out.push(o)}
  G.pen=null;PNM={mode:"res",out};PENR=false;save();sfx(out.some(o=>o.k)?"big":"click")}
 const penKind=o=>o.k=="sz"?[SZ[o.v][0],SZC[o.v]]:o.k=="mu"?[MU[o.v][0],MUC[o.v]]:[LS("Chromatique","Shiny"),"#fde047"];
@@ -4441,7 +4437,7 @@ function vPen(){const p=G.pen,run=!!(p&&p.t0),left=run?Math.max(0,PEN_T-(Date.no
  const slots=Array.from({length:10},(_,k)=>{const i=run?p.sl[k]:0;return i&&G.col[i]?`<div class="pns on">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pns${run?" off":""}" ${run?"":`data-a="pen"`}>${run?"":ico("plus2")}<small>${run?"":LS("Ajouter","Add")}</small></div>`}).join("");
  const pc=(x)=>{const v=x*100;return (v>=10?v.toFixed(0):v>=1?v.toFixed(1):v.toFixed(2)).replace(".",SG.lang=="en"?".":",")};
  const szT=[3,4,5,6].map(k=>{const t=[3,4,5,6].reduce((a,b)=>a+SZ[b][4],0);return [SZ[k][0],SZC[k],SZ[k][4]/t]}),muT=[1,2,3,4,5,6,7,8,9,10].map(k=>{const t=[1,2,3,4,5,6,7,8,9,10].reduce((a,b)=>a+MU[b][4],0);return [MU[k][0],MUC[k],MU[k][4]/t]});
- return `<div class="pnx"><div class="box pnh"><div class="pnt"><span class="pni">${ico("pension")}</span><div><h2>${LS("Pension","Daycare")}</h2><small>${LS("Confie un lot de 10 Pokémon au niveau maximum. 30 minutes plus tard, chacun a 3 % de chance de revenir avec une taille, une mutation ou en chromatique.","Leave a batch of 10 max-level Pokémon. Forty minutes later, each has a 3% chance to return with a size, a mutation or as a shiny.")}</small></div></div>
+ return `<div class="pnx"><div class="box pnh"><div class="pnt"><span class="pni">${ico("pension")}</span><div><h2>${LS("Pension","Daycare")}</h2><small>${LS("Confie un lot de 10 Pokémon au niveau maximum. 30 minutes plus tard, chaque Pokémon a 3 % de chance de revenir avec une taille, 3 % avec une mutation et 1 % en chromatique (tirages séparés).","Leave a batch of 10 max-level Pokémon. Thirty minutes later, each Pokémon has a 3% chance to return with a size, 3% with a mutation and 1% as a shiny (separate rolls).")}</small></div></div>
  ${run?`<div class="pnk"><div class="pnr" id="pnr" style="--p:${((1-left/PEN_T)*100).toFixed(1)}"><b id="pnct">${ready?LS("Terminé","Done"):hms(left/1000)}</b><small>${ready?LS("Prêt","Ready"):LS("Temps restant","Time left")}</small></div>
   <div class="pnc"><b>${ready?LS("Ton lot est prêt !","Your batch is ready!"):LS("Tes Pokémon se reposent…","Your Pokémon are resting…")}</b><small>${LS("Reviens quand tu veux : le temps continue même hors ligne.","Come back any time: the timer keeps running offline.")}</small>${ready?`<button class="go" data-a="pncl">${ico("gift")} ${LS("Récupérer le lot","Collect the batch")}</button>`:`<span class="pnw">${LS("Fin à","Ends at")} ${new Date(p.t0+PEN_T).toLocaleTimeString(SG.lang=="en"?"en-GB":"fr-FR",{hour:"2-digit",minute:"2-digit"})}</span>`}</div></div>`
  :`<div class="pnk"><div class="pnc"><b>${LS("Aucun lot en cours","No batch in progress")}</b><small>${LS("Pokémon éligibles : ","Eligible Pokémon: ")}<b>${el}</b> · ${LS("niveau requis : ","level required: ")}<b>${penLv()}</b></small><button class="go" data-a="pen" ${el?"":"disabled"}>${ico("pension")} ${LS("Composer un lot","Build a batch")}</button></div></div>`}
@@ -4456,7 +4452,7 @@ WSEC.push(["pen","Pension et déblocages","Daycare & unlocks","clock"]);
 wkBody.pen=()=>`<h2>${LS("Pension et déblocages","Daycare & unlocks")}</h2>
  <p>${TT("Certaines parties du jeu se débloquent avec ton <b>meilleur étage</b> : le cadenas sur l'icône t'indique quand.","Some parts of the game unlock with your <b>best floor</b>: the padlock on the icon tells you when.")}</p>
  ${tbl([LS("Fonction","Feature"),LS("Étage","Floor")],[[LS("Expéditions","Expeditions"),LOCKS.exp],[LS("Prestige","Prestige"),LOCKS.reb],[LS("Raids","Raids"),LOCKS.raid],[LS("Pension","Daycare"),LOCKS.pen],[LS("Cartes (boosters Éveil et Argent)","Cards (Awakening and Silver boosters)"),LOCKS.gacha],...BFL.slice(2).map((f,k)=>[LS("Booster ","Booster ")+BOOST[k+2].n,f])])}
- <h3>${LS("La Pension","The Daycare")}</h3><p>${TT("Dans l'onglet <b>Pension</b> (flèche à droite du dock), tu confies jusqu'à 10 Pokémon <b>au niveau maximum de ton étage</b>. 30 minutes plus tard, chacun a <b>3 %</b> de chance de gagner une taille, une mutation ou le statut chromatique. Le temps tourne même quand le jeu est fermé.","In the <b>Daycare</b> tab (arrow on the right of the dock), you leave up to 10 Pokémon <b>at your floor's level cap</b>. Forty minutes later, each has a <b>3%</b> chance to gain a size, a mutation or shiny status. The timer keeps running while the game is closed.")}</p>`;
+ <h3>${LS("La Pension","The Daycare")}</h3><p>${TT("Dans l'onglet <b>Pension</b> (flèche à droite du dock), tu confies jusqu'à 10 Pokémon <b>au niveau maximum de ton étage</b>. 30 minutes plus tard, chaque Pokémon a <b>3 %</b> de chance de gagner une taille, <b>3 %</b> une mutation et <b>1 %</b> le statut chromatique (tirages séparés). Le temps tourne même quand le jeu est fermé.","In the <b>Daycare</b> tab (arrow on the right of the dock), you leave up to 10 Pokémon <b>at your floor's level cap</b>. Forty minutes later, each Pokémon has a <b>3%</b> chance to gain a size, <b>3%</b> a mutation and <b>1%</b> shiny status (separate rolls). The timer keeps running while the game is closed.")}</p>`;
 
 /* ============ v20 : titres, cadres, profil, classement ============ */
 const nAch=()=>Object.keys(G.ach).length,nMut=()=>ids().filter(i=>G.col[i].mi).length,nBig=()=>ids().filter(i=>G.col[i].zi>=3).length;
@@ -5183,9 +5179,9 @@ function act22b(a,i,j,t,v){
  if(a=="chrx"){CH.rp=null;const f=$("chf");if(f)f.dataset.s="";chRender(false);return 2}
  if(a=="fcp"){copyId();return 2}
  if(a=="fad"){frAddCode();return 2}
- if(a=="fau"){frAddUid(t,(rowOf(t)||{}).n);return 2}
+ if(a=="fau"){frAddUid(t,(rowOf(t)||{}).n).then(()=>{try{if(VP)modal();if(SCP.o=="fr")frRender()}catch(e){}});return 2}
  if(a=="frm"){frRm(t);return 2}
- if(a=="fvp"){if(!rowOf(t)&&t!=LB.uid)return 2;scClose();return act("vp",0,0,t)}
+ if(a=="fvp"){if(!rowOf(t)&&t!=LB.uid){const q=(window.PIDINFO||{})[t]||CH.view.find(x=>x.u==t);if(!q)return 2;FD.info[t]=Object.assign({},q.u?{n:q.n,av:q.av,avs:q.avs,fr:q.fr,st:q.st,tl:q.tl}:q,{_t:Date.now()})}scClose();return act("vp",0,0,t)}
  if(a=="crx"){cropClose();return 2}
  if(a=="cro"){cropOk();return 2}
  if(a=="crrot"){CR.rot=(CR.rot+90)%360;cropClamp();cropDraw();return 2}
@@ -7144,7 +7140,7 @@ function pvPreview(){const o=PVX.cur,p=pvS(),pv=pvPrev(o),tt=pvTier(o.r),mt=pvTi
   ${o.tuto||o.fri?`<div class="pvvo"><span class="n">${o.tuto?"Entraînement : aucun point en jeu":"Match amical : hors classement"}</span></div>`:`<div class="pvvo"><span class="w">Victoire +${pv.w}</span><span class="l">Défaite ${pv.l}</span></div>`}
   <button class="pvgo big" data-pv="go">${pvIc("sword")} Lancer le combat</button><small class="pvdim c">Tu connais son équipe, mais pas ses attaques ni son ordre. Il découvre ta composition de la même façon.</small></div>`)}
 function pvProf(id){const r=pvRows().find(x=>String(x.id)==id);if(!r)return;const t=pvTier(r.r),rw=pvRw(r.rk);
- pvModal(`<div class="pvmb" data-pv="close"></div><div class="pvmc pvpf"><button class="pvcl" data-pv="close">${pvIc("x")}</button><div class="pvvh"><div class="pvvp l">${pvAvatar(r,"md")}<div><b>${esc(r.n)}</b><small>Rang ${r.rk} · ${r.r} pts · ${r.w||0}V ${r.l||0}D</small></div></div>${pvEmb(t,54)}</div>${rw?`<div class="pvvt">Récompense actuelle<em>${rw.n}</em></div>${pvRwHtml(rw,1)}`:""}
+ pvModal(`<div class="pvmb" data-pv="close"></div><div class="pvmc pvpf"><button class="pvcl" data-pv="close">${pvIc("x")}</button><div class="pvvh"><div class="pvvp l">${pvAvatar(r,"md")}<div><b>${esc(r.n)}</b><small>Rang ${r.rk} · ${r.r} pts · ${r.w||0}V ${r.l||0}D</small></div></div>${pvEmb(t,54)}</div>${r.me||r.bot?"":`<div style="margin:10px 0;text-align:center">${frBtn(r.id)}</div>`}${rw?`<div class="pvvt">Récompense actuelle<em>${rw.n}</em></div>${pvRwHtml(rw,1)}`:""}
   <div class="pvvt">Équipe défensive</div><div class="pvvg">${r.tm.map(id=>{const u=pvMake(id);return `<div class="pvvc"><i class="pvbd">${u.bst}</i>${pvImg(id,"big")}<b>${esc(u.name)}</b><span class="pvty">${tchips(u.types)}</span><small>PV ${u.max} · Vit ${u.spe}</small></div>`}).join("")}</div></div>`)}
 
 /* ---------- combat ---------- */
@@ -8106,7 +8102,7 @@ function glHelpV(S){const g=glS(),M=S.mine,now=Date.now(),mine=M.v.filter(m=>m.i
  <div class="glx-box"><h3>${glIc("swap")}${LS("Échanges proposés","Open trades")}</h3><div class="glx-reqs">${mine.filter(m=>m.of&&now-m.of.ts<864e5).map(m=>{const have=G.cards[m.of.w]||0,ok=have>=2;return `<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${glAgo(m.of.ts)}</small></div><div class="glx-of s">${glCard(m.of.g)}<span class="glx-ar">${glIc("swap")}</span>${glCard(m.of.w,`<i>×${have}</i>`)}</div><button class="${ok?"go":""}" data-gl="tk:${m.id}" ${ok?"":"disabled"}>${ok?LS("Échanger","Trade"):LS("Pas de double","No spare")}</button></div>`}).join("")||`<div class="glx-empty"><span>${LS("Aucun échange proposé.","No open trades.")}</span></div>`}</div></div>`}
 function glMemV(S){const M=S.mine,g=glS(),lead=M.lead.id,isL=S.isLead,wk=glWk(Date.now()),pt=m=>Math.floor(CHK.reduce((a,k)=>a+(((m.ct&&m.ct.wk==wk&&m.ct.w)||{})[k]||0)*(GXW[k]||0),0));
  const rows=M.v.slice().sort((a,b)=>(a.id==lead?-1:b.id==lead?1:0)||pt(b)-pt(a));
- return `<div class="glx-box"><h3>${glIc("team")}${LS("Membres","Members")}<span class="glx-sub">${M.n} / ${GLMAX}</span></h3><div class="glx-mem">${rows.map(m=>`<div class="glx-mr ${m.id==S.me?"me":""}">${glAvT(m)}<div class="glx-mn"><b>${esc(m.n)}${m.id==lead?`<span class="glx-cr">${glIc("crown")}${LS("Chef","Leader")}</span>`:""}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1} · ${fmt(m.pw||0)} ${LS("dégâts/s","dmg/s")}</small></div><div class="glx-mp"><b>${fmt(pt(m))}</b><small>${LS("pts / semaine","pts / week")}</small></div>${isL&&m.id!=S.me?`<button class="glx-kk" data-gl="kk:${m.id}" title="${LS("Exclure","Kick")}">${ico("x")}</button>`:"<span></span>"}</div>`).join("")}${Array.from({length:Math.max(0,GLMAX-M.n)},()=>`<div class="glx-mr e"><span class="glx-em0">${glIc("plus")}</span><small>${LS("Place libre","Free slot")}</small></div>`).join("")}</div></div>
+ return `<div class="glx-box"><h3>${glIc("team")}${LS("Membres","Members")}<span class="glx-sub">${M.n} / ${GLMAX}</span></h3><div class="glx-mem">${rows.map(m=>`<div class="glx-mr ${m.id==S.me?"me":""}">${(window.PIDREG&&PIDREG(m),"")}<span ${m.id!=S.me?`data-a="fvp" data-t="${esc(String(m.id))}" style="cursor:pointer"`:""}>${glAvT(m)}</span><div class="glx-mn" ${m.id!=S.me?`data-a="fvp" data-t="${esc(String(m.id))}" style="cursor:pointer"`:""}><b>${esc(m.n)}${m.id==lead?`<span class="glx-cr">${glIc("crown")}${LS("Chef","Leader")}</span>`:""}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1} · ${fmt(m.pw||0)} ${LS("dégâts/s","dmg/s")}</small></div><div class="glx-mp"><b>${fmt(pt(m))}</b><small>${LS("pts / semaine","pts / week")}</small></div>${isL&&m.id!=S.me?`<button class="glx-kk" data-gl="kk:${m.id}" title="${LS("Exclure","Kick")}">${ico("x")}</button>`:"<span></span>"}</div>`).join("")}${Array.from({length:Math.max(0,GLMAX-M.n)},()=>`<div class="glx-mr e"><span class="glx-em0">${glIc("plus")}</span><small>${LS("Place libre","Free slot")}</small></div>`).join("")}</div></div>
  ${isL&&M.pend.length?`<div class="glx-box"><h3>${glIc("uadd")}${LS("Demandes d'adhésion","Join requests")}</h3><div class="glx-reqs">${M.pend.map(m=>`<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1}</small></div><button class="go" data-gl="ac:${m.id}">${LS("Accepter","Accept")}</button></div>`).join("")}</div></div>`:""}
  ${isL?`<div class="glx-box"><h3>${glIc("sliders")}${LS("Réglages de la guilde","Guild settings")}</h3><label class="glx-lab2">${LS("Description","Description")}<input class="glx-in" id="glsd" value="${esc(M.ds||"")}" maxlength="120" autocomplete="off"></label><div class="glx-seg"><button class="${M.op!==0?"glon":""}" data-gl="so:1">${LS("Ouverte à tous","Open to all")}</button><button class="${M.op===0?"glon":""}" data-gl="so:0">${LS("Sur demande","On request")}</button></div><button class="go" data-gl="sd">${LS("Enregistrer la description","Save description")}</button></div>`:""}
  <div class="glx-lv2"><button class="glx-danger" data-gl="lv">${LS("Quitter la guilde","Leave guild")}</button></div>`}
@@ -9595,8 +9591,10 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
 (function(){
  const idle=d=>!!d&&/^(Dresseur|Trainer)$/i.test(d.n||"Dresseur")&&(+d.bf||0)<=1&&(+d.caps||0)<=30;
  try{const p=lbPush;lbPush=function(force){try{if(idle(lbDoc()))return}catch(e){}return p.apply(this,arguments)}}catch(e){}
- try{const r=lbRows;lbRows=function(){return r.apply(this,arguments).filter(x=>x.me||!idle(x))}}catch(e){}
+ try{const r=lbRows;lbRows=function(){return r.apply(this,arguments).filter(x=>x.me||(typeof FD!="undefined"&&FD.info&&FD.info[x.id])||!idle(x))}}catch(e){}
 })();
+
+window.PIDREG=function(m){try{if(m&&m.id!=null)(window.PIDINFO=window.PIDINFO||{})[m.id]={n:m.n,tl:m.tl,av:m.av,avs:m.avs,fr:m.fr,st:m.st}}catch(e){}};
 /* ===== filtre : insultes, raccourcis, propos racistes, liens ===== */
 function pidCensor(t){
  if(typeof t!="string"||!t)return t;
