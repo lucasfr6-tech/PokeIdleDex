@@ -3165,8 +3165,8 @@ body.lndon{overflow:hidden}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2c4f74f77a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2c4f74f77a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ce07e3c29b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ce07e3c29b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6841,7 +6841,7 @@ function pvRows(idx){idx=idx==null?pvIdx():idx;const cur=idx==pvIdx(),p=pvS(),re
   if(x.k==idx&&(x.w||0)+(x.l||0)>0)real.push(Object.assign({},x,{r:+x.r||PVN,f:(x.w||0)+(x.l||0)}));
   else if(x.pk==idx&&(x.pf||0)>0)real.push(Object.assign({},x,{r:+x.pr||PVN,f:x.pf,w:0,l:0}))});
  const nb=Math.max(30,100-real.length),rows=real.slice();
- for(let i=0;i<nb;i++)rows.push(pvBotRow(i,idx));
+ /* plus de bots : seulement des joueurs en ligne */
  const d=lbDoc();let me=null;
  if(cur)me=Object.assign({},d,{id:(LB&&LB.uid)||"me",me:1,r:p.r,w:p.w,l:p.l,f:p.f,tm:p.tm.slice()});
  else if(p.pk==idx)me=Object.assign({},d,{id:(LB&&LB.uid)||"me",me:1,r:p.pr,w:0,l:0,f:p.pf,tm:p.tm.slice()});
@@ -7528,7 +7528,7 @@ function twBotRow(i){const b=Math.max(3,Math.round(76*Math.pow(1-i/52,1.25))+(pv
  return{id:"bot"+i,bot:1,n:pvBotName(i+11),b,bt:1.6e12+i*3.7e9,tm,av:tm[0],avs:0,fr:"f0",tt:"t0"}}
 function twRows(){const t=twS(),real=[];
  TWX.rows.forEach(x=>{if(!x.n||x.id==(LB&&LB.uid)||!Array.isArray(x.tm)||x.tm.length<1||!(x.b>0))return;real.push(Object.assign({},x))});
- const rows=real.slice();for(let i=0;i<50;i++)rows.push(twBotRow(i));
+ const rows=real.slice();/* plus de bots : seulement des joueurs en ligne */
  const d=lbDoc();rows.push(Object.assign({},d,{id:(LB&&LB.uid)||"me",me:1,b:t.b,bt:t.bt||Date.now(),tm:t.tm.slice(),mv:pvPick(pvS().mv,t.tm),it:pvPick(pvS().it,t.tm)}));
  rows.sort((a,b)=>(b.b-a.b)||((a.bt||0)-(b.bt||0))||String(a.id).localeCompare(String(b.id)));rows.forEach((x,i)=>x.rk=i+1);return rows}
 const twRank=()=>{const m=twRows().find(x=>x.me);return m?m.rk:0};
@@ -7903,7 +7903,7 @@ function glAdd(k,n){const g=glS();glRoll();if(!(n>0))return;g.ct.w[k]=(g.ct.w[k]
 function glTrack(){const g=glS(),m=glMet();if(!g.last||!g.id){g.last=m;return}glRoll();CHK.forEach(k=>{if(k=="don")return;const d=m[k]-(g.last[k]||0);if(d>0)glAdd(k,d)});g.last=m}
 /* ---------- membres simulés ---------- */
 const GLSAY=["On enchaîne les boss ?","Bien joué pour le défi !","Qui a une carte rare en double ?","Le boss de la semaine est costaud","Je passe niveau supérieur ce soir","Merci pour la carte !","Courage, on y est presque","Je lance le boss maintenant","Quelqu'un pour un échange ?","GG la team"];
-function glBotGuilds(){const n=Date.now();return GLN.map((nm,i)=>{const id="bot"+i;return{id,n:nm,tag:GLT2[i],em:{i:GLEM[(i*3)%12],c:(i*3+1)%10},ds:["Guilde conviviale, tout le monde est bienvenu.","On vise le boss chaque semaine.","Actifs tous les jours, ambiance détendue.","Pour les chasseurs de chromatiques."][i%4],op:i%3==2?0:1,t:Date.parse("2026-09-"+(8+i*2)+"T10:00:00Z"),ow:"bot"+i+"-0",bot:1,N:7+glH("n"+i)%12}})}
+function glBotGuilds(){return[]}function glBotGuilds0(){const n=Date.now();return GLN.map((nm,i)=>{const id="bot"+i;return{id,n:nm,tag:GLT2[i],em:{i:GLEM[(i*3)%12],c:(i*3+1)%10},ds:["Guilde conviviale, tout le monde est bienvenu.","On vise le boss chaque semaine.","Actifs tous les jours, ambiance détendue.","Pour les chasseurs de chromatiques."][i%4],op:i%3==2?0:1,t:Date.parse("2026-09-"+(8+i*2)+"T10:00:00Z"),ow:"bot"+i+"-0",bot:1,N:7+glH("n"+i)%12}})}
 function glBotDoc(gd,i,now,pw0){const id=gd.id+"-"+i,s=id,dk=glDk(now),wk=glWk(now),f=Math.min(1,(now-glDs(dk))/864e5),r=glR(s+"r"),pw=Math.max(5,Math.round(pw0*(.35+1.25*r))),jd=gd.bot?gd.t+(i?i*36e5*7:0):gd.t+i*5*36e5;
  const ct={wk,w:{},dk,d:{}};const act=d=>glR(s+d)<.82?(.4+.8*glR(s+d+"a")):0;
  CHK.forEach(k=>{const b=k=="gain"?0:CHT[k].d;if(!b)return;let w=0;for(let j=0;j<7;j++){const day=glDk(glDs(wk)+j*864e5);if(glDs(day)>now)break;const part=day==dk?f:1;w+=b*act(day)*part*.6}ct.d[k]=Math.floor(b*act(dk)*f*.6);ct.w[k]=Math.floor(w)});
@@ -7919,7 +7919,7 @@ function glAll(){const now=Date.now(),g=glS(),me=glMyDoc(),out=[];
  if(glSrc()=="on"){const by={};GLX.gl.forEach(x=>{by[x.id]={gd:x,docs:[]}});GLX.docs.forEach(m=>{if(m.id==me.id||!m.g||!by[m.g])return;by[m.g].docs.push(m)});
   if(g.id&&!by[g.id]&&g.gd)by[g.id]={gd:g.gd,docs:[]};if(g.id&&by[g.id])by[g.id].docs.push(me);for(const k in by)out.push(by[k])}
  else{const pw0=Math.max(40,me.pw||40);glBotGuilds().forEach(gd=>{const docs=[];for(let i=0;i<gd.N;i++)docs.push(glBotDoc(gd,i,now,pw0));if(g.id==gd.id)docs.push(me);out.push({gd,docs})});
-  const sg=g.sg;if(sg){const n=Math.min(14,Math.floor((now-sg.t)/(4*36e5))+2),docs=[];for(let i=1;i<=n;i++)docs.push(glBotDoc(sg,i,now,pw0));if(g.id==sg.id)docs.push(me);out.push({gd:sg,docs})}}
+  const sg=g.sg;if(sg){const n=0,docs=[];for(let i=1;i<=n;i++)docs.push(glBotDoc(sg,i,now,pw0));if(g.id==sg.id)docs.push(me);out.push({gd:sg,docs})}}
  return out}
 function glValid(gd,docs){const mod=glLead(gd,docs).mod||{},acc=new Set(mod.acc||[]),kick=mod.kick||[];
  const ok=docs.filter(m=>m.id==gd.ow||((glSet(gd,docs).op!==0||acc.has(m.id)||m.a==1)&&!kick.some(k=>k.u==m.id&&(m.jd||0)<=k.ts)));
