@@ -3264,8 +3264,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6e2561b35c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=6e2561b35c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1233d79432"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1233d79432"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10009,7 +10009,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 const FREE=5,MAXB=3;
 const Q=()=>{const p=pvS(),d=pvDayK();if(!p.q||p.q.d!=d)p.q={d,n:0,b:0};return p.q};
 const left=()=>{const q=Q();return Math.max(0,FREE+q.b-q.n)};
-const price=()=>{const q=Q();let b=300000;try{b=Math.max(300000,qcps()*1800)}catch(e){}return Math.floor(b*(1+q.b))};
+const price=()=>{const q=Q();return 300000};
 window.pvQLeft=left;
 const _ps=pvStart;
 pvStart=function(){const o=PVX.cur;if(o&&!o.tuto&&!o.fri){if(left()<=0){toast(LS("Plus de combat classé aujourd'hui : achète un ticket ou reviens demain.","No ranked fights left today: buy a ticket or come back tomorrow."));sfx("err");try{pvModal("")}catch(e){}return}Q().n++;save()}return _ps.apply(this,arguments)};
@@ -10192,6 +10192,22 @@ function show1(id){const S=glState(),e=S.L.find(x=>String(x.gd.id)==String(id));
  <div class="glx-sub" style="margin:6px 0">${LS("Niv.","Lv.")} ${e.lv} · ${e.n} / ${GLMAX} · ${fmt(tot)} ${LS("dégâts/s au total","dmg/s total")}</div>
  <div class="glx-mem">${rows.map(m=>`<div class="glx-mr">${glAvT(m)}<div class="glx-mn"><b>${esc(m.n)}${m.id==lead?`<span class="glx-cr">${glIc("crown")}${LS("Chef","Leader")}</span>`:""}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1}</small></div><div class="glx-mp"><b>${fmt(m.pw||0)}</b><small>${LS("dégâts/s","dmg/s")}</small></div></div>`).join("")||`<div class="glx-empty"><span>${LS("Aucun membre.","No member.")}</span></div>`}</div>`)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-gl^="gv:"]');if(!b)return;ev.stopPropagation();show1(b.dataset.gl.slice(3))},true);
+})();
+/* JCJ : le gagnant fait perdre autant de MMR a l'adversaire (joueurs reels) */
+(function(){
+const _pf=pvFinish;
+pvFinish=function(B){const real=B&&!B.tuto&&!B.friendly&&B.over=="win"&&B.opp&&LB&&LB.ok&&LB.db&&PVX.rows.some(x=>x.id==B.opp.id&&Array.isArray(x.tm)),oid=real?String(B.opp.id):"";
+ const r=_pf.apply(this,arguments);
+ try{if(real){const p=pvS(),h=p.h[0];if(h&&h.id==B.opp.id&&h.res=="win"&&h.d>0){const d=Math.min(60,h.d|0),id="ht_"+oid.slice(0,24)+"_"+String(LB.uid).slice(0,12)+"_"+Date.now().toString(36);
+  LB.db.doc("pvp/"+id).set({hit:1,to:oid,d,k:pvIdx(),from:LB.uid,fn:G.name||"",t:Date.now()}).catch(()=>{})}}}catch(e){}
+ return r};
+function apply(){try{if(!(LB&&LB.ok&&LB.db))return;const p=pvS();p.hx=p.hx||{};let tot=0,who="";
+ PVX.rows.forEach(x=>{if(!x.hit||x.to!=LB.uid||p.hx[x.id])return;p.hx[x.id]=1;if(x.k!=pvIdx()||Date.now()-(x.t||0)>7*864e5)return;const d=Math.min(60,Math.max(0,x.d|0));if(d>0){tot+=d;who=x.fn||who}});
+ const ks=Object.keys(p.hx);if(ks.length>300)ks.slice(0,ks.length-300).forEach(k=>delete p.hx[k]);
+ if(tot>0){const old=p.r;p.r=Math.max(0,p.r-tot);save();pvPush();toast(LS("Un adversaire t'a battu en classé : -"+(old-p.r)+" MMR","An opponent beat you in ranked: -"+(old-p.r)+" MMR"));try{pvRefresh()}catch(e){}}
+ else if(Object.keys(p.hx).length)save()}catch(e){}}
+const _pf2=pvFetch;
+pvFetch=async function(){const r=await _pf2.apply(this,arguments);apply();return r};
 })();
 
 /* ============ DÉMARRAGE ============ */
