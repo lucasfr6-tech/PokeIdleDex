@@ -3250,8 +3250,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="15717ee10b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=15717ee10b"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="dd2d0be618"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=dd2d0be618"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6447,11 +6447,11 @@ vb=function(c){let s=vb0(c);if(c.mi>=8&&MU[c.mi])s=s.replace('">'+MU[c.mi][0]+'<
 const itSell=k=>{const i=IT[k];if(!i)return 0;const fb=i.m?30000:i.dy||/dynamax|band|bracelet|mega|méga|pearl|perle/i.test((i.n||"")+k)?25000:3000;return Math.max(10,Math.floor((i.p||fb)*.4))};
 const bgCard0=bgCard;
 bgCard=function(x){const s=bgCard0(x),k=x.k,have=G.inv[k]||0;if(have<1)return s;const v=itSell(k);
- return s.replace('</div><span class="bgn">',`<div class="bgs"><button data-bgs="${k}" data-q="1" title="+${fmt(v)} ₽">${LS("Vendre 1","Sell 1")} · +${fmt(v)} ₽</button>${have>1?`<button data-bgs="${k}" data-q="all" class="bgsa">${LS("Tout","All")} ×${have} · +${fmt(v*have)} ₽</button>`:""}</div></div><span class="bgn">`)};
+ return s.replace('</div><span class="bgn">',`<div class="bgs"><button data-bgs="${k}" data-q="1" title="">${LS("Supprimer 1","Delete 1")}</button>${have>1?`<button data-bgs="${k}" data-q="all" class="bgsa">${LS("Tout supprimer","Delete all")} ×${have}</button>`:""}</div></div><span class="bgn">`)};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-bgs]");if(!t)return;e.stopPropagation();e.preventDefault();
  const k=t.dataset.bgs,have=G.inv[k]||0,q=t.dataset.q=="all"?have:1;if(have<1||q<1)return;
- if(q>1&&!t.classList.contains("cf")){t.classList.add("cf");t.dataset.o=t.textContent;t.textContent=LS("Confirmer la vente","Confirm sale");setTimeout(()=>{if(t.classList.contains("cf")){t.classList.remove("cf");t.textContent=t.dataset.o||""}},3000);return}
- const v=itSell(k)*q;G.inv[k]=have-q;if(G.inv[k]<=0)delete G.inv[k];G.m+=kxI("sellit",v);recomp();save();sfx("coin");toast((IT[k]?IT[k].n:k)+" ×"+q+" "+LS("vendu","sold")+" (+"+fmt(v)+" ₽)");if(tab=="bag")show()},true);
+ if(q>1&&!t.classList.contains("cf")){t.classList.add("cf");t.dataset.o=t.textContent;t.textContent=LS("Confirmer la suppression","Confirm deletion");setTimeout(()=>{if(t.classList.contains("cf")){t.classList.remove("cf");t.textContent=t.dataset.o||""}},3000);return}
+ const v=itSell(k)*q;G.inv[k]=have-q;if(G.inv[k]<=0)delete G.inv[k];recomp();save();sfx("err");toast((IT[k]?IT[k].n:k)+" ×"+q+" "+LS("supprimé","deleted"));if(tab=="bag")show()},true);
 /* ============ v63 : bracelet Dynamax réservé aux Pokémon qui ont une forme Dynamax / Gigamax ============ */
 Object.assign(GMX,{25:10199,52:10200,99:10203,133:10205,569:10207,809:10208,812:10209,815:10210,818:10211,823:10212,826:10213,834:10214,839:10215,841:10216,842:10217,844:10218,849:10219,851:10220,858:10221,861:10222,869:10223,879:10224,884:10225,890:10190,892:10226});
 function canDyn(id){return !!GMX[spc(id)]}
@@ -8525,8 +8525,8 @@ wkBody.gld=()=>{
 wkBody.shop=()=>`<p class="lead">La Boutique vend tout ce qui sert à progresser ; le Sac rassemble ce que tu possèdes. Tout s'achète avec des pièces (₽).</p>
 ${wsx("Boutique",`<ul class="wks2"><li><b>Poké Balls</b> : de la Poké Ball (20 ₽ de base) à la Rêve Ball. Les balls plus puissantes se débloquent avec ton étage. Voir la page Capture.</li><li><b>Objets tenus</b> : ils changent le combat (voir la page Objets tenus).</li><li><b>Vitamines et entraînement</b> : donnent des EV.</li><li><b>Capsules et Patchs</b> : Capsule d'Argent (un IV à 31), Capsule d'Or (tous les IV), Patch Talent, Patch Capacité.</li><li><b>Méga et Dynamax</b> : Méga-Perles et Poignet Dynamax.</li></ul>
 <p>L'amélioration d'Économie du prestige réduit tous les prix de la boutique (−2 % par niveau).</p>`)}
-${wsx("Sac",`<p>Le Sac affiche tous tes objets : balls, soins, pierres, Méga-Perles, Dynamax, objets tenus. Tu peux trier par catégorie, nom, quantité, valeur ou rareté, et <b>vendre</b> un objet (40 % de son prix d'achat) ou un lot entier.</p>
-${wn("tip","Vendre sans regret","Les soins ne servent qu'aux raids : garde-en un petit stock et vends le reste si tu manques de pièces.")}`)}`;
+${wsx("Sac",`<p>Le Sac affiche tous tes objets : balls, soins, pierres, Méga-Perles, Dynamax, objets tenus. Tu peux trier par catégorie, nom, quantité, valeur ou rareté, et <b>supprimer</b> un objet ou un lot entier, sans contrepartie en pièces.</p>
+${wn("tip","Faire de la place","Les soins ne servent qu'aux raids : garde-en un petit stock et supprime le reste.")}`)}`;
 
 wkBody.inv=()=>{
  const N={D:"Divin",UR:"UR",SSR:"SSR",SR:"SR",N:"N"};
