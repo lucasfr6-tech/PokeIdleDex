@@ -3398,12 +3398,14 @@ a.qkb.qkdc .qki{color:#fff}
 .dmh{display:flex;align-items:center;gap:10px;padding:6px 4px 10px;position:sticky;top:0;background:inherit;z-index:2;border-bottom:1px solid #ffffff14;margin-bottom:6px}.dmh .frn b{display:block}.dmh .frn small{color:#94a3b8;font-size:11px}
 .dmb{width:36px;height:36px;border-radius:11px;border:1px solid #ffffff22;background:#ffffff10;color:#fff;display:grid;place-items:center;cursor:pointer}.dmb svg{width:18px;height:18px}
 .dmpv{display:flex;gap:6px;align-items:center;color:#94a3b8;font-size:11.5px;padding:6px 4px}.dmpv svg{width:13px;height:13px}.dmsn{display:block;text-align:right;color:#86efac;font-size:10.5px;margin-top:2px}
+#vtag{position:fixed;top:4px;right:10px;z-index:45;font:700 9px/1 Nunito,system-ui,sans-serif;letter-spacing:.06em;color:#cbd5e1;opacity:.55;pointer-events:none;user-select:none}
+@media(max-width:700px){#vtag{top:2px;right:6px;font-size:8px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d903c6f794"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=d903c6f794"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="dc5429a7c6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=dc5429a7c6"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10771,6 +10773,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 BOOST.forEach(b=>{b.p=Math.round(b.p/2)});
 /* ===== Chasse Méga : 2 millions de DPS requis au lieu de 3 millions ===== */
 {const m=EXT.find(t=>t.mega);if(m)m.rq=40}
+/* ===== Numéro de version, tout petit, en haut à droite (au-dessus de Courrier) ===== */
+(function(){const mk=()=>{if(document.getElementById("vtag"))return;const d=document.createElement("div");d.id="vtag";d.textContent="v1.1.0";d.title=LS("Version du jeu","Game version");document.body.appendChild(d)};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);setInterval(mk,3000)})();
 /* ===== Chat « Amis » : messages privés entre amis (seuls les deux participants les voient) ===== */
 const DMX={w:null,cv:{},msgs:[],r:0,un:0,sig:"",busy:0,ld:0,lt:0};
 const dmOn=()=>{try{return tnOn()}catch(e){return false}};
