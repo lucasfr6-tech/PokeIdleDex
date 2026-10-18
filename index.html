@@ -3176,12 +3176,25 @@ body.lndon{overflow:hidden}
  #sc>.qkb[data-t=fr]{position:fixed!important;top:auto!important;right:8px!important;bottom:193px!important;margin:0!important;z-index:44}
  #sc>#twh{position:fixed!important;top:106px!important;right:8px!important;bottom:auto!important;width:74px!important;margin:0!important;z-index:44}
 }
+
+/* fluidité : l'aurore sans mix-blend-mode et les étoiles en calques dédiés (de 35 à 59 images/s en test) */
+#sky .sk-au{mix-blend-mode:normal!important;will-change:transform}
+#sky .sk-st{will-change:opacity;transform:translateZ(0);animation:none!important}
+html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;text-shadow:none!important}
+.lntip{margin:14px auto 0;max-width:420px;font-size:12.5px;line-height:1.4;color:#aab1e8;opacity:.85;text-align:center}
+#pfb{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--dkt,118px) + 18px);z-index:100005;width:min(560px,calc(100vw - 24px));display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#10143af2;border:1px solid #fbbf2466;border-radius:16px;padding:12px 14px;box-shadow:0 10px 40px #000a;animation:pfin .3s ease-out}
+#pfb .pfi{display:flex;flex-direction:column;gap:2px;flex:1 1 220px;font-size:13px;color:#cdd3ff;line-height:1.35}
+#pfb .pfi b{color:#fbbf24;font-size:14px}
+#pfb .pfa{display:flex;gap:8px;flex-wrap:wrap}
+#pfb button{background:#ffffff14;border:1px solid #ffffff30;color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer}
+#pfb button.go{background:linear-gradient(135deg,#fde047,#f59e0b);color:#2a1b00;border:0}
+@keyframes pfin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d166ed01ec"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=d166ed01ec"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="68703257cc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=68703257cc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5116,7 +5129,7 @@ function frRender(){const p=$("frp");if(!p||SCP.o!="fr")return;const n=FD.mut.le
  ${pend.length?`<h4>${LS("En attente","Pending")}</h4>${pend.map(u=>frCard(u,"out")).join("")}`:""}</div>`;
  const c=$("fcode");if(c&&keep)c.value=keep}
 /* ---- chat ---- */
-function chBuild(){const now=Date.now(),L=[];CH.docs.forEach((d,u)=>{if(!d||!Array.isArray(d.m)||(G.fd.blk&&G.fd.blk.includes(u)&&u!=LB.uid))return;d.m.slice(-10).forEach(m=>{if(m&&typeof m.x=="string"&&typeof m.t=="number"&&m.t<now+120000)L.push({u,n:String(d.n||"").slice(0,16),tl:d.tl|0,av:d.av,avs:d.avs,fr:d.fr,st:d.st|0,t:m.t,x:m.x.slice(0,300),rp:m.rp&&typeof m.rp.x=="string"?{n:String(m.rp.n||"").slice(0,16),x:m.rp.x.slice(0,70)}:null})})});
+function chBuild(){const now=Date.now(),L=[];CH.docs.forEach((d,u)=>{if(!d||!Array.isArray(d.m)||(G.fd.blk&&G.fd.blk.includes(u)&&u!=LB.uid))return;d.m.slice(-10).forEach(m=>{if(m&&typeof m.x=="string"&&typeof m.t=="number"&&m.t<now+120000)L.push({u,n:pidCensor(String(d.n||"").slice(0,16)),tl:d.tl|0,av:d.av,avs:d.avs,fr:d.fr,st:d.st|0,t:m.t,x:pidCensor(m.x.slice(0,300)),rp:m.rp&&typeof m.rp.x=="string"?{n:pidCensor(String(m.rp.n||"").slice(0,16)),x:pidCensor(m.rp.x.slice(0,70))}:null})})});
  L.sort((a,b)=>a.t-b.t);CH.view=L.slice(-90)}
 function chMsg(m,i){const me=m.u==LB.uid,r=rowOf(m.u)||{},av=Object.assign({},m,{ai:me?(G.avm?G.avi:""):(r.ai||"")}),f=frOf(m.fr);
  return `<div class="chm${me?" me":""}"><span class="chav" data-a="fvp" data-t="${esc(m.u)}">${ava2(av,"sm")}</span><div class="chb"><div class="chn"><b data-a="fvp" data-t="${esc(m.u)}" style="color:${f[3]&&/^#/.test(f[3])?f[3]:"inherit"}">${esc(m.n)}</b><em>${m.tl}</em>${m.st>0?`<i class="chp" title="${LS("Prestige","Prestige")} ${m.st}">${ico("spark")}</i>`:""}<time>${tAgo(m.t)}</time></div>
@@ -5131,7 +5144,7 @@ function chRender(full){const p=$("chp");if(!p||SCP.o!="ch")return;chBuild();con
  const f=$("chf"),sig=[ok,lv>=CHMIN,CH.rp?CH.rp.x:"",SG.lang].join("|");if(f.dataset.s!==sig){const v=f.querySelector("textarea")?f.querySelector("textarea").value:"";f.dataset.s=sig;
   f.innerHTML=`${CH.rp?`<div class="chrp">${ico("reply")}<span><b>${esc(CH.rp.n)}</b> ${esc(CH.rp.x)}</span><button data-a="chrx">${ico("x")}</button></div>`:""}${lv<CHMIN?`<div class="chg">${ico("lock")} ${LS("Niveau "+CHMIN+" requis","Level "+CHMIN+" required")} <small>${LS("Tu es niveau "+lv,"You are level "+lv)}</small></div>`:""}<div class="chin2"><textarea id="chin" maxlength="300" rows="1" placeholder="${lv<CHMIN?LS("Niveau "+CHMIN+" requis pour écrire","Level "+CHMIN+" required to write"):LS("Écris un message…","Write a message…")}" >${esc(v)}</textarea><button class="go" data-a="chs">${ico("send")}</button></div><small class="chc" id="chc">${v.length}/300</small>`}}
 async function chSend(){const t=$("chin");if(!t)return;if(!LB.ok){toast(LS("Chat hors ligne : il fonctionne quand le jeu est ouvert depuis claude.ai","Chat offline: it works when the game is opened from claude.ai"));return}if(tlv().l<CHMIN){toast(LS("Niveau "+CHMIN+" requis","Level "+CHMIN+" required"));return}
- const x=t.value.replace(/\s+/g," ").trim().slice(0,300);if(!x)return;const now=Date.now();if(now-CH.last<3000){toast(LS("Doucement : un message toutes les 3 secondes.","Slow down: one message every 3 seconds."));return}
+ const x=pidCensor(t.value.replace(/\s+/g," ").trim().slice(0,300));if(!x)return;const now=Date.now();if(now-CH.last<3000){toast(LS("Doucement : un message toutes les 3 secondes.","Slow down: one message every 3 seconds."));return}
  if(CH.busy)return;const old=(CH.docs.get(LB.uid)||{}).m||[];if(old.length&&old[old.length-1].x==x&&now-old[old.length-1].t<30000){toast(LS("Message déjà envoyé.","Message already sent."));return}
  const m=old.filter(q=>q&&now-q.t<864e5).slice(-9),e={t:now,x};if(CH.rp)e.rp={n:CH.rp.n,x:CH.rp.x};m.push(e);
  const c=G.col[G.av]?G.av:ids()[0]||19,cc=G.col[c]||{},doc={n:G.name.slice(0,16),tl:tlv().l,av:spf(c),avs:cc.sh?1:0,tt:G.tt||"t0",fr:G.fr||"f0",st:G.st|0,m};
@@ -9500,6 +9513,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
    <button class="lndc">${DI}<span>${LS("Rejoindre le Discord","Join the Discord")}</span></button>
    <div class="lnsp">${STEPS.map(s=>`<div class="lnsq"><b>${s[0]}</b><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("")}</div>
    <div class="lntk"><div>${tk}${tk}</div></div>
+   <p class="lntip">${LS("Astuce : si le jeu rame, active le Mode performance dans Réglages.","Tip: if the game lags, turn on Performance mode in Settings.")}</p>
    <small class="lnft">${LS("Gratuit, sans téléchargement · Jeu de fan non officiel","Free, no download · Unofficial fan game")}</small></main>`;
   const lg=o.querySelector(".lnlg");lg.textContent=SG&&SG.lang=="en"?"FR":"EN";
   lg.onclick=()=>{try{const t=document.createElement("button");t.dataset.a="lang";t.dataset.t=SG.lang=="en"?"fr":"en";t.style.display="none";document.body.appendChild(t);t.click();t.remove()}catch(e){}open()};
@@ -9582,6 +9596,74 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
  const idle=d=>!!d&&/^(Dresseur|Trainer)$/i.test(d.n||"Dresseur")&&(+d.bf||0)<=1&&(+d.caps||0)<=30;
  try{const p=lbPush;lbPush=function(force){try{if(idle(lbDoc()))return}catch(e){}return p.apply(this,arguments)}}catch(e){}
  try{const r=lbRows;lbRows=function(){return r.apply(this,arguments).filter(x=>x.me||!idle(x))}}catch(e){}
+})();
+/* ===== filtre : insultes, raccourcis, propos racistes, liens ===== */
+function pidCensor(t){
+ if(typeof t!="string"||!t)return t;
+ const SQ=s=>s.replace(/(.)\1+/g,"$1");
+ const NORM=s=>SQ(s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[@4]/g,"a").replace(/3|€/g,"e").replace(/[1!|]/g,"i").replace(/0/g,"o").replace(/[5$]/g,"s").replace(/7/g,"t").replace(/[^a-z]/g,""));
+ const W=a=>new Set(a.split(" ").map(SQ));
+ const EXACT=W("con cons conne connes cul culs bite bites tg ftg ntm fdp pd pds pede pedes pedale pedales tapette tapettes tarlouze fiotte gouine gouines pute putes ptn ptns pttn pttns nsm tmtc tgl salo encule enculee encules enculer enculez bz bzz nik niker stfu fck fuk kys kms gtfo wtf nazi nazis heil negre negres negresse negro negros nga ngr niak niaks niaque bicot bicots bicote bougnoule bougnoules youpin youpins youpine feuj crouille crouilles bamboula rebeu renoi retard retarde retards retardee mongol mongols mongole attarde attardee triso trisos debile slut sluts whore whores cunt cunts dick dickhead fag fags faggot faggots bastard bastards asshole assholes shit shits merde merdes batard batards batarde bitch bitches chintok chintoks chleuh sidaique vtff");
+ const PRE=["nique","niqu","fuck","bitch","nigg","salop","connard","connass","conasse","petass","pouffi","batard","trouduc","putain","encul","branl","merd","negro","bougnoul","enfoire","tarlouz","pedal"].map(SQ);
+ const STEM=["connard","salope","encule","fuck","bitch","nigga","nigger","bougnoul","negresse","chintok","enfoire","trouduc","putain","tarlouze","nique"].map(SQ).filter(x=>x.length>=6);
+ const RACE=W("arabe arabes noir noire noirs noires blanc blanche juif juive juifs juives negre negres asiat asiatique chinois chinoise musulman musulmane rebeu renoi gitan gitane gitans turc turque");
+ const SAL=W("sale sales sal sal salle sacre");
+ const bad=n=>{if(!n||n.length<2)return false;if(EXACT.has(n))return true;for(const p of PRE)if(p.length>=4&&n.startsWith(p))return true;for(const s of STEM)if(n.includes(s))return true;return false};
+ // liens
+ let o=t.replace(/(?:https?:\/\/|ftp:\/\/|www\.)\S*/gi,"***")
+  .replace(/\b(?:discord|dsc|disc0rd)\s*\.?\s*(?:gg|com|me)\b[\s\/]*\S*/gi,"***")
+  .replace(/\b[a-z0-9-]+(?:\s*(?:\.|\(\s*\.\s*\)|\[\s*\.\s*\]|\bpoint\b|\bdot\b)\s*)(?:com|fr|net|org|io|gg|me|xyz|tk|ru|co|be|ly|tv|app|dev|info|gl|to|cc|ws|ch|de|uk|us|eu|biz|shop|site|online|link|click|top|club|live|pro|cn|jp|ml|ga|cf|gq|su)\b(?:\/\S*)?/gi,"***")
+  .replace(/\b\d{1,3}(?:\.\d{1,3}){3}\b/g,"***")
+  .replace(/\S+@\S+\.\S+/g,"***")
+  .replace(/\b(?:t\.me|bit\.ly|tinyurl)\S*/gi,"***");
+ const parts=o.split(/(\s+)/),idx=[];
+ for(let i=0;i<parts.length;i++)if(!/^\s*$/.test(parts[i]))idx.push(i);
+ const hit=new Set();
+ for(let k=0;k<idx.length;k++){
+  const raw=parts[idx[k]],n=NORM(raw);
+  if(raw=="1488"||/^n[i1!|]+g{2,}[ae4]/i.test(raw.replace(/[^a-z0-9!|]/gi,""))||bad(n))hit.add(idx[k]);
+  if(RACE.has(n)&&k>0&&SAL.has(NORM(parts[idx[k-1]]))){hit.add(idx[k]);hit.add(idx[k-1])}
+ }
+ // lettres espacees : "c o n n a r d"
+ for(let k=0;k<idx.length;){
+  let j=k;while(j<idx.length&&NORM(parts[idx[j]]).length==1&&parts[idx[j]].length<=2)j++;
+  if(j-k>=3){const n=idx.slice(k,j).map(i=>NORM(parts[i])).join("");if(bad(SQ(n)))for(let q=k;q<j;q++)hit.add(idx[q]);k=j}else k++}
+ hit.forEach(i=>{parts[i]="*".repeat(Math.max(3,Math.min(parts[i].length,8)))});
+ return parts.join("");
+}
+
+(function(){
+ try{const r=lbRows;lbRows=function(){return r.apply(this,arguments).map(x=>{if(x&&typeof x.n=="string"){const n=pidCensor(x.n);if(n!==x.n)return Object.assign({},x,{n})}return x})}}catch(e){}
+ try{const f=lbDoc;lbDoc=function(){const d=f.apply(this,arguments);if(d&&typeof d.n=="string")d.n=pidCensor(d.n);return d}}catch(e){}
+})();
+/* ===== v151 : fluidité + rappels du mode performance ===== */
+(function(){
+ const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}};
+ const isPerf=()=>{try{return !!SG.perf}catch(e){return document.documentElement.classList.contains("perf")}};
+ const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
+ let shown=0,open=false;
+ function enable(){try{const b=document.createElement("button");b.dataset.a="st";b.dataset.t="perf";b.style.display="none";document.body.appendChild(b);b.click();b.remove()}catch(e){}}
+ function close(){const o=document.getElementById("pfb");if(o)o.remove();open=false}
+ function show(txt){
+  if(open||isPerf()||document.getElementById("lnd")||document.getElementById("lndp"))return false;
+  const n=+ls("pid_pfn")||0;if(n>=6||ls("pid_pfno")=="1")return false;
+  open=true;ls("pid_pfn",String(n+1));shown++;
+  const o=document.createElement("div");o.id="pfb";
+  o.innerHTML=`<div class="pfi"><b>${LS("Jeu plus fluide","Smoother game")}</b><span>${txt}</span></div><div class="pfa"><button class="go" data-k="on">${LS("Activer","Turn on")}</button><button data-k="later">${LS("Plus tard","Later")}</button><button data-k="never">${LS("Ne plus afficher","Hide")}</button></div>`;
+  o.addEventListener("click",e=>{const k=e.target&&e.target.dataset&&e.target.dataset.k;if(!k)return;
+   if(k=="on"){enable();try{toast(LS("Mode performance activé. Tu peux le couper dans Réglages.","Performance mode on. You can turn it off in Settings."))}catch(x){}}
+   if(k=="never")ls("pid_pfno","1");close()});
+  document.body.appendChild(o);setTimeout(close,25000);return true}
+ const TIP=mobile?LS("Sur téléphone, le Mode performance (Réglages) évite les saccades et économise la batterie.","On phones, Performance mode (Settings) avoids stutter and saves battery."):LS("Si le jeu rame, active le Mode performance dans Réglages : moins d'effets, beaucoup plus fluide.","If the game lags, turn on Performance mode in Settings: fewer effects, much smoother.");
+ function fps(ms){return new Promise(r=>{let n=0;const t=performance.now();const f=()=>{n++;const d=performance.now()-t;if(d>=ms)r(n/(d/1000));else requestAnimationFrame(f)};requestAnimationFrame(f)})}
+ async function probe(){
+  if(isPerf()||document.hidden)return;
+  const v=await fps(5000);
+  if(v<45&&!isPerf())show(LS("Le jeu semble ralentir sur cet appareil. Le Mode performance le rend plus fluide.","The game seems to slow down on this device. Performance mode makes it smoother."))}
+ setTimeout(probe,30000);
+ setTimeout(()=>{if(mobile)show(TIP)},60000);
+ setTimeout(()=>show(TIP),12*60000);
+ setInterval(()=>{if(!document.hidden)show(TIP)},40*60000);
 })();
 
 /* ============ DÉMARRAGE ============ */
