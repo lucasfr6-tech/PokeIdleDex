@@ -3247,8 +3247,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7e6f014365"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=7e6f014365"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7a98b7ebcd"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=7a98b7ebcd"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9889,6 +9889,11 @@ function twAutoApply(f){const t=twS();if(!t.aa)return;const r=twPick(f);if(r&&r.
 {const on=twNew;twNew=function(f){twAutoApply(f);return on(f)}}
 /* prestige : la Tower repart à l'étage 1 ; record et récompenses déjà obtenues conservés (aucune récompense redonnée) */
 {const p1=prestige;prestige=function(sel){const st0=G.st,hn={};try{HWID.forEach(i=>{if(G.col[i]&&G.col[i].n>1)hn[i]=G.col[i].n})}catch(e){}sel=(sel||[]).slice();try{HWID.forEach(i=>{if(hn[i]!=null||G.col[i])if(sel.indexOf(i)<0)sel.push(i)})}catch(e){}const r=p1.call(this,sel);try{if(G.st>st0)for(const i in hn)if(G.col[i])G.col[i].n=hn[i]}catch(e){}try{const t=twS();t.f=1;t.ls=0;twPg=0;save()}catch(e){}return r}}
+/* revenus : ~88 % viennent des Pokémon (victoires, passif, hors ligne), ~12 % maximum des raids, JCJ, Tower, quêtes, expéditions… */
+{const k0=kxI,PK={kill:1,pas:1,off:1},OT={exp:1,tw:1,tpal:1,raid:1,rew:1,pvq:1,dq:1,pvp:1,dl:1};
+ kxI=function(s,a){try{if(!(a>0)||!isFinite(a))return a;const T=G.kls=G.kls||{p:0,o:0};
+  if(PK[s]){T.p+=a;return k0(s,a)}
+  if(OT[s]){const room=Math.max(0,.12/.88*T.p-T.o),b=Math.min(a,Math.floor(room+2000));T.o+=b;return k0(s,b)}}catch(e){}return k0(s,a)}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
