@@ -3412,12 +3412,19 @@ a.qkb.qkdc .qki{color:#fff}
 
 .chm.bnm{padding:8px 10px;margin:3px 0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}.chm.bnm:hover{filter:brightness(1.08)}
 .chm.bnm .chx,.chm.bnm .chn b{text-shadow:0 1px 2px rgba(0,0,0,.7)}
+
+.trfl{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:92%}
+.trfi{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(8,12,28,.88);border:1.5px solid var(--c);box-shadow:0 0 18px color-mix(in srgb,var(--c) 60%,transparent);color:#fff;font-size:13px;animation:trfin .45s cubic-bezier(.3,1.5,.5,1) both;max-width:100%}
+.trfi i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c);flex:none}
+.trfi b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trfi.out{opacity:0;transform:translateY(-8px);transition:.5s}
+@keyframes trfin{from{opacity:0;transform:translateY(-14px) scale(.8)}to{opacity:1;transform:none}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2d207239d8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2d207239d8"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bb515137a8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=bb515137a8"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10667,12 +10674,12 @@ function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);c
  for(let k=0;k<n;k++){
   if(useE){t.ea+=evr;while(t.ea>=1){t.ea-=1;const tot=c.ev.reduce((a,b)=>a+b,0);if(c.ev[t.e]<252&&tot<510){c.ev[t.e]++;t.s.ev++}}}
   if(!useV)continue;
-  if((m=="sz"||m=="all")&&Math.random()<pz){const L=[3,4,5,6],v=trRoll(L,L.map(i=>SZ[i][4]));if(penBetterSz(c,v)){c.zi=v;t.s.sz++;got.push(["Taille · "+SZ[v][0],SZC[v]||"#fb923c"])}}
-  if((m=="mu"||m=="all")&&Math.random()<pm){const L=trMuL(),v=trRoll(L,L.map(i=>MU[i][4]));if(penBetterMu(c,v)){c.mi=v;t.s.mu++;got.push(["Mutation · "+MU[v][0],(typeof MUC!="undefined"&&MUC[v])||"#c084fc"])}}
+  if((m=="sz"||m=="all")&&Math.random()<pz){const L=[3,4,5,6],v=trRoll(L,L.map(i=>SZ[i][4]));if(penBetterSz(c,v)){const o=c.zi>=3&&SZ[c.zi]?SZ[c.zi][0]:LS("Normale","Normal");c.zi=v;t.s.sz++;got.push([LS("Taille · ","Size · ")+o+" → "+SZ[v][0],SZC[v]||"#fb923c"])}}
+  if((m=="mu"||m=="all")&&Math.random()<pm){const L=trMuL(),v=trRoll(L,L.map(i=>MU[i][4]));if(penBetterMu(c,v)){const o=c.mi>0&&MU[c.mi]?MU[c.mi][0]:LS("Aucune","None");c.mi=v;t.s.mu++;got.push([LS("Mutation · ","Mutation · ")+o+" → "+MU[v][0],(typeof MUC!="undefined"&&MUC[v])||"#c084fc"])}}
   if((m=="al"||m=="all")&&!c.al&&Math.random()<pa){c.al=1;t.s.al++;got.push(["Alpha","#ef4444"])}
   if(m=="all"&&!c.sh&&Math.random()<ps){c.sh=1;t.s.sh++;got.push([LS("Chromatique","Shiny"),"#fde047"])}}
  t.s.k+=n;t.kc+=n;
- if(got.length){got.forEach(g=>{trLog(t,g[0],g[1]);toast(LS("Entraînement : ","Training: ")+g[0]+" !")});rq(t.i);sfx("big");save()}}
+ if(got.length){got.forEach(g=>{trLog(t,g[0],g[1]);toast(LS("Entraînement : ","Training: ")+g[0]+" !")});try{trFlash(got)}catch(e){}rq(t.i);sfx("big");save()}}
 function trTick(){const t=trS();if(!t.i||!t.on||!G.col[t.i])return;const now=Date.now();if(!t.t0)t.t0=now;
  let due=Math.floor((now-t.t0)/TRK)-t.cr;if(due<=0)return;if(due>TRCAP){t.t0+=(due-TRCAP)*TRK;due=TRCAP}
  t.cr+=due;trCredit(due);if(now-(t.sv||0)>30000){t.sv=now;save()}}
@@ -10840,22 +10847,26 @@ setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(
 var ONLN=0;
 (function(){const sid=Math.random().toString(36).slice(2,12)+Date.now().toString(36).slice(-6);
  const show=()=>{try{document.querySelectorAll(".chon.on").forEach(e=>{e.textContent=LS("En ligne","Online")+(ONLN>0?" · "+ONLN:"")})}catch(e){}};
- const ping=()=>{try{if(document.hidden)return;const a=(window.PID_API||"").replace(/\/$/,"");if(!a)return;
+ window.onlShow=show;const ping=()=>{try{if(document.hidden)return;const a=(window.PID_API||"").replace(/\/$/,"");if(!a)return;
   fetch(a+"/api/online?s="+sid+(TNLS("pid_uid")?"&u="+encodeURIComponent(TNLS("pid_uid")):"")).then(r=>r.json()).then(j=>{if(j&&typeof j.n=="number"){ONLN=j.n;show()}}).catch(()=>{})}catch(e){}};
- setTimeout(ping,2500);setInterval(ping,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)ping()});
+ setTimeout(ping,1500);setInterval(ping,8000);const bye=()=>{try{const a=(window.PID_API||"").replace(/\/$/,"");if(a&&navigator.sendBeacon)navigator.sendBeacon(a+"/api/online?x=1&s="+sid)}catch(e){}};window.addEventListener("pagehide",bye);document.addEventListener("visibilitychange",()=>{if(document.hidden)bye();else ping()});
  document.addEventListener("click",e=>{try{if(e.target.closest&&e.target.closest("[data-a=ch],[data-a=chat]"))setTimeout(ping,300)}catch(x){}});
 })();
 /* ---------- animation de capture (Poké Ball) plus rapide : ×1,8 ---------- */
 {const f0=capFx0;capFx0=function(){f0.apply(this,arguments);try{const L=document.querySelectorAll(".capfx"),w=L[L.length-1];if(w&&w.getAnimations)w.getAnimations({subtree:true}).forEach(x=>{x.playbackRate=1.8})}catch(e){}}}
 
-/* clic sur « En ligne · N » : liste des joueurs connectés */
+/* clic sur « En ligne · N » : liste des joueurs connectés (rafraîchie en direct) */
 (function(){
- const sid2=()=>{const a=(window.PID_API||"").replace(/\/$/,"");return a};
- async function open(){const p=document.getElementById("chp");if(!p)return;let b=document.getElementById("onlp");if(b){b.remove();return}
-  b=document.createElement("div");b.id="onlp";b.innerHTML=`<div class="onh"><b>${LS("Joueurs en ligne","Players online")}</b><button data-onx>×</button></div><div class="onb"><small>${LS("Chargement…","Loading…")}</small></div>`;p.appendChild(b);
-  try{const a=sid2();const r=await fetch(a+"/api/online?l=1&s="+Math.random().toString(36).slice(2,12)+"zz");const j=await r.json();if(!Array.isArray(j.l)){b.querySelector(".onb").innerHTML=`<small>${LS("Le serveur doit être mis à jour pour afficher les pseudos.","The server needs an update to show usernames.")}</small>`;return}const L=(j.l||[]).map(x=>`<div class="onr"><i></i><span>${esc(typeof pidCensor=="function"?pidCensor(x.n):x.n)}</span></div>`).join("");
-   const an=j.a|0;b.querySelector(".onb").innerHTML=(L||"")+(an?`<div class="onr an"><i></i><span>${an} ${LS(an>1?"joueurs sans compte":"joueur sans compte",an>1?"players without account":"player without account")}</span></div>`:"")||`<small>${LS("Personne pour le moment.","Nobody right now.")}</small>`}
+ const api=()=>(window.PID_API||"").replace(/\/$/,"");
+ async function fill(b){try{const r=await fetch(api()+"/api/online?l=1&s=view"+Math.random().toString(36).slice(2,10));const j=await r.json(),o=b.querySelector(".onb");if(!o)return;
+   if(!Array.isArray(j.l)){o.innerHTML=`<small>${LS("Le serveur doit être mis à jour pour afficher les pseudos.","The server needs an update to show usernames.")}</small>`;return}
+   if(typeof j.n=="number"){ONLN=j.n;try{onlShow()}catch(e){}}
+   const L=j.l.map(x=>`<div class="onr"><i></i><span>${esc(typeof pidCensor=="function"?pidCensor(x.n):x.n)}</span></div>`).join(""),an=j.a|0;
+   o.innerHTML=L+(an?`<div class="onr an"><i></i><span>${an} ${LS(an>1?"joueurs sans compte":"joueur sans compte",an>1?"players without account":"player without account")}</span></div>`:"")||`<small>${LS("Personne pour le moment.","Nobody right now.")}</small>`}
   catch(e){const o=b.querySelector(".onb");if(o)o.innerHTML=`<small>${LS("Indisponible.","Unavailable.")}</small>`}}
+ function open(){const p=document.getElementById("chp");if(!p)return;let b=document.getElementById("onlp");if(b){b.remove();return}
+  b=document.createElement("div");b.id="onlp";b.innerHTML=`<div class="onh"><b>${LS("Joueurs en ligne","Players online")}</b><button data-onx>×</button></div><div class="onb"><small>${LS("Chargement…","Loading…")}</small></div>`;p.appendChild(b);
+  fill(b);const iv=setInterval(()=>{if(!document.body.contains(b)){clearInterval(iv);return}fill(b)},3000)}
  document.addEventListener("click",e=>{const t=e.target;if(!t.closest)return;if(t.closest(".chon"))open();else if(t.closest("[data-onx]")){const b=document.getElementById("onlp");if(b)b.remove()}});
 })();
 

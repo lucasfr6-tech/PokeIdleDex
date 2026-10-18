@@ -126,14 +126,16 @@ http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x'),ip=(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();
  if(req.method=='OPTIONS'){send(res,204,{});return}
  if(u.pathname=='/api/online'&&req.method=='GET'){
-  if(limited(ip+'o',60)){send(res,429,{e:'rate'});return}
-  const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();
-  if(!u.searchParams.get('l')&&/^[a-z0-9]{8,24}$/.test(sid)&&(PRES.size<20000||PRES.has(sid)))PRES.set(sid,{t:now,u:/^u?[A-Za-z0-9_-]{6,40}$/.test(uid)?uid:''});
-  let n=0;for(const[k,v]of PRES){if(now-v.t>75000)PRES.delete(k);else n++}
-  if(u.searchParams.get('l')){const seen=new Set(),L=[];let anon=0;
-   for(const v of PRES.values()){const r=v.u&&db.lb[v.u]&&db.lb[v.u].d;const nm=r&&typeof r.n=='string'?r.n.slice(0,16):'';
-    if(nm){if(!seen.has(v.u)){seen.add(v.u);if(L.length<100)L.push({u:v.u,n:nm})}}else anon++}
-   send(res,200,{n,l:L,a:anon});return}
+  if(limited(ip+'o',150)){send(res,429,{e:'rate'});return}
+  const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();const lst=!!u.searchParams.get('l');
+  if(u.searchParams.get('x')){PRES.delete(sid);send(res,200,{n:0});return}
+  if(!lst&&/^[a-z0-9]{8,24}$/.test(sid)&&(PRES.size<20000||PRES.has(sid)))PRES.set(sid,{t:now,u:/^u?[A-Za-z0-9_-]{6,40}$/.test(uid)?uid:''});
+  const seen=new Set(),L=[];let anon=0;
+  for(const[k,v]of PRES){if(now-v.t>25000){PRES.delete(k);continue}
+   const r=v.u&&db.lb[v.u]&&db.lb[v.u].d;const nm=r&&typeof r.n=='string'?r.n.slice(0,16):'';
+   if(nm){if(!seen.has(v.u)){seen.add(v.u);if(L.length<100)L.push({u:v.u,n:nm})}}else anon++}
+  const n=seen.size+anon;
+  if(lst){send(res,200,{n,l:L,a:anon});return}
   send(res,200,{n});return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
 
