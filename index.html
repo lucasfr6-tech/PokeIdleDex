@@ -3219,12 +3219,25 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 @media(max-width:520px){#wlc .wlk{padding:18px 16px}#wlc h2{font-size:22px}#wlc .wlt{font-size:14px}}
 #wlc h2{font-family:inherit;font-weight:800}
 #wlc .wlav i{background-size:cover;background-position:center}
+.pdb{display:inline-block;margin-left:6px;font-size:.72em;font-weight:600;opacity:.65;white-space:nowrap}
+.pidb{margin:12px 0;padding:14px 16px}
+.pidb h3{margin:0 0 4px;color:#fbbf24}
+.pidb>small{display:block;opacity:.8;margin-bottom:10px;line-height:1.4}
+.pidg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-bottom:10px}
+.pidr{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:2px 10px;padding:8px 10px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff18}
+.pidr span{font-size:12.5px;opacity:.85}
+.pidr b{font-size:15px;color:#fff;text-align:right}
+.pidr em{grid-column:1/-1;font-style:normal;font-size:11.5px;opacity:.6;text-align:right}
+.pidr.big b{font-size:19px;color:#fde047}
+.pidu{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.pidu .pidr{grid-template-columns:1fr auto auto;background:transparent;border-style:dashed}
+.pidu .pidr em{grid-column:auto;text-align:right;opacity:.9;font-size:12.5px;color:#a7f3d0}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="570f95e807"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=570f95e807"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c5c71216c0"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=c5c71216c0"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4574,20 +4587,20 @@ function vVar(){const isS=DX.cat=="size",ref=(G.col[25]?25:ids()[0]||25);
  let cards;
  if(isS){const tw=SZ.reduce((a,x)=>a+x[4],0);
   cards=SZ.map((z,k)=>{const big=k>=3,col=SZC[k]||"#94a3b8",n=own(c=>c.zi==k);
-   return `<div class="vrc" style="--c:${col}"><div class="vrs"><span class="vrp" style="--sc:${z[1]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${z[0]}</b><em>${prc(z[4]/tw)}</em></div><p>${LS(SZTX[k][0],SZTX[k][1])}</p>
+   return `<div class="vrc" style="--c:${col}"><div class="vrs"><span class="vrp" style="--sc:${z[1]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${z[0]}</b><em>${pidSz(k)}</em></div><p>${LS(SZTX[k][0],SZTX[k][1])}</p>
    <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(kxHpS(z[2])),z[2]>1?"m":z[2]<1?"p":"n")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(z[3]),z[3]>1?"p":z[3]<1?"m":"n")}</div>
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${big?chip(LS("Dégâts ","Damage ")+xr(z[1])+LS(" (définitif)"," (permanent)"),"p"):chip(LS("La taille n'est pas conservée","Size is not kept"),"n")}</div>
    ${big?`<div class="vown">${ico("book")} ${LS("Tu en possèdes ","You own ")}<b>${n}</b></div>`:""}</div></div>`}).join("")}
  else{const tw=MU.reduce((a,x)=>a+x[4],0),shw=1/4096;
   cards=MU.map((u,k)=>{if(!k||k==7)return"";const n=own(c=>c.mi==k);
-   return `<div class="vrc" style="--c:${MUC[k]}"><div class="vrs"><span class="vrp" style="${u[3]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${u[0]}</b><em>${prc(u[4]/tw)}</em></div><p>${LS(MUTX[k][0],MUTX[k][1])}</p>
+   return `<div class="vrc" style="--c:${MUC[k]}"><div class="vrs"><span class="vrp" style="${u[3]}">${sp(ref,0)}</span></div><div class="vrb"><div class="vrh"><b>${u[0]}</b><em>${pidMu(k)}</em></div><p>${LS(MUTX[k][0],MUTX[k][1])}</p>
    <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("PV de l'ennemi ","Enemy HP ")+xr(kxHpM(u[2])),"m")}${chip(LS("Attaque ennemie ","Enemy attack ")+"×1,3".replace(",",SG.lang=="en"?".":","),"m")}${chip(LS("Pièces gagnées ","Coins earned ")+xr(u[2]),"p")}</div>
    <div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${chip(LS("Dégâts ","Damage ")+xr(u[1])+LS(" (définitif)"," (permanent)"),"p")}</div>
    <div class="vown">${ico("book")} ${LS("Tu en possèdes ","You own ")}<b>${n}</b></div></div></div>`}).join("")+
-  `<div class="vrc shiny" style="--c:#fde047"><div class="vrs"><span class="vrp">${sp(ref,1)}</span></div><div class="vrb"><div class="vrh"><b>${LS("Chromatique classique","Classic shiny")}</b><em>${PL("pcs")?LS("3 / 4096","3 / 4096"):"1 / 4096"}</em></div><p>${LS("Les couleurs changent, comme dans les jeux. Aucune mutation en même temps : un Pokémon est muté ou chromatique.","The colours change, like in the games. Never together with a mutation: a Pokémon is mutated or shiny.")}</p>
+  `<div class="vrc shiny" style="--c:#fde047"><div class="vrs"><span class="vrp">${sp(ref,1)}</span></div><div class="vrb"><div class="vrh"><b>${LS("Chromatique classique","Classic shiny")}</b><em>${pidSh()}</em></div><p>${LS("Les couleurs changent, comme dans les jeux. Aucune mutation en même temps : un Pokémon est muté ou chromatique.","The colours change, like in the games. Never together with a mutation: a Pokémon is mutated or shiny.")}</p>
    <div class="vch2"><small>${LS("Contre toi","Against you")}</small>${chip(LS("Aucun inconvénient","No drawback"),"n")}</div><div class="vch2"><small>${LS("Si tu le captures","If you catch it")}</small>${chip(LS("Dégâts ×1,25 (définitif)","Damage ×1.25 (permanent)"),"p")}${chip(LS("Peut devenir favori du Panthéon","Can become a Pantheon favourite"),"p")}</div>
    <div class="vown">${ico("star")} ${LS("Tu en possèdes ","You own ")}<b>${shinies()}</b></div></div></div>`}
- return `<div class="box"><div class="row sp2"><h2 style="font-size:28px;margin:0">Pokédex</h2><small>${isS?LS("Chaque Pokémon qui apparaît a une taille. Les grandes tailles sont plus coriaces mais rapportent plus.","Every Pokémon that appears has a size. Large sizes are tougher but pay more."):LS("Une mutation rend l'adversaire plus dangereux, mais donne un bonus définitif au Pokémon capturé.","A mutation makes the enemy more dangerous, but gives the caught Pokémon a permanent bonus.")}</small></div>${dxTabs()}</div>
+ return `${pidBox()}<div class="box"><div class="row sp2"><h2 style="font-size:28px;margin:0">Pokédex</h2><small>${isS?LS("Chaque Pokémon qui apparaît a une taille. Les grandes tailles sont plus coriaces mais rapportent plus.","Every Pokémon that appears has a size. Large sizes are tougher but pay more."):LS("Une mutation rend l'adversaire plus dangereux, mais donne un bonus définitif au Pokémon capturé.","A mutation makes the enemy more dangerous, but gives the caught Pokémon a permanent bonus.")}</small></div>${dxTabs()}</div>
  <div class="vrg">${cards}</div>`}
 const vDex=()=>DX.cat=="spc"?vSpc():(DX.cat=="size"||DX.cat=="mut")?vVar():vDex0();
 /* Panthéon : Pokémon animés qui flottent, comme dans le ciel */
@@ -9751,6 +9764,29 @@ BOOST.forEach(b=>{b.p*=12});
  window.wlcMaybe=function(){try{if(fresh())show()}catch(e){}};
  setTimeout(()=>{try{if(!document.getElementById("lnd")&&fresh())show()}catch(e){}},2200);
 })();
+/* ===== v155 : chances réelles (avec les améliorations de prestige) dans le Pokédex et le wiki ===== */
+function pidW(){
+ const bi=(typeof BIF!="undefined"&&BIF.m)||0,ecl=(typeof EV!="undefined"&&EV&&EV.k=="eclipse")?3:1;
+ const fz=k=>k>=3?1+.1*PL("pz"):1,fm=k=>k?ecl*(1+.12*PL("pm"))*(1+bi)*(k==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1;
+ const L=a=>a[a.length-1],sw=SZ.map((x,k)=>L(x)*fz(k)),mw=MU.map((x,k)=>L(x)*fm(k)),sb=SZ.map(L),mb=MU.map(L),S=a=>a.reduce((p,q)=>p+q,0);
+ return{sw,mw,sb,mb,ss:S(sw),ms:S(mw),sbs:S(sb),mbs:S(mb),bi,ecl}}
+const pidDiff=(p,b)=>Math.abs(p-b)>b*.004?` <small class="pdb">${LS("base","base")} ${prc(b)}</small>`:"";
+const pidOne=n=>"1 / "+Math.round(n).toLocaleString(SG.lang=="en"?"en-US":"fr-FR");
+function pidSz(k){const w=pidW();return prc(w.sw[k]/w.ss)+pidDiff(w.sw[k]/w.ss,w.sb[k]/w.sbs)}
+function pidMu(k){const w=pidW();return prc(w.mw[k]/w.ms)+pidDiff(w.mw[k]/w.ms,w.mb[k]/w.mbs)}
+function pidSh(){const w=pidW(),p=w.mw[7]/w.ms,b=w.mb[7]/w.mbs;return pidOne(1/p)+(Math.abs(p-b)>b*.004?` <small class="pdb">${LS("base","base")} ${pidOne(1/b)}</small>`:"")}
+function pidBox(){
+ const w=pidW(),sum=(a,f)=>a.reduce((t,x,k)=>t+(f(k)?x:0),0);
+ const pm=sum(w.mw,k=>k&&k!=7)/w.ms,pmb=sum(w.mb,k=>k&&k!=7)/w.mbs,pbig=sum(w.sw,k=>k>=3)/w.ss,pbigb=sum(w.sb,k=>k>=3)/w.sbs;
+ const ha=.06*(1+.2*PL("pt")),hab=.06;
+ const up=k=>{const u=PU.find(x=>x[0]==k);if(!u)return"";const l=PL(k);return `<div class="pidr"><span>${LS(u[1],u[1])}</span><b>${LS("niv.","lv.")} ${l}</b><em>${l?u[3](l):"—"}</em></div>`};
+ const row=(lab,p,b,txt)=>`<div class="pidr big"><span>${lab}</span><b>${txt||prc(p)}</b><em>${txt?"":(Math.abs(p-b)>b*.004?LS("base ","base ")+prc(b):LS("inchangé","unchanged"))}</em></div>`;
+ const tmp=w.bi>0||w.ecl>1;
+ return `<div class="box pidb"><h3>${LS("Tes chances actuelles","Your current odds")}</h3>
+ <small>${LS("Calculées avec tes améliorations de prestige"+(tmp?" et les bonus actifs":"")+". Elles changent dès que tu améliores quelque chose.","Based on your prestige upgrades"+(tmp?" and active bonuses":"")+". They update as soon as you upgrade something.")}</small>
+ <div class="pidg">${row(LS("Un ennemi est muté","An enemy is mutated"),pm,pmb)}${row(LS("Chromatique classique","Classic shiny"),0,0,pidSh())}${row(LS("Taille imposante ou plus","Large size or bigger"),pbig,pbigb)}${row(LS("Talent caché à la première capture","Hidden ability on first catch"),ha,hab)}</div>
+ <div class="pidu">${up("pm")}${up("pcs")}${up("psh")}${up("pz")}${up("pt")}</div></div>`}
+try{const _wp=wkPage;wkPage=function(k){const r=_wp.apply(this,arguments);return(k=="sizes"||k=="mut"||k=="pres")&&typeof r=="string"?r+pidBox():r}}catch(e){}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
