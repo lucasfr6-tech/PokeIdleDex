@@ -3192,12 +3192,38 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pmn{display:flex;flex-direction:column;gap:4px;margin:0 0 12px;padding:12px 14px;font-size:13px;color:#cdd3ff;line-height:1.4}
 .pmn b{color:#fbbf24;font-size:14px}
 .pmn em{color:#fde047;font-style:normal;font-weight:800}
+/* message de bienvenue du créateur */
+#wlc{position:fixed;inset:0;z-index:100030;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(ellipse at 50% 30%,#2a1f5acc,#04061ae6 70%);animation:wlin .35s ease-out;overflow:auto}
+#wlc.out{opacity:0;transition:opacity .35s}
+#wlc .wlk{width:min(520px,100%);background:linear-gradient(160deg,#171b4a,#0d1030);border:1px solid #fbbf2455;border-radius:24px;padding:22px 22px 20px;box-shadow:0 30px 90px #000c,0 0 0 1px #ffffff12 inset,0 0 60px #fbbf2418;color:#e6e9ff;text-align:center}
+#wlc .wlh{display:flex;align-items:center;gap:14px;text-align:left;margin-bottom:14px}
+#wlc .wlav{flex:none;width:68px;height:68px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#fde047,#f59e0b)}
+#wlc .wlav i{display:flex;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4c5bd4,#1c2160);align-items:center;justify-content:center;font:800 28px/1 inherit;font-style:normal;color:#fff}
+#wlc .wlid{display:flex;flex-direction:column;gap:1px}
+#wlc .wlid small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fbbf24}
+#wlc .wlid b{font-size:22px;color:#fff}
+#wlc .wlid em{font-style:normal;font-size:12.5px;color:#aab1e8}
+#wlc h2{margin:6px 0 10px;font-size:26px;color:#fff}
+#wlc .wlt{text-align:left;font-size:15px;line-height:1.55;color:#cdd3ff}
+#wlc .wlt p{margin:0 0 10px}
+#wlc .wlt b{color:#fde047}
+#wlc .wlf{margin:14px 0 14px;padding:12px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff1c}
+#wlc .wlf small{display:block;font-size:12.5px;color:#aab1e8;margin-bottom:8px;font-weight:700}
+#wlc .wlgs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+#wlc .wlg{display:inline-flex;align-items:center;gap:6px;background:#fbbf2422;border:1px solid #fbbf2455;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;color:#fff}
+#wlc .wlg b{color:#fde047}
+#wlc .wlb{width:100%;padding:14px;font-size:16px}
+#wlc .wld{display:inline-block;margin-top:12px;color:#aab1e8;font-weight:700;font-size:14px;text-decoration:none}
+#wlc .wld:hover{color:#fff}
+@keyframes wlin{from{opacity:0}to{opacity:1}}
+@media(max-width:520px){#wlc .wlk{padding:18px 16px}#wlc h2{font-size:22px}#wlc .wlt{font-size:14px}}
+#wlc h2{font-family:inherit;font-weight:800}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="676d53a4c0"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=676d53a4c0"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6535b7fb56"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=6535b7fb56"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9476,7 +9502,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
  const TK=[LS("Raids et World Boss","Raids and World Boss"),LS("La Tour","The Tower"),LS("Expéditions","Expeditions"),LS("Pass de combat","Battle Pass"),LS("Casino","Casino"),LS("Méga-évolutions","Mega evolutions"),LS("Amis et guildes","Friends and guilds"),LS("Pokémon chromatiques","Shiny Pokémon"),LS("Événement Halloween","Halloween event"),LS("Hors ligne aussi","Works offline")];
  const FL=[1,4,7,25,150,6,9,94,149,448,282,445];
  const root=()=>{let o=document.getElementById("lnd");if(!o){o=document.createElement("div");o.id="lnd";document.body.appendChild(o)}return o};
- function close(){const o=document.getElementById("lnd");if(o){o.classList.add("out");setTimeout(()=>o.remove(),400)}document.body.classList.remove("lndon");set()}
+ function close(){const o=document.getElementById("lnd");if(o){o.classList.add("out");setTimeout(()=>o.remove(),400)}document.body.classList.remove("lndon");set();setTimeout(()=>{try{window.wlcMaybe&&window.wlcMaybe()}catch(e){}},600)}
  function card(){const m=document.getElementById("lndp");if(m)m.remove();
   const d=document.createElement("div");d.id="lndp";
   d.innerHTML=`<div class="tcm"><button class="tcx" aria-label="${LS("Fermer","Close")}">×</button>
@@ -9688,6 +9714,41 @@ BOOST.forEach(b=>{b.p*=12});
  T("fl",150,700);
  ["d","w","m"].forEach(p=>{QP[p].secs=QP[p].secs/4;QP[p].min=Math.round(QP[p].min/4);if(QBN[p])QBN[p].s=Math.round(QBN[p].s/4)});
 }
+/* ===== v154 : message de bienvenue du créateur + cadeau (une seule fois) ===== */
+(function(){
+ const fresh=()=>window.PID_WLC_FORCE||(G&&!G.wlc&&(G.caps||0)<=30&&(G.ko||0)<=60);
+ const GIFT=[["master-ball",2],["bi-atk",1],["bi-xp",1],["bi-coin",1]];
+ const nameOf=k=>{try{if(k=="master-ball")return"Master Ball";const b=BIT.find(x=>x.k==k);return b?LS(b.n[0],b.n[1]):k}catch(e){return k}};
+ function close(){const o=document.getElementById("wlc");if(!o)return;o.classList.add("out");setTimeout(()=>o.remove(),350);document.body.classList.remove("wlcon")}
+ function claim(){
+  if(G.wlc)return;
+  G.wlc=1;GIFT.forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n});
+  try{save()}catch(e){}
+  try{toast(LS("Cadeau récupéré : 2 Master Ball et 3 objets de combat","Gift received: 2 Master Balls and 3 battle items"));sfx("big")}catch(e){}
+  close()}
+ function show(){
+  if(document.getElementById("wlc")||document.getElementById("lnd")||document.getElementById("lndp"))return false;
+  const dc=window.PID_DISCORD||(typeof BUG_URL!="undefined"?BUG_URL:"");
+  const o=document.createElement("div");o.id="wlc";
+  const chips=GIFT.map(([k,n])=>`<span class="wlg"><b>×${n}</b>${nameOf(k)}</span>`).join("");
+  o.innerHTML=`<div class="wlk" role="dialog" aria-modal="true">
+   <div class="wlh"><span class="wlav"><i>L</i></span><div class="wlid"><small>${LS("Un mot du créateur","A word from the creator")}</small><b>Luytox</b><em>${LS("Créateur de PokeIdleDex","Creator of PokeIdleDex")}</em></div></div>
+   <h2>${LS("Merci d'être là","Thank you for being here")}</h2>
+   <div class="wlt">
+    <p>${LS("Je te remercie de jouer à PokeIdleDex.","Thank you for playing PokeIdleDex.")}</p>
+    <p>${LS("Il n'y aura <b>jamais rien de payant</b>. Le jeu est et restera <b>gratuit et à but non lucratif</b> : il est fait pour vous faire plaisir.","There will <b>never be anything to pay for</b>. The game is and will stay <b>free and non-profit</b>: it is made for your enjoyment.")}</p>
+    <p>${LS("On sait que c'est compliqué de trouver de bons jeux. Merci encore, et bonne session. J'espère te revoir bientôt sur le Discord pour discuter avec toi.","We know good games are hard to find. Thanks again, and enjoy your session. I hope to see you soon on Discord to chat with you.")}</p>
+   </div>
+   <div class="wlf"><small>${LS("Tiens, de ma part :","Here, from me:")}</small><div class="wlgs">${chips}</div></div>
+   <button class="go wlb">${LS("Récupérer mes cadeaux et jouer","Claim my gifts and play")}</button>
+   ${dc?`<a class="wld" href="${dc}" target="_blank" rel="noopener">${LS("Rejoindre le Discord","Join the Discord")}</a>`:""}
+  </div>`;
+  document.body.appendChild(o);document.body.classList.add("wlcon");
+  o.querySelector(".wlb").onclick=claim;
+  return true}
+ window.wlcMaybe=function(){try{if(fresh())show()}catch(e){}};
+ setTimeout(()=>{try{if(!document.getElementById("lnd")&&fresh())show()}catch(e){}},2200);
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
