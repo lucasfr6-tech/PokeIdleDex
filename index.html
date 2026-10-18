@@ -3250,8 +3250,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="dd2d0be618"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=dd2d0be618"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="929aa69d16"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=929aa69d16"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3624,7 +3624,7 @@ function openBooster(k){const B=BOOST[k];if(G.m<B.p){toast("Il te manque "+fmt(B
  const cards=[];for(let i=0;i<B.cnt;i++){let q=draw();if(i==B.cnt-1)while(q<B.min)q=draw();const L=CBY[q],id=L[Math.random()*L.length|0];cards.push({id,nw:!G.cards[id]});G.cards[id]=(G.cards[id]||0)+1}
  cards.sort((a,b)=>crd(a.id)-crd(b.id));PACK=cards;OP={k,cards,ph:0,rev:cards.map(()=>false)};checkAch();save();
  preload(cards.map(x=>x.id)).then(()=>{if(OP)modal()});modal();setTimeout(()=>{if(OP&&OP.ph==0){OP.ph=1;modal()}},1700)}
-const ppGain=()=>Math.floor(Math.floor(G.cl/8)*8*kxSecP()*ppMul());
+const ppGain=()=>pmPend();
 function prestige(sel){const g=ppGain();if(g<1||!sel)return;sel=sel.slice();ids().forEach(i=>{if(i>9e4&&sel.indexOf(i)<0)sel.push(i)});const nc={};
  sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:(c.ev||[0,0,0,0,0,0]).map(()=>0),ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0,spc:c.spc||0,al:c.al||0,it:(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))?c.it:undefined}});
  Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:1,k:0,cl:0,pm:0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
@@ -4156,9 +4156,9 @@ function vSetg(){const acc=accNow();return `<div class="stg">
 /* ---------- prestige : visuel ---------- */
 const PUI={pd:["sword","#ef4444"],ps:["bolt","#f59e0b"],pc:["coin","#eab308"],px:["book","#22c55e"],ph:["heart","#f43f5e"],pk:["target","#06b6d4"],pm:["spark","#a855f7"],psh:["star","#fde047"],pcs:["spark","#facc15"],pz:["crown","#fb923c"],pb:["skull","#94a3b8"],pt:["key","#14b8a6"],pg:["team","#3b82f6"],po:["clock","#8b5cf6"],pn:["cards","#ec4899"],pe:["bag","#10b981"]};
 const fi=(ic,t,c)=>`<div class="pfi" style="--c:${c}"><i>${ico(ic)}</i><span>${t}</span></div>`;
-const vReb=()=>{const g=ppGain(),nx=(g/8+1)*8,pr=g<1?G.cl/15:Math.min(1,(G.cl-g/8*8)/8);
+const vReb=()=>{const g=ppGain(),nx=(Math.floor(G.cl/8)+1)*8,pr=(G.cl%8)/8;
  return `${pmLine()}<div class="prx"><div class="prh"><div class="orb"><span>${ico("spark")}</span><b>${fmt(G.pp||0)}</b><small>points</small></div>
- <div class="prg"><div class="gn ${g>=1?"on":""}">+${g}</div><small>${ico("crown")} Étage ${G.cl}</small><div class="bar"><i style="width:${Math.max(0,Math.min(100,pr*100))}%;background:linear-gradient(90deg,#ec4899,#fbbf24)"></i></div><small>Prochain point : étage ${nx}</small></div>
+ <div class="prg"><div class="gn ${g>=1?"on":""}">+${g}</div><small>${ico("crown")} Étage ${G.cl}</small><div class="bar"><i style="width:${Math.max(0,Math.min(100,pr*100))}%;background:linear-gradient(90deg,#ec4899,#fbbf24)"></i></div><small>Prochain palier : étage ${nx} (+${pmPts(nx)})</small></div>
  <button class="go prb" data-a="ps" ${g>=1?"":"disabled"}>${ico("spark")}<span>PRESTIGE</span></button></div>
  <div class="flow"><div class="pfc lose"><h4>Perdu</h4>${fi("crown","Étages","#ef4444")}${fi("coin","Argent","#f59e0b")}${fi("bag","Sac","#fb923c")}${fi("team","Équipe*","#3b82f6")}</div><div class="fa">${ico("chevr")}</div>
  <div class="pfc keep"><h4>Gardé</h4>${fi("book","Pokédex","#10b981")}${fi("cards","Cartes","#a855f7")}${fi("trophy","Succès","#eab308")}${fi("spark","Bonus","#ec4899")}</div><div class="fa">${ico("chevr")}</div>
@@ -9724,14 +9724,15 @@ function pidCensor(t){
 const ppMul=()=>(1+.25*PL("ppp"))*(1+Math.min(1,(G.st|0)*.05));
 const pmPts=f=>Math.max(1,Math.round((5+2*(f/8-1))*ppMul()));
 function pmChk(){
- const c=G.cl|0;let m=Math.floor((G.pm|0)/8)*8,tot=0,last=0;
+ const c=G.cl|0;let m=Math.floor((G.pmT|0)/8)*8,tot=0,last=0;if(m<Math.floor((G.pm|0)/8)*8)m=Math.floor((G.pm|0)/8)*8;
  while(m+8<=c){m+=8;tot+=pmPts(m);last=m}
- if(tot>0){const n=Math.round((m-(G.pm|0))/8);G.pm=m;G.pt=(G.pt||0)+tot;G.pp=(G.pp||0)+tot;
-  try{toast(n>1?LS("Paliers d'étage : +"+tot+" points de prestige","Floor milestones: +"+tot+" prestige points"):LS("Étage "+last+" atteint : +"+tot+" points de prestige","Floor "+last+" reached: +"+tot+" prestige points"));sfx("big")}catch(e){}
+ if(tot>0){G.pmT=m;
+  try{toast(LS("Étage "+last+" atteint : +"+tot+" points de prestige à récupérer au prestige","Floor "+last+" reached: +"+tot+" prestige points to collect on prestige"));sfx("big")}catch(e){}
   try{save()}catch(e){}}}
+const pmPend=()=>{let t=0;for(let m=Math.floor((G.pm|0)/8)*8+8;m<=(G.cl|0);m+=8)t+=pmPts(m);return t};
 function pmLine(){
  const nx=Math.floor((G.pm|0)/8)*8+8,p=pmPts(nx),p2=pmPts(nx+8);
- return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 8 étages, tu gagnes des points de prestige en plus, et le montant augmente à chaque palier.","Every 8 floors you earn extra prestige points, and the amount grows with each milestone.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+8}).</span></div>`}
+ return `<div class="box pmn"><b>${LS("Paliers d'étage","Floor milestones")}</b><span>${LS("Tous les 8 étages, des points de prestige s'ajoutent à ton gain (+), et le montant augmente à chaque palier. Tu les reçois quand tu fais prestige.","Every 8 floors you earn extra prestige points, and the amount grows with each milestone.")} ${LS("Prochain : étage","Next: floor")} <em>${nx}</em> → <em>+${p}</em> ${LS("points","points")} (${LS("puis","then")} +${p2} ${LS("à l'étage","at floor")} ${nx+8}).</span></div>`}
 
 /* prix des packs de cartes x12 */
 BOOST.forEach(b=>{b.p*=12});
@@ -9891,7 +9892,7 @@ function twAutoApply(f){const t=twS();if(!t.aa)return;const r=twPick(f);if(r&&r.
 {const os=twSim;twSim=async function(f,opt){if(!(opt&&opt.tm))twAutoApply(f);return os(f,opt)}}
 {const on=twNew;twNew=function(f){twAutoApply(f);return on(f)}}
 /* prestige : la Tower repart à l'étage 1 ; record et récompenses déjà obtenues conservés (aucune récompense redonnée) */
-{const p1=prestige;prestige=function(sel){const st0=G.st,hn={};try{HWID.forEach(i=>{if(G.col[i]&&G.col[i].n>1)hn[i]=G.col[i].n})}catch(e){}sel=(sel||[]).slice();try{HWID.forEach(i=>{if(hn[i]!=null||G.col[i])if(sel.indexOf(i)<0)sel.push(i)})}catch(e){}const r=p1.call(this,sel);try{if(G.st>st0)for(const i in hn)if(G.col[i])G.col[i].n=hn[i]}catch(e){}try{const t=twS();t.f=1;t.ls=0;twPg=0;save()}catch(e){}return r}}
+{const p1=prestige;prestige=function(sel){const st0=G.st,hn={};try{HWID.forEach(i=>{if(G.col[i]&&G.col[i].n>1)hn[i]=G.col[i].n})}catch(e){}sel=(sel||[]).slice();try{HWID.forEach(i=>{if(hn[i]!=null||G.col[i])if(sel.indexOf(i)<0)sel.push(i)})}catch(e){}const r=p1.call(this,sel);try{if(G.st>st0)for(const i in hn)if(G.col[i])G.col[i].n=hn[i]}catch(e){}G.pmT=0;try{const t=twS();t.f=1;t.ls=0;twPg=0;save()}catch(e){}return r}}
 /* revenus : ~88 % viennent des Pokémon (victoires, passif, hors ligne), ~12 % maximum des raids, JCJ, Tower, quêtes, expéditions… */
 {const k0=kxI,PK={kill:1,pas:1,off:1},OT={exp:1,tw:1,tpal:1,raid:1,rew:1,pvq:1,dq:1,pvp:1,dl:1};
  kxI=function(s,a){try{if(!(a>0)||!isFinite(a))return a;const T=G.kls=G.kls||{p:0,o:0};
