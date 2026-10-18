@@ -62,6 +62,19 @@ setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 const DC_ID=process.env.DISCORD_ID||'1561441130355237014',DC_SECRET=process.env.DISCORD_SECRET||'',DC_RED='https://api.pokeidledex.com/api/oauth/discord',SITE=process.env.SITE_URL||'https://pokeidledex.com';
 const pendO=new Map();setInterval(()=>{const n=Date.now();pendO.forEach((v,k)=>{if(n-v.ts>6e5)pendO.delete(k)})},6e4);
 const hreq=(url,opt,body)=>new Promise((ok,ko)=>{const r=require('https').request(url,opt,s=>{let x='';s.on('data',c=>x+=c);s.on('end',()=>{try{ok(JSON.parse(x))}catch(e){ko(new Error('json'))}})});r.on('error',ko);r.setTimeout(8000,()=>r.destroy(new Error('timeout')));if(body)r.write(body);r.end()});
+const GG_ID=process.env.GOOGLE_ID||'637104354464-n2esf9qoa4mh514f70v65qintii1lr3g.apps.googleusercontent.com',usedG=new Set();setInterval(()=>usedG.clear(),36e5);
+/* fin de connexion Discord/Google : retrouve, lie ou cree le compte (champ f = 'dc' ou 'gg') */
+function ssoFinish(res,d,tok,p,f){
+ for(const kk in db.acc){const a=db.acc[kk];if(a[f]==p.id){send(res,200,{ok:1,exists:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||''});return}}
+ if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a[f]){a[f]=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
+ if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
+ if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
+ const sv=typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',want=String(d.want||'').replace(/\s+/g,' ').trim();
+ const mk=(n,named)=>{const o={n,salt:crypto.randomBytes(12).toString('hex'),ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:sv,t:Date.now()};o[f]=p.id;db.acc[n.toLowerCase()]=o;dirty=1;send(res,200,{ok:1,created:1,named,name:n})};
+ if(NAME.test(want)&&pidCensor(want)===want&&!db.acc[want.toLowerCase()]){mk(want,1);return}
+ let base=p.un.replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,' ').trim().slice(0,12);if(base.length<2||pidCensor(base)!==base)base='Dresseur';
+ let n2=base;while(db.acc[n2.toLowerCase()])n2=base+(1000+Math.floor(Math.random()*9000));
+ mk(n2,0)}
 const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
@@ -111,20 +124,12 @@ http.createServer((req,res)=>{
     a.save=d.save;a.t=Date.now();dirty=1;send(res,200,{ok:1});return}
    if(act=='oauth'){
     const p=pendO.get(String(d.state||''));if(!p){send(res,400,{e:'state'});return}pendO.delete(String(d.state));
-    for(const kk in db.acc){const a=db.acc[kk];if(a.dc==p.id){send(res,200,{ok:1,exists:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||''});return}}
-    if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a.dc){a.dc=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
-    if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
-    if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
-    const want=String(d.want||'').replace(/\s+/g,' ').trim();
-    if(NAME.test(want)&&pidCensor(want)===want&&!db.acc[want.toLowerCase()]){
-     const salt0=crypto.randomBytes(12).toString('hex');
-     db.acc[want.toLowerCase()]={n:want,salt:salt0,ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',dc:p.id,t:Date.now()};dirty=1;
-     send(res,200,{ok:1,created:1,named:1,name:want});return}
-    let base=p.un.replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,' ').trim().slice(0,12);if(base.length<2||pidCensor(base)!==base)base='Dresseur';
-    let n2=base,i=0;while(db.acc[n2.toLowerCase()]){i++;n2=base+(1000+Math.floor(Math.random()*9000))}
-    const salt=crypto.randomBytes(12).toString('hex');
-    db.acc[n2.toLowerCase()]={n:n2,salt,ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',dc:p.id,t:Date.now()};dirty=1;
-    send(res,200,{ok:1,created:1,name:n2});return}
+    ssoFinish(res,d,tok,p,'dc');return}
+   if(act=='google'){
+    hreq('https://oauth2.googleapis.com/tokeninfo?id_token='+encodeURIComponent(String(d.idt||'').slice(0,4000)),{}).then(t=>{
+     if(!t||t.aud!==GG_ID||!t.sub||!/^accounts\.google\.com$|^https:\/\/accounts\.google\.com$/.test(String(t.iss))||String(t.nonce||'')!==String(d.nonce||'')||!d.nonce||+t.exp<Date.now()/1000){send(res,400,{e:'state'});return}
+     if(usedG.has(String(t.sub)+String(t.exp))){send(res,400,{e:'state'});return}usedG.add(String(t.sub)+String(t.exp));
+     ssoFinish(res,d,tok,{id:String(t.sub),un:String(t.name||t.given_name||'Dresseur')},'gg')}).catch(()=>send(res,502,{e:'net'}));return}
    if(act=='rename'){
     const a=db.acc[k];if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
     const nn=String(d.nn||'').replace(/\s+/g,' ').trim();if(!NAME.test(nn)||pidCensor(nn)!==nn){send(res,400,{e:'name'});return}

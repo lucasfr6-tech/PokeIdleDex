@@ -3257,12 +3257,13 @@ a.qkb.qkdc .qki{color:#fff}
 .oauth .dclk{background:rgba(52,211,153,.16)!important;color:#34d399!important;border:1px solid rgba(52,211,153,.5)!important;opacity:1!important}
 .dcw{display:block;width:100%;margin-top:8px;padding:12px;border-radius:12px;font-weight:700;background:#5865f2;color:#fff;border:0}
 #dcpk input{width:100%;margin:8px 0}
+.ggw{background:#fff!important;color:#1f2937!important}.ggbtn{background:#fff!important;color:#1f2937!important}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9939ff2d5c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=9939ff2d5c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="74e3e1b9e2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=74e3e1b9e2"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4161,7 +4162,7 @@ function vSetg(){const acc=accNow();return `<div class="stg">
  <div class="box scd"><h3>${ico("monitor")} Affichage</h3>${fsBtn()}<div class="seg th"><button class="${SG.theme=="night"?"on":""}" data-a="theme" data-t="night"><i class="tn"></i>${ico("moon")} Nuit</button><button class="${SG.theme=="day"?"on":""}" data-a="theme" data-t="day"><i class="td"></i>${ico("sun")} Jour</button></div>
   ${tgl("perf","Mode performance (moins d'effets)","bolt")}${tgl("fly","Pokémon dans le ciel","wind")}${tgl("stars","Étoiles filantes","star")}${tgl("anim","Animations de l'interface","spark")}${tgl("alert","Alertes de spawn rare","crown")}${tgl("cmp","Affichage compact","team")}${sld("ui","Taille de l'interface","monitor",80,120," %")}</div>
  ${vNf()}${vBk()}<div class="box scd"><h3>${ico("key")} Compte</h3>${window.pcOn&&window.pidAccBox?window.pidAccBox():acc?`<div class="accn">${ico("user")}<div><b>${acc}</b><small>Compte local actif</small></div><button class="mini" data-a="alogout">Déconnexion</button></div>`:`<div class="accf"><input type="email" id="acm" placeholder="E-mail" autocomplete="email"><input type="password" id="acp" placeholder="Mot de passe (6 car. min.)" autocomplete="current-password"><div class="row"><button class="go" data-a="alogin">Connexion</button><button data-a="acreate">Créer le compte</button></div></div>`}
-  <div class="oauth"><button disabled title="Nécessite un serveur d'authentification">${ico("globe")} Google</button>${window.dcBtn?window.dcBtn():""}</div>
+  <div class="oauth">${window.ggBtn?window.ggBtn():""}${window.dcBtn?window.dcBtn():""}</div>
   <div class="accs">${LB.ok?`${ico("wifi")} Classement en ligne actif`:`${ico("wifioff")} Classement en ligne indisponible ici`}</div></div>
  <div class="box scd"><h3>${ico("download")} Sauvegarde</h3><div class="row"><button data-a="expsv">${ico("download")} Exporter</button><button data-a="impsv">${ico("upload")} Importer</button></div><textarea id="imp" placeholder="Colle ici ton code de sauvegarde" rows="2"></textarea></div></div>${vSet()}`}
 /* ---------- prestige : visuel ---------- */
@@ -9549,7 +9550,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
   <label for="tci">${LS("Choisis ton nom","Choose your name")}</label><input id="tci" maxlength="16" autocomplete="off" spellcheck="false" placeholder="${LS("Ex. Sacha","E.g. Ash")}">
   ${window.pcOn?`<label for="tcpw">${LS("Mot de passe (facultatif)","Password (optional)")}</label><input id="tcpw" type="password" maxlength="64" autocomplete="new-password" placeholder="${LS("Pour reprendre ta partie sur un autre appareil","To continue your game on another device")}">`:""}
   <div class="tce" id="tce"></div>
-  <button class="go tcg">${LS("Commencer l'aventure","Start the adventure")}</button><button class="tca">${LS("Passer, je choisirai plus tard","Skip, I will choose later")}</button>${window.pcOn?`<button class="dcw" data-dc="go">${LS("Créer mon compte avec Discord","Create my account with Discord")}</button>`:""}
+  <button class="go tcg">${LS("Commencer l'aventure","Start the adventure")}</button><button class="tca">${LS("Passer, je choisirai plus tard","Skip, I will choose later")}</button>${window.pcOn?`<button class="dcw" data-dc="go">${LS("Créer mon compte avec Discord","Create my account with Discord")}</button><button class="dcw ggw" data-gg="go">${LS("Créer mon compte avec Google","Create my account with Google")}</button>`:""}
   <p>${window.pcOn?LS("Sans mot de passe, ta partie reste sur cet appareil.","Without a password, your game stays on this device."):LS("Pas de mot de passe ni d'e-mail : ta partie est enregistrée sur cet appareil.","No password or e-mail: your game is saved on this device.")}</p></div>`;
   document.getElementById("lnd").appendChild(d);
   const i=d.querySelector("#tci"),nm=d.querySelector("#tcn");setTimeout(()=>i.focus(),60);
@@ -10076,7 +10077,7 @@ async function back(){const q=new URLSearchParams(location.search),st=q.get("dc"
 setTimeout(back,1500);
 const TK=()=>LS("Ce pseudo est déjà pris.","This name is already taken.");
 function pick(){if(document.getElementById("dcpk"))return;const o=document.createElement("div");o.id="dcpk";o.style.cssText="position:fixed;inset:0;z-index:100030;background:#000a;display:grid;place-items:center;padding:16px";
- o.innerHTML=`<div class="tcm" style="position:relative"><div class="tcc"><div class="tcn"><small>${LS("COMPTE DISCORD LIÉ","DISCORD LINKED")}</small><b>${LS("Choisis ton pseudo","Choose your name")}</b></div></div><input id="dcpn" maxlength="16" autocomplete="off" spellcheck="false" value="${esc(G.name||"")}"><div class="tce" id="dcpe"></div><button class="go tcg" id="dcpg">${LS("Valider","Confirm")}</button><button class="tca" id="dcps">${LS("Garder ce nom","Keep this name")}</button></div>`;document.body.appendChild(o);
+ o.innerHTML=`<div class="tcm" style="position:relative"><div class="tcc"><div class="tcn"><small>${LS("COMPTE LIÉ","ACCOUNT LINKED")}</small><b>${LS("Choisis ton pseudo","Choose your name")}</b></div></div><input id="dcpn" maxlength="16" autocomplete="off" spellcheck="false" value="${esc(G.name||"")}"><div class="tce" id="dcpe"></div><button class="go tcg" id="dcpg">${LS("Valider","Confirm")}</button><button class="tca" id="dcps">${LS("Garder ce nom","Keep this name")}</button></div>`;document.body.appendChild(o);
  const i=o.querySelector("#dcpn"),e=o.querySelector("#dcpe"),close=()=>{ls("pid_dcpick",null);o.remove()};
  o.querySelector("#dcps").onclick=close;
  o.querySelector("#dcpg").onclick=async()=>{const v=(i.value||"").replace(/[<>"'&]/g,"").replace(/\s+/g," ").trim().slice(0,16);if(v.length<2){e.textContent=LS("Entre au moins 2 caractères.","Enter at least 2 characters.");return}
@@ -10085,7 +10086,33 @@ function pick(){if(document.getElementById("dcpk"))return;const o=document.creat
   let j={};try{const r=await fetch(API+"/api/acc/rename",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({name:ls("pid_acc"),nn:v})});j=await r.json()}catch(x){j={e:"net"}}
   if(!j.ok){e.textContent=j.e=="taken"?TK():LS("Pseudo invalide ou serveur injoignable.","Invalid name or server unreachable.");return}
   ls("pid_acc",j.name);ls("pid_dcl",j.name);G.name=j.name;try{save()}catch(x){}try{lbPush(true)}catch(x){}try{show()}catch(x){}close();toast(LS("Pseudo enregistré : "+j.name,"Name saved: "+j.name))}}
+window.dcPick=pick;
 setTimeout(()=>{if(ls("pid_dcpick")&&ls("pid_acc")&&!document.getElementById("lnd"))pick()},2500);
+})();
+/* --- connexion / creation de compte avec Google (OpenID, jeton verifie par le serveur aupres de Google) --- */
+(function(){
+const API=(window.PID_API||"").replace(/\/$/,""),CID="637104354464-n2esf9qoa4mh514f70v65qintii1lr3g.apps.googleusercontent.com",RED="https://pokeidledex.com/";
+if(!API)return;
+const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+const rnd=()=>Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,"0")).join("");
+const linked=()=>{const a=ls("pid_acc");return !!a&&ls("pid_ggl")==a};
+window.ggBtn=()=>linked()?`<button class="dclk" disabled title="${LS("Ton compte est lié à Google","Your account is linked to Google")}">${ico("globe")} ${LS("Google lié","Google linked")}</button>`:`<button data-gg="go" title="${LS("Continuer avec Google","Continue with Google")}">${ico("globe")} Google</button>`;
+const _lm=window.pcLoginModal;
+if(_lm)window.pcLoginModal=function(){_lm.apply(this,arguments);const o=document.getElementById("lndp");if(o){const x=o.querySelector(".dcbx");if(x)x.insertAdjacentHTML("beforeend",`<button class="go dcbtn ggbtn" data-gg="go" style="margin-top:8px">${LS("Continuer avec Google","Continue with Google")}</button>`)}};
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-gg="go"]');if(!b)return;e.stopPropagation();
+ try{save()}catch(x){}const n=rnd();ls("pid_ggn",n);
+ {const ip=document.getElementById("tci");const w=ip?(ip.value||"").replace(/[<>"'&]/g,"").trim().slice(0,16):"";ls("pid_dcw",w.length>=2?w:null)}
+ location.href="https://accounts.google.com/o/oauth2/v2/auth?client_id="+CID+"&redirect_uri="+encodeURIComponent(RED)+"&response_type=id_token&scope="+encodeURIComponent("openid profile")+"&nonce="+n+"&prompt=select_account"},true);
+async function back(){const h=location.hash||"";if(h.indexOf("id_token=")<0&&h.indexOf("error=")<0)return;
+ const q=new URLSearchParams(h.replace(/^#/,""));try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+ const idt=q.get("id_token"),n=ls("pid_ggn");ls("pid_ggn",null);const want=ls("pid_dcw")||"";ls("pid_dcw",null);
+ if(!idt||!n){toast(LS("Connexion Google annulée ou expirée.","Google sign-in cancelled or expired."));return}
+ let j={};try{const r=await fetch(API+"/api/acc/google",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({idt,nonce:n,uid:ls("pid_uid"),save:ls(SK)||"",want})});j=await r.json()}catch(x){j={e:"net"}}
+ if(!j.ok){toast(LS("Connexion Google échouée, réessaie.","Google sign-in failed, try again."));return}
+ if(j.exists){ls("pid_ggl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save)ls("idle3",j.save);toast(LS("Compte Google trouvé, chargement...","Google account found, loading..."));setTimeout(()=>location.reload(),300);return}
+ if(j.created){ls("pid_acc",j.name);ls("pid_ggl",j.name);ls("pid_sync",String(Date.now()));G.name=j.name;try{save()}catch(x){}ls("pid_land","1");if(!j.named)ls("pid_dcpick","1");toast(LS("Compte créé avec Google : "+j.name,"Account created with Google: "+j.name));setTimeout(()=>location.reload(),400);return}
+ if(j.linked){ls("pid_ggl",j.name||ls("pid_acc"));try{show()}catch(x){}toast(LS("Google lié à ton compte.","Google linked to your account."))}}
+setTimeout(back,1500);
 })();
 
 /* ============ DÉMARRAGE ============ */
