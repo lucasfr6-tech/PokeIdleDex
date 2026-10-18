@@ -3110,7 +3110,7 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3abcfa550a"</script><script src="config.js"></script><script src="shim.js"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7a1ef289d8"</script><script src="config.js"></script><script src="shim.js"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9329,7 +9329,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   const i=h.lastIndexOf("</section>");if(i>0)h=h.slice(0,i)+blk+h.slice(i)}catch(e){}return h};
 })();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
-const WMPOOL=[3,6,9,154,157,160,254,257,260,389,392,395,497,500,503,652,655,658,724,727,730,812,815,818,908,911,914,25,94,130,131,143,149,248,282,376,445,448];
+const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
 (function(){
  const pool=()=>WMPOOL.filter(i=>true);
  const root=()=>{let o=document.getElementById("wmr");if(!o){o=document.createElement("div");o.id="wmr";document.body.appendChild(o)}return o};
