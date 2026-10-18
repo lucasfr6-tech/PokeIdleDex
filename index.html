@@ -3404,8 +3404,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ac9bb67f94"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=ac9bb67f94"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4542e213c8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=4542e213c8"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10818,10 +10818,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 document.addEventListener("keydown",e=>{if(e.target&&e.target.id=="dmin"&&e.key=="Enter"&&!e.shiftKey){e.preventDefault();dmSend()}});
 setInterval(()=>{try{if(!dmOn())return;if(SCP.o=="ch"&&CH.tab=="f"){if(DMX.w)dmFetchConv(true);else dmFetchList()}}catch(e){}},3500);
 setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(e){}},30000);setTimeout(()=>{try{dmFetchList()}catch(e){}},9000);
-/* ---------- aucun Pokémon divin hors Invocation : raids et Pass de combat ---------- */
+/* ---------- aucun Pokémon divin hors Invocation : Pass de combat ---------- */
 (function(){
- const RP={Expert:[282,448,94,112,59,68],"Extrême":[149,248,373,445,376,282],Impossible:[376,448,373,445,248,149,282,94]};
- try{RT.forEach(t=>{const k=t.n&&t.n[0];if(RP[k])t.pool=RP[k].filter(x=>RB[x])})}catch(e){}
  try{BPLEG.splice(0,BPLEG.length,149,248,373,445,376,448,282,635,706,784,612,94,130,131,143,6,3,9)}catch(e){}
 })();
 /* ---------- Ticket Premium du Casino : chance divisée par 2 (Or 2 % → 1 %, Platine 12,5 % → 6,25 %) ---------- */
