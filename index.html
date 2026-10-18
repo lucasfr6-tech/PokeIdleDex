@@ -3404,8 +3404,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4542e213c8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=4542e213c8"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8277a8cac1"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=8277a8cac1"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5342,7 +5342,7 @@ function chMsg(m,i){const me=m.u==LB.uid,r=rowOf(m.u)||{},av=Object.assign({},m,
  return `<div class="chm${me?" me":""}"><span class="chav" data-a="fvp" data-t="${esc(m.u)}">${ava2(av,"sm")}</span><div class="chb"><div class="chn"><b data-a="fvp" data-t="${esc(m.u)}" style="color:${f[3]&&/^#/.test(f[3])?f[3]:"inherit"}">${esc(m.n)}</b>${ctt(m.tt)}<em>${m.tl}</em>${m.st>0?`<i class="chp" title="${LS("Prestige","Prestige")} ${m.st}">${ico("spark")}</i>`:""}<time>${tAgo(m.t)}</time></div>
  ${m.rp?`<div class="chq"><b>${esc(m.rp.n)}</b><span>${esc(m.rp.x)}</span></div>`:""}<div class="chx">${esc(m.x)}</div></div><button class="chr" data-a="chr" data-i="${i}" title="${LS("Répondre","Reply")}">${ico("reply")}</button></div>`}
 function chRender(full){const p=$("chp");if(!p||SCP.o!="ch")return;chBuild();const lv=tlv().l,ok=lv>=CHMIN&&LB.ok,fs=new Set(FD.mut),V=CH.tab=="f"?CH.view.filter(m=>fs.has(m.u)||m.u==LB.uid):CH.view;
- if(full||!$("chl")){p.innerHTML=`<div class="scph"><span class="scpi">${ico("chat")}</span><h3>CHAT</h3><span class="chon ${LB.ok?"on":""}">${LB.ok?LS("En ligne","Online"):LS("Hors ligne","Offline")}</span><button class="scpx" data-a="scx">${ico("x")}</button></div>
+ if(full||!$("chl")){p.innerHTML=`<div class="scph"><span class="scpi">${ico("chat")}</span><h3>CHAT</h3><span class="chon ${LB.ok?"on":""}">${LB.ok?LS("En ligne","Online")+(ONLN>0?" · "+ONLN:""):LS("Hors ligne","Offline")}</span><button class="scpx" data-a="scx">${ico("x")}</button></div>
  <div class="cht"><button class="${CH.tab=="g"?"on":""}" data-a="cht" data-t="g">${LS("Global","Global")}</button><button class="${CH.tab=="f"?"on":""}" data-a="cht" data-t="f">${LS("Amis","Friends")}</button></div><div class="chl" id="chl"></div>
  <div class="chf" id="chf"></div>`}
  const l=$("chl"),nb=l.scrollHeight-l.scrollTop-l.clientHeight<80||full;
@@ -10824,6 +10824,15 @@ setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(
 })();
 /* ---------- Ticket Premium du Casino : chance divisée par 2 (Or 2 % → 1 %, Platine 12,5 % → 6,25 %) ---------- */
 (function(){try{["o","p"].forEach(k=>{const L=CP[k],e=L.find(x=>x[1]=="i"&&x[2]=="bp-ticket");if(e){const h=e[0]/2;L[0][0]+=e[0]-h;e[0]=h}})}catch(x){}})();
+/* ---------- nombre de joueurs en ligne (pages ouvertes en ce moment) ---------- */
+var ONLN=0;
+(function(){const sid=Math.random().toString(36).slice(2,12)+Date.now().toString(36).slice(-6);
+ const show=()=>{try{document.querySelectorAll(".chon.on").forEach(e=>{e.textContent=LS("En ligne","Online")+(ONLN>0?" · "+ONLN:"")})}catch(e){}};
+ const ping=()=>{try{if(document.hidden)return;const a=(window.PID_API||"").replace(/\/$/,"");if(!a)return;
+  fetch(a+"/api/online?s="+sid).then(r=>r.json()).then(j=>{if(j&&typeof j.n=="number"){ONLN=j.n;show()}}).catch(()=>{})}catch(e){}};
+ setTimeout(ping,2500);setInterval(ping,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)ping()});
+ document.addEventListener("click",e=>{try{if(e.target.closest&&e.target.closest("[data-a=ch],[data-a=chat]"))setTimeout(ping,300)}catch(x){}});
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();

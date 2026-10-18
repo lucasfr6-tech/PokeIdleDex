@@ -117,6 +117,7 @@ function ssoFinish(res,d,tok,p,f){
 const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+const PRES=new Map();
 const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token','Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
 const CK=new Set(['n','x','nm','name','desc','tag','motd','bio','t0']);
@@ -124,6 +125,12 @@ const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.
 http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x'),ip=(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();
  if(req.method=='OPTIONS'){send(res,204,{});return}
+ if(u.pathname=='/api/online'&&req.method=='GET'){
+  if(limited(ip+'o',30)){send(res,429,{e:'rate'});return}
+  const sid=String(u.searchParams.get('s')||'');const now=Date.now();
+  if(/^[a-z0-9]{8,24}$/.test(sid)&&(PRES.size<20000||PRES.has(sid)))PRES.set(sid,now);
+  let n=0;for(const[k,t]of PRES){if(now-t>75000)PRES.delete(k);else n++}
+  send(res,200,{n});return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
 
  if(u.pathname=='/api/oauth/discord'&&req.method=='GET'){
