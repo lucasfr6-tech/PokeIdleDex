@@ -3249,8 +3249,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="54edeee7a7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=54edeee7a7"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="892a98d4f7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=892a98d4f7"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5181,7 +5181,7 @@ function frRender(){const p=$("frp");if(!p||SCP.o!="fr")return;const n=FD.mut.le
  ${pend.length?`<h4>${LS("En attente","Pending")}</h4>${pend.map(u=>frCard(u,"out")).join("")}`:""}</div>`;
  const c=$("fcode");if(c&&keep)c.value=keep}
 /* ---- chat ---- */
-function chBuild(){const now=Date.now(),L=[];CH.docs.forEach((d,u)=>{if(!d||!Array.isArray(d.m)||(G.fd.blk&&G.fd.blk.includes(u)&&u!=LB.uid))return;d.m.slice(-10).forEach(m=>{if(m&&typeof m.x=="string"&&typeof m.t=="number"&&m.t<now+120000)L.push({u,n:pidCensor(String(d.n||"").slice(0,16)),tl:d.tl|0,av:d.av,avs:d.avs,fr:d.fr,st:d.st|0,t:m.t,x:pidCensor(m.x.slice(0,300)),rp:m.rp&&typeof m.rp.x=="string"?{n:pidCensor(String(m.rp.n||"").slice(0,16)),x:pidCensor(m.rp.x.slice(0,70))}:null})})});
+function chBuild(){const now=Date.now(),L=[];CH.docs.forEach((d,u)=>{if(!d||!Array.isArray(d.m)||(G.fd.blk&&G.fd.blk.includes(u)&&u!=LB.uid))return;d.m.slice(-10).forEach(m=>{if(m&&typeof m.x=="string"&&typeof m.t=="number"&&m.t<now+120000)L.push({u,n:pidCensor(String(d.n||"").slice(0,16)),tl:d.tl|0,av:d.av,avs:d.avs,fr:d.fr,st:d.st|0,tt:String(d.tt||"").slice(0,8),t:m.t,x:pidCensor(m.x.slice(0,300)),rp:m.rp&&typeof m.rp.x=="string"?{n:pidCensor(String(m.rp.n||"").slice(0,16)),x:pidCensor(m.rp.x.slice(0,70))}:null})})});
  L.sort((a,b)=>a.t-b.t);CH.view=L.slice(-90)}
 function chMsg(m,i){const me=m.u==LB.uid,r=rowOf(m.u)||{},av=Object.assign({},m,{ai:me?(G.avm?G.avi:""):(r.ai||"")}),f=frOf(m.fr);
  return `<div class="chm${me?" me":""}"><span class="chav" data-a="fvp" data-t="${esc(m.u)}">${ava2(av,"sm")}</span><div class="chb"><div class="chn"><b data-a="fvp" data-t="${esc(m.u)}" style="color:${f[3]&&/^#/.test(f[3])?f[3]:"inherit"}">${esc(m.n)}</b>${ctt(m.tt)}<em>${m.tl}</em>${m.st>0?`<i class="chp" title="${LS("Prestige","Prestige")} ${m.st}">${ico("spark")}</i>`:""}<time>${tAgo(m.t)}</time></div>
