@@ -3252,12 +3252,13 @@ a.qkb.qkdc .qki{color:#fff}
 .gbl{display:grid;grid-template-columns:1fr 1fr;gap:8px}.gbl button{display:flex;align-items:center;gap:8px;padding:11px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--bc);color:#fff;font-weight:700}.gbl button .i{color:var(--bc)}.gbl button:hover{background:rgba(255,255,255,.1)}
 .gbx{margin-top:10px;width:100%;padding:8px;border-radius:10px;background:transparent;border:1px solid var(--ln);color:var(--mu)}
 .gqb{display:flex;gap:8px;margin-top:8px}.gqb button{flex:1;padding:8px 10px;border-radius:10px;font-weight:700}.gqr{background:rgba(255,255,255,.08);color:#fca5a5;border:1px solid rgba(248,113,113,.4)}
+.pvqs{display:block;margin-top:4px;opacity:.9}.pvqb{margin-top:6px;padding:7px 12px;border-radius:10px;font-weight:700;background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.5)}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="eb8e1e07e4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=eb8e1e07e4"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3780b0f0dc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=3780b0f0dc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9993,6 +9994,24 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  mailBox().forEach(m=>{if(m.gq==u)m.c=1});save();try{mailDot()}catch(x){}
  toast(b.dataset.gq=="acc"?LS("Demande acceptée.","Request accepted."):LS("Demande refusée.","Request declined."));
  try{mailOpen()}catch(x){}},true);
+})();
+/* --- JCJ : 5 combats classés par jour + jusqu'à 3 tickets achetables --- */
+(function(){
+const FREE=5,MAXB=3;
+const Q=()=>{const p=pvS(),d=pvDayK();if(!p.q||p.q.d!=d)p.q={d,n:0,b:0};return p.q};
+const left=()=>{const q=Q();return Math.max(0,FREE+q.b-q.n)};
+const price=()=>{const q=Q();let b=300000;try{b=Math.max(300000,qcps()*1800)}catch(e){}return Math.floor(b*(1+q.b))};
+window.pvQLeft=left;
+const _ps=pvStart;
+pvStart=function(){const o=PVX.cur;if(o&&!o.tuto&&!o.fri){if(left()<=0){toast(LS("Plus de combat classé aujourd'hui : achète un ticket ou reviens demain.","No ranked fights left today: buy a ticket or come back tomorrow."));sfx("err");try{pvModal("")}catch(e){}return}Q().n++;save()}return _ps.apply(this,arguments)};
+const _h=pvHero;
+pvHero=function(){let h=_h.apply(this,arguments);const q=Q(),l=left(),can=q.b<MAXB;
+ const add=`<small class="pvqs">${LS("Combats classés aujourd'hui","Ranked fights today")} : <b>${l}</b> / ${FREE+q.b}</small>${can?`<button class="pvqb" data-pvq="buy">${LS("Ticket JCJ","PvP ticket")} (${q.b}/${MAXB}) · ${fmt(price())} ₽</button>`:`<small class="pvqs">${LS("Tickets du jour épuisés","No tickets left today")}</small>`}`;
+ const k=h.lastIndexOf("</small></div></div></div>");return k<0?h:h.slice(0,k)+"</small>"+add+h.slice(k+8)};
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pvq]");if(!b)return;e.stopPropagation();const q=Q();
+ if(q.b>=MAXB){toast(LS("3 tickets maximum par jour.","3 tickets max per day."));return}
+ const c=price();if(G.m<c){toast(LS("Pas assez de pièces.","Not enough coins."));sfx("err");return}
+ G.m-=c;q.b++;save();sfx("pvbuy");toast(LS("Ticket JCJ acheté : +1 combat classé.","PvP ticket bought: +1 ranked fight."));try{show()}catch(x){}},true);
 })();
 
 /* ============ DÉMARRAGE ============ */
