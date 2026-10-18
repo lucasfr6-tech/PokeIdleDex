@@ -3260,12 +3260,13 @@ a.qkb.qkdc .qki{color:#fff}
 .ggw{background:#fff!important;color:#1f2937!important}.ggbtn{background:#fff!important;color:#1f2937!important}
 .glx-pips{display:flex;gap:3px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.glx-pips i{width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,.14)}.glx-pips i.on{background:#34d399}.glx-pips i.cur{background:#fbbf24;box-shadow:0 0 6px #fbbf24}
 .glx-clk{cursor:pointer}.glx-clk:hover b{text-decoration:underline}
+.vph .pidn{display:inline-flex;align-items:center;gap:6px;font-size:14px!important;cursor:pointer;border:0;font-family:inherit;padding:4px 10px!important}.vph .pidn svg{width:14px;height:14px}.vph .pidn.ok{color:#86efac}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="394ed630bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=394ed630bc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="54cfedec5d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=54cfedec5d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4138,7 +4139,7 @@ function lbRefresh(){const R=lbRows(),el=$("lbl");if(el){el.innerHTML=lbList(R);
 /* ---------- profil public d'un joueur ---------- */
 function vpModal(m){const R=lbRows(),r=R.find(x=>x.id==VP);if(!r){VP=null;m.innerHTML="";m.className="";return}const b=BAN[r.ban]||BAN[0],rk=R.indexOf(r)+1;
  m.className="on";m.innerHTML=`<div class="mb" data-a="vpx"></div><div class="mc vpm"><button class="x" data-a="vpx">${ico("x")}</button>
- <div class="vph" style="background:${b.css}"><span class="pidn" title="ID">${pidOf(r.id)}</span><div class="vpi">${ava2(r,"big")}<div><h2>${r.n}</h2><div>${lbBadges(r)}</div></div></div><span class="vpr">#${rk}</span></div>
+ <div class="vph" style="background:${b.css}"><button class="pidn" data-cp="${pidOf(r.id)}" title="Copier l'identifiant">${pidOf(r.id)}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button><div class="vpi">${ava2(r,"big")}<div><h2>${r.n}</h2><div>${lbBadges(r)}</div></div></div><span class="vpr">#${rk}</span></div>
  <div class="vpt">${(r.fav||[]).map((x,k)=>`<div class="vpf"><div class="p3s">${p3d(x.f,x.sh,7)}</div><div class="ped"><i></i></div><b>${x.n}</b><small>Niv. ${x.l}</small></div>`).join("")||"<small>Aucun Pokémon.</small>"}</div>
  <div class="vsg"><div>${ico("crown")}<b>${r.bf||0}</b><small>Étage max</small></div><div>${ico("book")}<b>${r.dx||0}</b><small>Espèces</small></div><div>${ico("target")}<b>${r.caps||0}</b><small>Captures</small></div><div>${ico("star")}<b>${r.sh||0}</b><small>Chromatiques</small></div></div></div>`}
 /* ---------- compte local ---------- */
@@ -4585,7 +4586,7 @@ const lbList=R=>R.slice(3).map((r,i)=>`<div class="lrow ${r.me?"me":""}" data-a=
 function vpModal(m){const R=lbRows(),r=R.find(x=>x.id==VP);if(!r){VP=null;m.innerHTML="";m.className="";return}
  const b=BAN[r.ban]||BAN[0],rk=R.indexOf(r)+1,f=frOf(r.fr),sty=(r.st|0)>0;
  m.className="on";m.innerHTML=`<div class="mb" data-a="vpx"></div><div class="mc vpm vpsq"><button class="x" data-a="vpx">${ico("x")}</button>
- <div class="vpc" style="--fg:${f[3]}"><div class="vph" style="background:${b.css}"><i class="vpsh"></i><span class="vpr">#${rk}</span><div class="vpa">${ava2(r,"huge")}</div></div>
+ <div class="vpc" style="--fg:${f[3]}"><div class="vph" style="background:${b.css}"><i class="vpsh"></i><button class="pidn" data-cp="${pidOf(r.id)}" title="Copier l'identifiant">${pidOf(r.id)}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button><span class="vpr">#${rk}</span><div class="vpa">${ava2(r,"huge")}</div></div>
  <div class="vpb"><h2>${esc(r.n)}${r.me?` <em>(${LS("toi","you")})</em>`:""}</h2>${ttHtml(r.tt,1)}<div class="vbd">${sty?`<span class="bdg pres">${ico("spark")} ${LS("PRESTIGE","PRESTIGE")} ${r.st|0}</span>`:""}<span class="bdg lvl">${ico("lvl")} ${LS("Niveau","Level")} ${(+r.tl||0)|0}</span><span class="bdg tt">${ico("crown")} ${ttl(r.dx||0)}</span></div>${r.me?"":frBtn(r.id)}</div>
  <div class="vsg"><div>${ico("crown")}<b>${r.bf||0}</b><small>${LS("Étage max","Best floor")}</small></div><div>${ico("book")}<b>${r.dx||0}</b><small>${LS("Espèces","Species")}</small></div><div>${ico("target")}<b>${r.caps||0}</b><small>${LS("Captures","Catches")}</small></div><div>${ico("star")}<b>${r.sh||0}</b><small>${LS("Chromatiques","Shinies")}</small></div></div>
  <div class="vpt">${(r.fav||[]).map((x,k)=>vpStatue(x,k+1)).join("")||`<small>${LS("Aucun Pokémon.","No Pokémon.")}</small>`}</div></div></div>`}
@@ -10209,6 +10210,11 @@ function apply(){try{if(!(LB&&LB.ok&&LB.db))return;const p=pvS();p.hx=p.hx||{};l
 const _pf2=pvFetch;
 pvFetch=async function(){const r=await _pf2.apply(this,arguments);apply();return r};
 })();
+/* identifiant #xxxxxxx copiable dans le profil */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cp]");if(!b)return;e.stopPropagation();e.preventDefault();const v=b.dataset.cp;
+ const done=()=>{b.classList.add("ok");try{toast(LS("Identifiant copié : "+v,"ID copied: "+v))}catch(x){}setTimeout(()=>b.classList.remove("ok"),1500)};
+ try{navigator.clipboard.writeText(v).then(done,()=>{fb()})}catch(x){fb()}
+ function fb(){const t=document.createElement("textarea");t.value=v;t.style.cssText="position:fixed;opacity:0";document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(x){}t.remove();done()}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
