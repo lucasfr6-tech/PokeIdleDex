@@ -68,6 +68,28 @@ const mkItem=it=>{if(!it||typeof it!='object')return null;const v=Math.max(0,Mat
  return null};
 const mkDeliver=(uid,o)=>{const a=db.mkd[uid]=db.mkd[uid]||[];const e=Object.assign({id:rid('D'),t:Date.now()},o);a.push(e);if(a.length>200)a.splice(0,a.length-200);dirty=1;return e};
 setInterval(()=>{try{const n=Date.now();for(const id in db.mkt){const l=db.mkt[id];if(n-l.t>MK_TTL){mkDeliver(l.s,{k:'ret',it:l.it});delete db.mkt[id];dirty=1}}}catch(e){console.error('mkt',e.message)}},36e5);
+
+/* ---- anti-triche : detection de valeurs impossibles (les joueurs suspects sont masques des classements) ---- */
+db.flag=db.flag||{};
+const hidden=id=>{const f=db.flag[id];return !!f&&!!(f.m||(f.s&&f.s.length)||(f.l&&f.l.length))};
+const setFlag=(uid,key,arr)=>{if(!uid)return;const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};
+ const had=hidden(uid);f[key]=arr;if(arr.length)f.t=Date.now();
+ if(!f.m&&!(f.s&&f.s.length)&&!(f.l&&f.l.length))delete db.flag[uid];
+ if(arr.length&&!had)console.log('SUSPECT',uid,arr.join(' | '));dirty=1};
+const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='object')return[];
+ const r=[],n=x=>+x||0,col=G.col&&typeof G.col=='object'?G.col:{};
+ const m=n(G.m),gain=n(G.gain);
+ if(!isFinite(m)||m<0||m>gain*5+5e9)r.push('pieces '+m.toExponential(2)+' pour '+gain.toExponential(2)+' gagnes');
+ const k=Math.floor(n(G.bf)/8),pts=k*k+4*k,pt=Math.max(n(G.pp),n(G.pt));
+ if(pt>3*Math.max(1,n(G.st))*Math.max(pts,5)+50)r.push('prestige '+pt+' points pour '+n(G.st)+' prestige(s), etage max '+n(G.bf));
+ const ids=Object.keys(col),sh=ids.filter(i=>col[i]&&col[i].sh).length,mu=ids.filter(i=>col[i]&&col[i].mi>0).length;
+ if(n(G.mut)>n(G.caps)*.5+5)r.push('mutations '+n(G.mut)+' pour '+n(G.caps)+' captures');
+ if(sh>n(G.mut)+40||mu>n(G.mut)+40)r.push('chromatiques/mutes possedes '+sh+'/'+mu+' pour '+n(G.mut)+' mutations captees');
+ if(n(G.caps)>n(G.ko)*3+500)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
+ if(G.tw&&n(G.tw.b)>200)r.push('tour etage '+n(G.tw.b));
+ return r};
+const ckT=new Map();
+const lbSus=d=>{const r=[],n=x=>+x||0;if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
 setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 /* connexion Discord (OAuth2) : le secret reste dans l'environnement du serveur (DISCORD_SECRET), jamais dans le jeu */
@@ -133,7 +155,7 @@ http.createServer((req,res)=>{
     const a=db.acc[k];
     if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
     if(typeof d.save!='string'||d.save.length>=MAXSAVE){send(res,400,{e:'size'});return}
-    a.save=d.save;a.t=Date.now();dirty=1;send(res,200,{ok:1});return}
+    a.save=d.save;a.t=Date.now();dirty=1;try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1});return}
    if(act=='oauth'){
     const p=pendO.get(String(d.state||''));if(!p){send(res,400,{e:'state'});return}pendO.delete(String(d.state));
     ssoFinish(res,d,tok,p,'dc');return}
@@ -150,6 +172,20 @@ http.createServer((req,res)=>{
    send(res,404,{e:'act'})});
   return}
 
+
+ if(u.pathname.startsWith('/api/adm/')&&req.method=='POST'){
+  const op=u.pathname.slice(9);
+  if(!ADMIN_KEY||ADMIN_KEY.length<12||req.headers['x-admin']!==ADMIN_KEY){send(res,403,{e:'admin'});return}
+  let b='';req.on('data',c=>{b+=c;if(b.length>5000)req.destroy()});
+  req.on('end',()=>{let d={};try{d=JSON.parse(b||'{}')}catch(e){}
+   const uid=String(d.uid||'');
+   if(op=='flags'){send(res,200,{ok:1,flags:Object.keys(db.flag).map(id=>Object.assign({uid:id,n:(db.lb[id]&&db.lb[id].d&&db.lb[id].d.n)||''},db.flag[id]))});return}
+   if(!ID.test(uid)){send(res,400,{e:'id'});return}
+   if(op=='purge'){let n=0;['lb','pvp','twr','wb','glm'].forEach(c=>{if(db[c][uid]){delete db[c][uid];n++}});
+    const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};f.m=1;f.t=Date.now();dirty=1;send(res,200,{ok:1,supprimes:n});return}
+   if(op=='unflag'){delete db.flag[uid];dirty=1;send(res,200,{ok:1});return}
+   send(res,404,{e:'op'})});
+  return}
  if(u.pathname.startsWith('/api/mkt/')){
   const act=u.pathname.slice(9);
   if(limited(ip+'m',150)){send(res,429,{e:'rate'});return}
@@ -195,7 +231,7 @@ http.createServer((req,res)=>{
   const col=db[m[2]];
   if(m[1]=='c'&&req.method=='GET'){
    if(limited(ip,240)){send(res,429,{e:'rate'});return}
-   let L=Object.keys(col).map(id=>({id,d:col[id].d}));
+   const HID={lb:1,pvp:1,twr:1,wb:1,glm:1};let L=Object.keys(col).filter(id=>!(HID[m[2]]&&hidden(id))).map(id=>({id,d:col[id].d}));
    const f=u.searchParams.get('f'),v=u.searchParams.get('v');
    if(f)L=L.filter(x=>String(x.d&&x.d[f])===v);
    const ob=u.searchParams.get('ob');
@@ -214,7 +250,7 @@ http.createServer((req,res)=>{
      const x=col[m[3]],h=sha(tok);
      if(x&&x.h!==h&&m[2]!='adm'){send(res,403,{e:'owner'});return}
      if(!x&&Object.keys(col).length>=MAXDOCS){send(res,507,{e:'full'});return}
-     col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;send(res,200,{ok:1})});
+     col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;if(m[2]=='lb'){try{setFlag(m[3],'l',lbSus(d))}catch(e){}}send(res,200,{ok:1})});
     return}
   }
   send(res,400,{e:'bad'});return}
