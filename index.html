@@ -3247,8 +3247,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7a98b7ebcd"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=7a98b7ebcd"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="021d8cbc73"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=021d8cbc73"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8276,8 +8276,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 {const c0=pvCanSt;pvCanSt=function(d,e){if(d&&d.gbs)return false;return c0.apply(this,arguments)}}
 /* ===== v102 : Pass de combat Premium = Ticket Premium rare du Casino ===== */
 IT["bp-ticket"]={n:"Ticket Premium",c:"__bp",p:0,r:99,du:"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs><path d="M6 14h52v10a6 6 0 0 0 0 12v14H6V36a6 6 0 0 0 0-12z" fill="url(#g)" stroke="#92400e" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 40l-2-12 8 6 6-10 6 10 8-6-2 12z" fill="#7c3aed" stroke="#4c1d95" stroke-width="2" stroke-linejoin="round"/><path d="M46 16v6M46 28v4M46 38v4" stroke="#92400e" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>')};
-CP.p[0][0]-=25;CP.p.push([25,"i","bp-ticket",1]);
-CP.o[0][0]-=4;CP.o.push([4,"i","bp-ticket",1]);
+CP.p[0][0]-=12.5;CP.p.push([12.5,"i","bp-ticket",1]);
+CP.o[0][0]-=2;CP.o.push([2,"i","bp-ticket",1]);
 {const f0=casRoll;casRoll=function(k){const o=f0.apply(this,arguments);
  if(o&&o.p&&o.p[1]=="i"&&o.p[2]=="bp-ticket"){G.inv["bp-ticket"]=(G.inv["bp-ticket"]||1)-1;if(G.inv["bp-ticket"]<=0)delete G.inv["bp-ticket"];
   const B=BPS();if(!B.pm){B.pm=1;BPSG="";o.lab=LS("Ticket Premium : Pass de combat Premium débloqué !","Premium Ticket: Premium Battle Pass unlocked!")}else{G.gem=(G.gem||0)+300;o.lab=LS("Ticket Premium (déjà actif) : +300 gemmes","Premium Ticket (already active): +300 gems")}
