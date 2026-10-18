@@ -3373,12 +3373,37 @@ a.qkb.qkdc .qki{color:#fff}
 @media(max-width:860px){.tr-grid{grid-template-columns:1fr}.tr-ar{height:260px;padding:12px 12px 38px;grid-template-columns:1fr 40px 1fr}.tr-pk{height:120px}.tr-sp img,.tr-sp.big img{max-height:104px;max-width:110px}}
 @media(max-width:560px){.tr-md{grid-template-columns:1fr}.tr-sm{grid-template-columns:repeat(3,1fr)}.tr-pc{flex-direction:column;align-items:flex-start}.tr-box{padding:16px}}
 .trn{height:auto;min-height:0;justify-content:flex-start}.trn>*{flex:none}.tr-top .tr-box{height:auto}
+.tr-box.arena .pva{width:min(100%,860px);margin:0 auto;aspect-ratio:16/9;max-height:none}
+.trpva .tr-pill{position:absolute;top:2.5%;left:50%;translate:-50% 0;z-index:5;display:flex;gap:7px;align-items:baseline;padding:6px 16px;border-radius:99px;background:#0b1030e6;border:2px solid #4a5ac0;font:800 clamp(10px,1.7cqw,14px) Nunito,system-ui,sans-serif;color:#cbd5e1;white-space:nowrap}.trpva .tr-pill span{color:#86efac;text-transform:uppercase;letter-spacing:.06em;font-size:.85em}.trpva .tr-pill b{color:#fde047}
+.trpva .pvsp.m img{scale:var(--z,1);transform-origin:50% 100%}
+.trpva .pvsp.atk{animation:tratkm .38s ease-out}.trpva .pvsp.f.atk{animation:tratkf .38s ease-out}.trpva .pvsp.hurt img{animation:trhurt .36s ease-out}
+@keyframes tratkm{0%{translate:0 0}45%{translate:9cqw -3cqw}100%{translate:0 0}}@keyframes tratkf{0%{translate:0 0}45%{translate:-9cqw 3cqw}100%{translate:0 0}}
+@keyframes trhurt{0%,100%{filter:none;translate:-50% 0}20%{filter:brightness(2.4);translate:-46% 0}55%{filter:brightness(1.3);translate:-54% 0}}
+.trpva.ko .pvsp.f img{opacity:0;transition:opacity .4s,translate .4s;translate:-50% 14%}.trpva .pvsp.f img{transition:opacity .15s}
+.trpva .tr-dm{position:absolute;z-index:6;font:900 clamp(14px,2.8cqw,26px) "Baloo 2",Nunito,system-ui,sans-serif;font-style:normal;color:#fff;text-shadow:0 2px 0 #7f1d1d,0 0 8px #000;animation:trdm .8s ease-out forwards;pointer-events:none}
+.trpva .pvpl.m{bottom:12%}
+/* Raid : récompenses par palier plus compactes */
+.wbr{padding:9px 11px;gap:6px;margin-top:8px}.wbr>small{font-size:11px;line-height:1.35}
+.wbg{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.wbt{padding:6px 8px;gap:3px;border-radius:10px}
+.wbh{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}.wbh b{font-size:11px}.wbh small{font-size:9.5px}
+.wbt .wbcp{font-size:9.5px;line-height:1.2;white-space:normal}
+.wbt .wbi{display:flex;flex-direction:row;flex-wrap:wrap;gap:2px 8px}.wbt .wbi span{font-size:9.5px;line-height:1.25;padding:0;display:inline-flex;gap:2px;align-items:center;white-space:nowrap;background:none;border:0}.wbt .wbi span .ic,.wbt .wbi span img{width:11px;height:11px}
+@media(max-width:1000px){.wbg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:620px){.wbg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Messages privés */
+.dml{display:flex;flex-direction:column;gap:6px;padding:4px 2px}
+.dmr{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;padding:9px 10px;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff14;color:#fff;cursor:pointer;font-family:inherit}.dmr:hover{background:#ffffff14;border-color:#4ade8077}
+.dmr .frn{min-width:0}.dmr .frn b{display:block;font-size:14px}.dmr .frn small{display:block;color:#94a3b8;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dmm{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.dmm time{font-size:10.5px;color:#94a3b8}
+.dmh{display:flex;align-items:center;gap:10px;padding:6px 4px 10px;position:sticky;top:0;background:inherit;z-index:2;border-bottom:1px solid #ffffff14;margin-bottom:6px}.dmh .frn b{display:block}.dmh .frn small{color:#94a3b8;font-size:11px}
+.dmb{width:36px;height:36px;border-radius:11px;border:1px solid #ffffff22;background:#ffffff10;color:#fff;display:grid;place-items:center;cursor:pointer}.dmb svg{width:18px;height:18px}
+.dmpv{display:flex;gap:6px;align-items:center;color:#94a3b8;font-size:11.5px;padding:6px 4px}.dmpv svg{width:13px;height:13px}.dmsn{display:block;text-align:right;color:#86efac;font-size:10.5px;margin-top:2px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4314292d83"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=4314292d83"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="0bbc10b61f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=0bbc10b61f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3572,7 +3597,7 @@ const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPK=.025,BOSS_PV=1.2;
-const hpF=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));
+const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);return Math.floor(hpF0(95)*Math.exp(I))};
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
@@ -7601,7 +7626,7 @@ function twWings(g,x,bx0,bx1,by0,by1,S,sh){const w=bx1-bx0,h=by1-by0,cx=(bx0+bx1
  g.restore()}
 
 /* ---------- état ---------- */
-const TWN=200;
+const TWN=300;
 function twS(){const t=G.tw=G.tw||{};
  if(t.f==null)Object.assign(t,{f:1,b:0,tm:[],au:0,af:"nx",fm:0,sc:0,up:{},cl:{},w:0,l:0,ls:0,ap:0,bt:0,tt:0,nt:{}});
  t.up=t.up||{};t.cl=t.cl||{};t.nt=t.nt||{};t.tm=(t.tm||[]).filter(id=>G.col[id]).slice(0,3);
@@ -7621,10 +7646,10 @@ const twZone=f=>TWZ[Math.floor((f-1)/10)%10];
 const twZi=f=>Math.floor((f-1)/10)%10;
 /* nombre d'ennemis : 1-2 au début, puis 3-4, puis 5, 6 au maximum */
 const twCount=f=>f>=100?6:f<=3?1:f<=10?2:f<=20?3:f<=35?3+(f%2==0?1:0):f<=50?4:f<=65?4+(f%2==0?1:0):f<=80?5:5+(f%5==0?1:0);
-const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:90004};
+const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,250:716,275:717,300:90004};
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
-const twSc=f=>{const g=f>100?.72+.0016*(f-100):1,a=(TWSC.a0+TWSC.a1*Math.pow(f/100,TWSC.p))*g;return{a,h:a*TWSC.h,d:a*TWSC.d*g+.08,p:TWSC.s+TWSC.s1*f}};
+const twSc=f=>{const g=f>100?.8+.0035*(f-100):1,a=(TWSC.a0+TWSC.a1*Math.pow(f/100,TWSC.p))*g;return{a,h:a*TWSC.h,d:a*TWSC.d*g+.08,p:TWSC.s+TWSC.s1*f}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -7852,7 +7877,7 @@ function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
   <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(15000*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
 function twViewRw(){const L=[];for(let m=5;m<=TWN;m+=5)L.push(m);
- return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 200</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 200</span>`}</div></div></div>
+ return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 300</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 300</span>`}</div></div></div>
   <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75, 100, 125, 150, 175 et 200 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
 
 /* ---------- classement ---------- */
@@ -7867,7 +7892,7 @@ function twViewRank(){const R=twRows(),me=R.find(x=>x.me),top=R.slice(0,50);
 function vTwr(){twS();twFetch();const t=twS(),V=TWX.v;
  const tabs=[["tour","tower","Tour"],["team","team","Équipe"],["up","bolt","Améliorations"],["rw","gift","Récompenses"],["rank","trophy","Classement"]];
  const body=V=="team"?twViewTeam():V=="up"?twViewUp():V=="rw"?twViewRw():V=="rank"?twViewRank():twViewTour();
- return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>200 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
+ return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>300 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
   <div class="twtabs">${tabs.map(([k,i,n])=>`<button class="${V==k?"on":""}" data-tw="v:${k}">${twIc(i)}<span>${n}</span></button>`).join("")}</div>${body}</div>`}
 /* mises à jour douces (sans tout redessiner) */
 function twRefresh(full){twHud();if(tab!="twr"||PB)return;if($("pvm")&&$("pvm").classList.contains("on"))return;const sy=window.scrollY;
@@ -8484,7 +8509,7 @@ const WKM={
  items:["Objets tenus","Le catalogue complet des objets à équiper, avec recherche","bag"],
  exp:["Expéditions","Des missions qui tournent pendant que tu joues","compass"],
  raid:["Raids","Boss plein écran, récompenses et boss mondial","skull"],
- twr:["Tower","200 étages, Sceaux, améliorations et Pikachu Zénith","tower"],
+ twr:["Tower","300 étages, Sceaux, améliorations et Pikachu Zénith","tower"],
  pvp:["JCJ : arène classée","6 contre 6, ligues, saisons et insignes","shield"],
  gld:["Guildes","Rejoindre ou créer une équipe, défis, boss hebdomadaire et entraide","frs"],
  shop:["Boutique et Sac","Acheter, vendre et ranger tes objets","bag"],
@@ -8620,12 +8645,12 @@ ${wsx("Fonctionnement",`<ol class="wks"><li>Ouvre l'onglet <b>Pension</b> (caté
 ${wn("tip","Qui y mettre ?","Les Pokémon que tu veux le plus rendre précieux : un chromatique ou un Colossal donne un bonus permanent de dégâts à tout le Pokémon.")}`;
 
 wkBody.twr=()=>{
- return `<p class="lead">La Tower est un mode à part : <b>200 étages</b> répartis en 10 zones (les étages 101 à 200 reprennent les zones, avec des adversaires niveau 100 et des équipes choisies pour contrer la tienne), affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
+ return `<p class="lead">La Tower est un mode à part : <b>300 étages</b> répartis en 10 zones (les étages 101 à 300 reprennent les zones, avec des adversaires niveau 100 et des équipes choisies pour contrer la tienne), affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
  ${wf([["Débloquée à l'étage",LOCKS.twr],["Étages",TWN],["Équipe","3 Pokémon"],["Récompense finale","Pikachu Zénith"]])}
  ${wsx("Les onglets",wg([["tower","Tour","Monte étage après étage et lance les combats."],["team","Équipe","Choisis tes 3 Pokémon, leurs attaques et leur objet."],["flask","Améliorations","Dépense tes Sceaux pour renforcer toute l'équipe."],["gift","Récompenses","Une récompense tous les 5 étages."],["trophy","Classement","Compare ton étage max à celui des autres."]]))}
  ${wsx("Sceaux et améliorations",`<p>Tu gagnes des <b>Sceaux</b> à chaque victoire, et beaucoup plus à la <b>première victoire</b> d'un étage. Ils achètent huit améliorations :</p>${tbl(["Amélioration","Effet","Niveau max"],[["Vitalité","PV de toute l'équipe",20],["Force","Attaque physique",20],["Carapace","Défense physique",20],["Esprit","Attaque spéciale",20],["Aura","Défense spéciale",20],["Élan","Vitesse",20],["Cadence","Combat de farm plus rapide : −0,2 s par niveau (6,0 s au départ)",20],["Butin","Plus de Sceaux par victoire",10]])}<p>L'<b>achat automatique</b> dépense tes Sceaux dans l'amélioration la moins chère disponible.</p>`)}
  ${wsx("Mode farm",`<p>Quand un étage est vaincu, tu peux le refaire en <b>mode farm</b>, un combat rapide qui rapporte des Sceaux. Attention : deux défaites d'affilée en farm te ramènent d'un étage en arrière.</p>`)}
- ${wsx("Récompenses",`<p>Une récompense tous les 5 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75, 100, 125, 150, 175 et 200</b> sont des paliers majeurs. Après l'étage 100, tous les adversaires sont niveau 100 et leur équipe est choisie pour contrer la tienne. À l'étage 200, tu obtiens <b>Pikachu Zénith</b>, un Pokémon spécial Électrik/Vol, sans évolution.</p>`)}
+ ${wsx("Récompenses",`<p>Une récompense tous les 5 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275 et 300</b> sont des paliers majeurs. Une récompense t'attend tous les 10 étages. Après l'étage 100, tous les adversaires sont niveau 100 et leur équipe est choisie pour contrer la tienne. À l'étage 300, tu obtiens <b>Pikachu Zénith</b>, un Pokémon spécial Électrik/Vol, sans évolution.</p>`)}
  ${wn("tip","Conseil","Améliore d'abord Force et Esprit pour passer les étages, puis Cadence et Butin pour farmer plus vite.")}`};
 
 wkBody.pvp=()=>{
@@ -10613,9 +10638,9 @@ NAV2.push(["trn","trn","Entraînement","#22c55e","#14532d"]);NENG.trn="Training"
 try{NAVX.push(["trn","trn","Entraînement","#22c55e","#14532d"])}catch(e){}
 {const c=NCAT.find(x=>x[0]=="c_adv")[6];if(!c.includes("trn")){const k=c.indexOf("pen");c.splice(k<0?c.length:k+1,0,"trn")}}
 const TRK=3000,TRCAP=7200,TRKPH=3600000/TRK;           // un combat = 3 s ; 1 200 combats par heure ; 6 h de rattrapage max
-const TRH={sz:.04,mu:.04,al:.015,sh:.007},TREV=6;         // chances par heure (mode ciblé) ; 1 EV tous les 6 combats
-const TRMODES=[["ev","EV","EVs","Gagne des EV sur la stat choisie"],["mu","Mutation","Mutation","Chance d'obtenir une mutation"],["sz","Taille","Size","Chance d'obtenir une taille spéciale"],["al","Alpha","Alpha","Chance de devenir Alpha"],["all","Tout","All","Tout en même temps, mais deux fois moins vite"]];
-const trMult=m=>m=="all"?.5:1;
+const TRH={sz:.10,mu:.10,al:.04,sh:.02},TREV=6;         // chances par heure (mode ciblé) ; 1 EV tous les 6 combats
+const TRMODES=[["ev","EV","EVs","Gagne des EV sur la stat choisie"],["mu","Mutation","Mutation","Chance d'obtenir une mutation"],["sz","Taille","Size","Chance d'obtenir une taille spéciale"],["al","Alpha","Alpha","Chance de devenir Alpha"],["all","Tout","All","Tout en même temps, un peu moins vite"]];
+const trMult=m=>m=="all"?.6:1;
 const trP=(h,m)=>{const x=h*trMult(m);return 1-Math.pow(1-x,1/TRKPH)};
 function trS(){if(!G.trn||typeof G.trn!="object")G.trn={};const t=G.trn;if(t.m==null)t.m="ev";if(t.e==null)t.e=1;if(!t.s)t.s={k:0,ev:0,sz:0,mu:0,al:0,sh:0};if(!t.lg)t.lg=[];if(t.on==null)t.on=1;if(!t.ea)t.ea=0;if(!t.kc)t.kc=0;if(!t.cr)t.cr=0;return t}
 const TRX={q:"",pk:0,li:-1,ph:-1};
@@ -10623,7 +10648,7 @@ const trRoll=(L,w)=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.
 const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(MU[k]&&MU[k][4]>0)o.push(k);return o};
 function trLog(t,x,c){t.lg.unshift({t:Date.now(),x,c});if(t.lg.length>10)t.lg.length=10}
 function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);const m=t.m,got=[];
- const pz=trP(TRH.sz,m),pm=trP(TRH.mu,m),pa=trP(TRH.al,m),ps=trP(TRH.sh,m),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.5:1)/TREV;
+ const pz=trP(TRH.sz,m),pm=trP(TRH.mu,m),pa=trP(TRH.al,m),ps=trP(TRH.sh,m),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
  for(let k=0;k<n;k++){
   if(useE){t.ea+=evr;while(t.ea>=1){t.ea-=1;const tot=c.ev.reduce((a,b)=>a+b,0);if(c.ev[t.e]<252&&tot<510){c.ev[t.e]++;t.s.ev++}}}
   if(!useV)continue;
@@ -10651,14 +10676,20 @@ const trPc=x=>{const v=x*100;return (v>=10?v.toFixed(0):v>=1?v.toFixed(1):v>=.1?
 const trNm=e=>{try{return I(e).n||("#"+e)}catch(_){return"#"+e}};
 function trEnemy(k){const t=trS(),L=ids().filter(i=>i<9e4),h=(k*2654435761+(t.t0||0))>>>0;return L.length?L[h%L.length]:25}
 /* ---- vue ---- */
+function trHpC(q){return q>.5?"g":q>.2?"y":"r"}
 function trArena(){const t=trS(),c=t.i&&G.col[t.i];
  if(!c)return `<div class="tr-ar empty"><div><i>${ico("trn")}</i><b>${LS("Aucun Pokémon à l'entraînement","No Pokémon in training")}</b><small>${LS("Choisis un Pokémon pour le voir combattre ici en continu.","Pick a Pokémon to watch it fight here non-stop.")}</small><button class="go" data-tr="pick">${LS("Choisir un Pokémon","Choose a Pokémon")}</button></div></div>`;
- const k=Math.floor((Date.now()-(t.t0||Date.now()))/TRK),e=trEnemy(k);
- return `<div class="tr-ar" id="trar"><div class="tr-sk"></div>
-  <div class="tr-sd me"><div class="tr-nm"><b>${esc(dn(t.i))}</b><small>${LS("Niv.","Lv.")} ${c.l}</small></div><div class="tr-hp"><i style="width:100%"></i></div><div class="tr-pk" id="trme">${trVis(t.i,c,1)}</div></div>
-  <div class="tr-vs">VS</div>
-  <div class="tr-sd foe"><div class="tr-nm"><b id="trfn">${esc(trNm(e))}</b><small>${LS("Niv.","Lv.")} ${Math.max(1,c.l)}</small></div><div class="tr-hp"><i id="trhp" style="width:100%"></i></div><div class="tr-pk" id="trfo" data-e="${e}"><span class="tr-sp big">${sp(e,0)}</span></div></div>
-  <div class="tr-st"><span id="trstt">${t.on?LS("Combat en cours","Fighting"):LS("En pause","Paused")}</span><b id="trkk">${fmt(t.s.k)}</b> ${LS("victoires","wins")}</div></div>`}
+ const k=Math.floor((Date.now()-(t.t0||Date.now()))/TRK),e=trEnemy(k);let ft=[];try{ft=I(e).t||[]}catch(_){}
+ let mf="";try{const m=c.mi>0&&MU[c.mi]?MU[c.mi]:null;if(m)mf=(typeof MUFX!="undefined"&&MUFX[m[0]])||m[3]}catch(_){}
+ const z=c.zi>=3&&SZ[c.zi]?Math.min(1.25,SZ[c.zi][1]):1,mt=(()=>{try{return tp(t.i)}catch(_){return[]}})();
+ TRX.mx=Math.max(50,calc(t.i,0));
+ return `<div class="pva trpva" id="trar" data-k="${k}"><canvas id="trbg" width="240" height="135"></canvas><i class="pvvg2"></i>
+  <div class="tr-pill"><span id="trstt">${t.on?LS("Combat","Battle"):LS("Pause","Paused")}</span><b id="trkk">${fmt(t.s.k)}</b> ${LS("victoires","wins")}</div>
+  <div class="pvsp f" id="trfo" data-e="${e}"><i class="pvsh"></i><img alt="" draggable="false" src="${pvF(e)}" onerror="this.style.visibility='hidden'"></div>
+  <div class="pvsp m" id="trme"><i class="pvsh"></i><img alt="" draggable="false" class="${t.i>9e4?"fl":""}" src="${pvBk(t.i)}" style="${mf};--z:${z}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src=pvF(${t.i});this.classList.add('fl')}else this.style.visibility='hidden'"></div>
+  <div class="pvpl f"><div class="pvpn1"><b id="trfn">${esc(trNm(e))}</b><em>${LS("Niv.","Lv.")} ${c.l}</em></div><div class="pvtc" id="trft">${tchips(ft)}</div><div class="pvhp"><i id="trhf" class="g" style="width:100%"></i></div><div class="pvhn"><span id="trhtf"></span></div></div>
+  <div class="pvpl m"><div class="pvpn1"><b>${esc(dn(t.i))}</b><em>${LS("Niv.","Lv.")} ${c.l}</em></div><div class="pvtc">${tchips(mt)}</div><div class="pvhp"><i id="trhm" class="g" style="width:100%"></i></div><div class="pvhn"><span id="trhtm"></span></div></div>
+  <div class="pvmsg" id="trmsg"><span id="trmt">${LS("Un adversaire apparaît !","A foe appears!")}</span></div></div>`}
 function trEvBars(c){return [0,1,2,3,4,5].map(k=>`<div class="tr-evr"><span>${SN[k]}</span><div><i style="width:${(c.ev[k]/252*100).toFixed(1)}%;background:${SCOL[k]}"></i></div><b>${c.ev[k]}</b></div>`).join("")}
 function trPoke(){const t=trS(),c=t.i&&G.col[t.i];
  if(!c)return `<section class="tr-box"><h3>${LS("Pokémon entraîné","Trained Pokémon")}</h3><div class="tr-no">${LS("Aucun Pokémon choisi.","None selected.")}</div><button class="go" data-tr="pick">${LS("Choisir un Pokémon","Choose a Pokémon")}</button></section>`;
@@ -10690,14 +10721,22 @@ function trOdds(){const t=trS(),c=t.i&&G.col[t.i],m=t.m,x=trMult(m),R=[];
   <h4>${LS("Derniers gains","Latest gains")}</h4><div class="tr-lgs">${lg}</div></section>`}
 function vTrn(){trTick();return `<div class="trn"><div class="tr-top"><section class="tr-box arena"><h3>${LS("Combat","Battle")}</h3>${trArena()}</section></div><div class="tr-grid"><div class="tr-l">${trPoke()}${trGoal()}</div><div class="tr-r">${trOdds()}</div></div></div>`}
 /* ---- animation du cadre de combat ---- */
-function trAnim(){if(tab!="trn")return;const t=trS(),ar=$("trar");if(!ar||!t.i||!t.on)return;const now=Date.now(),el=now-(t.t0||now),k=Math.floor(el/TRK),ph=el%TRK;
- if(k!==TRX.li){TRX.li=k;const e=trEnemy(k),fo=$("trfo");if(fo&&fo.dataset.e!=e){fo.dataset.e=e;fo.innerHTML=`<span class="tr-sp big">${sp(e,0)}</span>`;const n=$("trfn");if(n)n.textContent=trNm(e)}ar.classList.remove("ko")}
- const hit=ph<2000?Math.floor(ph/500):4,hp=$("trhp");if(hp)hp.style.width=Math.max(0,100-hit*25)+"%";
- if(hit!==TRX.ph){TRX.ph=hit;const me=$("trme"),fo=$("trfo");
-  if(hit>=1&&hit<=4){if(me){me.classList.remove("atk");void me.offsetWidth;me.classList.add("atk")}if(fo){fo.classList.remove("hurt");void fo.offsetWidth;fo.classList.add("hurt")}
-   const p=document.createElement("em");p.className="tr-dm";p.textContent="-"+(hit==4?"KO":(20+Math.floor(Math.random()*9))+"%");p.style.left=(62+Math.random()*16)+"%";ar.appendChild(p);setTimeout(()=>p.remove(),700)}
-  if(hit==4)ar.classList.add("ko")}
- const kk=$("trkk");if(kk)kk.textContent=fmt(t.s.k+0)}
+const TRPH=[[0,"s"],[350,"m"],[850,"f"],[1350,"m"],[1850,"f"],[2350,"m"]];
+function trPop(ar,txt,x,y,c){const p=document.createElement("em");p.className="tr-dm";p.textContent=txt;p.style.left=x+"%";p.style.top=y+"%";if(c)p.style.color=c;ar.appendChild(p);setTimeout(()=>p.remove(),800)}
+function trAnim(){if(tab!="trn")return;const t=trS(),ar=$("trar");if(!ar||!t.i||!t.on)return;const now=Date.now(),el=now-(t.t0||now),k=Math.floor(el/TRK),ph=el%TRK,mx=TRX.mx||100;
+ if(k!==TRX.li){TRX.li=k;TRX.ph=-1;const e=trEnemy(k),fo=$("trfo");if(fo&&fo.dataset.e!=e){fo.dataset.e=e;const im=fo.querySelector("img");im.style.visibility="";im.src=pvF(e);const n=$("trfn");if(n)n.textContent=trNm(e);const tc=$("trft");if(tc){try{tc.innerHTML=tchips(I(e).t||[])}catch(_){}}}
+  ar.classList.remove("ko");const m=$("trmt");if(m)m.textContent=LS("Un ","A ")+trNm(e)+LS(" apparaît !"," appears!")}
+ let n=0;TRPH.forEach((x,i)=>{if(ph>=x[0])n=i});
+ const mh=3-Math.min(3,[1,3,5].filter(i=>n>=i).length)>=0?0:0;
+ const myHits=[1,3,5].filter(i=>n>=i).length,foeHits=[2,4].filter(i=>n>=i).length,hf=Math.max(0,1-myHits/3),hm=Math.max(.15,1-foeHits*.09);
+ const bf=$("trhf"),bm=$("trhm");if(bf){bf.style.width=(hf*100)+"%";bf.className=trHpC(hf)}if(bm){bm.style.width=(hm*100)+"%";bm.className=trHpC(hm)}
+ const ft=$("trhtf"),mt=$("trhtm");if(ft)ft.textContent=Math.round(mx*hf*1.1)+" / "+Math.round(mx*1.1);if(mt)mt.textContent=Math.round(mx*hm)+" / "+mx;
+ if(n!==TRX.ph){TRX.ph=n;const kind=TRPH[n][1],me=$("trme"),fo=$("trfo"),msg=$("trmt"),dm=dn(t.i),fn=trNm(fo?+fo.dataset.e:0);
+  if(kind=="m"){if(me){me.classList.remove("atk");void me.offsetWidth;me.classList.add("atk")}setTimeout(()=>{const f=$("trfo");if(f){f.classList.remove("hurt");void f.offsetWidth;f.classList.add("hurt")}trPop(ar,n==5?"K.O.":"-"+(18+Math.floor(Math.random()*14))+"%",66+Math.random()*10,34,n==5?"#fde047":"")},170);if(msg)msg.textContent=n==5?fn+LS(" est K.O. !"," fainted!"):dm+LS(" attaque !"," attacks!");if(n==5)setTimeout(()=>ar.classList.add("ko"),260)}
+  else if(kind=="f"){if(fo){fo.classList.remove("atk");void fo.offsetWidth;fo.classList.add("atk")}setTimeout(()=>{const m=$("trme");if(m){m.classList.remove("hurt");void m.offsetWidth;m.classList.add("hurt")}trPop(ar,"-"+(3+Math.floor(Math.random()*6))+"%",22+Math.random()*10,62,"#fca5a5")},170);if(msg)msg.textContent=fn+LS(" riposte !"," strikes back!")}}
+ const kk=$("trkk");if(kk)kk.textContent=fmt(t.s.k)}
+function trBg(){const cv=$("trbg"),t=trS();if(cv&&t.i){try{pvArena(cv,(+t.i)%6)}catch(_){}}}
+{const s0=show;show=function(){const r=s0.apply(this,arguments);if(tab=="trn"){try{TRX.li=-1;trBg()}catch(_){}}return r}}
 setInterval(()=>{try{trAnim()}catch(e){}},100);
 /* ---- choix du Pokémon ---- */
 function trModal(h){let o=$("trm");if(!o){if(!h)return;o=document.createElement("div");o.id="trm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o)trModal("")})}
@@ -10709,6 +10748,55 @@ function trOpen(){TRX.q="";trModal(`<button class="tn-x" data-tr="mc">${ico("x")
 document.addEventListener("input",e=>{if(e.target&&e.target.id=="trq"){TRX.q=e.target.value;const l=$("trl");if(l)l.innerHTML=trList()}});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tr]");if(!b)return;const [k,a]=b.dataset.tr.split(":");
  if(k=="pick")trOpen();else if(k=="mc")trModal("");else if(k=="p")trPick(+a);else if(k=="m")trSet("m",a);else if(k=="e")trSet("e",+a);else if(k=="tog")trTog()});
+/* ===== Tower : étages 201 à 300, Pikachu Zénith à l'étage 300 (une récompense tous les 10 étages) ===== */
+(function(){
+ if(TWRW[200]){delete TWRW[200].sp;TWRW[200].gem=50;TWRW[200].ban=8;TWRW[200].big=1}
+ for(let f=210;f<=290;f+=10){const k=(f-200)/10,big=f%25==0||f==250;
+  TWRW[f]={h:76+k*3,s:6880+k*260,big:big?1:0,it:[["master-ball",5+(k>4?1:0)],["gold-bottle-cap",12],["bottle-cap",1],["dream-ball",48+k*2],["max-revive",17],["rare-candy",41+k*2]],gem:2+(big?30:0)};
+  if(big)TWRW[f].ban=8}
+ TWRW[300]={h:150,s:20000,big:1,ban:8,gem:80,sp:90004,it:[["master-ball",12],["gold-bottle-cap",15],["ability-patch",5],["dream-ball",60],["max-revive",30],["rare-candy",40]]}})();
+/* ===== Chat « Amis » : messages privés entre amis (seuls les deux participants les voient) ===== */
+const DMX={w:null,cv:{},msgs:[],r:0,un:0,sig:"",busy:0,ld:0,lt:0};
+const dmOn=()=>{try{return tnOn()}catch(e){return false}};
+async function dmReq(act,body){const A=tnAPI();if(!A)return{e:"off"};
+ try{const r=await fetch(A+"/api/dm/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||""},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
+const dmName=u=>{const r=rowOf(u);return r&&r.n?r.n:"…"};
+const dmTime=t=>{const d=new Date(t),n=new Date();return d.toDateString()==n.toDateString()?d.toLocaleTimeString(SG.lang=="en"?"en":"fr",{hour:"2-digit",minute:"2-digit"}):d.toLocaleDateString(SG.lang=="en"?"en":"fr",{day:"2-digit",month:"2-digit"})};
+async function dmFetchList(){if(!dmOn()||DMX.ld)return;DMX.ld=1;const j=await dmReq("list",{});DMX.ld=0;if(!j||!j.ok)return;const c={};let un=0;j.c.forEach(x=>{c[x.u]=x;un+=x.n|0});DMX.cv=c;const ch=un!==DMX.un;DMX.un=un;if(ch)try{socBadges()}catch(e){}
+ if(SCP.o=="ch"&&CH.tab=="f"&&DMX.w==null)dmRender(false)}
+async function dmFetchConv(mark){const w=DMX.w;if(!w||!dmOn())return;const j=await dmReq("get",{with:w,mark:mark?1:0});if(DMX.w!==w||!j)return;
+ if(!j.ok){if(j.st==403){DMX.msgs=[];DMX.err=LS("Vous n'êtes plus amis : la conversation est fermée.","You are no longer friends: this chat is closed.")}dmRender(false);return}
+ DMX.err="";DMX.msgs=j.m||[];DMX.r=j.r||0;if(mark&&DMX.cv[w]){const o=DMX.cv[w].n|0;if(o){DMX.un=Math.max(0,DMX.un-o);DMX.cv[w].n=0;try{socBadges()}catch(e){}}}dmRender(false)}
+function dmOpen(u){DMX.w=u;DMX.msgs=[];DMX.sig="";DMX.err="";dmRender(true);dmFetchConv(true)}
+function dmBack(){DMX.w=null;DMX.sig="";dmRender(true);dmFetchList()}
+async function dmSend(){const t=$("dmin");if(!t||!DMX.w||DMX.busy)return;const x=t.value.replace(/\s+/g," ").trim().slice(0,300);if(!x)return;DMX.busy=1;
+ const r=await dmReq("send",{with:DMX.w,x});DMX.busy=0;
+ if(r&&r.ok){t.value="";DMX.msgs.push({u:LB.uid||TNLS("pid_uid"),x:pidCensor(x),t:r.t||Date.now()});DMX.sig="";dmRender(false);dmFetchConv(true)}
+ else toast(r&&r.st==403?LS("Il faut être amis des deux côtés.","You both need to be friends."):r&&r.e=="slow"?LS("Doucement : un message toutes les 1,5 s.","Slow down: one message every 1.5 s."):r&&r.e=="dup"?LS("Message déjà envoyé.","Message already sent."):LS("Message non envoyé.","Message not sent."))}
+function dmAv(u){const r=rowOf(u);return r&&r.av?ava2(r,"sm"):`<span class="lav sm"></span>`}
+function dmRender(full){const p=$("chp");if(!p||SCP.o!="ch"||CH.tab!="f")return;const l=$("chl"),f=$("chf");if(!l||!f)return;
+ if(!dmOn()){l.innerHTML=`<div class="scem">${ico("chat")}<small>${LS("Les messages privés fonctionnent sur pokeidledex.com avec un compte en ligne.","Private messages work on pokeidledex.com with an online account.")}</small></div>`;f.innerHTML="";f.dataset.s="dm0";return}
+ const me=LB.uid||TNLS("pid_uid");
+ if(DMX.w==null){const F=FD.mut.slice().sort((a,b)=>((DMX.cv[b]||{}).t||0)-((DMX.cv[a]||{}).t||0));
+  const sig="L|"+F.join()+"|"+F.map(u=>(DMX.cv[u]||{}).t+":"+(DMX.cv[u]||{}).n).join();
+  if(!full&&sig===DMX.sig)return;DMX.sig=sig;
+  l.innerHTML=F.length?`<div class="dml">${F.map(u=>{const c=DMX.cv[u],r=rowOf(u)||{};return `<button class="dmr" data-dm="o:${esc(u)}"><span class="frav">${dmAv(u)}</span><div class="frn"><b>${esc(dmName(u))}</b><small>${c?(c.f?LS("Toi : ","You: "):"")+esc(c.x):LS("Dis bonjour !","Say hi!")}</small></div><div class="dmm">${c?`<time>${dmTime(c.t)}</time>`:""}${c&&c.n?`<i class="scn dotn">${c.n>99?"99+":c.n}</i>`:""}</div></button>`}).join("")}</div>`
+   :`<div class="scem">${ico("frs")}<small>${LS("Ajoute des amis (onglet Amis) pour discuter avec eux en privé.","Add friends to chat with them in private.")}</small></div>`;
+  f.innerHTML=`<small class="dmpv">${ico("lock")} ${LS("Conversations privées : seuls toi et ton ami les voient.","Private chats: only you and your friend can see them.")}</small>`;f.dataset.s="dmL";return}
+ const w=DMX.w,sig="C|"+w+"|"+DMX.msgs.length+"|"+((DMX.msgs[DMX.msgs.length-1]||{}).t||0)+"|"+DMX.r+"|"+(DMX.err||"");
+ if(!full&&sig===DMX.sig)return;DMX.sig=sig;
+ const nb=l.scrollHeight-l.scrollTop-l.clientHeight<80||full;
+ const seen=DMX.msgs.length?DMX.msgs.filter(m=>m.u==me&&m.t<=DMX.r).pop():null;
+ l.innerHTML=`<div class="dmh"><button class="dmb" data-dm="b">${ico("chevl")}</button><span class="frav" data-a="fvp" data-t="${esc(w)}">${dmAv(w)}</span><div class="frn"><b>${esc(dmName(w))}</b><small>${LS("Message privé","Private message")}</small></div></div>`
+  +(DMX.msgs.length?DMX.msgs.map(m=>{const mine=m.u==me;return `<div class="chm${mine?" me":""}"><span class="chav">${mine?"":dmAv(w)}</span><div class="chb"><div class="chn"><b>${mine?esc(G.name||"Moi"):esc(dmName(w))}</b><time>${dmTime(m.t)}</time></div><div class="chx">${esc(m.x)}</div>${seen&&m===seen?`<small class="dmsn">${LS("Vu","Seen")}</small>`:""}</div></div>`}).join(""):`<div class="scem">${ico("chat")}<small>${DMX.err||LS("Aucun message. Écris le premier !","No message yet. Write the first one!")}</small></div>`);
+ if(nb)l.scrollTop=l.scrollHeight;
+ if(!f.querySelector("#dmin")||full){const v=f.querySelector("#dmin")?f.querySelector("#dmin").value:"";f.dataset.s="dmC";f.innerHTML=DMX.err?"":`<div class="chin2"><textarea id="dmin" maxlength="300" rows="1" placeholder="${LS("Message privé…","Private message…")}">${esc(v)}</textarea><button class="go" data-dm="s">${ico("send")}</button></div>`}}
+{const c0=chRender;chRender=function(full){if(CH.tab=="f"&&$("chl")&&!full&&SCP.o=="ch"){dmRender(false);return}c0.apply(this,arguments);if(CH.tab=="f"&&SCP.o=="ch"){DMX.sig="";dmRender(true);if(DMX.w)dmFetchConv(true);else dmFetchList()}}}
+{const u0=chUnread;chUnread=function(){return u0()+(DMX.un|0)}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-dm]");if(!b)return;const [k,a]=b.dataset.dm.split(":");e.stopPropagation();e.preventDefault();if(k=="o")dmOpen(b.dataset.dm.slice(2));else if(k=="b")dmBack();else if(k=="s")dmSend()},true);
+document.addEventListener("keydown",e=>{if(e.target&&e.target.id=="dmin"&&e.key=="Enter"&&!e.shiftKey){e.preventDefault();dmSend()}});
+setInterval(()=>{try{if(!dmOn())return;if(SCP.o=="ch"&&CH.tab=="f"){if(DMX.w)dmFetchConv(true);else dmFetchList()}}catch(e){}},3500);
+setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(e){}},30000);setTimeout(()=>{try{dmFetchList()}catch(e){}},9000);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();

@@ -59,6 +59,11 @@ setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});proc
 
 /* ---- Hotel de ville : marche entre joueurs (annonces, achats atomiques, livraisons) ---- */
 db.mkt=db.mkt||{};db.mkd=db.mkd||{};
+db.dm=db.dm||{};
+const dmKey=(a,b)=>a<b?a+'.'+b:b+'.'+a,dmLast=new Map();
+const dmFr=(a,b)=>{const f=x=>{const o=db.fr[x]&&db.fr[x].d;return o&&Array.isArray(o.f)?o.f:[]};return f(a).includes(b)&&f(b).includes(a)};
+setInterval(()=>{try{const n=Date.now();for(const k in db.dm){const m=db.dm[k].m||[];if(!m.length||n-m[m.length-1].t>30*864e5){delete db.dm[k];dirty=1}}}catch(e){console.error('dm',e.message)}},36e5);
+
 const MK_MAXL=40,MK_MAXP=5e6,MK_TTL=14*864e5,MK_ALL=20000;
 const rid=p=>p+crypto.randomBytes(7).toString('hex');
 const mkAuth=(uid,tok)=>{uid=String(uid||'');tok=String(tok||'');if(!ID.test(uid)||tok.length<16||tok.length>100)return null;const l=db.lb[uid];return l&&l.h===sha(tok)?uid:null};
@@ -86,7 +91,7 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  if(n(G.mut)>n(G.caps)*.5+5)r.push('mutations '+n(G.mut)+' pour '+n(G.caps)+' captures');
  if(sh>n(G.mut)+40||mu>n(G.mut)+40)r.push('chromatiques/mutes possedes '+sh+'/'+mu+' pour '+n(G.mut)+' mutations captees');
  if(n(G.caps)>n(G.ko)*3+500)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
- if(G.tw&&n(G.tw.b)>200)r.push('tour etage '+n(G.tw.b));
+ if(G.tw&&n(G.tw.b)>310)r.push('tour etage '+n(G.tw.b));
  return r};
 const ckT=new Map();
 const lbSus=d=>{const r=[],n=x=>+x||0;if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
@@ -186,6 +191,26 @@ http.createServer((req,res)=>{
    if(op=='unflag'){delete db.flag[uid];dirty=1;send(res,200,{ok:1});return}
    send(res,404,{e:'op'})});
   return}
+/* ---- Messages prives entre amis (visibles uniquement par les deux participants) ---- */
+ if(u.pathname.startsWith('/api/dm/')){
+  const act=u.pathname.slice(8);
+  if(limited(ip+'d',240)){send(res,429,{e:'rate'});return}
+  if(req.method!='POST'){send(res,404,{e:'act'});return}
+  let b='';req.on('data',c=>{b+=c;if(b.length>8000)req.destroy()});
+  req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
+   if(!d||typeof d!='object'){send(res,400,{e:'obj'});return}
+   const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid){send(res,401,{e:'auth'});return}
+   if(act=='list'){const out=[];for(const k in db.dm){const p=k.split('.');if(p[0]!=uid&&p[1]!=uid)continue;const o=p[0]==uid?p[1]:p[0],c=db.dm[k],m=c.m||[],r=(c.r&&c.r[uid])||0;if(!m.length)continue;const l=m[m.length-1];out.push({u:o,x:l.x.slice(0,60),t:l.t,f:l.u==uid?1:0,n:m.filter(q=>q.u!=uid&&q.t>r).length})}
+    send(res,200,{ok:1,c:out.sort((a,b)=>b.t-a.t).slice(0,80)});return}
+   const to=String(d.with||d.to||'');if(!ID.test(to)||to==uid){send(res,400,{e:'to'});return}
+   if(!dmFr(uid,to)){send(res,403,{e:'friends'});return}
+   const k=dmKey(uid,to),c=db.dm[k]=db.dm[k]||{m:[],r:{}};
+   if(act=='get'){if(d.mark){c.r[uid]=Date.now();dirty=1}send(res,200,{ok:1,m:c.m.slice(-80),r:c.r[to]||0});return}
+   if(act=='send'){const x=pidCensor(String(d.x||'').replace(/\s+/g,' ').trim().slice(0,300));if(!x){send(res,400,{e:'empty'});return}
+    const n=Date.now(),lt=dmLast.get(uid)||0;if(n-lt<1500){send(res,429,{e:'slow'});return}dmLast.set(uid,n);
+    if(db.dm[k].m.length&&db.dm[k].m[db.dm[k].m.length-1].u==uid&&db.dm[k].m[db.dm[k].m.length-1].x==x&&n-db.dm[k].m[db.dm[k].m.length-1].t<20000){send(res,429,{e:'dup'});return}
+    c.m.push({u:uid,x,t:n});if(c.m.length>80)c.m.splice(0,c.m.length-80);c.r[uid]=n;dirty=1;send(res,200,{ok:1,t:n});return}
+   send(res,404,{e:'act'})});return}
  if(u.pathname.startsWith('/api/mkt/')){
   const act=u.pathname.slice(9);
   if(limited(ip+'m',150)){send(res,429,{e:'rate'});return}
