@@ -3425,12 +3425,19 @@ a.qkb.qkdc .qki{color:#fff}
 .plsb{background:none;border:0;color:#cbd5e1;cursor:pointer;vertical-align:middle;padding:2px 4px;margin-left:6px}.plsb svg{width:18px;height:18px}.plsb:hover{color:#fff}
 .plsrch{padding:0 0 8px}.plqi{width:100%;box-sizing:border-box;height:38px;border-radius:10px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;padding:0 12px;font:600 14px Nunito,system-ui,sans-serif}
 .tr-so select{color-scheme:dark;cursor:pointer}.tr-so select option{background:#101a33;color:#fff;font:600 14px Nunito,system-ui,sans-serif;padding:8px}
+.rix{margin-top:14px;padding:14px}.rix h3{margin:0 0 4px;display:flex;align-items:center;gap:8px}.rxn{color:var(--mu);display:block;margin-bottom:10px}
+.rxr{margin-top:10px;border-left:3px solid var(--c);padding-left:10px}.rxh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.rxh b{color:var(--c)}.rxh small{color:var(--mu)}
+.rxg{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.rxc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff1a;text-align:center}
+.rxc .rxs{width:64px;height:64px;display:grid;place-items:center}.rxc .rxs img{max-width:100%;max-height:100%;image-rendering:pixelated}
+.rxc b{font-size:11px;line-height:1.1;overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap}
+.rxc.hid .rxs img{filter:brightness(0) blur(1.5px);opacity:.55}.rxc.hid b{color:#94a3b8;letter-spacing:.2em}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b92b8d6cbd"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=b92b8d6cbd"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ece920034d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ece920034d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3759,7 +3766,7 @@ function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
  else if(c.h<m*.4){const hs=POTS.filter(p=>p[3]>0&&G.inv[p[0]]>0).sort((a,b)=>a[3]-b[3]),k=hs.find(p=>p[3]>=m-c.h)||hs[hs.length-1];if(k){G.inv[k[0]]--;c.h=Math.min(m,c.h+k[3])}}}}
 const tgtF=()=>Math.ceil((.65*(G.cl+1)+3+7*zoneOf(G.cl+1))*(1+.03*PL("px")));const tgtL=()=>Math.min(100,tgtF());
 function lvUp(c,tg){const mx=c.mx||100,t=mx>100?Math.min(mx,tgtF()):tg;if(c.l>=t||c.l>=mx)return;const s=Math.max(1,Math.ceil((t-c.l)/9*(c.xm||1)*(EVF.x||1)*BIF.x*(1+.5*(c.st||0))));c.l=Math.min(t,mx,c.l+s)}
-function win(){const L=E.L,b=E.boss,g=Math.floor(.2*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*Math.pow(1.06,G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb")):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c),tg=tgtL();
+function win(){const L=E.L,b=E.boss,g=Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*Math.pow(1.06,G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb")):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c),tg=tgtL();
  G.m+=kxI("kill",g);G.gain+=g;G.ko++;if(b)G.boss++;pop("+"+fmt(g)+" ₽","sup",22);sfx("coin");$("rw")&&($("rw").innerHTML=`<span>NIVEAU CIBLE <b>${tg}</b></span>`);
  ids().forEach(i=>{const c=G.col[i];lvUp(c,tg);const h=c.he;if(h&&h.pw!==undefined&&Math.random()<.5)addEV(c,h.pw>=6?Math.random()*6|0:h.pw,1)});
  const bl=pickBall(E);if(!bl)noBallFx(E);
@@ -10893,6 +10900,15 @@ var PLQ="",PLSO=0;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=plsq]");if(!b)return;e.stopPropagation();PLSO=PLSO?0:1;
  const w=document.querySelector(".plsrch");if(w){w.style.display=PLSO?"block":"none";const i=document.getElementById("plqi");if(PLSO&&i)i.focus();else if(!PLSO){PLQ="";if(i)i.value="";PSIG="";try{ui()}catch(x){}}}},true);
 document.addEventListener("input",e=>{if(e.target&&e.target.id=="plqi"){PLQ=e.target.value;PSIG="";try{ui()}catch(x){}}});
+
+/* ---------- Raids : index des Pokémon disponibles (silhouettes « ??? » levées une fois battus ou obtenus) ---------- */
+{const r0=rdResult;rdResult=function(R,win,rw,cap){try{if(win&&R&&R.boss&&R.boss.sp){G.rdx=G.rdx||{};G.rdx[R.boss.sp]=1}}catch(e){}return r0.apply(this,arguments)}}
+function rdIndex(){G.rdx=G.rdx||{};const kn=i=>!!G.rdx[i]||!!G.col[i];
+ const row=(t,c,L)=>{L=[...new Set(L)];const n=L.filter(kn).length;return `<div class="rxr" style="--c:${c}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(i=>{const k=kn(i);return `<div class="rxc${k?"":" hid"}" title="${k?esc(dn(i)):"???"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b></div>`}).join("")}</div></div>`};
+ let h=RT.map(t=>row(LS(t.n[0],t.n[1]),t.c,t.pool||[])).join("");
+ try{h+=row(LS("Boss monde","World boss"),"#a78bfa",RW.map(x=>x[0]))}catch(e){}
+ return `<div class="rix box"><h3>${ico("book")} ${LS("Index des raids","Raid index")}</h3><small class="rxn">${LS("Bats ou obtiens un Pokémon de raid pour révéler sa case.","Beat or obtain a raid Pokémon to reveal its slot.")}</small>${h}</div>`}
+{const v0=vRaid;vRaid=function(){const s=v0.apply(this,arguments);try{const i=s.lastIndexOf("</div>");return s.slice(0,i)+rdIndex()+s.slice(i)}catch(e){return s}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
