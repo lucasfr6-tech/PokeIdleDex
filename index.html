@@ -3404,8 +3404,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f61ec18ad4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f61ec18ad4"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ac9bb67f94"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ac9bb67f94"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10824,6 +10824,8 @@ setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(
  try{RT.forEach(t=>{const k=t.n&&t.n[0];if(RP[k])t.pool=RP[k].filter(x=>RB[x])})}catch(e){}
  try{BPLEG.splice(0,BPLEG.length,149,248,373,445,376,448,282,635,706,784,612,94,130,131,143,6,3,9)}catch(e){}
 })();
+/* ---------- Ticket Premium du Casino : chance divisée par 2 (Or 2 % → 1 %, Platine 12,5 % → 6,25 %) ---------- */
+(function(){try{["o","p"].forEach(k=>{const L=CP[k],e=L.find(x=>x[1]=="i"&&x[2]=="bp-ticket");if(e){const h=e[0]/2;L[0][0]+=e[0]-h;e[0]=h}})}catch(x){}})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
