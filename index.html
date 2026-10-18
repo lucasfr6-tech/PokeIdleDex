@@ -3257,8 +3257,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3780b0f0dc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=3780b0f0dc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3f6d7a0e1a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=3f6d7a0e1a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10012,6 +10012,24 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(q.b>=MAXB){toast(LS("3 tickets maximum par jour.","3 tickets max per day."));return}
  const c=price();if(G.m<c){toast(LS("Pas assez de pièces.","Not enough coins."));sfx("err");return}
  G.m-=c;q.b++;save();sfx("pvbuy");toast(LS("Ticket JCJ acheté : +1 combat classé.","PvP ticket bought: +1 ranked fight."));try{show()}catch(x){}},true);
+})();
+/* --- pseudo unique : refuse un pseudo deja utilise par un autre joueur (hors comptes, aussi en jeu libre) --- */
+(function(){
+const api=()=>(window.PID_API||"").replace(/\/$/,"");
+async function nameFree(nm){try{if(!api())return true;const r=await fetch(api()+"/api/c/lb?lim=500");if(!r.ok)return true;const j=await r.json(),k=String(nm).trim().toLowerCase(),me=(typeof LB!="undefined"&&LB.uid)||"";
+ return !(j.docs||[]).some(x=>x.id!=me&&x.d&&String(x.d.n||"").trim().toLowerCase()==k)}catch(e){return true}}
+window.nameFree=nameFree;
+const TAKEN=()=>LS("Ce pseudo est déjà pris.","This name is already taken.");
+document.addEventListener("change",async e=>{const s=e.target;if(!s||!s.matches||!s.matches("input[data-a=name]"))return;e.stopImmediatePropagation();
+ const v=(s.value||"").trim().slice(0,16);if(!v||v.toLowerCase()==String(G.name).toLowerCase()){act("name",0,0,"",v);return}
+ if(!(await nameFree(v))){toast(TAKEN());try{sfx("err")}catch(x){}s.value=G.name;return}
+ act("name",0,0,"",v);try{lbPush(true)}catch(x){}},true);
+document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest(".tcg");if(!b||b.dataset.nok)return;
+ let w=b,i=null;for(let k=0;k<6&&w&&!i;k++){w=w.parentElement;i=w&&w.querySelector('input:not([type=password])')}
+ const v=i?(i.value||"").trim():"";if(v.length<2)return;e.stopImmediatePropagation();e.preventDefault();
+ b.disabled=true;const ok=await nameFree(v);b.disabled=false;
+ if(!ok){const er=w&&w.querySelector("#tce");if(er)er.textContent=TAKEN();return}
+ b.dataset.nok=1;b.click();delete b.dataset.nok},true);
 })();
 
 /* ============ DÉMARRAGE ============ */
