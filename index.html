@@ -3246,12 +3246,17 @@ a.qkb.qkdc .qki{color:#fff}
 .lav .pkb{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;padding:0;background:#fff;border-radius:50%} .glx-av .pkb{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
 .chn .ttp{margin-left:6px;padding:1px 7px;font-size:10px;transform:scale(.92);transform-origin:left center}.chn .ttp i{display:none}
 .vph .pidn{position:absolute;left:12px;top:10px;z-index:3;font-size:11px;font-weight:700;letter-spacing:.04em;color:#e2e8f0;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:10px}.pidn2{color:var(--y);font-weight:800}
+.gbest{margin:6px 0 2px}.gbest button{width:100%;padding:9px 12px;border-radius:12px;font-weight:800;background:linear-gradient(135deg,#a855f7,#6b21a8);color:#fff;border:0}
+.gbm{position:fixed;inset:0;z-index:300;display:grid;place-items:center}.gbb{position:absolute;inset:0;background:rgba(3,6,20,.7);backdrop-filter:blur(4px)}
+.gbc{position:relative;width:min(92vw,420px);background:#111a33;border:1px solid var(--ln);border-radius:18px;padding:18px;box-shadow:0 20px 60px #000a}.gbc h3{margin:0 0 6px;font-size:19px}.gbc p{margin:0 0 12px;font-size:13px;color:var(--mu)}
+.gbl{display:grid;grid-template-columns:1fr 1fr;gap:8px}.gbl button{display:flex;align-items:center;gap:8px;padding:11px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--bc);color:#fff;font-weight:700}.gbl button .i{color:var(--bc)}.gbl button:hover{background:rgba(255,255,255,.1)}
+.gbx{margin-top:10px;width:100%;padding:8px;border-radius:10px;background:transparent;border:1px solid var(--ln);color:var(--mu)}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="417b8ca3c8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=417b8ca3c8"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="51e3f5c41e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=51e3f5c41e"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6788,7 +6793,7 @@ function eTabSum(){const e=E_(),p=ePrice(),tot=EQ.length,pS=Math.max(0,EPS-e.pS)
 function eTabLook(){const L=E_().lk;
  return `<div class="elk"><div class="elr"><b>${LS("Décor","Backdrop")}</b><div class="elo">${BGN.map((v,i)=>`<button class="${L.bg==i?"on":""} bgb" data-gl="bg:${i}" style="background:linear-gradient(135deg,${v[1]},${v[2]})" title="${v[0]}"></button>`).join("")}</div><small>${BGN[L.bg||0][0]}</small></div><p class="ehint">${LS("Choisis ton dresseur dans l'onglet Équipement (emplacement Dresseur) et débloque les autres par invocation.","Pick your trainer in the Gear tab (Trainer slot) and unlock the others by summoning.")}</p></div>`}
 function vGear(){const e=E_(),tabs=[["eq",LS("Équipement","Gear")],["sum",LS("Invocation","Summon")],["look",LS("Apparence","Look")]];
- return `<div class="gw">${eStage()}<div class="gpan"><div class="gtabs">${tabs.map(t=>`<button class="${GT==t[0]?"on":""}" data-gt="${t[0]}">${t[1]}</button>`).join("")}</div><div class="gbn">${eTotals()}</div><div class="gbody">${GT=="eq"?eTabEq():GT=="sum"?eTabSum():eTabLook()}</div></div></div>`}
+ return `<div class="gw">${eStage()}<div class="gpan"><div class="gtabs">${tabs.map(t=>`<button class="${GT==t[0]?"on":""}" data-gt="${t[0]}">${t[1]}</button>`).join("")}</div><div class="gbn">${eTotals()}</div>${GT=="eq"?`<div class="gbest"><button data-gbest="open">${ico("bolt")} ${LS("Équipement best","Best gear")}</button></div>`:""}<div class="gbody">${GT=="eq"?eTabEq():GT=="sum"?eTabSum():eTabLook()}</div></div></div>`}
 /* révélation des invocations */
 let EO=null;
 function eoHtml(){const R=EO.r,n=R.length,one=n==1;
@@ -9940,6 +9945,17 @@ async function admPoll(){if(admBusy||!(LB&&LB.ok&&LB.db))return;admBusy=1;try{co
   const ks=Object.keys(G.admDone);if(ks.length>200)ks.slice(0,ks.length-200).forEach(k=>delete G.admDone[k]);
   if(n){save();try{lbPush(true)}catch(e){}toast(LS("Le créateur a mis à jour ton compte.","The creator updated your account."));try{show()}catch(e){}}}}catch(e){}admBusy=0}
 setInterval(admPoll,45000);setTimeout(admPoll,6000);
+/* ===== Dresseur : équipement « best » selon la statistique voulue ===== */
+function gbestPick(t){const e=E_();let n=0,tot=0;
+ ESLOTS.forEach(sl=>{let best=null,bs=0;
+  EQ.forEach(o=>{if(o.sl!=sl||!(e.o[o.id]>0))return;const v=eVal(o).filter(x=>x[0]==t).reduce((a,x)=>a+x[1],0);const s=v*1000+o.r;if(v>0&&(!best||s>bs)){best=o;bs=s}});
+  if(best){if(e.e[sl]!=best.id){e.e[sl]=best.id;n++}tot++}});
+ recomp();save();return{n,tot}}
+function gbestHtml(){return `<div class="gbm" id="gbm"><div class="gbb" data-gbest="x"></div><div class="gbc"><h3>${LS("Équipement best","Best gear")}</h3><p>${LS("Que veux-tu privilégier ? Chaque emplacement reçoit la meilleure pièce que tu possèdes pour ce bonus.","What do you want to boost? Each slot gets the best piece you own for that bonus.")}</p><div class="gbl">${CTY.map((c,i)=>`<button data-gbest="${i}" style="--bc:${c[4]}">${ico(c[3])}<span>${LS(c[1],c[2])}</span></button>`).join("")}</div><button class="gbx" data-gbest="x">${LS("Annuler","Cancel")}</button></div></div>`}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-gbest]");if(!t)return;e.stopPropagation();e.preventDefault();const k=t.dataset.gbest;
+ if(k=="open"){if(!document.getElementById("gbm"))document.body.insertAdjacentHTML("beforeend",gbestHtml());return}
+ const m=document.getElementById("gbm");if(m)m.remove();if(k=="x")return;
+ const r=gbestPick(+k),c=CTY[+k];toast(r.tot?LS("Équipement best : "+c[1]+" ("+r.n+" pièce"+(r.n>1?"s":"")+" changée"+(r.n>1?"s":"")+")","Best gear: "+c[2]+" ("+r.n+" changed)"):LS("Aucune pièce avec ce bonus pour l'instant.","No piece with this bonus yet."));try{sfx(r.tot?"big":"err")}catch(x){}try{show()}catch(x){}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
