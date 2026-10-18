@@ -3423,8 +3423,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bb515137a8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=bb515137a8"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f5e57fa109"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=f5e57fa109"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10869,6 +10869,15 @@ var ONLN=0;
   fill(b);const iv=setInterval(()=>{if(!document.body.contains(b)){clearInterval(iv);return}fill(b)},3000)}
  document.addEventListener("click",e=>{const t=e.target;if(!t.closest)return;if(t.closest(".chon"))open();else if(t.closest("[data-onx]")){const b=document.getElementById("onlp");if(b)b.remove()}});
 })();
+
+/* ---------- Entraînement : bandeau animé dans l'arène quand le Pokémon change de taille, mutation, alpha ou chromatique ---------- */
+var TRFL=[];
+function trFlash(got){const n=Date.now();(got||[]).forEach(g=>TRFL.push({x:g[0],c:g[1]||"#fff",e:n+7000,n}));trFlSync()}
+function trFlSync(){const a=document.getElementById("trar"),n=Date.now();TRFL=TRFL.filter(f=>f.e>n);if(!a)return;
+ let w=a.querySelector(".trfl");if(!TRFL.length){if(w)w.remove();return}
+ const sg=TRFL.map(f=>f.n+f.x).join("|");if(!w){w=document.createElement("div");w.className="trfl";a.appendChild(w)}
+ if(w.dataset.s!==sg){w.dataset.s=sg;w.innerHTML=TRFL.map(f=>`<div class="trfi" style="--c:${f.c}"><i></i><b>${esc(f.x)}</b></div>`).join("")}}
+setInterval(()=>{try{trFlSync()}catch(e){}},150);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
