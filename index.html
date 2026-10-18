@@ -3338,8 +3338,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="3946439496"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=3946439496"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7b7508e11f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=7b7508e11f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10328,8 +10328,10 @@ function tnMonV(id,f){f=f||{};let r=0;try{r=pr(id)}catch(e){}
  const b=r>=4?900:TNB[Math.max(0,Math.min(3,r))];
  let m=1;if(f.sh)m*=12;if(f.mi)m*=TNMU[Math.min(6,f.mi)]||14;if(f.zi)m*=TNZ[f.zi]||3;if(f.al)m*=8;
  return Math.max(5,Math.round(b*m))}
-function tnItV(k){const i=IT[k];if(!i)return 0;const fb=i.m?30000:i.dy||/dynamax|band|bracelet|mega|méga|pearl|perle/i.test((i.n||"")+k)?25000:3000;const p=i.p||fb;
- return Math.max(1,Math.min(900,Math.round(Math.pow(p/1000,.62)*1.4)))}
+function tnItV(k){const i=IT[k];if(!i)return 0;
+ if(i.c==="Poké Balls"){if(i.m>=255)return 4000;const p=i.p||160;if(p<500)return 2;return Math.max(2,Math.round(Math.pow(p/1000,.9)*60))}
+ const fb=i.m?30000:i.dy||/dynamax|band|bracelet|mega|méga|pearl|perle/i.test((i.n||"")+k)?25000:3000;const p=i.p||fb;
+ return Math.max(1,Math.min(20000,Math.round(Math.pow(p/1000,.62)*1.4)))}
 const tnShopUnit=v=>Math.max(1,Math.floor(v*.35));
 function tnShopLeft(){const t=tnS();return Math.max(0,tnTier(tnLvl()).cap-t.d.shj)}
 const tnQuota=()=>Math.max(0,tnTier(tnLvl()).q-tnS().d.l);
