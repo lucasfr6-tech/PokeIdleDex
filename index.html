@@ -3258,12 +3258,13 @@ a.qkb.qkdc .qki{color:#fff}
 .dcw{display:block;width:100%;margin-top:8px;padding:12px;border-radius:12px;font-weight:700;background:#5865f2;color:#fff;border:0}
 #dcpk input{width:100%;margin:8px 0}
 .ggw{background:#fff!important;color:#1f2937!important}.ggbtn{background:#fff!important;color:#1f2937!important}
+.glx-pips{display:flex;gap:3px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.glx-pips i{width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,.14)}.glx-pips i.on{background:#34d399}.glx-pips i.cur{background:#fbbf24;box-shadow:0 0 6px #fbbf24}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="815cc5c41a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=815cc5c41a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a23ec9c982"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a23ec9c982"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8089,7 +8090,7 @@ async function glClaim(ch){const g=glS();if(!ch.done||g.cl[ch.id]||!ch.mine)retu
 async function glClaimBoss(){const S=glState(),B=S.boss,g=glS();if(!B||!B.dead||g.bcl[B.wk]||!(g.bs.dmg>0))return;g.bcl[B.wk]=1;const rk=B.dm.findIndex(x=>x.id==S.me),rw=glBossRw(S).concat(rk==0?[["g",12],["i","master-ball",1]]:rk==1?[["g",8]]:rk==2?[["g",5]]:[]);g.gx+=500;const out=await bpGive(rw);bpPop(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Récompenses de la semaine","This week's rewards"),out);save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)}
 /* bonus de guilde sur les gains */
 {const f0=biFlags;biFlags=function(){f0();const l=(G.gl&&G.gl.id&&G.gl.lv)||1;if(l>1){const p=glPerks(l);BIF.d*=p.d;BIF.c*=p.c;BIF.x*=p.x;BIF.k*=p.k}}}
-const glReady=()=>{try{const g=glS();if(!g.id||g.pend)return false;const S=glState();if(!S.inG)return false;if(S.boss&&!S.boss.dead&&glLeft()>0)return true;if(S.boss&&S.boss.dead&&!g.bcl[S.boss.wk]&&g.bs.dmg>0)return true;return glChals(S.mine).some(c=>c.done&&!g.cl[c.id]&&c.mine>0)}catch(e){return false}};
+const glReady=()=>{try{const g=glS();if(!g.id||g.pend)return false;const S=glState();if(!S.inG)return false;if(S.boss&&!S.boss.dead&&glLeft()>0)return true;if(S.boss&&S.boss.cleared>(g.bcs==null?(g.bs.bt>0||g.bs.dmg>0?0:S.boss.cleared):g.bcs))return true;return glChals(S.mine).some(c=>c.done&&!g.cl[c.id]&&c.mine>0)}catch(e){return false}};
 setInterval(()=>{try{glTrack()}catch(e){}},2000);
 setInterval(()=>{try{const g=glS();if(g.id){glState();glSync();glPush(0);glFetch()}}catch(e){}},5000);
 {const g=glS();if(g.id&&g.lv>1)setTimeout(()=>{try{biFlags();recomp()}catch(e){}},500)}
@@ -10140,6 +10141,43 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
 
 /* --- export / import de sauvegarde par fichier ou code : supprime (la sauvegarde passe par le compte en ligne) --- */
 expSave=function(){};impSave=function(){};bkShow=function(){};
+/* --- boss de guilde : 20 boss en etages, toute la guilde frappe la meme barre de PV --- */
+const GLBHP=[50,100,160,230,310,400,500,620,760,920,1100,1300,1550,1850,2200,2600,3100,3700,4400,5200].map(x=>x*1e6);
+const GLBN=GLBHP.length;
+const glBt=m=>m.bs?(m.bs.bt!=null?+m.bs.bt||0:+m.bs.dmg||0):0;
+glBossPlan=function(M){
+ const dm=M.v.map(m=>({id:m.id,n:m.n,av:m.av,avs:m.avs,d:glBt(m)})).sort((a,b)=>b.d-a.d),T=dm.reduce((a,b)=>a+b.d,0);
+ let st=0,c=0;while(st<GLBN&&T>=c+GLBHP[st]){c+=GLBHP[st];st++}
+ const all=st>=GLBN,idx=Math.min(st,GLBN-1),hp=GLBHP[idx];
+ return{wk:"s"+(idx+1),st:idx+1,cleared:st,sp:GLBS[idx%GLBS.length],hp,dm,tot:all?hp:T-c,T,dead:all,end:0}};
+const _gatk=glAtk;
+glAtk=function(){const S0=glState(),c0=S0.boss?S0.boss.cleared:0,g=glS(),r=_gatk.apply(this,arguments);
+ if(r){if(g.bs.bt==null)g.bs.bt=Math.max(0,(g.bs.dmg||0)-r.t);g.bs.bt+=r.t;glPush(1);GLX.st=null;
+  try{const c1=glState().boss.cleared;if(c1>c0)toast(LS("Boss de guilde n°"+c1+" vaincu ! Récompenses à récupérer dans l'onglet Boss.","Guild boss #"+c1+" defeated! Claim rewards in the Boss tab."))}catch(e){}}
+ return r};
+const _gmd=glMyDoc;
+glMyDoc=function(){const d=_gmd.apply(this,arguments),g=glS();d.bs.bt=Math.floor(g.bs.bt!=null?g.bs.bt:(g.bs.dmg||0));return d};
+function glStRw(s){const q=qcps(),f=1+.2*(s-1),r=[["m",Math.floor(Math.max(200000,q*10800)*f)],["g",60+4*(s-1)],["i","dream-ball",10]];
+ if(s%5==0)r.push(["i","master-ball",s==20?3:1]);if(s==10||s==15)r.push(["i","gold-bottle-cap",2]);if(s==20)r.push(["i","ability-patch",2]);return r}
+glBossRw=function(S){return glStRw(S.boss?S.boss.st:1)};
+glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B||g.bs.bt==null&&!(g.bs.dmg>0)||!(glBt({bs:g.bs})>0))return;
+ if(g.bcs==null)g.bcs=0;const n=B.cleared-g.bcs;if(n<=0)return;
+ let rw=[];for(let s=g.bcs+1;s<=B.cleared;s++)rw=rw.concat(glStRw(s));const mg={};rw.forEach(x=>{const k=x[0]+(x[1]&&x[0]=="i"?":"+x[1]:"");if(mg[k])mg[k][x[0]=="i"?2:1]+=x[x.length-1];else mg[k]=x.slice()});rw=Object.values(mg);
+ const rk=B.dm.findIndex(x=>x.id==S.me);rw=rw.concat(rk==0?[["g",40*n],["i","master-ball",1]]:rk==1?[["g",25*n]]:rk==2?[["g",15*n]]:[]);
+ g.bcs=B.cleared;g.gx+=500*n;
+ mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
+ toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
+glBossV=function(S){const B=S.boss,g=glS(),left=glLeft(),pct=Math.max(0,100-B.tot/B.hp*100),mx=Math.max(1,B.dm[0]?B.dm[0].d:1);
+ if(g.bcs==null&&!(glBt({bs:g.bs})>0))g.bcs=B.cleared;const pend=Math.max(0,B.cleared-(g.bcs||0)),mine=glBt({bs:g.bs})>0;
+ const pips=Array.from({length:GLBN},(_,i)=>`<i class="${i<B.cleared?"on":i==B.cleared?"cur":""}"></i>`).join("");
+ return `<div class="glx-bs"><div class="glx-bx"><div class="glx-pips">${pips}</div><div class="glx-bsp" id="glbsp">${sp(B.sp,0,1)}</div><div class="glx-bt"><h2>${esc(nm(B.sp))}</h2><div class="glx-ty">${tchips(tp(B.sp))}</div><small>${ico("crown")} ${B.dead?LS("Les 20 boss sont vaincus !","All 20 bosses defeated!"):LS("Boss ","Boss ")+B.st+" / "+GLBN+" · "+LS("toute la guilde attaque","the whole guild attacks")}</small></div>
+  <div class="glx-hp"><div class="glx-bar big hp"><i id="glhp" style="width:${pct}%"></i><span id="glhpt">${fmt(Math.max(0,B.hp-B.tot))} / ${fmt(B.hp)}</span></div></div>
+  <div class="glx-act">${pend>0?`<button class="go glx-big" data-gl="bc">${ico("gift")} ${LS("Récupérer les récompenses","Claim rewards")} (${pend})</button>`:""}${B.dead?"":`<div class="glx-try">${[0,1,2].map(i=>`<i class="${i<left?"ok":""}"></i>`).join("")}<small>${left} / 3 ${LS("essais aujourd'hui","tries today")}</small></div><button class="go glx-big" data-gl="atk" ${left?"":"disabled"} id="glatk">${glIc("sword")} ${LS("Attaquer","Attack")}</button>`}</div>
+  <div class="qrw glx-rwp">${glBossRw(S).map(glRw).join("")}</div></div>
+  <div class="glx-box"><h3>${glIc("trophy")}${LS("Classement des dégâts","Damage ranking")}</h3><div class="glx-rk">${B.dm.map((x,i)=>`<div class="glx-rr ${x.id==S.me?"me":""}"><span class="glx-rn">${i+1}</span>${glAvT(x)}<b>${esc(x.n)}</b><div class="glx-rb"><i style="width:${x.d/mx*100}%"></i></div><em>${fmt(x.d)}</em></div>`).join("")}</div></div></div>`};
+/* difficulte : les boss gagnent en puissance avec l'etage */
+const _gbn=glBNew;
+glBNew=function(S){const B=_gbn.apply(this,arguments),u=B.f.tm[0],f=1+.02*((S.boss.st||1)-1);u.atk=Math.round(u.atk*f);u.spa=Math.round(u.spa*f);return B};
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
