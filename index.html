@@ -3425,19 +3425,24 @@ a.qkb.qkdc .qki{color:#fff}
 .plsb{background:none;border:0;color:#cbd5e1;cursor:pointer;vertical-align:middle;padding:2px 4px;margin-left:6px}.plsb svg{width:18px;height:18px}.plsb:hover{color:#fff}
 .plsrch{padding:0 0 8px}.plqi{width:100%;box-sizing:border-box;height:38px;border-radius:10px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;padding:0 12px;font:600 14px Nunito,system-ui,sans-serif}
 .tr-so select{color-scheme:dark;cursor:pointer}.tr-so select option{background:#101a33;color:#fff;font:600 14px Nunito,system-ui,sans-serif;padding:8px}
-.rix{margin-top:14px;padding:14px}.rix h3{margin:0 0 4px;display:flex;align-items:center;gap:8px}.rxn{color:var(--mu);display:block;margin-bottom:10px}
+.rix{margin-top:2px;padding:4px}.rix h3{margin:0 0 4px;display:flex;align-items:center;gap:8px}.rxn{color:var(--mu);display:block;margin-bottom:10px}
 .rxr{margin-top:10px;border-left:3px solid var(--c);padding-left:10px}.rxh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}.rxh b{color:var(--c)}.rxh small{color:var(--mu)}
 .rxg{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
 .rxc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff1a;text-align:center}
 .rxc .rxs{width:64px;height:64px;display:grid;place-items:center}.rxc .rxs img{max-width:100%;max-height:100%;image-rendering:pixelated}
 .rxc b{font-size:11px;line-height:1.1;overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap}
 .rxc.hid .rxs img{filter:brightness(0) blur(1.5px);opacity:.55}.rxc.hid b{color:#94a3b8;letter-spacing:.2em}
+
+.rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxb svg{width:16px;height:16px}
+#rxm{position:fixed;inset:0;z-index:4000;display:none;background:rgba(3,6,18,.78);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#rxm.on{display:flex}
+.rxd{position:relative;width:min(880px,100%);max-height:88vh;overflow:auto;border-radius:18px;background:linear-gradient(#141b3a,#0b1026);border:1px solid #ffffff2a;padding:16px 16px 20px}
+.rxx{position:sticky;float:right;top:0;width:36px;height:36px;border-radius:10px;border:1px solid #ffffff2a;background:#0b1026;color:#fff;display:grid;place-items:center;cursor:pointer;z-index:2}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f96596e935"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f96596e935"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="820bb55274"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=820bb55274"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3855,7 +3860,7 @@ function exUi(){if(tab!="exp"||!$("exrot"))return;const n=Date.now(),sig=exSeed(
  $("exrot").textContent=hms((exNext()-n)/1000);{const e=$("exmrot");if(e)e.textContent=hms((mgNext()-n)/1000)}$("exrb").style.width=(100-(exNext()-n)/216e3)+"%";
  (G.ex||[]).forEach((r,k)=>{const e=$("exr"+k);if(e){const rem=Math.max(0,r.end-n);e.textContent=hms(rem/1000);$("exb"+k).style.width=Math.min(100,(1-rem/(r.du*1000))*100)+"%"}})}
 const exTeam=a=>`<div class="ext">${a.map(i=>`<span>${sp(i,G.col[i]&&G.col[i].sh)}</span>`).join("")}</div>`;
-const vExp=()=>{const cur=exCur(),run=G.ex||[],free=exFree(),best=free.slice(0,4),full=run.length>=3;
+var vExp=()=>{const cur=exCur(),run=G.ex||[],free=exFree(),best=free.slice(0,4),full=run.length>=3;
  const runHtml=(r,k)=>{const t=EXT[r.i],d=I(r.id),done=r.ok!==undefined;return `<div class="exu" style="--c1:${t.col[0]};--c2:${t.col[1]}"><div class="exs2">${sp(r.mf||r.id,0,1)}</div><div class="exb"><div class="row sp2"><b>${t.n}</b><small>Cible : ${r.mf?MGM[r.mf].n:d.n} niv. ${r.lv}</small></div>${exTeam(r.tm)}
   ${done?`<div class="exres ${r.ok?"ok":""}">${r.ok?ico("star")+" "+d.n+" capturé !":"Le Pokémon s'est échappé"} · +${fmt(r.g)} ₽</div>`:`<div class="bar"><i id="exb${k}" style="width:${Math.min(100,(1-Math.max(0,r.end-Date.now())/(r.du*1000))*100)}%;background:linear-gradient(90deg,#2dd4bf,#3b82f6)"></i></div><small>Retour dans <b id="exr${k}">${hms(Math.max(0,r.end-Date.now())/1000)}</b> · capture ${(r.ch*100).toFixed(1)} %</small>`}</div>
   <div class="exa">${done?`<button class="go" data-a="exget" data-i="${k}">Récupérer</button>`:""}<button class="${r.au?"on":""}" data-a="exau" data-i="${k}" title="Relance automatiquement avec la même équipe">Auto ${r.au?"activé":"désactivé"}</button>${done?"":`<button class="exx2" data-a="excx" data-i="${k}">Annuler</button>`}</div></div>`};
@@ -4439,7 +4444,7 @@ function vShop2(){return `<div class="box shh"><div class="row sp2"><div><h2 sty
  <div class="tools"><input type="search" id="shq" data-a="shq" placeholder="${LS("Rechercher un objet (toutes catégories)","Search an item (all categories)")}" value="${SH.q}"><button data-a="shaff" class="${SH.aff?"on":""}">${ico("filter")} ${LS("Achetables","Affordable")}</button></div></div><div id="shl">${shopList()}</div>`}
 /* ---------- expédition Méga (3 jours) ---------- */
 const MGX=()=>MGD.filter(m=>EXC.has(m[1])).map(m=>m[0]);
-const mgSeed=()=>Math.floor(Date.now()/2592e5),mgNext=()=>(mgSeed()+1)*2592e5;
+const mgSeed=()=>Math.floor(Date.now()/864e5),mgNext=()=>(mgSeed()+1)*864e5;
 function mgCur(t,i){const sd=mgSeed(),L=MGX(),R=rng(sd*7919+13);R();const f=L[R()*L.length|0],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}}
 /* ---------- migration v19 ---------- */
 function v19mig(){if((G.v||0)>=19)return;G.v=19;let ref=0;for(const k of Object.keys(G.inv||{})){if(RMP[k]&&G.inv[k]>0){ref+=Math.floor(RMP[k]*.6)*G.inv[k];delete G.inv[k]}}
@@ -4542,7 +4547,7 @@ ${tbl([TT("Mutation","Mutation"),TT("Probabilité","Chance"),TT("PV adverses","E
 <h3>${TT("Chromatiques","Shinies")}</h3><p>${TT("Le taux de base est de <b>1 sur 4096</b>, comme dans les jeux. Le <b>Charme chroma</b> (boutique du Prestige) le triple ; l'amélioration « Éclat » ajoute +25 % par niveau (jusqu'à 20 niveaux) ; l'événement Éclipse le multiplie par 3. Un chromatique a un sprite doré, un bonus permanent de +50 % de dégâts et une alerte spéciale.","The base rate is <b>1 in 4096</b>, like in the games. The <b>Shiny Charm</b> (Prestige shop) triples it; the “Shine” upgrade adds +25% per level (up to 20 levels); the Eclipse event multiplies it by 3. A shiny has a golden sprite, a permanent +50% damage bonus and a special alert.")}</p>
 ${cal("",TT("<b>À savoir :</b> un Pokémon est soit muté, soit chromatique (pas les deux). Les mutations et chromatiques sont réservés au combat sur les étages ; les expéditions donnent des Pokémon normaux.","<b>Good to know:</b> a Pokémon is either mutated or shiny (not both). Mutations and shinies only appear in floor battles; expeditions give normal Pokémon."))}`},
 forms:()=>`<h1>${TT("Formes : méga, Primo, Dynamax","Forms: Mega, Primal, Dynamax")}</h1><p class="lead">${TT("Le jeu contient les 1025 espèces des 9 générations, "+MGD.length+" méga-formes et formes primales, et le Dynamax.","The game contains all 1025 species from the 9 generations, "+MGD.length+" Mega and Primal forms, and Dynamax.")}</p>
-<h3>${TT("Méga-évolution et Primo-résurgence","Mega Evolution & Primal Reversion")}</h3><p>${TT("Un Pokémon qui tient sa <b>Méga-Perle</b> change de forme pour toujours : nouvelles stats, nouveaux types, nouveau talent, et puissance ×1,5. Les perles des Pokémon des étages se vendent en boutique (onglet « Méga et Dynamax »). Celles des Pokémon d'élite (Mewtwo, Rayquaza, Latios…) ne se gagnent que par l'<b>expédition Méga</b>, qui change tous les 3 jours.","A Pokémon holding its <b>Mega Pearl</b> changes form for good: new stats, new types, new ability and power ×1.5. Pearls for floor Pokémon are sold in the shop (“Mega and Dynamax” tab). Those of elite Pokémon (Mewtwo, Rayquaza, Latios…) can only be won in the <b>Mega hunt</b> expedition, which changes every 3 days.")}</p>
+<h3>${TT("Méga-évolution et Primo-résurgence","Mega Evolution & Primal Reversion")}</h3><p>${TT("Un Pokémon qui tient sa <b>Méga-Perle</b> change de forme pour toujours : nouvelles stats, nouveaux types, nouveau talent, et puissance ×1,5. Les perles des Pokémon des étages se vendent en boutique (onglet « Méga et Dynamax »). Celles des Pokémon d'élite (Mewtwo, Rayquaza, Latios…) ne se gagnent que par l'<b>expédition Méga</b>, qui change tous les jours.","A Pokémon holding its <b>Mega Pearl</b> changes form for good: new stats, new types, new ability and power ×1.5. Pearls for floor Pokémon are sold in the shop (“Mega and Dynamax” tab). Those of elite Pokémon (Mewtwo, Rayquaza, Latios…) can only be won in the <b>Mega hunt</b> expedition, which changes every day.")}</p>
 <h3>Dynamax</h3><p>${TT("Le <b>Poignet Dynamax</b> rend un Pokémon géant à vie : puissance ×2,2 et PV ×2.","The <b>Dynamax Band</b> makes a Pokémon giant for life: power ×2.2 and HP ×2.")}</p>
 <h3>${TT("Générations","Generations")}</h3>${tbl([TT("Génération","Generation"),TT("Région","Region"),TT("Numéros","Numbers"),TT("Espèces","Species")],GN.map((g,i)=>[i+1,g,"#"+GENS[i][0]+" – #"+GENS[i][1],GENS[i][1]-GENS[i][0]+1]))}`,
 stats:()=>`<h1>${TT("Stats, IV, EV, talents","Stats, IVs, EVs, abilities")}</h1><p class="lead">${TT("Les mécaniques des vrais jeux sont reprises : chaque Pokémon a des stats uniques.","The real games' mechanics are used: every Pokémon has unique stats.")}</p>
@@ -4556,7 +4561,7 @@ items:()=>`<h1>${TT("Objets tenus","Held items")}</h1><p class="lead">${TT("Chaq
 exp:()=>`<h1>${TT("Expéditions","Expeditions")}</h1><p class="lead">${TT("Envoie 4 Pokémon en mission : leurs dégâts s'additionnent et doivent atteindre le minimum requis. À la fin, le Pokémon cible est capturé selon une probabilité, et tu gagnes des pièces dans tous les cas.","Send 4 Pokémon on a mission: their damage adds up and must reach the required minimum. At the end, the target Pokémon is caught with some probability, and you earn coins either way.")}</p>
 ${tbl([TT("Destination","Destination"),TT("Niveau","Level"),TT("Durée","Duration"),TT("Capture de base","Base catch")],EXT.map(t=>[t.n,t.lv,dur(t.du),pcs(t.ch)+" %"]))}
 <p>${TT("Les 4 destinations changent toutes les <b>6 heures</b> (cible différente). Tu as 3 emplacements d'expédition en parallèle. « Auto » relance l'expédition avec la même équipe tant que la destination est là. Plus tes dégâts dépassent le minimum, plus la capture est probable (jusqu'à +12,5 %).","The 4 destinations change every <b>6 hours</b> (different target). You have 3 expedition slots in parallel. “Auto” relaunches the expedition with the same team while the destination lasts. The more your damage exceeds the minimum, the likelier the catch (up to +12.5%).")}</p>
-<h3>${TT("Chasse Méga","Mega hunt")}</h3><p>${TT("Tous les <b>3 jours</b>, une expédition spéciale propose un Pokémon d'élite (Mewtwo, Rayquaza, Latias…). La réussite donne le Pokémon <b>et sa Méga-Perle</b>. Très difficile : dégâts requis élevés et chance de base faible, mais tu peux la retenter tant qu'elle est là.","Every <b>3 days</b>, a special expedition offers an elite Pokémon (Mewtwo, Rayquaza, Latias…). Success gives the Pokémon <b>and its Mega Pearl</b>. Very hard: high damage requirement and a low base chance, but you can retry as long as it is available.")}</p>`,
+<h3>${TT("Chasse Méga","Mega hunt")}</h3><p>${TT("Chaque <b>jour</b>, une expédition spéciale propose un Pokémon d'élite (Mewtwo, Rayquaza, Latias…). La réussite donne le Pokémon <b>et sa Méga-Perle</b>. Très difficile : dégâts requis élevés et chance de base faible, mais tu peux la retenter tant qu'elle est là.","Every <b>day</b>, a special expedition offers an elite Pokémon (Mewtwo, Rayquaza, Latias…). Success gives the Pokémon <b>and its Mega Pearl</b>. Very hard: high damage requirement and a low base chance, but you can retry as long as it is available.")}</p>`,
 pres:()=>{const g=[5,10,15,20,30,40];return `<h1>Prestige</h1><p class="lead">${TT("Le prestige remet ta progression à zéro en échange de points permanents.","Prestige resets your progress in exchange for permanent points.")}</p>
 ${tbl([TT("Points gagnés","Points gained"),TT("Étage à atteindre","Floor to reach")],g.map(x=>[x,Math.ceil(x/5)*8]))}
 <ul class="wks2"><li><b>${TT("Perdu","Lost")}</b> ${TT("étages, 85 % de ton argent, objets du sac (tu gardes tes Balls), tous les autres Pokémon, doublons, étoiles, niveaux et EV. Tu gardes les Pokémon de ton choix et tes Pokémon spéciaux, en un seul exemplaire et au niveau 1.","floors, 85% of your money, bag items (you keep your Balls), all other Pokémon, duplicates, stars, levels and EVs. You keep the Pokémon of your choice and your special ones, one copy each, at level 1.")}</li><li><b>${TT("Gardé","Kept")}</b> ${TT("Pokédex, cartes, succès, améliorations, IV, chromatiques, mutés, tailles, alphas et spéciaux.","Pokédex, cards, achievements, upgrades, IVs, shinies, mutants, sizes, alphas and specials.")}</li><li><b>${TT("Gagné","Gained")}</b> ${TT("des points à dépenser dans "+PU.length+" améliorations à vie, dont le <b>Charme chroma</b> (chromatiques ×3) et chaque point apporte +3 % global.","points to spend on "+PU.length+" lifetime upgrades, including the <b>Shiny Charm</b> (shinies ×3), and each point adds +3% overall.")}</li></ul>
@@ -4583,7 +4588,7 @@ function vWiki(){const cur=WSEC.find(x=>x[0]==WK.s)||WSEC[0];
 
 /* ---------- bandeau Chasse Méga + niveau de dresseur (profil) ---------- */
 function megaBanner(t){const best=exFree().slice(0,4),req=exReq(t),dps=exDps(best),ok=best.length==4&&dps>=req,ch=exCh(t,Math.max(dps,req)),full=(G.ex||[]).length>=3,can=best.length>=4&&!full,m=MGM[t.mf];
- return `<div class="exm" style="--c1:${t.col[0]};--c2:${t.col[1]}"><div class="exmb"><span class="exmt">${ico("spark")} ${LS("CHASSE MÉGA","MEGA HUNT")}</span><h2>${t.mn}</h2><small>${LS("Une réussite rapporte le Pokémon ET sa Méga-Perle. Change tous les 3 jours.","Success gives the Pokémon AND its Mega Pearl. Changes every 3 days.")}</small><div class="exch" style="margin-top:8px">${tchips(m.t)}<span class="chip" style="background:${RC[4]};color:#111">${LS("Très rare","Very rare")}</span></div>
+ return `<div class="exm" style="--c1:${t.col[0]};--c2:${t.col[1]}"><div class="exmb"><span class="exmt">${ico("spark")} ${LS("CHASSE MÉGA","MEGA HUNT")}</span><h2>${t.mn}</h2><small>${LS("Une réussite rapporte le Pokémon ET sa Méga-Perle. Change tous les jours.","Success gives the Pokémon AND its Mega Pearl. Changes every day.")}</small><div class="exch" style="margin-top:8px">${tchips(m.t)}<span class="chip" style="background:${RC[4]};color:#111">${LS("Très rare","Very rare")}</span></div>
  <div class="exmr"><div><small>${ico("clock")} ${LS("Durée","Duration")}</small><b>${dur(t.du)}</b></div><div><small>${ico("bolt")} ${LS("DPS requis","DPS needed")}</small><b class="${ok?"g":"bad"}">${fmt(req)}</b></div><div><small>${ico("team")} ${LS("Ton équipe","Your team")}</small><b class="${ok?"g":"bad"}">${best.length>=4?fmt(dps):LS("4 Pokémon requis","4 Pokémon needed")}</b></div><div><small>${ico("star")} ${LS("Réussite","Success")}</small><b>${(ch*100).toFixed(1)} %</b></div></div>
  <div class="row"><button class="go" data-a="exsend" data-i="${t.i}" ${can?"":"disabled"}>${LS("Envoyer","Send")}</button><button data-a="exauto" data-i="${t.i}" ${can&&ok?"":"disabled"}>Auto</button></div></div>
  <div class="exms"><img class="sp" alt="" src="${IMG+t.mf}.png" onerror="this.style.visibility='hidden'"></div><div class="exmcd"><small>${ico("clock")} ${LS("PROCHAINE ROTATION","NEXT ROTATION")}</small><b id="exmrot">${hms((mgNext()-Date.now())/1000)}</b></div></div>`}
@@ -5674,6 +5679,7 @@ const GMX={3:10195,6:10196,9:10197,12:10198,68:10201,94:10202,131:10204,143:1020
 const rdPixF=(id,sh)=>IMG+(sh?"shiny/":"")+id+".png",rdPixB=(id,sh)=>IMG+"back/"+(sh?"shiny/":"")+id+".png";
 /* ============ v23 : RAIDS — moteur ============ */
 NAV2.push(["raid","skull","Raids","#ef4444","#7f1d1d"]);NENG.raid="Raids";
+var RFX={};
 const RUF={384:"mega",383:"prim",382:"prim",493:"n",150:"mega",890:"etern"};
 const rdDayK=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
 const rdWeekK=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
@@ -5690,7 +5696,7 @@ function rdBossMake(sp,form,L,hpm,am,cr,kind,sh){let types,S,name,mf=0,sm=1,pw=1
  mv=rdGen(types,S,sp>9e4?sp:sp).map(m=>({...m}));
  for(let i=0;i<mv.length;i++)if(mv[i].c=="u")mv[i]={...RMV[S[1]>=S[3]?"Giga Impact":"Ultralaser"]};
  return {sp,form,name,L,types,pid,pix:rdPixF(pid,sh),art:rdPixF(pid,sh),sh:!!sh,gm,dyn,sc,mf,hp:max,max,atk:st[1]*am,def:st[2],spa:st[3]*am,spd:st[4],spe:st[5],moves:mv,cr,pw,big:form=="dyn"||form=="etern"||kind=="wb"}}
-const rdDaily=(()=>{let k="",L=[];return()=>{const d=rdDayK();if(k==d)return L;k=d;L=RT.map((t,i)=>{const R=rng(rdStr(d+"#"+i)),sp=t.pool[R()*t.pool.length|0],f=t.f=="leg"?"n":t.f=="ult"?RUF[sp]:t.f=="sp"?"n":t.f;return{t:i,sp,f,L:t.L}});return L}})();
+const rdDaily=(()=>{let k="",L=[];return()=>{const d=rdDayK();if(k==d)return L;k=d;L=RT.map((t,i)=>{const R=rng(rdStr(d+"#"+i)),sp=t.pool[R()*t.pool.length|0],f=t.f=="leg"?(RFX[sp]||"n"):t.f=="ult"?(RUF[sp]||RFX[sp]||"n"):t.f=="sp"?(RFX[sp]||"n"):t.f;return{t:i,sp,f,L:t.L}});return L}})();
 const rdBossOf=(i)=>{const d=rdDaily()[i],t=RT[i];return rdBossMake(d.sp,d.f,t.L,t.hp,t.am,t.cr,"raid",!!t.sh)};
 const rdWB=()=>{const w=RW[rdWeekN()%RW.length];return {sp:w[0],f:w[1]}};
 const rdWBoss=()=>{const w=rdWB();return rdBossMake(w.sp,w.f,110,RWHP,WBAM,.1,"wb")};
@@ -10907,8 +10913,58 @@ function rdIndex(){G.rdx=G.rdx||{};const kn=i=>!!G.rdx[i]||!!G.col[i];
  const row=(t,c,L)=>{L=[...new Set(L)];const n=L.filter(kn).length;return `<div class="rxr" style="--c:${c}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(i=>{const k=kn(i);return `<div class="rxc${k?"":" hid"}" title="${k?esc(dn(i)):"???"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b></div>`}).join("")}</div></div>`};
  let h=RT.map(t=>row(LS(t.n[0],t.n[1]),t.c,t.pool||[])).join("");
  try{h+=row(LS("Boss monde","World boss"),"#a78bfa",RW.map(x=>x[0]))}catch(e){}
- return `<div class="rix box"><h3>${ico("book")} ${LS("Index des raids","Raid index")}</h3><small class="rxn">${LS("Bats ou obtiens un Pokémon de raid pour révéler sa case.","Beat or obtain a raid Pokémon to reveal its slot.")}</small>${h}</div>`}
-{const v0=vRaid;vRaid=function(){const s=v0.apply(this,arguments);try{const i=s.lastIndexOf("</div>");return s.slice(0,i)+rdIndex()+s.slice(i)}catch(e){return s}}}
+ return `<div class="rix"><h3>${ico("book")} ${LS("Index des raids","Raid index")}</h3><small class="rxn">${LS("Bats ou obtiens un Pokémon de raid pour révéler sa case.","Beat or obtain a raid Pokémon to reveal its slot.")}</small>${h}</div>`}
+
+/* ---------- Raids : beaucoup plus de Pokémon (légendaires, fabuleux, paradoxes, Gigamax) ---------- */
+(function(){
+ const B={245:["Suicune",["water"],[100,75,115,90,115,85]],244:["Entei",["fire"],[115,115,85,90,75,100]],243:["Raikou",["electric"],[90,85,75,115,100,115]],
+ 380:["Latias",["dragon","psychic"],[80,80,90,110,130,110]],381:["Latios",["dragon","psychic"],[80,90,80,130,110,110]],386:["Deoxys",["psychic"],[50,150,50,150,50,150]],
+ 643:["Reshiram",["dragon","fire"],[100,120,100,150,120,90]],644:["Zekrom",["dragon","electric"],[100,150,120,120,100,90]],646:["Kyurem",["dragon","ice"],[125,130,90,130,90,95]],
+ 716:["Xerneas",["fairy"],[126,131,95,131,98,99]],717:["Yveltal",["dark","flying"],[126,131,95,131,98,99]],791:["Solgaleo",["psychic","steel"],[137,137,107,113,89,97]],792:["Lunala",["psychic","ghost"],[137,113,89,137,107,97]],
+ 485:["Heatran",["fire","steel"],[91,90,106,130,106,77]],645:["Landorus",["ground","flying"],[89,125,90,115,80,101]],889:["Zamazenta",["fighting"],[92,120,140,80,140,128]],
+ 1001:["Wo-Chien",["dark","grass"],[85,85,100,95,135,70]],1002:["Chien-Pao",["dark","ice"],[80,120,80,90,65,135]],1003:["Ting-Lu",["dark","ground"],[155,110,125,55,80,45]],1004:["Chi-Yu",["dark","fire"],[55,80,80,135,120,100]],
+ 1007:["Koraidon",["fighting","dragon"],[100,135,115,85,100,135]],1008:["Miraidon",["electric","dragon"],[100,85,100,135,115,135]],
+ 984:["Fer-Hache",["ground","fighting"],[115,131,131,53,53,87]],987:["Flotte-Mèche",["ghost","fairy"],[55,55,55,135,135,135]],1005:["Rugit-Lune",["dragon","dark"],[105,139,71,55,101,119]],1006:["Garde-de-Fer",["fairy","fighting"],[74,130,90,120,60,116]],
+ 1009:["Serpente-Eau",["water","dragon"],[99,83,91,125,83,109]],1020:["Feu-Perçant",["fire","dragon"],[105,115,121,65,93,91]],1021:["Ire-Foudre",["electric","dragon"],[125,73,91,137,89,75]],1022:["Roc-de-Fer",["rock","psychic"],[90,120,80,68,108,124]],1023:["Chef-de-Fer",["steel","psychic"],[90,72,100,122,108,98]],
+ 151:["Mew",["psychic"],[100,100,100,100,100,100]],251:["Celebi",["psychic","grass"],[100,100,100,100,100,100]],385:["Jirachi",["steel","psychic"],[100,100,100,100,100,100]],494:["Victini",["psychic","fire"],[100,100,100,100,100,100]],
+ 649:["Genesect",["bug","steel"],[71,120,95,120,95,99]],719:["Diancie",["rock","fairy"],[50,100,150,100,150,50]],720:["Hoopa",["psychic","ghost"],[80,110,60,150,130,70]],721:["Volcanion",["fire","water"],[80,110,120,130,90,70]],
+ 801:["Magearna",["steel","fairy"],[80,95,115,130,115,65]],802:["Marshadow",["fighting","ghost"],[90,125,80,90,90,125]],807:["Zeraora",["electric"],[88,112,75,102,80,143]],893:["Zarude",["dark","grass"],[105,120,105,70,95,105]],1025:["Pêchaminus",["poison","fairy"],[88,88,160,88,88,88]],
+ 894:["Regieleki",["electric"],[80,100,50,100,50,200]],895:["Regidrago",["dragon"],[200,100,50,100,50,80]],
+ 809:["Melmetal",["steel"],[135,143,143,80,65,34]],812:["Gorythmic",["grass"],[100,125,90,60,70,85]],815:["Pyrobut",["fire"],[80,116,75,65,75,119]],818:["Lézargus",["water"],[70,85,65,125,65,120]],892:["Shifours",["fighting","dark"],[100,130,100,63,60,97]],
+ 884:["Duralugon",["steel","dragon"],[70,95,115,120,50,85]],858:["Sorcilège",["psychic","fairy"],[57,90,95,136,103,29]],861:["Ogerpon-Grimmsnarl",["dark","fairy"],[95,120,65,95,75,60]],849:["Salarsen",["electric","poison"],[75,98,70,114,70,75]],823:["Corvaillus",["flying","steel"],[98,87,105,53,85,67]],839:["Charbambin",["rock","fire"],[110,80,120,80,90,30]]};
+ B[861][0]="Grimmsnarl";B[1025][0]="Pêchaminus";
+ Object.keys(B).forEach(k=>{if(!RB[k])RB[k]=B[k]});
+ const add=(t,L)=>{const p=RT[t].pool;L.forEach(i=>{if(p.indexOf(i)<0)p.push(i)})};
+ /* Expert : légendaires */
+ add(3,[245,244,243,380,381,643,644,716,717,791,792,646,485,645,889,1001,1002,1003,1004]);
+ /* Extrême : paradoxes, légendaires ultimes, Méga-évolutions */
+ add(4,[386,1007,1008,984,987,1005,1006,1009,1020,1021,1022,1023,380,381,719,720,809,884,892,812,815,818]);
+ /* Impossible : fabuleux, mythiques et Gigamax de Pokémon ultra forts */
+ add(5,[151,251,385,494,649,719,720,721,801,802,807,893,1025,894,895,1007,1008,1021,1005,987,809,884,892,812,815,818,858,861,849,823,839]);
+ Object.assign(RUF,{380:"mega",381:"mega",719:"mega"});
+ [809,884,892,812,815,818,858,861,849,823,839].forEach(i=>{RFX[i]="dyn"});
+ /* Boss monde : encore plus de choix, y compris des Gigamax */
+ [[716,"n"],[717,"n"],[791,"n"],[792,"n"],[1007,"n"],[1008,"n"],[643,"n"],[644,"n"],[646,"n"],[386,"n"],[1005,"n"],[987,"n"],[1021,"n"],[809,"dyn"],[884,"dyn"],[892,"dyn"],[812,"dyn"],[815,"dyn"],[380,"mega"],[381,"mega"],[719,"mega"],[251,"n"],[801,"n"]].forEach(x=>{if(!RW.some(r=>r[0]==x[0]&&r[1]==x[1]))RW.push(x)});
+})();
+
+/* ---------- boutons « Index » (Raids et Expéditions) + fenêtre ---------- */
+function rxOpen(h){let o=document.getElementById("rxm");if(!o){o=document.createElement("div");o.id="rxm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-rxx]"))o.className=""})}
+ o.className="on";o.innerHTML=`<div class="rxd"><button class="rxx" data-rxx>${ico("x")}</button>${h}</div>`}
+const rxBtn=k=>`<button class="rxb" data-rxi="${k}">${ico("book")} Index</button>`;
+{const v0=vRaid;vRaid=function(){const s=v0.apply(this,arguments);try{return s.replace(/(Raids)(<\/h2>)/,"$1"+rxBtn("raid")+"$2")}catch(e){return s}}}
+{const v0=vExp;vExp=function(){const s=v0.apply(this,arguments);try{return s.replace(/(Expéditions)(<\/h2>)/,"$1"+rxBtn("exp")+"$2")}catch(e){return s}}}
+function exIndex(){const kn=i=>!!G.col[i];
+ const row=(t,c,L)=>{L=[...new Set(L)];const n=L.filter(kn).length;return `<div class="rxr" style="--c:${c}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(i=>{const k=kn(i);return `<div class="rxc${k?"":" hid"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b></div>`}).join("")}</div></div>`};
+ let h=EXT.filter(t=>!t.mega).map(t=>row(esc(t.n)+" · "+esc(t.z),t.col[0],t.pool)).join("");
+ try{const M=[...new Set(MGX().map(f=>MGM[f]&&MGM[f].s).filter(x=>x&&!kxDiv(x)))];h+=row(LS("Chasse Méga","Mega hunt"),"#f472b6",M)}catch(e){}
+ return `<div class="rix"><h3>${ico("book")} ${LS("Index des expéditions","Expedition index")}</h3><small class="rxn">${LS("Capture un Pokémon pour révéler sa case.","Catch a Pokémon to reveal its slot.")}</small>${h}</div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rxi]");if(!b)return;e.stopPropagation();e.preventDefault();rxOpen(b.dataset.rxi=="raid"?rdIndex():exIndex())},true);
+/* ---------- Expéditions : plus de Pokémon dans les zones ---------- */
+(function(){const add=(t,L)=>{const p=EXT[t].pool;L.forEach(i=>{if(p.indexOf(i)<0&&!kxDiv(i))p.push(i)})};
+ add(0,[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,23,27,29,32,35,37,39,43,46,48,50,52,54,56,60,69,72,74,79,84,86,88]);
+ add(1,[3,6,9,102,106,107,108,113,115,122,123,124,125,126,127,128,129,147,148,153,156,159,253,256,259,388,391,394]);
+ add(2,[59,103,121,149,154,157,160,208,230,237,248,257,260,289,350,359,365,392,395,398,409,430,448,460,466,467,468,473,475,553,567,598,612,620,637,663,670,700,1000]);
+ try{const sx=EXT.find(t=>t.n=="Sanctuaire oublié");if(sx)[6,9,3,65,68,94,130,131,143,142,181,212,229,282,306,330,373,376,445,553,609,628,635,706,784,887,998,1000,968,973,978,983].forEach(i=>{if(sx.pool.indexOf(i)<0&&!kxDiv(i))sx.pool.push(i)})}catch(e){}})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
