@@ -3314,7 +3314,7 @@ html[data-theme=day] .flpt button{background:color-mix(in srgb,var(--bc) 18%,#ff
 
 .x2b{margin-left:8px;padding:6px 12px;border-radius:12px;border:2px solid #64748b;background:#1e293b;color:#cbd5e1;font:800 15px "Baloo 2",Nunito,sans-serif;cursor:pointer;align-self:center;min-width:46px}
 .x2b.on{border-color:#fbbf24;background:linear-gradient(180deg,#fde047,#f59e0b);color:#422006;box-shadow:0 0 14px #fbbf2488}
-.x2b.off{opacity:.45}.x2b.x4{border-color:#f472b6;background:linear-gradient(180deg,#f9a8d4,#db2777);color:#3b0019;box-shadow:0 0 16px #ec489988}
+.x2b.off{opacity:.45}.x2b.x15{border-color:#a78bfa;background:linear-gradient(135deg,#c4b5fd,#7c3aed 55%,#22d3ee);color:#fff;text-shadow:0 1px 2px #0008;box-shadow:0 0 18px #8b5cf6aa}.x2b.x4{border-color:#f472b6;background:linear-gradient(180deg,#f9a8d4,#db2777);color:#3b0019;box-shadow:0 0 16px #ec489988}
 .glx-goal{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;margin:4px 0 6px;font-size:13px;opacity:.95}
 .glx-goal b{color:#fde68a;font-size:15px}
 .glx-goal .glx-pc{margin-left:auto;font-weight:800;color:#86efac}
@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="cce44b5a76"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=cce44b5a76"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="51e60e6a6e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=51e60e6a6e"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10464,23 +10464,29 @@ const x2Ok=()=>(G.st|0)>0&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0);
 const x2On=()=>x2Ok()&&SG.x2!==0;
 /* x4 réservé au compte du propriétaire (ID ami 4BWS-KL9Q) */
 const x4Me=()=>!!(G.fd&&G.fd.id==="4BWSKL9Q");
-const x2M=()=>!x2On()?1:(SG.x2===2&&x4Me())?4:2;
+const x2M=()=>!x2On()?1:!x4Me()?2:SG.x2===3?15:SG.x2===2?4:2;
 let XACC=0,XLAST=Date.now();
 function xHit(){const al=ids();if(!al.length||!E)return;let d=0;
  al.forEach(i=>{const k=G.col[i],h=k.he;let x=dmg(i)*(i==LDC?1.5:1);if(Math.random()<(h&&h.cr||.0417))x*=1.5;if(h&&h.qc&&Math.random()<h.qc)x*=2;d+=x});
  E.hp-=d;if(tab=="adv"&&Math.random()<.35){try{pop("-"+fmt(d),"dmg",42+Math.random()*16)}catch(e){}}
  if(E.hp<=0)win();else if(--E.t<=0)flee()}
-setInterval(()=>{const now=Date.now(),dt=Math.min(2,(now-XLAST)/1000);XLAST=now;
+setInterval(()=>{if(x2M()>=15)return;const now=Date.now(),dt=Math.min(2,(now-XLAST)/1000);XLAST=now;
  if(document.hidden||G.rv>0)return;
- if(!E){if(x2On()&&!busy){const cw=x2M()>=4?650:1300;if(CAPU>now+cw)CAPU=now+cw;if(now>=CAPU){try{spawn().then(ui)}catch(e){}}}return}
+ if(!E){if(x2On()&&!busy){const cw=x2M()>=15?200:x2M()>=4?650:1300;if(CAPU>now+cw)CAPU=now+cw;if(now>=CAPU){try{spawn().then(ui)}catch(e){}}}return}
  const rate=.06*PL("ps")+(x2M()-1);if(rate<=0){XACC=0;return}
  XACC+=rate*dt;let n=0;while(XACC>=1&&n<4&&E){XACC-=1;n++;try{xHit()}catch(e){XACC=0;break}}},200);
+/* x15 (propriétaire) : boucle rapide, même calcul que la boucle ci-dessus (XLAST partagé) */
+let X15N=0;const X15G=180;
+setInterval(()=>{if(x2M()<15)return;const now=Date.now(),dt=Math.min(2,(now-XLAST)/1000);XLAST=now;
+ if(document.hidden||G.rv>0)return;
+ if(!E){if(!X15N)X15N=now;if(!busy&&now-X15N>=X15G){X15N=0;try{spawn().then(ui)}catch(e){}}return}X15N=0;
+ const rate=.06*PL("ps")+(x2M()-1);XACC+=rate*dt;let n=0;while(XACC>=1&&n<4&&E){XACC-=1;n++;try{xHit()}catch(e){XACC=0;break}}},50);
 function x2Inj(){if(tab!="adv"||!(G.st>0))return;const f=document.querySelector(".cp-fl");if(!f)return;let b=f.querySelector(".x2b");if(!b){b=document.createElement("button");b.className="x2b";b.dataset.x2="1";f.appendChild(b)}
- const ok=x2Ok(),on=SG.x2!==0,q=SG.x2===2&&x4Me();b.className="x2b"+(on&&ok?" on":"")+(q&&ok?" x4":"")+(ok?"":" off");b.textContent=q?"x4":"x2";
+ const ok=x2Ok(),on=SG.x2!==0,q=x4Me()&&on?(SG.x2===3?15:SG.x2===2?4:2):2;b.className="x2b"+(on&&ok?" on":"")+(q==4&&ok?" x4":"")+(q==15&&ok?" x15":"")+(ok?"":" off");b.textContent="x"+q;
  b.title=ok?LS("Combats deux fois plus rapides sur les étages déjà faits avant ton prestige.","Battles twice as fast on floors you already cleared before prestige."):LS("x2 : disponible sur les étages déjà atteints avant ton prestige.","x2: available on floors you reached before prestiging.")}
 setInterval(()=>{try{x2Inj()}catch(e){}},1000);
 {const s0=show;show=function(){const r=s0.apply(this,arguments);try{x2Inj()}catch(e){}return r}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-x2]");if(!b)return;e.stopPropagation();e.preventDefault();SG.x2=x4Me()?(SG.x2===0?1:SG.x2===2?0:2):(SG.x2===0?1:0);try{svs()}catch(_){}x2Inj();sfx("click")},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-x2]");if(!b)return;e.stopPropagation();e.preventDefault();SG.x2=x4Me()?(SG.x2===0?1:SG.x2===3?0:SG.x2===2?3:2):(SG.x2===0?1:0);try{svs()}catch(_){}x2Inj();sfx("click")},true);
 /* --- prestige : les Pokémon spéciaux gardent leur statut, les EV sont remis à zéro --- */
 {const p0=prestige;prestige=function(sel){sel=(sel||[]).slice();Object.keys(G.col).map(Number).forEach(i=>{const c=G.col[i];if(c&&(c.sh||c.mi||(c.zi>=3)||c.al||c.spc||c.ha)&&sel.indexOf(i)<0)sel.push(i)});p0.call(this,sel);try{ids().forEach(i=>{try{rq(i)}catch(e){}});recomp();save()}catch(e){}}}
 /* --- raids : l'affichage des tentatives se met à jour tout seul --- */
