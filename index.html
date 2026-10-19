@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="efb864c6f2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=efb864c6f2"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2ab48c9eb7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2ab48c9eb7"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4103,7 +4103,12 @@ function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HF
  const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
  return PWTV[k]*sp/12.88*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
 const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
-const coin=id=>{const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
+var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["Divin","Divine"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
+function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
+function pwSp(id,k){return Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)))}
+/* pièces : même ordre que les dégâts, écart adouci (puissance 0,6) pour ne pas faire exploser l'économie */
+function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV.wN*Math.pow(PWTV[k]/PWTV.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*.478}
+const coin=id=>{if(PWNEW)return coinNew(id);const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
  let m=base(id)*Math.max(.25,e)*(mv?1+mv[2]/200:1)*(c.wa&&c.wa===W.k?1.4:1)*(EVF.d||1)*BIF.d;
@@ -4530,7 +4535,7 @@ function modal0(m){
  m.className="on";m.innerHTML=`<div class="mb" data-a="close"></div><div class="mc"><button class="x" data-a="close">${ico("x")}</button>
 <div class="mh">${sp(id,c.sh)}<div><h2 style="font-size:26px;margin:0">${dn(id)}</h2><div class="vbr">${vb(c)}</div>${tchips(tp(id))}${rtag(r)}<div class="mu">Niv. ${c.l} · capturé ×${c.n} · zone ${(ZOF[id]||0)+1}</div></div></div>
 <div class="row sp2" style="margin-top:14px"><small>Niveau automatique selon l'étage</small><small id="mxt">Niv. ${c.l} / ${tgtL()}</small></div><div class="xpb"><i id="mxp" style="width:${Math.min(100,c.l/tgtL()*100)}%"></i></div><small>Étage ${G.cl+1} atteint : niveau cible ${tgtL()}. Plus tu montes, plus ils montent vite.</small>
-<h2 style="margin-top:16px">Puissance</h2><div class="pw"><small>PUISSANCE PERMANENTE</small><b class="big2">${fmt(base(id))}</b><small>Ligne évolutive : stade ${stage(id)} · bonus de stade <b class="g">×${stM(id).toFixed(1)}</b> · ${fmt(coin(id))} ₽/s · ${fmt(mhp(id))} PV</small></div>
+<h2 style="margin-top:16px">Puissance</h2><div class="pw"><small>PUISSANCE PERMANENTE</small><b class="big2">${fmt(base(id))}</b><small>Ligne évolutive : stade ${stage(id)} · ${PWNEW?`palier <b class="g">${pwLabel(id)}</b>`:`bonus de stade <b class="g">×${stM(id).toFixed(1)}</b>`} · ${fmt(coin(id))} ₽/s · ${fmt(mhp(id))} PV</small></div>
 ${heldHtml(id)}${statsHtml(id)}<div class="aff"><h2>Affinités offensives</h2><small>Attaque : ${mv?mv[0]+" ("+TFR[mv[1]]+")":MV[tp(id)[0]]}. Les types de l'adversaire se multiplient.</small>
 <div style="margin-top:10px"><b class="g">FORT CONTRE</b></div>${tg(A.filter(a=>a[1]>=2))}<div style="margin-top:8px"><b style="color:#ff8a9a">PEU EFFICACE CONTRE</b></div>${tg(A.filter(a=>a[1]<1))}</div>
 ${ev.length||tms.length?`<h2>Évolution et CT</h2><div class="row" style="margin-bottom:10px">${ev.map(e=>`<button data-a="evo" data-i="${id}" data-j="${e[1]}" ${canEvo(e)?"":"disabled"}>→ ${I(e[1]).n} ${e[2]>0?"(niv. "+e[2]+")":e[2]==-1?"(échange)":"("+(IT[e[3]]?IT[e[3]].n:e[3])+")"}</button>`).join("")}${tms.length?`<select data-a="tm" data-i="${id}"><option value="">Apprendre une CT…</option>${tms.map(k=>`<option value="${k}">${IT[k].n}</option>`).join("")}</select>`:""}</div>`:""}
@@ -6526,7 +6531,7 @@ function pkModal(){const id=OPEN,c=id&&G.col[id];if(!c)return "";ens(id);const r
  <aside class="pqa"><div class="pqst"><div class="pqgl"></div>${sp(id,c.sh)}<i class="pqsh"></i></div>
  <div class="pqid"><h2>${dn(id)}</h2><div class="vbr">${vb(c)}</div><div class="pqty">${tchips(t)}${rtag(r)}</div><div class="mu">${LS("Niv.","Lv.")} ${c.l} · ${LS("capturé","caught")} ×${c.n} · zone ${(ZOF[id]||0)+1}</div></div>
  <div class="pqlv">${pqLvHtml(c)}</div>
- <div class="pw pqpw"><small>${LS("PUISSANCE PERMANENTE","PERMANENT POWER")}</small><b class="big2">${fmt(base(id))}</b><small>${LS("Stade","Stage")} ${stage(id)} · <b class="g">×${stM(id).toFixed(1)}</b> · ${fmt(coin(id))} ₽/s · ${fmt(mhp(id))} ${LS("PV","HP")}</small>${pqCap(id)}</div></aside>
+ <div class="pw pqpw"><small>${LS("PUISSANCE PERMANENTE","PERMANENT POWER")}</small><b class="big2">${fmt(base(id))}</b><small>${LS("Stade","Stage")} ${stage(id)} · <b class="g">${PWNEW?pwLabel(id):"×"+stM(id).toFixed(1)}</b> · ${fmt(coin(id))} ₽/s · ${fmt(mhp(id))} ${LS("PV","HP")}</small>${pqCap(id)}</div></aside>
  <section class="pqb"><div class="pqtb">${PKT().map(x=>`<button class="${MT==x[0]?"on":""}" data-mt="${x[0]}">${x[1]}</button>`).join("")}</div><div class="pqbd">${body}</div></section></div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mt]");if(!b)return;e.stopPropagation();MT=b.dataset.mt;modal()},true);
 
@@ -6814,7 +6819,7 @@ function sdRows(k){const d=k=="d",pu=u=>{const x=PU.find(y=>y[0]==u);return x?x[
  return R}
 function sdTop(k){const d=k=="d",pk=ids().map(i=>[i,d?base(i):coin(i)]).sort((a,b)=>b[1]-a[1]).slice(0,7),tot=ids().reduce((t,i)=>t+(d?base(i):coin(i)),0)||1;
  return pk.map(([i,v])=>{const c=G.col[i],tags=[];if(d){if(pr(i)==3)tags.push("UR ×2,5");if(PANS.has(i))tags.push(LS("favori ×1,25","favorite ×1.25"));if(c.al)tags.push("Alpha ×1,3");if(c.mf||c.dy)tags.push(c.dy?"Dynamax":"Méga");if(c.sh)tags.push(LS("chromatique","shiny"));if(c.mi)tags.push(LS("mutation","mutation"))}
-  return `<div class="mqp"><div class="mqpi">${sp(i,c.sh)}</div><div class="mqpb"><b>${dn(i)}</b><small>${LS("Niv. ","Lv. ")}${c.l} · ×${c.n} · ${LS("stade ","stage ")}${stage(i)} (${sdF(stM(i),1)})${tags.length?" · "+tags.join(" · "):""}</small><div class="mqbar"><i style="width:${Math.max(2,v/tot*100)}%"></i></div></div><em>${fmt(v)}${d?"":" ₽/s"}<small>${(v/tot*100).toFixed(1)} %</small></em></div>`}).join("")}
+  return `<div class="mqp"><div class="mqpi">${sp(i,c.sh)}</div><div class="mqpb"><b>${dn(i)}</b><small>${LS("Niv. ","Lv. ")}${c.l} · ×${c.n} · ${PWNEW?pwLabel(i):LS("stade ","stage ")+stage(i)+" ("+sdF(stM(i),1)+")"}${tags.length?" · "+tags.join(" · "):""}</small><div class="mqbar"><i style="width:${Math.max(2,v/tot*100)}%"></i></div></div><em>${fmt(v)}${d?"":" ₽/s"}<small>${(v/tot*100).toFixed(1)} %</small></em></div>`}).join("")}
 function sdHtml(){const d=SDK=="d",R=sdRows(d?"d":"c"),G0=R.reduce((p,r)=>p*r.v,1);
  TSC[2]!==TK&&0;const dps=ids().reduce((t,i)=>t+(d?base(i):coin(i)),0)*(EVF[d?"d":"c"]||1)*(d?BIF.d:BIF.c);
  let last="";const rows=R.map(r=>{const h=r.grp!==last?`<h4>${r.grp}</h4>`:"";last=r.grp;const on=Math.abs(r.v-1)>.0005,w=Math.min(100,Math.log(Math.max(1,r.v))/Math.log(6)*100);
@@ -9254,7 +9259,9 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||t.id!="wkgs")retur
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-a="wk"]');if(!b)return;setTimeout(()=>{const a=$("wka");if(a&&a.getBoundingClientRect().top<0)a.scrollIntoView({block:"start"})},60)},true);
 /* Légendaires et spéciaux : puissance x4 supplémentaire */
 const legM=id=>(id>9e4||LEG.has(id))?4:1;
-{const r0=wkBody.rarity;wkBody.rarity=()=>r0()+wn("tip","Légendaires et Pokémon spéciaux","Les Pokémon légendaires et les formes spéciales ont une puissance <b>multipliée par 4</b> en plus de leurs statistiques. Un seul d'entre eux pèse autant qu'une petite équipe.")}
+{const r1=wkBody.rarity;wkBody.rarity=()=>{if(!PWNEW)return r1();const o=["wN","wSR","wSSR","ex","wUR","mg","bN","bSR","bSSR","bUR","bD","h1","h2","h3","h4","r0","r1","r2","r3","r4","r5","f0","f7","sp","wb"];
+ return `<h1>${LS("Puissance des Pokémon","Pokémon power")}</h1><p class="lead">${LS("La puissance de base (dégâts et pièces) dépend de l'endroit où tu as obtenu le Pokémon. Un Pokémon obtenu par une meilleure source monte de palier, il ne descend jamais. Niveau, étoiles, doublons, mutation, taille, Alpha, chromatique, objets, cartes et prestige se multiplient ensuite par-dessus.","Base power (damage and coins) depends on where you got the Pokémon. A Pokémon obtained from a better source moves up a tier and never down. Level, stars, duplicates, mutation, size, Alpha, shiny, items, cards and prestige then multiply on top.")}</p>`+tbl([LS("Palier","Tier"),LS("Puissance de base","Base power")],o.map(k=>[LS(PWNM[k][0],PWNM[k][1]),"×"+(Math.round(PWTV[k]/PWTV.wN*10)/10).toString().replace(".",",")]))}}
+{const r0=wkBody.rarity;wkBody.rarity=()=>r0()+(PWNEW?"":wn("tip","Légendaires et Pokémon spéciaux","Les Pokémon légendaires et les formes spéciales ont une puissance <b>multipliée par 4</b> en plus de leurs statistiques. Un seul d'entre eux pèse autant qu'une petite équipe."))}
 /* sprite manquant d'une forme (ex. Méga-Zygarde) : on affiche l'espèce de base */
 document.addEventListener("error",e=>{const im=e.target;if(!im||im.tagName!="IMG"||im.dataset.zf)return;const m=/(\d{5})(\.\w+)$/.exec(im.src||"");if(!m||typeof MGM=="undefined")return;const g=MGM[m[1]];if(!g||!g.s)return;im.dataset.zf=1;e.stopPropagation();im.addEventListener("load",()=>{im.style.visibility=""},{once:true});im.src=im.src.replace(m[1]+m[2],g.s+m[2])},true);
 /* ===== fiche : carte « Statut et bonus » (mutation, taille, chroma, forme...) ===== */
@@ -9263,14 +9270,15 @@ function bonusCard(id){
  const f=x=>"×"+(Math.round(x*100)/100).toString().replace(".",","),L=[];
  const add=(t,n,v,col)=>L.push(`<div class="bnr"><i style="background:${col||"#64748b"}"></i><span>${t}${n?` <b>${n}</b>`:""}</span><em>${v}</em></div>`);
  try{
-  if(c.spc||id>9e4)add("Forme spéciale","",f(legM(id)*(id>9e4?6.4:1)),"#e879f9");
+  if(PWNEW){const k=pwTier(id);add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24")}
+  else{if(c.spc||id>9e4)add("Forme spéciale","",f(legM(id)*(id>9e4?6.4:1)),"#e879f9");
   else if(LEG.has(id))add("Légendaire","",f(legM(id)),"#f59e0b");
-  if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");
+  if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");}
   if(c.al)add("Alpha","",f(1.3),"#ef4444");
   if(c.sh)add("Chromatique","",f(1.5),"#facc15");
   if(c.mi)add("Mutation",MU[c.mi][0],f(MU[c.mi][1]),(typeof MUC!="undefined"&&MUC[c.mi])||"#22d3ee");
   if(c.zi&&c.zi!=2)add("Taille",SZ[c.zi][0],f((typeof SZD!="undefined"&&SZD[c.zi])||SZ[c.zi][1]),(typeof SZC!="undefined"&&SZC[c.zi])||"#60a5fa");
-  if(c.mf)add("Méga / Primo","",f(1.5),"#a78bfa");
+  if(c.mf&&!PWNEW)add("Méga / Primo","",f(1.5),"#a78bfa");
   if(c.dy)add("Dynamax","",f(2.2),"#fb7185");
   if(G.fav&&G.fav.includes(id))add("Panthéon","",f(1.25),"#fbbf24");
   if(c.st)add("Étoiles",c.st+" ★",f(starD(c)),"#fde047");
@@ -12365,7 +12373,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
-  ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
+  ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Les pièces gagnées par seconde suivent la même échelle. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Coins per second follow the same scale. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
   ["new","Classement « Meilleur Pokémon »","Nouvel onglet dans Classements : le Pokémon le plus fort de chaque joueur, selon le DPS le plus haut jamais atteint (cartes, équipement, prestige et objet tenu compris).","“Best Pokémon” ranking","New tab in Rankings: each player's strongest Pokémon, by the highest DPS ever reached (cards, gear, prestige and held item included)."],
   ["imp","Tour : la puissance compte","Dans la Tour, l'attaque réelle de tes Pokémon compte maintenant, comme en JCJ : les ennemis deviennent plus puissants à chaque étage, et l'écran de l'étage compare leur attaque à celle de ton équipe. Mutations, tailles, chromatiques et Alpha sont visibles en combat.","Tower: power matters","In the Tower, your Pokémon's real attack now counts, like in PvP: enemies get stronger every floor, and the floor screen compares their attack with your team's. Mutations, sizes, shinies and Alpha are shown in battle."],
   ["imp","JCJ : la puissance compte","En JCJ, l'attaque réelle de tes Pokémon compte maintenant (doublons, étoiles, mutation, taille, Alpha…) : un Pokémon bien plus fort que son adversaire inflige beaucoup plus de dégâts et en subit beaucoup moins. À puissance proche, les types restent décisifs. Mutations, tailles, chromatiques et Alpha sont aussi visibles pendant les combats.","PvP: power matters","In PvP, your Pokémon's real attack now counts (duplicates, stars, mutation, size, Alpha…): a much stronger Pokémon deals far more damage and takes far less. At similar power, types stay decisive. Mutations, sizes, shinies and Alpha are also shown during battles."],
