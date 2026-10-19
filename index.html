@@ -3234,7 +3234,7 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pidu .pidr em{grid-column:auto;text-align:right;opacity:.9;font-size:12.5px;color:#a7f3d0}
 .pnlock{opacity:.7;filter:grayscale(.6)}
 .pnlock .pni{background:#475569}
-.cp-fl{position:relative}.rhzn{box-shadow:0 0 0 1px #22d3ee66 inset,0 0 18px #22d3ee33}.rhzn .rhlv em{color:#67e8f9;font-variant-numeric:tabular-nums}.rhnomb{opacity:.55;filter:grayscale(.7)}.rhnomb em{color:#fca5a5!important}
+.cp-fl{position:relative}.pvsp img{width:calc(18cqw*var(--pvz,1))!important;height:calc(18cqw*var(--pvz,1))!important}.pvvbr{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0 1px}.pvvbr .vb{font-size:10px;padding:1px 6px;transform:none;margin:0}.rhzn{box-shadow:0 0 0 1px #22d3ee66 inset,0 0 18px #22d3ee33}.rhzn .rhlv em{color:#67e8f9;font-variant-numeric:tabular-nums}.rhnomb{opacity:.55;filter:grayscale(.7)}.rhnomb em{color:#fca5a5!important}
 /* classement des pièces */
 .rkm-hint{display:block;color:var(--mu);margin:-4px 0 10px;font-size:12px}
 .rkm-w{border-radius:14px;transition:background .25s}.rkm-w.op{background:rgba(255,255,255,.04)}
@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a91c73f684"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=a91c73f684"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="73b2ce77a4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=73b2ce77a4"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7501,7 +7501,7 @@ function pvBotRow(i,idx){const r=pvBotR(i,idx),tm=pvBotTeam(i),g=Math.max(8,Math
 /* ---------- classement en ligne ---------- */
 const PVX={rows:[],ts:0,busy:0,v:"arena",opp:null,q:"",ty:"",pg:1,lt:0,pf:null};
 const pvPick=(m,tm)=>{const o={};(tm||[]).forEach(id=>{if(m&&m[id])o[id]=m[id]});return o};
-const pvDoc=()=>{const p=pvS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",r:p.r,w:p.w,l:p.l,k:p.k,pk:p.pk,pr:p.pr,pf:p.pf,tm:p.tm.slice(0,6),mv:pvPick(p.mv,p.tm),it:pvPick(p.it,p.tm),pw:pvPwMap(p.tm.slice(0,6)),t:Date.now()}};
+const pvDoc=()=>{const p=pvS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",r:p.r,w:p.w,l:p.l,k:p.k,pk:p.pk,pr:p.pr,pf:p.pf,tm:p.tm.slice(0,6),mv:pvPick(p.mv,p.tm),it:pvPick(p.it,p.tm),pi:pvInfoMap(p.tm.slice(0,6)),t:Date.now()}};
 async function pvPush(){if(!(LB&&LB.ok&&LB.db))return;const p=pvS();if(!p.tm.length)return;try{await LB.db.doc("pvp/"+LB.uid).set(pvDoc())}catch(e){}}
 async function pvFetch(force){if(!(LB&&LB.ok&&LB.db)||PVX.busy)return;if(!force&&Date.now()-PVX.ts<20000)return;PVX.busy=1;
  try{const s=await LB.db.collection("pvp").get();PVX.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));PVX.ts=Date.now()}catch(e){}
@@ -7563,23 +7563,26 @@ const pvNoMf=(id,f)=>{const c=G.col[id],m=c&&c.mf;if(m)c.mf=0;try{return f()}fin
 const pvNm=id=>id>9e4&&SPM[id]?SPM[id].n:I(id).n;
 function pvMake(id,o){o=o||{};return pvNoMf(id,()=>{const S=ST(id),t=tp(id).slice(),mv=pvSetMoves(id,o.mv),st=k=>2*S[k]+31+5,hp=2*S[0]+31+110,it=pvItOk(o.it)?o.it:null;
  const u={id,name:pvNm(id),types:t,max:hp,hp,atk:st(1),def:st(2),spa:st(3),spd:st(4),spe:st(5),bst:S.reduce((a,b)=>a+b,0),moves:mv.slice(),st:null,sT:0,bA:0,bS:0,rc:0,hu:0,dead:0,it,used:0,lk:null,nu:it=="assault-vest"};
- if(it=="choice-band")u.atk=Math.floor(u.atk*1.4);if(it=="choice-specs")u.spa=Math.floor(u.spa*1.4);if(it=="choice-scarf")u.spe=Math.floor(u.spe*1.5);if(it=="assault-vest")u.spd=Math.floor(u.spd*1.5);if(o.pw){const f=Math.max(.5,Math.min(1.9,+o.pw||1));u.pf=f;u.max=u.hp=Math.round(u.max*f);u.atk=Math.round(u.atk*f);u.def=Math.round(u.def*f);u.spa=Math.round(u.spa*f);u.spd=Math.round(u.spd*f);u.spe=Math.round(u.spe*Math.sqrt(f))}return u})}
+ if(it=="choice-band")u.atk=Math.floor(u.atk*1.4);if(it=="choice-specs")u.spa=Math.floor(u.spa*1.4);if(it=="choice-scarf")u.spe=Math.floor(u.spe*1.5);if(it=="assault-vest")u.spd=Math.floor(u.spd*1.5);if(o.pi){const x=o.pi;u.pd=Math.max(0,+x[0]||0);u.mi=x[1]|0;u.zi=x[2]|0;u.sh=x[3]?1:0;u.al=x[4]?1:0}return u})}
 const pvPow=id=>{try{return pvNoMf(id,()=>ST(id).reduce((a,b)=>a+b,0))}catch(e){return 0}};
-/* JCJ : la puissance réelle des Pokémon compte (niveau, IV, EV, étoiles, Alpha), atténuée et bornée pour que les types restent décisifs */
-const PVPW_MIN=.5,PVPW_MAX=1.9;
-function pvPwOf(id){try{const c=G.col[id];if(!c)return 1;ens(id);return pvNoMf(id,()=>{const S=ST(id);let re=0,no=0;for(let k=0;k<6;k++){re+=calc(id,k);no+=k==0?2*S[0]+31+110:2*S[k]+31+5}
- const f=Math.pow(Math.max(.01,re/no),.6)*(1+.03*(c.st||0))*(c.al?1.05:1);return Math.round(Math.max(PVPW_MIN,Math.min(PVPW_MAX,f))*100)/100})}catch(e){return 1}}
-const pvPowR=id=>Math.round(pvPow(id)*pvPwOf(id));
-const pvPwMap=tm=>{const o={};(tm||[]).forEach(id=>{o[id]=pvPwOf(id)});return o};
-const pvBotPw=r=>{const f=Math.round((.8+.8*Math.max(0,Math.min(1,((r&&r.r)||110)-110)/570))*100)/100,o={};((r&&r.tm)||[]).forEach(id=>{o[id]=f});return o};
-const pvTeamU=(ids,mv,it,pw)=>{const seen={};return ids.map(id=>{let k=it&&it[id];if(k&&seen[k])k=null;if(k)seen[k]=1;return pvMake(id,{mv:mv&&mv[id],it:k,pw:pw&&pw[id]})})};
+/* JCJ : l'attaque réelle de chaque Pokémon (doublons, étoiles, mutation, taille, Alpha, qualité…) compte.
+   Dégâts × √(attaque de l'attaquant / attaque du défenseur), borné entre ×0,1 et ×10 : les types restent importants à puissance proche. */
+const PVPK=.5,PVPMN=.1,PVPMX=10;
+function pvInfo(id){try{const c=G.col[id];if(!c)return null;return[Math.round(base(id)),c.mi|0,c.zi|0,c.sh?1:0,c.al?1:0]}catch(e){return null}}
+const pvInfoMap=tm=>{const o={};(tm||[]).forEach(id=>{const x=pvInfo(id);if(x)o[id]=x});return o};
+const pvPowR=id=>{try{return base(id)}catch(e){return 0}};
+const pvGeo=m=>{const v=Object.values(m||{}).map(x=>+x[0]).filter(x=>x>0);return v.length?Math.exp(v.reduce((a,b)=>a+Math.log(b),0)/v.length):0};
+/* bots : puissance relative à la tienne selon leur rang (×0,4 en bas du classement, ×2,5 en haut) */
+function pvBotInfo(r,mine){const g=pvGeo(mine)||1,f=.4+2.1*Math.max(0,Math.min(1,(((r&&r.r)||110)-110)/570)),o={};((r&&r.tm)||[]).forEach((id,i)=>{o[id]=[Math.round(g*f*(.85+.3*((i*37)%10)/10)),0,0,0,0]});return o}
+const pvPwMul=(a,d)=>a&&d&&a.pd>0&&d.pd>0?Math.max(PVPMN,Math.min(PVPMX,Math.pow(a.pd/d.pd,PVPK))):1;
+const pvTeamU=(ids,mv,it,pi)=>{const seen={};return ids.map(id=>{let k=it&&it[id];if(k&&seen[k])k=null;if(k)seen[k]=1;return pvMake(id,{mv:mv&&mv[id],it:k,pi:pi&&pi[id]})})};
 
 /* ---------- dégâts ---------- */
 function pvDmg(a,d,m,est){const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
  const base=Math.floor(Math.floor(42*m.p*A/Math.max(1,D))/50)+2,stab=a.types.includes(m.t)?1.5:1,e=eff(m.t,d.types);
- if(est)return base*stab*e*(a.it=="life-orb"?1.3:1);
+ const pm=pvPwMul(a,d);if(est)return base*stab*e*(a.it=="life-orb"?1.3:1)*pm;
  const cr=Math.random()<.0625+(m.e=="crit"?.125:0),rn=.85+Math.random()*.15;
- return{v:e>0?Math.max(1,Math.floor(base*stab*e*(cr?1.5:1)*rn*(a.it=="life-orb"?1.3:1))):0,e,cr}}
+ return{v:e>0?Math.max(1,Math.floor(base*stab*e*(cr?1.5:1)*rn*(a.it=="life-orb"?1.3:1)*pm)):0,e,cr}}
 const pvAct=(B,s)=>B[s].tm[B[s].a];
 const pvAlive=(B,s)=>B[s].tm.filter(u=>!u.dead);
 const pvOth=s=>s=="m"?"f":"m";
@@ -7606,7 +7609,7 @@ function pvBestSwitch(B,s){const o=pvAct(B,pvOth(s));let bi=-1,bv=-9;B[s].tm.for
 
 /* ---------- combat ---------- */
 let PB=null;
-function pvNew(opp,fast){const p=pvS(),mine=pvTeamU(p.tm,p.mv,p.it,pvPwMap(p.tm)),foe=pvTeamU(opp.tm,opp.mv,opp.it,opp.tuto?null:opp.bot?pvBotPw(opp):opp.pw);
+function pvNew(opp,fast){const p=pvS(),mi=pvInfoMap(p.tm),mine=pvTeamU(p.tm,p.mv,p.it,mi),foe=pvTeamU(opp.tm,opp.mv,opp.it,opp.tuto?null:opp.bot?pvBotInfo(opp,mi):opp.pi);
  if(opp.tuto)foe.forEach(u=>{u.max=u.hp=Math.round(u.hp*.55);u.atk*=.45;u.spa*=.45;u.spe*=.7;u.it=null});
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foe.forEach((u,i)=>{u.i=i;u.s="f"});
  return{opp,m:{n:G.name||"Moi",r:p.r,tm:mine,a:0},f:{n:opp.n,r:opp.r,tm:foe,a:0},round:0,log:[],sp:1,auto:false,fast:!!fast,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:opp.tuto?.3:Math.max(.5,Math.min(.97,.45+opp.r/1200)),tuto:!!opp.tuto,friendly:!!opp.fri,prev:opp.tuto||opp.fri?{w:0,l:0,d:0}:pvPrev(opp)}}
@@ -7663,7 +7666,7 @@ async function pvTurn(B,am,af){B.round++;pvUI("round",B);
  if(pvAct(B,"m").dead){let i;if(B.auto||B.fast)i=pvBestSwitch(B,"m");else{B.phase="repl";B.wait=1;pvUI("upd",B);i=await new Promise(r=>{B.replRes=r})}B.wait=null;if(B.over)return;B.phase="anim";await pvSwitchTo(B,"m",i)}
  pvUI("upd",B)}
 /* simulation sans interface (tests et équilibrage) */
-async function pvSim(idsA,idsB,rA,rB,sk,oa,ob){oa=oa||{};ob=ob||{};const A=pvTeamU(idsA,oa.mv,oa.it,oa.pw),Bt=pvTeamU(idsB,ob.mv,ob.it,ob.pw);A.forEach((u,i)=>{u.i=i;u.s="m"});Bt.forEach((u,i)=>{u.i=i;u.s="f"});
+async function pvSim(idsA,idsB,rA,rB,sk,oa,ob){oa=oa||{};ob=ob||{};const A=pvTeamU(idsA,oa.mv,oa.it,oa.pi),Bt=pvTeamU(idsB,ob.mv,ob.it,ob.pi);A.forEach((u,i)=>{u.i=i;u.s="m"});Bt.forEach((u,i)=>{u.i=i;u.s="f"});
  const B={opp:{r:rB||100},m:{n:"A",r:rA||100,tm:A,a:0},f:{n:"B",r:rB||100,tm:Bt,a:0},round:0,log:[],sp:1,fast:true,over:null,sw:{m:0,f:0}},k=sk||.9;const keep=PB;PB=null;
  try{while(!B.over&&B.round<90){await pvTurn(B,pvAIpick(B,"m",k),pvAIpick(B,"f",k))}}finally{PB=keep}
  return B.over||"draw"}
@@ -7758,7 +7761,7 @@ function pvClaimBox(){const q=pvPending();if(!q)return"";return `<div class="pvc
 /* ---------- équipe ---------- */
 function pvOwned(){const q=PVX.q.trim().toLowerCase();return ids().filter(id=>{const t=tp(id);if(PVX.ty&&!t.includes(PVX.ty))return false;if(q&&!(pvNm(id).toLowerCase().includes(q)||t.some(x=>TFR[x].toLowerCase().includes(q))))return false;return true}).sort((a,b)=>pvPowR(b)-pvPowR(a))}
 function pvGrid(){const p=pvS(),L=pvOwned(),n=PVX.pg*48;
- return L.slice(0,n).map(id=>{const k=p.tm.indexOf(id),t=pvNoMf(id,()=>tp(id));return `<button class="pvcd ${k>=0?"on":""}" data-pv="tg:${id}">${k>=0?`<i class="pvbd">${k+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(t)}</span><small>Puissance ${pvPowR(id)}</small></button>`}).join("")+(L.length>n?`<button class="pvmore" data-pv="more">Afficher plus (${L.length-n})</button>`:"")+(L.length?"":`<small class="pvdim">Aucun Pokémon ne correspond.</small>`)}
+ return L.slice(0,n).map(id=>{const k=p.tm.indexOf(id),t=pvNoMf(id,()=>tp(id));return `<button class="pvcd ${k>=0?"on":""}" data-pv="tg:${id}">${k>=0?`<i class="pvbd">${k+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(t)}</span><small>${LS("Attaque","Attack")} ${fmt(pvPowR(id))}</small></button>`}).join("")+(L.length>n?`<button class="pvmore" data-pv="more">Afficher plus (${L.length-n})</button>`:"")+(L.length?"":`<small class="pvdim">Aucun Pokémon ne correspond.</small>`)}
 function pvViewTeam(){const p=pvS(),ok=p.tm.length==6;
  return `<div class="pvbox pvtm"><h3>${pvIc("team")} Mon équipe JCJ <span class="pvct ${ok?"ok":""}">${p.tm.length} / 6</span></h3><small class="pvdim">Tous tes Pokémon passent niveau 100 avec des IV au maximum dans ce mode : choisis les 6 meilleurs et la meilleure couverture de types.</small>${pvSlots()}
   <div class="pvtb"><button class="pvgo sm" data-pv="auto">${pvIc("bolt")} Équipe auto</button><button class="pvgo sm gr" data-pv="clear">${pvIc("x")} Vider</button>${ok?`<button class="pvgo sm" data-pv="v:arena">${pvIc("check")||""} Valider</button>`:""}</div></div>
@@ -12203,6 +12206,12 @@ function znAtt(){const r=rdState(),now=Date.now();r.zt=(r.zt||[]).filter(t=>now-
  if(r.tm.length>n0){r.tm=tm0;r.zt=r.zt||[];r.zt.push(Date.now());save()}}}
 /* sécurité : jamais de Master Ball sur le Pikachu Zénith du raid */
 {const t0=rdThrow;rdThrow=function(){if(RCX.ball=="master-ball"&&znNoMB()){toast(LS("La Master Ball est interdite sur le Pikachu Zénith.","The Master Ball is not allowed on Zenith Pikachu."));return}return t0.apply(this,arguments)}}
+
+/* JCJ : mutation, taille, chromatique et Alpha visibles en combat */
+{const ui0=pvUnitImg;pvUnitImg=function(u,s){if(u&&u.sh&&u.id<9e4)return s=="m"?rdPixB(u.id,1):rdPixF(u.id,1);return ui0.apply(this,arguments)}}
+{const sp0=pvSetSpr;pvSetSpr=function(B,s){const r=sp0.apply(this,arguments);try{const w=$("pvS"+s),u=pvAct(B,s);if(w&&u){const im=w.querySelector("img"),mu=u.mi&&MU[u.mi]?MU[u.mi][3]:"",z=u.zi&&SZ[u.zi]?SZ[u.zi][1]:1;
+ im.style.filter="";im.style.opacity="";if(mu)im.style.cssText+=";"+mu.replace(/--mx:[^;]*;?/g,"");w.style.setProperty("--pvz",Math.max(.6,Math.min(1.8,z)));}}catch(e){}return r}}
+{const up0=pvU_upd;pvU_upd=function(B){const r=up0.apply(this,arguments);try{["m","f"].forEach(s=>{const u=pvAct(B,s),n=$("pvN"+s);if(!u||!n)return;const h=vb({sh:u.sh,mi:u.mi,zi:u.zi,al:u.al}),row=n.closest(".pvpl");if(!row)return;let el=row.querySelector(".pvvbr");if(!el){el=document.createElement("div");el.className="pvvbr";row.querySelector(".pvpn1").insertAdjacentElement("afterend",el)}const k=[u.id,u.sh,u.mi,u.zi,u.al].join();if(el.dataset.k!==k){el.dataset.k=k;el.innerHTML=h||""}el.style.display=h&&h.indexOf("vb")>=0?"":"none"})}catch(e){}return r}}
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
@@ -12292,7 +12301,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
-  ["imp","JCJ : la puissance compte","En JCJ, la vraie puissance de tes Pokémon compte maintenant (niveau, IV, EV, étoiles, Alpha), en plus des types. Les avantages de type restent décisifs, mais un Pokémon bien entraîné a un vrai avantage.","PvP: power matters","In PvP, your Pokémon's real power now counts (level, IVs, EVs, stars, Alpha), on top of types. Type matchups stay decisive, but a well-trained Pokémon has a real edge."],
+  ["imp","JCJ : la puissance compte","En JCJ, l'attaque réelle de tes Pokémon compte maintenant (doublons, étoiles, mutation, taille, Alpha…) : un Pokémon bien plus fort que son adversaire inflige beaucoup plus de dégâts et en subit beaucoup moins. À puissance proche, les types restent décisifs. Mutations, tailles, chromatiques et Alpha sont aussi visibles pendant les combats.","PvP: power matters","In PvP, your Pokémon's real attack now counts (duplicates, stars, mutation, size, Alpha…): a much stronger Pokémon deals far more damage and takes far less. At similar power, types stay decisive. Mutations, sizes, shinies and Alpha are also shown during battles."],
   ["imp","Doublons limités à 330","Chaque Pokémon peut avoir au maximum 330 exemplaires, et la 5e étoile s'obtient au plus tard à 330. Un Pokémon 5 étoiles au niveau maximum n'augmente plus ses dégâts.","Duplicates capped at 330","Each Pokémon can have at most 330 copies, and the 5th star is reached at 330 copies at most. A 5-star Pokémon at max level no longer gains damage."],
   ["imp","Tour rééquilibrée","Les étages de la Tour sont bien moins durs, surtout après l'étage 100 : la difficulté monte maintenant de façon régulière jusqu'à l'étage 300, qui reste un vrai défi.","Tower rebalanced","Tower floors are much easier, especially after floor 100: difficulty now rises steadily up to floor 300, which stays a real challenge."],
   ["imp","Boss monde bien plus résistant","Le boss monde a maintenant 200 G de PV (200 milliards) au lieu de 200 M, pour tenir toute la semaine.","Much tougher world boss","The world boss now has 200G HP (200 billion) instead of 200M, so it lasts the whole week."],
