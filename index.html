@@ -3742,8 +3742,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5fba0a2617"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=5fba0a2617"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5fba0a2618"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5fba0a2618"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5461,7 +5461,7 @@ function vCas(){const cs=G.cs=G.cs||{};
  <div class="qbon" id="csstat" style="margin:10px 0">${casStatHtml()}</div>
  <div class="csstage" id="csst"><div class="csid">${ico("ticket")}<b>${LS("Choisis un ticket","Pick a ticket")}</b><small>${LS("Les prix suivent tes revenus. Plus le ticket est cher, meilleurs sont les lots.","Prices follow your income. The pricier the ticket, the better the prizes.")}</small></div></div>
  <div class="cstiers">${CT.map(T=>{const pr=casPrice(T.id),top=CP[T.id].filter(x=>["sp","mb","mp"].includes(x[1])).concat(CP[T.id].filter(x=>x[1]=="i"&&IT[x[2]].p>=400000)).slice(0,3);
-  return `<div class="cstier" data-k="${T.id}" style="--c1:${T.c1};--c2:${T.c2}"><div class="cstt">${ico("ticket")}<div><b>${LS(T.n[0],T.n[1])}</b><small>${fmt(pr)} ₽</small></div></div><div class="cstp">${top.map(x=>`<span class="${x[1]=="sp"?"sp":""}">${casLab(x)} <em>${prc(x[0]/10000)}</em></span>`).join("")}</div>${T.id=="p"?`<div id="cspity">${casPity()}</div>`:""}<div class="cstb"><button class="go" data-a="cas" data-t="${T.id}" data-i="1" ${G.m>=pr?"":"disabled"}>×1</button><button class="go" data-a="cas" data-t="${T.id}" data-i="10" ${G.m>=pr*10?"":"disabled"}>×10</button></div></div>`}).join("")}</div>
+  return `<div class="cstier" data-k="${T.id}" style="--c1:${T.c1};--c2:${T.c2}"><div class="cstt">${ico("ticket")}<div><b>${LS(T.n[0],T.n[1])}</b><small>${fmt(pr)} ₽</small></div></div><div class="cstp">${top.map(x=>`<span class="${x[1]=="sp"?"sp":""}">${casLab(x)} <em>${prc(x[0]/10000)}</em></span>`).join("")}</div>${T.id=="p"?`<div id="cspity">${casPity()}</div>`:""}<div class="cstb"><button class="go" data-a="cas" data-t="${T.id}" data-i="1" ${G.m>=pr?"":"disabled"}>×1</button><button class="go" data-a="cas" data-t="${T.id}" data-i="10" ${G.m>=pr*10?"":"disabled"}>×10</button><button class="go" data-a="cas" data-t="${T.id}" data-i="25" ${G.m>=pr*25?"":"disabled"}>×25</button></div></div>`}).join("")}</div>
  <div class="box"><h3 style="margin:0 0 8px">${LS("Derniers tirages","Recent draws")}</h3><div class="cshl" id="cshist">${casHist()}</div></div>
  <details class="box csod"><summary>${ico("chart")} ${LS("Voir toutes les probabilités","See all odds")}</summary>${CT.map(T=>`<h3 style="color:${T.c1}">${LS("Ticket ","")}${LS(T.n[0],T.n[1])}${SG.lang=="en"?" ticket":""} · ${fmt(casPrice(T.id))} ₽</h3>${tbl([LS("Lot","Prize"),LS("Chance","Chance")],CP[T.id].map(x=>[casLab(x,casPrice(T.id)),prc(x[0]/10000)]))}`).join("")}<p><small>${LS("Les pièces gagnées sont des multiples de la mise. Les prix sont recalculés selon tes revenus (minimum fixe en début de partie).","Coin prizes are multiples of the bet. Prices follow your income (with a fixed minimum early on).")}</small></p></details>`}
 function spReveal(id){const x=SPM[id];if(!x)return;let o=$("spm");if(!o){o=document.createElement("div");o.id="spm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target.closest("[data-r]")||e.target===o){o.className="";o.innerHTML=""}})}
@@ -5613,7 +5613,7 @@ function vCas(){const cs=G.cs=G.cs||{};
  return `<div class="cxhero"><div class="cxlt"></div><div class="cxtt"><div class="cxlg">${ico("dice")}</div><h2>CASINO</h2></div><span class="cxwal">${ico("coin")}<b id="cswal">${fmt(G.m)}</b></span><div class="cxst" id="csstat">${casStatHtml()}</div></div>
  <div class="cxstage" id="csst"><div class="cxidle">${ico("ticket")}</div></div>
  <div class="cxtks">${CT.map(T=>{const pr=casPrice(T.id),sp=CP[T.id].find(x=>x[1]=="sp");
-  return `<div class="cxtk" data-k="${T.id}" style="--c1:${CXM[T.id][0]};--c2:${CXM[T.id][1]}"><div class="cxtop">${cxEm(T.id,70)}<b>${LS(T.n[0],T.n[1])}</b></div><div class="cxcut"></div><div class="cxbot"><div class="cxpz">${cxShow(T.id).map(x=>`<span title="${esc(casLab(x))} · ${prc(x[0]/10000)}">${cxPrizeIc(x)}<em>${prc(x[0]/10000)}</em></span>`).join("")}</div><div class="cxspn" title="${LS("Chance d'obtenir une forme spéciale","Chance of a special form")}">${ico("sparkle")}<span>${cxOdds(sp)}</span></div>${T.id=="p"?`<div id="cspity">${casPity()}</div>`:""}<div class="cxpr2">${ico("coin")}<b class="cxpr">${fmt(pr)}</b></div><div class="cxbt"><button class="go" data-a="cas" data-t="${T.id}" data-i="1" ${G.m>=pr?"":"disabled"}>×1</button><button class="go" data-a="cas" data-t="${T.id}" data-i="10" ${G.m>=pr*10?"":"disabled"}>×10</button></div></div></div>`}).join("")}</div>
+  return `<div class="cxtk" data-k="${T.id}" style="--c1:${CXM[T.id][0]};--c2:${CXM[T.id][1]}"><div class="cxtop">${cxEm(T.id,70)}<b>${LS(T.n[0],T.n[1])}</b></div><div class="cxcut"></div><div class="cxbot"><div class="cxpz">${cxShow(T.id).map(x=>`<span title="${esc(casLab(x))} · ${prc(x[0]/10000)}">${cxPrizeIc(x)}<em>${prc(x[0]/10000)}</em></span>`).join("")}</div><div class="cxspn" title="${LS("Chance d'obtenir une forme spéciale","Chance of a special form")}">${ico("sparkle")}<span>${cxOdds(sp)}</span></div>${T.id=="p"?`<div id="cspity">${casPity()}</div>`:""}<div class="cxpr2">${ico("coin")}<b class="cxpr">${fmt(pr)}</b></div><div class="cxbt"><button class="go" data-a="cas" data-t="${T.id}" data-i="1" ${G.m>=pr?"":"disabled"}>×1</button><button class="go" data-a="cas" data-t="${T.id}" data-i="10" ${G.m>=pr*10?"":"disabled"}>×10</button><button class="go" data-a="cas" data-t="${T.id}" data-i="25" ${G.m>=pr*25?"":"disabled"}>×25</button></div></div></div>`}).join("")}</div>
  <div class="cxhist" id="cshist">${casHist()}</div>
  <details class="cxod"><summary>${ico("chart")} ${LS("Probabilités","Odds")}</summary><div class="cxodg">${CT.map(T=>`<div style="--c1:${CXM[T.id][0]}"><h3>${cxEm(T.id,22)} ${LS(T.n[0],T.n[1])}</h3>${tbl([LS("Lot","Prize"),"%"],CP[T.id].map(x=>[casLab(x,casPrice(T.id)),prc(x[0]/10000)]))}</div>`).join("")}</div></details>`}
 
@@ -6883,6 +6883,7 @@ const ivSlot=()=>Math.floor(Date.now()/IVSL);
 const ivRng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
 let IVB=null,IVN=1,IVBUSY=0,IVRS=0;
 const IV=()=>G.iv||(G.iv={n:0,pu:0,pd:0});
+const bcCap=()=>Math.min(70,25+5*PL("bc")),beCap=()=>Math.min(70,5+5*PL("be"));
 function ivBanner(){const s=ivSlot();if(IVB&&IVB.s==s)return IVB;
  const w=[[],[],[],[]],d=[];for(let i=1;i<=1025;i++){if(ZOF[i]===undefined){if(kxDiv(i))d.push(i)}else{const r=pr(i);if(r<=3)w[r].push(i)}}
  const R=ivRng(s*2654435761+977),pick=(a,n)=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=R()*(i+1)|0;[b[i],b[j]]=[b[j],b[i]]}return b.slice(0,n)};
@@ -6893,8 +6894,8 @@ function ivRoll(S,B){S.pu++;S.pd++;S.n++;let t;
  if(t=="D")S.pd=0;if(t=="D"||t=="UR")S.pu=0;const L=B[t];return[L[Math.random()*L.length|0],t]}
 const ivW=(L,W)=>{let r=Math.random()*L.reduce((t,i)=>t+W(i),0);for(const i of L){r-=W(i);if(r<=0)return i}return L[0]};
 const ivMu=()=>ivW([1,2,3,4,5,6,8,9,10],i=>MU[i][4]),ivSz=()=>ivW([3,4,5,6],i=>SZ[i][4]);
-async function ivSummon(n){if(IVBUSY)return;const B=ivBanner(),tot=ivCost()*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
- IVBUSY=1;G.m-=tot;const S=IV(),res={};
+async function ivSummon(n){if(IVBUSY)return;const S=IV();if(S.rs!==ivSlot()){S.rs=ivSlot();S.rc=0}if(S.rc+n>bcCap()){toast(LS("Limite d'invocations atteinte pour cette rotation.","Summon limit reached for this rotation."));sfx("err");return}const B=ivBanner(),tot=ivCost()*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
+ IVBUSY=1;G.m-=tot;S.rc+=n;const res={};
  for(let i=0;i<n;i++){const[id,t]=ivRoll(S,B),x=res[id]=res[id]||{id,t,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.05){x.mi=Math.max(x.mi,ivMu());x.mc++}if(Math.random()<.05)x.zi=Math.max(x.zi,ivSz());if(Math.random()<.05)x.al=1;if(Math.random()<.02)x.shn=1}
  const L=Object.values(res);try{await preload(L.map(x=>x.id))}catch(e){}
  let nNew=0,nSold=0,gain=0;
@@ -11723,8 +11724,14 @@ setInterval(()=>{try{const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db
 const X6C=20000;let X6T="pr";
 function pvNextSp(s){return s>=6?1:s>=3?(G.x6?6:1):s+1}
 {const g0=gpCyc;gpCyc=function(s){const r=g0.apply(this,arguments);if(!G.x6)return r;return s==4?6:s==6?1:r}}
+const BANNUPS=[{id:"bc",t:["Bannière classique","Standard banner"],base:25,c0:1500,mx:9,ic:"star"},{id:"be",t:["Bannière exclusive","Exclusive banner"],base:5,c0:5000,mx:13,ic:"spark"}];
+function vBann(){const pp=G.pp||0;
+ const rows=BANNUPS.map(u=>{const L=PL(u.id),cap=Math.min(70,u.base+5*L),mx=L>=u.mx,cost=u.c0*Math.pow(2,L),ok=!mx&&pp>=cost;
+ return `<div class="x6m" style="align-items:center"><div class="x6i" style="width:46px;height:46px;flex:none">${ico(u.ic)}</div><div style="flex:1;min-width:0"><b>${LS(u.t[0],u.t[1])}</b><small>${cap} ${LS("invocations / rotation","summons / rotation")}${mx?"":" → "+(cap+5)}</small><div class="bar" style="margin-top:6px"><i style="width:${(L/u.mx)*100}%;background:linear-gradient(90deg,#ec4899,#f59e0b)"></i></div></div><div class="x6b">${mx?`<div class="x6ok">${ico("check")} Max</div>`:`<button class="go" data-bann="${u.id}" ${ok?"":"disabled"}>${ico("spark")} ${fmt(cost)} pts</button><small>Niv. ${L} / ${u.mx}</small>`}</div></div>`}).join("");
+ return `<div class="x6p"><div class="x6h"><div class="x6i">${ico("summon")}</div><div><h2>Bannière</h2><p>${LS("Augmente le nombre d'invocations par rotation (2 h) de la bannière classique et des bannières exclusives.","Increases the summons per rotation (2 h) of the standard banner and exclusive banners.")}</p></div></div>${rows}</div>`}
 const vRebX=(()=>{const v0=vReb;return function(){
- const bar=`<div class="x6t"><button type="button" data-x6t="pr" class="${X6T=="pr"?"on":""}">${ico("spark")} Prestige</button><button type="button" data-x6t="x6" class="${X6T=="x6"?"on":""}">${ico("bolt")} ×6${G.x6?" ✓":""}</button></div>`;
+ const bar=`<div class="x6t"><button type="button" data-x6t="pr" class="${X6T=="pr"?"on":""}">${ico("spark")} Prestige</button><button type="button" data-x6t="x6" class="${X6T=="x6"?"on":""}">${ico("bolt")} ×6${G.x6?" ✓":""}</button><button type="button" data-x6t="bann" class="${X6T=="bann"?"on":""}">${ico("summon")} Bannière</button></div>`;
+ if(X6T=="bann")return bar+vBann();
  if(X6T!="x6")return bar+v0.apply(this,arguments);
  const pp=G.pp||0,ok=!G.x6&&pp>=X6C;
  const modes=[["Raids","Réglage de vitesse du combat : ×1, ×2, ×4 puis ×6"],["JCJ (arène classée)","Le bouton de vitesse passe aussi à ×6"],["Boss de guilde","Même bouton de vitesse"],["Tower","Toujours à ×6 au lieu de ×3"]];
@@ -11732,8 +11739,9 @@ const vRebX=(()=>{const v0=vReb;return function(){
  <div class="x6l">${modes.map(m=>`<div class="x6m">${ico("check")}<div><b>${m[0]}</b><small>${m[1]}</small></div></div>`).join("")}</div>
  <small class="x6n">Le combat principal et les combats de la nature gardent leur propre vitesse ×2 après un prestige.</small>
  <div class="x6b">${G.x6?`<div class="x6ok">${ico("check")} Débloqué : utilise le bouton de vitesse dans chaque mode</div>`:`<button class="go" data-x6b="1" ${ok?"":"disabled"}>${ico("spark")} Acheter pour 20 000 points</button><small>Tu as ${fmt(pp)} points${pp<X6C?" · il t'en manque "+(X6C-pp).toLocaleString("fr-FR"):""}</small>`}</div></div>`}})();
-document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-x6t],[data-x6b]");if(!t)return;e.stopPropagation();e.preventDefault();
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-x6t],[data-x6b],[data-bann]");if(!t)return;e.stopPropagation();e.preventDefault();
  if(t.dataset.x6t){X6T=t.dataset.x6t;show();return}
+ if(t.dataset.bann){const u=BANNUPS.find(x=>x.id==t.dataset.bann);if(!u)return;const L=PL(u.id),cost=u.c0*Math.pow(2,L);if(L>=u.mx)return;if((G.pp||0)<cost){toast(LS("Il te manque "+fmt(cost-(G.pp||0))+" points de prestige.","You need "+fmt(cost-(G.pp||0))+" more prestige points."));sfx("err");return}G.pp-=cost;G.pl=G.pl||{};G.pl[u.id]=L+1;try{sfx("prest")}catch(x){}toast(LS("Bannière améliorée : "+Math.min(70,u.base+5*(L+1))+" invocations / rotation.","Banner upgraded: "+Math.min(70,u.base+5*(L+1))+" summons / rotation."));save();show();return}
  if(!G.x6&&(G.pp||0)>=X6C){G.pp-=X6C;G.x6=1;try{sfx("prest")}catch(x){}toast(LS("Vitesse ×6 débloquée !","×6 speed unlocked!"));save();show()}},true);
 /* ===== JCJ : equipe modifiable pour un seul duel (la defense ne change pas) ===== */
 PVX.tt=null;PVX.ttf=null;PVX.q2="";PVX.pg2=1;PVX.ed=0;
@@ -11954,8 +11962,8 @@ const hfRate=(id,L)=>hfW(id)/L.reduce((a,i)=>a+hfW(i),0);
 const HFS=()=>G.hfs||(G.hfs={n:0,p:0});
 function hfRoll(L){const S=HFS();S.n++;S.p++;let id;if(S.p>=HFP)id=L[0];else{let r=Math.random()*L.reduce((a,i)=>a+hfW(i),0);id=L[L.length-1];for(const i of L){r-=hfW(i);if(r<=0){id=i;break}}}if(id==L[0])S.p=0;return id}
 let HFN=1,HFBUSY=0,IVMODE=null;
-async function hfSummon(n){if(HFBUSY||!HFON())return;const B=hfBanner(),tot=HFC*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
- HFBUSY=1;G.m-=tot;const res={};
+async function hfSummon(n){if(HFBUSY||!HFON())return;const S=HFS();if(S.rs!==hfSlot()){S.rs=hfSlot();S.rc=0}if(S.rc+n>beCap()){toast(LS("Limite d'invocations atteinte pour cette rotation.","Summon limit reached for this rotation."));sfx("err");return}const B=hfBanner(),tot=HFC*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
+ HFBUSY=1;G.m-=tot;S.rc+=n;const res={};
  for(let i=0;i<n;i++){const id=hfRoll(B.L),x=res[id]=res[id]||{id,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.01){x.mi=Math.max(x.mi,ivMu());x.mc++}if(Math.random()<.01)x.zi=Math.max(x.zi,ivSz());if(Math.random()<.01)x.al=1;if(Math.random()<.01)x.shn=1}
  const L=Object.values(res);try{await preload(L.map(x=>x.id))}catch(e){}
  let nNew=0;
@@ -11978,7 +11986,7 @@ function vHf(){const B=hfBanner(),S=HFS(),tot=HFC*HFN,ok=G.m>=tot,top=B.L[0],T=H
  <div class="ivqtm">${ico("clock")} ${LS("5 Pokémon changent dans ","5 Pokémon change in ")}<b id="ivcd">${ivCd()}</b> · ${LS("fin de l'événement dans ","event ends in ")}<b>${hfLeft()}</b></div></div></div>
  <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie : forme la plus rare","Guarantee: rarest form")}</b><span>${p} / ${HFP}</span></div><div class="ivqpb"><i style="width:${p/HFP*100}%;background:${T.c}"></i></div><small>${LS(esc(HFI[top].n)+" (ou la forme la plus rare de la bannière en cours) est garanti dans "+(HFP-p)+" invocation(s). Le compteur continue d'une bannière à l'autre.","The rarest form of the current banner is guaranteed in "+(HFP-p)+" summon(s). The counter carries over between banners.")}</small></div>
  <div class="ivqrt"><small>${LS("Chaque invocation donne une forme Halloween de la bannière. Plus une forme est forte, plus elle est rare. 1 % de chance de mutation, 1 % de taille hors norme, 1 % d'Alpha et 1 % de chromatique (tirages séparés).","Every summon gives a Halloween form from the banner. The stronger the form, the rarer it is. 1% mutation, 1% special size, 1% Alpha and 1% shiny chance (separate rolls).")}</small></div></div>
- <div class="box ivqs"><div class="ivqn"><b>${LS("COMBIEN INVOQUER ?","HOW MANY?")}</b><div>${[1,5,10,50].map(n=>`<button data-hf="n" data-n="${n}" class="${HFN==n?"on":""}">×${n}</button>`).join("")}</div></div>
+ <div class="box ivqs"><div class="ivqn"><b>${LS("COMBIEN INVOQUER ?","HOW MANY?")}</b><div>${[1,5].map(n=>`<button data-hf="n" data-n="${n}" class="${HFN==n?"on":""}">×${n}</button>`).join("")}</div></div>
  <button class="go ivqgo hfgo${ok?"":" no"}" data-hf="go"><b>${LS("Invoquer","Summon")} ×${HFN}</b><span>${ok?fmt(tot)+" ₽":LS("Il manque ","Missing ")+fmt(tot-G.m)+" ₽"}</span></button></div>
  <div class="box ivqpool"><div class="row sp2"><h2>${LS("Les 5 Pokémon de la bannière","The 5 banner Pokémon")}</h2><small>${LS("taux · puissance","rate · power")}</small></div><div class="ivqgrid">${B.L.map(i=>hfTile(i)).join("")}</div></div>
  <div class="box ivqpool"><div class="row sp2"><h2>${LS("Toutes les formes Halloween","All Halloween forms")}</h2><small>${HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length} / ${HFL.length} ${LS("obtenues","obtained")}</small></div><div class="hfall">${HFL.slice().reverse().map(([i,n,t])=>{const c=G.col[i],own=c&&c.hf;return `<div class="hfa${own?"":" lk"}${B.L.includes(i)?" now":""}" style="--c:${HFT[t].c}" title="${esc(n)}">${hfImg(i,own&&c.sh,own?c.hfv:(HFV[i]?HFV[i][0]:""))}<small>${own?esc(n):"???"}</small></div>`}).join("")}</div></div>`}
