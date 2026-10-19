@@ -3435,6 +3435,18 @@ a.qkb.qkdc .qki{color:#fff}
 
 .rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxb svg{width:16px;height:16px}
 #rxm{position:fixed;inset:0;z-index:4000;display:none;background:rgba(3,6,18,.78);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#rxm.on{display:flex}
+.ivsw{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.ivsw button{flex:1 1 220px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-radius:14px;border:1px solid var(--ln);background:var(--gl);color:var(--tx);font:800 16px "Baloo 2",Nunito,system-ui,sans-serif;cursor:pointer}.ivsw button svg{width:22px;height:22px}
+.ivsw button.on{border-color:#22d3ee;box-shadow:0 0 0 2px #22d3ee55 inset}.ivsw .hfsw{background:linear-gradient(90deg,#7c2d12,#2a0f08);border-color:#ff751888}.ivsw .hfsw.on{border-color:#ff7518;box-shadow:0 0 18px #ff751866,0 0 0 2px #ff751899 inset}.ivsw em{font-style:normal;font-size:12px;padding:2px 8px;border-radius:999px;background:#ff7518;color:#1a0a03}
+.hfh{--c:#ff7518;background:radial-gradient(120% 90% at 75% 20%,#3b0f5c 0,#1a0a2e 50%,#0a0510 100%)!important;border-color:#ff7518!important}.hfh .ivqhs img{width:230px;height:230px;image-rendering:pixelated;filter:drop-shadow(0 0 22px #ff7518aa)}
+.hfh .hfp{margin:6px 0 4px;color:#fed7aa;font-size:14px;max-width:520px}.hftag{background:#ff7518!important;color:#1a0a03!important}.hftag svg{width:18px;height:18px;vertical-align:-4px}
+.hfbats{position:absolute;inset:0;pointer-events:none;color:#0a0510;opacity:.55}.hfbats svg{position:absolute;width:60px;animation:hfbat 7s ease-in-out infinite}.hfbats svg:nth-child(1){left:8%;top:12%}.hfbats svg:nth-child(2){left:52%;top:6%;width:44px;animation-delay:-2s}.hfbats svg:nth-child(3){left:30%;top:70%;width:36px;animation-delay:-4s}
+@keyframes hfbat{50%{transform:translate(14px,-10px) scale(1.08)}}
+.hfgo{background:linear-gradient(90deg,#f97316,#c2410c)!important}
+.hft{border-color:var(--c)!important;background:linear-gradient(#c2410c55,#1a0a03 70%)!important}.hft .ivqsp img{image-rendering:pixelated}.hftg{position:absolute;top:6px;left:6px;font:800 10px Nunito,sans-serif;padding:2px 7px;border-radius:999px;background:var(--c);color:#1a0a03}
+.hfall{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:10px}.hfa{position:relative;display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:12px;border:1px solid color-mix(in srgb,var(--c) 60%,transparent);background:linear-gradient(#c2410c33,#0b0504)}
+.hfa img{width:72px;height:72px;image-rendering:pixelated}.hfa small{font-size:11px;color:#fed7aa;text-align:center}.hfa b{font-size:13px;color:#fff}.hfa.lk img{filter:brightness(0);opacity:.5}.hfa.lk small,.hfa.lk b{color:#94a3b8}.hfa.now{box-shadow:0 0 0 2px var(--c),0 0 14px var(--c)}
+.hfa.big img{width:96px;height:96px}.hfdx{margin-top:12px;border-color:#ff751888!important;background:linear-gradient(135deg,#b4380a33,#120706)!important}.hfdx h2 svg{width:26px;height:26px;vertical-align:-5px}
+
 #udm{position:fixed;inset:0;z-index:4100;display:none;background:rgba(3,6,18,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#udm.on{display:flex}
 .udw{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:20px;background:linear-gradient(#151c3d,#0b1026);border:1px solid #ffffff2a;padding:18px 18px 22px;box-shadow:0 30px 80px #000a}
 .udhd{display:flex;gap:12px;align-items:center;margin:0 44px 14px 0}.udhd h3{margin:0;font:800 26px "Baloo 2",Nunito,system-ui,sans-serif}.udhd small{color:var(--mu)}
@@ -3671,8 +3683,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fc80fce859"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=fc80fce859"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7cc88e287d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=7cc88e287d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11835,9 +11847,101 @@ setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(M
    Pour ajouter une mise à jour : ajouter une version EN HAUT de UPD.
    Types : new = Nouveau, imp = Amélioré, fix = Corrigé, rem = Retiré.
    Entrée : [type, titre FR, texte FR, titre EN, texte EN] (l'anglais est facultatif). */
+/* ===== Bannière Halloween : 30 formes Halloween, exclusives à cette bannière (19 oct. – 9 nov. 2026) =====
+   Une forme Halloween remplace la version normale de l'espèce (même case), garde taille, mutation, alpha, chromatique,
+   et reçoit un boost de puissance croissant (du plus faible au plus fort). */
+const HFEND=Date.UTC(2026,10,9,22,59,59); /* fin : dimanche 9 novembre 2026, 23 h 59 (Paris) */
+const HFON=()=>Date.now()<HFEND;
+/* ordre du plus faible au plus fort : [id, nom, palier] (palier 1 à 4) */
+const HFL=[[172,"Pichu",1],[300,"Skitty",1],[41,"Nosférapti",1],[595,"Statitik",1],[292,"Munja",1],[607,"Funécire",1],[353,"Polichombr",1],[355,"Skelénox",1],[562,"Tutafeh",1],[425,"Baudrive",1],[622,"Gringolem",1],[200,"Feuforêve",1],
+ [42,"Nosféralto",2],[301,"Delcatty",2],[608,"Mélancolux",2],[596,"Mygavolt",2],[302,"Ténéfix",2],[354,"Branette",2],[356,"Téraclope",2],[426,"Grodrive",2],[563,"Tutankafer",2],[169,"Nostenfer",2],[478,"Momartik",2],
+ [479,"Motisma",3],[429,"Magirêve",3],[442,"Spiritomb",3],[477,"Noctunoir",3],[609,"Lugulabre",3],
+ [491,"Darkrai",4],[487,"Giratina",4]];
+const HFT={1:{n:["Commun","Common"],c:"#fdba74",w:100,m:2.0},2:{n:["Rare","Rare"],c:"#fb923c",w:32,m:2.4},3:{n:["Épique","Epic"],c:"#f97316",w:9,m:2.8},4:{n:["Légendaire","Legendary"],c:"#c026d3",w:1.2,m:3.2}};
+const HFI={};HFL.forEach((x,k)=>HFI[x[0]]={id:x[0],n:x[1],t:x[2],r:k});
+const HFV={479:["normal","heat","wash","frost","fan","mow"],487:["altered","origin"]};
+const HFVN={normal:"",heat:"Chaleur",wash:"Lavage",frost:"Froid",fan:"Hélice",mow:"Tonte",altered:"Alternative",origin:"Originelle"};
+const HFC=250e6,HFP=80; /* coût d'une invocation (250 millions) et garantie de la forme la plus rare au bout de 80 */
+const hfPath=(id,sh,v)=>"img/hwf/"+(sh?"shiny/":"")+id+(v?"-"+v:"")+".png";
+const hfImg=(id,sh,v,cls)=>`<img class="${cls||"sp"} hfimg" alt="" draggable="false" loading="lazy" src="${hfPath(id,sh,v)}">`;
+/* --- puissance : chaque forme est strictement plus forte que la précédente, avec un multiplicateur minimum par palier --- */
+let HFMC=null;
+function hfMul(id){const x=HFI[id];if(!x)return 1;
+ /* multiplicateur minimum par palier ; le premier Pokémon d'un palier est toujours plus fort que le plus fort du palier précédent */
+ if(!HFMC){try{const s=i=>Math.pow(I(i).b/100,2.2)*stM(i)*legM(i)*(pr(i)==3?2.5:1);const M={};let prev=0,ok=1;
+  for(let t=1;t<=4&&ok;t++){let mx=0;HFL.filter(y=>y[2]==t).forEach(([i])=>{const d=I(i);if(!d||!d.b){ok=0;return}const si=s(i),m=Math.max(HFT[t].m,prev?prev*1.05/si:0);M[i]=m;mx=Math.max(mx,si*m)});prev=mx}
+  if(ok)HFMC=M}catch(e){}}
+ return HFMC&&HFMC[id]||HFT[x.t].m}
+try{preload(HFL.map(x=>x[0])).then(()=>{HFMC=null;try{ids().forEach(i=>{if(G.col[i]&&G.col[i].hf)rq(i)});recomp()}catch(e){}})}catch(e){}
+{const r0=rq;rq=function(id){const q=r0.apply(this,arguments);try{const c=G.col[id];if(c&&c.hf&&HFI[id]){c.q=q*hfMul(id);return c.q}}catch(e){}return q}}
+{const r0=recomp;recomp=function(){try{for(const k in G.col){const c=G.col[k];if(c&&c.hf){if(HFI[k]){c.hw=1;c.spc=1}else{delete c.hf;delete c.hfv}}}}catch(e){}return r0.apply(this,arguments)}}
+/* --- sprite Halloween partout où l'on affiche un Pokémon possédé --- */
+{const s0=sp;sp=function(id,sh,raw){try{if(!raw){const c=G.col[id];if(c&&c.hf&&HFI[id]&&!c.mf&&!c.dy)return hfImg(id,sh,c.hfv)}}catch(e){}return s0.apply(this,arguments)}}
+/* --- évolution : la forme Halloween suit l'évolution si elle existe, sinon l'évolution est bloquée --- */
+{const c0=canEvo;canEvo=function(e){try{const c=G.col[e[0]];if(c&&c.hf&&!HFI[e[1]])return false}catch(x){}return c0.apply(this,arguments)}}
+{const d0=doEvolve;doEvolve=function(from,to){const c=G.col[from],hf=c&&c.hf,v=c&&c.hfv;const r=d0.apply(this,arguments);try{const t=G.col[to];if(hf&&t&&HFI[to]){t.hf=1;t.hw=1;t.spc=1;if(v&&HFV[to]&&HFV[to].includes(v))t.hfv=v;rq(to);recomp();save()}}catch(e){}return r}}
+/* --- prestige : les formes Halloween sont gardées --- */
+{const p0=prestige;prestige=function(sel){const keep={};try{for(const k in G.col){const c=G.col[k];if(c&&c.hf)keep[k]=c.hfv||1}}catch(e){}sel=(sel||[]).slice();Object.keys(keep).forEach(k=>{if(sel.indexOf(+k)<0)sel.push(+k)});
+ const r=p0.call(this,sel);try{for(const k in keep){const c=G.col[k];if(c){c.hf=1;c.hw=1;c.spc=1;if(keep[k]!==1)c.hfv=keep[k];rq(+k)}}recomp();save()}catch(e){}return r}}
+/* --- bannière : 5 Pokémon qui changent toutes les 2 heures --- */
+const hfSlot=()=>Math.floor(Date.now()/IVSL);
+let HFB=null;
+function hfBanner(){const s=hfSlot();if(HFB&&HFB.s==s)return HFB;const R=ivRng(s*2246822519+4093),by=t=>HFL.filter(x=>x[2]==t).map(x=>x[0]);
+ const pick=(a,n)=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=R()*(i+1)|0;[b[i],b[j]]=[b[j],b[i]]}return b.slice(0,n)};
+ const top=R()<.3?pick(by(4),1):pick(by(3),1);
+ const L=[...top,...pick(by(2),2),...pick(by(1),2)].sort((a,b)=>HFI[b].r-HFI[a].r);
+ HFB={s,L};return HFB}
+const hfW=id=>HFT[HFI[id].t].w;
+const hfRate=(id,L)=>hfW(id)/L.reduce((a,i)=>a+hfW(i),0);
+const HFS=()=>G.hfs||(G.hfs={n:0,p:0});
+function hfRoll(L){const S=HFS();S.n++;S.p++;let id;if(S.p>=HFP)id=L[0];else{let r=Math.random()*L.reduce((a,i)=>a+hfW(i),0);id=L[L.length-1];for(const i of L){r-=hfW(i);if(r<=0){id=i;break}}}if(id==L[0])S.p=0;return id}
+let HFN=1,HFBUSY=0,IVMODE=null;
+async function hfSummon(n){if(HFBUSY||!HFON())return;const B=hfBanner(),tot=HFC*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
+ HFBUSY=1;G.m-=tot;const res={};
+ for(let i=0;i<n;i++){const id=hfRoll(B.L),x=res[id]=res[id]||{id,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.05){x.mi=Math.max(x.mi,ivMu());x.mc++}if(Math.random()<.05)x.zi=Math.max(x.zi,ivSz());if(Math.random()<.05)x.al=1;if(Math.random()<.02)x.shn=1}
+ const L=Object.values(res);try{await preload(L.map(x=>x.id))}catch(e){}
+ let nNew=0;
+ L.forEach(x=>{const id=x.id;let c=G.col[id];x.nw=!(c&&c.hf);
+  if(c){c.n+=x.k;try{train(id,x.k)}catch(e){}}else{c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}}
+  if(x.nw)nNew++;c.hf=1;c.hw=1;c.spc=1;if(HFV[id]&&!c.hfv)c.hfv=HFV[id][Math.random()*HFV[id].length|0];G.dx[id]=1;
+  if(x.mi){c.mi=Math.max(c.mi||0,x.mi);G.mut=(G.mut||0)+x.mc}if(x.zi)c.zi=Math.max(c.zi||0,x.zi);if(x.al)c.al=1;if(x.shn){c.sh=1;x.sh=true}
+  rq(id);c.h=mhp(id)});
+ IDC=null;recomp();save();HFBUSY=0;sfx(L.some(x=>HFI[x.id].t>=3)?"shiny":"big");
+ L.sort((a,b)=>HFI[b.id].r-HFI[a.id].r);
+ revealPop(LS("Invocation Halloween ×"+n,"Halloween summon ×"+n),LS(nNew+" nouvelle(s) forme(s) Halloween","+"+nNew+" new Halloween form(s)"),[],"qv gold");
+ const l=document.querySelector("#rvm .rvl");if(l){l.className="rvl ivqres";l.innerHTML=L.map(x=>hfTile(x.id,x)).join("")}
+ if(tab=="inv")show()}
+function hfTile(id,x){const c=G.col[id],h=HFI[id],T=HFT[h.t],mi=x?x.mi:0,zi=x?x.zi:0,fx=mi&&MU[mi]?MU[mi][3].replace(/opacity:[\d.]+;?/,""):"",sh=x?(x.sh||(c&&c.sh)):0,v=c&&c.hfv;
+ return `<div class="ivqt hft" style="--c:${T.c}"><span class="hftg">${LS(T.n[0],T.n[1])}</span><div class="ivqsp" style="${fx}">${hfImg(id,sh,v)}</div><b>${esc(h.n)}${v&&HFVN[v]?" "+HFVN[v]:""}</b>${mi||zi>=3||sh?`<div class="vbr">${vb({sh:sh?1:0,mi,zi})}</div>`:""}<i></i>${x?`<small>${x.nw?LS("NOUVEAU","NEW"):LS("Doublon","Duplicate")}${x.k>1?" ×"+x.k:""}</small>`:`<small>${(hfRate(id,hfBanner().L)*100).toFixed(1).replace(".",",")} % · ×${hfMul(id).toFixed(1).replace(".",",")}</small>`}</div>`}
+const hfLeft=()=>{let s=Math.max(0,Math.floor((HFEND-Date.now())/1000));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d>0?d+LS(" j "," d ")+h+" h":h+" h "+String(m).padStart(2,"0")+" min"};
+function vHf(){const B=hfBanner(),S=HFS(),tot=HFC*HFN,ok=G.m>=tot,top=B.L[0],T=HFT[HFI[top].t],p=Math.min(HFP,S.p);
+ return `<div class="ivqh hfh"><div class="ivqb"></div><div class="hfbats">${typeof kxBatSvg!="undefined"?kxBatSvg+kxBatSvg+kxBatSvg:""}</div><div class="ivqhs">${hfImg(top,0,HFV[top]?HFV[top][0]:"")}</div><div class="ivqct"><small>${LS("COÛT / INVOCATION","COST / SUMMON")}</small><b>${fmt(HFC)} ₽</b></div><span class="ivqtag hftag">${typeof kxPump!="undefined"?kxPump:""} ${LS("Événement limité","Limited event")}</span>
+ <div class="ivqhb"><small class="ivqk">${esc(HFI[top].n)} · ${LS(T.n[0],T.n[1])}</small><h2>${LS("Bannière Halloween","Halloween banner")}</h2><p class="hfp">${LS("Des formes Halloween exclusives, plus fortes que les Méga-Évolutions. Elles remplacent la version normale de l'espèce et gardent mutation, taille et Alpha.","Exclusive Halloween forms, stronger than Mega Evolutions. They replace the species' normal version and keep mutation, size and Alpha.")}</p>
+ <div class="ivqtm">${ico("clock")} ${LS("5 Pokémon changent dans ","5 Pokémon change in ")}<b id="ivcd">${ivCd()}</b> · ${LS("fin de l'événement dans ","event ends in ")}<b>${hfLeft()}</b></div></div></div>
+ <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie : forme la plus rare","Guarantee: rarest form")}</b><span>${p} / ${HFP}</span></div><div class="ivqpb"><i style="width:${p/HFP*100}%;background:${T.c}"></i></div><small>${LS(esc(HFI[top].n)+" (ou la forme la plus rare de la bannière en cours) est garanti dans "+(HFP-p)+" invocation(s). Le compteur continue d'une bannière à l'autre.","The rarest form of the current banner is guaranteed in "+(HFP-p)+" summon(s). The counter carries over between banners.")}</small></div>
+ <div class="ivqrt"><small>${LS("Chaque invocation donne une forme Halloween de la bannière. Plus une forme est forte, plus elle est rare. 5 % de chance de mutation, 5 % de taille hors norme, 5 % d'Alpha et 2 % de chromatique (tirages séparés).","Every summon gives a Halloween form from the banner. The stronger the form, the rarer it is. 5% mutation, 5% special size, 5% Alpha and 2% shiny chance (separate rolls).")}</small></div></div>
+ <div class="box ivqs"><div class="ivqn"><b>${LS("COMBIEN INVOQUER ?","HOW MANY?")}</b><div>${[1,5,10,50].map(n=>`<button data-hf="n" data-n="${n}" class="${HFN==n?"on":""}">×${n}</button>`).join("")}</div></div>
+ <button class="go ivqgo hfgo${ok?"":" no"}" data-hf="go"><b>${LS("Invoquer","Summon")} ×${HFN}</b><span>${ok?fmt(tot)+" ₽":LS("Il manque ","Missing ")+fmt(tot-G.m)+" ₽"}</span></button></div>
+ <div class="box ivqpool"><div class="row sp2"><h2>${LS("Les 5 Pokémon de la bannière","The 5 banner Pokémon")}</h2><small>${LS("taux · puissance","rate · power")}</small></div><div class="ivqgrid">${B.L.map(i=>hfTile(i)).join("")}</div></div>
+ <div class="box ivqpool"><div class="row sp2"><h2>${LS("Toutes les formes Halloween","All Halloween forms")}</h2><small>${HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length} / ${HFL.length} ${LS("obtenues","obtained")}</small></div><div class="hfall">${HFL.slice().reverse().map(([i,n,t])=>{const c=G.col[i],own=c&&c.hf;return `<div class="hfa${own?"":" lk"}${B.L.includes(i)?" now":""}" style="--c:${HFT[t].c}" title="${esc(n)}">${hfImg(i,own&&c.sh,own?c.hfv:(HFV[i]?HFV[i][0]:""))}<small>${own?esc(n):"???"}</small></div>`}).join("")}</div></div>`}
+{const v0=vInv;vInv=function(){const on=HFON();if(IVMODE===null)IVMODE=on?"hw":"std";if(!on)IVMODE="std";
+ const sw=on?`<div class="ivsw"><button class="${IVMODE=="std"?"on":""}" data-hf="mode" data-m="std">${ico("star")} ${LS("Bannière classique","Standard banner")}</button><button class="hfsw${IVMODE=="hw"?" on":""}" data-hf="mode" data-m="hw">${typeof kxPump!="undefined"?kxPump:""} ${LS("Bannière Halloween","Halloween banner")} <em>${hfLeft()}</em></button></div>`:"";
+ return sw+(IVMODE=="hw"?vHf():v0.apply(this,arguments))}}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-hf]");if(!t)return;e.stopPropagation();const a=t.dataset.hf;
+ if(a=="mode"){IVMODE=t.dataset.m;show()}else if(a=="n"){HFN=+t.dataset.n;show()}else if(a=="go")hfSummon(HFN)},true);
+setInterval(()=>{try{if(tab=="inv"&&IVMODE=="hw"&&!document.hidden&&HFB&&HFB.s!=hfSlot()){HFB=null;if(!HFBUSY)show()}}catch(e){}},1000);
+/* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
+{const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
+ h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
+ <div class="hfall">${HFL.slice().reverse().map(([i,n,t])=>{const c=G.col[i],o=c&&c.hf,T=HFT[t];return `<div class="hfa big${o?"":" lk"}" style="--c:${T.c}">${hfImg(i,o&&c.sh,o?c.hfv:(HFV[i]?HFV[i][0]:""))}<b>${o?esc(n):"???"}</b><small>${LS(T.n[0],T.n[1])} · ×${hfMul(i).toFixed(1).replace(".",",")}</small></div>`}).join("")}</div></div>`}catch(e){}return h}}
+{const t0=dxSpTabs;dxSpTabs=function(){let h=t0.apply(this,arguments);try{const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;h=h.replace(/(data-k="hw">[\s\S]*?<em>)(\d+)\/(\d+)(<\/em>)/,(m,a,b,c2,d)=>a+(+b+own)+"/"+(+c2+HFL.length)+d)}catch(e){}return h}}
+
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-19",t:["Partage, parrainage et journal des mises à jour","Sharing, invites and update log"],e:[
+ {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Bannière Halloween","Dans Invocation, une nouvelle bannière jusqu'au 9 novembre : 30 formes Halloween à invoquer, dont 5 mises en avant qui changent toutes les 2 heures. 250 millions de ₽ l'invocation, et la forme la plus rare de la bannière garantie au bout de 80 invocations.","Halloween banner","In Summon, a new banner until November 9: 30 Halloween forms to summon, 5 featured at a time, changing every 2 hours. 250 million ₽ per summon, and the banner's rarest form guaranteed after 80 summons."],
+  ["new","Formes Halloween","Une forme Halloween remplace la version normale de l'espèce, garde mutation, taille, Alpha et chromatique, et reçoit un bonus de puissance plus fort qu'une Méga-Évolution : ×2 (Commun) jusqu'à plus de ×3 (Légendaire : Giratina, Darkrai). Elle est gardée au prestige et a un fond orange dans tes listes.","Halloween forms","A Halloween form replaces the species' normal version, keeps mutation, size, Alpha and shiny, and gets a power bonus stronger than a Mega Evolution: ×2 (Common) up to over ×3 (Legendary: Giratina, Darkrai). It is kept on prestige and has an orange background in your lists."],
+  ["new","Pokédex : formes Halloween","Les 30 formes Halloween apparaissent dans Pokédex > Spéciales > Halloween, avec leur rareté et leur bonus.","Pokédex: Halloween forms","The 30 Halloween forms appear in Pokédex > Special > Halloween, with their rarity and bonus."],
   ["new","Journal des mises à jour","Ce bouton, sous Discord : toutes les nouveautés, améliorations, corrections et retraits, version par version. Un point rouge s'affiche quand il y a du nouveau.","Update log","This button, under Discord: every new feature, improvement, fix and removal, version by version. A red dot appears when something new is out."],
   ["new","Partager une capture","Dans la fiche d'un Pokémon, le bouton « Partager » crée une image avec le Pokémon, sa mutation, sa taille et le lien du jeu. Copie-la et colle-la dans Discord, ou partage-la depuis ton téléphone.","Share a catch","In a Pokémon's page, the « Share » button creates an image with the Pokémon, its mutation, its size and the game link. Copy and paste it in Discord, or share it from your phone."],
   ["new","Inviter un ami","Dans Amis, copie ton lien d'invitation. Ton ami doit cliquer dessus, créer un compte et jouer 5 minutes : vous devenez amis automatiquement.","Invite a friend","In Friends, copy your invite link. Your friend must click it, create an account and play 5 minutes: you become friends automatically."],
