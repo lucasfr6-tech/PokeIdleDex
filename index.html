@@ -3435,6 +3435,14 @@ a.qkb.qkdc .qki{color:#fff}
 
 .rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxb svg{width:16px;height:16px}
 #rxm{position:fixed;inset:0;z-index:4000;display:none;background:rgba(3,6,18,.78);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#rxm.on{display:flex}
+#shm{position:fixed;inset:0;z-index:4100;display:none;background:rgba(3,6,18,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#shm.on{display:flex}
+.shd{position:relative;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:18px;background:linear-gradient(#141b3a,#0b1026);border:1px solid #ffffff2a;padding:16px 16px 20px}.shd h3{margin:0 0 12px}
+.shi{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #ffffff22;margin-bottom:10px}.shp{padding:40px;text-align:center;color:#94a3b8}
+.shb{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.shb button{flex:1 1 150px}
+.shbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 4px;padding:10px 14px;border-radius:12px;border:0;background:linear-gradient(90deg,#5865f2,#7c3aed);color:#fff;font:800 15px "Baloo 2",Nunito,system-ui,sans-serif;cursor:pointer}.shbtn:hover{filter:brightness(1.1)}.shbtn svg{width:18px;height:18px}
+.refb{margin:0 0 12px;padding:12px;border-radius:14px;background:linear-gradient(135deg,#5865f233,#7c3aed22);border:1px solid #818cf855}.refb>b{display:flex;align-items:center;gap:8px;font-size:15px}.refb>b svg{width:18px;height:18px}.refb small{display:block;color:var(--mu);margin:4px 0 8px;line-height:1.35}
+.refl{display:flex;gap:6px;flex-wrap:wrap}.refl input{flex:1 1 180px;min-width:0;border-radius:10px;border:1px solid #ffffff2a;background:#00000055;color:#fff;padding:8px 10px;font:600 13px ui-monospace,Menlo,monospace;outline:none}
+
 .rxd{position:relative;width:min(880px,100%);max-height:88vh;overflow:auto;border-radius:18px;background:linear-gradient(#141b3a,#0b1026);border:1px solid #ffffff2a;padding:16px 16px 20px}
 .rxx{position:sticky;float:right;top:0;width:36px;height:36px;border-radius:10px;border:1px solid #ffffff2a;background:#0b1026;color:#fff;display:grid;place-items:center;cursor:pointer;z-index:2}
 .onlg{display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;vertical-align:middle;margin-left:1px}
@@ -3645,8 +3653,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="0c84677f91"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=0c84677f91"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="deabe699a5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=deabe699a5"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5614,7 +5622,7 @@ function scOpen(t){SCP.o=t;$("frp").classList.toggle("on",t=="fr");$("chp").clas
  SCS="";socUi()}
 function scClose(){SCP.o="";$("frp").classList.remove("on");$("chp").classList.remove("on");SCS="";socUi()}
 function socInit(){if(!LB.ok)return;const db=LB.db;
- db.collection("fr").limit(500).onSnapshot(s=>{FD.all={};s.docs.forEach(d=>{const v=d.data();if(v&&Array.isArray(v.f))FD.all[d.id]=v.f.map(String).slice(0,60)});if(!FD.all[LB.uid]&&G.fd.l.length&&!FD.ready){}
+ db.collection("fr").limit(500).onSnapshot(s=>{FD.all={};s.docs.forEach(d=>{const v=d.data();if(v&&Array.isArray(v.f))FD.all[d.id]=v.f.map(String).slice(0,60);if(v&&v.r)(FD.rf||(FD.rf={}))[d.id]=String(v.r)});if(!FD.all[LB.uid]&&G.fd.l.length&&!FD.ready){}
   if(!FD.ready){FD.ready=1;const rem=FD.all[LB.uid];if(rem&&!G.fd.l.length)G.fd.l=rem.slice(0,60)}frRecalc()},()=>{});
  db.collection("chat").limit(300).onSnapshot(s=>{s.docs.forEach(d=>CH.docs.set(d.id,d.data()));const ids3=new Set(s.docs.map(d=>d.id));CH.docs.forEach((v,k)=>{if(!ids3.has(k))CH.docs.delete(k)});chBuild();CH.ready=1;
   if(SCP.o=="ch"){G.fd.cs=Date.now();chRender(false)}socBadges()},()=>{});
@@ -11695,6 +11703,107 @@ z22init();applySt();navRender();skyBuild();
 G.dx=G.dx||{};G.ex=G.ex||[];ids().forEach(i=>G.dx[i]=1);G.mg=G.mg||{};G.pl=G.pl||{};if(!G.mig){G.mig=1;}G.bf=Math.max(G.bf||0,G.cl);fixHp();v19mig();v20mig();v21mig();v22mig();v23mig();socMount();
 if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=ids().reduce((t,i)=>t+coin(i),0)*s*Math.min(1,.5+.05*PL("po"));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
 setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(Math.random()*120|0);topInit();dailyCheck();recomp();show();lbInit();trSwitch();if(OFFMSG)toast(OFFMSG);bulk().then(()=>{z22fin();fixHp();info(19)});setInterval(tick,1000);
+</script><script>
+/* ===== Parrainage : lien d'invitation (ajout en ami automatique + boost) ===== */
+(function(){
+ const SITE="https://pokeidledex.com",RCAP=20,KEY="pid_ami";
+ try{const q=new URLSearchParams(location.search),a=(q.get("ami")||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+  if(a.length==8){localStorage.setItem(KEY,a);q.delete("ami");const s=q.toString();history.replaceState(null,"",location.pathname+(s?"?"+s:"")+location.hash)}}catch(e){}
+ FD.rf=FD.rf||{};
+ const link=()=>SITE+"/?ami="+((G.fd&&G.fd.id)||"");
+ window.refLink=link;
+ const boost=(min)=>{try{const b=BS(),n=Date.now();[0,1,2].forEach(i=>{b.e[i]=Math.min(n+3*36e5,Math.max(n,b.e[i]||0)+min*6e4)});biFlags();recomp()}catch(e){}};
+ /* le document d'amis porte aussi le parrain (r) */
+ frSave=async function(){if(!LB.ok)return false;try{const d={f:G.fd.l.slice(0,60),t:Date.now()};if(G.fd.ref)d.r=G.fd.ref;await LB.db.doc("fr/"+LB.uid).set(d);FD.all[LB.uid]=G.fd.l.slice();frRecalc();return true}catch(e){toast(LS("Impossible d'enregistrer pour l'instant.","Could not save right now."));return false}};
+ /* parrain : accepte automatiquement ses filleuls et reçoit sa récompense */
+ let busy=0;const rc0=frRecalc;
+ frRecalc=function(){const r=rc0.apply(this,arguments);try{if(busy||!FD.ready||!LB.uid)return r;
+  const me=LB.uid,news=FD.inc.filter(u=>FD.rf[u]==me&&!G.fd.blk.includes(u));if(!news.length)return r;
+  G.fd.rw=Array.isArray(G.fd.rw)?G.fd.rw:[];busy=1;let got=0;
+  news.forEach(u=>{if(!G.fd.l.includes(u)&&G.fd.l.length<60)G.fd.l.push(u);if(!G.fd.rw.includes(u)&&G.fd.rw.length<RCAP){G.fd.rw.push(u);got++}});
+  if(got){G.inv["master-ball"]=(G.inv["master-ball"]||0)+got;["bi-atk","bi-xp","bi-coin"].forEach(k=>G.inv[k]=(G.inv[k]||0)+30*got);
+   toast(LS(got>1?got+" amis ont rejoint le jeu grâce à toi ! +"+got+" Master Ball et des boosts":"Un ami a rejoint le jeu grâce à toi ! +1 Master Ball et 30 min de boosts",got>1?got+" friends joined thanks to you! +"+got+" Master Balls and boosts":"A friend joined thanks to you! +1 Master Ball and 30 min of boosts"));try{sfx("big")}catch(e){}}
+  else toast(LS("Nouvel ami ajouté grâce à ton lien !","New friend added through your link!"));
+  save();frSave().finally(()=>{busy=0})}catch(e){busy=0}return r};
+ /* filleul : ajoute le parrain et reçoit le boost de bienvenue */
+ const tick=async()=>{let code="";try{code=localStorage.getItem(KEY)||""}catch(e){}if(!code)return clearInterval(T);
+  if(!LB.ok||!LB.uid||!FD.ready||!G.fd||!G.fd.id)return;clearInterval(T);
+  const done=()=>{try{localStorage.removeItem(KEY)}catch(e){}};
+  if(code==G.fd.id||G.fd.ref){done();return}
+  try{const s=await LB.db.collection("lb").where("fid","==",code).limit(1).get();if(s.empty){done();return}
+   const d=s.docs[0],u=d.id;if(u==LB.uid){done();return}FD.info[u]=Object.assign({},d.data(),{_t:Date.now()});
+   G.fd.ref=u;const nw=!G.fd.rg&&(G.caps||0)<=300;if(nw){G.fd.rg=1;boost(60);G.inv["master-ball"]=(G.inv["master-ball"]||0)+1}
+   save();done();
+   if(!G.fd.l.includes(u))await frAddUid(u,d.data().n);else await frSave();
+   if(nw)setTimeout(()=>{toast(LS("Invité par "+(d.data().n||"un ami")+" : boost de bienvenue +30 % dégâts, XP et pièces pendant 1 h, et une Master Ball !","Invited by "+(d.data().n||"a friend")+": welcome boost +30% damage, XP and coins for 1 h, plus a Master Ball!"));try{sfx("big")}catch(e){}},1200)}catch(e){T=setInterval(tick,5000)}};
+ let T=setInterval(tick,3000);
+ /* encart « Inviter un ami » dans le panneau Amis */
+ const fr0=frRender;frRender=function(){const r=fr0.apply(this,arguments);try{const p=$("frp");if(!p||SCP.o!="fr"||p.querySelector(".refb"))return r;const at=p.querySelector(".fradd");if(!at)return r;
+  const n=(G.fd.rw||[]).length,box=document.createElement("div");box.className="refb";
+  box.innerHTML=`<b>${ico("uadd")} ${LS("Inviter un ami","Invite a friend")}</b><small>${LS("Il devient ton ami automatiquement. Lui reçoit 1 h de boost (+30 % dégâts, XP, pièces) et une Master Ball ; toi, une Master Ball et 30 min de boosts par ami ("+n+" / "+RCAP+").","They become your friend automatically. They get a 1 h boost (+30% damage, XP, coins) and a Master Ball; you get a Master Ball and 30 min of boosts per friend ("+n+" / "+RCAP+").")}</small>
+  <div class="refl"><input readonly value="${esc(link())}"><button class="frab" data-a="refcp">${ico("copy")} ${LS("Copier","Copy")}</button>${navigator.share?`<button class="go" data-a="refsh">${LS("Partager","Share")}</button>`:""}</div>`;
+  at.parentNode.insertBefore(box,at);}catch(e){}return r};
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=refcp],[data-a=refsh]");if(!b)return;e.stopPropagation();e.preventDefault();
+  const url=link(),txt=LS("Viens jouer à PokeIdleDex avec moi ! Avec mon lien, tu deviens mon ami et tu reçois un boost de bienvenue :","Come play PokeIdleDex with me! With my link you become my friend and get a welcome boost:");
+  if(b.dataset.a=="refsh"){navigator.share({title:"PokeIdleDex",text:txt,url}).catch(()=>{});return}
+  const ok=()=>toast(LS("Lien d'invitation copié !","Invite link copied!"));try{navigator.clipboard.writeText(url).then(ok,()=>{fallbackCopy(url);ok()})}catch(er){fallbackCopy(url);ok()}},true);
+})();
+
+/* ===== Partager une capture : image prête pour Discord, réseaux, etc. ===== */
+(function(){
+ const W=1200,H=630;
+ const muFilter=k=>{try{const m=MU[k];if(!m)return"none";if(typeof MUFX!="undefined"&&MUFX[m[0]]){const f=/filter:([^;]+)/.exec(MUFX[m[0]]);if(f)return f[1]}const f=/filter:([^;]+)/.exec(m[3]||"");return f?f[1]:"none"}catch(e){return"none"}};
+ const srcOf=(id,sh)=>{const h=sp(id,sh?1:0),m=/src="([^"]+)"/.exec(h);return m?m[1]:""};
+ const load=s=>new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=ko;i.src=s});
+ const rr=(x,a,b,w,h,r)=>{x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()};
+ async function card(id){const c=G.col[id];if(!c)throw 0;const t=tp(id),c1=TC[t[0]]||"#6366f1",c2=TC[t[1]||t[0]]||c1;
+  const cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");
+  try{await document.fonts.load('800 60px "Baloo 2"')}catch(e){}
+  const F=(w,s)=>w+" "+s+'px "Baloo 2",Nunito,system-ui,sans-serif';
+  let g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#0d1230");g.addColorStop(1,"#1d1650");x.fillStyle=g;x.fillRect(0,0,W,H);
+  g=x.createRadialGradient(330,300,20,330,300,330);g.addColorStop(0,c1+"bb");g.addColorStop(1,"#0d123000");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.globalAlpha=.06;x.strokeStyle="#fff";for(let i=0;i<W;i+=40){x.beginPath();x.moveTo(i,0);x.lineTo(i,H);x.stroke()}for(let j=0;j<H;j+=40){x.beginPath();x.moveTo(0,j);x.lineTo(W,j);x.stroke()}x.globalAlpha=1;
+  x.fillStyle=c1;x.fillRect(0,0,W,10);x.fillStyle=c2;x.fillRect(W/2,0,W/2,10);
+  /* sprite (taille et mutation visibles) */
+  const zi=c.zi|0,mi=c.mi|0,sc=zi>=5?1.12:zi==4?1.06:zi==3?1.03:1;
+  try{const im=await load(srcOf(id,c.sh));const s=Math.round(420*sc);x.save();x.imageSmoothingEnabled=false;if(mi>0)x.filter=muFilter(mi);else if(c.sh)x.filter="drop-shadow(0 0 18px #ffe066)";
+   x.drawImage(im,330-s/2,330-s/2,s,s);x.restore()}catch(e){}
+  x.fillStyle="#00000055";x.beginPath();x.ellipse(330,560,170,22,0,0,6.283);x.fill();
+  /* texte */
+  const L=640;x.textBaseline="alphabetic";x.fillStyle="#ffd23f";x.font=F(800,26);x.fillText(LS("NOUVELLE CAPTURE","NEW CATCH"),L,110);
+  let nm=dn(id),fs=76;x.font=F(800,fs);while(x.measureText(nm).width>520&&fs>40){fs-=4;x.font=F(800,fs)}x.fillStyle="#fff";x.fillText(nm,L,180);
+  const tags=[];if(c.sh)tags.push([LS("✨ Chromatique","✨ Shiny"),"#fde047"]);if(mi>0&&MU[mi])tags.push([MU[mi][0],(typeof MUCOL!="undefined"&&MUCOL[MU[mi][0]])||"#c084fc"]);if(zi>0&&SZ[zi])tags.push([SZ[zi][0],zi>=5?"#ff5a5f":"#4ade80"]);if(c.al)tags.push(["Alpha","#ef4444"]);if(!tags.length)tags.push([LS("Capturé !","Caught!"),"#60a5fa"]);
+  let tx=L,ty=220;x.font=F(800,30);tags.forEach(([s,col])=>{const w=x.measureText(s).width+36;if(tx+w>W-50){tx=L;ty+=62}rr(x,tx,ty,w,48,24);x.fillStyle=col+"33";x.fill();x.strokeStyle=col;x.lineWidth=3;x.stroke();x.fillStyle=col;x.fillText(s,tx+18,ty+35);tx+=w+12});
+  x.font=F(800,34);x.fillStyle="#cbd5e1";x.fillText(LS("Niv. ","Lv. ")+c.l+"  ·  "+LS("Puissance ","Power ")+fmt(base(id)),L,ty+110);
+  x.font=F(800,28);x.fillStyle="#94a3b8";x.fillText(LS("Dresseur : ","Trainer: ")+(G.name||"Dresseur"),L,ty+156);
+  /* logo + lien */
+  x.font='900 54px Nunito,"Baloo 2",system-ui,sans-serif';const a="Poke",b2="Idle",c3="Dex";let lx=L;const ly=H-88;
+  [[a,"#fff"],[b2,"#ff4d6d"],[c3,"#fff"]].forEach(([s,col])=>{x.fillStyle="#12122e";x.fillText(s,lx,ly+5);x.fillStyle=col;x.fillText(s,lx,ly);lx+=x.measureText(s).width});
+  x.font=F(800,28);x.fillStyle="#ffd23f";x.fillText(LS("Joue gratuitement : pokeidledex.com","Play free: pokeidledex.com"),L,H-40);
+  return cv}
+ function blobOf(cv){return new Promise(ok=>cv.toBlob(b=>ok(b),"image/png"))}
+ function msgOf(id){const c=G.col[id]||{},v=[];if(c.sh)v.push(LS("chromatique","shiny"));if(c.mi>0&&MU[c.mi])v.push(MU[c.mi][0]);if(c.zi>0&&SZ[c.zi])v.push(SZ[c.zi][0]);
+  return LS("J'ai capturé "+dn(id)+(v.length?" ("+v.join(", ")+")":"")+" sur PokeIdleDex ! Viens jouer : ","I caught "+dn(id)+(v.length?" ("+v.join(", ")+")":"")+" on PokeIdleDex! Come play: ")+(window.refLink?refLink():"https://pokeidledex.com")}
+ let CUR=null;
+ async function open(id){let o=document.getElementById("shm");if(!o){o=document.createElement("div");o.id="shm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-shx]"))o.className=""})}
+  o.className="on";o.innerHTML=`<div class="shd"><button class="rxx" data-shx>${ico("x")}</button><h3>${LS("Partager ma capture","Share my catch")}</h3><div class="shp">${LS("Création de l'image…","Creating image…")}</div></div>`;
+  try{const cv=await card(id),bl=await blobOf(cv);CUR={id,bl,url:URL.createObjectURL(bl)};
+   const file=new File([bl],"pokeidledex-"+id+".png",{type:"image/png"}),canF=!!(navigator.canShare&&navigator.canShare({files:[file]}));CUR.file=file;
+   o.querySelector(".shp").outerHTML=`<img class="shi" src="${CUR.url}" alt=""><small class="mu">${LS("Copie l'image puis colle-la (Ctrl+V) dans Discord, ou télécharge-la. Le message contient ton lien d'invitation.","Copy the image and paste it (Ctrl+V) in Discord, or download it. The message includes your invite link.")}</small>
+   <div class="shb">${canF?`<button class="go" data-sh="share">${LS("Partager","Share")}</button>`:""}${window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write?`<button class="go" data-sh="img">${ico("copy")} ${LS("Copier l'image","Copy image")}</button>`:""}<button data-sh="txt">${ico("copy")} ${LS("Copier le message","Copy message")}</button><button data-sh="dl">${LS("Télécharger","Download")}</button></div>`}
+  catch(e){o.querySelector(".shp").textContent=LS("Impossible de créer l'image.","Could not create the image.")}}
+ window.pidShare=open;
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-sh]");if(!b)return;e.stopPropagation();e.preventDefault();
+  const k=b.dataset.sh;if(k=="open"){open(+b.dataset.i||b.dataset.i);return}if(!CUR)return;const msg=msgOf(CUR.id);
+  if(k=="share"){navigator.share({files:[CUR.file],text:msg}).catch(()=>{});return}
+  if(k=="img"){navigator.clipboard.write([new ClipboardItem({"image/png":CUR.bl})]).then(()=>toast(LS("Image copiée : colle-la dans Discord avec Ctrl+V","Image copied: paste it in Discord with Ctrl+V")),()=>toast(LS("Copie impossible : utilise Télécharger.","Copy failed: use Download.")));return}
+  if(k=="txt"){const ok=()=>toast(LS("Message copié !","Message copied!"));try{navigator.clipboard.writeText(msg).then(ok,()=>{fallbackCopy(msg);ok()})}catch(er){fallbackCopy(msg);ok()}return}
+  if(k=="dl"){const a=document.createElement("a");a.href=CUR.url;a.download="pokeidledex-"+CUR.id+".png";document.body.appendChild(a);a.click();a.remove()}},true);
+ /* bouton dans la fiche du Pokémon */
+ const pm0=pkModal;pkModal=function(){const h=pm0.apply(this,arguments);try{const id=OPEN;if(!h||!id||!G.col[id])return h;
+  return h.replace('<div class="pqlv">',`<button class="shbtn" data-sh="open" data-i="${id}">${ico("send")} ${LS("Partager","Share")}</button><div class="pqlv">`)}catch(e){return h}};
+})();
+
 </script><script>(function(){function warn(t){var d=document.createElement("div");d.id="pidw";d.innerHTML="<span>"+t+"</span><button type=button>OK</button>";d.querySelector("button").onclick=function(){d.remove()};document.body.appendChild(d)}
 var okS=false;try{localStorage.setItem("pid_t","1");okS=localStorage.getItem("pid_t")==="1";localStorage.removeItem("pid_t")}catch(e){}
 if(!okS)warn("Le stockage de ton navigateur est bloqué (navigation privée ou réglages) : ta progression ne sera pas sauvegardée. Autorise le stockage du site ou quitte la navigation privée.");
