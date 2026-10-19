@@ -3617,8 +3617,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6e734ce7a6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=6e734ce7a6"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e468b2744b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=e468b2744b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5859,8 +5859,9 @@ var RFX={};
 const RUF={384:"mega",383:"prim",382:"prim",493:"n",150:"mega",890:"etern"};
 const rdPer=()=>"p"+Math.floor(Date.now()/72e5),rdPerNext=()=>(Math.floor(Date.now()/72e5)+1)*72e5;
 const rdDayK=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
-const rdWeekK=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
-const rdWeekN=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return Math.floor(d.getTime()/6048e5)};
+const WBG=1;/* génération du boss monde : +1 = nouveau boss, PV pleins */
+const rdWeekK=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+(WBG?"-g"+WBG:"")};
+const rdWeekN=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return Math.floor(d.getTime()/6048e5)+WBG};
 const rdStr=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
 const rdStat=(b,L,k)=>Math.floor((2*b+31+21)*L/100)+(k==0?L+10:5);
 function rdBossMake(sp,form,L,hpm,am,cr,kind,sh){let types,S,name,mf=0,sm=1,pw=1,pid=sp,gm=0,dyn=0,sc=1;
@@ -5879,7 +5880,7 @@ const rdWB=()=>{const w=RW[rdWeekN()%RW.length];return {sp:w[0],f:w[1]}};
 const rdWBoss=()=>{const w=rdWB();return rdBossMake(w.sp,w.f,110,RWHP,WBAM,.1,"wb")};
 function rdState(){const r=G.rd=G.rd||{};r.tm=r.tm||[];r.team=r.team||[];r.mv=r.mv||{};r.rp=r.rp||0;r.st=r.st||0;r.cl=r.cl||{};r.fw=r.fw||{};r.wt=r.wt||{d:"",n:0};r.wd=r.wd||{k:"",d:0};r.wc=r.wc||{k:"",ok:0,cap:0};return r}
 function rdAtt(){const r=rdState(),now=Date.now();r.tm=r.tm.filter(t=>now-t<36e5);return{left:Math.max(0,5-r.tm.length),next:r.tm.length>=5?r.tm[0]+36e5:0}}
-function rdWTries(){const r=rdState(),d=rdDayK();if(r.wt.d!=d){r.wt={d,n:0}}return 5-r.wt.n}
+function rdWTries(){const r=rdState(),d=rdDayK();if(r.wt.d!=d||r.wt.g!=WBG){r.wt={d,n:0,g:WBG}}return 5-r.wt.n}
 /* ---- unités ---- */
 function rdUnit(id){const c=G.col[id];ens(id);rq(id);const S=[0,1,2,3,4,5].map(k=>calc(id,k));let qm=(c.q||1)/(c.mf?1.5:1)/(c.dy?2.2:1);qm=Math.max(1,qm);const he=c.he||null,hp=Math.max(10,Math.floor(S[0]*(c.dy?2:1)*Math.sqrt(qm)));
  return{id,dm:base(id)*(EVF.d?EVF.d:1)*BIF.d,name:dn(id),L:c.l,types:tp(id),hp,max:hp,atk:S[1]*qm,def:S[2]*qm,spa:S[3]*qm,spd:S[4]*qm,spe:S[5],moves:rdMoves(id),mi:Math.min(3,G.rd&&G.rd.mv&&G.rd.mv[id]||0),he,df:c.df||1,cr:.0625+(he&&he.cr?.03:0),st:null,sT:0,bA:0,bS:0,rc:0,svd:0,hld:0,dy:c.dy,pw:c.dy?1.2:1,art:rdArtOf(id),pb:rdBackOf(id),sh:c.sh,dead:0}}
@@ -5887,7 +5888,7 @@ function rdArtOf(id){const c=G.col[id];if(id>9e4)return IMG+(c.sh?"shiny/":"")+i
 function rdBackOf(id){const c=G.col[id];if(id>9e4)return rdArtOf(id);return rdPixB(c.mf||(c.dy&&GMX[id])||id,c.sh)}
 const rdEff=(m,types)=>eff(m.t,types);
 /* ---- dégâts (formule des jeux) ---- */
-function rdDamage(a,d,m,mult){if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(e>0?1:0,Math.floor(a.dm*Math.min(1.7,Math.max(.6,m.p/90))*(a.types.includes(m.t)?1.2:1)*e*(cr?1.5:1)*rnd*(a.pw||1)*(mult||1))),e,cr}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
+function rdDamage(a,d,m,mult){if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(1,Math.floor(a.dm*.8/30*(.97+Math.random()*.06))),e:1,cr:false}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
  const base=Math.floor(Math.floor(Math.floor(2*a.L/5+2)*m.p*A/Math.max(1,D))/50)+2,stab=a.types.includes(m.t)?1.5:1,e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.85+Math.random()*.15;
  return{v:Math.max(e>0?1:0,Math.floor(base*stab*e*(cr?1.5:1)*rnd*(a.pw||1)*(mult||1))),e,cr}}
 /* ---- combat ---- */
@@ -5912,12 +5913,12 @@ function rdApplyEff(R,a,d,m,dealt){const e=m.e,ev=[];if(!e)return ev;
 /* un acteur joue */
 async function rdAct(R,side,u){const boss=R.boss;if(R.over)return;
  if(side=="p"){if(u.dead)return;
-  if(u.rc>0){u.rc--;rdLog(R,u.name+" récupère…");rdPop(R,"p",u,"Récupère","#94a3b8");await rdSleep(420);return}
+  if(u.rc>0&&R.kind!="wb"){u.rc--;rdLog(R,u.name+" récupère…");rdPop(R,"p",u,"Récupère","#94a3b8");await rdSleep(420);return}
   if(u.st=="par"&&Math.random()<.25){rdPop(R,"p",u,"Paralysé !","#facc15");rdLog(R,u.name+" est paralysé : il ne peut pas bouger");await rdSleep(520);return}
-  const m=rdPlayerMove(u);
+  let m=rdPlayerMove(u);if(R.kind=="wb"&&m.c=="u")m=u.moves.find(x=>x.c!="u")||m;
   if(m.c=="u"){await rdFxMove(R,"p",u,m);if(m.e=="heal"){rdHeal(u,u.max*.45);rdPop(R,"p",u,"+PV","#4ade80")}else if(m.e=="boostA"){u.bA=4;rdPop(R,"p",u,"Attaque ↑","#fb923c")}else{u.bS=4;rdPop(R,"p",u,"Att. Spé ↑","#a78bfa")}rdLog(R,u.name+" utilise "+m.n);rdUpd(R);await rdSleep(560);return}
   await rdFxMove(R,"p",u,m);
-  if(Math.random()*100>m.a){rdPop(R,"b",boss,"Raté !","#94a3b8");rdLog(R,u.name+" utilise "+m.n+" mais rate");await rdSleep(420);return}
+  if(R.kind!="wb"&&Math.random()*100>m.a){rdPop(R,"b",boss,"Raté !","#94a3b8");rdLog(R,u.name+" utilise "+m.n+" mais rate");await rdSleep(420);return}
   const r=rdDamage(u,boss,m,rdPow(R,u));let v=r.v;if(m.e=="cd")u.rc=1;
   boss.hp=Math.max(0,boss.hp-v);R.dealt+=v;R.gauge=Math.min(100,R.gauge+(r.e>1?17:11));
   await rdFxHit(R,"b",boss,v,r);rdLog(R,u.name+" : "+m.n+" "+(r.e>1?"(super efficace) ":r.e==0?"(aucun effet) ":r.e<1?"(peu efficace) ":"")+"-"+fmt(v));
@@ -6100,7 +6101,7 @@ function wbInit(){if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;const wk=rdW
  try{WB.sub=LB.db.collection("wb").where("k","==",wk).onSnapshot(s=>{WB.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));WB.total=WB.rows.reduce((a,x)=>a+(+x.d||0),0);const a=$("rdb");if(tab=="raid"&&!(a&&a.className))rdWbRefresh()},()=>{WB.ok=false})}catch(e){WB.ok=false}}
 async function wbSend(){const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;try{await LB.db.doc("wb/"+LB.uid).set({k:r.wd.k,d:r.wd.d,n:G.name||"?",t:Date.now()})}catch(e){}}
 const wbShared=()=>WB.ok?Math.max(WB.total,rdState().wd.k==rdWeekK()?rdState().wd.d:0):(rdState().wd.k==rdWeekK()?rdState().wd.d:0);
-const WBT=[4e5,12e5,32e5,6e6,1e7,16e6,24e6,36e6,52e6,8e7];
+const WBT=[15e4,45e4,12e5,22e5,4e6,6e6,9e6,13e6,2e7,3e7];
 const WBR=[[["great-ball",5],["super-potion",5]],[["ultra-ball",5],["max-potion",3]],[["max-revive",3],["bottle-cap",2]],[["gold-bottle-cap",1],["#pearl",1],["full-restore",5]],[["ability-patch",1],["gold-bottle-cap",2],["master-ball",1],["#pearl",2]],
  [["ultra-ball",10],["max-revive",5],["bottle-cap",3]],[["gold-bottle-cap",2],["full-restore",5],["#pearl",1]],[["ability-patch",1],["gold-bottle-cap",2],["master-ball",1]],[["ability-patch",2],["#pearl",2],["master-ball",1],["gold-bottle-cap",3]],[["ability-patch",3],["#pearl",3],["master-ball",2],["gold-bottle-cap",5]]];
 const wbMy=()=>{const w=rdState().wd;return w.k==rdWeekK()?w.d:0};
@@ -6115,7 +6116,7 @@ async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
  o.className="on";o.innerHTML=`<div class="rdrs" id="rdRes" style="--c:#a78bfa"><div class="rdrh w"><h2>${killed?LS("Boss monde vaincu !","World boss defeated!"):LS("Récompenses de la semaine","Weekly rewards")}</h2><small>${fmt(d)} ${LS("dégâts","damage")} · ${n} / ${WBT.length} ${LS("paliers","tiers")} · ${LS("récompenses dans ton courrier","rewards sent to your mail")}</small></div>
  <div class="rdrw"><div class="rdrl"><div class="rdri"><i>${ico("trophy")}</i><b>${rp} ${LS("Points Raid","Raid Points")}</b></div>${items.map(item).join("")}</div>${killed?"":`<small>${LS("Le boss n'a pas été vaincu cette semaine : pas de capture.","The boss was not defeated: no capture.")}</small>`}</div>
  ${killed?`<div class="rdcpw">${rdCapHtml()}</div>`:`<div class="rdcpc"><button class="go" data-rd="dn">${LS("Continuer","Continue")}</button></div>`}</div>`;sfx("shiny")}
-function rdWBossOf(k){const w=RW[(Math.floor(new Date(k.split("-")[0],k.split("-")[1]-1,k.split("-")[2]).getTime()/6048e5))%RW.length]||RW[0];return rdBossMake(w[0],w[1],110,RWHP,WBAM,.1,"wb")}
+function rdWBossOf(k){const w=RW[(Math.floor(new Date(k.split("-")[0],k.split("-")[1]-1,k.split("-")[2]).getTime()/6048e5)+(parseInt((k.split("-")[3]||"g0").slice(1))||0))%RW.length]||RW[0];return rdBossMake(w[0],w[1],110,RWHP,WBAM,.1,"wb")}
 /* ============ v23 : RAIDS — onglet, équipe, boutique, actions ============ */
 const RTB={kind:"raid",tier:0,team:[],q:"",s:"adv",boss:null};
 const RSHOP=[["master-ball",1,5000],["ultra-ball",10,25],["quick-ball",10,30],["dusk-ball",10,30],["hyper-potion",10,30],["max-revive",3,35],["full-restore",5,60],["bottle-cap",1,90],["ability-capsule",1,120],["gold-bottle-cap",1,2500],["ability-patch",1,3600],["#pearl",1,400],["life-orb",1,700],["choice-band",1,700]];
@@ -11538,7 +11539,7 @@ wkBody.town=()=>{
 {const p=wkBody.items;if(p)wkBody.items=()=>p()+wn("tip","Chariot dans la fiche d'un Pokémon","À côté de l'emplacement d'objet tenu, le petit chariot ouvre la liste des objets que tu peux acheter pour ce Pokémon : ses Méga-Gemmes et son bracelet Dynamax s'il en a, plus les objets classiques (ceinture force, etc.).")}
 {const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
 {const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
-{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts, et chaque attaque de ton Pokémon utilise ses vrais dégâts du jeu (mutation, taille, Alpha et étoiles comprises). Sa barre de PV, commune à tous les joueurs, est de 80 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
+{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 80 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
