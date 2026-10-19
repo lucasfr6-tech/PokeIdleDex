@@ -3583,39 +3583,40 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 }
 @media(max-width:700px){#mbsh .mbi.hwb,#mbsh .mbi[class*=hw]{flex-direction:column!important;grid-column:1/-1;min-height:64px;flex-direction:row!important;gap:10px;justify-content:center}}
 @media(max-width:700px){.tr-mdl{max-height:94vh!important;width:calc(100vw - 14px)!important;padding:12px!important}.tr-sc{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tr-sc::-webkit-scrollbar{display:none}.tr-sb{flex:none!important;white-space:nowrap}}
-/* ===== Arbre de compétences ===== */
-.sx{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;max-width:100%}.sx>section{min-width:0;overflow:hidden}
-.sx-top,.sx-box{background:var(--gl,#ffffff0d);border:1px solid var(--ln,#ffffff1f);border-radius:20px;padding:18px}
-.sx-h h2{margin:0 0 6px;font-size:22px}.sx-h p{margin:0;color:var(--mu,#94a3b8);font-size:14px;line-height:1.45;max-width:760px}
-.sx-st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 12px}
-.sx-st>div{background:#ffffff0a;border:1px solid #ffffff14;border-radius:14px;padding:10px 12px}.sx-st small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu,#94a3b8);font-weight:800}.sx-st b{font-size:20px}
-.sx-bar{height:8px;border-radius:99px;background:#ffffff14;overflow:hidden;margin-top:8px}.sx-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#14b8a6,#6366f1)}.sx-bar.big{height:10px;margin:0 0 14px}
-.sx-chs{display:flex;flex-wrap:wrap;gap:8px}
-.sx-ch{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;background:#ffffff0a;border:1px solid #ffffff18;color:var(--mu,#94a3b8);font-size:13px}.sx-ch svg{width:16px;height:16px}.sx-ch b{color:#fff}.sx-ch.on{border-color:var(--c);color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}.sx-ch.on b{color:var(--c)}
-.sx-tb{display:flex;gap:10px;align-items:stretch;margin-bottom:12px}.sx-det{flex:1;min-width:0}
-.sx-dt{display:flex;gap:14px;align-items:center;height:100%;padding:12px 14px;border-radius:16px;border:1px solid #ffffff1c;background:#ffffff08;--c:#64748b}.sx-dt.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent)}
-.sx-dti{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--c);color:#fff}.sx-dti svg{width:24px;height:24px}
-.sx-dtx{min-width:0;flex:1}.sx-dtx b{display:block;font-size:17px}.sx-dtx em{display:block;font-style:normal;color:var(--c);font-weight:800;font-size:15px}.sx-dtx small{display:block;color:var(--mu,#94a3b8);font-size:12.5px;margin-top:2px}
-.sx-ctl{display:flex;gap:8px;align-items:center}.sx-ctl button{width:44px;height:44px;border-radius:12px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;display:grid;place-items:center;cursor:pointer}.sx-ctl svg{width:20px;height:20px}
-.sx-map{position:relative;height:min(62vh,560px);overflow:auto;border-radius:16px;background:radial-gradient(circle at center,#1e293b88,#0b11324d 70%);border:1px solid #ffffff14;cursor:grab;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
-.sx-cv{position:relative}
-.sx-n,.sx-l{position:absolute;left:calc(var(--x)*var(--z)*1px);top:calc(var(--y)*var(--z)*1px);transform:translate(-50%,-50%)}
-.sx-l{border-radius:99px;background:#334155}.sx-l.on{background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 70%,transparent)}
-.sx-n{width:calc(var(--z)*.68px);height:calc(var(--z)*.68px);border-radius:22%;display:grid;place-items:center;padding:0;border:2px solid #475569;background:#1e293b;color:#64748b;cursor:pointer;font:inherit}
-.sx-n svg{width:48%;height:48%}.sx-n i{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);font-style:normal;font-size:11px;font-weight:900;background:#0b1132;border:1px solid var(--c);color:var(--c);border-radius:99px;padding:0 6px;white-space:nowrap}
-.sx-n u{position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#0b1132;border:1px solid #475569;display:grid;place-items:center;text-decoration:none}.sx-n u svg{width:10px;height:10px}
-.sx-n.on{background:var(--c);border-color:#fff8;color:#fff;box-shadow:0 0 16px color-mix(in srgb,var(--c) 65%,transparent)}
+/* ===== Arbre de compétences (plein écran) ===== */
+#skfs{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;background:radial-gradient(circle at 50% 45%,#1b2350 0,#0a0f2c 62%,#050818 100%);color:#fff}
+html.skon #mbfab,html.skon #vtag{display:none!important}
+.sx-hd{display:flex;align-items:center;gap:12px;padding:12px 16px calc(6px)}
+.sx-bk{display:flex;align-items:center;gap:6px;height:46px;padding:0 14px;border-radius:14px;border:1px solid #ffffff2a;background:#ffffff12;color:#fff;font:800 15px Nunito,system-ui,sans-serif;cursor:pointer}.sx-bk svg{width:20px;height:20px}
+.sx-tt{flex:1;min-width:0}.sx-tt h2{margin:0;font-size:22px;line-height:1.1}.sx-tt small{color:#94a3b8;font-size:13px}
+.sx-ctl{display:flex;gap:8px}.sx-ctl button{width:46px;height:46px;border-radius:14px;border:1px solid #ffffff2a;background:#ffffff12;color:#fff;display:grid;place-items:center;cursor:pointer}.sx-ctl svg{width:22px;height:22px}
+.sx-bar{height:8px;border-radius:99px;background:#ffffff14;overflow:hidden;margin-top:8px}.sx-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#14b8a6,#6366f1)}.sx-bar.big{margin:2px 16px 8px;flex:none}
+.sx-map{flex:1;min-height:0;overflow:auto;cursor:grab;scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sx-cv{position:relative;margin:0 auto}
+.sx-sv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sx-sv line{stroke:#334155;stroke-width:.09;stroke-linecap:round}.sx-sv line.on{stroke:var(--c);filter:drop-shadow(0 0 .08px var(--c))}
+.sx-n{position:absolute;left:calc(var(--x)*var(--z)*1px);top:calc(var(--y)*var(--z)*1px);transform:translate(-50%,-50%);width:calc(var(--z)*.66px);height:calc(var(--z)*.66px);border-radius:24%;display:grid;place-items:center;padding:0;border:3px solid #475569;background:#1e293b;color:#7b8aa3;cursor:pointer;font:inherit}
+.sx-n>svg{width:46%;height:46%}.sx-n.ap{width:calc(var(--z)*.86px);height:calc(var(--z)*.86px);border-radius:50%}.sx-n.ce{width:calc(var(--z)*.9px);height:calc(var(--z)*.9px);border-radius:50%}
+.sx-lb{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;white-space:nowrap;font-size:12px;line-height:1.15;color:#cbd5e1;font-weight:700;pointer-events:none;text-shadow:0 1px 3px #000}.sx-lb b{font-size:11px;font-weight:800;color:#94a3b8;letter-spacing:.03em;text-transform:uppercase}
+.sx-n.lk .sx-lb{opacity:.55}.sx-n.on .sx-lb{color:#fff}.sx-n.on .sx-lb b{color:var(--c)}
+.sx-n u{position:absolute;right:-6px;top:-6px;width:20px;height:20px;border-radius:50%;background:#0b1132;border:1px solid #475569;display:grid;place-items:center;text-decoration:none}.sx-n u svg{width:11px;height:11px}
+.sx-n.on{background:var(--c);border-color:#fffa;color:#fff;box-shadow:0 0 22px color-mix(in srgb,var(--c) 70%,transparent)}
 .sx-n.nx{border-color:var(--c);color:var(--c);animation:sxp 1.6s ease-in-out infinite}
-@keyframes sxp{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--c) 22%,transparent)}}
-.sx-n.sel{outline:3px solid #fff;outline-offset:3px;z-index:2}
-.sx-lg{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:13px;color:var(--mu,#94a3b8)}.sx-lg span{display:inline-flex;align-items:center;gap:6px}.sx-lg svg{width:16px;height:16px;color:var(--c)}
-@media(max-width:700px){.sx-top,.sx-box{padding:14px}.sx-tb{flex-direction:column}.sx-ctl{justify-content:flex-end}.sx-map{height:56vh}.sx-st b{font-size:17px}}
+@keyframes sxp{50%{box-shadow:0 0 0 9px color-mix(in srgb,var(--c) 24%,transparent)}}
+.sx-n.sel{outline:3px solid #fff;outline-offset:4px;z-index:2}
+.sx-ft{flex:none;display:flex;flex-wrap:wrap;gap:10px;padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid #ffffff1a;background:#080d28ee}
+.sx-det{flex:1 1 320px;min-width:0}.sx-chs{flex:1 1 320px;display:flex;flex-wrap:wrap;gap:6px;align-content:center}
+.sx-dt{display:flex;gap:12px;align-items:center;padding:8px 12px;border-radius:14px;border:1px solid #ffffff1c;background:#ffffff08;--c:#64748b}.sx-dt.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.sx-dti{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--c);color:#fff}.sx-dti svg{width:22px;height:22px}
+.sx-dtx{min-width:0;flex:1}.sx-dtx b{display:block;font-size:16px}.sx-dtx em{display:block;font-style:normal;color:var(--c);font-weight:800;font-size:14px}.sx-dtx small{display:block;color:#94a3b8;font-size:12px}
+.sx-ch{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;background:#ffffff0c;border:1px solid #ffffff1a;color:#94a3b8;font-size:12px}.sx-ch svg{width:14px;height:14px}.sx-ch b{color:#fff}
+@media(max-width:700px){.sx-hd{padding:10px 10px 4px;gap:8px}.sx-tt h2{font-size:17px}.sx-bk span{display:none}.sx-bk{padding:0 12px}.sx-ctl button,.sx-bk{height:42px;width:auto;min-width:42px}.sx-ft{padding:8px 10px calc(10px + env(safe-area-inset-bottom));max-height:34vh;overflow:auto}.sx-bar.big{margin:2px 10px 6px}.sx-lb{font-size:11px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2840855a8c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2840855a8c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6e33e02227"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=6e33e02227"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3811,7 +3812,7 @@ let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPFIX=.14,HPK=.025,BOSS_PV=1.2;
 const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);return Math.floor(hpF0(95)*Math.exp(I))};
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
-const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*kxEco());
+const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*SKM("e")*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
 const pdx=()=>1+dxn()*.004,am=()=>1+Object.keys(G.ach).length*.005+tlv().l*.004+TBV;
 let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
@@ -3838,7 +3839,7 @@ const calc=(id,k)=>{const c=G.col[id],B=ST(id)[k],v=Math.floor((2*B+c.iv[k]+(c.e
 function train(id,k){const c=G.col[id];if(!c)return;ens(id);for(let j=0;j<k;j++){
  const a=[0,1,2,3,4,5].filter(x=>c.iv[x]<31);if(a.length)c.iv[a[Math.random()*a.length|0]]++;
  const tot=c.ev.reduce((x,y)=>x+y,0),b=[0,1,2,3,4,5].filter(x=>c.ev[x]<252);if(b.length&&tot<510){const x=b[Math.random()*b.length|0];c.ev[x]+=Math.min(4+PL("pg"),252-c.ev[x],510-tot)}
- if(!c.ha&&abl(id)[1]&&Math.random()<.06*(1+.2*PL("pt"))){c.ha=1;toast(I(id).n+" : talent caché obtenu ("+abl(id)[1]+")")}}
+ if(!c.ha&&abl(id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t")){c.ha=1;toast(I(id).n+" : talent caché obtenu ("+abl(id)[1]+")")}}
  rq(id)}
 /* ============ MÉTÉO ET ÉVÉNEMENTS ============ */
 const WX={calm:{n:"Temps calme",i:"cloud",c:"#64748b",w:30,m:{}},
@@ -3866,7 +3867,7 @@ function wxCard(){const w=WX[W.k],e=Object.entries(w.m),up=e.filter(x=>x[1]>1).s
 function evCard(){if(!EV.k)return `<i class="wic" style="--c:#475569">${ico("clock")}</i><div class="wbd"><b class="wn">Aucun événement</b><br><small>Des événements spéciaux arrivent régulièrement : pièces doublées, frénésie, fièvre de capture, course à l'XP, éclipse.</small></div>`;
  const e=EVT[EV.k];return `<i class="wic" style="--c:${e.c}">${ico(e.i)}</i><div class="wbd"><div class="row sp2"><b class="wn">${e.n}</b><small><span id="evt"></span> restant</small></div><small>${e.d}</small><div class="bar"><i id="evb" style="width:100%;background:${e.c}"></i></div></div>`}
 
-const mhp=id=>{const c=G.col[id],f=c.iv?1+(c.iv[0]+c.iv[2])/62*.1+(c.ev[0]+c.ev[2])/504*.2:1;return Math.floor((Math.floor(bs(id)/4)+c.l*4+20)*f*(c.dy?2:1)*(1+.1*PL("ph")))};
+const mhp=id=>{const c=G.col[id],f=c.iv?1+(c.iv[0]+c.iv[2])/62*.1+(c.ev[0]+c.ev[2])/504*.2:1;return Math.floor((Math.floor(bs(id)/4)+c.l*4+20)*f*(c.dy?2:1)*(1+.1*PL("ph"))*SKM("h"))};
 const STG={};const stage=id=>STG[id]||(STG[id]=(()=>{const L=EVC[I(id).ch]||[];let st=1,c=id,g=0;while(g++<5){const p=L.find(e=>e[1]==c);if(!p)break;st++;c=p[0]}return st})());
 const clearSTG=()=>{for(const k in STG)delete STG[k]};
 const stM=id=>id>9e4?6.4:1+.3*(stage(id)-1);
@@ -3936,7 +3937,7 @@ function rulesHtml(){const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.in
  return `<label><b ${j<4?`class="rty r${j}"`:""}>${t}</b><select data-a="rule" data-t="${k}"><option value="">Ne pas lancer</option>${L.map(b=>`<option value="${b}" ${b==cur?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select></label>`}).join("")}</div>`}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=Math.min(100,G.fl+2+(boss?3:0));let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
- const sz=wp(SZ,x=>SZ.indexOf(x)>=3?1+.1*PL("pz"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][pr(id)||0]*[.6,.8,1,1.3,1.8,2.5][SZ.indexOf(sz)]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
+ const sz=wp(SZ,x=>SZ.indexOf(x)>=3?(1+.1*PL("pz"))*SKM("z"):1),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?(EV.k=="eclipse"?3:1)*(1+.12*PL("pm"))*(1+BIF.m)*(i==7?(1+.25*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][pr(id)||0]*[.6,.8,1,1.3,1.8,2.5][SZ.indexOf(sz)]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
  FID++;E={id,d,L,boss,t:30,sz,mu,mi:MU.findIndex(m=>m[0]==mu[0]),hp,max:hp,atk:Math.floor((L*1.1+4)*(1+G.fl/110)*(mu[2]>1?1.3:1)*(boss?1.8:1)),r:pr(id),ph:phy(id)};busy=false;spawnFx()}
 function pop(t,c,x){const f=$("fx");if(!f)return;const d=document.createElement("div");d.className="pp "+c;d.textContent=t;d.style.left=x+"%";f.appendChild(d);setTimeout(()=>d.remove(),1100)}
 function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
@@ -3944,14 +3945,14 @@ function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
  else if(c.h<m*.4){const hs=POTS.filter(p=>p[3]>0&&G.inv[p[0]]>0).sort((a,b)=>a[3]-b[3]),k=hs.find(p=>p[3]>=m-c.h)||hs[hs.length-1];if(k){G.inv[k[0]]--;c.h=Math.min(m,c.h+k[3])}}}}
 const tgtF=()=>Math.ceil((.65*(G.cl+1)+3+7*zoneOf(G.cl+1))*(1+.03*PL("px")));const tgtL=()=>Math.min(100,tgtF());
 function lvUp(c,tg){const mx=c.mx||100,t=mx>100?Math.min(mx,tgtF()):tg;if(c.l>=t||c.l>=mx)return;const s=Math.max(1,Math.ceil((t-c.l)/9*(c.xm||1)*(EVF.x||1)*BIF.x*(1+.5*(c.st||0))));c.l=Math.min(t,mx,c.l+s)}
-function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*kxFlg(G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb")):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c)),tg=tgtL();
+function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*kxFlg(G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb"))*SKM("b"):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c)),tg=tgtL();
  G.m+=kxI("kill",g);G.gain+=g;G.ko++;if(b)G.boss++;pop("+"+fmt(g)+" ₽","sup",22);sfx("coin");$("rw")&&($("rw").innerHTML=`<span>NIVEAU CIBLE <b>${tg}</b></span>`);
  ids().forEach(i=>{const c=G.col[i];lvUp(c,tg);const h=c.he;if(h&&h.pw!==undefined&&Math.random()<.5)addEV(c,h.pw>=6?Math.random()*6|0:h.pw,1)});
  const bl=pickBall(E);if(!bl)noBallFx(E);
  if(bl){G.inv[bl]--;{const pc=capPct(E,bl);qadd("thr",1);if(Math.random()<pc)catchIt(E,bl,pc);else missFx(E,bl,pc)}}
  if(b&&Math.random()<.004+.0004*PL("pb")){G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;pop("Master Ball obtenue","cap",50)}
  if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;pmChk();if(G.auto)G.fl++}E=null}
-function catchIt(e,bl,pc){const n=1,nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt")))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(e.mi>0)c.mi=Math.max(c.mi||0,e.mi);{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
+function catchIt(e,bl,pc){const n=1,nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t"))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(e.mi>0)c.mi=Math.max(c.mi||0,e.mi);{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
 function flee(){sfx("flee");pop("Trop tard ! Il s'enfuit","dmg",45);toast("Le Pokémon s'est enfui : il fallait le battre en 30 secondes");if(E.boss)G.k=Math.min(G.k,5);E=null}
 function capFx(e,bl,nw,pc){try{capFx0(e,bl,nw,pc)}catch(x){}}
 function capFx0(e,bl,nw,pc){const a=$("ar");if(!a||tab!="adv"||!a.animate)return;const w=document.createElement("div");w.className="capfx";
@@ -4021,7 +4022,7 @@ const exCh=(t,d)=>Math.min(.95,t.ch*(1+Math.min(.5,Math.max(0,d/exReq(t)-1)*.25)
 const exGold=(t,a)=>Math.floor(t.rq*exRef2(t.lv||90)*t.du*.0012);
 const hms=t=>{t=Math.max(0,Math.ceil(t));const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return (h?h+":":"")+String(m).padStart(h?2:1,"0")+":"+String(s).padStart(2,"0")};
 const dur=d=>d<3600?d/60+" min":(d/3600).toFixed(d%3600?2:0).replace(/\.?0+$/,"")+" h";
-function exGet(id,lv){const nw=!G.col[id],c=G.col[id]||(G.col[id]={n:0,l:lv,x:0,h:-1});c.n+=1;if(nw){ens(id);if(abl(id)[1]&&Math.random()<.06*(1+.2*PL("pt")))c.ha=1;rq(id)}else train(id,1);c.l=Math.max(c.l,Math.min(lv,tgtL()+8));G.dx[id]=1;G.caps++;IDC=null;chain(id);c.h=mhp(id)}
+function exGet(id,lv){const nw=!G.col[id],c=G.col[id]||(G.col[id]={n:0,l:lv,x:0,h:-1});c.n+=1;if(nw){ens(id);if(abl(id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t"))c.ha=1;rq(id)}else train(id,1);c.l=Math.max(c.l,Math.min(lv,tgtL()+8));G.dx[id]=1;G.caps++;IDC=null;chain(id);c.h=mhp(id)}
 function exStart(i,tm,au){const t=exCur()[i];if(!t||(G.ex||[]).length>=3||tm.length!=4)return false;const b=exBusy();if(tm.some(x=>b.has(x)||!G.col[x]))return false;if(exDps(tm)<exReq(t))return false;
  (G.ex=G.ex||[]).push({i,sd:t.sd,id:t.id,mf:t.mf||0,lv:t.lv,tm:tm.slice(),end:Date.now()+t.du*1000,du:t.du,au:au?1:0,ch:exCh(t,exDps(tm)),g:exGold(t,tm)});return true}
 function exClaim(r,auto){const k=G.ex.indexOf(r);if(k<0)return;qadd("exp",1);G.ex.splice(k,1);G.m+=kxI("exp",r.g);G.gain+=r.g;let msg="Expédition terminée : +"+fmt(r.g)+" ₽";
@@ -5854,6 +5855,7 @@ const rdPixF=(id,sh)=>IMG+(sh?"shiny/":"")+id+".png",rdPixB=(id,sh)=>IMG+"back/"
 NAV2.push(["raid","skull","Raids","#ef4444","#7f1d1d"]);NENG.raid="Raids";
 var RFX={};
 const RUF={384:"mega",383:"prim",382:"prim",493:"n",150:"mega",890:"etern"};
+const rdPer=()=>"p"+Math.floor(Date.now()/72e5),rdPerNext=()=>(Math.floor(Date.now()/72e5)+1)*72e5;
 const rdDayK=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
 const rdWeekK=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()};
 const rdWeekN=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return Math.floor(d.getTime()/6048e5)};
@@ -5869,13 +5871,13 @@ function rdBossMake(sp,form,L,hpm,am,cr,kind,sh){let types,S,name,mf=0,sm=1,pw=1
  mv=rdGen(types,S,sp>9e4?sp:sp).map(m=>({...m}));
  for(let i=0;i<mv.length;i++)if(mv[i].c=="u")mv[i]={...RMV[S[1]>=S[3]?"Giga Impact":"Ultralaser"]};
  return {sp,form,name,L,types,pid,pix:rdPixF(pid,sh),art:rdPixF(pid,sh),sh:!!sh,gm,dyn,sc,mf,hp:max,max,atk:st[1]*am,def:st[2],spa:st[3]*am,spd:st[4],spe:st[5],moves:mv,cr,pw,big:form=="dyn"||form=="etern"||kind=="wb"}}
-const rdDaily=(()=>{let k="",L=[];return()=>{const d=rdDayK();if(k==d)return L;k=d;L=RT.map((t,i)=>{const R=rng(rdStr(d+"#"+i)),sp=t.pool[R()*t.pool.length|0],f=t.f=="leg"?(RFX[sp]||"n"):t.f=="ult"?(RUF[sp]||RFX[sp]||"n"):t.f=="sp"?(RFX[sp]||"n"):t.f;return{t:i,sp,f,L:t.L}});return L}})();
+const rdDaily=(()=>{let k="",L=[];return()=>{const d=rdPer();if(k==d)return L;k=d;L=RT.map((t,i)=>{const R=rng(rdStr(d+"#"+i)),sp=t.pool[R()*t.pool.length|0],f=t.f=="leg"?(RFX[sp]||"n"):t.f=="ult"?(RUF[sp]||RFX[sp]||"n"):t.f=="sp"?(RFX[sp]||"n"):t.f;return{t:i,sp,f,L:t.L}});return L}})();
 const rdBossOf=(i)=>{const d=rdDaily()[i],t=RT[i];return rdBossMake(d.sp,d.f,t.L,t.hp,t.am,t.cr,"raid",!!t.sh)};
 const rdWB=()=>{const w=RW[rdWeekN()%RW.length];return {sp:w[0],f:w[1]}};
 const rdWBoss=()=>{const w=rdWB();return rdBossMake(w.sp,w.f,110,RWHP,WBAM,.1,"wb")};
 function rdState(){const r=G.rd=G.rd||{};r.tm=r.tm||[];r.team=r.team||[];r.mv=r.mv||{};r.rp=r.rp||0;r.st=r.st||0;r.cl=r.cl||{};r.fw=r.fw||{};r.wt=r.wt||{d:"",n:0};r.wd=r.wd||{k:"",d:0};r.wc=r.wc||{k:"",ok:0,cap:0};return r}
-function rdAtt(){const r=rdState(),now=Date.now();r.tm=r.tm.filter(t=>now-t<36e5);return{left:Math.max(0,3-r.tm.length),next:r.tm.length>=3?r.tm[0]+36e5:0}}
-function rdWTries(){const r=rdState(),d=rdDayK();if(r.wt.d!=d){r.wt={d,n:0}}return 3-r.wt.n}
+function rdAtt(){const r=rdState(),now=Date.now();r.tm=r.tm.filter(t=>now-t<36e5);return{left:Math.max(0,5-r.tm.length),next:r.tm.length>=5?r.tm[0]+36e5:0}}
+function rdWTries(){const r=rdState(),d=rdDayK();if(r.wt.d!=d){r.wt={d,n:0}}return 5-r.wt.n}
 /* ---- unités ---- */
 function rdUnit(id){const c=G.col[id];ens(id);rq(id);const S=[0,1,2,3,4,5].map(k=>calc(id,k));let qm=(c.q||1)/(c.mf?1.5:1)/(c.dy?2.2:1);qm=1+(Math.max(1,qm)-1)*.6;const he=c.he||null,hp=Math.max(10,Math.floor(S[0]*(c.dy?2:1)*Math.sqrt(qm)));
  return{id,name:dn(id),L:c.l,types:tp(id),hp,max:hp,atk:S[1]*qm,def:S[2]*qm,spa:S[3]*qm,spd:S[4]*qm,spe:S[5],moves:rdMoves(id),mi:Math.min(3,G.rd&&G.rd.mv&&G.rd.mv[id]||0),he,df:c.df||1,cr:.0625+(he&&he.cr?.03:0),st:null,sT:0,bA:0,bS:0,rc:0,svd:0,hld:0,dy:c.dy,pw:c.dy?1.2:1,art:rdArtOf(id),pb:rdBackOf(id),sh:c.sh,dead:0}}
@@ -6043,7 +6045,7 @@ const RLOOT=[
 const rdPearlKey=()=>{const m=MGD[Math.random()*MGD.length|0];return "mp"+m[0]};
 function rdRollLoot(tier,first){const out=[];const T=RLOOT[tier]||[];T.forEach(([k,a,b,p])=>{if(Math.random()<Math.min(1,p*(first?1.5:1))){const kk=k=="#pearl"?rdPearlKey():k;if(IT[kk])out.push({k:kk,n:a+(Math.random()*(b-a+1)|0)})}});
  if(first&&tier>=1&&!out.some(x=>x.k=="bottle-cap"||x.k=="gold-bottle-cap"))out.push({k:tier>=3?"gold-bottle-cap":"bottle-cap",n:1});return out}
-function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdDayK(),first=win&&r.cl.d==dk&&!(r.cl.t||[]).includes(R.tier)||win&&r.cl.d!=dk;
+function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdPer(),first=win&&r.cl.d==dk&&!(r.cl.t||[]).includes(R.tier)||win&&r.cl.d!=dk;
  const sb=win?Math.min(.5,r.st*.05):0;let rp=win?Math.round(t.rp*(1+sb)*(first?1.5:1)):Math.floor(t.rp*.2*Math.min(1,R.dealt/R.boss.max)),
  coins=win?t.rp*500:Math.floor(t.rp*500*.1*Math.min(1,R.dealt/R.boss.max));
  return{rp,coins,items:win?rdRollLoot(R.tier,first):[],first,sb}}
@@ -6079,7 +6081,7 @@ function rdFinish(R){const win=R.over=="win",r=rdState(),b=R.boss;let rw=null,wb
  if(R.kind=="wb"){const d=Math.max(0,Math.floor(R.dealt));const wk=rdWeekK();if(r.wd.k!=wk){r.wd={k:wk,d:0,cl:0,pe:r.wd.k&&r.wd.d>0&&!r.wd.cl?{k:r.wd.k,d:r.wd.d}:null}}
   r.wd.d+=d;wbSend();rw={rp:Math.floor(d/400),coins:Math.floor(Math.min(d,5e6)*30),items:[],first:0,sb:0};r.rp+=rw.rp;G.m+=kxI("raid",rw.coins)}
  else{rw=rdRewards(R,win);r.rp+=rw.rp;G.m+=kxI("raid",rw.coins);rw.items.forEach(x=>{G.inv[x.k]=(G.inv[x.k]||0)+x.n});
-  if(win){r.st++;r.cn=r.cn||{};r.cn[R.tier]=(r.cn[R.tier]||0)+1;const dk=rdDayK();if(r.cl.d!=dk)r.cl={d:dk,t:[]};r.cl.t=r.cl.t||[];if(!r.cl.t.includes(R.tier))r.cl.t.push(R.tier)}else r.st=0}
+  if(win){r.st++;r.cn=r.cn||{};r.cn[R.tier]=(r.cn[R.tier]||0)+1;const dk=rdPer();if(r.cl.d!=dk)r.cl={d:dk,t:[]};r.cl.t=r.cl.t||[];if(!r.cl.t.includes(R.tier))r.cl.t.push(R.tier)}else r.st=0}
  save();
  const cap=win&&R.kind=="raid";RCX.boss=b;RCX.tier=R.tier;RCX.wb=0;RCX.n=1;RCX.done=!cap;RCX.ok=0;RCX.busy=false;RCX.cap=cap?RT[R.tier].cap:0;
  rdResult(R,win,rw,cap)}
@@ -6136,7 +6138,7 @@ function rdtRender(){let o=$("rdt");if(!o){o=document.createElement("div");o.id=
  o.className="on";o.style.setProperty("--c",t.c);o.innerHTML=`<div class="tw"><aside class="tbs"><button class="rdx" data-rd="tx">${ico("x")}</button><small class="tk">${RTB.kind=="wb"?LS("Boss monde","World boss"):LS("Raid ","Raid ")+LS(t.n[0],t.n[1])}</small><div class="tbi">${rdFixImg(b.pix,b.gm||b.form=="etern"?rdPixF(b.sp,b.sh):"")}</div><h2>${esc(b.name)}</h2><div class="tty">${tchips(b.types)}<span class="rdlv">${LS("Niv.","Lv.")} ${b.L}</span></div>
  <div class="tbx"><b>${LS("Faiblesses","Weaknesses")}</b><div class="tty">${weak.length?weak.map(x=>`<span class="chip" style="background:${TC[x]}">${TFR[x]}</span>`).join(""):"—"}</div></div>
  <div class="tbx"><b>${LS("Attaques du boss","Boss moves")}</b>${b.moves.map(m=>`<div class="tbm" style="--tc:${TC[m.t]}"><i></i><span>${esc(m.n)}</span><em>${m.c=="u"?LS("Soutien","Support"):m.p}</em></div>`).join("")}</div>
- <small class="tn">${LS("Niveau conseillé ","Advised level ")}${t.rec} · ${RTB.kind=="wb"?LS("Essais : ","Tries: ")+rdWTries()+" / 3":LS("Tentatives : ","Attempts: ")+rdAtt().left+" / 3"}</small></aside>
+ <small class="tn">${LS("Niveau conseillé ","Advised level ")}${t.rec} · ${RTB.kind=="wb"?LS("Essais : ","Tries: ")+rdWTries()+" / 5":LS("Tentatives : ","Attempts: ")+rdAtt().left+" / 5"}</small></aside>
  <section class="tmain"><div class="tth"><div><h2>${LS("Ton équipe","Your team")} <em>${RTB.team.length} / 4</em></h2><small>${LS("Un seul Pokémon combat à la fois. Le suivant entre quand il tombe, et tu peux changer en plein combat.","One Pokémon fights at a time. The next steps in when one falls, and you can switch mid-battle.")}</small></div><button data-rd="tauto" class="gh">${ico("spark")} ${LS("Équipe conseillée","Best team")}</button></div>
  <div class="tsls">${[0,1,2,3].map(slot).join("")}</div>
  <div class="tlist"><div class="tools"><input type="search" id="rdtq" data-rd="tq" placeholder="${LS("Rechercher un Pokémon","Search a Pokémon")}" value="${esc(RTB.q)}"><select data-rd="ts"><option value="adv" ${RTB.s=="adv"?"selected":""}>${LS("Tri : avantage","Sort: advantage")}</option><option value="lvl" ${RTB.s=="lvl"?"selected":""}>${LS("Tri : niveau","Sort: level")}</option><option value="nm" ${RTB.s=="nm"?"selected":""}>${LS("Tri : nom","Sort: name")}</option></select></div>
@@ -6155,8 +6157,8 @@ function rdSpinUp(R){RB2=R}
 const RHS={sel:-1};
 const rhPx=(b,cls)=>`<img class="${cls||"rhpx"}" style="--k:${b.sc||1}" src="${b.pix}" alt="" draggable="false" onerror="${b.gm||b.form=="etern"?`this.onerror=null;this.src='${rdPixF(b.sp,b.sh)}'`:"this.style.visibility='hidden'"}">`;
 const rhForm=b=>{const L=[];if(b.gm)L.push(LS("Gigamax","Gigantamax"));else if(b.dyn)L.push("Dynamax");else if(b.form=="etern")L.push("Éternamax");else if(b.mf)L.push(b.name.startsWith("Primo")?LS("Primo-Résurgence","Primal Reversion"):LS("Méga-Évolution","Mega Evolution"));if(b.sp>9e4)L.push(LS("Forme spéciale","Special form"));if(b.sh)L.push(LS("Chromatique garanti","Guaranteed shiny"));return L};
-function rhLadder(){const r=rdState();return [5,4,3,2,1,0].map(i=>{const t=RT[i],b=rdBossOf(i),done=r.cl.d==rdDayK()&&(r.cl.t||[]).includes(i);return `<button class="rhl${RHS.sel==i?" on":""}${done?" dn":""}" data-rd="rsel" data-i="${i}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${LS("Niv.","Lv.")} ${b.L}</em>${done?`<i>${ico("check")}</i>`:""}</span></button>`}).join("")}
-function rhStage(){const i=RHS.sel,t=RT[i],b=rdBossOf(i),r=rdState(),at=rdAtt(),done=r.cl.d==rdDayK()&&(r.cl.t||[]).includes(i),weak=Object.keys(TFR).filter(x=>eff(x,b.types)>1),F=rhForm(b);
+function rhLadder(){const r=rdState();return [5,4,3,2,1,0].map(i=>{const t=RT[i],b=rdBossOf(i),done=r.cl.d==rdPer()&&(r.cl.t||[]).includes(i);return `<button class="rhl${RHS.sel==i?" on":""}${done?" dn":""}" data-rd="rsel" data-i="${i}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${LS("Niv.","Lv.")} ${b.L}</em>${done?`<i>${ico("check")}</i>`:""}</span></button>`}).join("")}
+function rhStage(){const i=RHS.sel,t=RT[i],b=rdBossOf(i),r=rdState(),at=rdAtt(),done=r.cl.d==rdPer()&&(r.cl.t||[]).includes(i),weak=Object.keys(TFR).filter(x=>eff(x,b.types)>1),F=rhForm(b);
  const loot=RLOOT[i].filter(x=>IT[x[0]]||x[0]=="#pearl");const bl=["poke-ball","great-ball","ultra-ball"].filter(x=>IT[x]);
  return `<div class="rhst" style="--c:${t.c};--c1:${rdMainT(b)};--c2:${TC[b.types[1]||b.types[0]]}"><canvas class="rhbg" id="rhBg"></canvas><div class="rhtint"></div>
  <div class="rhsh"><div><small class="rhk">${LS("Raid ","Raid ")}${LS(t.n[0],t.n[1])}${done?" · "+LS("réussi aujourd'hui","cleared today"):""}</small><h2>${esc(b.name)}</h2><div class="rhch">${tchips(b.types)}<span class="rdlv">${LS("Niv.","Lv.")} ${b.L}</span>${F.map(x=>`<span class="rhf">${x}</span>`).join("")}</div></div>
@@ -6165,25 +6167,25 @@ function rhStage(){const i=RHS.sel,t=RT[i],b=rdBossOf(i),r=rdState(),at=rdAtt(),
  <div class="rhdown"><div class="rhcol"><b>${LS("Attaques du boss","Boss moves")}</b>${b.moves.map(m=>`<div class="tbm" style="--tc:${TC[m.t]}"><i></i><span>${esc(m.n)}</span><em>${m.c=="u"?LS("Soutien","Support"):m.p}</em></div>`).join("")}<b class="rhsp">${LS("Faiblesses","Weaknesses")}</b><div class="tty">${weak.length?weak.map(x=>`<span class="chip" style="background:${TC[x]}">${TFR[x]}</span>`).join(""):"—"}</div></div>
  <div class="rhcol"><b>${LS("Capture du boss vaincu","Catching the defeated boss")}</b><div class="rhcap">${bl.map(x=>`<span>${ic(x,IT[x].img)}<em>${Math.min(95,Math.round(t.cap*(BM[x]||1)*100*10)/10)} %</em></span>`).join("")}<span>${ic("master-ball",IT["master-ball"]&&IT["master-ball"].img)}<em>100 %</em></span></div><small>${LS("un seul lancer. Le boss capturé est un Alpha"+(t.sh?" chromatique":"")+", avec une chance de mutation.","a single throw. The caught boss is an Alpha"+(t.sh?" shiny":"")+" with a chance of mutation.")}</small>
  <b class="rhsp">${LS("Butin possible","Possible loot")}</b><div class="rhloot">${loot.map(x=>{const k=x[0]=="#pearl"?"mp"+MGD[0][0]:x[0];return `<span title="${x[0]=="#pearl"?LS("Méga-Perle","Mega Pearl"):IT[k].n}">${x[0]=="#pearl"?`<i class="rdpi">${ico("star")}</i>`:ic(k,IT[k].img)}<em>${Math.round(x[3]*100)} %</em></span>`}).join("")}</div></div>
- <div class="rhcol rhgo"><div class="rhrw"><span>${ico("trophy")} <b>${t.rp}</b> PR</span><span>${ico("coin")} <b>${fmt(t.rp*500)}</b></span></div><button class="go rhbtn" data-rd="go" data-i="${i}" ${at.left<=0?"disabled":""}>${ico("sword")} ${LS("Préparer l'équipe","Prepare team")}</button><small>${at.left<=0?LS("Plus de tentative. Prochaine dans ","No attempts left. Next in ")+rdMS(at.next-Date.now()):LS("Tentatives : ","Attempts: ")+at.left+" / 3"}</small></div></div></div>`}
+ <div class="rhcol rhgo"><div class="rhrw"><span>${ico("trophy")} <b>${t.rp}</b> PR</span><span>${ico("coin")} <b>${fmt(t.rp*500)}</b></span></div><button class="go rhbtn" data-rd="go" data-i="${i}" ${at.left<=0?"disabled":""}>${ico("sword")} ${LS("Préparer l'équipe","Prepare team")}</button><small>${at.left<=0?LS("Plus de tentative. Prochaine dans ","No attempts left. Next in ")+rdMS(at.next-Date.now()):LS("Tentatives : ","Attempts: ")+at.left+" / 5"}</small></div></div></div>`}
 function rhWb(){const b=rdWBoss(),r=rdState(),sh=wbShared(),dead=sh>=RWHP,my=wbMy(),n=wbTiers(my),tr=rdWTries(),pe=r.wd.pe,top=WB.rows.slice().sort((a,c)=>c.d-a.d).slice(0,5),pct=Math.max(0,Math.min(100,(1-sh/RWHP)*100));
  return `<section class="rhwb" style="--c1:${rdMainT(b)}"><div class="rhwi"><small class="rdkk">${ico("globe")} ${LS("Boss monde","World boss")} · ${LS("change dans ","changes in ")}<span data-cd="${Date.now()+rdUntilMonday()}">${rdMS(rdUntilMonday())}</span></small><h2>${esc(b.name)}</h2><div class="rhch">${tchips(b.types)}<span class="rdlv">${LS("Niv.","Lv.")} ${b.L}</span>${rhForm(b).map(x=>`<span class="rhf">${x}</span>`).join("")}${WB.ok?`<span class="rdon">${ico("team")} ${WB.rows.length} ${LS("joueur"+(WB.rows.length>1?"s":""),"player"+(WB.rows.length>1?"s":""))}</span>`:`<span class="rdoff">${LS("Hors ligne : seuls tes dégâts comptent","Offline: only your damage counts")}</span>`}</div>
  <div class="rdwh"><i style="width:${pct}%"></i><em id="rdWbT">${dead?LS("Vaincu !","Defeated!"):fmt(Math.max(0,RWHP-sh))+" / "+fmt(RWHP)}</em></div>
  <div class="rhwt">${WBT.map((x,j)=>`<span class="${my>=x?"ok":""}"><b>${j+1}</b><small>${fmt(x)}</small></span>`).join("")}</div>
- <div class="rhwm"><span><small>${LS("Tes dégâts","Your damage")}</small><b>${fmt(my)}</b></span><span><small>${LS("Palier","Tier")}</small><b>${n} / ${WBT.length}</b></span><span><small>${LS("Essais aujourd'hui","Tries today")}</small><b>${tr} / 3</b></span></div>
+ <div class="rhwm"><span><small>${LS("Tes dégâts","Your damage")}</small><b>${fmt(my)}</b></span><span><small>${LS("Palier","Tier")}</small><b>${n} / ${WBT.length}</b></span><span><small>${LS("Essais aujourd'hui","Tries today")}</small><b>${tr} / 5</b></span></div>
  <div class="rdwb2"><button class="go" data-rd="wgo" ${tr<=0||dead?"disabled":""}>${ico("sword")} ${dead?LS("Boss vaincu","Defeated"):LS("Affronter","Challenge")}</button>${dead&&r.wd.k==rdWeekK()&&!r.wd.cl&&my?`<button class="go" data-rd="wcl" data-t="cur">${ico("gift")} ${LS("Réclamer","Claim")}</button>`:""}${pe?`<button class="go" data-rd="wcl" data-t="pe">${ico("gift")} ${LS("Réclamer la semaine passée","Claim last week")}</button>`:""}</div></div>
  <div class="rhwbs"><div class="rhwaura"></div>${rhPx(b,"rhwpx")}</div>
  <div class="rhwtop"><b>${LS("Meilleurs dégâts","Top damage")}</b>${top.length?top.map((x,j)=>`<span><em>${j+1}</em>${esc(String(x.n||"?"))}<strong>${fmt(x.d)}</strong></span>`).join(""):`<small>${LS("Personne n'a encore attaqué cette semaine.","Nobody has attacked this week yet.")}</small>`}</div></section>`}
 function rhSide(){const r=rdState(),at=rdAtt(),cnt=Object.values(r.cn||{}).reduce((a,x)=>a+x,0);
- return `<aside class="rhside"><div class="rhs1"><span title="${LS("Tentatives par heure","Attempts per hour")}">${ico("clock")}<b>${at.left} / 3</b><small>${at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}</small></span><span>${ico("trophy")}<b>${fmt(r.rp)}</b><small>PR</small></span><span>${ico("bolt")}<b>${r.st}</b><small>${LS("série","streak")}</small></span><span>${ico("target")}<b>${cnt}</b><small>${LS("victoires","wins")}</small></span></div>
+ return `<aside class="rhside"><div class="rhs1"><span title="${LS("Tentatives par heure","Attempts per hour")}">${ico("clock")}<b>${at.left} / 5</b><small>${at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}</small></span><span>${ico("trophy")}<b>${fmt(r.rp)}</b><small>PR</small></span><span>${ico("bolt")}<b>${r.st}</b><small>${LS("série","streak")}</small></span><span>${ico("target")}<b>${cnt}</b><small>${LS("victoires","wins")}</small></span></div>
  <div class="rhsr">${ico("clock")} ${LS("Nouveaux raids dans ","New raids in ")}<b data-cd="${Date.now()+rdUntilMidnight()}">${rdMS(rdUntilMidnight())}</b></div>
  <h3>${LS("Boutique Raid","Raid shop")}</h3><div class="rdshop">${RSHOP.map((x,j)=>{const k=x[0]=="#pearl"?"mp"+MGD[0][0]:x[0];if(!IT[k])return"";return `<button class="rdsi" data-rd="buy" data-j="${j}" ${r.rp<x[2]?"disabled":""}>${x[0]=="#pearl"?`<i class="rdpi">${ico("star")}</i>`:ic(x[0],IT[x[0]].img)}<span><b>${x[0]=="#pearl"?LS("Méga-Perle aléatoire","Random Mega Pearl"):IT[x[0]].n}${x[1]>1?" ×"+x[1]:""}</b></span><em>${x[2]} PR</em></button>`}).join("")}</div></aside>`}
 function rhPaintBg(){const cv=$("rhBg");if(!cv)return;const old=document.getElementById("bg");if(old&&old!==cv)old.id="bg_x";cv.id="bg";try{drawBg(RHS.sel+1)}catch(e){}cv.id="rhBg";if(old&&old!==cv)old.id="bg"}
-function rhPickSel(){if(RHS.sel>=0)return;const r=rdState();let s=0;for(let i=0;i<6;i++){if(!(r.cl.d==rdDayK()&&(r.cl.t||[]).includes(i)))s=i;}RHS.sel=s}
+function rhPickSel(){if(RHS.sel>=0)return;const r=rdState();let s=0;for(let i=0;i<6;i++){if(!(r.cl.d==rdPer()&&(r.cl.t||[]).includes(i)))s=i;}RHS.sel=s}
 function vRaid(){wbInit();rhPickSel();setTimeout(rhPaintBg,0);
- return `<div class="rhub"><div class="rhhd"><h2>${ico("skull")} Raids</h2><small>${LS("Six raids par jour, de Facile à Impossible. Un Pokémon combat à la fois, tu peux changer en plein combat.","Six raids a day, Easy to Impossible. One Pokémon fights at a time and you can switch mid-battle.")}</small></div>${rhWb()}
- <div class="rhmain"><nav class="rhlad" id="rhLad"><h3>${LS("Raids du jour","Today's raids")}</h3>${rhLadder()}</nav><div class="rhsw" id="rhStage">${rhStage()}</div>${rhSide()}</div></div>`}
-function rhSelect(i){RHS.sel=i;const s=$("rhStage"),l=$("rhLad");if(s)s.innerHTML=rhStage();if(l)l.innerHTML="<h3>"+LS("Raids du jour","Today's raids")+"</h3>"+rhLadder();rhPaintBg()}
+ return `<div class="rhub"><div class="rhhd"><h2>${ico("skull")} Raids</h2><small>${LS("Six raids qui changent toutes les 2 heures, de Facile à Impossible.<b id='rdper'></b> Un Pokémon combat à la fois, tu peux changer en plein combat.","Six raids that change every 2 hours, Easy to Impossible.<b id='rdper'></b> One Pokémon fights at a time and you can switch mid-battle.")}</small></div>${rhWb()}
+ <div class="rhmain"><nav class="rhlad" id="rhLad"><h3>${LS("Raids en cours","Today's raids")}</h3>${rhLadder()}</nav><div class="rhsw" id="rhStage">${rhStage()}</div>${rhSide()}</div></div>`}
+function rhSelect(i){RHS.sel=i;const s=$("rhStage"),l=$("rhLad");if(s)s.innerHTML=rhStage();if(l)l.innerHTML="<h3>"+LS("Raids en cours","Today's raids")+"</h3>"+rhLadder();rhPaintBg()}
 function rdWbRefresh(){const t=$("rdWbT");if(!t)return;const sh=wbShared(),dead=sh>=RWHP;t.textContent=dead?LS("Vaincu !","Defeated!"):fmt(Math.max(0,RWHP-sh))+" / "+fmt(RWHP);const i=t.parentNode.querySelector("i");if(i)i.style.width=Math.max(0,Math.min(100,(1-sh/RWHP)*100))+"%"}
 setInterval(()=>{if(tab!="raid")return;document.querySelectorAll("[data-cd]").forEach(e=>{const t=+e.dataset.cd-Date.now();e.textContent=t>0?rdMS(t):"0 s";if(t<-1500&&!e.dataset.r){e.dataset.r=1;setTimeout(()=>{const a=$("rdb"),c=$("rdt");if(tab=="raid"&&!(a&&a.className)&&!(c&&c.className))show()},50)}})},1000);
 /* ---- actions ---- */
@@ -6222,12 +6224,12 @@ function rdGuard(R){if(R.over||R.guard||R.gleft<=0||R.gcd>0||!(R.chargeNext||R.c
 function rdMig(){const r=rdState();return r}
 /* ---- wiki ---- */
 WSEC.push(["raid","Raids","Raids","skull"]);
-wkBody.raid=()=>`<h1>Raids</h1><p class="lead">${TT("Six raids sont proposés chaque jour (nouveaux boss à minuit), de <b>Facile</b> à <b>Impossible</b>. Tu choisis une équipe de 4 Pokémon, leurs attaques, puis ils affrontent le boss <b>un par un</b> dans un combat plein écran : tu peux changer de Pokémon, choisir toi-même les attaques ou laisser le mode Auto jouer. Tu peux lancer <b>3 raids par heure</b>.","Six raids are offered each day (new bosses at midnight), from <b>Easy</b> to <b>Impossible</b>. You pick a team of 4 Pokémon and their moves, then they face the boss <b>one at a time</b> in a full-screen battle: you can switch Pokémon, pick moves yourself, or let Auto play. You can start <b>3 raids per hour</b>.")}</p>
+wkBody.raid=()=>`<h1>Raids</h1><p class="lead">${TT("Six raids sont proposés en même temps et <b>changent toutes les 2 heures</b>, de <b>Facile</b> à <b>Impossible</b>. Tu choisis une équipe de 4 Pokémon, leurs attaques, puis ils affrontent le boss <b>un par un</b> dans un combat plein écran : tu peux changer de Pokémon, choisir toi-même les attaques ou laisser le mode Auto jouer. Tu peux lancer <b>3 raids par heure</b>.","Six raids are offered each day (new bosses at midnight), from <b>Easy</b> to <b>Impossible</b>. You pick a team of 4 Pokémon and their moves, then they face the boss <b>one at a time</b> in a full-screen battle: you can switch Pokémon, pick moves yourself, or let Auto play. You can start <b>3 raids per hour</b>.")}</p>
 ${tbl([TT("Raid","Raid"),TT("Niveau du boss","Boss level"),TT("Niveau conseillé","Advised level"),TT("Capture (par lancer, Poké Ball)","Catch (per throw, Poké Ball)"),TT("Points Raid","Raid Points")],RT.map(t=>[LS(t.n[0],t.n[1]),t.L,t.rec,(t.cap*100).toFixed(t.cap<.1?1:0).replace(".",",")+" %",t.rp]))}
 <h3>${TT("Le combat","The battle")}</h3><p>${TT("Chaque Pokémon a quatre vraies attaques (les attaques emblématiques pour les Pokémon connus, sinon des attaques réelles choisies selon ses types et ses stats). Les dégâts suivent la formule des jeux : types, STAB, critiques, brûlure. Tous les 4 tours, le boss <b>accumule de l'énergie</b> puis lance une attaque dévastatrice : utilise la <b>Garde</b> (3 fois par raid). Une jauge se remplit en combattant : à 100 %, l'<b>Attaque Fusion</b> fait frapper toute l'équipe avec ses meilleures attaques. À mi-vie, le boss entre en fureur. Tu as 50 tours pour le vaincre.","Each Pokémon has four real moves (signature moves for well-known Pokémon, otherwise real moves picked from its types and stats). Damage follows the games' formula: types, STAB, crits, burn. Every 4 turns the boss <b>charges up</b> then unleashes a devastating attack: use <b>Guard</b> (3 per raid). A gauge fills as you fight: at 100% the <b>Fusion attack</b> makes the whole team strike with its best moves. At half HP the boss enrages. You have 24 to 30 rounds to win.")}</p>
 <h3>${TT("Objets","Items")}</h3><p>${TT("Les <b>potions et Rappels</b> ne servent que dans les raids (6 utilisations par raid). Les <b>Poké Balls</b> servent à capturer le boss vaincu : un seul lancer, la Master Ball ne rate jamais. Le boss capturé est un <b>Alpha</b>, avec une chance de mutation et de grande taille qui augmente avec la difficulté.","<b>Potions and Revives</b> are only used in raids (6 uses per raid). <b>Poké Balls</b> are used to catch the defeated boss: a single throw, the Master Ball never fails. The captured boss is an <b>Alpha</b>, with a mutation and size chance that rises with difficulty.")}</p>
 <h3>${TT("Récompenses","Rewards")}</h3><p>${TT("Victoire : pièces, Points Raid, objets (Bonus, Capsules, Patchs, Méga-Perles, Master Ball selon la difficulté). La première victoire du jour de chaque raid donne <b>×1,5 Points Raid</b> et un objet d'entraînement garanti. Une série de victoires ajoute jusqu'à +50 %. Les Points Raid s'échangent dans la boutique en bas de l'onglet.","Win: coins, Raid Points, items (Bottle Caps, Capsules, Patches, Mega Pearls, Master Ball depending on difficulty). The first win of the day on each raid gives <b>×1.5 Raid Points</b> and a guaranteed training item. A win streak adds up to +50%. Raid Points are spent in the shop at the bottom of the tab.")}</p>
-<h3>${TT("Boss monde","World boss")}</h3><p>${TT("Un seul boss géant pour tout le serveur, renouvelé chaque lundi. Tous les joueurs attaquent la <b>même barre de PV</b> : 3 essais par jour. Plus tu infliges de dégâts, plus tu atteins de paliers (10 au total). Quand la barre est vide (50 millions de PV), tu réclames tes récompenses et tu as 3 lancers de <b>Super Ball offertes</b> pour capturer le boss : la chance affichée (de 2 % au palier 1 à 15,5 % au palier 10) est la chance réelle, sans autre Ball ni bonus. Si le boss n'est pas vaincu, tu réclames quand même les paliers la semaine suivante, sans capture. Hors ligne, seuls tes propres dégâts comptent.","One giant boss for the whole server, renewed every Monday. Every player attacks the <b>same HP bar</b>: 3 tries per day. The more damage you deal, the more tiers you reach (10 in total). When the bar is empty (50 million HP) you claim your rewards and get 3 throws with <b>Great Balls we give you</b> to catch the boss: the shown chance (2% at tier 1 up to 15.5% at tier 10) is the real chance, no other Ball or bonus. If the boss isn't defeated you still claim your tiers next week, without a capture. Offline, only your own damage counts.")}</p>
+<h3>${TT("Boss monde","World boss")}</h3><p>${TT("Un seul boss géant pour tout le serveur, renouvelé chaque lundi. Tous les joueurs attaquent la <b>même barre de PV</b> : 5 essais par jour. Plus tu infliges de dégâts, plus tu atteins de paliers (10 au total). Quand la barre est vide (50 millions de PV), tu réclames tes récompenses et tu as 3 lancers de <b>Super Ball offertes</b> pour capturer le boss : la chance affichée (de 2 % au palier 1 à 15,5 % au palier 10) est la chance réelle, sans autre Ball ni bonus. Si le boss n'est pas vaincu, tu réclames quand même les paliers la semaine suivante, sans capture. Hors ligne, seuls tes propres dégâts comptent.","One giant boss for the whole server, renewed every Monday. Every player attacks the <b>same HP bar</b>: 3 tries per day. The more damage you deal, the more tiers you reach (10 in total). When the bar is empty (50 million HP) you claim your rewards and get 3 throws with <b>Great Balls we give you</b> to catch the boss: the shown chance (2% at tier 1 up to 15.5% at tier 10) is the real chance, no other Ball or bonus. If the boss isn't defeated you still claim your tiers next week, without a capture. Offline, only your own damage counts.")}</p>
 <h3>${TT("Dracolosse Éclipse","Eclipse Dragonite")}</h3><p>${TT("Une forme spéciale inspirée de Lucario Aurore et d'Ectoplasma Crépuscule, uniquement dans les raids Impossible. Darkrai y apparaît aussi, et il est toujours chromatique. Les formes Dynamax / Gigamax affichées sont les vraies formes du Pokémon quand elles existent.","A special form inspired by Dawn Lucario and Dusk Gengar, only found in Impossible raids. Darkrai also shows up there, and is always shiny. Dynamax / Gigamax forms shown are the Pokémon's real forms when they exist.")}</p>`;
 
 ["raid","gacha","reb"].forEach(id=>{const n=NAV2.find(x=>x[0]==id);if(n&&!NAVX.includes(n))NAVX.unshift(n)});
@@ -10089,7 +10091,7 @@ function pidCensor(t){
  setInterval(()=>{if(!document.hidden)show(TIP)},40*60000);
 })();
 /* ===== v152 : paliers d'étage = points de prestige (5 x racine(étage/10)) ===== */
-const ppMul=()=>(1+.15*PL("ppp"))*(1+Math.min(1,(G.st|0)*.05));
+const ppMul=()=>(1+.15*PL("ppp"))*SKM("p")*(1+Math.min(1,(G.st|0)*.05));
 const pmPts=f=>Math.max(1,Math.round((5+2*(f/8-1))*ppMul()));
 function pmChk(){
  const c=G.cl|0;let m=Math.floor((G.pmT|0)/8)*8,tot=0,last=0;if(m<Math.floor((G.pm|0)/8)*8)m=Math.floor((G.pm|0)/8)*8;
@@ -10151,7 +10153,7 @@ BOOST.forEach(b=>{b.p*=12});
 /* ===== v155 : chances réelles (avec les améliorations de prestige) dans le Pokédex et le wiki ===== */
 function pidW(){
  const bi=(typeof BIF!="undefined"&&BIF.m)||0,ecl=(typeof EV!="undefined"&&EV&&EV.k=="eclipse")?3:1;
- const fz=k=>k>=3?1+.1*PL("pz"):1,fm=k=>k?ecl*(1+.12*PL("pm"))*(1+bi)*(k==7?(1+.25*PL("psh"))*(PL("pcs")?3:1):1):1;
+ const fz=k=>k>=3?(1+.1*PL("pz"))*SKM("z"):1,fm=k=>k?ecl*(1+.12*PL("pm"))*(1+bi)*(k==7?(1+.25*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1;
  const L=a=>a[a.length-1],sw=SZ.map((x,k)=>L(x)*fz(k)),mw=MU.map((x,k)=>L(x)*fm(k)),sb=SZ.map(L),mb=MU.map(L),S=a=>a.reduce((p,q)=>p+q,0);
  return{sw,mw,sb,mb,ss:S(sw),ms:S(mw),sbs:S(sb),mbs:S(mb),bi,ecl}}
 const pidDiff=(p,b)=>Math.abs(p-b)>b*.004?` <small class="pdb">${LS("base","base")} ${prc(b)}</small>`:"";
@@ -10162,7 +10164,7 @@ function pidSh(){const w=pidW(),p=w.mw[7]/w.ms,b=w.mb[7]/w.mbs;return pidOne(1/p
 function pidBox(){
  const w=pidW(),sum=(a,f)=>a.reduce((t,x,k)=>t+(f(k)?x:0),0);
  const pm=sum(w.mw,k=>k&&k!=7)/w.ms,pmb=sum(w.mb,k=>k&&k!=7)/w.mbs,pbig=sum(w.sw,k=>k>=3)/w.ss,pbigb=sum(w.sb,k=>k>=3)/w.sbs;
- const ha=.06*(1+.2*PL("pt")),hab=.06;
+ const ha=.06*(1+.2*PL("pt"))*SKM("t"),hab=.06;
  const up=k=>{const u=PU.find(x=>x[0]==k);if(!u)return"";const l=PL(k);return `<div class="pidr"><span>${LS(u[1],u[1])}</span><b>${LS("niv.","lv.")} ${l}</b><em>${l?u[3](l):"—"}</em></div>`};
  const row=(lab,p,b,txt)=>`<div class="pidr big"><span>${lab}</span><b>${txt||prc(p)}</b><em>${txt?"":(Math.abs(p-b)>b*.004?LS("base ","base ")+prc(b):LS("inchangé","unchanged"))}</em></div>`;
  const tmp=w.bi>0||w.ecl>1;
@@ -10221,7 +10223,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* --- prestige : les Pokémon spéciaux gardent leur statut, les EV sont remis à zéro --- */
 {const p0=prestige;prestige=function(sel){sel=(sel||[]).slice();Object.keys(G.col).map(Number).forEach(i=>{const c=G.col[i];if(c&&(c.sh||c.mi||(c.zi>=3)||c.al||c.spc||c.ha)&&sel.indexOf(i)<0)sel.push(i)});p0.call(this,sel);try{ids().forEach(i=>{try{rq(i)}catch(e){}});recomp();save()}catch(e){}}}
 /* --- raids : l'affichage des tentatives se met à jour tout seul --- */
-setInterval(()=>{if(tab!="raid")return;try{const at=rdAtt();document.querySelectorAll(".rhs1 > span:first-child b").forEach(b=>{const t=at.left+" / 3";if(/^\d+ \/ 3$/.test(b.textContent)&&b.textContent!=t){b.textContent=t;const sm=b.parentNode.querySelector("small");if(sm)sm.innerHTML=at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}})}catch(e){}},1000);
+setInterval(()=>{if(tab!="raid")return;try{const at=rdAtt();document.querySelectorAll(".rhs1 > span:first-child b").forEach(b=>{const t=at.left+" / 5";if(/^\d+ \/ 5$/.test(b.textContent)&&b.textContent!=t){b.textContent=t;const sm=b.parentNode.querySelector("small");if(sm)sm.innerHTML=at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}})}catch(e){}},1000);
 /* --- boss monde : récompenses plus généreuses --- */
 try{WBR.forEach(t=>t.forEach(x=>{x[1]*=2}));WBR[2].push(["dream-ball",6]);WBR[3].push(["master-ball",1]);WBR[4].push(["master-ball",1],["gold-bottle-cap",2])}catch(e){}
 /* --- défis de guilde : objectif et progression bien visibles --- */
@@ -11392,57 +11394,67 @@ NAV2.push(["sk","sk","Compétences","#14b8a6","#134e4a"]);NENG.sk="Skills";
 try{NAVX.push(["sk","sk","Compétences","#14b8a6","#134e4a"])}catch(e){}
 {const c=NCAT.find(x=>x[0]=="c_me")[6];if(!c.includes("sk")){c.unshift("sk")}}
 
-/* 4 branches (haut, droite, bas, gauche) · 8 cases chacune · bonus volontairement faibles */
-const SKW=[1,1,1.5,1.5,2,2,2.5,4];                         /* % par niveau */
-const SKQ=[1500,8000,20000,40000,70000,110000,160000,230000]; /* K.O. requis par niveau */
-const SKJ=[1,1.1,1.2,1.3];                                   /* léger décalage entre branches (niveau 2 et +) */
+/* 6 branches en étoile, chacune se divise en deux puis se rejoint au sommet · bonus volontairement faibles */
+const SKE={d:["Dégâts","Damage","sword"],c:["Pièces","Coins","coin"],x:["XP","XP","lvl"],k:["Capture","Catch","target"],m:["Mutation","Mutation","sparkle"],z:["Taille","Size","resize"],s:["Chroma","Shiny","star"],b:["Boss","Boss","skull"],t:["Talents","Talents","key"],e:["Remise","Discount","bag"],p:["Prestige","Prestige","spark"],h:["PV","HP","heart"]};
+const SKEL={d:["Dégâts de l'équipe","Team damage"],c:["Pièces gagnées","Coins earned"],x:["Expérience gagnée","Experience gained"],k:["Chances de capture","Capture chance"],m:["Chance de mutation","Mutation chance"],z:["Apparition des grandes tailles","Big size chance"],s:["Apparition des chromatiques","Shiny chance"],b:["Pièces des boss","Boss coins"],t:["Chance de talent caché","Hidden ability chance"],e:["Réduction des prix de la boutique","Shop discount"],p:["Points de prestige gagnés","Prestige points gained"],h:["Points de vie de l'équipe (raids)","Team HP (raids)"]};
+const SKTIER=[{v:1,ko:1200,r:1.35,a:0,l:"I"},{v:1.5,ko:8400,r:2.65,a:0,l:"II"},{v:2,ko:22000,r:3.95,a:-15,l:"III"},{v:2,ko:28000,r:3.95,a:15,l:"III"},{v:2.5,ko:55000,r:5.2,a:-18,l:"IV"},{v:2.5,ko:70000,r:5.2,a:18,l:"IV"},{v:4,ko:120000,r:6.5,a:0,l:"★"}];
+const SKPAR=[-1,0,1,1,2,3,4];  /* parent principal (le sommet a aussi 5) */
 const SKB=[
- {k:"f",dx:0,dy:-1,c:"#ef4444",ic:"sword",n:["Force","Strength"],t:i=>["d"]},
- {k:"g",dx:1,dy:0,c:"#f59e0b",ic:"coin",n:["Fortune","Fortune"],t:i=>["c"]},
- {k:"i",dx:0,dy:1,c:"#a855f7",ic:"sparkle",n:["Instinct","Instinct"],t:i=>["m"]},
- {k:"s",dx:-1,dy:0,c:"#22c55e",ic:"target",n:["Savoir","Knowledge"],t:i=>[i%2?"k":"x"]}];
-const SKE={d:["Dégâts","Damage"],c:["Pièces","Coins"],m:["Mutations","Mutations"],x:["Expérience","Experience"],k:["Capture","Capture"]};
-const SKI={d:"sword",c:"coin",m:"sparkle",x:"lvl",k:"target"};
-const SKN=["I","II","III","IV","V","VI","VII","VIII"];
-const SKNODES=(()=>{const a=[{id:"c0",b:-1,l:0,x:0,y:0,ko:0,e:null,v:0,c:"#14b8a6",ic:"user"}];
- SKB.forEach((b,bi)=>{for(let l=0;l<8;l++){const e=b.t(l)[0];a.push({id:b.k+l,b:bi,l:l+1,x:b.dx*(l+1),y:b.dy*(l+1),ko:Math.round(SKQ[l]*(l?SKJ[bi]:1)),e,v:SKW[l],c:b.c,ic:SKI[e]})}});return a})();
+ {k:"a",n:["Combat","Combat"],c:"#ef4444",e:"ddd"+"hdd"+"d"},
+ {k:"b",n:["Fortune","Fortune"],c:"#f59e0b",e:"cc"+"ce"+"cb"+"c"},
+ {k:"c",n:["Savoir","Knowledge"],c:"#22c55e",e:"xx"+"xp"+"xh"+"x"},
+ {k:"d",n:["Chasse","Hunt"],c:"#3b82f6",e:"kk"+"kb"+"kt"+"k"},
+ {k:"e",n:["Mutation","Mutation"],c:"#a855f7",e:"mm"+"mz"+"mz"+"m"},
+ {k:"f",n:["Éclat","Shine"],c:"#eab308",e:"ss"+"sp"+"st"+"s"}];
+const SKNODES=(()=>{const a=[{id:"ctr",b:-1,j:-1,x:0,y:0,ko:0,e:null,v:0,c:"#14b8a6",par:[]}];
+ SKB.forEach((b,bi)=>{const th=(-90+60*bi)*Math.PI/180;for(let j=0;j<7;j++){const t=SKTIER[j],an=th+t.a*Math.PI/180,e=b.e[j];
+  a.push({id:b.k+j,b:bi,j,x:+(Math.cos(an)*t.r).toFixed(3),y:+(Math.sin(an)*t.r).toFixed(3),ko:Math.round(t.ko*(1+.06*bi)),e,v:t.v,c:b.c,par:j==0?["ctr"]:j==6?[b.k+"4",b.k+"5"]:[b.k+SKPAR[j]]})}});return a})();
 const skKo=()=>G.ko|0;
 const skOn=n=>skKo()>=n.ko;
 const skPct=x=>String(x).replace(".",",")+" %";
-function skBon(){const r={d:0,c:0,m:0,x:0,k:0};SKNODES.forEach(n=>{if(n.e&&skOn(n))r[n.e]+=n.v/100});return r}
+let SKC=null;
+function skSum(){if(SKC&&SKC.g===G&&SKC.ko===G.ko)return SKC.r;const r={};Object.keys(SKE).forEach(k=>r[k]=0);SKNODES.forEach(n=>{if(n.e&&skOn(n))r[n.e]+=n.v});SKC={g:G,ko:G.ko,r};return r}
+const skBon=()=>{const r=skSum(),o={};Object.keys(r).forEach(k=>o[k]=r[k]/100);return o};
+function SKM(k){try{const v=skSum()[k]||0;return k=="e"?1-Math.min(.5,v/100):1+v/100}catch(e){return 1}}
 {const bf0=biFlags;biFlags=function(){bf0.apply(this,arguments);try{const b=skBon();BIF.d*=1+b.d;BIF.c*=1+b.c;BIF.x*=1+b.x;BIF.k*=1+b.k;BIF.m+=b.m}catch(e){}}}
 try{biFlags()}catch(e){}
-let SKSEL=null,SKZ=0;
-const skZs=[64,76,92];
-const skZi=()=>{if(SKZ)return SKZ;let z=-1;try{z=+localStorage.getItem("pid_skz")}catch(e){}if(!(z>=0&&z<3))z=innerWidth<700?0:1;return SKZ=z};
+let SKSEL=null,SKZ=-1;
+const skZs=[84,104,128];
+const skZi=()=>{if(SKZ>=0)return SKZ;let z=-1;try{const v=localStorage.getItem("pid_skz2");if(v!=null)z=+v}catch(e){}if(!(z>=0&&z<3))z=innerWidth<700?0:1;return SKZ=z};
 const skNext=()=>SKNODES.filter(n=>!skOn(n)).sort((a,b)=>a.ko-b.ko)[0]||null;
-const skNm=n=>n.b<0?LS("Dresseur","Trainer"):LS(SKB[n.b].n[0],SKB[n.b].n[1])+" "+SKN[n.l-1];
+const skNm=n=>n.b<0?LS("Dresseur","Trainer"):LS(SKB[n.b].n[0],SKB[n.b].n[1])+" "+SKTIER[n.j].l;
+const SKW=15.4;
 function skDet(n){
- if(!n)return `<div class="sx-dt"><b>${LS("Arbre complet !","Tree complete!")}</b><small>${LS("Toutes les compétences sont débloquées.","All skills are unlocked.")}</small></div>`;
- const on=skOn(n),ko=skKo(),eff=n.e?LS(SKE[n.e][0],SKE[n.e][1])+" +"+skPct(n.v):LS("Point de départ de l'arbre","Start of the tree");
+ if(!n)return `<div class="sx-dt"><b>${LS("Arbre complet !","Tree complete!")}</b></div>`;
+ const on=skOn(n),ko=skKo(),eff=n.e?LS(SKEL[n.e][0],SKEL[n.e][1])+" +"+skPct(n.v):LS("Point de départ de l'arbre","Start of the tree");
  const q=on?1:Math.min(1,ko/n.ko);
- return `<div class="sx-dt${on?" on":""}" style="--c:${n.c}"><span class="sx-dti">${ico(n.ic)}</span><div class="sx-dtx"><b>${esc(skNm(n))}</b><em>${eff}</em><small>${on?LS("Débloquée","Unlocked"):LS("Débloquée à ","Unlocks at ")+fmt(n.ko)+" K.O. · "+LS("encore ","")+fmt(n.ko-ko)+LS(" K.O."," more K.O.")}</small>${on?"":`<div class="sx-bar"><i style="width:${(q*100).toFixed(1)}%"></i></div>`}</div></div>`}
-function skNodeH(n,nx){const on=skOn(n),cl=on?"on":nx&&nx.id==n.id?"nx":"lk",sel=SKSEL==n.id?" sel":"";
- return `<button type="button" class="sx-n ${cl}${sel}" data-sk="n:${n.id}" style="--x:${n.x+8.5};--y:${n.y+8.5};--c:${n.c}" aria-label="${esc(skNm(n))}">${ico(n.ic)}${n.e&&on?`<i>+${String(n.v).replace(".",",")}</i>`:""}${!on&&cl=="lk"?`<u>${ico("lock")}</u>`:""}</button>`}
-function skLineH(){let h="";SKB.forEach(b=>{for(let l=0;l<8;l++){const n=SKNODES.find(x=>x.id==b.k+l);h+=`<span class="sx-l${skOn(n)?" on":""}" style="--x:${8.5+b.dx*(l+.5)};--y:${8.5+b.dy*(l+.5)};--c:${b.c};${b.dx?"width:calc(var(--z)*1px);height:6px":"height:calc(var(--z)*1px);width:6px"}"></span>`}});return h}
-function vSk(){
- const ko=skKo(),tot=SKNODES.length,got=SKNODES.filter(skOn).length,nx=skNext(),b=skBon();
- if(!SKSEL||!SKNODES.find(n=>n.id==SKSEL))SKSEL=nx?nx.id:"c0";
+ return `<div class="sx-dt${on?" on":""}" style="--c:${n.c}"><span class="sx-dti">${n.e?ico(SKE[n.e][2]):ico("user")}</span><div class="sx-dtx"><b>${esc(skNm(n))}</b><em>${eff}</em><small>${on?LS("Débloquée","Unlocked"):LS("Se débloque à ","Unlocks at ")+fmt(n.ko)+" K.O. · "+LS("encore ","")+fmt(n.ko-ko)}</small>${on?"":`<div class="sx-bar"><i style="width:${(q*100).toFixed(1)}%"></i></div>`}</div></div>`}
+function skNodeH(n,nx){const on=skOn(n),cl=on?"on":nx&&nx.id==n.id?"nx":"lk",sel=SKSEL==n.id?" sel":"",ap=n.j==6?" ap":n.b<0?" ce":"";
+ const lb=n.e?`<span class="sx-lb"><b>${LS(SKE[n.e][0],SKE[n.e][1])}</b>+${String(n.v).replace(".",",")} %</span>`:`<span class="sx-lb"><b>${LS("Dresseur","Trainer")}</b></span>`;
+ return `<button type="button" class="sx-n ${cl}${sel}${ap}" data-sk="n:${n.id}" style="--x:${n.x+SKW/2};--y:${n.y+SKW/2};--c:${n.c}" aria-label="${esc(skNm(n))}">${n.e?ico(SKE[n.e][2]):ico("user")}${!on&&cl=="lk"?`<u>${ico("lock")}</u>`:""}${lb}</button>`}
+function skLines(){let h="";const by={};SKNODES.forEach(n=>by[n.id]=n);
+ SKNODES.forEach(n=>n.par.forEach(p=>{const a=by[p],on=skOn(n);h+=`<line x1="${a.x+SKW/2}" y1="${a.y+SKW/2}" x2="${n.x+SKW/2}" y2="${n.y+SKW/2}" class="${on?"on":""}" style="--c:${n.c}"/>`}));
+ return `<svg class="sx-sv" viewBox="0 0 ${SKW} ${SKW}" preserveAspectRatio="none">${h}</svg>`}
+function skHtml(){
+ const ko=skKo(),tot=SKNODES.length,got=SKNODES.filter(skOn).length,nx=skNext(),sm=skSum();
+ if(!SKSEL||!SKNODES.find(n=>n.id==SKSEL))SKSEL=nx?nx.id:"ctr";
  const sel=SKNODES.find(n=>n.id==SKSEL);
- const chips=["d","c","m","x","k"].map(k=>`<span class="sx-ch${b[k]?" on":""}" style="--c:${k=="d"?"#ef4444":k=="c"?"#f59e0b":k=="m"?"#a855f7":"#22c55e"}">${ico(SKI[k])}<small>${LS(SKE[k][0],SKE[k][1])}</small><b>+${skPct((b[k]*100).toFixed(1).replace(/\.0$/,""))}</b></span>`).join("");
- setTimeout(skCenter,40);
- return `<div class="sx" style="--z:${skZs[skZi()]}">
- <section class="sx-top"><div class="sx-h"><h2>${LS("Arbre de compétences","Skill tree")}</h2><p>${LS("Chaque Pokémon vaincu te rapproche de la prochaine case. Les cases se débloquent toutes seules, de l'intérieur vers l'extérieur, avec de petits bonus permanents.","Every Pokémon you defeat brings you closer to the next node. Nodes unlock on their own, from the centre outwards, with small permanent bonuses.")}</p></div>
- <div class="sx-st"><div><small>K.O.</small><b>${fmt(ko)}</b></div><div><small>${LS("Cases","Nodes")}</small><b>${got} / ${tot}</b></div><div><small>${LS("Progression","Progress")}</small><b>${Math.floor(got/tot*100)} %</b></div></div>
- <div class="sx-bar big"><i style="width:${(got/tot*100).toFixed(1)}%"></i></div><div class="sx-chs">${chips}</div></section>
- <section class="sx-box"><div class="sx-tb"><div class="sx-det" id="sxdet">${skDet(sel)}</div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></div>
- <div class="sx-map" id="sxmap"><div class="sx-cv" style="width:calc(17*var(--z)*1px);height:calc(17*var(--z)*1px)">${skLineH()}${SKNODES.map(n=>skNodeH(n,nx)).join("")}</div></div>
- <div class="sx-lg">${SKB.map(b=>`<span style="--c:${b.c}">${ico(b.ic)}${LS(b.n[0],b.n[1])}</span>`).join("")}</div></section></div>`}
-function skCenter(){const m=$("sxmap");if(!m)return;const nx=skNext(),z=skZs[skZi()],n=nx||SKNODES[0];m.scrollLeft=(n.x+8.5)*z-m.clientWidth/2;m.scrollTop=(n.y+8.5)*z-m.clientHeight/2}
+ const chips=Object.keys(SKE).filter(k=>sm[k]>0).map(k=>`<span class="sx-ch">${ico(SKE[k][2])}<small>${LS(SKE[k][0],SKE[k][1])}</small><b>${k=="e"?"−":"+"}${skPct(String(Math.round(sm[k]*10)/10).replace(".",","))}</b></span>`).join("")||`<span class="sx-ch"><small>${LS("Aucun bonus pour l'instant","No bonus yet")}</small></span>`;
+ return `<header class="sx-hd"><button type="button" class="sx-bk" data-a="tab" data-t="adv">${ico("chevl")}<span>${LS("Retour","Back")}</span></button><div class="sx-tt"><h2>${LS("Arbre de compétences","Skill tree")}</h2><small>${fmt(ko)} K.O. · ${got} / ${tot} ${LS("cases","nodes")} · ${Math.floor(got/tot*100)} %</small></div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></header>
+ <div class="sx-bar big"><i style="width:${(got/tot*100).toFixed(1)}%"></i></div>
+ <div class="sx-map" id="sxmap"><div class="sx-cv" style="width:calc(${SKW}*var(--z)*1px);height:calc(${SKW}*var(--z)*1px)">${skLines()}${SKNODES.map(n=>skNodeH(n,nx)).join("")}</div></div>
+ <footer class="sx-ft"><div class="sx-det" id="sxdet">${skDet(sel)}</div><div class="sx-chs">${chips}</div></footer>`}
+function skMount(){let o=document.getElementById("skfs");const keep=o&&document.getElementById("sxmap")?[document.getElementById("sxmap").scrollLeft,document.getElementById("sxmap").scrollTop]:null;
+ if(!o){o=document.createElement("div");o.id="skfs";document.body.appendChild(o)}
+ o.style.setProperty("--z",skZs[skZi()]);o.innerHTML=skHtml();document.documentElement.classList.add("skon");
+ if(keep){const m=$("sxmap");m.scrollLeft=keep[0];m.scrollTop=keep[1]}else setTimeout(skCenter,30)}
+setInterval(()=>{const o=document.getElementById("skfs");if(tab!="sk"){if(o)o.remove();document.documentElement.classList.remove("skon")}},300);
+function vSk(){setTimeout(()=>{if(tab=="sk")skMount()},0);return `<div style="min-height:60vh"></div>`}
+function skCenter(){const m=$("sxmap");if(!m)return;const z=skZs[skZi()];m.scrollLeft=(SKW/2)*z-m.clientWidth/2;m.scrollTop=(SKW/2)*z-m.clientHeight/2}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-sk]");if(!b)return;e.stopPropagation();e.preventDefault();const [k,a]=b.dataset.sk.split(":");
  if(k=="n"){SKSEL=a;document.querySelectorAll(".sx-n.sel").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");const d=$("sxdet");if(d)d.innerHTML=skDet(SKNODES.find(n=>n.id==a));try{sfx("coin")}catch(x){}}
  else if(k=="ctr")skCenter();
- else{const z=Math.max(0,Math.min(2,skZi()+(k=="z+"?1:-1)));SKZ=z;try{localStorage.setItem("pid_skz",z)}catch(x){}const r=document.querySelector(".sx");if(r)r.style.setProperty("--z",skZs[z]);skCenter()}},true);
+ else{const z=Math.max(0,Math.min(2,skZi()+(k=="z+"?1:-1))),m=$("sxmap"),z0=skZs[skZi()];let cx=0,cy=0;if(m){cx=(m.scrollLeft+m.clientWidth/2)/z0;cy=(m.scrollTop+m.clientHeight/2)/z0}SKZ=z;try{localStorage.setItem("pid_skz2",z)}catch(x){}const r=$("skfs");if(r)r.style.setProperty("--z",skZs[z]);if(m){m.scrollLeft=cx*skZs[z]-m.clientWidth/2;m.scrollTop=cy*skZs[z]-m.clientHeight/2}}},true);
 /* défilement à la souris (glisser) */
 {let dn=null;document.addEventListener("pointerdown",e=>{const m=e.target.closest&&e.target.closest("#sxmap");if(m&&e.pointerType=="mouse"&&!e.target.closest("[data-sk]"))dn={m,x:e.clientX,y:e.clientY,l:m.scrollLeft,t:m.scrollTop}});
  document.addEventListener("pointermove",e=>{if(!dn)return;dn.m.scrollLeft=dn.l-(e.clientX-dn.x);dn.m.scrollTop=dn.t-(e.clientY-dn.y)});document.addEventListener("pointerup",()=>{dn=null})}
@@ -11464,14 +11476,14 @@ const wkMin=n=>n>=60?(n/60)+" h":n+" min";
 
 wkBody.sk=()=>{
  const ko=skKo(),got=SKNODES.filter(skOn).length,tot=SKNODES.length;
- const rows=SKB.map(b=>[LS(b.n[0],b.n[1]),b.t(0)[0]=="d"?"Dégâts":b.t(0)[0]=="c"?"Pièces":b.t(0)[0]=="m"?"Mutations":"Expérience / Capture",SKW.map(v=>"+"+String(v).replace(".",",")+" %").join(" · ")]);
- const th=SKQ.map((k,i)=>[SKN[i],SKB.map(b=>fN(SKNODES.find(n=>n.id==b.k+i).ko)).join(" / ")]);
- return `<p class="lead">L'arbre de compétences est un réseau de <b>${tot} cases</b> qui part du centre et s'étend en quatre branches. Chaque case est <b>débloquée automatiquement</b> quand ton nombre total de <b>K.O.</b> (Pokémon vaincus) atteint son seuil. Il n'y a rien à acheter : les bonus sont permanents et restent après un prestige.</p>
+ const cl=k=>LS(SKE[k][0],SKE[k][1]);
+ const rows=SKB.map(b=>[LS(b.n[0],b.n[1]),[...new Set(b.e.split(""))].map(cl).join(", ")]);
+ const th=SKTIER.map((t,i)=>[t.l,"+"+String(t.v).replace(".",",")+" %",fN(t.ko)+(i?"":" (puis légèrement plus selon la branche)")]);
+ return `<p class="lead">L'arbre de compétences est un réseau de <b>${tot} cases</b> : une case centrale et <b>6 branches</b>. Chaque branche part du centre, se divise en deux chemins puis se rejoint sur une case sommet. Chaque case est <b>débloquée automatiquement</b> quand ton nombre total de <b>K.O.</b> (Pokémon vaincus) atteint son seuil. Il n'y a rien à acheter : les bonus sont permanents et restent après un prestige.</p>
  ${wf([["Où le trouver","Moi › Compétences"],["Cases",got+" / "+tot],["Tes K.O.",fN(ko)],["Progression",Math.floor(got/tot*100)+" %"]])}
- ${wsx("Les quatre branches",tbl(["Branche","Bonus","Bonus par case (I à VIII)"],rows))}
- <p>La branche <b>Savoir</b> alterne l'expérience (cases impaires) et la chance de capture (cases paires). La branche <b>Instinct</b> augmente la chance de mutation des ennemis, comme l'objet « mutation ».</p>
- ${wsx("Seuils de K.O.",tbl(["Niveau de case","K.O. requis (Force / Fortune / Instinct / Savoir)"],th))}
- ${wsx("Comment s'en servir",`<ul class="wks2"><li>Touche une case pour voir son bonus et le nombre de K.O. qu'il te reste.</li><li>Les cases lumineuses sont actives, la case qui pulse est la prochaine, les cases avec un cadenas viennent ensuite.</li><li>Les boutons + et − règlent le zoom, la cible recentre l'arbre sur la prochaine case. Sur téléphone, fais glisser le doigt pour te déplacer.</li><li>Un message t'avertit à chaque nouvelle case débloquée.</li></ul>`)}
+ ${wsx("Les six branches",tbl(["Branche","Bonus qu'elle contient"],rows))}
+ ${wsx("Bonus et seuils par étape",tbl(["Étape","Bonus de la case","K.O. requis"],th)+"<p>Chaque case affiche en petit ce qu'elle améliore. Les deux chemins d'une branche donnent des bonus différents ; le sommet est la case la plus forte.</p>")}
+ ${wsx("Comment s'en servir",`<ul class="wks2"><li>L'arbre prend tout l'écran : le bouton Retour te ramène au jeu.</li><li>Touche une case pour voir son bonus et le nombre de K.O. qu'il te reste.</li><li>Les cases colorées sont actives, celle qui pulse est la prochaine, les cadenas viennent ensuite.</li><li>Les boutons + et − règlent le zoom, la cible recentre l'arbre. Fais glisser pour te déplacer.</li></ul>`)}
  ${wn("info","Des bonus volontairement petits","Chaque case ajoute entre +1 % et +4 %. Ils se multiplient avec le reste (objets, cartes, prestige) mais ne remplacent pas la progression normale.")}`};
 
 wkBody.trn=()=>{
@@ -11541,6 +11553,9 @@ wkBody.town=()=>{
   const i=h.indexOf('<div class="rxr" style="--c:#f472b6">');
   if(i>=0){let j=h.lastIndexOf("</div></div>");h=h.slice(0,i)+row+h.slice(j+12)}else h=h.replace(/(<\/div>)$/,row+"$1")}catch(e){}return h}
 })();
+/* ===== Raids : compte à rebours du changement toutes les 2 h ===== */
+{let last=rdPer();setInterval(()=>{try{if(tab!="raid")return;const e=document.getElementById("rdper");if(e){const s=Math.max(0,Math.ceil((rdPerNext()-Date.now())/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);e.textContent=LS(" Prochains boss dans "," Next bosses in ")+(h?h+" h ":"")+String(m).padStart(2,"0")+" min "+String(s%60).padStart(2,"0")+" s"}
+ const p=rdPer();if(p!==last){last=p;if(!document.getElementById("rdA")){RHS.sel=-1;show()}}}catch(x){}},1000)}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
