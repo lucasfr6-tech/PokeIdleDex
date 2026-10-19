@@ -3822,8 +3822,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c0b708f9ba"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c0b708f9ba"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2e56c979d6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2e56c979d6"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10880,6 +10880,8 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
 (function(){
 const HH="2b1d85a0b77b22a367ca7a4a9b6fc88ffbd59dcd178c02137ec2ca6905d3f16a";
 TIT.push(["hlp","Helper","Helper",["#16a34a","#4ade80"],()=>!!G.hlp,"Réservé aux helpers","Helpers only",0]);
+/* titres Owner, Admin et Helper : même bonus que Divinité Céleste */
+{const d=TIT.find(x=>x[0]=="t16");["own","adm","hlp"].forEach(k=>{const t=TIT.find(x=>x[0]==k);if(t&&d)t[7]=d[7]})}
 document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest('[data-ml="code"]');if(!b)return;const i=document.getElementById("mlin"),v=(i&&i.value||"").trim();if(!v)return;
  try{const h=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)))).map(x=>x.toString(16).padStart(2,"0")).join("");
   if(h===HH){G.hlp=1;G.tt="hlp";save();try{lbPush(true)}catch(x){}toast(LS("Titre Helper débloqué et équipé","Helper title unlocked and equipped"));sfx("big");if(i)i.value="";try{mailOpen()}catch(x){}}}catch(x){}
@@ -12608,7 +12610,7 @@ const EVTS=[
   ORI.forEach((o,k)=>{const c=o.cloneNode(true);c.removeAttribute("id");c.removeAttribute("style");c.removeAttribute("href");c.classList.remove("on","act","sel");c.classList.add("hbi");c.dataset.hb=k;["data-a","data-ud","data-hw","data-iv"].forEach(a=>c.removeAttribute(a));g.appendChild(c)});
   h.classList.add("on")}
  const hubClose=()=>{const h=$("hub");if(h)h.classList.remove("on")};
- function pos(){const b=$("hubb");if(!b)return;const w=document.getElementById("hwb");if(w&&w.offsetParent!==null){const r=w.getBoundingClientRect();b.style.left=r.left+"px";b.style.top=(r.bottom+8)+"px";b.style.width=r.width+"px"}else{b.style.left="8px";b.style.top="92px";b.style.width=""}
+ function pos(){const b=$("hubb");if(!b)return;const w=document.getElementById("hwb");if(w&&w.offsetParent!==null){const r=w.getBoundingClientRect(),z=parseFloat(getComputedStyle(document.body).zoom)||1;b.style.left=(r.left/z)+"px";b.style.top=(r.bottom/z+8)+"px";b.style.width=(r.width/z)+"px"}else{b.style.left="8px";b.style.top="92px";b.style.width=""}
   const on=document.querySelector("#qk .dot,#qk .udot,#qk .hot,#qk .dotn"+(MQ.matches?",#mlbtn.dot,#nwbtn.dot,#sc .dotn,#utl .dot":""));b.classList.toggle("dt",!!on)}
  function build(){if($("hubb"))return;
   const b=document.createElement("button");b.id="hubb";b.type="button";b.setAttribute("aria-label","Menu");b.innerHTML=icMenu+`<span>${LS("Menu","Menu")}</span><i></i>`;document.body.appendChild(b);
@@ -12645,6 +12647,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","Boutons en haut à gauche superposés","Avec une taille d'interface différente de 100 %, les boutons Halloween, Menu et Mises à jour se chevauchaient : ils sont maintenant bien alignés.","Overlapping top-left buttons","With an interface size other than 100%, the Halloween, Menu and Updates buttons overlapped: they are now properly aligned."],
+  ["imp","Titres Owner, Admin et Helper","Ces titres donnent maintenant le même bonus que Divinité Céleste : +5 % de dégâts et de pièces.","Owner, Admin and Helper titles","These titles now give the same bonus as Celestial Deity: +5% damage and coins."],
   ["new","Bouton « Mises à jour » toujours visible","Un bouton en haut à gauche, sous le Menu, ouvre le journal des mises à jour. Il s'illumine quand il y a du nouveau.","“Updates” button always visible","A button at the top left, under the Menu, opens the update log. It lights up when there is something new."],
   ["new","Wiki : Puissance et rareté + simulateur","Nouvelle page qui explique l'échelle de puissance du jeu, avec un graphique de tous les paliers et un simulateur pour comparer deux Pokémon. Nouvelle page « Nouveautés récentes ».","Wiki: Power and rarity + simulator","New page explaining the game's power scale, with a chart of every tier and a simulator to compare two Pokémon. New “Recent changes” page."],
   ["imp","Wiki plus lisible","Menu du wiki plus aéré avec une courte description de chaque page, textes et tableaux plus espacés.","Clearer wiki","Roomier wiki menu with a short description of each page, more spacing in texts and tables."],
@@ -12747,7 +12751,7 @@ const UPD=[
    if(!b){b=document.createElement("button");b.id="updb";b.type="button";b.dataset.ud="open";b.title=LS("Mises à jour","Updates");document.body.appendChild(b)}
    const u=unread(),sig=(u?1:0)+"|"+(SG&&SG.lang);if(b.dataset.s!==sig){b.dataset.s=sig;b.classList.toggle("nw",!!u);
     b.innerHTML=`${ic}<span>${LS("Mises à jour","Updates")}</span><small>${u?LS("Nouveautés !","New stuff!"):LS("Journal","Log")}</small>${u?`<em>${LS("NEW","NEW")}</em>`:""}<i class="upsh"></i>`}
-   if(!matchMedia("(max-width:700px)").matches){const m=document.getElementById("hubb");if(m&&m.offsetParent!==null){const r=m.getBoundingClientRect();b.style.left=r.left+"px";b.style.top=(r.bottom+8)+"px";b.style.width=r.width+"px"}}
+   if(!matchMedia("(max-width:700px)").matches){const m=document.getElementById("hubb");if(m&&m.offsetParent!==null){const r=m.getBoundingClientRect(),z=parseFloat(getComputedStyle(document.body).zoom)||1;b.style.left=(r.left/z)+"px";b.style.top=(r.bottom/z+8)+"px";b.style.width=(r.width/z)+"px"}}
    else{b.style.left="";b.style.top="";b.style.width=""}
    const lnd=document.getElementById("lnd");b.style.display=lnd?"none":""}
   setInterval(()=>{try{upd()}catch(e){}},700);setTimeout(()=>{try{upd()}catch(e){}},300);
