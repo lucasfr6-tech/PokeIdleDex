@@ -3644,8 +3644,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9505a812bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=9505a812bc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="019728629c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=019728629c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6802,7 +6802,6 @@ async function ivSummon(n){if(IVBUSY)return;const B=ivBanner(),tot=ivCost()*n;if
  let nNew=0,nSold=0,gain=0;
  L.forEach(x=>{const id=x.id,ex=G.col[id];x.nw=false;x.sold=0;x.sh=false;
   if(ex){ex.n+=x.k;try{train(id,x.k)}catch(e){}}
-  else if(x.t!="D"&&!x.mi&&!x.zi&&boxFull()){x.sold=x.k;const v=(60*Math.max(1,tgtL())+100)*x.k;G.m+=kxI("sell",v);gain+=v;nSold+=x.k;G.dx[id]=1}
   else{x.nw=true;nNew++;const c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}G.dx[id]=1;rq(id);c.h=mhp(id)}
   if(G.col[id]&&x.mi){G.col[id].mi=Math.max(G.col[id].mi||0,x.mi);G.mut=(G.mut||0)+x.mc}
   if(G.col[id]&&x.zi)G.col[id].zi=Math.max(G.col[id].zi||0,x.zi);
