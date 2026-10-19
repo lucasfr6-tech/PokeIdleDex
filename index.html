@@ -3613,12 +3613,18 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 @media(max-width:700px){.sx-hd{padding:10px 10px 4px;gap:8px}.sx-tt h2{font-size:17px}.sx-bk span{display:none}.sx-bk{padding:0 12px}.sx-ctl button,.sx-bk{height:42px;width:auto;min-width:42px}.sx-ft{padding:8px 10px calc(10px + env(safe-area-inset-bottom));max-height:34vh;overflow:auto}.sx-bar.big{margin:2px 10px 6px}.sx-lb{font-size:11px}}
 .bgw .tools:has(.rdt-sc){flex-wrap:wrap}.rdt-sc{flex:1 1 100%}.rdt-sc .tr-sb{flex:none}
 @media(min-width:701px){.rdt-sc{flex-wrap:wrap}}
+/* ===== Prestige › x6 ===== */
+.x6t{display:flex;gap:8px;margin-bottom:12px}.x6t button{display:flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:1px solid #ffffff2a;background:#ffffff10;color:#cbd5e1;font:800 15px Nunito,system-ui,sans-serif;cursor:pointer}.x6t button svg{width:18px;height:18px}.x6t button.on{background:linear-gradient(135deg,#ec4899,#f59e0b);border-color:#fff6;color:#fff}
+.x6p{background:var(--gl,#ffffff0d);border:1px solid var(--ln,#ffffff1f);border-radius:20px;padding:20px;display:grid;gap:16px;max-width:760px}
+.x6h{display:flex;gap:16px;align-items:flex-start}.x6h h2{margin:0 0 6px}.x6h p{margin:0;color:var(--mu,#94a3b8);line-height:1.45}.x6i{flex:none;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#f59e0b,#ec4899);color:#fff}.x6i svg{width:34px;height:34px}
+.x6l{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.x6m{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff14}.x6m>svg{flex:none;width:20px;height:20px;color:#4ade80;margin-top:2px}.x6m b{display:block}.x6m small{color:var(--mu,#94a3b8)}
+.x6n{color:var(--mu,#94a3b8)}.x6b{display:flex;flex-direction:column;gap:8px;align-items:flex-start}.x6b .go{height:52px;padding:0 24px;font-size:16px}.x6ok{display:flex;gap:10px;align-items:center;padding:12px 16px;border-radius:14px;background:#22c55e22;border:1px solid #22c55e66;color:#4ade80;font-weight:800}.x6ok svg{width:20px;height:20px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="14b156a538"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=14b156a538"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="14b9dfb0a9"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=14b9dfb0a9"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4308,7 +4314,7 @@ ${ev.length||tms.length?`<h2>Évolution et CT</h2><div class="row" style="margin
 <h2>Niveau automatique</h2><small>Plus aucun bonbon : les Pokémon montent de niveau seuls selon l'étage atteint, et rattrapent vite leur retard.</small></div>`}
 
 function show0(){document.querySelectorAll("#nav [data-t],#qk [data-t],#pan").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));lastE=null;HUDK="";STK="";PSIG="";WXK="";EXSIG="";recomp();
- $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vReb,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
+ $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vRebX,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
 if(tab=="gacha"||tab=="dex"||tab=="prof"||tab=="mine"){const need2=tab=="gacha"?Object.keys(G.cards).map(Number):ids(),miss=need2.filter(i=>!DB[i]);if(miss.length&&!OFF)preload(miss).then(softRefresh)}}
 let sr=0;function softRefresh(){clearTimeout(sr);sr=setTimeout(()=>{if(tab=="mine"&&$("mng"))$("mng").innerHTML=mineGrid();else if(tab=="dex"&&$("dxg"))$("dxg").innerHTML=dexGrid();else if(tab=="gacha"&&$("cgr"))$("cgr").innerHTML=cardGrid()},200)}
 
@@ -7664,7 +7670,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
  if(k=="mv"){pvAction({k:"m",j:+v});return}
  if(k=="sw"){pvAction({k:"s",i:+v});return}
  if(k=="auto2"&&PB){PB.auto=!PB.auto;pvU_upd(PB);if(PB.auto&&PB.pickRes){const r=PB.pickRes;PB.pickRes=null;r(pvAIpick(PB,"m",.9))}if(PB.auto&&PB.replRes){const r=PB.replRes;PB.replRes=null;r(pvBestSwitch(PB,"m"))}return}
- if(k=="spd"&&PB){PB.sp=PB.sp>=3?1:PB.sp+1;pvU_upd(PB);return}
+ if(k=="spd"&&PB){PB.sp=pvNextSp(PB.sp);pvU_upd(PB);return}
  if(k=="ff"&&PB){if(!confirm("Abandonner ce combat comptera comme une défaite."))return;const B=PB;B.over="lose";if(B.pickRes){const r=B.pickRes;B.pickRes=null;r({k:"r"})}if(B.replRes){const r=B.replRes;B.replRes=null;r(0)}pvFinish(B);return}
  if(k=="done"){pvLeave();return}
 },true);
@@ -8143,12 +8149,12 @@ function twLvUi(B){["m","f"].forEach(s=>{const u=pvAct(B,s),e=document.querySele
 function twIntro(f){const n=twCount(f),b=twList(f).some(e=>e.boss);return (b?"Un boss garde l'étage ":"Étage ")+f+" : "+n+" adversaire"+(n>1?"s":"")+" !"}
 function twNew(f){const t=twS(),pv=pvS(),mine=twTeamU(t.tm,pv.mv,pv.it);twBuff(mine);const foes=twFoes(f);
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foes.forEach((u,i)=>{u.i=i;u.s="f"});
- return{tw:f,opp:{id:"tw"+f,n:"Étage "+f,r:0,tm:foes.map(u=>u.id)},m:{n:G.name||"Moi",r:0,tm:mine,a:0},f:{n:"Étage "+f,r:0,tm:foes,a:0},round:0,log:[],sp:3,auto:!!(t.au||t.fm),fast:false,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:twSk(f),tuto:false,friendly:false,prev:{w:0,l:0,d:0}}}
+ return{tw:f,opp:{id:"tw"+f,n:"Étage "+f,r:0,tm:foes.map(u=>u.id)},m:{n:G.name||"Moi",r:0,tm:mine,a:0},f:{n:"Étage "+f,r:0,tm:foes,a:0},round:0,log:[],sp:(G.x6?6:3),auto:!!(t.au||t.fm),fast:false,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:twSk(f),tuto:false,friendly:false,prev:{w:0,l:0,d:0}}}
 function twWin(B){pvBuild(B);const o=$("pvb"),Z=twZone(B.tw);o.classList.add("tw");o.style.setProperty("--zc",Z.c[0]);twArena($("pvbg"),B.tw);
  const L=o.querySelector(".pvpn.m"),Rr=o.querySelector(".pvpn.f");
  [L,Rr].forEach(p=>{const s=p.querySelector("svg");if(s)s.outerHTML=twTower(30)});
  L.querySelector("small").textContent="Équipe de 3";Rr.querySelector("small").textContent=Z.n;
- const ub=o.querySelector(".pvub");if(ub){const sb=ub.querySelector("[data-pv=spd]");if(sb){sb.textContent="×3";sb.disabled=true;sb.title="La Tower est toujours à ×3"}ub.insertAdjacentHTML("afterbegin",`<button data-tw="min" title="Le combat se termine tout seul, la Tower continue en arrière-plan">Réduire</button><button id="twFm" class="${twS().fm?"on":""}" data-tw="fmw">Farm</button>`)}}
+ const ub=o.querySelector(".pvub");if(ub){const sb=ub.querySelector("[data-pv=spd]");if(sb){sb.textContent=G.x6?"×6":"×3";sb.disabled=true;sb.title=G.x6?"La Tower est toujours à ×6":"La Tower est toujours à ×3"}ub.insertAdjacentHTML("afterbegin",`<button data-tw="min" title="Le combat se termine tout seul, la Tower continue en arrière-plan">Réduire</button><button id="twFm" class="${twS().fm?"on":""}" data-tw="fmw">Farm</button>`)}}
 async function twStart(f){const t=twS();if(PB)return;if(t.tm.length<3){toast("Choisis d'abord 3 Pokémon pour ta Tower.");TWX.v="team";if(tab!="twr")tab="twr";show();return}
  f=Math.max(1,Math.min(f||t.f,t.b+1,TWN));t.f=f;twCancel();
  const B=twNew(f);B.intro=1;PB=B;twWin(B);document.body.classList.add("pvon2");twHud();
@@ -11540,6 +11546,7 @@ wkBody.town=()=>{
 {const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
 {const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
 {const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 200 millions. Chaque tentative rapporte 150 points de raid, et quand le boss est vaincu, tous les joueurs reçoivent 3 000 points de raid. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
+{const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Onglet ×6","Dans la page Prestige, l'onglet ×6 propose une amélioration permanente à 20 000 points de prestige : la vitesse de combat passe à ×6 dans les raids, le JCJ, les boss de guilde et la Tower.")}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
@@ -11568,6 +11575,22 @@ wkBody.town=()=>{
  const p=rdPer();if(p!==last){last=p;if(!document.getElementById("rdA")){RHS.sel=-1;show()}}}catch(x){}},1000)}
 /* ===== Boss monde vaincu : 3 000 points de raid pour tout le monde (une fois par boss) ===== */
 setInterval(()=>{try{const r=rdState(),k=rdWeekK();if(r.wk3===k||!WB.ok||WB.wk!==k)return;if(wbShared()>=RWHP){r.wk3=k;r.rp+=3000;save();toast(LS("Boss monde vaincu ! +3 000 points de raid pour tous","World boss defeated! +3,000 raid points for everyone"));if(tab=="raid")show()}}catch(e){}},4000);
+/* ===== Prestige › x6 : vitesse ×6 dans les modes de combat à vitesse réglable (20 000 points de prestige) ===== */
+const X6C=20000;let X6T="pr";
+function pvNextSp(s){return s>=6?1:s>=3?(G.x6?6:1):s+1}
+{const g0=gpCyc;gpCyc=function(s){const r=g0.apply(this,arguments);if(!G.x6)return r;return s==4?6:s==6?1:r}}
+const vRebX=(()=>{const v0=vReb;return function(){
+ const bar=`<div class="x6t"><button type="button" data-x6t="pr" class="${X6T=="pr"?"on":""}">${ico("spark")} Prestige</button><button type="button" data-x6t="x6" class="${X6T=="x6"?"on":""}">${ico("bolt")} ×6${G.x6?" ✓":""}</button></div>`;
+ if(X6T!="x6")return bar+v0.apply(this,arguments);
+ const pp=G.pp||0,ok=!G.x6&&pp>=X6C;
+ const modes=[["Raids","Réglage de vitesse du combat : ×1, ×2, ×4 puis ×6"],["JCJ (arène classée)","Le bouton de vitesse passe aussi à ×6"],["Boss de guilde","Même bouton de vitesse"],["Tower","Toujours à ×6 au lieu de ×3"]];
+ return bar+`<div class="x6p"><div class="x6h"><div class="x6i">${ico("bolt")}</div><div><h2>Vitesse ×6</h2><p>Une amélioration permanente à vie : tes combats se déroulent jusqu'à six fois plus vite dans les modes ci-dessous. Elle ne change ni les dégâts ni les récompenses, seulement la durée des animations.</p></div></div>
+ <div class="x6l">${modes.map(m=>`<div class="x6m">${ico("check")}<div><b>${m[0]}</b><small>${m[1]}</small></div></div>`).join("")}</div>
+ <small class="x6n">Le combat principal et les combats de la nature gardent leur propre vitesse ×2 après un prestige.</small>
+ <div class="x6b">${G.x6?`<div class="x6ok">${ico("check")} Débloqué : utilise le bouton de vitesse dans chaque mode</div>`:`<button class="go" data-x6b="1" ${ok?"":"disabled"}>${ico("spark")} Acheter pour 20 000 points</button><small>Tu as ${fmt(pp)} points${pp<X6C?" · il t'en manque "+(X6C-pp).toLocaleString("fr-FR"):""}</small>`}</div></div>`}})();
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-x6t],[data-x6b]");if(!t)return;e.stopPropagation();e.preventDefault();
+ if(t.dataset.x6t){X6T=t.dataset.x6t;show();return}
+ if(!G.x6&&(G.pp||0)>=X6C){G.pp-=X6C;G.x6=1;try{sfx("prest")}catch(x){}toast(LS("Vitesse ×6 débloquée !","×6 speed unlocked!"));save();show()}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
