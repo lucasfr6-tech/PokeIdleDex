@@ -3645,8 +3645,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b0ca56bea6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=b0ca56bea6"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7dda68e608"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=7dda68e608"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11683,8 +11683,8 @@ glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B)return;con
  mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
  toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
 
-/* ===== agrandir la boite avec des pieces : +10 places par achat, 25 achats max (150 + 250 + 300 prestige = 700) ===== */
-const BXMAX=25,bxCost=n=>Math.round(1e6*Math.pow(1.35,n));
+/* ===== agrandir la boite avec des pieces : +10 places par achat, 55 achats max (150 + 550 = 700 avec les pieces, + 300 avec le prestige = 1000) ===== */
+const BXMAX=55,bxCost=n=>Math.round(1e6*Math.pow(1.15,n));
 {const f=slPanel;slPanel=function(){let h=f.apply(this,arguments);try{const n=G.bxc|0,mx=n>=BXMAX,c=bxCost(n),ok=G.m>=c;
  h+=`<div class="slbx"><div><b>${ico("pack")} ${LS("Agrandir la boîte","Expand the box")}</b><small>${LS("+10 places par achat","+10 slots per purchase")} · ${n} / ${BXMAX} ${LS("achats","purchases")}${mx?" · "+LS("maximum atteint (le reste vient des points de prestige)","maximum reached (the rest comes from prestige points)"):""}</small></div>${mx?"":`<button class="${ok?"go":""}" data-bxb="1" ${ok?"":"disabled"}>${ico("coin")} +10 · ${fmt(c)} ₽</button>`}</div>`}catch(e){}return h}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-bxb]");if(!b||b.disabled)return;ev.stopPropagation();const n=G.bxc|0;if(n>=BXMAX)return;const c=bxCost(n);if(G.m<c)return;G.m-=c;G.bxc=n+1;try{IDC=null}catch(e){}save();sfx("coin");toast(LS("Boîte agrandie : +10 places ("+boxCap()+" au total)","Box expanded: +10 slots ("+boxCap()+" total)"));try{slRef()}catch(e){}show()},true);
