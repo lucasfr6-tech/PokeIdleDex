@@ -3543,12 +3543,22 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 .fz3 .p3l{image-rendering:auto}
 .fzmp.z-dyn,.fzmp.z-dyn{background:radial-gradient(circle,#a855f755,#00000040)}
 @media(max-width:620px){.fz3.fzpx{width:170px;height:170px}}
+
+.tr2{display:flex;gap:8px;align-items:center}.tr2 select[data-a=equip]{flex:1;min-width:0}
+.hcart{flex:none;width:46px;height:46px;border-radius:12px;border:1px solid #fbbf2466;background:#fbbf2418;color:#fbbf24;display:grid;place-items:center;cursor:pointer}.hcart:hover{background:#fbbf2430}.hcart svg{width:22px;height:22px}
+.hc-l{display:flex;flex-direction:column;gap:8px}.hc-s{color:#94a3b8;font-size:12px}
+.hc-it{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;border:1px solid #ffffff14;background:#ffffff08}.hc-it.lk{opacity:.55}
+.hc-ic{display:grid;place-items:center}.hc-ic img,.hc-ic svg{max-width:38px;max-height:38px}
+.hc-tx b{display:block;color:#fff;font-size:14px}.hc-tx small{display:block;color:#94a3b8;font-size:12px;line-height:1.3}
+.hc-bt{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.hc-bt em{font-style:normal;color:#fbbf24;font-weight:800;font-size:13px}
+.hc-bt button{height:32px;padding:0 14px;border-radius:9px;border:0;background:#22c55e;color:#04210f;font:800 13px Nunito,system-ui,sans-serif;cursor:pointer}.hc-bt button:disabled{background:#334155;color:#94a3b8;cursor:not-allowed}
+.hc-ok{color:#4ade80;font-weight:800;font-size:12px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f33d002136"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f33d002136"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d6526413a6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=d6526413a6"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11285,6 +11295,17 @@ document.addEventListener("error",e=>{const im=e.target;if(!im||im.tagName!="IMG
  if(st==0&&/\/shiny\//.test(s)){im.dataset.fb=1;im.style.filter=(im.style.filter||"")+" hue-rotate(40deg) saturate(1.5)";im.src=s.replace("/shiny/","/")}
  else if(st<2&&/\/pokemon\/(?!other)/.test(s)){im.dataset.fb=2;im.src=s.replace("/pokemon/","/pokemon/other/official-artwork/").replace("/shiny/","/shiny/")}},true);
 document.addEventListener("load",e=>{const im=e.target;if(im&&im.tagName=="IMG"&&im.dataset&&im.dataset.fb){im.style.visibility="visible"}},true);
+/* ---- chariot : objets achetables pour ce Pokémon (fiche Pokémon) ---- */
+function hcItems(id){return Object.keys(IT).filter(k=>{const i=IT[k];if(!i||!i.hold)return false;if(i.mf)return MGM[i.mf]&&MGM[i.mf].s==id;if(i.dy)return canDyn(id);if(i.sp&&!i.sp.includes(id))return false;if(!(shopP(i)>0)&&!(G.inv[k]>0))return false;return true})
+ .sort((a,b)=>{const w=k=>IT[k].mf?0:IT[k].dy?1:2;return w(a)-w(b)||IT[a].n.localeCompare(IT[b].n)})}
+function hcHtml(id){const own=G.col[id];const L=hcItems(id);
+ return `<button class="tn-x" data-hc="x">${ico("x")}</button><h3>${LS("Objets pour ","Items for ")}${esc(dn(id))}</h3><small class="hc-s">${LS("Pièces : ","Coins: ")}<b>${fmt(G.m)}</b></small><div class="hc-l">${L.map(k=>{const i=IT[k],p=shopP(i)||0,lk=uf()<(i.r||0),one=i.mf||i.dy,have=G.inv[k]||0,held=own&&own.it==k,can=p>0&&!lk&&G.m>=p&&!(one&&(have>0||held));
+  return `<div class="hc-it${lk?" lk":""}"><span class="hc-ic">${ic(k,i.img)}</span><div class="hc-tx"><b>${esc(i.n)}</b><small>${esc(itxt(i)||i.d||"")}</small></div><div class="hc-bt">${p?`<em>${fmt(p)} ₽</em>`:`<em>${LS("Butin des boss","Boss loot")}</em>`}${held?`<span class="hc-ok">${LS("Équipé","Held")}</span>`:have>0&&one?`<span class="hc-ok">${LS("Dans le sac","In bag")}</span>`:p?`<button data-hc="b:${k}" ${can?"":"disabled"}>${lk?LS("Étage ","Floor ")+i.r:LS("Acheter","Buy")}</button>`:""}${have>0&&!one?`<small>×${have}</small>`:""}</div></div>`}).join("")||`<div class="tr-no">${LS("Aucun objet.","None.")}</div>`}</div><small class="hc-s">${LS("Après l'achat, équipe l'objet depuis la liste « Équiper un objet du sac ».","After buying, equip it from the “Equip an item from the bag” list.")}</small>`}
+{const h0=heldHtml;heldHtml=function(id){let s=h0.apply(this,arguments);if(s.indexOf("</select>")>=0)s=s.replace("</select>",`</select><button type="button" class="hcart" data-hc="o:${id}" title="${LS("Objets à acheter pour ce Pokémon","Items to buy for this Pokémon")}">${ico("bag")}</button>`);return s}}
+let HCID=0;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hc]");if(!b)return;e.stopPropagation();e.preventDefault();const [k,a]=b.dataset.hc.split(":");
+ if(k=="o"){HCID=+a;trModal(hcHtml(HCID))}else if(k=="x"){trModal("")}
+ else if(k=="b"){const i=IT[a];if(!i||!HCID)return;const p=shopP(i);if(!(p>0)||G.m<p||uf()<(i.r||0))return;G.m-=p;G.inv[a]=(G.inv[a]||0)+1;try{qadd("buy",1);qadd("spend",p)}catch(x){}sfx("coin");toast(LS("Acheté : ","Bought: ")+i.n);save();const m=document.querySelector("#trm .tr-mdl"),y=m?m.scrollTop:0;trModal(hcHtml(HCID));const m2=document.querySelector("#trm .tr-mdl");if(m2)m2.scrollTop=y;try{show()}catch(x){}}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
