@@ -3653,8 +3653,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="64e6985776"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=64e6985776"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a182a99a5a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a182a99a5a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11712,7 +11712,9 @@ setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(M
  FD.rf=FD.rf||{};
  const link=()=>SITE+"/?ami="+((G.fd&&G.fd.id)||"");
  window.refLink=link;
- const boost=(min)=>{try{const b=BS(),n=Date.now();[0,1,2].forEach(i=>{b.e[i]=Math.min(n+3*36e5,Math.max(n,b.e[i]||0)+min*6e4)});biFlags();recomp()}catch(e){}};
+ const boost=(min)=>{try{const n=Date.now();G.fd.rbE=Math.min(n+3*36e5,Math.max(n,G.fd.rbE||0)+min*6e4);biFlags();recomp()}catch(e){}};
+ {const bf0=biFlags;biFlags=function(){bf0.apply(this,arguments);try{if(G.fd&&Date.now()<(G.fd.rbE||0)){BIF.d*=1.1;BIF.x*=1.1;BIF.c*=1.1}}catch(e){}}}
+ setInterval(()=>{try{if(G.fd&&G.fd.rbE&&Date.now()>=G.fd.rbE){delete G.fd.rbE;biFlags();recomp()}}catch(e){}},5000);
  /* le document d'amis porte aussi le parrain (r) */
  frSave=async function(){if(!LB.ok)return false;try{const d={f:G.fd.l.slice(0,60),t:Date.now()};if(G.fd.ref)d.r=G.fd.ref;await LB.db.doc("fr/"+LB.uid).set(d);FD.all[LB.uid]=G.fd.l.slice();frRecalc();return true}catch(e){toast(LS("Impossible d'enregistrer pour l'instant.","Could not save right now."));return false}};
  /* parrain : accepte automatiquement ses filleuls et reçoit sa récompense */
@@ -11721,8 +11723,8 @@ setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(M
   const me=LB.uid,news=FD.inc.filter(u=>FD.rf[u]==me&&!G.fd.blk.includes(u));if(!news.length)return r;
   G.fd.rw=Array.isArray(G.fd.rw)?G.fd.rw:[];busy=1;let got=0;
   news.forEach(u=>{if(!G.fd.l.includes(u)&&G.fd.l.length<60)G.fd.l.push(u);if(!G.fd.rw.includes(u)&&G.fd.rw.length<RCAP){G.fd.rw.push(u);got++}});
-  if(got){G.inv["master-ball"]=(G.inv["master-ball"]||0)+got;["bi-atk","bi-xp","bi-coin"].forEach(k=>G.inv[k]=(G.inv[k]||0)+30*got);
-   toast(LS(got>1?got+" amis ont rejoint le jeu grâce à toi ! +"+got+" Master Ball et des boosts":"Un ami a rejoint le jeu grâce à toi ! +1 Master Ball et 30 min de boosts",got>1?got+" friends joined thanks to you! +"+got+" Master Balls and boosts":"A friend joined thanks to you! +1 Master Ball and 30 min of boosts"));try{sfx("big")}catch(e){}}
+  if(got){G.inv["master-ball"]=(G.inv["master-ball"]||0)+got;boost(30*got);
+   toast(LS(got>1?got+" amis ont rejoint le jeu grâce à toi ! +"+got+" Master Ball et "+(30*got)+" min de boost (+10 % dégâts, XP, pièces)":"Un ami a rejoint le jeu grâce à toi ! +1 Master Ball et 30 min de boost (+10 % dégâts, XP, pièces)",got>1?got+" friends joined thanks to you! +"+got+" Master Balls and "+(30*got)+" min of boost (+10% damage, XP, coins)":"A friend joined thanks to you! +1 Master Ball and 30 min of boost (+10% damage, XP, coins)"));try{sfx("big")}catch(e){}}
   else toast(LS("Nouvel ami ajouté grâce à ton lien !","New friend added through your link!"));
   save();frSave().finally(()=>{busy=0})}catch(e){busy=0}return r};
  /* filleul : il doit avoir cliqué le lien, créé un compte et joué 5 minutes ; ensuite il ajoute le parrain et reçoit le boost */
@@ -11741,12 +11743,12 @@ setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(M
   const d=s.docs[0],u=d.id;if(u==LB.uid){delete G.fd.rp;save();busy2=0;return}FD.info[u]=Object.assign({},d.data(),{_t:Date.now()});
   G.fd.ref=u;delete G.fd.rp;const nw=!G.fd.rg&&G.fd.rn;if(nw){G.fd.rg=1;boost(60);G.inv["master-ball"]=(G.inv["master-ball"]||0)+1}save();
   if(!G.fd.l.includes(u))await frAddUid(u,d.data().n);else await frSave();
-  setTimeout(()=>{toast(nw?LS("Invitation validée ! Tu es ami avec "+(d.data().n||"ton parrain")+" : boost +30 % dégâts, XP et pièces pendant 1 h, et une Master Ball !","Invite complete! You are friends with "+(d.data().n||"your sponsor")+": +30% damage, XP and coins for 1 h, plus a Master Ball!"):LS("Invitation validée : tu es ami avec "+(d.data().n||"ton parrain")+" !","Invite complete: you are friends with "+(d.data().n||"your sponsor")+"!"));try{sfx("big")}catch(e){}},800);busy2=0}catch(e){busy2=0}};
+  setTimeout(()=>{toast(nw?LS("Invitation validée ! Tu es ami avec "+(d.data().n||"ton parrain")+" : boost +10 % dégâts, XP et pièces pendant 1 h, et une Master Ball !","Invite complete! You are friends with "+(d.data().n||"your sponsor")+": +10% damage, XP and coins for 1 h, plus a Master Ball!"):LS("Invitation validée : tu es ami avec "+(d.data().n||"ton parrain")+" !","Invite complete: you are friends with "+(d.data().n||"your sponsor")+"!"));try{sfx("big")}catch(e){}},800);busy2=0}catch(e){busy2=0}};
  setInterval(tick,5000);
  /* encart « Inviter un ami » dans le panneau Amis */
  const fr0=frRender;frRender=function(){const r=fr0.apply(this,arguments);try{const p=$("frp");if(!p||SCP.o!="fr"||p.querySelector(".refb"))return r;const at=p.querySelector(".fradd");if(!at)return r;
   const n=(G.fd.rw||[]).length,box=document.createElement("div");box.className="refb";
-  box.innerHTML=`<b>${ico("uadd")} ${LS("Inviter un ami","Invite a friend")}</b><small>${LS("Ton ami doit <b>cliquer sur ton lien</b>, <b>créer un compte</b> et <b>jouer au moins 5 minutes</b>. Il devient alors ton ami automatiquement : lui reçoit 1 h de boost (+30 % dégâts, XP, pièces) et une Master Ball ; toi, une Master Ball et 30 min de boosts par ami ("+n+" / "+RCAP+").","Your friend must <b>click your link</b>, <b>create an account</b> and <b>play at least 5 minutes</b>. They then become your friend automatically: they get a 1 h boost (+30% damage, XP, coins) and a Master Ball; you get a Master Ball and 30 min of boosts per friend ("+n+" / "+RCAP+").")}</small>
+  box.innerHTML=`<b>${ico("uadd")} ${LS("Inviter un ami","Invite a friend")}</b><small>${LS("Ton ami doit <b>cliquer sur ton lien</b>, <b>créer un compte</b> et <b>jouer au moins 5 minutes</b>. Il devient alors ton ami automatiquement : lui reçoit 1 h de boost (+10 % dégâts, XP, pièces) et une Master Ball ; toi, une Master Ball et 30 min du même boost par ami ("+n+" / "+RCAP+").","Your friend must <b>click your link</b>, <b>create an account</b> and <b>play at least 5 minutes</b>. They then become your friend automatically: they get a 1 h boost (+10% damage, XP, coins) and a Master Ball; you get a Master Ball and 30 min of the same boost per friend ("+n+" / "+RCAP+").")}</small>
   <div class="refl"><input readonly value="${esc(link())}"><button class="frab" data-a="refcp">${ico("copy")} ${LS("Copier","Copy")}</button>${navigator.share?`<button class="go" data-a="refsh">${LS("Partager","Share")}</button>`:""}</div>`;
   const st=window.refState&&refState();if(st){const w=document.createElement("div");w.className="refst";w.innerHTML=`<b>${LS("Invitation reçue","Invite received")}</b><span class="${st.acc?"ok":""}">${st.acc?"✓":"○"} ${LS("Compte créé","Account created")}</span><span class="${st.min>=5?"ok":""}">${st.min>=5?"✓":"○"} ${LS("Temps de jeu","Playtime")} ${st.min} / 5 min</span>`;box.appendChild(w)}
   at.parentNode.insertBefore(box,at);}catch(e){}return r};
