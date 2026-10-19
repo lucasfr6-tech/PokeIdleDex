@@ -3480,12 +3480,16 @@ a.qkb.qkdc .qki{color:#fff}
 .fzrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.fzrl span{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:#ffffff14;font-weight:800;font-size:13px}.fzrl img,.fzrl svg{width:20px;height:20px}
 .rxc.fzx{position:relative}.rxc.fzx em{font-style:normal;font-size:10px;font-weight:800}.rxc.fzx.cap{border-color:#4ade8088;background:#22c55e14}.rxc.fzx u{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#22c55e;color:#0b1026;display:grid;place-items:center;text-decoration:none}.rxc.fzx u svg{width:11px;height:11px}
 @media(max-width:560px){.fzst span{font-size:11px;padding:6px}.fzar{flex-basis:100%}.fzbt{width:100%;justify-content:space-between}}
+/* boss monde : paliers repliables */
+.rhwar{display:grid;place-items:center;width:34px;height:22px;margin:6px auto 0;padding:0;border-radius:11px;border:1px solid #ffffff2a;background:#ffffff0f;color:#cbd5e1;cursor:pointer}.rhwar:hover{background:#ffffff1f}
+.rhwar svg{transition:transform .2s}.rhwar.on svg{transform:rotate(180deg)}
+.rhwtt{display:none}.rhwtt.on{display:flex}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2932171ccf"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2932171ccf"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bf54b137bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=bf54b137bc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7760,16 +7764,16 @@ const twPow=id=>{try{ens(id);return[0,1,2,3,4,5].reduce((a,k)=>a+calc(id,k),0)}c
 const twFoes=f=>twList(f).map(e=>twFoe(e,f));
 /* ---------- améliorations permanentes (achetées avec les Sceaux) ---------- */
 const TWU=[
- {k:"hp",n:"Vitalité",d:"PV de toute l'équipe",ic:"heart",c:"#4ade80",m:20,e:2.5},
- {k:"atk",n:"Force",d:"Attaque physique",ic:"sword",c:"#fb923c",m:20,e:2.5},
- {k:"def",n:"Carapace",d:"Défense physique",ic:"shield",c:"#60a5fa",m:20,e:2.5},
- {k:"spa",n:"Esprit",d:"Attaque spéciale",ic:"spark",c:"#c084fc",m:20,e:2.5},
- {k:"spd",n:"Aura",d:"Défense spéciale",ic:"star",c:"#f472b6",m:20,e:2.5},
- {k:"spe",n:"Élan",d:"Vitesse",ic:"bolt",c:"#facc15",m:20,e:2.5},
+ {k:"hp",n:"Vitalité",d:"PV de toute l'équipe",ic:"heart",c:"#4ade80",m:40,e:2.5},
+ {k:"atk",n:"Force",d:"Attaque physique",ic:"sword",c:"#fb923c",m:40,e:2.5},
+ {k:"def",n:"Carapace",d:"Défense physique",ic:"shield",c:"#60a5fa",m:40,e:2.5},
+ {k:"spa",n:"Esprit",d:"Attaque spéciale",ic:"spark",c:"#c084fc",m:40,e:2.5},
+ {k:"spd",n:"Aura",d:"Défense spéciale",ic:"star",c:"#f472b6",m:40,e:2.5},
+ {k:"spe",n:"Élan",d:"Vitesse",ic:"bolt",c:"#facc15",m:40,e:2.5},
  {k:"vi",n:"Cadence",d:"Durée d'un combat de farm : −0,2 s",ic:"clock",c:"#22d3ee",m:20,e:0,x:1},
- {k:"ch",n:"Butin",d:"Sceaux gagnés par victoire",ic:"gift",c:"#fbbf24",m:10,e:0,x:1}];
+ {k:"ch",n:"Butin",d:"Sceaux gagnés par victoire",ic:"gift",c:"#fbbf24",m:20,e:0,x:1}];
 const twLv=k=>(twS().up[k]||0);
-const twCost=(k,l)=>Math.round(30*Math.pow(1.27,l)*((k=="vi"||k=="ch")?1.7:1));
+const twCost=(k,l)=>Math.round(30*Math.pow(1.27,Math.min(l,20))*Math.pow(1.13,Math.max(0,l-20))*((k=="vi"||k=="ch")?1.7:1));
 const twMul=k=>1+.025*twLv(k);
 function twBuy(k,quiet){const t=twS(),u=TWU.find(x=>x.k==k);if(!u)return 0;const l=twLv(k);if(l>=u.m)return 0;const c=twCost(k,l);if(t.sc<c)return 0;t.sc-=c;t.up[k]=l+1;if(!quiet)save();return 1}
 function twAutoBuy(){const t=twS(),got=[];for(let n=0;n<40;n++){const L=TWU.filter(u=>twLv(u.k)<u.m).sort((a,b)=>twCost(a.k,twLv(a.k))-twCost(b.k,twLv(b.k)));if(!L.length)break;const u=L[0];if(!twBuy(u.k,1))break;got.push(u.k)}return got}
@@ -7814,7 +7818,7 @@ const twSk=f=>f>100?Math.min(.95,.78+.0017*(f-100)):Math.min(.95,.45+f*.0055);
 /* ---------- résultat d'un combat (visible ou en arrière-plan) ---------- */
 function twApply(res,f,o){o=o||{};const t=twS(),win=res=="win",out={win,f,first:0,rw:null,sc:0,coins:0,up:[],back:0,nf:t.f};t.tt=Date.now();
  if(win){t.w++;t.ls=0;const first=f>t.b;out.first=first;
-  out.sc=Math.round((2+f*.6)*(1+.05*(t.up.ch||0))*(first?3:1));t.sc+=out.sc;
+  out.sc=Math.round((2+f*.6)*(1+.05*(t.up.ch||0))*(first?3:1)*.5);t.sc+=out.sc;
   out.coins=Math.floor(3000*(1+f/100)*(.3+Math.min(1,(()=>{try{const L=(t.tm||[]).map(i=>G.col[i]&&G.col[i].l||0);return L.length?L.reduce((x,y)=>x+y,0)/L.length/100:0}catch(e){return .5}})())));G.m+=kxI("tw",out.coins);G.gain+=out.coins;
   if(first){t.b=f;t.bt=Date.now();if(TWRW[f]&&!t.cl[f])out.rw=twGrant(f);twPush(1)}
   const nf=t.af=="rp"?f:Math.min(TWN,f+1);t.f=Math.max(1,Math.min(nf,t.b+1,TWN));if(t.af=="st"&&o.bg)t.fm=0;out.nf=t.f}
@@ -11156,6 +11160,22 @@ setInterval(()=>{if(tab!="fz")return;try{
  const dp=document.getElementById("fzdps");if(dp&&!c)dp.textContent=fmt(fzDps())+"/s"}catch(e){}},500);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fz]");if(!b||b.getAttribute("data-no"))return;e.stopPropagation();e.preventDefault();
  const a=b.dataset.fz;if(a=="go")fzStart(+b.dataset.t);else if(a=="ch")fzChoose(b.dataset.k);else if(a=="th")fzThrow();else if(a=="lv")fzLeave();else if(a=="ix")rxOpen(fzIndex())},true);
+/* ---------- Hôtel de ville : valeurs estimées des Pokémon −60 % ---------- */
+{const f=tnMonV;tnMonV=function(id,fl){return Math.max(3,Math.round(f(id,fl)*.4))}}
+
+/* ---------- Tower JCJ : Sceaux des récompenses d'étage ÷ 2 (ceux des victoires sont réduits dans build23) ---------- */
+try{Object.keys(TWRW).forEach(k=>{if(TWRW[k]&&TWRW[k].s)TWRW[k].s=Math.max(1,Math.round(TWRW[k].s/2))})}catch(e){}
+
+/* ---------- Boss monde : paliers repliés derrière une petite flèche sous « Affronter » ---------- */
+let RHWO=false;
+{const v0=vRaid;vRaid=function(){const s=v0.apply(this,arguments);try{
+ const m=/<div class="rhwt">[\s\S]*?<\/div>/.exec(s);if(!m)return s;
+ let t=m[0].replace('class="rhwt"','class="rhwt rhwtt'+(RHWO?" on":"")+'" id="rhwt"');
+ let r=s.replace(m[0],"");
+ const k='</div></div>\n <div class="rhwbs">',i=r.indexOf(k);if(i<0)return s;
+ const ar=`<button class="rhwar${RHWO?" on":""}" id="rhwar" data-rhw="1" title="${LS("Voir les paliers","Show tiers")}" aria-label="${LS("Voir les paliers","Show tiers")}" aria-expanded="${RHWO}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
+ return r.slice(0,i)+"</div>"+ar+t+r.slice(i+6)}catch(e){return s}}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rhw]");if(!b)return;e.stopPropagation();e.preventDefault();RHWO=!RHWO;const t=document.getElementById("rhwt"),a=document.getElementById("rhwar");if(t)t.classList.toggle("on",RHWO);if(a){a.classList.toggle("on",RHWO);a.setAttribute("aria-expanded",RHWO)}},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
