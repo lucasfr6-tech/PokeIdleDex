@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ff755be1c0"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=ff755be1c0"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1aba320761"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1aba320761"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -12178,7 +12178,7 @@ function znAtt(){const r=rdState(),now=Date.now();r.zt=(r.zt||[]).filter(t=>now-
 /* échelle : le raid Zénith en haut, seulement une fois débloqué */
 {const l0=rhLadder;rhLadder=function(){const h=l0.apply(this,arguments);if(!znUnlocked())return h;
  const t=RT[ZNT],b=rdBossOf(ZNT),a=znAtt();
- return `<button class="rhl rhzn${RHS.sel==ZNT?" on":""}" data-rd="rsel" data-i="${ZNT}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${a.left}/${ZNMAX}</em></span></button>`+h}}
+ return h+`<button class="rhl rhzn${RHS.sel==ZNT?" on":""}" data-rd="rsel" data-i="${ZNT}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${a.left}/${ZNMAX}</em></span></button>`}}
 /* fiche du raid : son propre compteur (10 / heure) et pas de Master Ball */
 {const s0=rhStage;rhStage=function(){if(RHS.sel!==ZNT)return s0.apply(this,arguments);if(!znUnlocked()){RHS.sel=5;return s0.apply(this,arguments)}
  const a0=rdAtt;let h;rdAtt=znAtt;try{h=s0.apply(this,arguments)}finally{rdAtt=a0}
