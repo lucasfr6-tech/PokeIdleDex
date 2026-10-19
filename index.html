@@ -3439,47 +3439,93 @@ a.qkb.qkdc .qki{color:#fff}
 .rxx{position:sticky;float:right;top:0;width:36px;height:36px;border-radius:10px;border:1px solid #ffffff2a;background:#0b1026;color:#fff;display:grid;place-items:center;cursor:pointer;z-index:2}
 .onlg{display:inline-block;width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;vertical-align:middle;margin-left:1px}
 /* ===== Failles dimensionnelles ===== */
-.fz{padding:4px 2px 24px}.fzhd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.fzhd h2{margin:0 0 4px;display:flex;align-items:center;gap:8px}.fzhd small{color:var(--mu);display:block;max-width:520px}
-.fzbt{display:flex;align-items:center;gap:10px}.fzdp{padding:6px 14px;border-radius:12px;background:#ffffff0d;border:1px solid #ffffff1f;text-align:right}.fzdp small{display:block;font-size:11px}.fzdp b{font-size:17px;color:#fbbf24}
-.fzbt .rxb{margin:0}
-.fzg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
-.fzc{position:relative;display:flex;flex-direction:column;gap:9px;padding:14px;border-radius:16px;background:linear-gradient(#ffffff0d,#ffffff06);border:1px solid #ffffff1f;border-top:3px solid var(--c)}
-.fzc.rdy{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset,0 6px 22px -10px var(--c)}.fzc.lk{opacity:.72}
-.fzh{display:flex;justify-content:space-between;align-items:center;gap:8px}.fzh b{display:flex;align-items:center;gap:8px;font-size:16px;color:var(--c)}.fzh b i{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c);color:#0b1026;font-style:normal;font-size:13px}
-.fzs{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;background:#ffffff14}.fzs svg{width:13px;height:13px}.fzs.ok{color:#4ade80;background:#22c55e22}.fzs.bad{color:#fca5a5;background:#ef444422}.fzs.wait{color:#fcd34d;background:#f59e0b22}
-.fzp{display:flex;gap:12px;align-items:center}.fzsil{flex:0 0 84px;height:84px;border-radius:14px;background:radial-gradient(circle,#ffffff14,#00000040);display:grid;place-items:center;overflow:hidden}
-.fzsil img{width:76px;height:76px;object-fit:contain;filter:brightness(0) blur(1px);opacity:.6}
-.fzin{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}.fzk{display:flex;justify-content:space-between;gap:8px;font-size:13px;align-items:center}.fzk span{display:inline-flex;align-items:center;gap:5px;color:var(--mu)}.fzk span svg{width:14px;height:14px}.fzk b.g{color:#4ade80}.fzk b.b{color:#f87171}
-.fzbr{height:7px;border-radius:4px;background:#ffffff14;overflow:hidden}.fzbr i{display:block;height:100%;background:var(--c);border-radius:4px}.fzq{color:var(--mu);margin-top:-4px}
-.fzch{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;font-size:12px;color:var(--mu)}.fzch b{color:#fff;margin-left:2px}
-.fzgo{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 16px;border-radius:12px;border:1px solid var(--c,#8b5cf6);background:var(--c,#8b5cf6);color:#0b1026;font:800 14px Nunito,system-ui,sans-serif;cursor:pointer}
-.fzgo svg{width:17px;height:17px}.fzgo[data-no]{background:#ffffff10;border-color:#ffffff20;color:#94a3b8;cursor:not-allowed}.fzgo:not([data-no]):hover{filter:brightness(1.1)}
-.fzcur{max-width:760px;margin:0 auto;padding:16px;border-radius:18px;background:linear-gradient(#ffffff0d,#ffffff06);border:1px solid #ffffff1f;border-top:3px solid var(--c);display:flex;flex-direction:column;gap:14px}
-.fzct{display:flex;align-items:baseline;gap:12px}.fzct b{font-size:20px;color:var(--c)}.fzct small{color:var(--mu);flex:1}.fzlv{background:none;border:1px solid #ffffff2a;color:#cbd5e1;border-radius:10px;padding:5px 12px;font:700 12px Nunito,system-ui,sans-serif;cursor:pointer}
-.fzst{display:flex;gap:8px}.fzst span{flex:1;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;background:#ffffff0a;color:#64748b;font-weight:800;font-size:13px}.fzst i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#ffffff14;font-style:normal;font-size:12px}.fzst i svg{width:13px;height:13px}
+.fz{padding:4px 2px 24px;display:flex;flex-direction:column;gap:12px}
+.fztop{display:flex;gap:12px;align-items:stretch}
+.fzban{flex:1;min-width:0;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,#3b1d6e,#1b1240);border:1px solid #8b5cf655}
+.fzban h2{margin:0 0 4px;display:flex;align-items:center;gap:8px;font-size:18px}.fzban p{margin:0;font-size:13px;line-height:1.45;color:#d6d3f5}.fzban p b{color:#fff}
+.fzsqs{display:flex;gap:10px;flex:0 0 auto}
+.fzsq{width:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 6px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff22;color:#fff;font-family:inherit;text-align:center}
+.fzsq i{display:grid;place-items:center;width:26px;height:26px;color:#a78bfa}.fzsq i svg{width:22px;height:22px}.fzsq small{color:var(--mu);font-size:11px}.fzsq b{font-size:14px;color:#fbbf24}
+button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#a78bfa}
+.fzfr{padding:12px;border-radius:18px;background:#00000030;border:1px solid #ffffff1a}
+.fzfh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 4px 10px}.fzfh b{font-size:15px}.fzfh small{color:var(--mu)}
+.fzlist{display:flex;flex-direction:column;gap:10px}
+.fzrw{display:grid;grid-template-columns:150px minmax(210px,1.3fr) minmax(190px,1.2fr) 140px 130px;gap:14px;align-items:center;padding:12px 14px;min-height:104px;border-radius:14px;background:linear-gradient(90deg,#ffffff0f,#ffffff06);border:1px solid #ffffff1a;border-left:5px solid var(--c)}
+.fzrw.rdy{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset,0 6px 20px -12px var(--c)}.fzrw.lk{opacity:.78}
+.fzr1{display:flex;align-items:center;gap:10px}.fzn{display:grid;place-items:center;flex:0 0 36px;height:36px;border-radius:12px;background:var(--c);color:#0b1026;font-weight:900;font-size:18px}
+.fzr1 b{display:block;color:var(--c);font-size:16px;margin-bottom:3px}
+.fzs{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#ffffff14;white-space:nowrap}.fzs svg{width:12px;height:12px}.fzs.ok{color:#4ade80;background:#22c55e22}.fzs.bad{color:#fca5a5;background:#ef444422}.fzs.wait{color:#fcd34d;background:#f59e0b22}
+.fzr2{display:flex;align-items:center;gap:12px;min-width:0}.fzmp{position:relative;flex:0 0 84px;height:84px;display:grid;place-items:center;border-radius:14px;background:radial-gradient(circle,color-mix(in srgb,var(--ac) 35%,transparent),#00000040)}
+.fzmp img{width:76px;height:76px;image-rendering:pixelated;object-fit:contain;filter:drop-shadow(0 3px 4px #0008)}.fzmp.dyn img{filter:drop-shadow(0 0 7px #ef4444)}
+.fzmi{display:flex;flex-direction:column;gap:3px;min-width:0}.fzmi b{font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fzpl{font-size:12px;font-weight:800}.fzty{display:flex;gap:4px;flex-wrap:wrap}
+.fzr3{display:flex;flex-direction:column;gap:5px}.fzk{display:flex;justify-content:space-between;gap:8px;font-size:13px;align-items:center}.fzk span{display:inline-flex;align-items:center;gap:5px;color:var(--mu)}.fzk span svg{width:14px;height:14px}.fzk b.g{color:#4ade80}.fzk b.b{color:#f87171}
+.fzbr{height:6px;border-radius:3px;background:#ffffff14;overflow:hidden}.fzbr i{display:block;height:100%;background:var(--c);border-radius:3px}.fzr3>small{color:var(--mu);font-size:11px;margin-top:-2px}
+.fzr4{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;font-size:11px;color:var(--mu)}.fzr4 span{display:flex;flex-direction:column}.fzr4 b{color:#fff;font-size:13px}
+.fzgo{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 14px;border-radius:12px;border:1px solid var(--c,#8b5cf6);background:var(--c,#8b5cf6);color:#0b1026;font:800 14px Nunito,system-ui,sans-serif;cursor:pointer}
+.fzgo svg{width:17px;height:17px}.fzgo[data-no]{background:#ffffff10;border-color:#ffffff20;color:#94a3b8;cursor:not-allowed}.fzgo:not([data-no]):hover{filter:brightness(1.1)}.fzgo.big{min-height:50px;font-size:16px;width:100%}
+.fzcur{max-width:820px;width:100%;margin:0 auto;padding:14px;border-radius:18px;background:linear-gradient(#ffffff0d,#ffffff06);border:1px solid #ffffff1f;border-top:3px solid var(--c);display:flex;flex-direction:column;gap:12px}
+.fzct{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.fzct b{font-size:20px;color:var(--c)}.fzct span{font-weight:800}.fzct small{color:var(--mu);flex:1}.fzlv{background:none;border:1px solid #ffffff2a;color:#cbd5e1;border-radius:10px;padding:5px 12px;font:700 12px Nunito,system-ui,sans-serif;cursor:pointer}
+.fzst{display:flex;gap:8px}.fzst span{flex:1;display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:10px;background:#ffffff0a;color:#64748b;font-weight:800;font-size:13px}.fzst i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#ffffff14;font-style:normal;font-size:12px}.fzst i svg{width:13px;height:13px}
 .fzst .on{background:#ffffff14;color:#fff}.fzst .on i{background:var(--c);color:#0b1026}.fzst .done{color:#4ade80}.fzst .done i{background:#22c55e;color:#0b1026}
-.fzar2{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.fzar{position:relative;flex:0 0 190px;height:190px;display:grid;place-items:center;border-radius:18px;background:radial-gradient(circle,#ffffff12,#00000050);overflow:hidden}
-.fzar::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle,var(--ac,#8b5cf6) 0%,transparent 60%);opacity:.35;animation:fzp 2.4s ease-in-out infinite}
-.fzar.dyn{--ac:#ef4444}.fzar.past{--ac:#f59e0b}.fzar.fut{--ac:#22d3ee}
-.fzaw{position:relative;transition:transform .5s}.fzar img{width:170px;height:170px;object-fit:contain;filter:brightness(0) blur(2px);opacity:.7;transition:filter .8s,opacity .8s}.fzar.rv img{filter:none;opacity:1}
-.fzar.dyn.rv .fzaw{transform:scale(1.12);filter:drop-shadow(0 0 14px #ef4444)}
-@keyframes fzp{50%{opacity:.6;transform:scale(1.08)}}
-.fzmt{flex:1;min-width:200px;display:flex;flex-direction:column;gap:6px}.fzmt b{font-size:22px}.fzmt small{color:var(--mu)}.fzty{display:flex;gap:6px;min-height:22px}.fzts{display:flex;flex-wrap:wrap;gap:6px}
-.fzts .tg{padding:3px 10px;border-radius:999px;background:#ffffff14;font-size:12px;font-weight:800}.fzts .tg.al{background:#ef444433;color:#fca5a5}.fzts .tg.sh{background:#fbbf2433;color:#fcd34d}.fzts .tg.sz{background:#3b82f633;color:#93c5fd}.fzts .tg.mu{background:#a855f733;color:#e9d5ff}
-.fzbx{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:14px;background:#00000026;border:1px solid #ffffff14}.fzbx>small{color:var(--mu)}
-.fzlb{display:flex;justify-content:space-between;font-weight:800}.fzlb b{color:#fbbf24}.fzbar{height:12px;border-radius:7px;background:#ffffff14;overflow:hidden}.fzbar i{display:block;height:100%;background:linear-gradient(90deg,var(--c),#fff8);border-radius:7px;transition:width .45s linear}
+/* scène : faille violette autour du Pokémon */
+.fzsc{position:relative;height:300px;border-radius:16px;overflow:hidden;isolation:isolate;border:1px solid #ffffff24;background:#0d1530}
+.fzbg{position:absolute;inset:0;z-index:0;background:linear-gradient(#27406b 0%,#4a6a8f 42%,#6b7d99 55%,#1d4f7c 56%,#1a4570 100%)}
+.fzbg::before{content:"";position:absolute;left:0;right:0;top:56%;bottom:0;background:repeating-linear-gradient(0deg,#ffffff0d 0 3px,transparent 3px 11px)}
+.fzbg::after{content:"";position:absolute;left:62%;top:14%;width:96px;height:34px;background:#8d8a9c;box-shadow:16px -14px 0 0 #8d8a9c,40px 6px 0 0 #8d8a9c,-12px 8px 0 0 #8d8a9c;opacity:.55}
+.fzrf{position:absolute;left:50%;top:52%;width:330px;height:330px;margin:-165px 0 0 -165px;z-index:1;pointer-events:none}
+.fzrf i{position:absolute;inset:0;border-radius:50%}
+.fzrf i:nth-child(1){background:conic-gradient(from 0deg,#7c3aed,#c026d3,#4c1d95,#a855f7,#6d28d9,#7c3aed);filter:blur(10px);opacity:.85;animation:fzsp 5s linear infinite;-webkit-mask:radial-gradient(circle,transparent 38%,#000 40%,#000 62%,transparent 72%);mask:radial-gradient(circle,transparent 38%,#000 40%,#000 62%,transparent 72%)}
+.fzrf i:nth-child(2){inset:12%;border:3px dashed #e9d5ff;opacity:.7;animation:fzsp 3s linear infinite reverse}
+.fzrf i:nth-child(3){inset:24%;background:radial-gradient(circle,#2e106555,#1e0b4799 60%,transparent 70%);animation:fzpu 2.2s ease-in-out infinite}
+.fzrf b{position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,transparent 45%,color-mix(in srgb,var(--ac) 28%,#a855f7) 62%,transparent 72%);opacity:.5;animation:fzpu 2.8s ease-in-out infinite}
+@keyframes fzsp{to{transform:rotate(360deg)}}@keyframes fzpu{50%{transform:scale(1.07);opacity:.9}}
+.fzmn{position:absolute;left:50%;top:54%;z-index:3;transform:translate(-50%,-50%)}
+.fzmw{--sz:1;transform:scale(var(--sz));transform-origin:50% 80%}
+.fzpx{display:block;width:216px;height:216px;image-rendering:pixelated;object-fit:contain;filter:drop-shadow(0 6px 8px #000a)}
+.fzsc.dyn .fzmw{filter:drop-shadow(0 0 14px #ef4444)}
+.fzsc.idle .fzmn,.fzsc.stb .fzmn{animation:fzji calc(.5s + (1 - var(--inst))*.9s) steps(2,end) infinite}
+.fzsc.idle .fzpx,.fzsc.stb .fzpx{animation:fzfl calc(.35s + (1 - var(--inst))*1.2s) steps(1,end) infinite}
+@keyframes fzji{0%{transform:translate(-50%,-50%) translate(calc(var(--inst)*-9px),calc(var(--inst)*4px))}50%{transform:translate(-50%,-50%) translate(calc(var(--inst)*8px),calc(var(--inst)*-6px))}100%{transform:translate(-50%,-50%) translate(calc(var(--inst)*-4px),calc(var(--inst)*7px))}}
+@keyframes fzfl{0%{opacity:1}45%{opacity:calc(1 - var(--inst)*.35)}50%{opacity:1;transform:translateX(calc(var(--inst)*5px))}}
+.fzsc.sg .fzrf{filter:hue-rotate(150deg) saturate(2.4) brightness(1.1)}.fzsc.sg{animation:fzsk .22s linear infinite}
+@keyframes fzsk{0%{transform:translate(0,0)}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-3px)}100%{transform:translate(0,0)}}
+.fzsc.pls .fzrf{animation:fzpl .38s ease-out}@keyframes fzpl{40%{transform:scale(1.14);filter:brightness(1.6)}}
+.fzsc.lock .fzrf i:nth-child(1){animation-duration:9s;opacity:.95}.fzsc.lock .fzrf i:nth-child(2){border-style:solid;border-color:#a5f3fc}
+.fzsc.lock .fzmn{animation:fzfl2 3s ease-in-out infinite}@keyframes fzfl2{50%{transform:translate(-50%,-52%)}}
+.fzsc.anc .fzrf{animation:fzcl 1.9s ease-in forwards}@keyframes fzcl{0%{transform:scale(1)}70%{transform:scale(.62) rotate(120deg);filter:brightness(1.8)}100%{transform:scale(.7) rotate(180deg)}}
+.fzsc.anc .fzmw{animation:fzsq 1.9s ease-in-out}@keyframes fzsq{0%{transform:scale(var(--sz))}50%{transform:scale(calc(var(--sz)*.82));filter:brightness(1.6)}100%{transform:scale(var(--sz))}}
+.fzsc.fail .fzrf{animation:fzfa .6s ease-out}@keyframes fzfa{0%{filter:brightness(2.2) hue-rotate(-40deg);transform:scale(1.18)}100%{filter:none}}
+.fzbl{position:absolute;left:50%;top:60%;width:60px;height:60px;margin-left:-30px;z-index:4;image-rendering:pixelated;opacity:0;pointer-events:none}
+.fzsc.win .fzmn{transition:none}.fzsc.win.play .fzmn{animation:fzsu 1.1s cubic-bezier(.6,0,.9,.4) forwards}
+@keyframes fzsu{0%{transform:translate(-50%,-50%) scale(1);filter:brightness(1)}60%{filter:brightness(3) saturate(0)}100%{transform:translate(-50%,-50%) scale(.04);opacity:0;filter:brightness(4)}}
+.fzsc.win .fzmn{opacity:0}.fzsc.win:not(.play) .fzbl{opacity:1;top:68%}
+.fzsc.win.play .fzbl{animation:fzbd 2.4s ease-out 1s forwards}
+@keyframes fzbd{0%{opacity:1;transform:translateY(-110px) scale(.4)}25%{transform:translateY(0) scale(1)}35%{transform:translateY(-24px)}45%{transform:translateY(8px) rotate(0)}58%{transform:translateY(8px) rotate(-22deg)}70%{transform:translateY(8px) rotate(22deg)}82%{transform:translateY(8px) rotate(-14deg)}100%{opacity:1;transform:translateY(8px) rotate(0)}}
+.fzsc.win .fzrf{animation:fzcs 1.6s ease-in forwards}.fzsc.win:not(.play) .fzrf{opacity:0}
+@keyframes fzcs{0%{transform:scale(1)}100%{transform:scale(.05) rotate(360deg);opacity:0}}
+.fzsc.win .fzsh{position:absolute;left:50%;top:68%;width:10px;height:10px;margin:-5px;border-radius:50%;z-index:5;pointer-events:none}
+.fzsc.win.play .fzsh{animation:fzsr 1.3s ease-out 3.3s forwards;box-shadow:0 0 0 0 #fff}
+@keyframes fzsr{0%{background:#fff;box-shadow:0 0 0 0 #fff8,0 0 0 0 #fbbf2488}100%{background:transparent;box-shadow:0 0 0 70px #fff0,0 0 0 120px #fbbf2400}}
+.fzsc.lose .fzrf{filter:grayscale(.8) brightness(.6)}.fzsc.lose.play .fzmn{animation:fzlo 1s ease-out}@keyframes fzlo{0%{transform:translate(-50%,-50%) scale(1.25)}100%{transform:translate(-50%,-50%) scale(1)}}
+.fztags{position:absolute;left:10px;top:10px;z-index:6;display:flex;flex-wrap:wrap;gap:6px;max-width:75%}
+.fztags .tg{padding:3px 10px;border-radius:999px;background:#000000a0;font-size:12px;font-weight:800;color:#fff}.fztags .tg.al{background:#ef4444cc}.fztags .tg.sh{background:#f59e0bdd;color:#1a1200}.fztags .tg.sz{background:#2563ebcc}.fztags .tg.mu{background:#7e22cedd}
+.fzfx{position:absolute;inset:0;z-index:7;pointer-events:none;overflow:hidden}.fzfx em{position:absolute;bottom:30%;font-style:normal;font-weight:900;font-size:20px;text-shadow:0 2px 4px #000;animation:fzup .9s ease-out forwards}
+@keyframes fzup{to{transform:translateY(-90px);opacity:0}}
+.fzbx{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;background:#00000026;border:1px solid #ffffff14}.fzbx>small{color:var(--mu)}
+.fzlb{display:flex;justify-content:space-between;font-weight:800}.fzlb b{color:#c4b5fd}.fzbar{height:14px;border-radius:8px;background:#ffffff14;overflow:hidden}.fzbar i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#c4b5fd);border-radius:8px;transition:width .12s linear}
+.fzpls{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;border-radius:14px;border:2px solid #a78bfa;background:#7c3aed33;color:#fff;font:900 18px Nunito,system-ui,sans-serif;cursor:pointer;user-select:none;touch-action:manipulation}
+.fzpls i svg{width:22px;height:22px}.fzpls:active{transform:scale(.98)}.fzpls[data-no]{opacity:.65}.fzpls.sg{border-color:#f87171;background:#ef4444aa;animation:fzbl .3s steps(2) infinite}@keyframes fzbl{50%{background:#ef4444}}
 .fzcho{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
 .fzcho button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px;border-radius:14px;border:1px solid var(--c);background:#ffffff0a;color:#fff;text-align:left;cursor:pointer;font-family:inherit}
 .fzcho button:hover{background:#ffffff18}.fzcho button svg{width:22px;height:22px;color:var(--c)}.fzcho b{font-size:15px;color:var(--c)}.fzcho small{color:#cbd5e1;font-size:12px}
 .fzcap{text-align:center}.fzpc{font-size:40px;font-weight:900;color:#fbbf24;line-height:1}.fzcap small{color:var(--mu)}
-.fzpips{display:flex;justify-content:center;gap:8px}.fzpips i{width:14px;height:14px;border-radius:50%;background:#ffffff1c}.fzpips i.on{background:#fbbf24;box-shadow:0 0 8px #fbbf24}
-.fzball{display:grid;place-items:center;height:70px}.fzball img{width:54px;height:54px;image-rendering:pixelated}.fzball.th img{animation:fzth 1.8s ease-in-out}
-@keyframes fzth{0%{transform:translateY(40px) scale(.6)}25%{transform:translateY(-6px) scale(1)}40%{transform:rotate(-24deg)}55%{transform:rotate(24deg)}70%{transform:rotate(-18deg)}85%{transform:rotate(14deg)}100%{transform:rotate(0)}}
+.fzpips{display:flex;justify-content:center;gap:8px}.fzpips i{width:14px;height:14px;border-radius:50%;background:#ffffff1c}.fzpips i.on{background:#fbbf24;box-shadow:0 0 8px #fbbf24}.fzwarn{text-align:center;color:#fca5a5}
 .fzres{text-align:center;align-items:center}.fzres h3{margin:0;font-size:22px}.fzres.win h3{color:#4ade80}.fzres.lose h3{color:#fca5a5}.fzres p{margin:0;color:#cbd5e1}
+.fzres:not(.st){animation:fzin .5s ease-out 3.8s both}@keyframes fzin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fzrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.fzrl span{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:#ffffff14;font-weight:800;font-size:13px}.fzrl img,.fzrl svg{width:20px;height:20px}
+@media(max-width:1000px){.fzrw{grid-template-columns:1fr 1fr;gap:10px}.fzr1{grid-column:1/-1}.fzgo{grid-column:1/-1}}
+@media(max-width:620px){.fztop{flex-direction:column}.fzsqs{width:100%}.fzsq{flex:1;width:auto}.fzrw{grid-template-columns:1fr}.fzsc{height:260px}.fzpx{width:170px;height:170px}.fzst span{font-size:11px;padding:6px}}
 .rxc.fzx{position:relative}.rxc.fzx em{font-style:normal;font-size:10px;font-weight:800}.rxc.fzx.cap{border-color:#4ade8088;background:#22c55e14}.rxc.fzx u{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#22c55e;color:#0b1026;display:grid;place-items:center;text-decoration:none}.rxc.fzx u svg{width:11px;height:11px}
-@media(max-width:560px){.fzst span{font-size:11px;padding:6px}.fzar{flex-basis:100%}.fzbt{width:100%;justify-content:space-between}}
 /* boss monde : paliers repliables */
 .rhwar{display:grid;place-items:center;width:34px;height:22px;margin:6px auto 0;padding:0;border-radius:11px;border:1px solid #ffffff2a;background:#ffffff0f;color:#cbd5e1;cursor:pointer}.rhwar:hover{background:#ffffff1f}
 .rhwar svg{transition:transform .2s}.rhwar.on svg{transform:rotate(180deg)}
@@ -3488,8 +3534,8 @@ a.qkb.qkdc .qki{color:#fff}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e8b2878da9"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=e8b2878da9"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="05833b305a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=05833b305a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11033,57 +11079,83 @@ NAV2.push(["fz","fz","Failles","#8b5cf6","#4c1d95"]);NENG.fz="Rifts";
 try{NAVX.push(["fz","fz","Failles","#8b5cf6","#4c1d95"])}catch(e){}
 {const c=NCAT.find(x=>x[0]=="c_adv")[6];if(!c.includes("fz")){const k=c.indexOf("trn");c.splice(k<0?c.length:k+1,0,"fz")}}
 
-/* nom fr, nom en, couleur, DPS requis, capture, mutation, taille, alpha, chromatique, recharge (min) */
+/* nom fr, nom en, couleur, DPS requis, stabilisation (chance d'ancrage), mutation, taille, alpha, chromatique, recharge (min) */
 const FZT=[
- ["Fissure","Fissure","#22c55e",5e4,.60,.03,.03,.005,.003,3],
- ["Brèche","Breach","#14b8a6",2e5,.45,.06,.06,.010,.004,5],
- ["Rupture","Rupture","#3b82f6",8e5,.32,.10,.10,.020,.006,10],
- ["Déchirure","Tear","#a855f7",3e6,.22,.16,.15,.040,.009,15],
- ["Gouffre","Chasm","#ec4899",1.2e7,.14,.24,.22,.070,.013,25],
- ["Abîme","Abyss","#f59e0b",5e7,.08,.34,.30,.110,.018,40],
- ["Singularité","Singularity","#ef4444",2e8,.04,.46,.40,.160,.025,60],
- ["Chaos","Chaos","#e11d48",1e9,.02,.60,.50,.250,.040,90]];
+ ["Fissure","Fissure","#22c55e",5e4,.80,.03,.03,.005,.003,3],
+ ["Brèche","Breach","#14b8a6",2e5,.70,.06,.06,.010,.004,5],
+ ["Rupture","Rupture","#3b82f6",8e5,.60,.10,.10,.020,.006,10],
+ ["Déchirure","Tear","#a855f7",3e6,.50,.16,.15,.040,.009,15],
+ ["Gouffre","Chasm","#ec4899",1.2e7,.42,.24,.22,.070,.013,25],
+ ["Abîme","Abyss","#f59e0b",5e7,.35,.34,.30,.110,.018,40],
+ ["Singularité","Singularity","#ef4444",2e8,.28,.46,.40,.160,.025,60],
+ ["Chaos","Chaos","#e11d48",1e9,.22,.60,.50,.250,.040,90]];
 /* Pokémon Dynamax (ceux qui ont une forme Dynamax / Gigamax) et Paradoxes par difficulté */
 const FZD=[[12,569,834,841,842,844],[99,68,52,826,839,851],[849,879,884,823],[25,94,858,861],[3,9,131,869],[6,133,143,815],[812,818,809],[892,890]];
 const FZP=[[985,986,988],[989,991,994],[990,995,993],[984,992,1010],[1006,1009,1022],[987,1005,1020],[1021,1023],[1007,1008]];
 const FZPAST=new Set([984,985,986,987,988,989,1005,1007,1009,1020,1021]);
 const FZPOOL=FZD.map((d,i)=>d.concat(FZP[i]));
 const FZDYN=new Set([].concat(...FZD));
-const FZTHR=3;                     /* lancers par faille */
+const FZTHR=3;                     /* tentatives d'ancrage par défaut */
 const fzKind=i=>FZDYN.has(i)?"dyn":FZPAST.has(i)?"past":"fut";
 const fzKindN=k=>k=="dyn"?"Dynamax":k=="past"?LS("Paradoxe du passé","Past paradox"):LS("Paradoxe du futur","Future paradox");
 const fzKindC=k=>k=="dyn"?"#ef4444":k=="past"?"#f59e0b":"#22d3ee";
 const fzPct=x=>{const v=x*100;return (v<1?v.toFixed(1):v<10&&v%1?v.toFixed(1):Math.round(v)).toString().replace(".",",")+" %"};
 const fzMs=ms=>{const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return m>=60?Math.floor(m/60)+" h "+String(m%60).padStart(2,"0"):m+":"+String(s%60).padStart(2,"0")};
+const fzRnd=(a,b)=>a+Math.random()*(b-a);
 
 function fzS(){if(!G.fz||typeof G.fz!="object")G.fz={};const f=G.fz;if(!f.r)f.r={};if(!f.ix)f.ix={};if(!f.st)f.st={n:0,c:0};if(f.cur===undefined)f.cur=null;return f}
 let FZC={d:0,t:0};
 function fzDps(){const n=Date.now();if(n-FZC.t<1500)return FZC.d;let d=0;try{d=ids().reduce((t,i)=>t+base(i),0)*(EVF["d"]||1)*(BIF["d"]||1)}catch(e){}FZC={d,t:n};return d}
 function fzRift(t){const f=fzS(),r=f.r[t]||(f.r[t]={sp:0,cd:0});if(!r.sp){const p=FZPOOL[t];r.sp=p[Math.floor(Math.random()*p.length)]}return r}
 
-/* ---- état d'une faille en cours : 0 sondage · 1 choix · 2 ancrage · 3 résultat ---- */
-function fzDur(t){const q=Math.max(1,fzDps()/FZT[t][3]);return Math.round(Math.max(10,Math.min(45,45/Math.sqrt(q)))*1000)}
+/* ---- état d'une faille : 0 préparation · 1 stabilisation · 2 ancrage · 3 résultat ---- */
+function fzDur(t){const q=Math.max(1,fzDps()/FZT[t][3]);return Math.round(Math.max(14,Math.min(45,50/Math.sqrt(q)))*1000)}
 function fzStart(t){const f=fzS();if(f.cur)return;const T=FZT[t],r=fzRift(t);
  if(Date.now()<r.cd){toast(LS("Cette faille se recharge encore.","This rift is still recharging."));return}
- const d=fzDps();if(d<T[3]){toast(LS("Il te faut "+fmt(T[3])+" de dégâts par seconde pour sonder cette faille.","You need "+fmt(T[3])+" damage per second to probe this rift."));return}
- f.cur={t,ph:0,t0:Date.now(),dur:fzDur(t),sp:r.sp,n:FZTHR,cho:"",tr:null,thr:null,res:null};f.st.n++;save();show()}
-function fzAdv(){const f=fzS(),c=f.cur;if(!c)return false;let ch=false;
- if(c.thr&&Date.now()>=c.thr.at){fzApplyThrow();ch=true}
- if(c.ph==0&&Date.now()>=c.t0+c.dur){c.ph=1;f.ix[c.sp]=Math.max(f.ix[c.sp]||0,1);save();ch=true}
- return ch}
+ const d=fzDps();if(d<T[3]){toast(LS("Il te faut "+fmt(T[3])+" de dégâts par seconde pour ouvrir cette faille.","You need "+fmt(T[3])+" damage per second to open this rift."));return}
+ f.ix[r.sp]=Math.max(f.ix[r.sp]||0,1);
+ f.cur={t,ph:0,sp:r.sp,n:FZTHR,cho:"",tr:null,thr:null,res:null,dur:fzDur(t),stab:null,shown:0};save();show()}
+function fzChoose(k){const f=fzS(),c=f.cur;if(!c||c.ph!=0)return;c.cho=k;c.tr=fzRoll(c.t,k=="amp");c.n=k=="amp"?2:k=="sta"?4:3;c.ph=1;
+ c.stab={p:0,t:Date.now(),sg:0,nx:Date.now()+fzRnd(4000,7000),cd:0,hits:0,cn:0};f.st.n++;save();sfx("pvbuy");show()}
 function fzRoll(t,amp){const T=FZT[t],k=amp?1.5:1,pick=(L,F)=>{const w=L.map(F),s=w.reduce((a,b)=>a+b,0);let x=Math.random()*s;for(let i=0;i<L.length;i++){x-=w[i];if(x<=0)return L[i]}return L[0]};
  const bst=w=>w<2?1+.6*t:1;let mi=0,zi=2;
  if(Math.random()<T[5]*k)mi=pick([1,2,3,4,5,6,8,9,10].filter(i=>MU[i]),i=>MU[i][4]*bst(MU[i][4]));
  if(Math.random()<T[6]*k)zi=pick([3,4,5,6],i=>SZ[i][4]*bst(SZ[i][4]));
  return {mi,zi,al:Math.random()<T[7]*k?1:0,sh:Math.random()<T[8]*k?1:0}}
-function fzChoose(k){const c=fzS().cur;if(!c||c.ph!=1)return;c.cho=k;c.tr=fzRoll(c.t,k=="amp");c.n=k=="amp"?2:k=="sta"?4:3;c.ph=2;save();show()}
-function fzThrow(){const c=fzS().cur;if(!c||c.ph!=2||c.thr||c.n<=0)return;const ok=Math.random()<FZT[c.t][4];c.n--;c.thr={ok,at:Date.now()+1900};save();fzAnim();setTimeout(()=>{if(fzAdv())show()},1950)}
-function fzApplyThrow(){const f=fzS(),c=f.cur;if(!c||!c.thr)return;const ok=c.thr.ok;c.thr=null;
- if(ok){c.res=fzGrant(c);c.ph=3;c.res.ok=1;f.st.c++;f.ix[c.sp]=2;fzEnd(c);sfx(c.tr&&(c.tr.sh)?"shiny":"cap")}
+
+/* ---- stabilisation dynamique : jauge qui monte seule, pulsations du joueur, surtensions à contrer ---- */
+function fzStabTick(){const f=fzS(),c=f.cur;if(!c||c.ph!=1||!c.stab)return false;const s=c.stab,now=Date.now(),dt=Math.min(.4,Math.max(0,(now-s.t)/1000));s.t=now;
+ let rate=100/(c.dur/1000);
+ if(s.sg){if(now<s.sg)rate=-9;else{s.sg=0;s.nx=now+fzRnd(5000,9000)}}
+ else if(now>=s.nx){s.sg=now+2000;try{sfx("flee")}catch(e){}}
+ s.p=Math.max(0,Math.min(100,s.p+rate*dt));
+ if(s.p>=100){s.p=100;c.ph=2;c.shown=0;save();sfx("shiny");return true}
+ return false}
+function fzPulse(){const c=fzS().cur;if(!c||c.ph!=1||!c.stab)return;const s=c.stab,now=Date.now();if(now<s.cd)return;s.cd=now+380;
+ if(s.sg){s.sg=0;s.nx=now+fzRnd(5000,9000);s.p=Math.min(100,s.p+4);s.cn++;fzFx(LS("Contré !","Countered!"),"#4ade80")}
+ else{s.p=Math.min(100,s.p+1.6);s.hits++;fzFx("+","#c4b5fd")}
+ const sc=document.getElementById("fzsc");if(sc){sc.classList.remove("pls");void sc.offsetWidth;sc.classList.add("pls")}
+ if(s.p>=100&&fzStabTick())show();else fzStabDom()}
+function fzFx(txt,col){const e=document.getElementById("fzfx");if(!e)return;const i=document.createElement("em");i.textContent=txt;i.style.color=col;i.style.left=(35+Math.random()*30)+"%";e.appendChild(i);setTimeout(()=>i.remove(),900)}
+function fzStabDom(){const c=fzS().cur;if(!c||c.ph!=1||!c.stab)return;const s=c.stab,sg=s.sg&&Date.now()<s.sg,p=Math.round(s.p);
+ const bi=document.getElementById("fzbi"),pc=document.getElementById("fzpc"),sc=document.getElementById("fzsc"),bt=document.getElementById("fzpl");
+ if(bi)bi.style.width=s.p+"%";if(pc)pc.textContent=p+" %";
+ if(sc){sc.style.setProperty("--inst",(1-s.p/100).toFixed(2));sc.classList.toggle("sg",!!sg)}
+ if(bt){bt.classList.toggle("sg",!!sg);if(Date.now()<s.cd)bt.setAttribute("data-no","1");else bt.removeAttribute("data-no");const l=bt.querySelector("b");if(l)l.textContent=sg?LS("CONTRER !","COUNTER!"):LS("Pulsation","Pulse")}}
+
+/* ---- ancrage : tentatives avec une chance de stabilisation fixe ---- */
+function fzAnchor(){const c=fzS().cur;if(!c||c.ph!=2||c.thr||c.n<=0)return;const ok=Math.random()<FZT[c.t][4];c.n--;c.fail=0;c.thr={ok,at:Date.now()+1900};save();
+ const sc=document.getElementById("fzsc");if(sc){sc.classList.remove("fail");sc.classList.add("anc")}const g=document.querySelector(".fzcur [data-fz=an]");if(g){g.setAttribute("data-no","1");g.innerHTML=ico("target")+" "+LS("Ancrage en cours…","Anchoring…")}
+ sfx("pvbuy");setTimeout(()=>{if(fzAdv())show()},1950)}
+function fzAdv(){const f=fzS(),c=f.cur;if(!c)return false;let ch=false;
+ if(c.thr&&Date.now()>=c.thr.at){fzApply();ch=true}
+ return ch}
+function fzApply(){const f=fzS(),c=f.cur;if(!c||!c.thr)return;const ok=c.thr.ok;c.thr=null;c.shown=0;
+ if(ok){c.res=fzGrant(c);c.res.ok=1;c.ph=3;f.st.c++;f.ix[c.sp]=2;fzEnd(c);sfx(c.tr&&c.tr.sh?"shiny":"cap")}
  else if(c.n<=0){c.res=fzGrant(c,1);c.res.ok=0;c.ph=3;fzEnd(c);sfx("flee")}
- else sfx("flee");save()}
+ else{c.fail=1;sfx("flee")}save()}
 function fzEnd(c){const r=fzRift(c.t);r.sp=0;r.cd=Date.now()+FZT[c.t][9]*60000}
-function fzLeave(){const f=fzS(),c=f.cur;if(!c)return;if(c.ph<3){fzEnd(c)}f.cur=null;save();show()}
+function fzLeave(){const f=fzS(),c=f.cur;if(!c)return;if(c.ph>=1&&c.ph<3)fzEnd(c);f.cur=null;save();show()}
 const FZITEMS=["bi-atk","bi-xp","bi-coin","bi-find","bi-mut","bi-cap"];
 function fzGrant(c,lost){const T=FZT[c.t],pil=c.cho=="pil",out={name:dn(c.sp),notes:[],coins:Math.floor(T[3]*3*(pil?3:1)*(lost?.4:1)),items:[]};
  G.m+=out.coins;
@@ -11100,66 +11172,76 @@ function fzGrant(c,lost){const T=FZT[c.t],pil=c.cho=="pil",out={name:dn(c.sp),no
  out.dyn=FZDYN.has(sp)&&o.it=="dynamax-band";out.n=o.n;out.tr=tr;return out}
 
 /* ---- affichage ---- */
-const fzArt=(i,sh)=>`<img src="${ART}${sh?"shiny/":""}${i}.png" alt="" draggable="false" onerror="this.onerror=null;this.src='${IMG}${sh?"shiny/":""}${i}.png'">`;
+const fzPx=(i,sh)=>`<img class="fzpx" src="${rdPixF(i,sh)}" alt="" draggable="false" onerror="this.onerror=null;this.src='${ART}${sh?"shiny/":""}${i}.png'">`;
 const fzMuStyle=mi=>MU[mi]&&MU[mi][3]?MU[mi][3]:"";
-function fzGrid(){const f=fzS(),d=fzDps(),now=Date.now();
- return `<div class="fzg">${FZT.map((T,t)=>{const r=fzRift(t),q=d/T[3],ok=q>=1,cd=r.cd-now,rdy=ok&&cd<=0,k=fzKind(r.sp);
- const st=!ok?`<span class="fzs bad">${ico("lock")} ${LS("DPS insuffisant","Not enough DPS")}</span>`:cd>0?`<span class="fzs wait">${ico("clock")} <span data-fzcd="${r.cd}">${fzMs(cd)}</span></span>`:`<span class="fzs ok">${ico("check")} ${LS("Prête","Ready")}</span>`;
- return `<div class="fzc${rdy?" rdy":""}${!ok?" lk":""}" style="--c:${T[2]}">
-  <div class="fzh"><b><i>${t+1}</i> ${LS(T[0],T[1])}</b>${st}</div>
-  <div class="fzp"><div class="fzsil ${k}">${fzArt(r.sp,0)}</div><div class="fzin">
-   <div class="fzk"><span>${ico("bolt")} ${LS("Dégâts requis","Required damage")}</span><b class="${ok?"g":"b"}">${fmt(T[3])}/s</b></div>
-   <div class="fzk"><span>${ico("target")} ${LS("Capture","Capture")}</span><b>${fzPct(T[4])}</b></div>
-   <div class="fzk"><span>${ico("spark")} ${LS("Polarité","Polarity")}</span><b style="color:${fzKindC(k)}">${k=="dyn"?"Dynamax":LS("Paradoxe","Paradox")}</b></div></div></div>
-  <div class="fzbr"><i style="width:${Math.min(100,q*100)}%"></i></div><small class="fzq">${ok?LS("Ton équipe fait ×"+(q>=10?Math.round(q):q.toFixed(1))+" du seuil","Your team does ×"+(q>=10?Math.round(q):q.toFixed(1))+" the threshold"):LS("Il te manque "+fmt(T[3]-d)+"/s","You are "+fmt(T[3]-d)+"/s short")}</small>
-  <div class="fzch"><span>${LS("Mutation","Mutation")} <b>${fzPct(T[5])}</b></span><span>${LS("Taille","Size")} <b>${fzPct(T[6])}</b></span><span>Alpha <b>${fzPct(T[7])}</b></span><span>${LS("Chroma","Shiny")} <b>${fzPct(T[8])}</b></span></div>
-  <button class="fzgo" data-fz="go" data-t="${t}" ${rdy?"":"data-no=1"}>${rdy?ico("compass")+" "+LS("Sonder la faille","Probe the rift"):!ok?LS("Seuil non atteint","Threshold not reached"):LS("En recharge","Recharging")}</button></div>`}).join("")}</div>`}
+const fzTags=tr=>tr?`${tr.mi?`<span class="tg mu" style="${fzMuStyle(tr.mi)}">${esc(MU[tr.mi][0])}</span>`:""}${tr.zi>=3?`<span class="tg sz">${esc(SZ[tr.zi][0])}</span>`:""}${tr.al?'<span class="tg al">Alpha</span>':""}${tr.sh?`<span class="tg sh">${LS("Chromatique","Shiny")}</span>`:""}${!tr.mi&&tr.zi<3&&!tr.al&&!tr.sh?`<span class="tg">${LS("Aucune particularité","Nothing special")}</span>`:""}`:"";
 
-function fzSteps(ph){const S=[LS("Sondage","Probe"),LS("Choix","Choice"),LS("Ancrage","Anchor")];
- return `<div class="fzst">${S.map((s,i)=>`<span class="${ph>i?"done":ph==i?"on":""}"><i>${ph>i?ico("check"):i+1}</i>${s}</span>`).join("")}</div>`}
-function fzCur(){const f=fzS(),c=f.cur,T=FZT[c.t],ph=c.ph,k=fzKind(c.sp),pr=Math.min(1,(Date.now()-c.t0)/c.dur),sd=I(c.sp),tr=c.tr;
- const show1=ph>=1,types=pr>=.5||show1,traits=ph>=2;
- let art=`<div class="fzar ${k}${show1?" rv":""}" id="fzar"><div class="fzaw" style="${traits&&tr&&tr.mi?fzMuStyle(tr.mi):""}${traits&&tr&&tr.zi>=3?";transform:scale("+(1+.05*(tr.zi-2))+")":""}">${fzArt(c.sp,traits&&tr&&tr.sh)}</div></div>`;
- let info=`<div class="fzmt"><b>${show1?esc(dn(c.sp)):"???"}</b><small>${show1?`<span style="color:${fzKindC(k)}">${fzKindN(k)}</span>`:LS("Identité en cours de sondage","Probing identity")}</small><div class="fzty">${types?tchips(sd.t):""}</div>
-  ${traits&&tr?`<div class="fzts">${tr.mi?`<span class="tg mu" style="${fzMuStyle(tr.mi)}">${esc(MU[tr.mi][0])}</span>`:""}${tr.zi>=3?`<span class="tg sz">${esc(SZ[tr.zi][0])}</span>`:""}${tr.al?'<span class="tg al">Alpha</span>':""}${tr.sh?`<span class="tg sh">${LS("Chromatique","Shiny")}</span>`:""}${!tr.mi&&tr.zi<3&&!tr.al&&!tr.sh?`<span class="tg">${LS("Aucune particularité","Nothing special")}</span>`:""}</div>`:""}</div>`;
- let body="";
- if(ph==0)body=`<div class="fzbx"><div class="fzlb"><span>${LS("Stabilité de la faille","Rift stability")}</span><b id="fzt">${fzMs(c.t0+c.dur-Date.now())}</b></div><div class="fzbar"><i id="fzbi" style="width:${pr*100}%"></i></div><small>${LS("Ton équipe fait "+fmt(fzDps())+"/s : plus tu dépasses "+fmt(T[3])+"/s, plus c'est rapide.","Your team deals "+fmt(fzDps())+"/s: the more you exceed "+fmt(T[3])+"/s, the faster it goes.")}</small></div>`;
- else if(ph==1)body=`<div class="fzbx"><div class="fzlb"><span>${LS("Que fais-tu de cette faille ?","What do you do with this rift?")}</span></div><div class="fzcho">
-  <button data-fz="ch" data-k="amp" style="--c:#ef4444">${ico("bolt")}<b>${LS("Amplifier","Amplify")}</b><small>${LS("Mutation, taille, alpha et chromatique ×1,5 · 2 lancers","Mutation, size, alpha and shiny ×1.5 · 2 throws")}</small></button>
-  <button data-fz="ch" data-k="sta" style="--c:#22c55e">${ico("shield")}<b>${LS("Stabiliser","Stabilize")}</b><small>${LS("4 lancers au lieu de 3 · mêmes chances","4 throws instead of 3 · same odds")}</small></button>
-  <button data-fz="ch" data-k="pil" style="--c:#f59e0b">${ico("coin")}<b>${LS("Piller","Plunder")}</b><small>${LS("Pièces ×3 et objets en plus · 3 lancers","Coins ×3 plus items · 3 throws")}</small></button></div></div>`;
- else if(ph==2)body=`<div class="fzbx"><div class="fzcap"><div class="fzpc">${fzPct(T[4])}</div><small>${LS("de chances par lancer, toujours les mêmes","chance per throw, always the same")}</small></div>
-  <div class="fzpips">${Array.from({length:c.cho=="amp"?2:c.cho=="sta"?4:3},(_,i)=>`<i class="${i<c.n?"on":""}"></i>`).join("")}</div>
-  <div class="fzball${c.thr?" th":""}" id="fzball"><img src="${ITM}poke-ball.png" alt=""></div>
-  <button class="fzgo" data-fz="th" ${c.thr?"data-no=1":""}>${ico("target")} ${c.thr?LS("Lancer en cours…","Throwing…"):LS("Lancer la Ball","Throw the Ball")} · ${c.n} ${LS("restant"+(c.n>1?"s":""),"left")}</button></div>`;
- else{const r=c.res||{};body=`<div class="fzbx fzres ${r.ok?"win":"lose"}"><h3>${r.ok?LS("Capturé !","Captured!"):LS("La faille s'est refermée","The rift closed")}</h3>
+function fzRows(){const f=fzS(),d=fzDps(),now=Date.now();
+ return `<div class="fzlist">${FZT.map((T,t)=>{const r=fzRift(t),q=d/T[3],ok=q>=1,cd=r.cd-now,rdy=ok&&cd<=0,k=fzKind(r.sp),I0=I(r.sp);f.ix[r.sp]=Math.max(f.ix[r.sp]||0,1);
+ const st=!ok?`<span class="fzs bad">${ico("lock")} ${LS("DPS insuffisant","Not enough DPS")}</span>`:cd>0?`<span class="fzs wait">${ico("clock")} <span data-fzcd="${r.cd}">${fzMs(cd)}</span></span>`:`<span class="fzs ok">${ico("check")} ${LS("Ouverte","Open")}</span>`;
+ return `<div class="fzrw${rdy?" rdy":""}${!ok?" lk":""}" style="--c:${T[2]};--ac:${fzKindC(k)}">
+  <div class="fzr1"><span class="fzn">${t+1}</span><div><b>${LS(T[0],T[1])}</b>${st}</div></div>
+  <div class="fzr2"><div class="fzmp ${k}">${fzPx(r.sp,0)}</div><div class="fzmi"><b>${esc(dn(r.sp))}</b><span class="fzpl" style="color:${fzKindC(k)}">${fzKindN(k)}</span><div class="fzty">${tchips(I0.t)}</div></div></div>
+  <div class="fzr3"><div class="fzk"><span>${ico("bolt")} ${LS("Dégâts requis","Required damage")}</span><b class="${ok?"g":"b"}">${fmt(T[3])}/s</b></div><div class="fzbr"><i style="width:${Math.min(100,q*100)}%"></i></div><small>${ok?LS("Ton équipe fait ×"+(q>=10?Math.round(q):q.toFixed(1))+" du seuil","Your team does ×"+(q>=10?Math.round(q):q.toFixed(1))+" the threshold"):LS("Il te manque "+fmt(T[3]-d)+"/s","You are "+fmt(T[3]-d)+"/s short")}</small>
+   <div class="fzk"><span>${ico("target")} ${LS("Stabilisation","Stabilization")}</span><b>${fzPct(T[4])}</b></div></div>
+  <div class="fzr4"><span>${LS("Mutation","Mutation")}<b>${fzPct(T[5])}</b></span><span>${LS("Taille","Size")}<b>${fzPct(T[6])}</b></span><span>Alpha<b>${fzPct(T[7])}</b></span><span>${LS("Chroma","Shiny")}<b>${fzPct(T[8])}</b></span></div>
+  <button class="fzgo" data-fz="go" data-t="${t}" ${rdy?"":"data-no=1"}>${rdy?ico("compass")+" "+LS("Entrer","Enter"):!ok?ico("lock")+" "+LS("Seuil non atteint","Locked"):ico("clock")+" "+LS("Recharge","Recharging")}</button></div>`}).join("")}</div>`}
+
+function fzScene(c){const T=FZT[c.t],k=fzKind(c.sp),tr=c.tr,ph=c.ph,trv=ph>=1&&tr,inst=ph==1&&c.stab?(1-c.stab.p/100):ph==0?1:0;
+ const scale=trv&&tr.zi>=3?1+.12*(tr.zi-2):1,mst=trv&&tr.mi?fzMuStyle(tr.mi):"";
+ const cls=["fzsc",k,ph==0?"idle":"",ph==1?"stb":"",ph==2?"lock":"",c.thr?"anc":"",ph==3&&c.res&&c.res.ok?"win":ph==3?"lose":"",c.fail&&ph==2?"fail":"",ph==3&&!c.shown?"play":""].filter(Boolean).join(" ");
+ return `<div class="${cls}" id="fzsc" style="--c:${T[2]};--ac:${fzKindC(k)};--inst:${inst.toFixed(2)}">
+  <div class="fzbg"></div><div class="fzrf"><i></i><i></i><i></i><b></b></div>
+  <div class="fzmn"><div class="fzmw" style="${mst};--sz:${scale}">${fzPx(c.sp,trv&&tr.sh)}</div></div>
+  <img class="fzbl" src="${ITM}poke-ball.png" alt="" draggable="false">
+  <div class="fzsh"></div>
+  <div class="fztags"><span class="tg k" style="color:${fzKindC(k)}">${fzKindN(k)}</span>${trv?fzTags(tr):""}</div>
+  <div class="fzfx" id="fzfx"></div></div>`}
+
+function fzCur(){const f=fzS(),c=f.cur,T=FZT[c.t],ph=c.ph;let body="";
+ if(ph==0)body=`<div class="fzbx"><div class="fzlb"><span>${LS("Comment abordes-tu cette faille ?","How do you approach this rift?")}</span></div><div class="fzcho">
+  <button data-fz="ch" data-k="amp" style="--c:#ef4444">${ico("bolt")}<b>${LS("Amplifier","Amplify")}</b><small>${LS("Mutation, taille, alpha et chromatique ×1,5 · 2 ancrages","Mutation, size, alpha and shiny ×1.5 · 2 anchors")}</small></button>
+  <button data-fz="ch" data-k="sta" style="--c:#22c55e">${ico("shield")}<b>${LS("Prudence","Careful")}</b><small>${LS("4 ancrages au lieu de 3 · mêmes chances","4 anchors instead of 3 · same odds")}</small></button>
+  <button data-fz="ch" data-k="pil" style="--c:#f59e0b">${ico("coin")}<b>${LS("Piller","Plunder")}</b><small>${LS("Pièces ×3 et objets en plus · 3 ancrages","Coins ×3 plus items · 3 anchors")}</small></button></div></div>`;
+ else if(ph==1){const s=c.stab,sg=s.sg&&Date.now()<s.sg;body=`<div class="fzbx"><div class="fzlb"><span>${LS("Stabilisation de la faille","Rift stabilization")}</span><b id="fzpc">${Math.round(s.p)} %</b></div><div class="fzbar"><i id="fzbi" style="width:${s.p}%"></i></div>
+  <button class="fzpls${sg?" sg":""}" id="fzpl" data-fz="pl"><i>${ico("bolt")}</i><b>${sg?LS("CONTRER !","COUNTER!"):LS("Pulsation","Pulse")}</b></button>
+  <small>${LS("La jauge monte toute seule avec tes "+fmt(fzDps())+"/s. Envoie des pulsations pour aller plus vite, et contre les surtensions (la faille devient rouge) pour ne pas perdre de stabilisation.","The gauge fills by itself with your "+fmt(fzDps())+"/s. Send pulses to go faster, and counter surges (the rift turns red) so you don't lose stability.")}</small></div>`}
+ else if(ph==2){const N=c.cho=="amp"?2:c.cho=="sta"?4:3;body=`<div class="fzbx"><div class="fzcap"><div class="fzpc">${fzPct(T[4])}</div><small>${LS("de stabilisation par ancrage, toujours la même","stabilization chance per anchor, always the same")}</small></div>
+  <div class="fzpips">${Array.from({length:N},(_,i)=>`<i class="${i<c.n?"on":""}"></i>`).join("")}</div>
+  <button class="fzgo big" data-fz="an" ${c.thr?"data-no=1":""}>${ico("target")} ${c.thr?LS("Ancrage en cours…","Anchoring…"):LS("Ancrer la faille","Anchor the rift")} · ${c.n} ${LS("restant"+(c.n>1?"s":""),"left")}</button>
+  ${c.fail&&!c.thr?`<small class="fzwarn">${LS("La faille a résisté. Réessaie !","The rift resisted. Try again!")}</small>`:""}</div>`}
+ else{const r=c.res||{};body=`<div class="fzbx fzres ${r.ok?"win":"lose"}${c.shown?" st":""}"><h3>${r.ok?LS("Capturé !","Captured!"):LS("La faille s'est refermée","The rift closed")}</h3>
   <p>${r.ok?`${esc(r.name)}${r.dyn?" · "+LS("Dynamax avec son bracelet","Dynamax with its band"):""} · ${LS("exemplaires : ","copies: ")}${r.n}`:LS("Le Pokémon est reparti dans sa dimension.","The Pokémon went back to its dimension.")}</p>
   <div class="fzrl"><span>${ico("coin")} +${fmt(r.coins||0)} ₽</span>${(r.items||[]).map(it=>`<span>${ic(it,IT[it]&&IT[it].img)} ${esc(IT[it]?IT[it].n:it)}</span>`).join("")}</div>
-  <button class="fzgo" data-fz="lv">${ico("check")} ${LS("Retour aux failles","Back to rifts")}</button></div>`}
- return `<div class="fzcur" style="--c:${T[2]}"><div class="fzct"><b>${LS(T[0],T[1])}</b><small>${LS("Dégâts requis","Required damage")} ${fmt(T[3])}/s</small>${ph<3?`<button class="fzlv" data-fz="lv">${LS("Abandonner","Give up")}</button>`:""}</div>${fzSteps(Math.min(ph,3))}<div class="fzar2">${art}${info}</div>${body}</div>`}
+  <button class="fzgo big" data-fz="lv">${ico("check")} ${LS("Retour aux failles","Back to rifts")}</button></div>`}
+ const stp=[LS("Approche","Approach"),LS("Stabilisation","Stabilize"),LS("Ancrage","Anchor")];
+ const h=`<div class="fzcur" style="--c:${T[2]}"><div class="fzct"><b>${LS(T[0],T[1])}</b><span>${esc(dn(c.sp))}</span><small>${LS("Dégâts requis","Required damage")} ${fmt(T[3])}/s</small>${ph<3?`<button class="fzlv" data-fz="lv">${LS("Quitter","Leave")}</button>`:""}</div>
+  <div class="fzst">${stp.map((s,i)=>`<span class="${ph>i?"done":ph==i?"on":""}"><i>${ph>i?ico("check"):i+1}</i>${s}</span>`).join("")}</div>${fzScene(c)}${body}</div>`;
+ if(ph==3)c.shown=1;return h}
 
 function fzIndex(){const f=fzS(),kn=i=>(f.ix[i]||0)>=1||!!G.col[i];
  const tot=FZPOOL.reduce((a,p)=>a+p.length,0),got=Object.keys(f.ix).filter(i=>f.ix[i]>=2).length;
  const cell=i=>{const k=kn(i),cp=f.ix[i]>=2;return `<div class="rxc fzx${k?"":" hid"}${cp?" cap":""}" title="${k?esc(dn(i)):"???"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b><em style="color:${k?fzKindC(fzKind(i)):"#64748b"}">${k?(FZDYN.has(i)?"Dynamax":LS("Paradoxe","Paradox")):"?"}</em>${cp?`<u>${ico("check")}</u>`:""}</div>`};
- return `<div class="rix"><h3>${ico("book")} ${LS("Index des failles","Rift index")}</h3><small class="rxn">${LS("Sonde une faille pour révéler une case. La coche indique les Pokémon que tu as capturés dans une faille.","Probe a rift to reveal a slot. The tick marks Pokémon you captured in a rift.")} · <b>${got} / ${tot}</b></small>
+ return `<div class="rix"><h3>${ico("book")} ${LS("Index des failles","Rift index")}</h3><small class="rxn">${LS("Une case se révèle quand tu vois le Pokémon dans une faille. La coche indique ceux que tu as capturés.","A slot is revealed when you see the Pokémon in a rift. The tick marks those you captured.")} · <b>${got} / ${tot}</b></small>
  ${FZT.map((T,t)=>{const L=FZPOOL[t];return `<div class="rxr" style="--c:${T[2]}"><div class="rxh"><b>${t+1} · ${LS(T[0],T[1])}</b><small>${L.filter(i=>(f.ix[i]||0)>=2).length} / ${L.length}</small></div><div class="rxg">${L.map(cell).join("")}</div></div>`}).join("")}</div>`}
 
-function vFz(){const f=fzS();fzAdv();const d=fzDps();
- return `<div class="fz"><div class="fzhd"><div><h2>${ico("fz")} ${LS("Failles dimensionnelles","Dimensional rifts")}</h2><small>${LS("Sonde une faille, choisis ton approche, puis ancre-la pour capturer un Pokémon Dynamax ou Paradoxe.","Probe a rift, pick your approach, then anchor it to capture a Dynamax or Paradox Pokémon.")}</small></div>
- <div class="fzbt"><div class="fzdp"><small>${LS("Ton DPS","Your DPS")}</small><b id="fzdps">${fmt(d)}/s</b></div><button class="rxb" data-fz="ix">${ico("book")} Index</button></div></div>
- ${f.cur?fzCur():fzGrid()}</div>`}
+function vFz(){const f=fzS();fzAdv();const d=fzDps(),tot=FZPOOL.reduce((a,p)=>a+p.length,0),got=Object.keys(f.ix).filter(i=>f.ix[i]>=2).length;
+ return `<div class="fz"><div class="fztop"><div class="fzban"><h2>${ico("fz")} ${LS("Failles dimensionnelles","Dimensional rifts")}</h2>
+  <p>${LS("Des brèches instables s'ouvrent entre les dimensions et laissent passer des <b>Pokémon Dynamax</b> et des <b>Paradoxes</b>. Il faut assez de dégâts par seconde pour ouvrir une faille, puis tu la <b>stabilises</b> (pulsations, surtensions à contrer) et tu l'<b>ancres</b> pour capturer le Pokémon. Plus la faille est difficile, plus il est rare et puissant.","Unstable breaches open between dimensions and let <b>Dynamax Pokémon</b> and <b>Paradoxes</b> through. You need enough damage per second to open a rift, then you <b>stabilize</b> it (pulses, surges to counter) and <b>anchor</b> it to capture the Pokémon. The harder the rift, the rarer and stronger it is.")}</p></div>
+  <div class="fzsqs"><div class="fzsq"><i>${ico("bolt")}</i><small>${LS("Ton DPS","Your DPS")}</small><b id="fzdps">${fmt(d)}/s</b></div>
+  <button class="fzsq ix" data-fz="ix"><i>${ico("book")}</i><small>Index</small><b>${got} / ${tot}</b></button></div></div>
+ ${f.cur?fzCur():`<div class="fzfr"><div class="fzfh"><b>${LS("Choisis une faille","Choose a rift")}</b><small>${LS("Le Pokémon derrière chaque faille est visible. Les 8 niveaux se rechargent séparément.","The Pokémon behind each rift is visible. The 8 levels recharge separately.")}</small></div>${fzRows()}</div>`}</div>`}
 
-/* ---- animation du lancer + tic-tac ---- */
-function fzAnim(){const b=document.getElementById("fzball");if(b)b.classList.add("th");const g=document.querySelector(".fzcur .fzgo[data-fz=th]");if(g){g.setAttribute("data-no","1");g.innerHTML=ico("target")+" "+LS("Lancer en cours…","Throwing…")}}
+/* ---- tic-tac : stabilisation, ancrage, minuteurs, DPS ---- */
 setInterval(()=>{if(tab!="fz")return;try{
  if(fzAdv()){show();return}
  const c=fzS().cur;
- if(c&&c.ph==0){const pr=Math.min(1,(Date.now()-c.t0)/c.dur),bi=document.getElementById("fzbi"),t=document.getElementById("fzt");if(bi)bi.style.width=pr*100+"%";if(t)t.textContent=fzMs(c.t0+c.dur-Date.now());
-  if((pr>=.5)!=(document.querySelectorAll(".fzty .chip").length>0))show()}
+ if(c&&c.ph==1){if(fzStabTick()){show();return}fzStabDom()}
  document.querySelectorAll("[data-fzcd]").forEach(e=>{const l=+e.dataset.fzcd-Date.now();if(l<=0){show()}else e.textContent=fzMs(l)});
- const dp=document.getElementById("fzdps");if(dp&&!c)dp.textContent=fmt(fzDps())+"/s"}catch(e){}},500);
+ const dp=document.getElementById("fzdps");if(dp&&!c)dp.textContent=fmt(fzDps())+"/s"}catch(e){}},120);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fz]");if(!b||b.getAttribute("data-no"))return;e.stopPropagation();e.preventDefault();
- const a=b.dataset.fz;if(a=="go")fzStart(+b.dataset.t);else if(a=="ch")fzChoose(b.dataset.k);else if(a=="th")fzThrow();else if(a=="lv")fzLeave();else if(a=="ix")rxOpen(fzIndex())},true);
+ const a=b.dataset.fz;if(a=="go")fzStart(+b.dataset.t);else if(a=="ch")fzChoose(b.dataset.k);else if(a=="pl")fzPulse();else if(a=="an")fzAnchor();else if(a=="lv")fzLeave();else if(a=="ix")rxOpen(fzIndex())},true);
+document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("#fzsc.stb");if(s&&!e.target.closest("[data-fz]"))fzPulse()},true);
 /* ---------- Hôtel de ville : valeurs estimées des Pokémon −60 % ---------- */
 {const f=tnMonV;tnMonV=function(id,fl){return Math.max(3,Math.round(f(id,fl)*.4))}}
 
