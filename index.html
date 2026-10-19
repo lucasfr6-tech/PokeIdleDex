@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2ab48c9eb7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2ab48c9eb7"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e601cce866"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=e601cce866"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11493,13 +11493,13 @@ try{NAVX.push(["fz","fz","Failles","#8b5cf6","#4c1d95"])}catch(e){}
 /* nom fr, nom en, couleur, DPS requis, stabilisation (chance d'ancrage), mutation, taille, alpha, chromatique, recharge (min) */
 const FZT=[
  ["Fissure","Fissure","#22c55e",5e4,.80,.03,.03,.005,.003,3],
- ["Brèche","Breach","#14b8a6",2e5,.70,.06,.06,.010,.004,5],
- ["Rupture","Rupture","#3b82f6",8e5,.60,.10,.10,.020,.006,10],
- ["Déchirure","Tear","#a855f7",3e6,.50,.16,.15,.040,.009,15],
- ["Gouffre","Chasm","#ec4899",1.2e7,.42,.24,.22,.070,.013,25],
- ["Abîme","Abyss","#f59e0b",5e7,.35,.34,.30,.110,.018,40],
- ["Singularité","Singularity","#ef4444",2e8,.28,.46,.40,.160,.025,60],
- ["Chaos","Chaos","#e11d48",1e9,.22,.60,.50,.250,.040,90]];
+ ["Brèche","Breach","#14b8a6",3e5,.70,.06,.06,.010,.004,5],
+ ["Rupture","Rupture","#3b82f6",2e6,.60,.10,.10,.020,.006,10],
+ ["Déchirure","Tear","#a855f7",1e7,.50,.16,.15,.040,.009,15],
+ ["Gouffre","Chasm","#ec4899",6e7,.42,.24,.22,.070,.013,25],
+ ["Abîme","Abyss","#f59e0b",3e8,.35,.34,.30,.110,.018,40],
+ ["Singularité","Singularity","#ef4444",2e9,.28,.46,.40,.160,.025,60],
+ ["Chaos","Chaos","#e11d48",1e10,.22,.60,.50,.250,.040,90]];
 /* Pokémon Dynamax (ceux qui ont une forme Dynamax / Gigamax) et Paradoxes par difficulté */
 const FZD=[[12,569,834,841,842,844],[99,68,52,826,839,851],[849,879,884,823],[25,94,858,861],[3,9,131,869],[6,133,143,815],[812,818,809],[892,890]];
 const FZP=[[985,986,988],[989,991,994],[990,995,993],[984,992,1010],[1006,1009,1022],[987,1005,1020],[1021,1023],[1007,1008]];
@@ -11572,7 +11572,8 @@ function fzApply(){const f=fzS(),c=f.cur;if(!c||!c.thr)return;const ok=c.thr.ok;
 function fzEnd(c){const r=fzRift(c.t);r.done=c.hr!=null?c.hr:fzHour()}
 function fzLeave(){const f=fzS(),c=f.cur;if(!c)return;if(c.ph>=1&&c.ph<3)fzEnd(c);f.cur=null;save();show()}
 const FZITEMS=["bi-atk","bi-xp","bi-coin","bi-find","bi-mut","bi-cap"];
-function fzGrant(c,lost){const T=FZT[c.t],pil=c.cho=="pil",out={name:dn(c.sp),notes:[],coins:Math.floor(T[3]*3*(pil?3:1)*(lost?.4:1)),items:[]};
+const FZCOIN=[5e4,2e5,8e5,3e6,1.2e7,5e7,2e8,1e9];/* pièces des failles : montants d'avant le rééquilibrage des seuils */
+function fzGrant(c,lost){const T=FZT[c.t],pil=c.cho=="pil",out={name:dn(c.sp),notes:[],coins:Math.floor((FZCOIN[c.t]||T[3])*3*(pil?3:1)*(lost?.4:1)),items:[]};
  G.m+=out.coins;
  if(pil){const n=1+Math.floor(c.t/3);for(let k=0;k<n;k++){const it=FZITEMS[Math.floor(Math.random()*FZITEMS.length)];if(IT[it]){G.inv[it]=(G.inv[it]||0)+1;out.items.push(it)}}
   if(c.t>=4&&IT["bottle-cap"]){G.inv["bottle-cap"]=(G.inv["bottle-cap"]||0)+1;out.items.push("bottle-cap")}}
@@ -12373,6 +12374,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Failles rééquilibrées","Les DPS requis pour ouvrir les failles sont recalés sur la puissance actuelle des joueurs : la Fissure reste accessible dès le début, le Chaos demande maintenant 10 G de DPS.","Rifts rebalanced","The DPS needed to open rifts now matches current player power: Fissure stays open from the start, Chaos now needs 10G DPS."],
   ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Les pièces gagnées par seconde suivent la même échelle. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Coins per second follow the same scale. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
   ["new","Classement « Meilleur Pokémon »","Nouvel onglet dans Classements : le Pokémon le plus fort de chaque joueur, selon le DPS le plus haut jamais atteint (cartes, équipement, prestige et objet tenu compris).","“Best Pokémon” ranking","New tab in Rankings: each player's strongest Pokémon, by the highest DPS ever reached (cards, gear, prestige and held item included)."],
   ["imp","Tour : la puissance compte","Dans la Tour, l'attaque réelle de tes Pokémon compte maintenant, comme en JCJ : les ennemis deviennent plus puissants à chaque étage, et l'écran de l'étage compare leur attaque à celle de ton équipe. Mutations, tailles, chromatiques et Alpha sont visibles en combat.","Tower: power matters","In the Tower, your Pokémon's real attack now counts, like in PvP: enemies get stronger every floor, and the floor screen compares their attack with your team's. Mutations, sizes, shinies and Alpha are shown in battle."],
