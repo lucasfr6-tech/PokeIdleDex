@@ -3640,12 +3640,13 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 .pvtt{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0 4px}.pvtt .pvgo{width:100%;max-width:420px;justify-content:center}
 .pvq2{width:100%;box-sizing:border-box;margin:10px 0;padding:11px 14px;border-radius:12px;border:1px solid var(--ln,#334);background:rgba(255,255,255,.06);color:inherit;font:inherit}
 .pvvc.em{display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.5;border-style:dashed;min-height:90px}
+.slbx{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:8px 0 12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--ln,#334)}.slbx b{display:block}.slbx small{opacity:.75}.slbx button{padding:10px 16px;border-radius:12px;font-weight:800;white-space:nowrap}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="019728629c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=019728629c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b0ca56bea6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=b0ca56bea6"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6701,7 +6702,7 @@ sdRows=function(k){const R=sdRows0(k),d=k=="d",m=gpMul(d?"dmg":"coin");
  return R};
 /* limite de Pokémon */
 const BOXB=150;
-const boxCap=()=>(BOXB+10*PL("bx"))*(gpOn("box")?2:1);
+const boxCap=()=>(BOXB+10*PL("bx")+10*(G.bxc|0))*(gpOn("box")?2:1);
 const boxIds=()=>pIds().filter(i=>!G.col[i].spc);
 const boxN=()=>boxIds().length;
 const boxFull=()=>boxN()>=boxCap();
@@ -6802,6 +6803,7 @@ async function ivSummon(n){if(IVBUSY)return;const B=ivBanner(),tot=ivCost()*n;if
  let nNew=0,nSold=0,gain=0;
  L.forEach(x=>{const id=x.id,ex=G.col[id];x.nw=false;x.sold=0;x.sh=false;
   if(ex){ex.n+=x.k;try{train(id,x.k)}catch(e){}}
+  else if(x.t!="D"&&!x.mi&&!x.zi&&boxFull()){x.sold=x.k;const v=(60*Math.max(1,tgtL())+100)*x.k;G.m+=kxI("sell",v);gain+=v;nSold+=x.k;G.dx[id]=1}
   else{x.nw=true;nNew++;const c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}G.dx[id]=1;rq(id);c.h=mhp(id)}
   if(G.col[id]&&x.mi){G.col[id].mi=Math.max(G.col[id].mi||0,x.mi);G.mut=(G.mut||0)+x.mc}
   if(G.col[id]&&x.zi)G.col[id].zi=Math.max(G.col[id].zi||0,x.zi);
@@ -11680,6 +11682,12 @@ glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B)return;con
  g.bcs=B.cleared;g.gx+=500*n;
  mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
  toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
+
+/* ===== agrandir la boite avec des pieces : +10 places par achat, 25 achats max (150 + 250 + 300 prestige = 700) ===== */
+const BXMAX=25,bxCost=n=>Math.round(1e6*Math.pow(1.35,n));
+{const f=slPanel;slPanel=function(){let h=f.apply(this,arguments);try{const n=G.bxc|0,mx=n>=BXMAX,c=bxCost(n),ok=G.m>=c;
+ h+=`<div class="slbx"><div><b>${ico("pack")} ${LS("Agrandir la boîte","Expand the box")}</b><small>${LS("+10 places par achat","+10 slots per purchase")} · ${n} / ${BXMAX} ${LS("achats","purchases")}${mx?" · "+LS("maximum atteint (le reste vient des points de prestige)","maximum reached (the rest comes from prestige points)"):""}</small></div>${mx?"":`<button class="${ok?"go":""}" data-bxb="1" ${ok?"":"disabled"}>${ico("coin")} +10 · ${fmt(c)} ₽</button>`}</div>`}catch(e){}return h}}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-bxb]");if(!b||b.disabled)return;ev.stopPropagation();const n=G.bxc|0;if(n>=BXMAX)return;const c=bxCost(n);if(G.m<c)return;G.m-=c;G.bxc=n+1;try{IDC=null}catch(e){}save();sfx("coin");toast(LS("Boîte agrandie : +10 places ("+boxCap()+" au total)","Box expanded: +10 slots ("+boxCap()+" total)"));try{slRef()}catch(e){}show()},true);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
