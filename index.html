@@ -3235,6 +3235,32 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pnlock{opacity:.7;filter:grayscale(.6)}
 .pnlock .pni{background:#475569}
 .cp-fl{position:relative}
+/* classement des pièces */
+.rkm-hint{display:block;color:var(--mu);margin:-4px 0 10px;font-size:12px}
+.rkm-w{border-radius:14px;transition:background .25s}.rkm-w.op{background:rgba(255,255,255,.04)}
+.rkm-r{cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;transition:background .15s}.rkm-r:hover,.rkm-r:focus-visible{background:rgba(255,255,255,.06)}
+.rkm-v{color:var(--y)}
+.rkm-ch{display:grid;place-items:center;width:22px;flex:none;color:var(--mu);transition:transform .25s cubic-bezier(.2,.9,.3,1)}.rkm-ch svg{width:16px;height:16px}
+.rkm-w.op .rkm-ch{transform:rotate(90deg);color:var(--y)}
+.rkm-1 .rkx-n{color:#fde047;text-shadow:0 0 8px #fde04788}.rkm-2 .rkx-n{color:#e2e8f0}.rkm-3 .rkx-n{color:#f0a868}
+.rkm-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s cubic-bezier(.2,.9,.3,1)}.rkm-p>*{overflow:hidden;min-height:0}
+.rkm-w.op .rkm-p{grid-template-rows:1fr}
+.rkm-pi{padding:2px 10px 0}.rkm-w.op .rkm-pi{padding-bottom:12px}
+.rkm-ph{display:flex;align-items:center;gap:8px;margin:4px 0 8px}.rkm-ph small{font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--mu)}
+.rkm-pf{margin-left:auto;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;border:1px solid var(--ln);background:var(--gl2);color:var(--tx);font:800 12px Nunito,sans-serif;cursor:pointer}.rkm-pf svg{width:14px;height:14px}
+.rkm-g{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.rkm-c{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px 7px;border-radius:12px;background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 22%,transparent),rgba(0,0,0,.18));border:1px solid color-mix(in srgb,var(--tc) 40%,transparent);min-width:0;opacity:0;transform:translateY(6px)}
+.rkm-w.op .rkm-c{animation:rkmIn .32s cubic-bezier(.2,.9,.3,1) var(--d) forwards}
+@keyframes rkmIn{to{opacity:1;transform:none}}
+.rkm-k{position:absolute;top:4px;left:6px;font:800 11px "Baloo 2",Nunito,sans-serif;color:var(--mu)}
+.rkm-tgs{position:absolute;top:4px;right:5px;display:flex;gap:2px}.rkm-tg{font-style:normal;font:800 9px Nunito,sans-serif;width:14px;height:14px;border-radius:50%;display:grid;place-items:center;color:#1a1200}.rkm-tg.sh{background:#fde047}.rkm-tg.mu{background:#c084fc}.rkm-tg.al{background:#f87171}
+.rkm-s{height:58px;width:100%;display:grid;place-items:center;overflow:hidden}.rkm-s .hv{width:56px!important;height:56px!important;display:grid;place-items:center;transform:none!important}.rkm-s .hvi{max-width:56px!important;max-height:56px!important;width:auto!important;height:auto!important;object-fit:contain}
+.rkm-c b{font-size:12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rkm-c small{font-size:10px;color:var(--mu)}
+.rkm-c em{font-style:normal;font:800 11px Nunito,sans-serif;color:#fca5a5;display:inline-flex;align-items:center;gap:3px}.rkm-c em svg{width:11px;height:11px}
+.rkm-e{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mu);padding:8px 2px}.rkm-e svg{width:16px;height:16px;flex:none}
+@media(max-width:520px){.rkm-g{gap:5px}.rkm-s{height:46px}.rkm-s .hv{width:44px!important;height:44px!important}.rkm-s .hvi{max-width:44px!important;max-height:44px!important}.rkm-c b{font-size:10px}.rkm-c em{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.rkm-p,.rkm-ch{transition:none}.rkm-w.op .rkm-c{animation:none;opacity:1;transform:none}}
+
 /* compteur d'invocations */
 .ivqq{flex:1 1 100%;display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,transparent),transparent 70%);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
 .ivqqt{display:flex;align-items:center;gap:10px}.ivqqi{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}.ivqqi svg{width:20px;height:20px}
@@ -3793,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e949a7091e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=e949a7091e"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="cce44b5a76"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=cce44b5a76"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4652,7 +4678,7 @@ function vPan(){const f=favs3();return `<div class="pan"><div class="pan-bg"><di
 /* ---------- classement ---------- */
 const LB={db:null,uid:"",ok:false,rows:[],sig:"",busy:false,last:0};
 function lbDoc(){const a=G.col[G.av]?G.av:ids()[0]||19,c=G.col[a]||{};return{n:G.name,av:spf(a),avs:c.sh?1:0,ban:G.ban,bf:Math.max(G.cl,G.bf||0),st:G.st,dx:dxn(),caps:G.caps,sh:shinies(),fav:favs3().map(x=>({f:x.f,sh:x.sh,n:x.n,l:x.l,ty:x.ty})),t:Date.now()}}
-async function lbPush(force){if(!LB.ok||LB.busy)return;const d=lbDoc(),sg=[d.n,d.av,d.ban,d.bf,d.st,d.dx,d.tt,d.fr,d.tl,(d.ai||"").length,JSON.stringify(d.fav)].join("|");if(!force&&(sg===LB.sig||Date.now()-LB.last<25000))return;LB.busy=true;try{await LB.db.doc("lb/"+LB.uid).set(d);LB.sig=sg;LB.last=Date.now()}catch(e){}LB.busy=false}
+async function lbPush(force){if(!LB.ok||LB.busy)return;const d=lbDoc(),sg=[d.n,d.av,d.ban,d.bf,d.st,d.dx,d.tt,d.fr,d.tl,(d.ai||"").length,JSON.stringify(d.fav),d.m?Number(d.m).toPrecision(3):0,JSON.stringify(d.t5||[])].join("|");if(!force&&(sg===LB.sig||Date.now()-LB.last<25000))return;LB.busy=true;try{await LB.db.doc("lb/"+LB.uid).set(d);LB.sig=sg;LB.last=Date.now()}catch(e){}LB.busy=false}
 async function lbInit(){try{if(!window.claude||!claude.use)return;const [db,us]=await Promise.all([claude.use("db"),claude.use("user")]);if(!db||!us)return;const id=await us.id();if(!id)return;LB.db=db;LB.uid=String(id);LB.ok=true;setTimeout(socInit,0);
  db.collection("lb").orderBy("bf","desc").limit(200).onSnapshot(s=>{LB.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));if(tab=="lb")lbRefresh()},()=>{});lbPush(true)}catch(e){}}
 function lbRows(){const me=Object.assign({id:LB.uid||"me",me:1},lbDoc()),r=LB.rows.filter(x=>x.id!=me.id&&x.n);r.push(me);return r.sort((a,b)=>(b.bf||0)-(a.bf||0)||(a.t||0)-(b.t||0))}
@@ -8772,7 +8798,7 @@ G.gp={};
 NAVX.push(["rks","trophy","Classements","#eab308","#854d0e"]);NENG.rks="Rankings";
 NCAT.splice(NCAT.findIndex(x=>x[0]=="c_shp"),0,["c_soc","Social","Social","trophy","#e11d48","#881337",["gld","pvp","rks"]]);
 const RKX={v:"lb"};
-const RKT=[["lb","crown",()=>LS("Étage","Floor")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
+const RKT=[["lb","crown",()=>LS("Étage","Floor")],["m","coin",()=>LS("Pièces","Coins")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
 const rkRow=(r,i,val,lab)=>`<div class="rkx-r${r.me?" me":""}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
 function rkBy(key,lab){const R=lbRows().slice().sort((a,b)=>(b[key]||0)-(a[key]||0)||(a.t||0)-(b.t||0));
  return `<div class="box rkx-box"><h3>${ico("trophy")} ${lab}${LB.ok?"":` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r[key]||0,lab)).join("")}</div></div>`}
@@ -8782,12 +8808,48 @@ function rkTwr(){let R=[];try{R=twRows()}catch(e){}
  return `<div class="box rkx-box"><h3>${ico("tower")} ${LS("Classement de la Tour","Tower ranking")}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r.b||0,LS("étage","floor"))).join("")}</div></div>`}
 function vRks(){const v=RKX.v;
  const tabs=`<div class="rkx-tabs">${RKT.map(t=>`<button class="${v==t[0]?"on":""}" data-rk="${t[0]}">${ico(t[1])}<span>${t[2]()}</span></button>`).join("")}</div>`;
- let b="";try{b=v=="lb"?vLB():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
+ let b="";try{b=v=="lb"?vLB():v=="m"?rkCoins():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
  return `<div class="rkx">${tabs}${b}</div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rk]");if(!b)return;RKX.v=b.dataset.rk;if(RKX.v=="pvp"){try{pvS();pvFetch()}catch(_){}}show()});
 {const s0=show;show=function(){if(tab=="lb"){tab="rks";RKX.v="lb"}if(tab=="gem")tab="adv";return s0.apply(this,arguments)}}
 {const q0=qkUi;qkUi=function(){const r=q0.apply(this,arguments);const q=$("qk"),g=q&&q.querySelector('[data-t="gem"]');if(g)g.remove();return r}}
 setInterval(()=>{try{if(tab=="rks"&&RKX.v=="lb")lbRefresh()}catch(e){}},4000);
+
+/* ============ Classement des pièces + top 5 Pokémon de chaque joueur ============ */
+function rkTop5(){try{const L=ids().filter(i=>G.col[i]).map(i=>[i,base(i)]).sort((a,b)=>b[1]-a[1]).slice(0,5);
+ return L.map(([i,a])=>{const c=G.col[i];let f=spf(i);try{if(c.dy&&typeof GMX!="undefined"&&GMX[i])f=GMX[i]}catch(e){}
+  return{f,sh:c.sh?1:0,n:dn(i),l:c.l|0,ty:tp(i),a:Math.round(a),mi:c.mi|0,zi:c.zi|0,al:c.al?1:0}})}catch(e){return[]}}
+{const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{d.m=Math.max(0,Math.floor(G.m||0));d.t5=rkTop5()}catch(e){}return d}}
+const RKM={rows:[],t:0,busy:0,open:null,ok:0};
+async function rkmFetch(force){if(RKM.busy||(!force&&Date.now()-RKM.t<20000))return;if(!LB||!LB.ok||!LB.db)return;RKM.busy=1;
+ try{const q=await LB.db.collection("lb").orderBy("m","desc").limit(100).get();RKM.rows=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(x=>x&&x.n&&typeof x.m=="number");RKM.ok=1}catch(e){}
+ RKM.t=Date.now();RKM.busy=0;if(tab=="rks"&&RKX.v=="m"&&!document.hidden)rkmPaint()}
+function rkmRows(){const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKM.rows.filter(x=>x.id!=me.id);
+ try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
+ R.push(me);return R.sort((a,b)=>(b.m||0)-(a.m||0)||(a.t||0)-(b.t||0)).slice(0,100)}
+function rkmMon(x,k){const c=TC[(x.ty||["normal"])[0]]||"#888";
+ const tags=[x.sh?`<i class="rkm-tg sh" title="${LS("Chromatique","Shiny")}">★</i>`:"",x.mi?`<i class="rkm-tg mu" title="${LS("Muté","Mutated")}">M</i>`:"",x.al?`<i class="rkm-tg al" title="Alpha">α</i>`:""].join("");
+ return `<div class="rkm-c" style="--tc:${c};--d:${k*45}ms"><span class="rkm-k">${k+1}</span>${tags?`<span class="rkm-tgs">${tags}</span>`:""}<div class="rkm-s">${aSpr(x.f,x.sh)}</div><b>${esc(x.n||"?")}</b><small>${LS("Niv.","Lv.")} ${x.l|0}</small><em>${ico("sword")} ${fmt(x.a||0)}</em></div>`}
+function rkmPanel(r){const L=r.t5||[];
+ const body=L.length?`<div class="rkm-g">${L.map(rkmMon).join("")}</div>`:`<div class="rkm-e">${ico("clock")} ${LS("Ses Pokémon apparaîtront dès qu'il se connectera avec la dernière version du jeu.","Their Pokémon will show up once they play on the latest version.")}</div>`;
+ return `<div class="rkm-pi"><div class="rkm-ph"><small>${LS("5 MEILLEURS POKÉMON","TOP 5 POKÉMON")}</small>${r.me?"":`<button class="rkm-pf" data-a="vp" data-t="${esc(String(r.id))}">${ico("user")} ${LS("Voir le profil","View profile")}</button>`}</div>${body}</div>`}
+function rkmRow(r,i){const op=RKM.open===String(r.id);
+ return `<div class="rkm-w${op?" op":""}" data-rkw="${esc(String(r.id))}"><div class="rkx-r rkm-r${r.me?" me":""}${i<3?" rkm-"+(i+1):""}" data-rkm="${esc(String(r.id))}" role="button" tabindex="0" aria-expanded="${op}"><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v rkm-v">${fmt(r.m||0)} ₽<small>${LS("pièces","coins")}</small></span><span class="rkm-ch">${ico("chevr")}</span></div><div class="rkm-p">${op?rkmPanel(r):""}</div></div>`}
+function rkmList(){const R=rkmRows();return R.map(rkmRow).join("")}
+function rkCoins(){rkmFetch();
+ const off=!(LB&&LB.ok);
+ return `<div class="box rkx-box"><h3>${ico("coin")} ${LS("Classement des pièces","Coin ranking")}${off?` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`:""}</h3><small class="rkm-hint">${LS("Touche un joueur pour voir ses 5 meilleurs Pokémon.","Tap a player to see their top 5 Pokémon.")}</small><div class="rkx-l" id="rkml">${rkmList()}</div></div>`}
+function rkmPaint(){const el=$("rkml");if(!el)return;const h=rkmList();if(el.dataset.h===h)return;el.dataset.h=h;el.innerHTML=h}
+function rkmToggle(id){const el=$("rkml");if(!el)return;const prev=RKM.open;RKM.open=prev===id?null:id;
+ el.querySelectorAll(".rkm-w").forEach(w=>{const me=w.dataset.rkw===RKM.open,p=w.querySelector(".rkm-p"),r=w.querySelector(".rkm-r");
+  if(me&&!w.classList.contains("op")){const row=rkmRows().find(x=>String(x.id)===id);if(row)p.innerHTML=rkmPanel(row);void p.offsetWidth;w.classList.add("op");r.setAttribute("aria-expanded","true")}
+  else if(!me&&w.classList.contains("op")){w.classList.remove("op");r.setAttribute("aria-expanded","false");setTimeout(()=>{if(!w.classList.contains("op"))p.innerHTML=""},300)}});
+ el.dataset.h=rkmList();try{sfx("click")}catch(e){}}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-rkm]");if(!t)return;e.stopPropagation();rkmToggle(t.dataset.rkm)},true);
+document.addEventListener("keydown",e=>{if(e.key!="Enter"&&e.key!=" ")return;const t=e.target.closest&&e.target.closest("[data-rkm]");if(!t)return;e.preventDefault();rkmToggle(t.dataset.rkm)});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-rk="m"]');if(b)rkmFetch(true)});
+setInterval(()=>{try{if(tab=="rks"&&RKX.v=="m"&&!document.hidden)rkmFetch()}catch(e){}},5000);
+{const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKM.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
 /* ===== v99 : chat de guilde, délai de 6 h, combat du boss de guilde (moteur de la Tower) ===== */
 const GLCD=6*36e5;
 const glWait=()=>Math.max(0,(glS().lt||0)+GLCD-Date.now());
@@ -12188,6 +12250,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Classement des pièces","Nouvel onglet Pièces dans Classements : les joueurs qui ont le plus de pièces. Touche un joueur pour voir ses 5 meilleurs Pokémon.","Coin ranking","New Coins tab in Rankings: the players with the most coins. Tap a player to see their top 5 Pokémon."],
   ["new","Choix rapide de l'étage","Dans Combat, touche le carré ÉTAGE : une fenêtre s'ouvre pour aller directement à n'importe quel étage déjà atteint, zone par zone, ou en tapant son numéro.","Quick floor picker","In Battle, tap the FLOOR box: a window opens to jump straight to any floor you have reached, zone by zone, or by typing its number."],
   ["imp","Compteur d'invocations","L'onglet Invocation affiche maintenant combien d'invocations tu as faites sur la limite de la rotation (classique et Halloween), et dans combien de temps elle se remet à zéro.","Summon counter","The Summon tab now shows how many summons you have used out of the rotation limit (standard and Halloween), and when it resets."],
   ["new","Bientôt : Four Seasons","Du 12 au 28 novembre, Évoli, ses évolutions et Fragilady aux couleurs des 4 saisons. Un aperçu flouté est visible dans le calendrier (menu ☰) et dans Pokédex > Spéciales > Four Seasons.","Coming soon: Four Seasons","From November 12 to 28, Eevee, its evolutions and Lilligant in the colours of the 4 seasons. A blurred preview is in the calendar (☰ menu) and in Pokédex > Special > Four Seasons."],
