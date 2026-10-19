@@ -3619,12 +3619,33 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 .x6h{display:flex;gap:16px;align-items:flex-start}.x6h h2{margin:0 0 6px}.x6h p{margin:0;color:var(--mu,#94a3b8);line-height:1.45}.x6i{flex:none;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#f59e0b,#ec4899);color:#fff}.x6i svg{width:34px;height:34px}
 .x6l{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.x6m{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff14}.x6m>svg{flex:none;width:20px;height:20px;color:#4ade80;margin-top:2px}.x6m b{display:block}.x6m small{color:var(--mu,#94a3b8)}
 .x6n{color:var(--mu,#94a3b8)}.x6b{display:flex;flex-direction:column;gap:8px;align-items:flex-start}.x6b .go{height:52px;padding:0 24px;font-size:16px}.x6ok{display:flex;gap:10px;align-items:center;padding:12px 16px;border-radius:14px;background:#22c55e22;border:1px solid #22c55e66;color:#4ade80;font-weight:800}.x6ok svg{width:20px;height:20px}
+
+/* equipe de raid compacte sur telephone */
+@media(max-width:900px){
+.tw .tbxm{display:none}.tw .tbi{height:96px}.tw .tbs{gap:8px;padding-bottom:10px}
+.tw .tmain{padding:14px 14px 90px}
+.tw .tsls{grid-template-columns:1fr;gap:8px}
+.tw .tsl{display:grid;grid-template-columns:64px 1fr;grid-template-areas:"a n" "a s" "a m";align-items:center;justify-items:start;gap:2px 10px;padding:8px 46px 8px 10px;border-radius:14px;text-align:left}
+.tw .tsl .tss{grid-area:a;height:64px;width:64px;justify-content:center;align-self:center}
+.tw .tsl>b{grid-area:n;font-size:14px}.tw .tsl>small{grid-area:s;font-size:11px}
+.tw .tsl .tty{display:none}
+.tw .tsl .tmv{grid-area:m;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;width:100%}
+.tw .tsl .tmv button{padding:4px 3px;min-width:0;overflow:hidden}.tw .tsl .tmv button b{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.tw .tsl .tmv button small{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tw .tsl .tsn{left:auto;right:56px;top:8px}
+.tw .tsl .rdrm{right:8px;top:8px;width:36px;height:36px}
+.tw .tsl.em{min-height:48px;display:flex;flex-direction:row;align-items:center;gap:10px;padding:8px 12px}.tw .tsl.em .tsn,.tw .tsl.em>span{position:static}
+}
+.tw .tsl .rdrm{z-index:5;cursor:pointer}.tw .tsl .tss{pointer-events:none}
+.tw .tlist .rdpl{min-height:260px}
+.pvtt{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0 4px}.pvtt .pvgo{width:100%;max-width:420px;justify-content:center}
+.pvq2{width:100%;box-sizing:border-box;margin:10px 0;padding:11px 14px;border-radius:12px;border:1px solid var(--ln,#334);background:rgba(255,255,255,.06);color:inherit;font:inherit}
+.pvvc.em{display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.5;border-style:dashed;min-height:90px}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2e5b6b591f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2e5b6b591f"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ff67aa7199"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ff67aa7199"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6146,7 +6167,7 @@ function rdtRender(){let o=$("rdt");if(!o){o=document.createElement("div");o.id=
   return `<div class="tsl"><span class="tsn">${i==0?LS("Ouvre","Lead"):i+1}</span><button class="rdrm" data-rd="trm" data-i="${id}" title="${LS("Retirer","Remove")}">${ico("x")}</button><div class="tss">${rdFixImg(rdArtOf(id))}</div><b>${dn(id)}</b><small>${LS("Niv.","Lv.")} ${c.l}</small><div class="tty">${tchips(tp(id))}</div><div class="tmv">${ms.map((m,j)=>{const e=m.c=="u"?1:rdEff(m,b.types);return `<button class="${j==cur?"on":""}" data-rd="tmv" data-i="${id}" data-j="${j}" style="--tc:${TC[m.t]}"><b>${esc(m.n)}</b><small>${m.c=="u"?LS("Soutien","Support"):m.p+" · "+(e>1?LS("fort","strong"):e==0?LS("nul","none"):e<1?LS("faible","weak"):"=")}</small></button>`}).join("")}</div></div>`};
  o.className="on";o.style.setProperty("--c",t.c);o.innerHTML=`<div class="tw"><aside class="tbs"><button class="rdx" data-rd="tx">${ico("x")}</button><small class="tk">${RTB.kind=="wb"?LS("Boss monde","World boss"):LS("Raid ","Raid ")+LS(t.n[0],t.n[1])}</small><div class="tbi">${rdFixImg(b.pix,b.gm||b.form=="etern"?rdPixF(b.sp,b.sh):"")}</div><h2>${esc(b.name)}</h2><div class="tty">${tchips(b.types)}<span class="rdlv">${LS("Niv.","Lv.")} ${b.L}</span></div>
  <div class="tbx"><b>${LS("Faiblesses","Weaknesses")}</b><div class="tty">${weak.length?weak.map(x=>`<span class="chip" style="background:${TC[x]}">${TFR[x]}</span>`).join(""):"—"}</div></div>
- <div class="tbx"><b>${LS("Attaques du boss","Boss moves")}</b>${b.moves.map(m=>`<div class="tbm" style="--tc:${TC[m.t]}"><i></i><span>${esc(m.n)}</span><em>${m.c=="u"?LS("Soutien","Support"):m.p}</em></div>`).join("")}</div>
+ <div class="tbx tbxm"><b>${LS("Attaques du boss","Boss moves")}</b>${b.moves.map(m=>`<div class="tbm" style="--tc:${TC[m.t]}"><i></i><span>${esc(m.n)}</span><em>${m.c=="u"?LS("Soutien","Support"):m.p}</em></div>`).join("")}</div>
  <small class="tn">${LS("Niveau conseillé ","Advised level ")}${t.rec} · ${RTB.kind=="wb"?LS("Essais : ","Tries: ")+rdWTries()+" / 5":LS("Tentatives : ","Attempts: ")+rdAtt().left+" / 5"}</small></aside>
  <section class="tmain"><div class="tth"><div><h2>${LS("Ton équipe","Your team")} <em>${RTB.team.length} / 4</em></h2><small>${LS("Un seul Pokémon combat à la fois. Le suivant entre quand il tombe, et tu peux changer en plein combat.","One Pokémon fights at a time. The next steps in when one falls, and you can switch mid-battle.")}</small></div><button data-rd="tauto" class="gh">${ico("spark")} ${LS("Équipe conseillée","Best team")}</button></div>
  <div class="tsls">${[0,1,2,3].map(slot).join("")}</div>
@@ -11581,6 +11602,9 @@ setInterval(()=>{try{const r=rdState(),k=rdWeekK();if(r.wk3===k||!WB.ok||WB.wk!=
 
 /* resync classement boss monde */
 setInterval(()=>{try{const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db&&LB.uid)||r.wd.k!=rdWeekK()||!(r.wd.d>0))return;wbInit();const e=WB.rows.find(x=>x.id==LB.uid);if((!e||(+e.d||0)<r.wd.d)&&Date.now()-wbSN>6000)wbSend()}catch(e){}},5000);
+
+/* equipe de raid : garde la position de defilement apres chaque changement (telephone) */
+{const f=rdtRender;rdtRender=function(){const w=document.querySelector("#rdt .tw"),st=w?w.scrollTop:0,ae=document.activeElement,q=ae&&ae.id=="rdtq",pos=q?ae.selectionStart:0;const r=f.apply(this,arguments);try{const n=document.querySelector("#rdt .tw");if(n&&st)n.scrollTop=st;if(q){const i=$("rdtq");if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch(e){}}}}catch(e){}return r}}
 /* ===== Prestige › x6 : vitesse ×6 dans les modes de combat à vitesse réglable (20 000 points de prestige) ===== */
 const X6C=20000;let X6T="pr";
 function pvNextSp(s){return s>=6?1:s>=3?(G.x6?6:1):s+1}
@@ -11597,6 +11621,40 @@ const vRebX=(()=>{const v0=vReb;return function(){
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-x6t],[data-x6b]");if(!t)return;e.stopPropagation();e.preventDefault();
  if(t.dataset.x6t){X6T=t.dataset.x6t;show();return}
  if(!G.x6&&(G.pp||0)>=X6C){G.pp-=X6C;G.x6=1;try{sfx("prest")}catch(x){}toast(LS("Vitesse ×6 débloquée !","×6 speed unlocked!"));save();show()}},true);
+/* ===== JCJ : equipe modifiable pour un seul duel (la defense ne change pas) ===== */
+PVX.tt=null;PVX.ttf=null;PVX.q2="";PVX.pg2=1;PVX.ed=0;
+{
+const fPrev=pvPreview,fStart=pvStart,fDuel=pvDuel;
+const swap=(fn)=>{const p=pvS(),real=p.tm;if(PVX.tt&&PVX.tt.length)p.tm=PVX.tt.slice();try{return fn()}finally{p.tm=real}};
+pvPreview=function(){
+ if(PVX.ttf!==PVX.cur){PVX.tt=null;PVX.ttf=PVX.cur;PVX.ed=0}
+ if(PVX.ed){pvEditHtml();return}
+ swap(()=>fPrev());
+ try{const m=$("pvm"),g=m&&m.querySelector(".pvgo.big");if(g){const d=document.createElement("div");d.className="pvtt";d.innerHTML=`<button class="pvgo sm gr" data-pv="tte">${pvIc("team")} ${PVX.tt?"Modifier l'équipe de ce combat":"Changer mon équipe pour ce combat"}</button>${PVX.tt?`<button class="pvgo sm gr" data-pv="ttz">${pvIc("x")} Remettre mon équipe de défense</button>`:""}<small class="pvdim c">${PVX.tt?"Équipe spéciale pour ce match seulement.":"Seulement pour ce match."} Ton équipe de défense ne change pas.</small>`;g.parentNode.insertBefore(d,g)}}catch(e){}
+};
+pvStart=function(){if(!pvS().tm.length)return;const p=pvS();if(PVX.tt&&PVX.tt.length==6&&PVX.tt.every(id=>G.col[id])){const real=p.tm;p.tm=PVX.tt.slice();let r;try{r=fStart()}finally{p.tm=real}return r}return fStart()};
+pvDuel=function(k){PVX.tt=null;PVX.ed=0;return fDuel(k)};
+}
+function pvEditHtml(){const t=PVX.tt||pvS().tm.slice(),own=pvOwned2();
+ const sl=[0,1,2,3,4,5].map(i=>{const id=t[i];return id?`<button class="pvvc me" data-pv="ttr:${i}">${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><small>Retirer</small></button>`:`<div class="pvvc em"><b>${i+1}</b><small>Libre</small></div>`}).join("");
+ const n=PVX.pg2*48;
+ pvModal(`<div class="pvmb" data-pv="close"></div><div class="pvmc pvvs"><button class="pvcl" data-pv="close">${pvIc("x")}</button>
+ <div class="pvvt">Équipe pour ce combat<em>${t.length} / 6 · ta défense reste inchangée</em></div><div class="pvvg" id="pvtts">${sl}</div>
+ <input id="pvq2" type="search" class="pvq2" placeholder="Rechercher un Pokémon ou un type…" value="${esc(PVX.q2)}" autocomplete="off">
+ <div class="pvgr" id="pvgr2">${own.slice(0,n).map(id=>`<button class="pvcd ${t.includes(id)?"on":""}" data-pv="tta:${id}">${t.includes(id)?`<i class="pvbd">${t.indexOf(id)+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(pvNoMf(id,()=>tp(id)))}</span><small>Puissance ${pvPow(id)}</small></button>`).join("")}${own.length>n?`<button class="pvmore" data-pv="ttm">Afficher plus (${own.length-n})</button>`:""}</div>
+ <button class="pvgo big" data-pv="ttv" ${t.length==6?"":"disabled"}>${pvIc("check")||""} ${t.length==6?"Valider cette équipe":"Choisis "+(6-t.length)+" Pokémon de plus"}</button></div>`);
+ const sc=$("pvm").querySelector(".pvmc");if(sc&&PVX.sc2)sc.scrollTop=PVX.sc2}
+function pvOwned2(){const q=PVX.q2.trim().toLowerCase();return ids().filter(id=>{if(!q)return true;const t=tp(id);return pvNm(id).toLowerCase().includes(q)||t.some(x=>TFR[x].toLowerCase().includes(q))}).sort((a,b)=>pvPow(b)-pvPow(a))}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-pv]");if(!b||b.disabled)return;const a=b.dataset.pv,k=a.split(":")[0],v=a.slice(a.indexOf(":")+1);
+ if(!/^tt[a-z]$/.test(k))return;ev.stopPropagation();const sc=$("pvm")&&$("pvm").querySelector(".pvmc");PVX.sc2=sc?sc.scrollTop:0;
+ if(k=="tte"){if(!PVX.tt)PVX.tt=pvS().tm.slice();PVX.ed=1;PVX.q2="";PVX.pg2=1;PVX.sc2=0;pvPreview()}
+ else if(k=="ttz"){PVX.tt=null;PVX.lead=0;PVX.ed=0;pvPreview()}
+ else if(k=="ttr"){PVX.tt.splice(+v,1);pvPreview()}
+ else if(k=="tta"){const id=+v,i=PVX.tt.indexOf(id);if(i>=0)PVX.tt.splice(i,1);else if(PVX.tt.length<6&&G.col[id])PVX.tt.push(id);else toast("Équipe complète : retire un Pokémon d'abord.");pvPreview()}
+ else if(k=="ttm"){PVX.pg2++;pvPreview()}
+ else if(k=="ttv"){if(PVX.tt.length==6){PVX.ed=0;PVX.lead=0;PVX.sc2=0;pvPreview()}}
+},true);
+document.addEventListener("input",ev=>{if(ev.target&&ev.target.id=="pvq2"){PVX.q2=ev.target.value;PVX.pg2=1;const sc=$("pvm").querySelector(".pvmc"),pos=ev.target.selectionStart;PVX.sc2=sc?sc.scrollTop:0;pvEditHtml();const i=$("pvq2");if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch(e){}}}});
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
