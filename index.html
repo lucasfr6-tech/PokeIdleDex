@@ -3644,8 +3644,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d3b110c0e4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=d3b110c0e4"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8e318267e6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=8e318267e6"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11655,6 +11655,15 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  else if(k=="ttv"){if(PVX.tt.length==6){PVX.ed=0;PVX.lead=0;PVX.sc2=0;pvPreview()}}
 },true);
 document.addEventListener("input",ev=>{if(ev.target&&ev.target.id=="pvq2"){PVX.q2=ev.target.value;PVX.pg2=1;const sc=$("pvm").querySelector(".pvmc"),pos=ev.target.selectionStart;PVX.sc2=sc?sc.scrollTop:0;pvEditHtml();const i=$("pvq2");if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch(e){}}}});
+
+/* boss de guilde : reinstalle la recuperation par boss (une ancienne version ecrasait la bonne) */
+glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B||g.bs.bt==null&&!(g.bs.dmg>0)||!(glBt({bs:g.bs})>0))return;
+ if(g.bcs==null)g.bcs=0;const n=B.cleared-g.bcs;if(n<=0)return;
+ let rw=[];for(let s=g.bcs+1;s<=B.cleared;s++)rw=rw.concat(glStRw(s));const mg={};rw.forEach(x=>{const k=x[0]+(x[1]&&x[0]=="i"?":"+x[1]:"");if(mg[k])mg[k][x[0]=="i"?2:1]+=x[x.length-1];else mg[k]=x.slice()});rw=Object.values(mg);
+ const rk=B.dm.findIndex(x=>x.id==S.me);rw=rw.concat(rk==0?[["i","master-ball",1]]:[]);
+ g.bcs=B.cleared;g.gx+=500*n;
+ mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
+ toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
