@@ -3644,8 +3644,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="846e1da124"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=846e1da124"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="dbc1c65006"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=dbc1c65006"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6797,7 +6797,7 @@ const ivW=(L,W)=>{let r=Math.random()*L.reduce((t,i)=>t+W(i),0);for(const i of L
 const ivMu=()=>ivW([1,2,3,4,5,6,8,9,10],i=>MU[i][4]),ivSz=()=>ivW([3,4,5,6],i=>SZ[i][4]);
 async function ivSummon(n){if(IVBUSY)return;const B=ivBanner(),tot=ivCost()*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
  IVBUSY=1;G.m-=tot;const S=IV(),res={};
- for(let i=0;i<n;i++){const[id,t]=ivRoll(S,B),x=res[id]=res[id]||{id,t,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.015){if(Math.random()<.5){x.mi=Math.max(x.mi,ivMu());x.mc++}else x.zi=Math.max(x.zi,ivSz())}}
+ for(let i=0;i<n;i++){const[id,t]=ivRoll(S,B),x=res[id]=res[id]||{id,t,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.05){x.mi=Math.max(x.mi,ivMu());x.mc++}if(Math.random()<.05)x.zi=Math.max(x.zi,ivSz());if(Math.random()<.05)x.al=1;if(Math.random()<.02)x.shn=1}
  const L=Object.values(res);try{await preload(L.map(x=>x.id))}catch(e){}
  let nNew=0,nSold=0,gain=0;
  L.forEach(x=>{const id=x.id,ex=G.col[id];x.nw=false;x.sold=0;x.sh=false;
@@ -6806,7 +6806,7 @@ async function ivSummon(n){if(IVBUSY)return;const B=ivBanner(),tot=ivCost()*n;if
   else{x.nw=true;nNew++;const c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}G.dx[id]=1;rq(id);c.h=mhp(id)}
   if(G.col[id]&&x.mi){G.col[id].mi=Math.max(G.col[id].mi||0,x.mi);G.mut=(G.mut||0)+x.mc}
   if(G.col[id]&&x.zi)G.col[id].zi=Math.max(G.col[id].zi||0,x.zi);
-  if(G.col[id]&&Math.random()<1-Math.pow(1-.004,x.k)){G.col[id].sh=1;x.sh=true}});
+  if(G.col[id]&&x.al)G.col[id].al=1;if(G.col[id]&&x.shn){G.col[id].sh=1;x.sh=true}});
  IDC=null;recomp();save();IVBUSY=0;sfx(L.some(x=>x.t=="D")?"shiny":L.some(x=>x.t=="UR")?"big":"prest");
  L.sort((a,b)=>IVT.indexOf(a.t)-IVT.indexOf(b.t)||a.id-b.id);ivPop(L,n,nNew,nSold,gain);if(tab=="inv")show()}
 function ivTile(id,t,x){const c=G.col[id],mi=x?x.mi:0,zi=x?x.zi:0,fx=mi&&MU[mi]?MU[mi][3].replace(/opacity:[\d.]+;?/,""):"";
@@ -8937,7 +8937,7 @@ wkBody.inv=()=>{
  const rt=["D","UR","SSR","SR","N"].map(k=>[N[k],IVRT[k].toString().replace(".",",")+" %"]);
  return `<p class="lead">L'Invocation fait apparaître des Pokémon d'un <b>pool dédié</b> de 26 Pokémon, rotatif toutes les 2 heures avec une bannière mise en avant.</p>
  ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie Divin","350"]])}
- ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque invocation a aussi <b>1,5 %</b> de chance de donner une mutation ou une grande taille.</p>`)}
+ ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque Pokémon invoqué a aussi <b>5 %</b> de chance d'avoir une mutation, <b>5 %</b> une taille hors norme, <b>5 %</b> le statut Alpha et <b>2 %</b> d'être chromatique (tirages séparés).</p>`)}
  ${wsx("Garanties",`<ul class="wks2"><li><b>Divin</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
  ${wsx("Prix et lots",`<p>Une invocation coûte <b>40 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
  ${wn("info","Doublons","Chaque copie compte pour les étoiles (page Ascensions).")}`};
