@@ -3723,8 +3723,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d7b0f369c8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=d7b0f369c8"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2e8e62356d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2e8e62356d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3923,7 +3923,7 @@ const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*SKM("e")*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,8)),0)/100*(1+.1*PL("pn"));
 const pdx=()=>1+dxn()*.004,am=()=>1+Object.keys(G.ach).length*.005+tlv().l*.004+TBV;
-let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*QB.d*FRB(),a*cb(1)*(1+.12*PL("pc"))*QB.c]};
+let GM=[1,1];let recomp=()=>{PANS=new Set((G.fav||[]).filter(f=>f&&G.col[f]));const a=sm()*pdx()*am();GM=[a*cb(0)*(1+.1*PL("pd"))*QB.d*FRB(),a*cb(1)*(1+.06*PL("pc"))*QB.c]};
 /* ============ STATS, IV, EV, TALENTS ============ */
 const mfo=id=>{const c=G.col[id];return c&&c.mf?MGM[c.mf]:null};
 const tp=id=>{const m=mfo(id);return m?(id>9e4&&SPM[id]?I(id).t:m.t):I(id).t};
@@ -4053,7 +4053,7 @@ function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
  else if(c.h<m*.4){const hs=POTS.filter(p=>p[3]>0&&G.inv[p[0]]>0).sort((a,b)=>a[3]-b[3]),k=hs.find(p=>p[3]>=m-c.h)||hs[hs.length-1];if(k){G.inv[k[0]]--;c.h=Math.min(m,c.h+k[3])}}}}
 const tgtF=()=>Math.ceil((.65*(G.cl+1)+3+7*zoneOf(G.cl+1))*(1+.03*PL("px")));const tgtL=()=>Math.min(100,tgtF());
 function lvUp(c,tg){const mx=c.mx||100,t=mx>100?Math.min(mx,tgtF()):tg;if(c.l>=t||c.l>=mx)return;const s=Math.max(1,Math.ceil((t-c.l)/9*(c.xm||1)*(EVF.x||1)*BIF.x*(1+.5*(c.st||0))));c.l=Math.min(t,mx,c.l+s)}
-function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*kxFlg(G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb"))*SKM("b"):1)*sm()*cb(1)*(1+.12*PL("pc"))*(EVF.c||1)*BIF.c)),tg=tgtL();
+function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*kxFlg(G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb"))*SKM("b"):1)*sm()*cb(1)*(1+.06*PL("pc"))*(EVF.c||1)*BIF.c)),tg=tgtL();
  G.m+=kxI("kill",g);G.gain+=g;G.ko++;if(b)G.boss++;pop("+"+fmt(g)+" ₽","sup",22);sfx("coin");$("rw")&&($("rw").innerHTML=`<span>NIVEAU CIBLE <b>${tg}</b></span>`);
  ids().forEach(i=>{const c=G.col[i];lvUp(c,tg);const h=c.he;if(h&&h.pw!==undefined&&Math.random()<.5)addEV(c,h.pw>=6?Math.random()*6|0:h.pw,1)});
  const bl=pickBall(E);if(!bl)noBallFx(E);
@@ -4104,7 +4104,7 @@ function prestige(sel){const g=ppGain();if(g<1||!sel)return;sel=sel.slice();ids(
 function resetAll(){const n=G.name;G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
 function delAccount(){NOSAVE=true;try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
 const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,1.3],["ps","Cadence d'attaque","Coups plus rapides : dégâts par seconde",l=>"+"+l*6+" %",40,3,1.3],
-["pc","Fortune","Pièces gagnées (combats et revenu passif)",l=>"+"+l*12+" %",50,2,1.3],["px","Entraînement","Niveau cible des Pokémon selon l'étage",l=>"+"+l*3+" %",30,2,1.28],
+["pc","Fortune","Pièces gagnées (combats et revenu passif)",l=>"+"+l*6+" %",50,2,1.3],["px","Entraînement","Niveau cible des Pokémon selon l'étage",l=>"+"+l*3+" %",30,2,1.28],
 ["ph","Endurance","Points de vie de l'équipe",l=>"+"+l*10+" %",30,2,1.28],["pk","Chasseur","Chances de capture",l=>"+"+l*8+" %",25,4,1.35],
 ["pm","Mutations","Apparition des mutations",l=>"+"+l*12+" %",25,5,1.38],["pcs","Charme chroma","Chances de chromatique ×3, comme dans les jeux",l=>l?"×3":"×1",1,12,1.5],["psh","Éclat","Apparition des chromatiques",l=>"+"+l*25+" %",20,8,1.45],
 ["pz","Colosses","Apparition des tailles imposantes et colossales",l=>"+"+l*10+" %",25,5,1.38],["pb","Chasseur de boss","Pièces des boss et butin de Master Ball",l=>"+"+l*15+" % · +"+(l*.5).toFixed(1)+" %",20,6,1.4],
@@ -6681,7 +6681,7 @@ function sdRows(k){const d=k=="d",pu=u=>{const x=PU.find(y=>y[0]==u);return x?x[
  add(LS("Collection","Collection"),"cards","#a855f7",LS("Cartes Pokémon","Pokémon cards"),LS("Chaque carte rapporte un bonus selon sa rareté, et ses doublons l'augmentent.","Each card gives a bonus by rarity, and duplicates increase it."),cb(d?0:1),Object.keys(G.cards).length+LS(" cartes"," cards"));
  if(d){add(LS("Améliorations de prestige","Prestige upgrades"),"bolt","#ef4444",pu("pd"),LS("+10 % par niveau.","+10% per level."),1+.1*lv("pd"),LS("niveau ","level ")+lv("pd"));
   add(LS("Améliorations de prestige","Prestige upgrades"),"sword","#f59e0b",pu("ps"),LS("+6 % par niveau.","+6% per level."),1+.06*lv("ps"),LS("niveau ","level ")+lv("ps"))}
- else add(LS("Améliorations de prestige","Prestige upgrades"),"coin","#eab308",pu("pc"),LS("+12 % par niveau.","+12% per level."),1+.12*lv("pc"),LS("niveau ","level ")+lv("pc"));
+ else add(LS("Améliorations de prestige","Prestige upgrades"),"coin","#eab308",pu("pc"),LS("+6 % par niveau.","+6% per level."),1+.06*lv("pc"),LS("niveau ","level ")+lv("pc"));
  const dxb=dxBon();add(LS("Collection","Collection"),"trophy","#eab308",LS("Paliers du Pokédex","Pokédex milestones"),LS("Bonus permanents récupérés en découvrant des espèces.","Permanent boosts claimed by discovering species."),dxb[d?"d":"c"],DXT.filter(t=>dxtS()[t.n]).length+" / "+DXT.length);
  add(LS("Quêtes et amis","Quests and friends"),"quest","#38bdf8",LS("Quêtes définitives","Permanent quests"),LS("Bonus définitifs gagnés avec les paliers de quêtes.","Permanent boosts earned from quest tiers."),(d?QB.d:QB.c)/dxb[d?"d":"c"],"");
  if(d)add(LS("Quêtes et amis","Quests and friends"),"user","#22c55e",LS("Amis","Friends"),LS("+1 % par ami, jusqu'au maximum autorisé.","+1% per friend, up to the cap."),FRB(),fr+LS(" amis"," friends"));
@@ -12035,6 +12035,7 @@ const EVTS=[
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Prestige : Fortune rééquilibrée","L'amélioration Fortune donne maintenant +6 % de pièces par niveau au lieu de +12 %. Les niveaux déjà achetés sont conservés, leur bonus est simplement divisé par 2.","Prestige: Fortune rebalanced","The Fortune upgrade now gives +6% coins per level instead of +12%. Levels already bought are kept; their bonus is simply halved."],
   ["new","Menu ☰ et calendrier des événements","Les boutons de gauche (Pass, Quêtes, Connexion, Discord, Mises à jour) sont rangés dans le menu ☰, sous le bouton Halloween. Le menu contient aussi un calendrier : les jours d'événement sont colorés, avec les dates et le temps restant.","☰ menu and event calendar","The left buttons (Pass, Quests, Login, Discord, Updates) are now in the ☰ menu, under the Halloween button. The menu also has a calendar: event days are coloured, with dates and time left."],
   ["new","Bannière Halloween","Dans Invocation, une nouvelle bannière jusqu'au 9 novembre : 30 formes Halloween à invoquer, dont 5 mises en avant qui changent toutes les 2 heures. 1,5 milliard de ₽ (1,5 G) l'invocation, la forme la plus rare de la bannière garantie au bout de 80 invocations, et 1 % de chance de mutation, de taille hors norme, d'Alpha et de chromatique.","Halloween banner","In Summon, a new banner until November 9: 30 Halloween forms to summon, 5 featured at a time, changing every 2 hours. 1.5 billion ₽ (1.5G) per summon, and the banner's rarest form guaranteed after 80 summons."],
   ["new","Formes Halloween","Une forme Halloween remplace la version normale de l'espèce. Sa mutation, sa taille et son Alpha ne viennent que de la bannière (ceux de la version normale disparaissent) ; le chromatique, lui, se garde et peut aussi venir d'une capture dans la nature. Elle reçoit un bonus de puissance plus fort qu'une Méga-Évolution : ×2 (Commun), ×2,5 (Rare), ×3 (Épique) et ×3,6 (Légendaire : Giratina, Darkrai). Elle est gardée au prestige et a un fond orange dans tes listes.","Halloween forms","A Halloween form replaces the species' normal version. Its mutation, size and Alpha only come from the banner (the normal version's are removed); shiny is kept and can also come from a wild catch. It gets a power bonus stronger than a Mega Evolution: ×2 (Common), ×2.5 (Rare), ×3 (Epic) and ×3.6 (Legendary: Giratina, Darkrai). It is kept on prestige and has an orange background in your lists."],
