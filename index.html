@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c0c055eacf"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c0c055eacf"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ef1c6db7eb"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ef1c6db7eb"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6050,7 +6050,7 @@ const RT=[
  {n:["Impossible","Impossible"],c:"#c084fc",L:100,hp:52000,am:0.56,cr:.1,rp:500,sec:86400,cap:.018,pool:[90003,90002,491,491],sh:1,f:"sp",rec:100}];
 /* boss monde (change chaque semaine) */
 const RW=[[890,"etern"],[384,"mega"],[493,"n"],[383,"prim"],[382,"prim"],[150,"mega"]];
-const RWHP=5e8;const WBAM=.8;
+const RWHP=2e10;const WBAM=.8;
 
 /* ---- sprites pixel (2D) ---- */
 const GMX={3:10195,6:10196,9:10197,12:10198,68:10201,94:10202,131:10204,143:10206};
@@ -8086,7 +8086,7 @@ const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 /* Tour : courbe continue et progressive (avant : saut à l'étage 100 et défense multipliée deux fois) */
-const twSc=f=>{const a=f<=100?.8+.25*Math.pow(f/100,1.1):1.05+.6*Math.pow((f-100)/200,1.3);return{a,h:a*1.1,d:a*.85+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
+const twSc=f=>{const a=f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.5*Math.pow((f-100)/200,1.6);return{a,h:a*1.13,d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -12171,7 +12171,7 @@ document.addEventListener("keydown",e=>{const d=$("flp");
 
 /* ============ Raid Zénith : doublons du Pikachu Zénith (après l'étage 300 de la Tour) ============ */
 const ZNT=6,ZNID=90004,ZNMAX=10;
-RT[ZNT]={n:["Zénith","Zenith"],c:"#22d3ee",L:100,hp:40000,am:0.5,cr:.09,rp:300,sec:43200,cap:.05,pool:[ZNID],f:"sp",rec:100};
+RT[ZNT]={n:["Zénith","Zenith"],c:"#22d3ee",L:100,hp:45200,am:0.56,cr:.1,rp:500,sec:43200,cap:.05,pool:[ZNID],f:"sp",rec:100};
 RLOOT[ZNT]=RLOOT[5];
 const znUnlocked=()=>{try{return !!(G.sp&&G.sp[ZNID])&&(twS().b|0)>=300}catch(e){return false}};
 const znNoMB=()=>!RCX.wb&&RCX.tier===ZNT&&!!RCX.boss&&RCX.boss.sp===ZNID;
@@ -12285,7 +12285,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
   ["imp","Tour rééquilibrée","Les étages de la Tour sont bien moins durs, surtout après l'étage 100 : la difficulté monte maintenant de façon régulière jusqu'à l'étage 300, qui reste un vrai défi.","Tower rebalanced","Tower floors are much easier, especially after floor 100: difficulty now rises steadily up to floor 300, which stays a real challenge."],
-  ["imp","Boss monde plus résistant","Le boss monde a maintenant 500 M de PV au lieu de 200 M.","Tougher world boss","The world boss now has 500M HP instead of 200M."],
+  ["imp","Boss monde bien plus résistant","Le boss monde a maintenant 20 G de PV (20 milliards) au lieu de 200 M, pour tenir toute la semaine.","Much tougher world boss","The world boss now has 20G HP (20 billion) instead of 200M, so it lasts the whole week."],
   ["new","Raid Zénith","Une fois l'étage 300 de la Tour réussi avec le Pikachu Zénith, un raid Zénith apparaît dans Raids pour obtenir des doublons. 10 tentatives par heure, à part des autres raids. Master Ball interdite pour le capturer.","Zenith raid","Once floor 300 of the Tower is cleared with Zenith Pikachu, a Zenith raid appears in Raids to get duplicates. 10 attempts per hour, separate from other raids. Master Ball not allowed to catch it."],
   ["new","Classement des pièces","Nouvel onglet Pièces dans Classements : les joueurs qui ont le plus de pièces. Touche un joueur pour voir ses 5 meilleurs Pokémon.","Coin ranking","New Coins tab in Rankings: the players with the most coins. Tap a player to see their top 5 Pokémon."],
   ["new","Choix rapide de l'étage","Dans Combat, touche le carré ÉTAGE : une fenêtre s'ouvre pour aller directement à n'importe quel étage déjà atteint, zone par zone, ou en tapant son numéro.","Quick floor picker","In Battle, tap the FLOOR box: a window opens to jump straight to any floor you have reached, zone by zone, or by typing its number."],
