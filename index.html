@@ -3683,8 +3683,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="0385eb25ad"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=0385eb25ad"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4562a057ad"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=4562a057ad"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11861,7 +11861,7 @@ const HFT={1:{n:["Commun","Common"],c:"#fdba74",w:100,m:2.0},2:{n:["Rare","Rare"
 const HFI={};HFL.forEach((x,k)=>HFI[x[0]]={id:x[0],n:x[1],t:x[2],r:k});
 const HFV={479:["normal","heat","wash","frost","fan","mow"],487:["altered","origin"]};
 const HFVN={normal:"",heat:"Chaleur",wash:"Lavage",frost:"Froid",fan:"Hélice",mow:"Tonte",altered:"Alternative",origin:"Originelle"};
-const HFC=250e6,HFP=80; /* coût d'une invocation (250 millions) et garantie de la forme la plus rare au bout de 80 */
+const HFC=1.5e9,HFP=80; /* coût d'une invocation (1,5 milliard) et garantie de la forme la plus rare au bout de 80 */
 const hfPath=(id,sh,v)=>"img/hwf/"+(sh?"shiny/":"")+id+(v?"-"+v:"")+".png";
 const hfImg=(id,sh,v,cls)=>`<img class="${cls||"sp"} hfimg" alt="" draggable="false" loading="lazy" src="${hfPath(id,sh,v)}">`;
 /* --- puissance : chaque forme est strictement plus forte que la précédente, avec un multiplicateur minimum par palier --- */
@@ -11939,7 +11939,7 @@ setInterval(()=>{try{if(tab=="inv"&&IVMODE=="hw"&&!document.hidden&&HFB&&HFB.s!=
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
-  ["new","Bannière Halloween","Dans Invocation, une nouvelle bannière jusqu'au 9 novembre : 30 formes Halloween à invoquer, dont 5 mises en avant qui changent toutes les 2 heures. 250 millions de ₽ l'invocation, la forme la plus rare de la bannière garantie au bout de 80 invocations, et 1 % de chance de mutation, de taille hors norme, d'Alpha et de chromatique.","Halloween banner","In Summon, a new banner until November 9: 30 Halloween forms to summon, 5 featured at a time, changing every 2 hours. 250 million ₽ per summon, and the banner's rarest form guaranteed after 80 summons."],
+  ["new","Bannière Halloween","Dans Invocation, une nouvelle bannière jusqu'au 9 novembre : 30 formes Halloween à invoquer, dont 5 mises en avant qui changent toutes les 2 heures. 1,5 milliard de ₽ (1,5 G) l'invocation, la forme la plus rare de la bannière garantie au bout de 80 invocations, et 1 % de chance de mutation, de taille hors norme, d'Alpha et de chromatique.","Halloween banner","In Summon, a new banner until November 9: 30 Halloween forms to summon, 5 featured at a time, changing every 2 hours. 1.5 billion ₽ (1.5G) per summon, and the banner's rarest form guaranteed after 80 summons."],
   ["new","Formes Halloween","Une forme Halloween remplace la version normale de l'espèce, garde mutation, taille, Alpha et chromatique, et reçoit un bonus de puissance plus fort qu'une Méga-Évolution : ×2 (Commun) jusqu'à plus de ×3 (Légendaire : Giratina, Darkrai). Elle est gardée au prestige et a un fond orange dans tes listes.","Halloween forms","A Halloween form replaces the species' normal version, keeps mutation, size, Alpha and shiny, and gets a power bonus stronger than a Mega Evolution: ×2 (Common) up to over ×3 (Legendary: Giratina, Darkrai). It is kept on prestige and has an orange background in your lists."],
   ["new","Pokédex : formes Halloween","Les 30 formes Halloween apparaissent dans Pokédex > Spéciales > Halloween, avec leur rareté et leur bonus.","Pokédex: Halloween forms","The 30 Halloween forms appear in Pokédex > Special > Halloween, with their rarity and bonus."],
   ["new","Journal des mises à jour","Ce bouton, sous Discord : toutes les nouveautés, améliorations, corrections et retraits, version par version. Un point rouge s'affiche quand il y a du nouveau.","Update log","This button, under Discord: every new feature, improvement, fix and removal, version by version. A red dot appears when something new is out."],
