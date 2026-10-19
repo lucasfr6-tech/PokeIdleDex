@@ -3234,7 +3234,7 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pidu .pidr em{grid-column:auto;text-align:right;opacity:.9;font-size:12.5px;color:#a7f3d0}
 .pnlock{opacity:.7;filter:grayscale(.6)}
 .pnlock .pni{background:#475569}
-.cp-fl{position:relative}.pvsp img{width:calc(18cqw*var(--pvz,1))!important;height:calc(18cqw*var(--pvz,1))!important}.pvvbr{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0 1px}.pvvbr .vb{font-size:10px;padding:1px 6px;transform:none;margin:0}.rhzn{box-shadow:0 0 0 1px #22d3ee66 inset,0 0 18px #22d3ee33}.rhzn .rhlv em{color:#67e8f9;font-variant-numeric:tabular-nums}.rhnomb{opacity:.55;filter:grayscale(.7)}.rhnomb em{color:#fca5a5!important}
+.cp-fl{position:relative}.rkb-r{gap:10px}.rkb-s{width:52px;height:52px;flex:none;display:grid;place-items:center;border-radius:12px;background:radial-gradient(circle,color-mix(in srgb,var(--tc) 30%,transparent),transparent 70%);overflow:hidden}.rkb-s .hv{width:48px!important;height:48px!important;transform:none!important}.rkb-s .hvi{max-width:48px!important;max-height:48px!important;width:auto!important;height:auto!important}.rkb-t{flex:1;min-width:0;display:flex;flex-direction:column}.rkb-t b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rkb-t small{color:var(--mu);font-size:11px}.rkb-vb{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}.rkb-vb .vb{font-size:9px;padding:1px 5px;margin:0}.rkb-v{color:#fca5a5}.twpw{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:8px 12px;margin-bottom:8px;border-radius:12px;border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent);font-size:13px}.twpw svg{width:16px;height:16px;color:var(--c)}.twpw em{margin-left:auto;font-style:normal;font-weight:800;color:var(--c)}.pvsp img{width:calc(18cqw*var(--pvz,1))!important;height:calc(18cqw*var(--pvz,1))!important}.pvvbr{display:flex;flex-wrap:wrap;gap:3px;margin:3px 0 1px}.pvvbr .vb{font-size:10px;padding:1px 6px;transform:none;margin:0}.rhzn{box-shadow:0 0 0 1px #22d3ee66 inset,0 0 18px #22d3ee33}.rhzn .rhlv em{color:#67e8f9;font-variant-numeric:tabular-nums}.rhnomb{opacity:.55;filter:grayscale(.7)}.rhnomb em{color:#fca5a5!important}
 /* classement des pièces */
 .rkm-hint{display:block;color:var(--mu);margin:-4px 0 10px;font-size:12px}
 .rkm-w{border-radius:14px;transition:background .25s}.rkm-w.op{background:rgba(255,255,255,.04)}
@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="73b2ce77a4"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=73b2ce77a4"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="acdeb7a9bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=acdeb7a9bc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4679,7 +4679,7 @@ function vPan(){const f=favs3();return `<div class="pan"><div class="pan-bg"><di
 /* ---------- classement ---------- */
 const LB={db:null,uid:"",ok:false,rows:[],sig:"",busy:false,last:0};
 function lbDoc(){const a=G.col[G.av]?G.av:ids()[0]||19,c=G.col[a]||{};return{n:G.name,av:spf(a),avs:c.sh?1:0,ban:G.ban,bf:Math.max(G.cl,G.bf||0),st:G.st,dx:dxn(),caps:G.caps,sh:shinies(),fav:favs3().map(x=>({f:x.f,sh:x.sh,n:x.n,l:x.l,ty:x.ty})),t:Date.now()}}
-async function lbPush(force){if(!LB.ok||LB.busy)return;const d=lbDoc(),sg=[d.n,d.av,d.ban,d.bf,d.st,d.dx,d.tt,d.fr,d.tl,(d.ai||"").length,JSON.stringify(d.fav),d.m?Number(d.m).toPrecision(3):0,JSON.stringify(d.t5||[])].join("|");if(!force&&(sg===LB.sig||Date.now()-LB.last<25000))return;LB.busy=true;try{await LB.db.doc("lb/"+LB.uid).set(d);LB.sig=sg;LB.last=Date.now()}catch(e){}LB.busy=false}
+async function lbPush(force){if(!LB.ok||LB.busy)return;const d=lbDoc(),sg=[d.n,d.av,d.ban,d.bf,d.st,d.dx,d.tt,d.fr,d.tl,(d.ai||"").length,JSON.stringify(d.fav),d.m?Number(d.m).toPrecision(3):0,JSON.stringify(d.t5||[]),d.bpv?Number(d.bpv).toPrecision(3):0].join("|");if(!force&&(sg===LB.sig||Date.now()-LB.last<25000))return;LB.busy=true;try{await LB.db.doc("lb/"+LB.uid).set(d);LB.sig=sg;LB.last=Date.now()}catch(e){}LB.busy=false}
 async function lbInit(){try{if(!window.claude||!claude.use)return;const [db,us]=await Promise.all([claude.use("db"),claude.use("user")]);if(!db||!us)return;const id=await us.id();if(!id)return;LB.db=db;LB.uid=String(id);LB.ok=true;setTimeout(socInit,0);
  db.collection("lb").orderBy("bf","desc").limit(200).onSnapshot(s=>{LB.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));if(tab=="lb")lbRefresh()},()=>{});lbPush(true)}catch(e){}}
 function lbRows(){const me=Object.assign({id:LB.uid||"me",me:1},lbDoc()),r=LB.rows.filter(x=>x.id!=me.id&&x.n);r.push(me);return r.sort((a,b)=>(b.bf||0)-(a.bf||0)||(a.t||0)-(b.t||0))}
@@ -8097,7 +8097,7 @@ const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 /* Tour : courbe continue et progressive (avant : saut à l'étage 100 et défense multipliée deux fois) */
-const twSc=f=>{const a=f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.5*Math.pow((f-100)/200,1.6);return{a,h:a*1.13,d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
+const twSc=f=>{const a=f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5);return{a,h:a*1.13,d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -8810,7 +8810,7 @@ G.gp={};
 NAVX.push(["rks","trophy","Classements","#eab308","#854d0e"]);NENG.rks="Rankings";
 NCAT.splice(NCAT.findIndex(x=>x[0]=="c_shp"),0,["c_soc","Social","Social","trophy","#e11d48","#881337",["gld","pvp","rks"]]);
 const RKX={v:"lb"};
-const RKT=[["lb","crown",()=>LS("Étage","Floor")],["m","coin",()=>LS("Pièces","Coins")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
+const RKT=[["lb","crown",()=>LS("Étage","Floor")],["m","coin",()=>LS("Pièces","Coins")],["bp","sword",()=>LS("Meilleur Pokémon","Best Pokémon")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
 const rkRow=(r,i,val,lab)=>`<div class="rkx-r${r.me?" me":""}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
 function rkBy(key,lab){const R=lbRows().slice().sort((a,b)=>(b[key]||0)-(a[key]||0)||(a.t||0)-(b.t||0));
  return `<div class="box rkx-box"><h3>${ico("trophy")} ${lab}${LB.ok?"":` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r[key]||0,lab)).join("")}</div></div>`}
@@ -8820,7 +8820,7 @@ function rkTwr(){let R=[];try{R=twRows()}catch(e){}
  return `<div class="box rkx-box"><h3>${ico("tower")} ${LS("Classement de la Tour","Tower ranking")}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r.b||0,LS("étage","floor"))).join("")}</div></div>`}
 function vRks(){const v=RKX.v;
  const tabs=`<div class="rkx-tabs">${RKT.map(t=>`<button class="${v==t[0]?"on":""}" data-rk="${t[0]}">${ico(t[1])}<span>${t[2]()}</span></button>`).join("")}</div>`;
- let b="";try{b=v=="lb"?vLB():v=="m"?rkCoins():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
+ let b="";try{b=v=="lb"?vLB():v=="m"?rkCoins():v=="bp"?rkBest():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
  return `<div class="rkx">${tabs}${b}</div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rk]");if(!b)return;RKX.v=b.dataset.rk;if(RKX.v=="pvp"){try{pvS();pvFetch()}catch(_){}}show()});
 {const s0=show;show=function(){if(tab=="lb"){tab="rks";RKX.v="lb"}if(tab=="gem")tab="adv";return s0.apply(this,arguments)}}
@@ -12212,6 +12212,36 @@ function znAtt(){const r=rdState(),now=Date.now();r.zt=(r.zt||[]).filter(t=>now-
 {const sp0=pvSetSpr;pvSetSpr=function(B,s){const r=sp0.apply(this,arguments);try{const w=$("pvS"+s),u=pvAct(B,s);if(w&&u){const im=w.querySelector("img"),mu=u.mi&&MU[u.mi]?MU[u.mi][3]:"",z=u.zi&&SZ[u.zi]?SZ[u.zi][1]:1;
  im.style.filter="";im.style.opacity="";if(mu)im.style.cssText+=";"+mu.replace(/--mx:[^;]*;?/g,"");w.style.setProperty("--pvz",Math.max(.6,Math.min(1.8,z)));}}catch(e){}return r}}
 {const up0=pvU_upd;pvU_upd=function(B){const r=up0.apply(this,arguments);try{["m","f"].forEach(s=>{const u=pvAct(B,s),n=$("pvN"+s);if(!u||!n)return;const h=vb({sh:u.sh,mi:u.mi,zi:u.zi,al:u.al}),row=n.closest(".pvpl");if(!row)return;let el=row.querySelector(".pvvbr");if(!el){el=document.createElement("div");el.className="pvvbr";row.querySelector(".pvpn1").insertAdjacentElement("afterend",el)}const k=[u.id,u.sh,u.mi,u.zi,u.al].join();if(el.dataset.k!==k){el.dataset.k=k;el.innerHTML=h||""}el.style.display=h&&h.indexOf("vb")>=0?"":"none"})}catch(e){}return r}}
+
+/* ============ Classement « Meilleur Pokémon » : record de DPS (cartes, équipement, prestige, objet tenu, CT) ============ */
+function pkDps(id){try{const c=G.col[id];if(!c)return 0;const h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let m=base(id)*(mv?1+mv[2]/200:1)*(EVF.d||1)*(BIF.d||1);
+ if(h){if(h.ph&&phy(id))m*=h.ph;if(h.sc&&!phy(id))m*=h.sc}return isFinite(m)?m:0}catch(e){return 0}}
+function bpScan(){try{if(!G||!G.col)return;let bi=0,bv=0;for(const id of ids()){const v=pkDps(id);if(v>bv){bv=v;bi=id}}if(!bi)return;const r=G.bpk||{};
+ if(!(r.v>=bv)){const c=G.col[bi];let f=spf(bi);try{if(c.dy&&typeof GMX!="undefined"&&GMX[bi])f=GMX[bi]}catch(e){}G.bpk={i:bi,v:Math.round(bv),f,sh:c.sh?1:0,mi:c.mi|0,zi:c.zi|0,al:c.al?1:0,n:dn(bi),ty:tp(bi),t:Date.now()}}}catch(e){}}
+setInterval(bpScan,6000);setTimeout(bpScan,2500);
+{const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{const b=G.bpk;if(b&&b.v>0){d.bpv=b.v;d.bp=[b.f,b.sh,b.mi,b.zi,b.al,b.n,b.i,b.ty]}}catch(e){}return d}}
+const RKB={rows:[],t:0,busy:0};
+async function rkbFetch(force){if(RKB.busy||(!force&&Date.now()-RKB.t<20000))return;if(!LB||!LB.ok||!LB.db)return;RKB.busy=1;
+ try{const q=await LB.db.collection("lb").orderBy("bpv","desc").limit(100).get();RKB.rows=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(x=>x&&x.n&&typeof x.bpv=="number"&&Array.isArray(x.bp))}catch(e){}
+ RKB.t=Date.now();RKB.busy=0;if(tab=="rks"&&RKX.v=="bp"&&!document.hidden){const el=$("rkbl");if(el){const h=rkbList();if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}}}
+function rkbRows(){const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKB.rows.filter(x=>x.id!=me.id);try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
+ if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,100)}
+function rkbList(){const R=rkbRows();if(!R.length)return `<small class="rkm-hint">${LS("Aucun record pour le moment.","No record yet.")}</small>`;
+ return R.map((r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
+  return `<div class="rkx-r rkb-r${r.me?" me":""}${i<3?" rkm-"+(i+1):""}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""} style="--tc:${c}"><span class="rkx-n">${i+1}</span><span class="rkb-s">${aSpr(b[0],b[1])}</span><span class="rkb-t"><b>${esc(b[5]||"?")}</b><small>${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</small>${h&&h.indexOf("vb")>=0?`<span class="rkb-vb">${h}</span>`:""}</span><span class="rkx-v rkb-v">${fmt(r.bpv)}<small>DPS</small></span></div>`}).join("")}
+function rkBest(){rkbFetch();bpScan();const off=!(LB&&LB.ok);
+ return `<div class="box rkx-box"><h3>${ico("sword")} ${LS("Meilleur Pokémon","Best Pokémon")}${off?` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`:""}</h3><small class="rkm-hint">${LS("Le DPS le plus haut jamais atteint par un Pokémon de chaque joueur, cartes, équipement, prestige et objet tenu compris.","The highest DPS ever reached by each player's Pokémon, including cards, gear, prestige and held item.")}</small><div class="rkx-l" id="rkbl">${rkbList()}</div></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-rk="bp"]');if(b)rkbFetch(true)});
+setInterval(()=>{try{if(tab=="rks"&&RKX.v=="bp"&&!document.hidden)rkbFetch()}catch(e){}},5000);
+{const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKB.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
+
+/* ============ Tour : la puissance compte, comme en JCJ ============ */
+/* attaque des ennemis : ~10 000 à l'étage 1 → ~1 M (100) → ~64 M (200) → ~3 G (300) (3 Pokémon contre jusqu'à 6) ; boss ×1,5, gardien ×2 */
+const twFoePd=(f,boss)=>Math.round(1e4*Math.pow(1e6,(Math.max(1,f)-1)/299)*(f<=100?1:1-.7*Math.min(1,(f-100)/200))*(boss==2?2:boss?1.5:1));
+{const m0=twMine;twMine=function(id,o){const u=m0.apply(this,arguments);try{const c=G.col[id];u.pd=Math.max(1,base(id));u.mi=c.mi|0;u.zi=c.zi|0;u.sh=c.sh?1:0;u.al=c.al?1:0}catch(e){}return u}}
+{const f0=twFoe;twFoe=function(e,f){const u=f0.apply(this,arguments);try{u.pd=twFoePd(f,e.boss)}catch(x){}return u}}
+{const c0=twFoeCards;twFoeCards=function(f){const h=c0.apply(this,arguments);try{const t=twS(),tm=(t.tm||[]).filter(i=>G.col[i]),my=tm.length?Math.exp(tm.reduce((a,i)=>a+Math.log(Math.max(1,base(i))),0)/tm.length):0,fo=twFoePd(f,0),r=my/fo,mul=Math.max(.1,Math.min(10,Math.sqrt(r))),col=mul>=1.2?"#4ade80":mul>=.8?"#facc15":"#f87171";
+ return `<div class="twpw" style="--c:${col}">${ico("sword")}<span>${LS("Attaque des ennemis","Enemy attack")} <b>${fmt(fo)}</b></span><span>${LS("Ton équipe","Your team")} <b>${fmt(my)}</b></span><em>${LS("Dégâts","Damage")} ×${mul.toFixed(mul<1?2:1)}</em></div>`+h}catch(e){return h}}}
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
@@ -12301,6 +12331,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Classement « Meilleur Pokémon »","Nouvel onglet dans Classements : le Pokémon le plus fort de chaque joueur, selon le DPS le plus haut jamais atteint (cartes, équipement, prestige et objet tenu compris).","“Best Pokémon” ranking","New tab in Rankings: each player's strongest Pokémon, by the highest DPS ever reached (cards, gear, prestige and held item included)."],
+  ["imp","Tour : la puissance compte","Dans la Tour, l'attaque réelle de tes Pokémon compte maintenant, comme en JCJ : les ennemis deviennent plus puissants à chaque étage, et l'écran de l'étage compare leur attaque à celle de ton équipe. Mutations, tailles, chromatiques et Alpha sont visibles en combat.","Tower: power matters","In the Tower, your Pokémon's real attack now counts, like in PvP: enemies get stronger every floor, and the floor screen compares their attack with your team's. Mutations, sizes, shinies and Alpha are shown in battle."],
   ["imp","JCJ : la puissance compte","En JCJ, l'attaque réelle de tes Pokémon compte maintenant (doublons, étoiles, mutation, taille, Alpha…) : un Pokémon bien plus fort que son adversaire inflige beaucoup plus de dégâts et en subit beaucoup moins. À puissance proche, les types restent décisifs. Mutations, tailles, chromatiques et Alpha sont aussi visibles pendant les combats.","PvP: power matters","In PvP, your Pokémon's real attack now counts (duplicates, stars, mutation, size, Alpha…): a much stronger Pokémon deals far more damage and takes far less. At similar power, types stay decisive. Mutations, sizes, shinies and Alpha are also shown during battles."],
   ["imp","Doublons limités à 330","Chaque Pokémon peut avoir au maximum 330 exemplaires, et la 5e étoile s'obtient au plus tard à 330. Un Pokémon 5 étoiles au niveau maximum n'augmente plus ses dégâts.","Duplicates capped at 330","Each Pokémon can have at most 330 copies, and the 5th star is reached at 330 copies at most. A 5-star Pokémon at max level no longer gains damage."],
   ["imp","Tour rééquilibrée","Les étages de la Tour sont bien moins durs, surtout après l'étage 100 : la difficulté monte maintenant de façon régulière jusqu'à l'étage 300, qui reste un vrai défi.","Tower rebalanced","Tower floors are much easier, especially after floor 100: difficulty now rises steadily up to floor 300, which stays a real challenge."],
