@@ -3623,8 +3623,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="334daed9c5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=334daed9c5"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bcbb4da0e5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=bcbb4da0e5"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6105,7 +6105,7 @@ function rdResult(R,win,rw,cap){const o=$("rdb");if(!o)return;const b=R.boss,t=R
 const WB={rows:[],total:0,sub:null,wk:"",ok:false,n:0};
 function wbInit(){if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;const wk=rdWeekK();if(WB.sub&&WB.wk==wk)return;try{WB.sub&&WB.sub();}catch(e){}WB.wk=wk;WB.ok=true;
  try{WB.sub=LB.db.collection("wb").where("k","==",wk).onSnapshot(s=>{WB.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));WB.total=WB.rows.reduce((a,x)=>a+(+x.d||0),0);const a=$("rdb");if(tab=="raid"&&!(a&&a.className))rdWbRefresh()},()=>{WB.ok=false})}catch(e){WB.ok=false}}
-async function wbSend(){const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;try{await LB.db.doc("wb/"+LB.uid).set({k:r.wd.k,d:r.wd.d,n:G.name||"?",t:Date.now()})}catch(e){}}
+let wbSN=0;async function wbSend(){wbSN=Date.now();const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;try{await LB.db.doc("wb/"+LB.uid).set({k:r.wd.k,d:r.wd.d,n:G.name||"?",t:Date.now()});wbSN=0}catch(e){}}
 const wbShared=()=>WB.ok?Math.max(WB.total,rdState().wd.k==rdWeekK()?rdState().wd.d:0):(rdState().wd.k==rdWeekK()?rdState().wd.d:0);
 const WBT=[15e4,45e4,12e5,22e5,4e6,6e6,9e6,13e6,2e7,3e7];
 const WBR=[[["great-ball",5],["super-potion",5]],[["ultra-ball",5],["max-potion",3]],[["max-revive",3],["bottle-cap",2]],[["gold-bottle-cap",1],["#pearl",1],["full-restore",5]],[["ability-patch",1],["gold-bottle-cap",2],["master-ball",1],["#pearl",2]],
@@ -6188,7 +6188,7 @@ function rhWb(){const b=rdWBoss(),r=rdState(),sh=wbShared(),dead=sh>=RWHP,my=wbM
  <div class="rhwm"><span><small>${LS("Tes dégâts","Your damage")}</small><b>${fmt(my)}</b></span><span><small>${LS("Palier","Tier")}</small><b>${n} / ${WBT.length}</b></span><span><small>${LS("Essais aujourd'hui","Tries today")}</small><b>${tr} / 5</b></span></div>
  <div class="rdwb2"><button class="go" data-rd="wgo" ${tr<=0||dead?"disabled":""}>${ico("sword")} ${dead?LS("Boss vaincu","Defeated"):LS("Affronter","Challenge")}</button>${dead&&r.wd.k==rdWeekK()&&!r.wd.cl&&my?`<button class="go" data-rd="wcl" data-t="cur">${ico("gift")} ${LS("Réclamer","Claim")}</button>`:""}${pe?`<button class="go" data-rd="wcl" data-t="pe">${ico("gift")} ${LS("Réclamer la semaine passée","Claim last week")}</button>`:""}</div></div>
  <div class="rhwbs"><div class="rhwaura"></div>${rhPx(b,"rhwpx")}</div>
- <div class="rhwtop"><b>${LS("Meilleurs dégâts","Top damage")}</b>${top.length?top.map((x,j)=>`<span><em>${j+1}</em>${esc(String(x.n||"?"))}<strong>${fmt(x.d)}</strong></span>`).join(""):`<small>${LS("Personne n'a encore attaqué cette semaine.","Nobody has attacked this week yet.")}</small>`}</div></section>`}
+ <div class="rhwtop" id="rdWbTop">${wbTopHtml()}</div></section>`}
 function rhSide(){const r=rdState(),at=rdAtt(),cnt=Object.values(r.cn||{}).reduce((a,x)=>a+x,0);
  return `<aside class="rhside"><div class="rhs1"><span title="${LS("Tentatives par heure","Attempts per hour")}">${ico("clock")}<b>${at.left} / 5</b><small>${at.next?`<span data-cd="${at.next}">${rdMS(at.next-Date.now())}</span>`:LS("tentatives","attempts")}</small></span><span>${ico("trophy")}<b>${fmt(r.rp)}</b><small>PR</small></span><span>${ico("bolt")}<b>${r.st}</b><small>${LS("série","streak")}</small></span><span>${ico("target")}<b>${cnt}</b><small>${LS("victoires","wins")}</small></span></div>
  <div class="rhsr">${ico("clock")} ${LS("Nouveaux raids dans ","New raids in ")}<b data-cd="${Date.now()+rdUntilMidnight()}">${rdMS(rdUntilMidnight())}</b></div>
@@ -6199,7 +6199,9 @@ function vRaid(){wbInit();rhPickSel();setTimeout(rhPaintBg,0);
  return `<div class="rhub"><div class="rhhd"><h2>${ico("skull")} Raids</h2><small>${LS("Six raids qui changent toutes les 2 heures, de Facile à Impossible.<b id='rdper'></b> Un Pokémon combat à la fois, tu peux changer en plein combat.","Six raids that change every 2 hours, Easy to Impossible.<b id='rdper'></b> One Pokémon fights at a time and you can switch mid-battle.")}</small></div>${rhWb()}
  <div class="rhmain"><nav class="rhlad" id="rhLad"><h3>${LS("Raids en cours","Today's raids")}</h3>${rhLadder()}</nav><div class="rhsw" id="rhStage">${rhStage()}</div>${rhSide()}</div></div>`}
 function rhSelect(i){RHS.sel=i;const s=$("rhStage"),l=$("rhLad");if(s)s.innerHTML=rhStage();if(l)l.innerHTML="<h3>"+LS("Raids en cours","Today's raids")+"</h3>"+rhLadder();rhPaintBg()}
-function rdWbRefresh(){const t=$("rdWbT");if(!t)return;const sh=wbShared(),dead=sh>=RWHP;t.textContent=dead?LS("Vaincu !","Defeated!"):fmt(Math.max(0,RWHP-sh))+" / "+fmt(RWHP);const i=t.parentNode.querySelector("i");if(i)i.style.width=Math.max(0,Math.min(100,(1-sh/RWHP)*100))+"%"}
+function wbRows(){const r=rdState(),me=(typeof LB!="undefined"&&LB.uid)||"",my=wbMy(),rows=WB.rows.map(x=>Object.assign({},x));if(my>0){const e=rows.find(x=>x.id==me);if(e){if(my>(+e.d||0))e.d=my}else rows.push({id:me||"me",d:my,n:G.name||"?"})}return rows.sort((a,c)=>c.d-a.d)}
+function wbTopHtml(){const top=wbRows().slice(0,5);return `<b>${LS("Meilleurs dégâts","Top damage")}</b>`+(top.length?top.map((x,j)=>`<span><em>${j+1}</em>${esc(String(x.n||"?"))}<strong>${fmt(x.d)}</strong></span>`).join(""):`<small>${LS("Personne n'a encore attaqué cette semaine.","Nobody has attacked this week yet.")}</small>`)}
+function rdWbRefresh(){const tp=$("rdWbTop");if(tp)tp.innerHTML=wbTopHtml();const t=$("rdWbT");if(!t)return;const sh=wbShared(),dead=sh>=RWHP;t.textContent=dead?LS("Vaincu !","Defeated!"):fmt(Math.max(0,RWHP-sh))+" / "+fmt(RWHP);const i=t.parentNode.querySelector("i");if(i)i.style.width=Math.max(0,Math.min(100,(1-sh/RWHP)*100))+"%"}
 setInterval(()=>{if(tab!="raid")return;document.querySelectorAll("[data-cd]").forEach(e=>{const t=+e.dataset.cd-Date.now();e.textContent=t>0?rdMS(t):"0 s";if(t<-1500&&!e.dataset.r){e.dataset.r=1;setTimeout(()=>{const a=$("rdb"),c=$("rdt");if(tab=="raid"&&!(a&&a.className)&&!(c&&c.className))show()},50)}})},1000);
 /* ---- actions ---- */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rd]");if(!b||b.disabled)return;const a=b.dataset.rd;if(a=="tq"||a=="ts")return;e.stopPropagation();e.preventDefault();
@@ -11576,6 +11578,9 @@ wkBody.town=()=>{
 /* ===== Boss monde vaincu : 3 000 points de raid pour tout le monde (une fois par boss) ===== */
 function wbKillRP(n){let v=0;for(let i=1;i<=n;i++)v=i==1?400:i==2?v*2:i==3?v*1.5:v*1.3;return Math.round(v)}
 setInterval(()=>{try{const r=rdState(),k=rdWeekK();if(r.wk3===k||!WB.ok||WB.wk!==k)return;if(wbShared()>=RWHP){r.wk3=k;const nt=wbTiers(wbMy()),gain=wbKillRP(nt);r.rp+=gain;save();toast(gain?LS("Boss monde vaincu ! +"+fmt(gain)+" points de raid (palier "+nt+")","World boss defeated! +"+fmt(gain)+" raid points (tier "+nt+")"):LS("Boss monde vaincu ! Tu n'as pas atteint le palier 1.","World boss defeated! You did not reach tier 1."));if(tab=="raid")show()}}catch(e){}},4000);
+
+/* resync classement boss monde */
+setInterval(()=>{try{const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db&&LB.uid)||r.wd.k!=rdWeekK()||!(r.wd.d>0))return;wbInit();const e=WB.rows.find(x=>x.id==LB.uid);if((!e||(+e.d||0)<r.wd.d)&&Date.now()-wbSN>6000)wbSend()}catch(e){}},5000);
 /* ===== Prestige › x6 : vitesse ×6 dans les modes de combat à vitesse réglable (20 000 points de prestige) ===== */
 const X6C=20000;let X6T="pr";
 function pvNextSp(s){return s>=6?1:s>=3?(G.x6?6:1):s+1}
