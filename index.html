@@ -3821,8 +3821,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="30234a257a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=30234a257a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b7fa888a1d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=b7fa888a1d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10971,12 +10971,14 @@ function tnLvl(){const x=tnS().xs;let l=1;while(l<TNMAX&&x>=tnNeed(l+1))l++;retu
 function tnXp(n){const t=tnS(),a=tnLvl();t.xs+=n;const b=tnLvl();if(b>a){const A=tnTier(a),B=tnTier(b);setTimeout(()=>{try{sfx("prest");toast(LS("Niveau marchand "+b+(B!==A?" : "+B.fr:"")+" !","Merchant level "+b+(B!==A?": "+B.en:"")+"!"))}catch(e){}},400)}}
 const tnHist=(k,n,j)=>{const t=tnS();t.h.unshift({t:Date.now(),k,n,j});t.h.length=Math.min(t.h.length,40)};
 /* ---- valeurs estimées ---- */
-const TNB=[10,40,150,500],TNMU=[1,2.5,3.5,3.5,6,10,14],TNZ={3:3,4:6,5:15};
+const TNB=[8,30,100,300],TNMU=[1,1.6,2.2,2.2,2.8,3.5,4.5],TNZ={3:1.5,4:2.2,5:3};
 function tnFlags(id){const c=G.col[id]||{};return{sh:c.sh?1:0,mi:c.mi>0&&c.mi<7?c.mi:0,zi:c.zi>=3?c.zi:0,al:c.al?1:0}}
 function tnMonV(id,f){f=f||{};let r=0;try{r=pr(id)}catch(e){}
- const b=r>=4?900:TNB[Math.max(0,Math.min(3,r))];
- let m=1;if(f.sh)m*=12;if(f.mi)m*=TNMU[Math.min(6,f.mi)]||14;if(f.zi)m*=TNZ[f.zi]||3;if(f.al)m*=8;
- return Math.max(5,Math.round(b*m))}
+ const b=r>=4?500:TNB[Math.max(0,Math.min(3,r))];
+ /* bonus rares : multiplicateurs modérés, et un combo est adouci (puissance 0,7) pour rester achetable avec les Jetons des quêtes */
+ let m=1;if(f.sh)m*=4;if(f.mi)m*=TNMU[Math.min(6,f.mi)]||4.5;if(f.zi)m*=TNZ[f.zi]||1.5;if(f.al)m*=2;
+ if(m>1)m=Math.pow(m,.7);
+ return Math.max(4,Math.round(b*m))}
 function tnItV(k){const i=IT[k];if(!i)return 0;
  if(i.c==="Poké Balls"){if(i.m>=255)return 4000;const p=i.p||160;if(p<500)return 2;return Math.max(2,Math.round(Math.pow(p/1000,.9)*60))}
  const fb=i.m?30000:i.dy||/dynamax|band|bracelet|mega|méga|pearl|perle/i.test((i.n||"")+k)?25000:3000;const p=i.p||fb;
@@ -11053,7 +11055,10 @@ const tnAPI=()=>(window.PID_API||"").replace(/\/$/,"");
 const tnOn=()=>!!tnAPI()&&!!TNLS("pid_uid")&&!!TNLS("pid_tok")&&typeof LB!="undefined"&&LB.ok;
 async function tnReq(act,body){const A=tnAPI();if(!A)return{e:"off"};
  try{const r=await fetch(A+"/api/mkt/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||"",n:G.name||"Dresseur"},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
-async function tnBrowse(){const A=tnAPI();if(!A)return null;try{const r=await fetch(A+"/api/mkt/browse?lim=500");const j=await r.json();return j&&j.ok?j.docs:null}catch(e){return null}}
+async function tnBrowse(){const A=tnAPI();if(!A)return null;try{const r=await fetch(A+"/api/mkt/browse?lim=500");const j=await r.json();return j&&j.ok?(j.docs||[]).filter(tnPriceOk):null}catch(e){return null}}
+/* annonces de Pokémon publiées avant la baisse des prix : masquées si leur prix dépasse le nouveau maximum (le vendeur peut les retirer et les remettre en vente) */
+function tnPriceOk(l){try{if(!l||!l.it||l.it.t!="m")return true;if(l.s&&l.s===TNLS("pid_uid"))return true;
+ const v=tnMonV(l.it.id,{sh:l.it.sh?1:0,mi:l.it.mi>0&&l.it.mi<7?l.it.mi:0,zi:l.it.zi>=3?l.it.zi:0,al:l.it.al?1:0});return (+l.p||0)<=tnMaxP(v)}catch(e){return true}}
 const TN={sub:"mk",q:"",ty:"all",rar:{},vr:{},so:"new",aff:0,list:null,mine:[],ld:0,vq:"",vt:"m",vs:"val",busy:0,err:""};
 function tnApply(d){const t=tnS(),fee=tnTier(tnLvl()).f;
  if(d.k=="sale"){const net=Math.floor(d.p*(100-fee)/100);t.j+=net;tnXp(1);t.st.sold++;t.st.earn+=net;tnHist("sale",tnItName(d.it)+" · "+(d.b||""),net);
@@ -11897,7 +11902,7 @@ wkBody.town=()=>{
  const rows=TNT.map(t=>[t.l,LS(t.fr,t.en),t.q,t.f+" %",fN(t.cap)]);
  return `<p class="lead">L'Hôtel de ville est le <b>marché entre dresseurs</b>. Tu y vends tes Pokémon et tes objets contre des <b>Jetons</b>, et tu achètes ceux des autres joueurs avec ces mêmes Jetons.</p>
  ${wf([["Débloqué à l'étage",LOCKS.town],["Monnaie","Jetons"],["Niveau maximum",TNMAX],["Connexion","requise"]])}
- ${wsx("Vendre et acheter",`<ul class="wks2"><li><b>Vendre</b> : tu fixes ton prix en Jetons et tu publies une annonce. Le nombre d'annonces par jour dépend de ton niveau de marchand.</li><li><b>Acheter</b> : tu paies en Jetons, l'objet ou le Pokémon arrive dans ton jeu.</li><li>Une <b>commission</b> est retenue sur chaque vente : elle baisse quand ton niveau monte.</li><li>La valeur des Pokémon est volontairement réduite (×0,4) pour éviter l'inflation des prix.</li></ul>`)}
+ ${wsx("Vendre et acheter",`<ul class="wks2"><li><b>Vendre</b> : tu fixes ton prix en Jetons et tu publies une annonce. Le nombre d'annonces par jour dépend de ton niveau de marchand.</li><li><b>Acheter</b> : tu paies en Jetons, l'objet ou le Pokémon arrive dans ton jeu.</li><li>Une <b>commission</b> est retenue sur chaque vente : elle baisse quand ton niveau monte.</li><li>La valeur des Pokémon est volontairement basse pour rester accessible avec les Jetons des quêtes : chromatique, mutation, taille et Alpha l'augmentent, mais un combo de plusieurs bonus est adouci. Le prix de vente est limité à 5 fois cette valeur.</li></ul>`)}
  ${wsx("Niveaux de marchand",tbl(["Niveau","Titre","Annonces par jour","Commission","Plafond de ventes par jour (Jetons)"],rows)+`<p>Chaque vente ou achat te fait gagner de l'expérience de marchand. Le plafond du jour limite le total que tu peux vendre : une vente qui le dépasserait est refusée.</p>`)}
  ${wsx("Quêtes et paliers",`<p>Des quêtes quotidiennes et des paliers de ventes rapportent des Jetons. Chaque quête du jour rapporte 1 500 Jetons, et terminer toutes les quêtes du jour donne un bonus en plus. Cinq quêtes de la semaine, bien plus difficiles (800 captures, 30 000 ennemis, 35 boss alpha, 15 mutés, 40 combats JCJ), rapportent chacune 3 000 Jetons. Les compteurs se remettent à zéro chaque jour, ou chaque lundi pour les quêtes de la semaine.</p>`)}
  ${wn("info","Marché hors ligne","Le marché passe par les serveurs du jeu : sans connexion, il affiche « Marché indisponible ». Les onglets Vendre et Quêtes restent consultables.")}`};
@@ -12487,6 +12492,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Hôtel de ville : Pokémon bien moins chers","La valeur des Pokémon au marché a fortement baissé, surtout pour les chromatiques, mutés, grandes tailles et Alpha : un combo de bonus est maintenant adouci pour rester achetable avec les Jetons des quêtes. Les anciennes annonces trop chères sont masquées ; leur vendeur peut les retirer et les remettre en vente.","Town hall: much cheaper Pokémon","Pokémon market values were cut sharply, especially shinies, mutated, large and Alpha ones: a combo of bonuses is now softened so it stays affordable with quest Tokens. Old overpriced listings are hidden; their seller can withdraw and relist them."],
   ["fix","Synchro du compte entre appareils","Avec un compte Google, Discord ou pseudo, ta partie est maintenant synchronisée dans les deux sens : ce que tu gagnes sur ton téléphone arrive sur ton PC et inversement. En revenant sur un appareil, il récupère automatiquement la version la plus récente.","Account sync across devices","With a Google, Discord or name account, your game now syncs both ways: what you earn on your phone reaches your PC and vice versa. When you come back to a device, it automatically loads the latest version."],
   ["imp","PV du Boss monde calculés chaque semaine","Les PV du Boss monde sont fixés au début de la semaine selon le nombre de joueurs actifs et leurs dégâts, pour qu'il tombe en 2 à 3 jours. Ils ne changent plus pendant la semaine.","World boss HP set weekly","World boss HP is set at the start of the week from active players and their damage, so it falls in 2 to 3 days. It no longer changes during the week."],
   ["new","Origine des Pokémon","La fiche d'un Pokémon indique maintenant en petit où il a été obtenu : étages, bannière, raid, faille, Boss monde, Casino…","Pokémon origin","A Pokémon's sheet now shows in small where it was obtained: floors, banner, raid, rift, World boss, Casino…"],
