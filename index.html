@@ -3557,8 +3557,8 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b37971bb8e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=b37971bb8e"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="209b130188"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=209b130188"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6143,7 +6143,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  case"trm":RTB.team=RTB.team.filter(x=>x!=i);rdtRender();break;
  case"tmv":rdState().mv[i]=j;save();rdtRender();break;
  case"tgo":rdStart();break;
- case"buy":{const r=rdState(),x=RSHOP[j];if(!x||r.rp<x[2])break;const k=x[0]=="#pearl"?rdPearlKey():x[0];if(!IT[k])break;r.rp-=x[2];G.inv[k]=(G.inv[k]||0)+x[1];save();toast(LS("Acheté : ","Bought: ")+IT[k].n+(x[1]>1?" ×"+x[1]:""));sfx("coin");show();break}
+ case"buy":{const r=rdState(),x=RSHOP[j];if(!x||r.rp<x[2])break;const k=x[0]=="#pearl"?rdPearlKey():x[0];if(!IT[k])break;r.rp-=x[2];capBuy(()=>{G.inv[k]=(G.inv[k]||0)+x[1]});save();toast(LS("Acheté : ","Bought: ")+IT[k].n+(x[1]>1?" ×"+x[1]:""));sfx("coin");show();break}
  case"wcl":wbClaim(b.dataset.t);break;
  case"mv":if(R)rdSetMv(R,R.ai,j);break;
  case"fus":if(R&&R.gauge>=100)R.fuseReq=1;break;
@@ -9592,7 +9592,7 @@ const BUG_URL="https://discord.gg/AP3Y2YQav";/* colle ici le lien d'invitation D
 
 /* ===== Capsules d'argent et d'or : les gains (raids, tour, quêtes, pass, casino…) sont divisés par 5 ; les achats ne changent pas ===== */
 (function(){
- const K=.2,KEYS={"bottle-cap":1,"gold-bottle-cap":1};let OK=0;
+ const K=.2,KEYS={"bottle-cap":1,"gold-bottle-cap":1};let OK=0;window.capBuy=f=>{OK++;try{return f()}finally{OK--}};
  const W=n=>{const f=window[n];if(typeof f!="function")return;window[n]=function(){OK++;try{return f.apply(this,arguments)}finally{OK--}}};
  ["bqBuy","pvBuy"].forEach(W);
  {const f=window.act;if(typeof f=="function")window.act=function(a){if(a!="buy")return f.apply(this,arguments);OK++;try{return f.apply(this,arguments)}finally{OK--}}}
@@ -11302,7 +11302,7 @@ function hcHtml(id){const own=G.col[id];const L=hcItems(id);
 let HCID=0;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hc]");if(!b)return;e.stopPropagation();e.preventDefault();const [k,a]=b.dataset.hc.split(":");
  if(k=="o"){HCID=+a;trModal(hcHtml(HCID))}else if(k=="x"){trModal("")}
- else if(k=="b"){const i=IT[a];if(!i||!HCID)return;const p=shopP(i);if(!(p>0)||G.m<p||uf()<(i.r||0))return;G.m-=p;G.inv[a]=(G.inv[a]||0)+1;try{qadd("buy",1);qadd("spend",p)}catch(x){}sfx("coin");toast(LS("Acheté : ","Bought: ")+i.n);save();const m=document.querySelector("#trm .tr-mdl"),y=m?m.scrollTop:0;trModal(hcHtml(HCID));const m2=document.querySelector("#trm .tr-mdl");if(m2)m2.scrollTop=y;try{show()}catch(x){}}},true);
+ else if(k=="b"){const i=IT[a];if(!i||!HCID)return;const p=shopP(i);if(!(p>0)||G.m<p||uf()<(i.r||0))return;G.m-=p;capBuy(()=>{G.inv[a]=(G.inv[a]||0)+1});try{qadd("buy",1);qadd("spend",p)}catch(x){}sfx("coin");toast(LS("Acheté : ","Bought: ")+i.n);save();const m=document.querySelector("#trm .tr-mdl"),y=m?m.scrollTop:0;trModal(hcHtml(HCID));const m2=document.querySelector("#trm .tr-mdl");if(m2)m2.scrollTop=y;try{show()}catch(x){}}},true);
 /* ---- rebirth : les Pokémon gardés conservent leurs étoiles (mais perdent les doublons) ---- */
 {const os=starsOf;starsOf=function(id,n){return Math.max(os(id,n),(G.col[id]&&G.col[id].ks)|0)}}
 {const p0=prestige;prestige=function(sel){const ks={};try{for(const k in G.col){const c=G.col[k],s=Math.max(c.st|0,c.ks|0,os2(+k,c.n||1));if(s>0)ks[k]=s}}catch(e){}
