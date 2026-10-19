@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8eec4d7c84"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=8eec4d7c84"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c35a05542f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=c35a05542f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4078,8 +4078,12 @@ const clearSTG=()=>{for(const k in STG)delete STG[k]};
 const stM=id=>id>9e4?6.4:1+.3*(stage(id)-1);
 /* ===== Échelle de puissance par source (PWNEW=1). Mettre PWNEW=0 pour revenir exactement à l'ancienne formule. ===== */
 var PWNEW=1;
-var PWTV={wN:700,wSR:1600,wSSR:3500,ex:6000,wUR:9000,mg:16000,bN:1850,bSR:4000,bSSR:10500,bUR:18500,bD:32000,h1:2100,h2:4600,h3:12000,h4:38000,r0:1900,r1:4200,r2:10800,r3:19000,r4:30000,r5:44000,f0:1900,f1:3000,f2:4200,f3:7000,f4:10800,f5:19000,f6:30000,f7:44000,sp:90000,wb:180000};
+var PWTV={wN:274,wSR:802,wSSR:2218,ex:4471,wUR:7573,mg:16000,bN:968,bSR:2639,bSSR:9254,bUR:19324,bD:39397,h1:1142,h2:3165,h3:11008,h4:49259,r0:1003,r1:2812,r2:9599,r3:20005,r4:36226,r5:59601,f0:1003,f1:1816,f2:2812,f3:5463,f4:9599,f5:20005,f6:36226,f7:59601,sp:151105,wb:372065};
+/* échelle validée le 19/10 (écart ×1,30 autour de la Chasse Méga) ; ancienne échelle pour les pièces, pour garder l'économie stable */
+var PWTV0={wN:700,wSR:1600,wSSR:3500,ex:6000,wUR:9000,mg:16000,bN:1850,bSR:4000,bSSR:10500,bUR:18500,bD:32000,h1:2100,h2:4600,h3:12000,h4:38000,r0:1900,r1:4200,r2:10800,r3:19000,r4:30000,r5:44000,f0:1900,f1:3000,f2:4200,f3:7000,f4:10800,f5:19000,f6:30000,f7:44000,sp:90000,wb:180000};
 var PWREF={h1:380,h2:450,h3:520,h4:720,wN:330,wSR:440,wSSR:505,wUR:590,ex:500,mg:600,bN:330,bSR:440,bSSR:505,bUR:590,bD:620,r0:430,r1:470,r2:520,r3:600,r4:640,r5:660,f0:420,f1:450,f2:480,f3:500,f4:520,f5:560,f6:600,f7:760,sp:660,wb:680};
+/* facteur global : garde le DPS médian des joueurs au niveau d'avant (les modes restent calibrés), sans changer les écarts */
+var PWK=1.5;
 var PWS=null,PWC=new Map();
 function pwSets(){if(PWS)return PWS;try{const ex=new Set(),rt={},fz={};EXT.forEach(t=>{if(!t.mega)(t.pool||[]).forEach(i=>ex.add(i))});RT.forEach((t,k)=>{if(k<=5)(t.pool||[]).forEach(i=>{if(i<9e4)rt[i]=Math.max(rt[i]|0,k)})});FZD.forEach((L,k)=>L.forEach(i=>{fz[i]=Math.max(fz[i]|0,k)}));void HFI;void ZOF;PWS={ex,rt,fz};PWC.clear()}catch(e){return null}return PWS}
 const pwBest=(a,b)=>!a?b:!b?a:(PWTV[a]||0)>=(PWTV[b]||0)?a:b;
@@ -4101,13 +4105,13 @@ function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HF
  /* bonus de catégorie déjà compris dans le palier : Divin ×1,6, spécial ×2,6, forme Méga ×1,5 */
  try{if(typeof kxDiv=="function"&&kxDiv(id))q/=1.6;if(id>9e4)q/=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mf)q/=1.5}catch(e){}
  const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
- return PWTV[k]*sp/12.88*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
+ return PWK*PWTV[k]*sp/12.88*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
 const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
 var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["Divin","Divine"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
 function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
 function pwSp(id,k){return Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)))}
 /* pièces : même ordre que les dégâts, écart adouci (puissance 0,6) pour ne pas faire exploser l'économie */
-function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV.wN*Math.pow(PWTV[k]/PWTV.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*.478}
+function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV0.wN*Math.pow(PWTV0[k]/PWTV0.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*.478}
 const coin=id=>{if(PWNEW)return coinNew(id);const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
@@ -12387,6 +12391,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Écart de puissance entre raretés agrandi","Les paliers de puissance sont plus espacés : les Pokémon rares (Divins, raids difficiles, failles, spéciaux, boss monde) prennent plus d'avance sur les Pokémon communs très entraînés. Le niveau de dégâts moyen des joueurs reste le même.","Bigger power gap between rarities","Power tiers are further apart: rare Pokémon (Divine, hard raids, rifts, specials, world boss) gain more ground over heavily trained common Pokémon. Average player damage stays the same."],
   ["fix","JCJ : puissance toujours prise en compte","Ton équipe JCJ et sa puissance sont maintenant publiées automatiquement. Contre un joueur qui ne l'a pas encore publiée, sa puissance est estimée d'après ses meilleurs Pokémon au classement.","PvP: power always counted","Your PvP team and its power are now published automatically. Against a player who hasn't published it yet, their power is estimated from their best Pokémon in the rankings."],
   ["imp","Failles rééquilibrées","Les DPS requis pour ouvrir les failles sont recalés sur la puissance actuelle des joueurs : la Fissure reste accessible dès le début, le Chaos demande maintenant 10 G de DPS.","Rifts rebalanced","The DPS needed to open rifts now matches current player power: Fissure stays open from the start, Chaos now needs 10G DPS."],
   ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Les pièces gagnées par seconde suivent la même échelle. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Coins per second follow the same scale. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
