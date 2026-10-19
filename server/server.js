@@ -104,7 +104,7 @@ const hreq=(url,opt,body)=>new Promise((ok,ko)=>{const r=require('https').reques
 const GG_ID=process.env.GOOGLE_ID||'637104354464-n2esf9qoa4mh514f70v65qintii1lr3g.apps.googleusercontent.com',usedG=new Set();setInterval(()=>usedG.clear(),36e5);
 /* fin de connexion Discord/Google : retrouve, lie ou cree le compte (champ f = 'dc' ou 'gg') */
 function ssoFinish(res,d,tok,p,f){
- for(const kk in db.acc){const a=db.acc[kk];if(a[f]==p.id){send(res,200,{ok:1,exists:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||''});return}}
+ for(const kk in db.acc){const a=db.acc[kk];if(a[f]==p.id){send(res,200,{ok:1,exists:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||'',t:a.t||0});return}}
  if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a[f]){a[f]=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
  if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
  if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
@@ -164,7 +164,7 @@ http.createServer((req,res)=>{
   }catch(e){back('dcerr=4')}})();return}
  if(u.pathname.startsWith('/api/acc/')&&req.method=='POST'){
   const act=u.pathname.slice(9);
-  if(limited(ip+'a',12)){send(res,429,{e:'rate'});return}
+  const sy=act=='load'||act=='save';if(limited(ip+(sy?'y':'a'),sy?40:12)){send(res,429,{e:'rate'});return}
   let b='';req.on('data',c=>{b+=c;if(b.length>MAXSAVE+20000){req.destroy()}});
   req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
    if(!d||typeof d!='object'){send(res,400,{e:'obj'});return}
@@ -180,12 +180,20 @@ http.createServer((req,res)=>{
    if(act=='login'){
     const a=db.acc[k];
     if(!a||!crypto.timingSafeEqual(Buffer.from(pwh(d.pw,a.salt)),Buffer.from(a.ph))){send(res,401,{e:'bad'});return}
-    send(res,200,{ok:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||''});return}
+    send(res,200,{ok:1,name:a.n,uid:a.uid,tok:a.tok,save:a.save||'',t:a.t||0});return}
+   if(act=='load'){
+    const a=db.acc[k];
+    if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
+    const t=a.t||0,since=+d.since||0;
+    if(since>=t){send(res,200,{ok:1,t});return}
+    send(res,200,{ok:1,t,save:a.save||''});return}
    if(act=='save'){
     const a=db.acc[k];
     if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
     if(typeof d.save!='string'||d.save.length>=MAXSAVE){send(res,400,{e:'size'});return}
-    a.save=d.save;a.t=Date.now();dirty=1;try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1});return}
+    /* synchro multi-appareils : si un autre appareil a sauvegardé depuis la dernière synchro de celui-ci, on refuse (l'appareil récupère alors la version en ligne) */
+    if(typeof d.base=='number'&&!d.force&&(a.t||0)>d.base){send(res,409,{e:'stale',t:a.t});return}
+    a.save=d.save;a.t=Math.max(Date.now(),(a.t||0)+1);dirty=1;try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1,t:a.t});return}
    if(act=='oauth'){
     const p=pendO.get(String(d.state||''));if(!p){send(res,400,{e:'state'});return}pendO.delete(String(d.state));
     ssoFinish(res,d,tok,p,'dc');return}
