@@ -3535,8 +3535,8 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9b7a7e6e85"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=9b7a7e6e85"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4cb7636589"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=4cb7636589"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11107,15 +11107,19 @@ const fzRnd=(a,b)=>a+Math.random()*(b-a);
 function fzS(){if(!G.fz||typeof G.fz!="object")G.fz={};const f=G.fz;if(!f.r)f.r={};if(!f.ix)f.ix={};if(!f.st)f.st={n:0,c:0};if(f.cur===undefined)f.cur=null;return f}
 let FZC={d:0,t:0};
 function fzDps(){const n=Date.now();if(n-FZC.t<1500)return FZC.d;let d=0;try{d=ids().reduce((t,i)=>t+base(i),0)*(EVF["d"]||1)*(BIF["d"]||1)}catch(e){}FZC={d,t:n};return d}
-function fzRift(t){const f=fzS(),r=f.r[t]||(f.r[t]={sp:0,cd:0});if(!r.sp){const p=FZPOOL[t];r.sp=p[Math.floor(Math.random()*p.length)]}return r}
+/* le Pokémon de chaque faille change toutes les heures, pour tous les joueurs (tirage déterministe) */
+const fzHour=()=>Math.floor(Date.now()/36e5);
+const fzSeed=(h,t)=>{let x=(Math.imul(h,2654435761)+Math.imul(t,40503))>>>0;x^=x>>>15;x=Math.imul(x,2246822519)>>>0;x^=x>>>13;x=Math.imul(x,3266489917)>>>0;x^=x>>>16;return x>>>0};
+const fzSpAt=(t,h)=>{const p=FZPOOL[t];return p[fzSeed(h,t+1)%p.length]};
+function fzRift(t){const f=fzS(),r=f.r[t]||(f.r[t]={}),h=fzHour();r.sp=fzSpAt(t,h);r.cd=r.done===h?(h+1)*36e5:0;return r}
 
 /* ---- état d'une faille : 0 préparation · 1 stabilisation · 2 ancrage · 3 résultat ---- */
 function fzDur(t){const q=Math.max(1,fzDps()/FZT[t][3]);return Math.round(Math.max(14,Math.min(45,50/Math.sqrt(q)))*1000)}
 function fzStart(t){const f=fzS();if(f.cur)return;const T=FZT[t],r=fzRift(t);
- if(Date.now()<r.cd){toast(LS("Cette faille se recharge encore.","This rift is still recharging."));return}
+ if(Date.now()<r.cd){toast(LS("Tu as déjà tenté cette faille : son Pokémon change à la prochaine heure.","You already tried this rift: its Pokémon changes next hour."));return}
  const d=fzDps();if(d<T[3]){toast(LS("Il te faut "+fmt(T[3])+" de dégâts par seconde pour ouvrir cette faille.","You need "+fmt(T[3])+" damage per second to open this rift."));return}
  f.ix[r.sp]=Math.max(f.ix[r.sp]||0,1);
- f.cur={t,ph:0,sp:r.sp,n:FZTHR,cho:"",tr:null,thr:null,res:null,dur:fzDur(t),stab:null,shown:0};save();show()}
+ f.cur={t,hr:fzHour(),ph:0,sp:r.sp,n:FZTHR,cho:"",tr:null,thr:null,res:null,dur:fzDur(t),stab:null,shown:0};save();show()}
 function fzChoose(k){const f=fzS(),c=f.cur;if(!c||c.ph!=0)return;c.cho=k;c.tr=fzRoll(c.t,k=="amp");c.n=k=="amp"?2:k=="sta"?4:3;c.ph=1;
  c.stab={p:0,t:Date.now(),sg:0,nx:Date.now()+fzRnd(4000,7000),cd:0,hits:0,cn:0};f.st.n++;save();sfx("pvbuy");show()}
 function fzRoll(t,amp){const T=FZT[t],k=amp?1.5:1,pick=(L,F)=>{const w=L.map(F),s=w.reduce((a,b)=>a+b,0);let x=Math.random()*s;for(let i=0;i<L.length;i++){x-=w[i];if(x<=0)return L[i]}return L[0]};
@@ -11155,7 +11159,7 @@ function fzApply(){const f=fzS(),c=f.cur;if(!c||!c.thr)return;const ok=c.thr.ok;
  if(ok){c.res=fzGrant(c);c.res.ok=1;c.ph=3;f.st.c++;f.ix[c.sp]=2;fzEnd(c);sfx(c.tr&&c.tr.sh?"shiny":"cap")}
  else if(c.n<=0){c.res=fzGrant(c,1);c.res.ok=0;c.ph=3;fzEnd(c);sfx("flee")}
  else{c.fail=1;sfx("flee")}save()}
-function fzEnd(c){const r=fzRift(c.t);r.sp=0;r.cd=Date.now()+FZT[c.t][9]*60000}
+function fzEnd(c){const r=fzRift(c.t);r.done=c.hr!=null?c.hr:fzHour()}
 function fzLeave(){const f=fzS(),c=f.cur;if(!c)return;if(c.ph>=1&&c.ph<3)fzEnd(c);f.cur=null;save();show()}
 const FZITEMS=["bi-atk","bi-xp","bi-coin","bi-find","bi-mut","bi-cap"];
 function fzGrant(c,lost){const T=FZT[c.t],pil=c.cho=="pil",out={name:dn(c.sp),notes:[],coins:Math.floor(T[3]*3*(pil?3:1)*(lost?.4:1)),items:[]};
@@ -11187,7 +11191,7 @@ function fzRows(){const f=fzS(),d=fzDps(),now=Date.now();
   <div class="fzr3"><div class="fzk"><span>${ico("bolt")} ${LS("Dégâts requis","Required damage")}</span><b class="${ok?"g":"b"}">${fmt(T[3])}/s</b></div><div class="fzbr"><i style="width:${Math.min(100,q*100)}%"></i></div><small>${ok?LS("Ton équipe fait ×"+(q>=10?Math.round(q):q.toFixed(1))+" du seuil","Your team does ×"+(q>=10?Math.round(q):q.toFixed(1))+" the threshold"):LS("Il te manque "+fmt(T[3]-d)+"/s","You are "+fmt(T[3]-d)+"/s short")}</small>
    <div class="fzk"><span>${ico("target")} ${LS("Stabilisation","Stabilization")}</span><b>${fzPct(T[4])}</b></div></div>
   <div class="fzr4"><span>${LS("Mutation","Mutation")}<b>${fzPct(T[5])}</b></span><span>${LS("Taille","Size")}<b>${fzPct(T[6])}</b></span><span>Alpha<b>${fzPct(T[7])}</b></span><span>${LS("Chroma","Shiny")}<b>${fzPct(T[8])}</b></span></div>
-  <button class="fzgo" data-fz="go" data-t="${t}" ${rdy?"":"data-no=1"}>${rdy?ico("compass")+" "+LS("Entrer","Enter"):!ok?ico("lock")+" "+LS("Seuil non atteint","Locked"):ico("clock")+" "+LS("Recharge","Recharging")}</button></div>`}).join("")}</div>`}
+  <button class="fzgo" data-fz="go" data-t="${t}" ${rdy?"":"data-no=1"}>${rdy?ico("compass")+" "+LS("Entrer","Enter"):!ok?ico("lock")+" "+LS("Seuil non atteint","Locked"):ico("clock")+" "+LS("Déjà tentée","Already tried")}</button></div>`}).join("")}</div>`}
 
 function fzScene(c){const T=FZT[c.t],k=fzKind(c.sp),tr=c.tr,ph=c.ph,trv=ph>=1&&tr,inst=ph==1&&c.stab?(1-c.stab.p/100):ph==0?1:0;
  const scale=trv&&tr.zi>=3?1+.12*(tr.zi-2):1,mst=trv&&tr.mi?fzMuStyle(tr.mi):"";
@@ -11232,7 +11236,7 @@ function vFz(){const f=fzS();fzAdv();const d=fzDps(),tot=FZPOOL.reduce((a,p)=>a+
   <p>${LS("Des brèches instables s'ouvrent entre les dimensions et laissent passer des <b>Pokémon Dynamax</b> et des <b>Paradoxes</b>. Il faut assez de dégâts par seconde pour ouvrir une faille, puis tu la <b>stabilises</b> (pulsations, surtensions à contrer) et tu l'<b>ancres</b> pour capturer le Pokémon. Plus la faille est difficile, plus il est rare et puissant.","Unstable breaches open between dimensions and let <b>Dynamax Pokémon</b> and <b>Paradoxes</b> through. You need enough damage per second to open a rift, then you <b>stabilize</b> it (pulses, surges to counter) and <b>anchor</b> it to capture the Pokémon. The harder the rift, the rarer and stronger it is.")}</p></div>
   <div class="fzsqs"><div class="fzsq"><i>${ico("bolt")}</i><small>${LS("Ton DPS","Your DPS")}</small><b id="fzdps">${fmt(d)}/s</b></div>
   <button class="fzsq ix" data-fz="ix"><i>${ico("book")}</i><small>Index</small><b>${got} / ${tot}</b></button></div></div>
- ${f.cur?fzCur():`<div class="fzfr"><div class="fzfh"><b>${LS("Choisis une faille","Choose a rift")}</b><small>${LS("Le Pokémon derrière chaque faille est visible. Les 8 niveaux se rechargent séparément.","The Pokémon behind each rift is visible. The 8 levels recharge separately.")}</small></div>${fzRows()}</div>`}</div>`}
+ ${f.cur?fzCur():`<div class="fzfr"><div class="fzfh"><b>${LS("Choisis une faille","Choose a rift")}</b><small>${LS("Les Pokémon changent toutes les heures, pour tous les joueurs · prochain changement dans ","Pokémon change every hour, for all players · next change in ")}<b class="fzhn" data-fzcd="${(fzHour()+1)*36e5}">${fzMs((fzHour()+1)*36e5-Date.now())}</b> · ${LS("une tentative par faille et par Pokémon","one attempt per rift and Pokémon")}</small></div>${fzRows()}</div>`}</div>`}
 
 /* ---- tic-tac : stabilisation, ancrage, minuteurs, DPS ---- */
 setInterval(()=>{if(tab!="fz")return;try{
@@ -11259,6 +11263,9 @@ let RHWO=false;
  const ar=`<button class="rhwar${RHWO?" on":""}" id="rhwar" data-rhw="1" title="${LS("Récompenses par palier","Rewards per tier")}" aria-label="${LS("Récompenses par palier","Rewards per tier")}" aria-expanded="${RHWO}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
  return r.slice(0,i)+"</div>"+ar+r.slice(i+6)}catch(e){return s}}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rhw]");if(!b)return;e.stopPropagation();e.preventDefault();RHWO=!RHWO;const t=document.getElementById("rhwt"),a=document.getElementById("rhwar");if(t)t.classList.toggle("on",RHWO);if(a){a.classList.toggle("on",RHWO);a.setAttribute("aria-expanded",RHWO)}},true);
+/* PV des adversaires indexés sur les dégâts réels de l'équipe : toujours tuable, mais pas instantané */
+{const os=spawn;spawn=async function(){await os.apply(this,arguments);try{if(!E||E._ad)return;E._ad=1;let d=0;for(const i of ids()){const k=G.col[i];if(k&&k.h>0)d+=dmg(i)}
+ if(!(d>0))return;const sz=E.sz[2]>1?1+(E.sz[2]-1)*.15:1,k=E.boss?11:E.mi>0?7:4.5,t=Math.floor(d*k*sz*(E.mi>0&&E.boss?1.1:1));if(t>E.max){E.max=E.hp=t}}catch(e){}}}
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
