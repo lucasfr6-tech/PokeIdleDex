@@ -3553,12 +3553,42 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 .hc-bt{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.hc-bt em{font-style:normal;color:#fbbf24;font-weight:800;font-size:13px}
 .hc-bt button{height:32px;padding:0 14px;border-radius:9px;border:0;background:#22c55e;color:#04210f;font:800 13px Nunito,system-ui,sans-serif;cursor:pointer}.hc-bt button:disabled{background:#334155;color:#94a3b8;cursor:not-allowed}
 .hc-ok{color:#4ade80;font-weight:800;font-size:12px}
+
+/* ===== Mobile ===== */
+#mbfab,#mbsh{display:none}
+@media(max-width:700px){
+ #qk,#utl,#sc,#hwb{display:none!important}
+ main{padding-left:8px!important;padding-right:8px!important}
+ #mbfab{display:grid;position:fixed;right:10px;bottom:158px;z-index:46;width:46px;height:46px;border-radius:50%;border:1px solid #ffffff40;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;place-items:center;box-shadow:0 6px 18px #0009;cursor:pointer;padding:0}
+ #mbfab i{display:none;position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#ef4444;border:2px solid #0b1236}#mbfab.dt i{display:block}
+ html.mbo #mbfab{display:none}
+ #mbsh{position:fixed;inset:0;z-index:90;display:none}#mbsh.on{display:block}
+ #mbsh .mbbk{position:absolute;inset:0;background:#02061799}
+ #mbsh .mbp{position:absolute;left:0;right:0;bottom:0;max-height:78vh;overflow:auto;background:#0b1132;border-top:1px solid #ffffff2a;border-radius:22px 22px 0 0;padding:16px 14px calc(20px + env(safe-area-inset-bottom));animation:mbup .22s ease-out}
+ @keyframes mbup{from{transform:translateY(40px);opacity:0}}
+ #mbsh .mbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}#mbsh .mbh b{color:#fff;font:800 18px Nunito,system-ui,sans-serif}
+ #mbsh .mbx{width:40px;height:40px;border-radius:12px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+ #mbsh .mbg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ #mbsh .mbi{position:relative;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;min-height:92px;width:auto!important;margin:0!important;padding:12px 6px!important;border-radius:16px;border:1px solid #ffffff1c;background:#ffffff0d;color:#fff;text-align:center;text-decoration:none;font:700 12px Nunito,system-ui,sans-serif;cursor:pointer;transform:none!important;animation:none!important}
+ #mbsh .mbi .qki,#mbsh .mbi>span:first-child{display:grid!important;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--c1,#6366f1),var(--c2,#4338ca))}
+ #mbsh .mbi svg{width:22px;height:22px}
+ #mbsh .mbi .qkt{display:flex!important;flex-direction:column;align-items:center}#mbsh .mbi b{font:800 13px Nunito,system-ui,sans-serif}#mbsh .mbi small{font-size:10.5px;color:#94a3b8;line-height:1.2}
+ #mbsh .mbi.dot::after,#mbsh .mbi .dot{top:6px;right:8px}
+ #mbsh #hwb,#mbsh .mbi.hwb{grid-column:1/-1}
+ /* barre du bas */
+ .panb{width:58px;height:58px;left:6px;bottom:12px}.panb .pi .i{width:30px;height:30px}.panb em{font-size:9px;bottom:7px}
+ nav#nav{left:70px!important;right:6px!important;bottom:6px!important;padding:8px 6px 4px!important;gap:2px!important}
+ .dk{width:auto!important;flex:1 1 0;min-width:0}.dk{overflow:hidden!important;padding:6px 0 5px!important}.dk em{display:block!important;font-size:8.4px!important;letter-spacing:-.5px;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .dk .ni{width:38px!important;height:38px!important}.dk .ni .i{width:21px!important;height:21px!important}
+}
+@media(max-width:700px){#mbsh .mbi.hwb,#mbsh .mbi[class*=hw]{flex-direction:column!important;grid-column:1/-1;min-height:64px;flex-direction:row!important;gap:10px;justify-content:center}}
+@media(max-width:700px){.tr-mdl{max-height:94vh!important;width:calc(100vw - 14px)!important;padding:12px!important}.tr-sc{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tr-sc::-webkit-scrollbar{display:none}.tr-sb{flex:none!important;white-space:nowrap}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2bc6b87985"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=2bc6b87985"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4a6a165652"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=4a6a165652"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11310,6 +11340,25 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  try{if(G.st>s0)for(const k in ks){const c=G.col[k];if(c){c.ks=ks[k];c.st=ks[k];c.mx=100+10*ks[k]}}starSync();save()}catch(e){}
  return r}}
 function os2(id,n){const T=starT(id);let s=0;for(const t of T)if(n>=t)s++;return Math.min(STMX,s)}
+/* ---- Mobile : les colonnes flottantes passent dans un menu (bouton + panneau du bas) ---- */
+(function(){
+const MQ=window.matchMedia?matchMedia("(max-width:700px)"):{matches:false};
+function build(){
+ const sh=document.createElement("div");sh.id="mbsh";sh.innerHTML='<div class="mbbk"></div><div class="mbp"><div class="mbh"><b></b><button type="button" class="mbx" aria-label="Fermer">×</button></div><div class="mbg"></div></div>';document.body.appendChild(sh);
+ const f=document.createElement("button");f.id="mbfab";f.type="button";f.setAttribute("aria-label","Menu");f.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><i></i>';document.body.appendChild(f);
+ sh.querySelector(".mbh b").textContent=(typeof LS=="function"?LS("Menu","Menu"):"Menu");
+ const open=()=>{const g=sh.querySelector(".mbg");g.innerHTML="";
+  const add=(src)=>{const c=src.cloneNode(true);c.removeAttribute("id");c.removeAttribute("style");c.classList.add("mbi");if(c.tagName=="BUTTON")c.type="button";g.appendChild(c)};
+  ["#hwb","#qk > *","#utl > *","#sc > *:not(#twh)"].forEach(s=>document.querySelectorAll(s).forEach(add));
+  sh.classList.add("on");document.documentElement.classList.add("mbo")};
+ const close=()=>{sh.classList.remove("on");document.documentElement.classList.remove("mbo")};
+ f.addEventListener("click",open);
+ sh.addEventListener("click",e=>{if(e.target.closest(".mbx")||e.target.classList.contains("mbbk")){close();return}if(e.target.closest(".mbi"))setTimeout(close,60)});
+ const dot=()=>{const on=document.querySelector("#qk .hot,#mlbtn.dot,#nwbtn.dot,#sc .dotn,#qk .dotn");f.classList.toggle("dt",!!on)};
+ setInterval(dot,1500);dot();
+}
+if(document.readyState!="loading")build();else document.addEventListener("DOMContentLoaded",build);
+})();
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
