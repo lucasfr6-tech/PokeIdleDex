@@ -3823,8 +3823,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c05737078e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c05737078e"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5eb1923029"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5eb1923029"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9511,6 +9511,33 @@ function kxClose(){const o=$("kxo");if(o)o.classList.remove("on");document.body.
 function kxRender(){const o=$("kxo");if(!o)return;const m=o.querySelector(".kxm"),y=m?m.scrollTop:0;o.innerHTML=kxHtml();const n=o.querySelector(".kxm");if(n)n.scrollTop=y}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=rp]");if(!b)return;e.stopPropagation();e.preventDefault();kxOpen()},true);
 document.addEventListener("keydown",e=>{if(e.key=="Escape")kxClose()});
+/* ---- espèces ciblées par zone : si une sélection existe pour la zone, seules ces espèces sont capturées ---- */
+let KXZV=null;
+const kxzSel=z=>{const m=G.kxz||{};const L=m[z];return Array.isArray(L)?L:[]};
+{const w0=kxWant;kxWant=function(e){try{const z=zoneOf(G.fl),L=kxzSel(z);if(L.length&&e&&e.id<9e4){if(L.includes(e.id))return true;if(e.mi==7&&KX().sh)return true;return false}}catch(x){}return w0.apply(this,arguments)}}
+function kxzHtml(){const cz=zoneOf(G.fl),z=KXZV==null?cz:KXZV,pool=zonePool(z)||[],L=kxzSel(z),mx=zoneOf(Math.max(G.fl,(typeof bfl=="function"?bfl():G.fl)||G.fl));
+ const cells=pool.map(id=>{const on=L.includes(id),seen=!!G.dx[id];let nm="?";try{nm=I(id).n}catch(x){}
+  return `<button class="kxzc${on?" on":""}${seen?"":" un"}" data-kx="zsp" data-v="${id}" title="${seen?esc(nm):"???"}">${sp(id,0)}<b>${seen?esc(nm):"???"}</b>${on?`<i>${ico("check")}</i>`:""}</button>`}).join("");
+ return `<h4>${LS("Espèces ciblées","Targeted species")}</h4>
+ <div class="kxzh"><button class="kxzn" data-kx="zz" data-v="-1" ${z<=0?"disabled":""} aria-label="-">${ico("chevl")}</button><div><b>Zone ${z+1}${z==cz?` <em>${LS("zone actuelle","current zone")}</em>`:""}</b><small>${LS("étages","floors")} ${zs(z)} – ${ze(z)} · ${L.length?LS(L.length+" espèce"+(L.length>1?"s":"")+" ciblée"+(L.length>1?"s":""),L.length+" targeted species"):LS("toutes les espèces","all species")}</small></div><button class="kxzn r" data-kx="zz" data-v="1" ${z>=mx?"disabled":""} aria-label="+">${ico("chevl")}</button></div>
+ <p class="kxnt">${LS("Touche les Pokémon que tu veux capturer dans cette zone : seules ces espèces recevront une ball, les autres seront mises K.O. Sans sélection, la stratégie ci-dessus s'applique. Les chromatiques restent capturés si l'option « Ne jamais rater un chromatique » est active.","Tap the Pokémon you want to catch in this zone: only these species get a Ball, the others are KO'd. With no selection, the strategy above applies. Shinies are still caught if “Never miss a shiny” is on.")}</p>
+ <div class="kxzg">${cells}</div>${L.length?`<button class="kxzx" data-kx="zclr">${LS("Tout désélectionner (capturer selon la stratégie)","Clear selection (catch by strategy)")}</button>`:""}`}
+{const h0=kxHtml;kxHtml=function(){const h=h0.apply(this,arguments);const k=h.indexOf('<h4>',h.indexOf('class="kxg5"'));return k>0?h.slice(0,k)+kxzHtml()+h.slice(k):h+kxzHtml()}}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-kx="zsp"],[data-kx="zz"],[data-kx="zclr"]');if(!b)return;ev.stopPropagation();ev.preventDefault();
+ const cz=zoneOf(G.fl),z=KXZV==null?cz:KXZV,a=b.dataset.kx;G.kxz=G.kxz||{};
+ if(a=="zz"){KXZV=Math.max(0,z+(+b.dataset.v));}
+ else if(a=="zclr"){delete G.kxz[z]}
+ else{const id=+b.dataset.v,L=kxzSel(z).slice(),i=L.indexOf(id);if(i>=0)L.splice(i,1);else L.push(id);if(L.length)G.kxz[z]=L;else delete G.kxz[z]}
+ try{save()}catch(x){}kxRender()},true);
+{const c0=kxClose;kxClose=function(){KXZV=null;return c0.apply(this,arguments)}}
+{const st=document.createElement("style");st.textContent=`.kxzh{display:flex;align-items:center;gap:10px;margin-bottom:8px}.kxzh>div{flex:1;min-width:0}.kxzh b{display:block;font-size:15px}.kxzh em{font-style:normal;font-size:11px;font-weight:800;color:#4ade80;margin-left:6px}.kxzh small{color:var(--mu);font-size:12px}
+.kxzn{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);flex:none}.kxzn.r svg{transform:scaleX(-1)}.kxzn:disabled{opacity:.3}
+.kxzg{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.kxzc{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 7px;border-radius:12px;background:rgba(0,0,0,.25);border:2px solid transparent;cursor:pointer}
+.kxzc img{width:56px;height:56px;object-fit:contain;image-rendering:pixelated}.kxzc b{font-size:11.5px;line-height:1.15;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kxzc.un img{filter:brightness(0) invert(.82) opacity(.55)}.kxzc.un b{color:var(--mu)}.kxzc.on{border-color:#4ade80;background:rgba(74,222,128,.14)}
+.kxzc i{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#4ade80;color:#052e16;display:grid;place-items:center}.kxzc i svg{width:12px;height:12px}
+.kxzx{margin-top:10px;width:100%;padding:10px;border-radius:12px;background:rgba(255,255,255,.06);font-weight:800}`;document.head.appendChild(st)}
 /* ---- migration : réglages automatiques pour tous, une seule fois ---- */
 function kxMig(){if(!G.kxv){G.kxv=1;G.rules={};KX()}else KX()}
 
@@ -12668,6 +12695,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Capture : espèces ciblées","Dans les réglages de capture (bouton « … » à côté des balls), tu peux maintenant choisir les espèces à capturer dans chaque zone. Si tu en sélectionnes, seules ces espèces reçoivent une ball, les autres sont mises K.O. Les chromatiques restent capturés si l'option « Ne jamais rater un chromatique » est active.","Capture: targeted species","In the capture settings (the “…” button next to the balls), you can now choose which species to catch in each zone. If you select some, only those get a Ball and the others are KO'd. Shinies are still caught if “Never miss a shiny” is on."],
   ["fix","Le palier d'un Pokémon ne change plus","Certains Pokémon (par exemple Gorythmic, l'évolution d'un Pokémon des étages) passaient parfois au palier « Raid Impossible » et leurs dégâts bondissaient. Chaque Pokémon garde maintenant pour toujours le palier de l'endroit où il a été obtenu, et une évolution garde le palier du Pokémon d'origine. Les paliers devinés à tort ont été corrigés.","A Pokémon's tier no longer changes","Some Pokémon (for example Rillaboom, evolved from a floor Pokémon) sometimes jumped to the “Impossible raid” tier and their damage spiked. Every Pokémon now keeps forever the tier of where it was obtained, and an evolution keeps the original Pokémon's tier. Wrongly guessed tiers have been fixed."],
   ["fix","Bouton Tower qui bougeait","Le bouton Tower à droite descendait parfois un instant : il reste maintenant à sa place.","Moving Tower button","The Tower button on the right sometimes dropped for a moment: it now stays in place."],
   ["imp","Codes des titres de l'équipe renouvelés","Les codes secrets des titres Owner, Admin et Helper ont été changés. Les anciens ne fonctionnent plus.","Team title codes renewed","The secret codes for the Owner, Admin and Helper titles have been changed. The old ones no longer work."],
