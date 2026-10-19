@@ -3234,7 +3234,7 @@ html.perf *{backdrop-filter:none!important;-webkit-backdrop-filter:none!importan
 .pidu .pidr em{grid-column:auto;text-align:right;opacity:.9;font-size:12.5px;color:#a7f3d0}
 .pnlock{opacity:.7;filter:grayscale(.6)}
 .pnlock .pni{background:#475569}
-.cp-fl{position:relative}
+.cp-fl{position:relative}.rhzn{box-shadow:0 0 0 1px #22d3ee66 inset,0 0 18px #22d3ee33}.rhzn .rhlv em{color:#67e8f9;font-variant-numeric:tabular-nums}.rhnomb{opacity:.55;filter:grayscale(.7)}.rhnomb em{color:#fca5a5!important}
 /* classement des pièces */
 .rkm-hint{display:block;color:var(--mu);margin:-4px 0 10px;font-size:12px}
 .rkm-w{border-radius:14px;transition:background .25s}.rkm-w.op{background:rgba(255,255,255,.04)}
@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="51e60e6a6e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=51e60e6a6e"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ff755be1c0"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ff755be1c0"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6256,7 +6256,7 @@ function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdPer(),first=win&&r
  return{rp,coins,items:win?rdRollLoot(R.tier,first):[],first,sb}}
 /* ---- capture ---- */
 const RCX={ball:"poke-ball",n:0,cap:0,boss:null,tier:0,busy:false,done:false,ok:0,wb:0};
-const rdBalls=()=>RCX.wb?BALLS.filter(b=>b[0]=="great-ball"&&G.inv[b[0]]>0):BALLS.filter(b=>G.inv[b[0]]>0).sort((a,b)=>(BM[b[0]]||1)-(BM[a[0]]||1));
+const rdBalls=()=>RCX.wb?BALLS.filter(b=>b[0]=="great-ball"&&G.inv[b[0]]>0):BALLS.filter(b=>G.inv[b[0]]>0&&!(b[0]=="master-ball"&&typeof znNoMB=="function"&&znNoMB())).sort((a,b)=>(BM[b[0]]||1)-(BM[a[0]]||1));
 const rdCapP=ball=>RCX.wb?RCX.cap:ball=="master-ball"?1:Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk")));
 function rdCapGrant(){const b=RCX.boss,t=RCX.tier;let note="";
  if(b.sp>9e4){spGrant(b.sp);note=spRoll(b.sp);if(b.sh&&!G.col[b.sp].sh){G.col[b.sp].sh=1;rq(b.sp);note+=" · Chromatique"}return {name:b.name,note}}
@@ -6371,7 +6371,7 @@ function rhStage(){const i=RHS.sel,t=RT[i],b=rdBossOf(i),r=rdState(),at=rdAtt(),
  const loot=RLOOT[i].filter(x=>IT[x[0]]||x[0]=="#pearl");const bl=["poke-ball","great-ball","ultra-ball"].filter(x=>IT[x]);
  return `<div class="rhst" style="--c:${t.c};--c1:${rdMainT(b)};--c2:${TC[b.types[1]||b.types[0]]}"><canvas class="rhbg" id="rhBg"></canvas><div class="rhtint"></div>
  <div class="rhsh"><div><small class="rhk">${LS("Raid ","Raid ")}${LS(t.n[0],t.n[1])}${done?" · "+LS("réussi aujourd'hui","cleared today"):""}</small><h2>${esc(b.name)}</h2><div class="rhch">${tchips(b.types)}<span class="rdlv">${LS("Niv.","Lv.")} ${b.L}</span>${F.map(x=>`<span class="rhf">${x}</span>`).join("")}</div></div>
- <div class="rhstat"><span><small>${LS("PV du boss","Boss HP")}</small><b>${fmt(b.max)}</b></span><span><small>${LS("Niveau conseillé","Advised level")}</small><b>${t.rec}</b></span><span><small>${LS("Tours max","Max rounds")}</small><b>${[30,30,32,34,36,36][i]}</b></span></div></div>
+ <div class="rhstat"><span><small>${LS("PV du boss","Boss HP")}</small><b>${fmt(b.max)}</b></span><span><small>${LS("Niveau conseillé","Advised level")}</small><b>${t.rec}</b></span><span><small>${LS("Tours max","Max rounds")}</small><b>${[30,30,32,34,36,36,36][i]}</b></span></div></div>
  <div class="rhboss"><div class="rhshd"></div>${rhPx(b)}</div>
  <div class="rhdown"><div class="rhcol"><b>${LS("Attaques du boss","Boss moves")}</b>${b.moves.map(m=>`<div class="tbm" style="--tc:${TC[m.t]}"><i></i><span>${esc(m.n)}</span><em>${m.c=="u"?LS("Soutien","Support"):m.p}</em></div>`).join("")}<b class="rhsp">${LS("Faiblesses","Weaknesses")}</b><div class="tty">${weak.length?weak.map(x=>`<span class="chip" style="background:${TC[x]}">${TFR[x]}</span>`).join(""):"—"}</div></div>
  <div class="rhcol"><b>${LS("Capture du boss vaincu","Catching the defeated boss")}</b><div class="rhcap">${bl.map(x=>`<span>${ic(x,IT[x].img)}<em>${Math.min(95,Math.round(t.cap*(BM[x]||1)*100*10)/10)} %</em></span>`).join("")}<span>${ic("master-ball",IT["master-ball"]&&IT["master-ball"].img)}<em>100 %</em></span></div><small>${LS("un seul lancer. Le boss capturé est un Alpha"+(t.sh?" chromatique":"")+", avec une chance de mutation.","a single throw. The caught boss is an Alpha"+(t.sh?" shiny":"")+" with a chance of mutation.")}</small>
@@ -12167,6 +12167,33 @@ document.addEventListener("keydown",e=>{const d=$("flp");
  if(e.key=="Escape"){e.preventDefault();e.stopPropagation();flpClose();return}
  if(e.target.id=="flpi")return;
  if(e.key=="ArrowRight"||e.key=="ArrowLeft"){const z=FLPZ+(e.key=="ArrowRight"?1:-1),b=d.querySelector(`[data-flz="${z}"]`);if(b&&!b.disabled){e.preventDefault();flpZone(z)}}},true);
+
+/* ============ Raid Zénith : doublons du Pikachu Zénith (après l'étage 300 de la Tour) ============ */
+const ZNT=6,ZNID=90004,ZNMAX=10;
+RT[ZNT]={n:["Zénith","Zenith"],c:"#22d3ee",L:100,hp:40000,am:0.5,cr:.09,rp:300,sec:43200,cap:.05,pool:[ZNID],f:"sp",rec:100};
+RLOOT[ZNT]=RLOOT[5];
+const znUnlocked=()=>{try{return !!(G.sp&&G.sp[ZNID])&&(twS().b|0)>=300}catch(e){return false}};
+const znNoMB=()=>!RCX.wb&&RCX.tier===ZNT&&!!RCX.boss&&RCX.boss.sp===ZNID;
+function znAtt(){const r=rdState(),now=Date.now();r.zt=(r.zt||[]).filter(t=>now-t<36e5);return{left:Math.max(0,ZNMAX-r.zt.length),next:r.zt.length>=ZNMAX?r.zt[0]+36e5:0}}
+/* échelle : le raid Zénith en haut, seulement une fois débloqué */
+{const l0=rhLadder;rhLadder=function(){const h=l0.apply(this,arguments);if(!znUnlocked())return h;
+ const t=RT[ZNT],b=rdBossOf(ZNT),a=znAtt();
+ return `<button class="rhl rhzn${RHS.sel==ZNT?" on":""}" data-rd="rsel" data-i="${ZNT}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${a.left}/${ZNMAX}</em></span></button>`+h}}
+/* fiche du raid : son propre compteur (10 / heure) et pas de Master Ball */
+{const s0=rhStage;rhStage=function(){if(RHS.sel!==ZNT)return s0.apply(this,arguments);if(!znUnlocked()){RHS.sel=5;return s0.apply(this,arguments)}
+ const a0=rdAtt;let h;rdAtt=znAtt;try{h=s0.apply(this,arguments)}finally{rdAtt=a0}
+ return h.replace(/<span>(<[^>]*master-ball[^]*?)<em>100 %<\/em><\/span>/,`<span class="rhnomb" title="${LS("Master Ball interdite","Master Ball not allowed")}">$1<em>${LS("Interdite","Not allowed")}</em></span>`)
+  .replace(/ \/ 5<\/small>/," / "+ZNMAX+"</small>")
+  .replace(/<small>(un seul lancer|a single throw)[^<]*<\/small>/,`<small>${LS("Un seul lancer, Master Ball interdite. Chaque capture ajoute un doublon de ton Pikachu Zénith.","A single throw, Master Ball not allowed. Each catch adds a duplicate of your Zenith Pikachu.")}</small>`)
+  .replace(/(class="rhk">)/,`$1${ico("clock")} ${ZNMAX} ${LS("tentatives / heure","attempts / hour")} · `)}}
+/* lancement : décompte sur le compteur Zénith, pas sur les 5 tentatives des autres raids */
+{const f0=rdStart;rdStart=function(){if(!(RTB.kind=="raid"&&RTB.tier===ZNT))return f0.apply(this,arguments);
+ if(!znUnlocked())return;const z=znAtt();if(z.left<=0){toast(LS("Plus de tentative pour le raid Zénith : attends la prochaine heure","No Zenith raid attempts left: wait for the next hour"));return}
+ const r=rdState(),tm0=r.tm.slice(),n0=r.tm.length,a0=rdAtt;rdAtt=()=>({left:1,next:0});
+ try{f0.apply(this,arguments)}finally{rdAtt=a0}
+ if(r.tm.length>n0){r.tm=tm0;r.zt=r.zt||[];r.zt.push(Date.now());save()}}}
+/* sécurité : jamais de Master Ball sur le Pikachu Zénith du raid */
+{const t0=rdThrow;rdThrow=function(){if(RCX.ball=="master-ball"&&znNoMB()){toast(LS("La Master Ball est interdite sur le Pikachu Zénith.","The Master Ball is not allowed on Zenith Pikachu."));return}return t0.apply(this,arguments)}}
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
@@ -12256,6 +12283,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Raid Zénith","Une fois l'étage 300 de la Tour réussi avec le Pikachu Zénith, un raid Zénith apparaît dans Raids pour obtenir des doublons. 10 tentatives par heure, à part des autres raids. Master Ball interdite pour le capturer.","Zenith raid","Once floor 300 of the Tower is cleared with Zenith Pikachu, a Zenith raid appears in Raids to get duplicates. 10 attempts per hour, separate from other raids. Master Ball not allowed to catch it."],
   ["new","Classement des pièces","Nouvel onglet Pièces dans Classements : les joueurs qui ont le plus de pièces. Touche un joueur pour voir ses 5 meilleurs Pokémon.","Coin ranking","New Coins tab in Rankings: the players with the most coins. Tap a player to see their top 5 Pokémon."],
   ["new","Choix rapide de l'étage","Dans Combat, touche le carré ÉTAGE : une fenêtre s'ouvre pour aller directement à n'importe quel étage déjà atteint, zone par zone, ou en tapant son numéro.","Quick floor picker","In Battle, tap the FLOOR box: a window opens to jump straight to any floor you have reached, zone by zone, or by typing its number."],
   ["imp","Compteur d'invocations","L'onglet Invocation affiche maintenant combien d'invocations tu as faites sur la limite de la rotation (classique et Halloween), et dans combien de temps elle se remet à zéro.","Summon counter","The Summon tab now shows how many summons you have used out of the rotation limit (standard and Halloween), and when it resets."],
