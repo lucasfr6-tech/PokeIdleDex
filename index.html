@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="acdeb7a9bc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=acdeb7a9bc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="efb864c6f2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=efb864c6f2"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4076,7 +4076,33 @@ const mhp=id=>{const c=G.col[id],f=c.iv?1+(c.iv[0]+c.iv[2])/62*.1+(c.ev[0]+c.ev[
 const STG={};const stage=id=>STG[id]||(STG[id]=(()=>{const L=EVC[I(id).ch]||[];let st=1,c=id,g=0;while(g++<5){const p=L.find(e=>e[1]==c);if(!p)break;st++;c=p[0]}return st})());
 const clearSTG=()=>{for(const k in STG)delete STG[k]};
 const stM=id=>id>9e4?6.4:1+.3*(stage(id)-1);
-const base=id=>{const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
+/* ===== Échelle de puissance par source (PWNEW=1). Mettre PWNEW=0 pour revenir exactement à l'ancienne formule. ===== */
+var PWNEW=1;
+var PWTV={wN:700,wSR:1600,wSSR:3500,ex:6000,wUR:9000,mg:16000,bN:1850,bSR:4000,bSSR:10500,bUR:18500,bD:32000,h1:2100,h2:4600,h3:12000,h4:38000,r0:1900,r1:4200,r2:10800,r3:19000,r4:30000,r5:44000,f0:1900,f1:3000,f2:4200,f3:7000,f4:10800,f5:19000,f6:30000,f7:44000,sp:90000,wb:180000};
+var PWREF={h1:380,h2:450,h3:520,h4:720,wN:330,wSR:440,wSSR:505,wUR:590,ex:500,mg:600,bN:330,bSR:440,bSSR:505,bUR:590,bD:620,r0:430,r1:470,r2:520,r3:600,r4:640,r5:660,f0:420,f1:450,f2:480,f3:500,f4:520,f5:560,f6:600,f7:760,sp:660,wb:680};
+var PWS=null,PWC=new Map();
+function pwSets(){if(PWS)return PWS;try{const ex=new Set(),rt={},fz={};EXT.forEach(t=>{if(!t.mega)(t.pool||[]).forEach(i=>ex.add(i))});RT.forEach((t,k)=>{if(k<=5)(t.pool||[]).forEach(i=>{if(i<9e4)rt[i]=Math.max(rt[i]|0,k)})});FZD.forEach((L,k)=>L.forEach(i=>{fz[i]=Math.max(fz[i]|0,k)}));void HFI;void ZOF;PWS={ex,rt,fz};PWC.clear()}catch(e){return null}return PWS}
+const pwBest=(a,b)=>!a?b:!b?a:(PWTV[a]||0)>=(PWTV[b]||0)?a:b;
+function pwInfer(id,c){if(id>9e4)return"sp";const S=pwSets();let k=null;
+ try{if(c.hf&&HFI[id])return"h"+HFI[id].t}catch(e){}
+ try{if(ZOF[id]!==undefined)k=["wN","wSR","wSSR","wUR"][Math.min(3,Math.max(0,pr(id)|0))];
+  else if(typeof kxDiv=="function"&&kxDiv(id))k="bD";
+  else if(S&&S.rt[id]!=null)k="r"+S.rt[id];
+  else if(S&&S.ex.has(id))k="ex";
+  else if(S&&S.fz[id]!=null)k="f"+S.fz[id];
+  else k=["wN","wSR","wSSR","wUR"][Math.min(3,Math.max(0,pr(id)|0))]}catch(e){k="wN"}
+ if(c.mf)k=pwBest(k,"mg");return k}
+function pwTier(id){const c=G.col[id];if(!c)return"wN";const key=(c.src||"")+"|"+(c.hf?1:0)+"|"+(c.mf||0)+"|"+(PWS?1:0);const m=PWC.get(id);if(m&&m[0]===key)return m[1];
+ let k=(c.src&&PWTV[c.src]&&!(c.hf||id>9e4))?(c.mf?pwBest(c.src,"mg"):c.src):pwInfer(id,c);PWC.set(id,[key,k]);return k}
+/* nouvelle source d'obtention : on garde la meilleure */
+function srcUp(id,k,nw){const c=G.col[id];if(!c||!PWTV[k])return;PWC.delete(id);if(nw){c.src=k;return}const cur=pwTier(id);if((PWTV[k]||0)>(PWTV[cur]||0))c.src=k;else if(!c.src)c.src=cur;PWC.delete(id)}
+var SRCNEXT=null;
+function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HFI[id]&&typeof hfMul=="function")q/=hfMul(id)||1}catch(e){}
+ /* bonus de catégorie déjà compris dans le palier : Divin ×1,6, spécial ×2,6, forme Méga ×1,5 */
+ try{if(typeof kxDiv=="function"&&kxDiv(id))q/=1.6;if(id>9e4)q/=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mf)q/=1.5}catch(e){}
+ const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
+ return PWTV[k]*sp/12.88*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
+const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
 const coin=id=>{const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
@@ -12242,6 +12268,14 @@ const twFoePd=(f,boss)=>Math.round(1e4*Math.pow(1e6,(Math.max(1,f)-1)/299)*(f<=1
 {const f0=twFoe;twFoe=function(e,f){const u=f0.apply(this,arguments);try{u.pd=twFoePd(f,e.boss)}catch(x){}return u}}
 {const c0=twFoeCards;twFoeCards=function(f){const h=c0.apply(this,arguments);try{const t=twS(),tm=(t.tm||[]).filter(i=>G.col[i]),my=tm.length?Math.exp(tm.reduce((a,i)=>a+Math.log(Math.max(1,base(i))),0)/tm.length):0,fo=twFoePd(f,0),r=my/fo,mul=Math.max(.1,Math.min(10,Math.sqrt(r))),col=mul>=1.2?"#4ade80":mul>=.8?"#facc15":"#f87171";
  return `<div class="twpw" style="--c:${col}">${ico("sword")}<span>${LS("Attaque des ennemis","Enemy attack")} <b>${fmt(fo)}</b></span><span>${LS("Ton équipe","Your team")} <b>${fmt(my)}</b></span><em>${LS("Dégâts","Damage")} ×${mul.toFixed(mul<1?2:1)}</em></div>`+h}catch(e){return h}}}
+
+/* ===== Échelle de puissance : on retient la source d'obtention ===== */
+{const c0=catchIt;catchIt=function(e){const nw=!!(e&&e.id&&!G.col[e.id]);const r=c0.apply(this,arguments);try{if(SRCNEXT&&e&&e.id)srcUp(e.id,SRCNEXT,nw)}catch(x){}return r}}
+{const g0=exGet;exGet=function(id){const nw=!G.col[id];const r=g0.apply(this,arguments);try{if(SRCNEXT)srcUp(id,SRCNEXT,nw)}catch(x){}return r}}
+{const x0=exClaim;exClaim=function(r){const p=SRCNEXT;SRCNEXT=r&&r.mf?"mg":"ex";try{return x0.apply(this,arguments)}finally{SRCNEXT=p;try{recomp()}catch(e){}}}}
+{const r0=rdCapGrant;rdCapGrant=function(){const p=SRCNEXT;SRCNEXT=RCX.wb?"wb":(RCX.tier>=0&&RCX.tier<=5?"r"+RCX.tier:null);try{return r0.apply(this,arguments)}finally{SRCNEXT=p;try{recomp()}catch(e){}}}}
+{const f0=fzGrant;fzGrant=function(c,lost){const p=SRCNEXT;SRCNEXT=c&&c.t!=null?"f"+Math.min(7,c.t|0):null;try{return f0.apply(this,arguments)}finally{SRCNEXT=p;try{recomp()}catch(e){}}}}
+{const p0=ivPop;ivPop=function(L){try{const M={N:"bN",SR:"bSR",SSR:"bSSR",UR:"bUR",D:"bD"};(L||[]).forEach(x=>{if(x&&G.col[x.id]&&M[x.t])srcUp(x.id,M[x.t],!!x.nw)});recomp();save()}catch(e){}return p0.apply(this,arguments)}}
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
@@ -12331,6 +12365,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
   ["new","Classement « Meilleur Pokémon »","Nouvel onglet dans Classements : le Pokémon le plus fort de chaque joueur, selon le DPS le plus haut jamais atteint (cartes, équipement, prestige et objet tenu compris).","“Best Pokémon” ranking","New tab in Rankings: each player's strongest Pokémon, by the highest DPS ever reached (cards, gear, prestige and held item included)."],
   ["imp","Tour : la puissance compte","Dans la Tour, l'attaque réelle de tes Pokémon compte maintenant, comme en JCJ : les ennemis deviennent plus puissants à chaque étage, et l'écran de l'étage compare leur attaque à celle de ton équipe. Mutations, tailles, chromatiques et Alpha sont visibles en combat.","Tower: power matters","In the Tower, your Pokémon's real attack now counts, like in PvP: enemies get stronger every floor, and the floor screen compares their attack with your team's. Mutations, sizes, shinies and Alpha are shown in battle."],
   ["imp","JCJ : la puissance compte","En JCJ, l'attaque réelle de tes Pokémon compte maintenant (doublons, étoiles, mutation, taille, Alpha…) : un Pokémon bien plus fort que son adversaire inflige beaucoup plus de dégâts et en subit beaucoup moins. À puissance proche, les types restent décisifs. Mutations, tailles, chromatiques et Alpha sont aussi visibles pendant les combats.","PvP: power matters","In PvP, your Pokémon's real attack now counts (duplicates, stars, mutation, size, Alpha…): a much stronger Pokémon deals far more damage and takes far less. At similar power, types stay decisive. Mutations, sizes, shinies and Alpha are also shown during battles."],
