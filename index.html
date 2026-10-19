@@ -3433,7 +3433,7 @@ a.qkb.qkdc .qki{color:#fff}
 .rxc b{font-size:11px;line-height:1.1;overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap}
 .rxc.hid .rxs img{filter:brightness(0) blur(1.5px);opacity:.55}.rxc.hid b{color:#94a3b8;letter-spacing:.2em}
 
-.rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxb svg{width:16px;height:16px}
+.rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxp{margin-left:8px;border-color:#facc1580;background:#facc151f}.rxp img,.rix h3 img{width:24px;height:24px;object-fit:contain;image-rendering:pixelated;margin:-4px 0}.rxb svg{width:16px;height:16px}
 #rxm{position:fixed;inset:0;z-index:4000;display:none;background:rgba(3,6,18,.78);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#rxm.on{display:flex}
 .rxd{position:relative;width:min(880px,100%);max-height:88vh;overflow:auto;border-radius:18px;background:linear-gradient(#141b3a,#0b1026);border:1px solid #ffffff2a;padding:16px 16px 20px}
 .rxx{position:sticky;float:right;top:0;width:36px;height:36px;border-radius:10px;border:1px solid #ffffff2a;background:#0b1026;color:#fff;display:grid;place-items:center;cursor:pointer;z-index:2}
@@ -11187,7 +11187,19 @@ function exIndex(){const kn=i=>!!G.col[i];
  let h=EXT.filter(t=>!t.mega).map(t=>row(esc(t.n)+" · "+esc(t.z),t.col[0],t.pool)).join("");
  try{const M=[...new Set(MGX().map(f=>MGM[f]&&MGM[f].s).filter(x=>x&&!kxDiv(x)))];h+=row(LS("Chasse Méga","Mega hunt"),"#f472b6",M)}catch(e){}
  return `<div class="rix"><h3>${ico("book")} ${LS("Index des expéditions","Expedition index")}</h3><small class="rxn">${LS("Capture un Pokémon pour révéler sa case.","Catch a Pokémon to reveal its slot.")}</small>${h}</div>`}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rxi]");if(!b)return;e.stopPropagation();e.preventDefault();rxOpen(b.dataset.rxi=="raid"?rdIndex():exIndex())},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rxi]");if(!b)return;e.stopPropagation();e.preventDefault();rxOpen(b.dataset.rxi=="raid"?rdIndex():b.dataset.rxi=="pika"?pkIndex():exIndex())},true);
+/* ---------- Expéditions : index Pikachu (toutes les variantes : formes, mutations, tailles) ---------- */
+{const f=catchIt;catchIt=function(e){try{if(e&&e.id==25){G.pkx=G.pkx||{m:{},z:{}};if(e.mi>0)G.pkx.m[e.mi]=1;const zi=SZ.indexOf(e.sz);if(zi>=0)G.pkx.z[zi]=1;if(e.boss)G.pkx.al=1}}catch(x){}return f.apply(this,arguments)}}
+function pkIndex(){const c=G.col[25]||{},X=G.pkx||{m:{},z:{}},has=!!G.col[25];
+ const cell=(ok,nm,st,sh,id)=>`<div class="rxc${ok?"":" hid"}"><span class="rxs"><span style="display:grid;place-items:center;${st||""}">${sp(id||25,sh?1:0)}</span></span><b>${ok?esc(nm):"???"}</b></div>`;
+ const row=(t,col,L)=>{const n=L.filter(x=>x[0]).length;return `<div class="rxr" style="--c:${col}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(x=>cell.apply(null,x)).join("")}</div></div>`};
+ const F=[[has,"Pikachu"],[has&&!!c.sh,LS("Chromatique","Shiny"),"",1],[has&&!!(c.al||X.al),"Alpha","filter:drop-shadow(0 0 6px #ef4444)"],[!!G.col[90004],"Pikachu Zénith","",0,90004]];
+ const M=[];for(let k=1;k<MU.length;k++){if(k==7)continue;M.push([has&&(!!X.m[k]||c.mi==k),MU[k][0],MU[k][3]])}
+ const Z=SZ.map((z,k)=>[has&&(!!X.z[k]||k==2||c.zi==k),z[0],"transform:scale("+Math.min(1.25,Math.max(.55,z[1]*.85)).toFixed(2)+")"]);
+ const all=[...F,...M,...Z],n=all.filter(x=>x[0]).length;
+ return `<div class="rix"><h3>${sp(25,0)} ${LS("Index Pikachu","Pikachu index")} <small>(${n} / ${all.length})</small></h3><small class="rxn">${LS("Obtiens chaque variante de Pikachu pour révéler sa case. Les mutations et tailles comptent à partir de maintenant (ta meilleure déjà obtenue est reprise).","Get every Pikachu variant to reveal its slot. Mutations and sizes count from now on (your best one so far is kept).")}</small>${row(LS("Formes","Forms"),"#facc15",F)}${row(LS("Mutations","Mutations"),"#a855f7",M)}${row(LS("Tailles","Sizes"),"#4ade80",Z)}</div>`}
+{const v0=vExp;vExp=function(){const s=v0.apply(this,arguments);try{return s.replace(rxBtn("exp"),rxBtn("exp")+`<button class="rxb rxp" data-rxi="pika">${sp(25,0)} Pikachu</button>`)}catch(e){return s}}}
+
 /* ---------- Expéditions : plus de Pokémon dans les zones ---------- */
 (function(){const add=(t,L)=>{const p=EXT[t].pool;L.forEach(i=>{if(p.indexOf(i)<0&&!kxDiv(i))p.push(i)})};
  add(0,[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,23,27,29,32,35,37,39,43,46,48,50,52,54,56,60,69,72,74,79,84,86,88]);
