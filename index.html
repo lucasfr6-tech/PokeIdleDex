@@ -1117,6 +1117,7 @@ html[data-theme=day] .bgc{background:linear-gradient(135deg,color-mix(in srgb,va
 .rdrwp{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mu)}.rdrwp>span{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.05);border-radius:8px;padding:3px 7px}.rdrwp svg{width:13px;height:13px;color:var(--y)}.rdri2{padding:2px 4px!important}.rdri2 img{width:20px;height:20px}
 .rdon,.rdoff{font-size:11px;background:rgba(255,255,255,.07);border-radius:8px;padding:3px 8px;display:inline-flex;gap:4px;align-items:center}.rdon svg{width:12px;height:12px}.rdoff{color:#fbbf24}
 .pqsrc{display:inline-flex;align-items:center;gap:4px;margin:4px auto 0;padding:2px 9px;border-radius:999px;font-size:10.5px;font-weight:600;letter-spacing:.2px;color:#cbd5e1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}.pqsrc svg{width:11px;height:11px;opacity:.8}
+.mc>.x,.pqm>.x{z-index:60!important}.mc>.x{isolation:isolate}
 .wbhn{display:block;margin-top:6px;font-size:11px;opacity:.7;text-align:center}
 .rdwh{position:relative;height:26px;border-radius:13px;background:rgba(0,0,0,.45);border:1px solid rgba(167,139,250,.4);margin:10px 0;overflow:hidden}.rdwh i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#7c3aed,#c084fc);transition:width .8s}.rdwh em{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:12px;text-shadow:0 1px 2px #000}
 .rdwb2{display:flex;gap:8px;flex-wrap:wrap}.rdwb2 .go{display:flex;align-items:center;gap:6px}
@@ -3821,8 +3822,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1d5640dac7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=1d5640dac7"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c0b708f9ba"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=c0b708f9ba"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3974,8 +3975,12 @@ const STABS=[["balls","Poké Balls","Poké Balls"],["heal","Soins","Soins"],["st
 /* ===== Remise à zéro générale (nouveau départ pour tous les joueurs) =====
    Chaque partie locale d'une ancienne époque est effacée : Pokémon, prestiges, amis, JCJ, pass, titres, codes, statistiques...
    On garde seulement l'identité (identifiant, jeton, compte lié, code ami), les réglages et le cache des données Pokémon. */
-var PID_EP="r2",PID_WIPED=false;
-(function(){try{if(localStorage.getItem("pid_ep")===PID_EP)return;
+var PID_EP="r3",PID_WIPED=false;
+(function(){try{
+ /* une partie sans la marque de la nouvelle époque (ex. écrite par un ancien onglet resté ouvert) est aussi effacée */
+ const tag='"ep":"'+PID_EP+'"';let stale=false;
+ Object.keys(localStorage).forEach(k=>{if(k==="idle3"||k.indexOf("idle3:")===0){const v=localStorage.getItem(k)||"";if(v&&v.indexOf(tag)<0)stale=true}});
+ if(localStorage.getItem("pid_ep")===PID_EP&&!stale)return;
  const keep={pid_uid:1,pid_tok:1,pid_acc:1,pid_dcl:1,pid_ggl:1,idle_set:1,dx3:1,evc:1,pid_skz2:1};
  let fid=null,had=false;
  Object.keys(localStorage).forEach(k=>{if(k==="idle3"||k.indexOf("idle3:")===0){had=true;if(!fid){try{const o=JSON.parse(localStorage.getItem(k)||"{}");if(o&&o.fd&&/^[A-Z0-9]{8}$/.test(o.fd.id||""))fid=o.fd.id}catch(e){}}}});
@@ -9036,7 +9041,7 @@ function starCard(id){const c=G.col[id];if(!c)return "";const s=c.st||0,T=starT(
 /* ================= WIKI v2 : refonte complète ================= */
 const wkOld=Object.assign({},wkBody);
 const WKG=[
- ["Démarrer","#f59e0b","#b45309",["home","start","bal","menu","faq"]],
+ ["Démarrer","#f59e0b","#b45309",["home","news","start","pw","bal","menu","faq"]],
  ["Combat et progression","#ef4444","#991b1b",["combat","alpha","wx","pen","pres"]],
  ["Pokémon","#22c55e","#166534",["rarity","capture","sizes","mut","asc","stats","forms","items"]],
  ["Modes de jeu","#6366f1","#3730a3",["exp","raid","twr","pvp","gld"]],
@@ -9044,6 +9049,8 @@ const WKG=[
  ["Social","#ec4899","#9d174d",["soc","rks"]]];
 const WKM={
  home:["Accueil du wiki","Tout le jeu expliqué, page par page","book"],
+ news:["Nouveautés récentes","Les derniers changements du jeu, expliqués simplement","spark"],
+ pw:["Puissance et rareté","L'échelle de puissance du jeu et son simulateur","chart"],
  start:["Bien débuter","Le guide pas à pas, des premières minutes jusqu'à l'endgame","flag"],
  bal:["Équilibrage et progression","Comment la puissance, les étages et les bonus s'articulent","chart"],
  menu:["Menu et déblocages","Où trouver chaque fonction et à quel étage elle s'ouvre","map"],
@@ -9053,7 +9060,7 @@ const WKM={
  wx:["Météo et événements","Types renforcés, bonus temporaires et fenêtres à ne pas rater","cloud"],
  pen:["Pension","Faire gagner des tailles, mutations et chromatiques pendant que tu joues ailleurs","pension"],
  pres:["Prestige","Repartir de zéro pour devenir plus fort pour toujours","spark"],
- rarity:["Raretés","N, SR, SSR, UR, Spécial et Divin : qui apparaît où et pourquoi","star"],
+ rarity:["Raretés et paliers","N, SR, SSR, UR, Spécial et Divin : qui apparaît où et pourquoi","star"],
  capture:["Capture et Poké Balls","Comment fonctionne la capture et quelle ball utiliser","target"],
  sizes:["Tailles","De Lilliputien à Cosmique : des Pokémon hors norme","resize"],
  mut:["Mutations et chromatiques","Auras colorées, bonus permanents et chasse au chromatique","sparkle"],
@@ -9079,6 +9086,7 @@ const WKO=[].concat(...WKG.map(g=>g[3]));
 WSEC.length=0;WKO.forEach(k=>WSEC.push([k,WKM[k][0],WKM[k][0],WKM[k][2]]));
 WK.s="home";WK.sq="";WK.l=null;
 const wkGrp=k=>WKG.find(g=>g[3].includes(k))||WKG[0];
+const WKNEW=new Set(["news","pw"]);
 
 /* ---------- briques de mise en page ---------- */
 const wf=a=>`<div class="wkf">${a.map(x=>`<div><small>${x[0]}</small><b>${x[1]}</b></div>`).join("")}</div>`;
@@ -9292,7 +9300,7 @@ function vWiki(){
  if(WK.s!==WK.l){WK.sq="";WK.l=WK.s}
  const cur=WK.s;
  return `<div class="wk wk2"><nav class="wkn"><h2>${ico("wiki")} Wiki</h2><div class="wks0"><i>${ico("search")}</i><input id="wkgs" placeholder="Chercher dans le wiki…" value="${esc(WK.sq||"")}" autocomplete="off"></div>
- ${WKG.map(g=>`<div class="wkgp" style="--c:${g[1]}"><span>${g[0]}</span>${g[3].map(k=>`<button data-a="wk" data-t="${k}" class="${k==cur?"on":""}"><i>${ico(WKM[k][2])}</i><b>${WKM[k][0]}</b></button>`).join("")}</div>`).join("")}</nav>
+ ${WKG.map(g=>`<div class="wkgp" style="--c:${g[1]}"><span>${g[0]}</span>${g[3].map(k=>`<button data-a="wk" data-t="${k}" class="${k==cur?"on":""}"><i>${ico(WKM[k][2])}</i><span class="wknt"><b>${WKM[k][0]}${WKNEW.has(k)?`<em class="wknw">NOUVEAU</em>`:""}</b><small>${WKM[k][1]}</small></span></button>`).join("")}</div>`).join("")}</nav>
  <article class="wka" id="wka">${WK.sq?wkRes():wkPage(cur)}</article></div>`}
 document.addEventListener("input",e=>{const t=e.target;if(!t||t.id!="wkgs")return;WK.sq=t.value.trim();WK.l=WK.sq?null:WK.s;const a=$("wka");if(a)a.innerHTML=WK.sq.length>1?wkRes():wkPage(WK.s)});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-a="wk"]');if(!b)return;setTimeout(()=>{const a=$("wka");if(a&&a.getBoundingClientRect().top<0)a.scrollIntoView({block:"start"})},60)},true);
@@ -11953,6 +11961,134 @@ wkBody.town=()=>{
 {const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wsx(TT("Raid Zénith","Zenith raid"),`<p>${TT("Débloqué quand tu possèdes <b>Pikachu Zénith</b> et que tu as atteint l'étage <b>300</b> de la Tower. Il apparaît sous le raid Facile et permet d'obtenir des doublons de Pikachu Zénith. Il est aussi dur que le raid Impossible, la <b>Master Ball y est interdite</b>, et il a son propre compteur : <b>10 tentatives par heure</b>.","Unlocked once you own <b>Zenith Pikachu</b> and have reached Tower floor <b>300</b>. It shows under the Easy raid and lets you get Zenith Pikachu duplicates. It is as hard as the Impossible raid, the <b>Master Ball is forbidden</b>, and it has its own counter: <b>10 tries per hour</b>.")}</p>`)
  +wsx(TT("PV du Boss monde","World boss HP"),`<p>${TT("Les PV du Boss monde sont calculés <b>une seule fois</b>, au début de la semaine, à partir des joueurs actifs et de leurs dégâts moyens par essai : le boss doit pouvoir tomber en <b>2 à 3 jours</b> si tout le monde l'attaque 3 fois par jour. Ils restent ensuite <b>fixes</b> toute la semaine, même si de nouveaux joueurs arrivent ; le boss suivant tient compte des joueurs du moment.","World boss HP is computed <b>only once</b>, at the start of the week, from active players and their average damage per try: the boss should fall in <b>2 to 3 days</b> if everyone attacks it 3 times a day. It then stays <b>fixed</b> all week, even if new players join; the next boss takes the players of that time into account.")}</p>`)}
 {const p=wkBody.rks;if(p)wkBody.rks=()=>p()+wsx(TT("Pièces et Meilleur Pokémon","Coins and Best Pokémon"),`<p>${TT("<b>Pièces</b> classe les joueurs selon leurs pièces ; clique sur un joueur pour voir ses 5 meilleurs Pokémon. <b>Meilleur Pokémon</b> classe le Pokémon le plus puissant de chaque joueur, objets et cartes compris.","<b>Coins</b> ranks players by their coins; click a player to see their top 5 Pokémon. <b>Best Pokémon</b> ranks each player's strongest Pokémon, items and cards included.")}</p>`)}
+/* ===== Wiki : page « Nouveautés récentes », page « Puissance et rareté » avec simulateur, mise en page aérée ===== */
+(function(){
+ const st=document.createElement("style");st.textContent=`
+.wk2{grid-template-columns:300px minmax(0,1fr)!important;gap:20px}
+.wk2 .wkn{padding:14px 12px 18px!important;gap:0!important}
+.wk2 .wkn h2{margin:2px 8px 12px!important;font-size:24px}
+.wk2 .wks0{margin:0 2px 6px!important}
+.wk2 .wkgp{gap:3px!important;margin-top:18px!important}
+.wk2 .wkgp>span{font-size:11.5px!important;padding:2px 10px 8px!important;letter-spacing:.12em}
+.wk2 .wkgp button{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important;padding:9px 12px!important;min-height:48px;border-radius:12px!important;width:100%;text-align:left}
+.wk2 .wkgp button i{width:34px!important;height:34px!important;border-radius:10px!important;flex:none;background:color-mix(in srgb,var(--c) 18%,transparent)!important;color:var(--c)}
+.wk2 .wkgp button i svg{width:18px;height:18px}
+.wk2 .wkgp button.on i{background:var(--c)!important;color:#111}
+.wknt{display:flex;flex-direction:column;min-width:0;gap:2px}
+.wknt b{font-size:14px!important;font-weight:800!important;line-height:1.2;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.wknt small{font-size:11.5px;line-height:1.3;color:var(--mu);font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wknw{font-style:normal;font-size:9px;font-weight:900;letter-spacing:.06em;padding:2px 6px;border-radius:6px;background:#ef4444;color:#fff}
+.wk2 .wka>*:not(.wkh){max-width:900px}
+.wk2 .wka p,.wk2 .wka li{font-size:15px;line-height:1.7}
+.wk2 .wka>.lead{font-size:16px;line-height:1.7;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--ln)}
+.wk2 .wka h3{margin-top:34px!important;margin-bottom:12px!important;font-size:21px}
+.wk2 .wka h3::before{content:"";width:5px;height:22px;border-radius:3px;background:var(--y);flex:none}
+.wk2 .wkt{margin:14px 0}
+.wk2 .wkt td{padding:10px 14px!important}
+.wk2 .wkt th{padding:11px 14px!important}
+.wk2 .wkt tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
+.wk2 .wkt td:last-child{font-variant-numeric:tabular-nums}
+.wk2 .wkn2{padding:16px 18px;gap:16px}
+@media(max-width:900px){.wk2{grid-template-columns:minmax(0,1fr)!important}
+ .wk2 .wkgp{flex-direction:row!important;margin-top:10px!important}.wk2 .wkgp button{width:auto;min-height:40px;padding:7px 12px!important}
+ .wk2 .wkgp button i{display:grid!important;width:26px!important;height:26px!important}.wknt small{display:none}.wknt b{white-space:nowrap}
+ .wk2 .wka>*:not(.wkh){margin-left:16px!important;margin-right:16px!important}}
+/* nouveautés */
+.wnws{display:grid;gap:10px;margin:12px 0}
+.wnw{display:flex;gap:14px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--ln);border-left:4px solid var(--c)}
+.wnw .wnt{flex:none;font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--c);padding:3px 8px;border-radius:7px;background:color-mix(in srgb,var(--c) 16%,transparent);height:fit-content;white-space:nowrap}
+.wnw b{display:block;font-size:15.5px;margin-bottom:3px}.wnw p{margin:0;color:var(--mu);font-size:14px!important;line-height:1.6!important}
+.wnwd{display:flex;align-items:center;gap:10px;margin:26px 0 4px;font-weight:800;font-size:16px}.wnwd small{color:var(--mu);font-weight:700}
+.wnwb{margin-top:16px}
+/* échelle de puissance */
+.pwlg{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.pwlg span{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--ln)}
+.pwlg i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.pwtg{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid var(--ln);margin-bottom:10px}
+.pwtg button{padding:7px 14px;border-radius:9px;font-weight:800;font-size:13px;background:transparent}.pwtg button.on{background:var(--y);color:#1a1300}
+.pwld{display:grid;gap:6px}
+.pwgh{margin:14px 0 2px;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.pwr{display:grid;grid-template-columns:170px minmax(0,1fr) 78px;align-items:center;gap:12px;padding:6px 10px;border-radius:10px}
+.pwr:hover{background:rgba(255,255,255,.04)}
+.pwr .pwn{display:flex;align-items:center;gap:8px;min-width:0}.pwr .pwn i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.pwr .pwn b{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pwr .pwt{height:12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+.pwr .pwt i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 55%,transparent),var(--c))}
+.pwr .pwv{text-align:right;font-weight:900;font-variant-numeric:tabular-nums;font-size:14px}
+.pwsim{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.pwc{padding:16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--ln);border-top:4px solid var(--c)}
+.pwc h4{margin:0 0 12px!important;color:var(--c)!important;font-size:13px!important}
+.pwf{display:grid;gap:4px;margin-bottom:12px}.pwf>label{font-size:12px;font-weight:800;color:var(--mu);display:flex;justify-content:space-between}
+.pwf>label output{color:var(--tx);font-variant-numeric:tabular-nums}
+.pwf select{width:100%;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid var(--ln);color:var(--tx);font:inherit;font-size:14px}
+.pwf input[type=range]{width:100%;accent-color:var(--c)}
+.pwst{display:flex;gap:4px}.pwst button{flex:1;padding:7px 0;border-radius:9px;font-weight:800;background:rgba(255,255,255,.06);font-size:13px}.pwst button.on{background:var(--c);color:#111}
+.pwck{display:flex;gap:8px;flex-wrap:wrap}.pwck label{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13px;font-weight:700;cursor:pointer}
+.pwres{margin-top:6px;padding:12px;border-radius:12px;background:rgba(0,0,0,.28)}
+.pwres>small{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--mu)}.pwres>b{display:block;font-size:30px;font-weight:900;color:var(--c);font-variant-numeric:tabular-nums}
+.pwch{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.pwch span{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.07)}.pwch span b{color:var(--tx)}
+.pwvs{margin:4px 0 8px;padding:16px 18px;border-radius:14px;text-align:center;background:linear-gradient(135deg,rgba(255,203,61,.14),rgba(255,203,61,.03));border:1px solid rgba(255,203,61,.4);font-size:16px}
+.pwvs b{font-size:22px;color:var(--y)}
+@media(max-width:700px){.pwsim{grid-template-columns:1fr}.pwr{grid-template-columns:110px minmax(0,1fr) 62px;gap:8px}}`;
+ document.head.appendChild(st);
+
+ /* ---------- Nouveautés récentes ---------- */
+ const TYC={new:["Nouveau","#34d399"],imp:["Amélioré","#60a5fa"],fix:["Corrigé","#fbbf24"],rem:["Retiré","#f87171"]};
+ const fD=d=>{try{const[y,m,j]=d.split("-");return new Date(+y,+m-1,+j).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(e){return d}};
+ wkBody.news=()=>{const V=(typeof UPD!="undefined"?UPD:[]).slice(0,2);
+  return `<p class="lead">Voici les derniers changements du jeu, expliqués simplement. Le bouton <b>Mises à jour</b>, en haut à gauche de l'écran, ouvre le journal complet à tout moment.</p>`
+  +V.map(v=>`<div class="wnwd">${ico("spark")} ${esc(v.t[0])} <small>· ${fD(v.d)}</small></div><div class="wnws">${v.e.map(e=>{const t=TYC[e[0]]||TYC.new;return `<div class="wnw" style="--c:${t[1]}"><span class="wnt">${t[0]}</span><div><b>${esc(e[1])}</b><p>${esc(e[2])}</p></div></div>`}).join("")}</div>`).join("")
+  +`<div class="wnwb"><button class="go" data-ud="open">${ico("book")} Ouvrir le journal complet</button></div>`};
+
+ /* ---------- Puissance et rareté ---------- */
+ const PWG={w:["Étages","#94a3b8"],e:["Expéditions","#38bdf8"],b:["Bannière","#a78bfa"],h:["Halloween","#fb923c"],r:["Raids","#f87171"],f:["Failles","#22d3ee"],s:["Spéciaux","#f472b6"],x:["Boss monde","#facc15"]};
+ const pwG=k=>k=="ex"||k=="mg"?"e":k=="sp"?"s":k=="wb"?"x":k[0]=="w"?"w":k[0]=="b"?"b":k[0]=="h"?"h":k[0]=="r"?"r":"f";
+ const ORD=["wN","wSR","wSSR","wUR","ex","mg","bN","bSR","bSSR","bUR","bD","h1","h2","h3","h4","r0","r1","r2","r3","r4","r5","f0","f1","f2","f3","f4","f5","f6","f7","sp","wb"];
+ const nm=k=>(PWNM[k]||[k])[0];
+ const fx=v=>"×"+(v>=100?Math.round(v).toLocaleString("fr-FR"):v>=10?v.toFixed(1):v.toFixed(2)).replace(".",",");
+ let SORT=0;
+ const SIM={a:{k:"wUR",l:100,n:100,st:3,mi:0,zi:2,sh:0,al:0,fm:0},b:{k:"sp",l:1,n:1,st:0,mi:0,zi:2,sh:0,al:0,fm:0}};
+ const parts=o=>{const lm=100+10*o.st;o.l=Math.min(o.l,lm);const P=[["Palier",PWTV[o.k]/PWTV.wN],["Niveau",1+(o.l-1)*.12],["Doublons",capM(o.n)],["Étoiles",1+.3*o.st]];
+  if(o.mi)P.push(["Mutation",MU[o.mi][1]]);if(SZD[o.zi]&&SZD[o.zi]!=1)P.push(["Taille",SZD[o.zi]]);if(o.sh)P.push(["Chroma",1.5]);if(o.al)P.push(["Alpha",1.3]);if(o.fm==1)P.push(["Méga",1.5]);if(o.fm==2)P.push(["Dynamax",2.2]);return P};
+ const pwOf=o=>PWK*PWTV.wN/12.88*parts(o).reduce((a,x)=>a*x[1],1);
+ function ladder(){const L=ORD.filter(k=>PWTV[k]).map(k=>[k,PWTV[k]/PWTV.wN]);const mx=Math.log(Math.max(...L.map(x=>x[1])));
+  const row=([k,v])=>{const g=PWG[pwG(k)];return `<div class="pwr" style="--c:${g[1]}"><div class="pwn"><i></i><b title="${nm(k)}">${nm(k)}</b></div><div class="pwt"><i style="width:${Math.max(3,Math.log(v)/mx*100).toFixed(1)}%"></i></div><div class="pwv">${fx(v)}</div></div>`};
+  if(SORT)return `<div class="pwld">${L.slice().sort((a,b)=>a[1]-b[1]).map(row).join("")}</div>`;
+  let h="",last="";L.forEach(x=>{const g=pwG(x[0]);if(g!=last){h+=`<div class="pwgh" style="--c:${PWG[g][1]}">${PWG[g][0]}</div>`;last=g}h+=row(x)});return `<div class="pwld">${h}</div>`}
+ function card(id,lab,col){const o=SIM[id],lm=100+10*o.st;
+  const opt=ORD.filter(k=>PWTV[k]).map(k=>`<option value="${k}"${o.k==k?" selected":""}>${PWG[pwG(k)][0]} · ${nm(k)}</option>`).join("");
+  return `<div class="pwc" style="--c:${col}"><h4>${lab}</h4>
+  <div class="pwf"><label>Origine (palier)</label><select data-pws="${id}.k">${opt}</select></div>
+  <div class="pwf"><label>Niveau <output id="pwo-${id}-l">${Math.min(o.l,lm)} / ${lm}</output></label><input type="range" min="1" max="${lm}" value="${Math.min(o.l,lm)}" data-pws="${id}.l"></div>
+  <div class="pwf"><label>Doublons <output id="pwo-${id}-n">${o.n} / ${NMX}</output></label><input type="range" min="1" max="${NMX}" value="${o.n}" data-pws="${id}.n"></div>
+  <div class="pwf"><label>Étoiles</label><div class="pwst">${[0,1,2,3,4,5].map(n=>`<button data-pwsb="${id}.st.${n}" class="${o.st==n?"on":""}">${n}★</button>`).join("")}</div></div>
+  <div class="pwf"><label>Mutation</label><select data-pws="${id}.mi">${MU.map((m,i)=>`<option value="${i}"${o.mi==i?" selected":""}>${i?m[0]+" ("+fx(m[1])+")":"Aucune"}</option>`).join("")}</select></div>
+  <div class="pwf"><label>Taille</label><select data-pws="${id}.zi">${SZ.map((z,i)=>`<option value="${i}"${o.zi==i?" selected":""}>${z[0]} (${fx(SZD[i]||z[1])})</option>`).join("")}</select></div>
+  <div class="pwf"><label>Forme</label><select data-pws="${id}.fm"><option value="0"${o.fm==0?" selected":""}>Normale</option><option value="1"${o.fm==1?" selected":""}>Méga-évolution (×1,5)</option><option value="2"${o.fm==2?" selected":""}>Dynamax / Gigamax (×2,2)</option></select></div>
+  <div class="pwf"><div class="pwck"><label><input type="checkbox" data-pws="${id}.sh"${o.sh?" checked":""}> Chromatique ×1,5</label><label><input type="checkbox" data-pws="${id}.al"${o.al?" checked":""}> Alpha ×1,3</label></div></div>
+  <div class="pwres" id="pwr-${id}"></div></div>`}
+ function res(){["a","b"].forEach(id=>{const e=document.getElementById("pwr-"+id);if(!e)return;const o=SIM[id];
+   e.innerHTML=`<small>ATTAQUE DE BASE ESTIMÉE</small><b>${fmt(pwOf(o))}</b><div class="pwch">${parts(o).map(x=>`<span>${x[0]} <b>${fx(x[1])}</b></span>`).join("")}</div>`});
+  const v=document.getElementById("pwvs");if(v){const a=pwOf(SIM.a),b=pwOf(SIM.b),r=a/b;v.innerHTML=r>=1?`Le Pokémon <b>A</b> est <b>${fx(r)}</b> plus fort que le Pokémon B`:`Le Pokémon <b>B</b> est <b>${fx(1/r)}</b> plus fort que le Pokémon A`}}
+ function simHtml(){return `<div class="pwvs" id="pwvs"></div><div class="pwsim" id="pwsim">${card("a","Pokémon A","#38bdf8")}${card("b","Pokémon B","#f472b6")}</div>`}
+ function reSim(){const s=document.getElementById("pwsimw");if(s){s.innerHTML=simHtml();res()}}
+ wkBody.pw=()=>{setTimeout(res,0);
+  return `<p class="lead">La force d'un Pokémon dépend d'abord de <b>l'endroit où tu l'as obtenu</b> : c'est son <b>palier</b>. Un Pokémon des étages, d'une bannière, d'un raid ou du Boss monde ne part pas du même niveau de puissance. Ensuite, son niveau, ses doublons, ses étoiles, sa mutation, sa taille et ses bonus se <b>multiplient</b> par-dessus.</p>`
+  +wsx("Comment ça marche",`<ol class="wks2"><li><b>Le palier</b> donne la puissance de départ. Un N des étages vaut ×1 ; le Boss monde vaut ${fx(PWTV.wb/PWTV.wN)}.</li><li><b>Le palier ne baisse jamais.</b> Si tu obtiens le même Pokémon par une meilleure source, il monte au palier supérieur.</li><li><b>Tous les bonus se multiplient.</b> Un Pokémon de palier moyen, bien monté (niveau, doublons, étoiles, mutation, taille), peut dépasser un Pokémon de palier élevé resté au niveau 1.</li><li><b>Le maximum</b> est atteint à ${NMX} doublons, 5 étoiles et niveau 150. Au-delà, seuls les objets, les cartes et les bonus de compte (Pokédex, prestige, succès…) le font encore progresser.</li></ol>`)
+  +wsx("L'échelle de puissance",`<p>Puissance de départ de chaque palier, comparée à un Pokémon N des étages (×1). La barre suit une échelle logarithmique pour que tout reste lisible.</p><div class="pwlg">${Object.values(PWG).map(g=>`<span style="--c:${g[1]}"><i></i>${g[0]}</span>`).join("")}</div><div class="pwtg"><button data-pwsort="0" class="${SORT?"":"on"}">Par origine</button><button data-pwsort="1" class="${SORT?"on":""}">Du plus faible au plus fort</button></div><div id="pwlad">${ladder()}</div>`)
+  +wsx("Simulateur",`<p>Compare deux Pokémon avec les vraies formules du jeu. Choisis l'origine, le niveau, les doublons et les bonus : l'attaque de base se met à jour en direct. Les objets, les cartes, les IV/EV et les bonus de compte ne sont pas comptés, car ils s'appliquent pareil aux deux.</p><div id="pwsimw">${simHtml()}</div>`)
+  +wsx("Tableau des multiplicateurs",tbl(["Bonus","Effet sur les dégâts"],[["Niveau","+12 % par niveau (max 100 + 10 par étoile)"],["Doublons (max "+NMX+")",fx(capM(1))+" → "+fx(capM(NMX))],["Étoiles","+30 % par étoile (5 au maximum)"],["Chromatique","×1,5"],["Alpha","×1,3"],["Méga-évolution","×1,5"],["Dynamax / Gigamax","×2,2"],["Talent caché","+10 %"]])+tbl(["Mutation","Dégâts"],MU.map((m,i)=>i?[m[0],fx(m[1])]:null).filter(Boolean))+tbl(["Taille","Dégâts"],SZ.map((z,i)=>[z[0],fx(SZD[i]||z[1])])))
+  +wn("tip","Où voir le palier de mes Pokémon ?","Dans la fiche d'un Pokémon, un petit badge sous les mutations indique où il a été obtenu, et la ligne <b>Puissance permanente</b> affiche son palier.")};
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pwsort],[data-pwsb]");if(!b)return;e.preventDefault();
+  if(b.dataset.pwsort!=null){SORT=+b.dataset.pwsort;const l=document.getElementById("pwlad");if(l)l.innerHTML=ladder();b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));return}
+  const[id,f,v]=b.dataset.pwsb.split(".");SIM[id][f]=+v;reSim()});
+ const onIn=e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.pws)return;const[id,f]=t.dataset.pws.split(".");const o=SIM[id];
+  o[f]=t.type=="checkbox"?(t.checked?1:0):f=="k"?t.value:+t.value;
+  if(f=="l"){const x=document.getElementById("pwo-"+id+"-l");if(x)x.textContent=o.l+" / "+(100+10*o.st)}
+  if(f=="n"){const x=document.getElementById("pwo-"+id+"-n");if(x)x.textContent=o.n+" / "+NMX}
+  res()};
+ document.addEventListener("input",onIn);document.addEventListener("change",onIn);
+})();
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
@@ -12509,6 +12645,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Bouton « Mises à jour » toujours visible","Un bouton en haut à gauche, sous le Menu, ouvre le journal des mises à jour. Il s'illumine quand il y a du nouveau.","“Updates” button always visible","A button at the top left, under the Menu, opens the update log. It lights up when there is something new."],
+  ["new","Wiki : Puissance et rareté + simulateur","Nouvelle page qui explique l'échelle de puissance du jeu, avec un graphique de tous les paliers et un simulateur pour comparer deux Pokémon. Nouvelle page « Nouveautés récentes ».","Wiki: Power and rarity + simulator","New page explaining the game's power scale, with a chart of every tier and a simulator to compare two Pokémon. New “Recent changes” page."],
+  ["imp","Wiki plus lisible","Menu du wiki plus aéré avec une courte description de chaque page, textes et tableaux plus espacés.","Clearer wiki","Roomier wiki menu with a short description of each page, more spacing in texts and tables."],
+  ["fix","Croix de fermeture de la fiche Pokémon","Sur téléphone, la croix en haut à droite de la fiche d'un Pokémon ne répondait pas : corrigé.","Pokémon sheet close button","On phones, the close button at the top right of a Pokémon sheet did not respond: fixed."],
   ["new","Nouveau départ pour tous","Après les nombreuses mises à jour et le rééquilibrage, toutes les données du jeu ont été remises à zéro : Pokémon, prestiges, classements, JCJ, pass de combat, titres, amis et statistiques. Les codes cadeaux du Discord sont de nouveau utilisables et le Pokémon chromatique de départ est offert à nouveau.","A fresh start for everyone","After the many updates and the rebalance, all game data has been reset: Pokémon, prestiges, rankings, PvP, battle pass, titles, friends and stats. Discord gift codes can be used again and the starting shiny Pokémon is offered again."],
   ["imp","Hôtel de ville : Pokémon bien moins chers","La valeur des Pokémon au marché a fortement baissé, surtout pour les chromatiques, mutés, grandes tailles et Alpha : un combo de bonus est maintenant adouci pour rester achetable avec les Jetons des quêtes. Les anciennes annonces trop chères sont masquées ; leur vendeur peut les retirer et les remettre en vente.","Town hall: much cheaper Pokémon","Pokémon market values were cut sharply, especially shinies, mutated, large and Alpha ones: a combo of bonuses is now softened so it stays affordable with quest Tokens. Old overpriced listings are hidden; their seller can withdraw and relist them."],
   ["fix","Synchro du compte entre appareils","Avec un compte Google, Discord ou pseudo, ta partie est maintenant synchronisée dans les deux sens : ce que tu gagnes sur ton téléphone arrive sur ton PC et inversement. En revenant sur un appareil, il récupère automatiquement la version la plus récente.","Account sync across devices","With a Google, Discord or name account, your game now syncs both ways: what you earn on your phone reaches your PC and vice versa. When you come back to a device, it automatically loads the latest version."],
@@ -12591,6 +12731,27 @@ const UPD=[
   b.innerHTML=`<span class="qki" style="--c1:#f472b6;--c2:#9d174d">${ic}</span><span class="qkt"><b>${LS("Mises à jour","Updates")}</b><small>${u?LS("Nouveautés !","New stuff!"):LS("Journal","Log")}</small></span>${u?`<i class="dot udot"></i>`:""}`}
  setInterval(()=>{try{inj()}catch(e){}},700);
  window.pidUpdates=open;
+ /* bouton « Mises à jour » toujours visible en haut à gauche, sous le Menu, mis en avant quand il y a du nouveau */
+ (function(){
+  const st=document.createElement("style");st.textContent=`#updb{position:fixed;left:8px;top:156px;z-index:45;width:84px;padding:7px 4px 6px;border-radius:14px;border:2px solid #f472b6;background:linear-gradient(160deg,#9d174d,#3b0764 70%);color:#ffe4f1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;overflow:hidden;box-shadow:0 0 16px rgba(244,114,182,.5),0 6px 16px #0008;font:900 10.5px Nunito,system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;text-align:center}
+#updb svg{width:20px;height:20px;filter:drop-shadow(0 0 6px #f472b6)}#updb small{font-size:8.5px;font-weight:800;text-transform:none;letter-spacing:0;opacity:.85}
+#updb.nw{animation:updp 1.8s ease-in-out infinite}#updb.nw small{color:#fde047;opacity:1}
+#updb em{position:absolute;top:-1px;right:-1px;padding:1px 5px;border-radius:0 12px 0 8px;background:#ef4444;color:#fff;font-size:8px;font-style:normal;font-weight:900;letter-spacing:.04em}
+#updb .upsh{position:absolute;top:0;bottom:0;left:-60%;width:38%;background:linear-gradient(100deg,transparent,rgba(255,220,240,.55),transparent);transform:skewX(-18deg);animation:hwsh 3.6s ease-in-out infinite;pointer-events:none}
+#updb:hover{transform:translateY(-1px) scale(1.04)}
+@keyframes updp{0%,100%{box-shadow:0 0 12px rgba(244,114,182,.45),0 6px 16px #0008}50%{box-shadow:0 0 26px rgba(244,114,182,.95),0 6px 16px #0008}}
+@media(max-width:900px){#updb{width:62px;padding:5px 2px;font-size:8.5px}#updb small{display:none}#updb svg{width:18px;height:18px}}
+@media(max-width:700px){#updb{left:auto!important;right:8px!important;top:auto!important;bottom:276px!important;width:52px!important;height:54px;justify-content:center;font-size:7px;border-radius:12px}}`;
+  document.head.appendChild(st);
+  function upd(){let b=document.getElementById("updb");
+   if(!b){b=document.createElement("button");b.id="updb";b.type="button";b.dataset.ud="open";b.title=LS("Mises à jour","Updates");document.body.appendChild(b)}
+   const u=unread(),sig=(u?1:0)+"|"+(SG&&SG.lang);if(b.dataset.s!==sig){b.dataset.s=sig;b.classList.toggle("nw",!!u);
+    b.innerHTML=`${ic}<span>${LS("Mises à jour","Updates")}</span><small>${u?LS("Nouveautés !","New stuff!"):LS("Journal","Log")}</small>${u?`<em>${LS("NEW","NEW")}</em>`:""}<i class="upsh"></i>`}
+   if(!matchMedia("(max-width:700px)").matches){const m=document.getElementById("hubb");if(m&&m.offsetParent!==null){const r=m.getBoundingClientRect();b.style.left=r.left+"px";b.style.top=(r.bottom+8)+"px";b.style.width=r.width+"px"}}
+   else{b.style.left="";b.style.top="";b.style.width=""}
+   const lnd=document.getElementById("lnd");b.style.display=lnd?"none":""}
+  setInterval(()=>{try{upd()}catch(e){}},700);setTimeout(()=>{try{upd()}catch(e){}},300);
+ })();
 })();
 
 </script><script>(function(){function warn(t){var d=document.createElement("div");d.id="pidw";d.innerHTML="<span>"+t+"</span><button type=button>OK</button>";d.querySelector("button").onclick=function(){d.remove()};document.body.appendChild(d)}

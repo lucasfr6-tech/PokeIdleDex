@@ -53,7 +53,7 @@ if(db.meta.rankReset!==RANK_RESET){ // remise a zero unique : etages (lb.bf), JC
  db.meta.rankReset=RANK_RESET;resetChat=1}
 /* remise a zero generale (nouvelle epoque EP) : copie de securite puis tout est efface, sauf les identifiants de compte (pseudo, mot de passe, Google/Discord)
    et les bannis. Les jeux a jour envoient ep=EP ; les anciennes versions encore ouvertes sont refusees pour ne rien recreer. */
-const EP='r2',FULL_RESET=1;
+const EP='r3',FULL_RESET=2;
 if(db.meta.fullReset!==FULL_RESET){
  try{if(fs.existsSync(DATA))fs.copyFileSync(DATA,DATA+'.avant-reset-'+FULL_RESET)}catch(e){console.error('backup',e.message)}
  for(const c in COLS)db[c]={};
