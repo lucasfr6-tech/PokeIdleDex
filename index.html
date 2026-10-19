@@ -3557,8 +3557,8 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="209b130188"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=209b130188"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="45a74981b8"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=45a74981b8"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6694,7 +6694,7 @@ function ivBanner(){const s=ivSlot();if(IVB&&IVB.s==s)return IVB;
  const w=[[],[],[],[]],d=[];for(let i=1;i<=1025;i++){if(ZOF[i]===undefined){if(kxDiv(i))d.push(i)}else{const r=pr(i);if(r<=3)w[r].push(i)}}
  const R=ivRng(s*2654435761+977),pick=(a,n)=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=R()*(i+1)|0;[b[i],b[j]]=[b[j],b[i]]}return b.slice(0,n)};
  IVB={s,N:pick(w[0],10),SR:pick(w[1],4),SSR:pick(w[2],4),UR:pick(w[3],4),D:pick(d,4)};return IVB}
-const ivCost=()=>72e6;
+const ivCost=()=>40e6;
 function ivRoll(S,B){S.pu++;S.pd++;S.n++;let t;
  if(S.pd>=IV_D)t="D";else if(S.pu>=IV_UR)t=Math.random()<.12?"D":"UR";else{const r=Math.random()*100;t=r<IVRT.D?"D":r<IVRT.D+IVRT.UR?"UR":r<IVRT.D+IVRT.UR+IVRT.SSR?"SSR":r<IVRT.D+IVRT.UR+IVRT.SSR+IVRT.SR?"SR":"N"}
  if(t=="D")S.pd=0;if(t=="D"||t=="UR")S.pu=0;const L=B[t];return[L[Math.random()*L.length|0],t]}
@@ -8844,7 +8844,7 @@ wkBody.inv=()=>{
  ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie Divin","350"]])}
  ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque invocation a aussi <b>1,5 %</b> de chance de donner une mutation ou une grande taille.</p>`)}
  ${wsx("Garanties",`<ul class="wks2"><li><b>Divin</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
- ${wsx("Prix et lots",`<p>Une invocation coûte <b>72 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
+ ${wsx("Prix et lots",`<p>Une invocation coûte <b>40 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
  ${wn("info","Doublons","Chaque copie compte pour les étoiles (page Ascensions).")}`};
 
 wkBody.cas=()=>{
