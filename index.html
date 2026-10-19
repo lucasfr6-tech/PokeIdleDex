@@ -3617,8 +3617,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1e81a16550"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=1e81a16550"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="14b156a538"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=14b156a538"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6082,7 +6082,7 @@ function rdFeedback(){if(typeof ui=="function")setTimeout(ui,0)}
 /* ---- fin de combat ---- */
 function rdFinish(R){const win=R.over=="win",r=rdState(),b=R.boss;let rw=null,wbn="";
  if(R.kind=="wb"){const d=Math.max(0,Math.floor(R.dealt));const wk=rdWeekK();if(r.wd.k!=wk){r.wd={k:wk,d:0,cl:0,pe:r.wd.k&&r.wd.d>0&&!r.wd.cl?{k:r.wd.k,d:r.wd.d}:null}}
-  r.wd.d+=d;wbSend();rw={rp:Math.min(3000,Math.floor(d/700)),coins:Math.floor(Math.min(d,5e6)*30),items:[],first:0,sb:0};r.rp+=rw.rp;G.m+=kxI("raid",rw.coins)}
+  r.wd.d+=d;wbSend();rw={rp:150,coins:Math.floor(Math.min(d,5e6)*30),items:[],first:0,sb:0};r.rp+=rw.rp;G.m+=kxI("raid",rw.coins)}
  else{rw=rdRewards(R,win);r.rp+=rw.rp;G.m+=kxI("raid",rw.coins);rw.items.forEach(x=>{G.inv[x.k]=(G.inv[x.k]||0)+x.n});
   if(win){r.st++;r.cn=r.cn||{};r.cn[R.tier]=(r.cn[R.tier]||0)+1;const dk=rdPer();if(r.cl.d!=dk)r.cl={d:dk,t:[]};r.cl.t=r.cl.t||[];if(!r.cl.t.includes(R.tier))r.cl.t.push(R.tier)}else r.st=0}
  save();
@@ -11539,7 +11539,7 @@ wkBody.town=()=>{
 {const p=wkBody.items;if(p)wkBody.items=()=>p()+wn("tip","Chariot dans la fiche d'un Pokémon","À côté de l'emplacement d'objet tenu, le petit chariot ouvre la liste des objets que tu peux acheter pour ce Pokémon : ses Méga-Gemmes et son bracelet Dynamax s'il en a, plus les objets classiques (ceinture force, etc.).")}
 {const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
 {const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
-{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 200 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
+{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 200 millions. Chaque tentative rapporte 150 points de raid, et quand le boss est vaincu, tous les joueurs reçoivent 3 000 points de raid. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
@@ -11566,6 +11566,8 @@ wkBody.town=()=>{
 /* ===== Raids : compte à rebours du changement toutes les 2 h ===== */
 {let last=rdPer();setInterval(()=>{try{if(tab!="raid")return;const e=document.getElementById("rdper");if(e){const s=Math.max(0,Math.ceil((rdPerNext()-Date.now())/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);e.textContent=LS(" Prochains boss dans "," Next bosses in ")+(h?h+" h ":"")+String(m).padStart(2,"0")+" min "+String(s%60).padStart(2,"0")+" s"}
  const p=rdPer();if(p!==last){last=p;if(!document.getElementById("rdA")){RHS.sel=-1;show()}}}catch(x){}},1000)}
+/* ===== Boss monde vaincu : 3 000 points de raid pour tout le monde (une fois par boss) ===== */
+setInterval(()=>{try{const r=rdState(),k=rdWeekK();if(r.wk3===k||!WB.ok||WB.wk!==k)return;if(wbShared()>=RWHP){r.wk3=k;r.rp+=3000;save();toast(LS("Boss monde vaincu ! +3 000 points de raid pour tous","World boss defeated! +3,000 raid points for everyone"));if(tab=="raid")show()}}catch(e){}},4000);
 
 /* ============ DÉMARRAGE ============ */
 z22init();applySt();navRender();skyBuild();
