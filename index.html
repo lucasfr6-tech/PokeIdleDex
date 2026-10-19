@@ -3617,8 +3617,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bc6737e4b9"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=bc6737e4b9"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1e81a16550"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1e81a16550"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5848,7 +5848,7 @@ const RT=[
  {n:["Impossible","Impossible"],c:"#c084fc",L:100,hp:52000,am:0.56,cr:.1,rp:500,sec:86400,cap:.018,pool:[90003,90002,491,491],sh:1,f:"sp",rec:100}];
 /* boss monde (change chaque semaine) */
 const RW=[[890,"etern"],[384,"mega"],[493,"n"],[383,"prim"],[382,"prim"],[150,"mega"]];
-const RWHP=8e7;const WBAM=.8;
+const RWHP=2e8;const WBAM=.8;
 
 /* ---- sprites pixel (2D) ---- */
 const GMX={3:10195,6:10196,9:10197,12:10198,68:10201,94:10202,131:10204,143:10206};
@@ -11539,7 +11539,7 @@ wkBody.town=()=>{
 {const p=wkBody.items;if(p)wkBody.items=()=>p()+wn("tip","Chariot dans la fiche d'un Pokémon","À côté de l'emplacement d'objet tenu, le petit chariot ouvre la liste des objets que tu peux acheter pour ce Pokémon : ses Méga-Gemmes et son bracelet Dynamax s'il en a, plus les objets classiques (ceinture force, etc.).")}
 {const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
 {const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
-{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 80 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
+{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts. Pendant ces 30 secondes, un Pokémon inflige 80 % de ses dégâts du jeu (mutation, taille, Alpha et étoiles comprises), le même calcul pour tout le monde. La barre de PV, commune à tous les joueurs, est de 200 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
