@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e601cce866"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=e601cce866"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8eec4d7c84"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=8eec4d7c84"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7640,7 +7640,7 @@ function pvBestSwitch(B,s){const o=pvAct(B,pvOth(s));let bi=-1,bv=-9;B[s].tm.for
 
 /* ---------- combat ---------- */
 let PB=null;
-function pvNew(opp,fast){const p=pvS(),mi=pvInfoMap(p.tm),mine=pvTeamU(p.tm,p.mv,p.it,mi),foe=pvTeamU(opp.tm,opp.mv,opp.it,opp.tuto?null:opp.bot?pvBotInfo(opp,mi):opp.pi);
+function pvNew(opp,fast){const p=pvS(),mi=pvInfoMap(p.tm),mine=pvTeamU(p.tm,p.mv,p.it,mi),foe=pvTeamU(opp.tm,opp.mv,opp.it,opp.tuto?null:opp.bot?pvBotInfo(opp,mi):pvOppInfo(opp,mi));
  if(opp.tuto)foe.forEach(u=>{u.max=u.hp=Math.round(u.hp*.55);u.atk*=.45;u.spa*=.45;u.spe*=.7;u.it=null});
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foe.forEach((u,i)=>{u.i=i;u.s="f"});
  return{opp,m:{n:G.name||"Moi",r:p.r,tm:mine,a:0},f:{n:opp.n,r:opp.r,tm:foe,a:0},round:0,log:[],sp:1,auto:false,fast:!!fast,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:opp.tuto?.3:Math.max(.5,Math.min(.97,.45+opp.r/1200)),tuto:!!opp.tuto,friendly:!!opp.fri,prev:opp.tuto||opp.fri?{w:0,l:0,d:0}:pvPrev(opp)}}
@@ -12285,6 +12285,19 @@ const twFoePd=(f,boss)=>Math.round(1e4*Math.pow(1e6,(Math.max(1,f)-1)/299)*(f<=1
 {const r0=rdCapGrant;rdCapGrant=function(){const p=SRCNEXT;SRCNEXT=RCX.wb?"wb":(RCX.tier>=0&&RCX.tier<=5?"r"+RCX.tier:null);try{return r0.apply(this,arguments)}finally{SRCNEXT=p;try{recomp()}catch(e){}}}}
 {const f0=fzGrant;fzGrant=function(c,lost){const p=SRCNEXT;SRCNEXT=c&&c.t!=null?"f"+Math.min(7,c.t|0):null;try{return f0.apply(this,arguments)}finally{SRCNEXT=p;try{recomp()}catch(e){}}}}
 {const p0=ivPop;ivPop=function(L){try{const M={N:"bN",SR:"bSR",SSR:"bSSR",UR:"bUR",D:"bD"};(L||[]).forEach(x=>{if(x&&G.col[x.id]&&M[x.t])srcUp(x.id,M[x.t],!!x.nw)});recomp();save()}catch(e){}return p0.apply(this,arguments)}}
+
+/* ===== JCJ : puissance des adversaires toujours connue + publication automatique de la tienne ===== */
+function pvOppInfo(o,mine){try{const pi=o&&o.pi;if(pi&&o.tm&&o.tm.some(id=>pi[id]&&+pi[id][0]>0))return pi;
+ /* pas encore publiée : on l'estime avec ses meilleurs Pokémon publiés au classement */
+ const rows=[].concat((typeof LB!="undefined"&&LB.rows)||[],(typeof RKM!="undefined"&&RKM.rows)||[],(typeof RKB!="undefined"&&RKB.rows)||[]),r=rows.find(x=>x&&x.id==o.id&&Array.isArray(x.t5)&&x.t5.length);
+ if(r){const A=r.t5.map(x=>+x.a||0).filter(x=>x>0).sort((a,b)=>b-a);if(A.length){const med=A[A.length>>1],out={};(o.tm||[]).forEach((id,i)=>{out[id]=[i<A.length?A[i]:med*.8,0,0,0,0]});return out}}
+ if(r&&+r.bpv>0){const out={};(o.tm||[]).forEach((id,i)=>{out[id]=[+r.bpv*(i==0?1:.5),0,0,0,0]});return out}
+ /* sinon : estimation selon son rang, comme pour les bots */
+ return pvBotInfo(o,mine)}catch(e){return null}}
+let PVPS="";
+function pvAutoPush(force){try{if(!(LB&&LB.ok&&LB.db))return;const p=pvS();if(!p.tm||!p.tm.length)return;const m=pvInfoMap(p.tm.slice(0,6)),sg=p.tm.join(",")+"|"+p.tm.map(id=>m[id]?Number(m[id][0]).toPrecision(2)+m[id].slice(1).join(""):"").join(",");
+ if(!force&&sg===PVPS)return;PVPS=sg;pvPush()}catch(e){}}
+setTimeout(()=>pvAutoPush(true),12000);setInterval(()=>pvAutoPush(false),120000);
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
@@ -12374,6 +12387,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","JCJ : puissance toujours prise en compte","Ton équipe JCJ et sa puissance sont maintenant publiées automatiquement. Contre un joueur qui ne l'a pas encore publiée, sa puissance est estimée d'après ses meilleurs Pokémon au classement.","PvP: power always counted","Your PvP team and its power are now published automatically. Against a player who hasn't published it yet, their power is estimated from their best Pokémon in the rankings."],
   ["imp","Failles rééquilibrées","Les DPS requis pour ouvrir les failles sont recalés sur la puissance actuelle des joueurs : la Fissure reste accessible dès le début, le Chaos demande maintenant 10 G de DPS.","Rifts rebalanced","The DPS needed to open rifts now matches current player power: Fissure stays open from the start, Chaos now needs 10G DPS."],
   ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Les pièces gagnées par seconde suivent la même échelle. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Coins per second follow the same scale. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
   ["new","Classement « Meilleur Pokémon »","Nouvel onglet dans Classements : le Pokémon le plus fort de chaque joueur, selon le DPS le plus haut jamais atteint (cartes, équipement, prestige et objet tenu compris).","“Best Pokémon” ranking","New tab in Rankings: each player's strongest Pokémon, by the highest DPS ever reached (cards, gear, prestige and held item included)."],
