@@ -3435,6 +3435,24 @@ a.qkb.qkdc .qki{color:#fff}
 
 .rxb{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:5px 12px;border-radius:999px;border:1px solid #ffffff30;background:#ffffff14;color:#fff;font:700 13px Nunito,system-ui,sans-serif;cursor:pointer;vertical-align:middle}.rxb:hover{background:#ffffff26}.rxb svg{width:16px;height:16px}
 #rxm{position:fixed;inset:0;z-index:4000;display:none;background:rgba(3,6,18,.78);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#rxm.on{display:flex}
+#udm{position:fixed;inset:0;z-index:4100;display:none;background:rgba(3,6,18,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#udm.on{display:flex}
+.udw{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:20px;background:linear-gradient(#151c3d,#0b1026);border:1px solid #ffffff2a;padding:18px 18px 22px;box-shadow:0 30px 80px #000a}
+.udhd{display:flex;gap:12px;align-items:center;margin:0 44px 14px 0}.udhd h3{margin:0;font:800 26px "Baloo 2",Nunito,system-ui,sans-serif}.udhd small{color:var(--mu)}
+.udi{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#f472b6,#9d174d);box-shadow:0 4px 12px #0007}
+.udf{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:-18px;z-index:1;padding:8px 0;background:#141b3a}
+.udf button{border-radius:999px;padding:6px 14px;border:1px solid color-mix(in srgb,var(--c) 55%,transparent);background:transparent;color:#e2e8f0;font:800 14px Nunito,system-ui,sans-serif;cursor:pointer}.udf button.on{background:var(--c);color:#0b1026;border-color:var(--c)}
+.udv{border:1px solid #ffffff1f;border-radius:16px;margin-bottom:10px;background:#ffffff08;overflow:hidden}.udv.op{border-color:#ffffff38;background:#ffffff0d}
+.udh{width:100%;display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"d d c" "t t c" "s s c";gap:2px 10px;text-align:left;padding:12px 14px;background:none;border:0;color:inherit;cursor:pointer}
+.udd{grid-area:d;display:flex;gap:8px;align-items:center}.udd b{font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em}.udd em{font-style:normal;font:800 11px Nunito,sans-serif;padding:2px 8px;border-radius:999px;background:#ef4444;color:#fff}
+.udt{grid-area:t;font:800 19px "Baloo 2",Nunito,system-ui,sans-serif}.uds{grid-area:s;display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.uds i{font-style:normal;font-size:12px;font-weight:800;color:var(--c)}
+.udc{grid-area:c;align-self:center;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#ffffff14;font:800 20px Nunito,sans-serif}
+.udl{list-style:none;margin:0;padding:0 14px 12px;display:flex;flex-direction:column;gap:8px}
+.udl li{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#00000033;border-left:4px solid var(--c)}
+.udg{flex:none;min-width:92px;text-align:center;font:800 12px Nunito,sans-serif;padding:4px 8px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}
+.udl b{display:block;font-size:15px}.udl p{margin:2px 0 0;color:#cbd5e1;font-size:14px;line-height:1.4}
+.qkb .udot{background:#ef4444;box-shadow:0 0 10px #ef4444}
+@media (max-width:560px){.udl li{flex-direction:column;gap:6px}.udg{min-width:0}}
+
 #shm{position:fixed;inset:0;z-index:4100;display:none;background:rgba(3,6,18,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px}#shm.on{display:flex}
 .shd{position:relative;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:18px;background:linear-gradient(#141b3a,#0b1026);border:1px solid #ffffff2a;padding:16px 16px 20px}.shd h3{margin:0 0 12px}
 .shi{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #ffffff22;margin-bottom:10px}.shp{padding:40px;text-align:center;color:#94a3b8}
@@ -3653,8 +3671,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a182a99a5a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=a182a99a5a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fc80fce859"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=fc80fce859"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11811,6 +11829,70 @@ setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(M
  /* bouton dans la fiche du Pokémon */
  const pm0=pkModal;pkModal=function(){const h=pm0.apply(this,arguments);try{const id=OPEN;if(!h||!id||!G.col[id])return h;
   return h.replace('<div class="pqlv">',`<button class="shbtn" data-sh="open" data-i="${id}">${ico("send")} ${LS("Partager","Share")}</button><div class="pqlv">`)}catch(e){return h}};
+})();
+
+/* ===== Journal des mises à jour (bouton sous Discord) =====
+   Pour ajouter une mise à jour : ajouter une version EN HAUT de UPD.
+   Types : new = Nouveau, imp = Amélioré, fix = Corrigé, rem = Retiré.
+   Entrée : [type, titre FR, texte FR, titre EN, texte EN] (l'anglais est facultatif). */
+/*UPD_BEGIN*/
+const UPD=[
+ {d:"2026-10-19",t:["Partage, parrainage et journal des mises à jour","Sharing, invites and update log"],e:[
+  ["new","Journal des mises à jour","Ce bouton, sous Discord : toutes les nouveautés, améliorations, corrections et retraits, version par version. Un point rouge s'affiche quand il y a du nouveau.","Update log","This button, under Discord: every new feature, improvement, fix and removal, version by version. A red dot appears when something new is out."],
+  ["new","Partager une capture","Dans la fiche d'un Pokémon, le bouton « Partager » crée une image avec le Pokémon, sa mutation, sa taille et le lien du jeu. Copie-la et colle-la dans Discord, ou partage-la depuis ton téléphone.","Share a catch","In a Pokémon's page, the « Share » button creates an image with the Pokémon, its mutation, its size and the game link. Copy and paste it in Discord, or share it from your phone."],
+  ["new","Inviter un ami","Dans Amis, copie ton lien d'invitation. Ton ami doit cliquer dessus, créer un compte et jouer 5 minutes : vous devenez amis automatiquement.","Invite a friend","In Friends, copy your invite link. Your friend must click it, create an account and play 5 minutes: you become friends automatically."],
+  ["new","Récompenses de parrainage","L'invité reçoit 1 h de boost (+10 % dégâts, XP et pièces) et une Master Ball. Le parrain reçoit une Master Ball et 30 min du même boost par ami (20 amis maximum).","Invite rewards","The invited player gets a 1 h boost (+10% damage, XP and coins) and a Master Ball. The sponsor gets a Master Ball and 30 min of the same boost per friend (20 friends max)."]]},
+ {d:"2026-10-18",t:["Halloween, CT en raid et Courrier","Halloween, TMs in raids and Mail"],e:[
+  ["new","Pokémon exclusifs Halloween","5 nouveaux Pokémon exclusifs, avec leur bouton, leurs sprites et un onglet dédié dans le Pokédex. Ils s'obtiennent uniquement par invocation et au Casino."],
+  ["new","Les CT deviennent de vraies attaques","Une CT apprise s'utilise désormais en raid. Tu choisis quelle attaque elle remplace, depuis la fiche du Pokémon ou l'écran d'équipe du raid. L'ancienne CT t'est rendue."],
+  ["new","Pokédex : formes cochées automatiquement","Les Méga-évolutions et les Primo-formes se cochent dès que tu possèdes la Méga-Perle correspondante."],
+  ["new","Pass de combat : plus d'XP","Un Pokémon vaincu ou capturé sur deux donne 1 XP, et la capture d'un UR en rapporte 5."],
+  ["new","Récap des expéditions","À la fin d'une expédition, même en automatique, un récap te dit si tu as obtenu le Pokémon visé."],
+  ["new","Exclusifs Halloween rachetables","Tu peux racheter un exemplaire d'un Pokémon Halloween que tu possèdes déjà : chaque copie le rend plus fort."],
+  ["new","Capture du boss monde","Quand le boss monde est vaincu, tu reçois 3 Super Balls pour tenter de le capturer."],
+  ["new","Courrier","Un bouton en haut à droite : récompenses du boss monde, des défis de guilde et des codes cadeaux. Tu peux aussi y entrer un code cadeau."],
+  ["new","Signaler un bug","Un bouton dans les Paramètres t'envoie sur notre Discord pour décrire le problème."],
+  ["imp","Boss monde renforcé","2 fois plus de points de vie (8 millions), et les récompenses de chaque palier sont visibles avant le combat."],
+  ["imp","Tour : récompenses tous les 10 étages","Une récompense tous les 10 étages au lieu de 5, avec beaucoup moins de capsules."],
+  ["imp","Capsules d'argent et d'or plus rares","Les gains de capsules (raids, Tour, quêtes, Pass de combat, Casino) sont divisés par 5. Les achats en boutique ne changent pas."],
+  ["imp","Exclusifs du Casino moins fréquents","Le taux d'obtention des formes spéciales exclusives au Casino est divisé par 2."],
+  ["imp","Prix fixes partout","Les tickets du Casino et l'invocation d'équipement ont un prix fixe, qui ne dépend plus de ta progression."],
+  ["imp","Boutique rééquilibrée","Vitamines, objets IV, talents et bonbons coûtent 4 fois plus cher."],
+  ["imp","Wiki et Paramètres en bas à droite","Un accès rapide permanent, sur ordinateur comme sur mobile."],
+  ["rem","Raids sans exclusifs","Les Pokémon exclusifs n'apparaissent plus dans les raids. Le raid Impossible propose 8 légendaires à taux égal."],
+  ["fix","Zones sans légendaires divins","Les Pokémon divins (Rayquaza, Mewtwo…) n'apparaissent plus dans les zones, les étages ni les expéditions : uniquement par invocation."],
+  ["fix","Quêtes conservées au rechargement","Recharger la page ne casse plus les expéditions et ne redemande plus de réclamer les quêtes définitives."]]}
+];
+/*UPD_END*/
+(function(){
+ const TY={new:["Nouveau","New","#22c55e","✦"],imp:["Amélioré","Improved","#3b82f6","▲"],fix:["Corrigé","Fixed","#f59e0b","✔"],rem:["Retiré","Removed","#ef4444","✕"]};
+ const K="pid_upd_seen",seen=()=>{try{return localStorage.getItem(K)||""}catch(e){return""}},last=()=>UPD[0]?UPD[0].d:"";
+ const unread=()=>last()&&seen()<last();
+ const fmtD=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString(SG&&SG.lang=="en"?"en-GB":"fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(e){return d}};
+ const ttl=x=>LS(x.t[0],x.t[1]||x.t[0]);
+ let F="all",OP=new Set();
+ const ic='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg>';
+ function render(){const o=document.getElementById("udm");if(!o||!o.classList.contains("on"))return;const sn=o.dataset.seen||"";
+  const cnt=k=>UPD.reduce((a,v)=>a+v.e.filter(e=>k=="all"||e[0]==k).length,0);
+  const ver=(v,i)=>{const E=v.e.filter(e=>F=="all"||e[0]==F);if(!E.length)return"";const isNew=!sn||v.d>sn,open=F!="all"||OP.has(v.d);
+   const sum=Object.keys(TY).map(k=>{const n=v.e.filter(e=>e[0]==k).length;const PL2={new:["nouveauté","new feature"],imp:["amélioration","improvement"],fix:["correction","fix"],rem:["retrait","removal"]}[k];return n?`<i style="--c:${TY[k][2]}">${n} ${LS(PL2[0],PL2[1])}${n>1?(SG&&SG.lang=="en"&&k=="fix"?"es":"s"):""}</i>`:""}).join("");
+   return `<section class="udv${open?" op":""}"><button class="udh" data-ud="t" data-d="${v.d}"><span class="udd"><b>${fmtD(v.d)}</b>${isNew?`<em>${LS("NOUVEAU","NEW")}</em>`:""}</span><span class="udt">${esc(ttl(v))}</span><span class="uds">${sum}</span><span class="udc">${open?"−":"+"}</span></button>
+    ${open?`<ul class="udl">${E.map(e=>{const t=TY[e[0]]||TY.new;return `<li style="--c:${t[2]}"><span class="udg">${t[3]} ${LS(t[0],t[1])}</span><div><b>${esc(LS(e[1],e[3]||e[1]))}</b><p>${esc(LS(e[2],e[4]||e[2]))}</p></div></li>`}).join("")}</ul>`:""}</section>`};
+  o.querySelector(".udb").innerHTML=UPD.map(ver).join("")||`<p class="mu">${LS("Rien dans cette catégorie.","Nothing in this category.")}</p>`;
+  o.querySelectorAll("[data-ud=f]").forEach(b=>b.classList.toggle("on",b.dataset.f==F))}
+ function open(){let o=document.getElementById("udm");if(!o){o=document.createElement("div");o.id="udm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-udx]"))o.classList.remove("on")})}
+  o.dataset.seen=seen();F="all";OP=new Set(UPD.length?[UPD[0].d]:[]);
+  o.innerHTML=`<div class="udw"><button class="rxx" data-udx>${ico("x")}</button><div class="udhd"><span class="udi">${ic}</span><div><h3>${LS("Mises à jour","Update log")}</h3><small>${LS("Tout ce qui change dans PokeIdleDex, du plus récent au plus ancien.","Everything that changes in PokeIdleDex, newest first.")}</small></div></div>
+   <div class="udf">${[["all",LS("Tout","All"),"#94a3b8"]].concat(Object.keys(TY).map(k=>[k,LS(TY[k][0],TY[k][1]),TY[k][2]])).map(f=>`<button data-ud="f" data-f="${f[0]}" style="--c:${f[2]}">${f[1]}</button>`).join("")}</div><div class="udb"></div></div>`;
+  o.classList.add("on");render();try{localStorage.setItem(K,last())}catch(e){}inj(1)}
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ud]");if(!b)return;e.stopPropagation();e.preventDefault();
+  if(b.dataset.ud=="open")open();else if(b.dataset.ud=="f"){F=b.dataset.f;render()}else if(b.dataset.ud=="t"){const d=b.dataset.d;if(F!="all"){F="all";OP=new Set([d])}else if(OP.has(d))OP.delete(d);else OP.add(d);render()}},true);
+ function inj(force){const q=$("qk");if(!q)return;let b=q.querySelector(".qkud");
+  if(!b){b=document.createElement("button");b.className="qkb qkud";b.dataset.ud="open";const dc=q.querySelector(".qkdc");if(dc&&dc.nextSibling)q.insertBefore(b,dc.nextSibling);else q.appendChild(b);force=1}
+  const u=unread(),sig=(u?1:0)+"|"+(SG&&SG.lang);if(!force&&b.dataset.s==sig)return;b.dataset.s=sig;
+  b.innerHTML=`<span class="qki" style="--c1:#f472b6;--c2:#9d174d">${ic}</span><span class="qkt"><b>${LS("Mises à jour","Updates")}</b><small>${u?LS("Nouveautés !","New stuff!"):LS("Journal","Log")}</small></span>${u?`<i class="dot udot"></i>`:""}`}
+ setInterval(()=>{try{inj()}catch(e){}},700);
+ window.pidUpdates=open;
 })();
 
 </script><script>(function(){function warn(t){var d=document.createElement("div");d.id="pidw";d.innerHTML="<span>"+t+"</span><button type=button>OK</button>";d.querySelector("button").onclick=function(){d.remove()};document.body.appendChild(d)}
