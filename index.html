@@ -3617,8 +3617,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e468b2744b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=e468b2744b"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bc6737e4b9"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=bc6737e4b9"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6082,7 +6082,7 @@ function rdFeedback(){if(typeof ui=="function")setTimeout(ui,0)}
 /* ---- fin de combat ---- */
 function rdFinish(R){const win=R.over=="win",r=rdState(),b=R.boss;let rw=null,wbn="";
  if(R.kind=="wb"){const d=Math.max(0,Math.floor(R.dealt));const wk=rdWeekK();if(r.wd.k!=wk){r.wd={k:wk,d:0,cl:0,pe:r.wd.k&&r.wd.d>0&&!r.wd.cl?{k:r.wd.k,d:r.wd.d}:null}}
-  r.wd.d+=d;wbSend();rw={rp:Math.floor(d/400),coins:Math.floor(Math.min(d,5e6)*30),items:[],first:0,sb:0};r.rp+=rw.rp;G.m+=kxI("raid",rw.coins)}
+  r.wd.d+=d;wbSend();rw={rp:Math.min(3000,Math.floor(d/700)),coins:Math.floor(Math.min(d,5e6)*30),items:[],first:0,sb:0};r.rp+=rw.rp;G.m+=kxI("raid",rw.coins)}
  else{rw=rdRewards(R,win);r.rp+=rw.rp;G.m+=kxI("raid",rw.coins);rw.items.forEach(x=>{G.inv[x.k]=(G.inv[x.k]||0)+x.n});
   if(win){r.st++;r.cn=r.cn||{};r.cn[R.tier]=(r.cn[R.tier]||0)+1;const dk=rdPer();if(r.cl.d!=dk)r.cl={d:dk,t:[]};r.cl.t=r.cl.t||[];if(!r.cl.t.includes(R.tier))r.cl.t.push(R.tier)}else r.st=0}
  save();
