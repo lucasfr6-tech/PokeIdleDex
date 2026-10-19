@@ -3583,12 +3583,39 @@ button.fzsq{cursor:pointer}button.fzsq:hover{background:#ffffff1a;border-color:#
 }
 @media(max-width:700px){#mbsh .mbi.hwb,#mbsh .mbi[class*=hw]{flex-direction:column!important;grid-column:1/-1;min-height:64px;flex-direction:row!important;gap:10px;justify-content:center}}
 @media(max-width:700px){.tr-mdl{max-height:94vh!important;width:calc(100vw - 14px)!important;padding:12px!important}.tr-sc{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.tr-sc::-webkit-scrollbar{display:none}.tr-sb{flex:none!important;white-space:nowrap}}
+/* ===== Arbre de compétences ===== */
+.sx{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;max-width:100%}.sx>section{min-width:0;overflow:hidden}
+.sx-top,.sx-box{background:var(--gl,#ffffff0d);border:1px solid var(--ln,#ffffff1f);border-radius:20px;padding:18px}
+.sx-h h2{margin:0 0 6px;font-size:22px}.sx-h p{margin:0;color:var(--mu,#94a3b8);font-size:14px;line-height:1.45;max-width:760px}
+.sx-st{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 12px}
+.sx-st>div{background:#ffffff0a;border:1px solid #ffffff14;border-radius:14px;padding:10px 12px}.sx-st small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu,#94a3b8);font-weight:800}.sx-st b{font-size:20px}
+.sx-bar{height:8px;border-radius:99px;background:#ffffff14;overflow:hidden;margin-top:8px}.sx-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#14b8a6,#6366f1)}.sx-bar.big{height:10px;margin:0 0 14px}
+.sx-chs{display:flex;flex-wrap:wrap;gap:8px}
+.sx-ch{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;background:#ffffff0a;border:1px solid #ffffff18;color:var(--mu,#94a3b8);font-size:13px}.sx-ch svg{width:16px;height:16px}.sx-ch b{color:#fff}.sx-ch.on{border-color:var(--c);color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}.sx-ch.on b{color:var(--c)}
+.sx-tb{display:flex;gap:10px;align-items:stretch;margin-bottom:12px}.sx-det{flex:1;min-width:0}
+.sx-dt{display:flex;gap:14px;align-items:center;height:100%;padding:12px 14px;border-radius:16px;border:1px solid #ffffff1c;background:#ffffff08;--c:#64748b}.sx-dt.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent)}
+.sx-dti{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--c);color:#fff}.sx-dti svg{width:24px;height:24px}
+.sx-dtx{min-width:0;flex:1}.sx-dtx b{display:block;font-size:17px}.sx-dtx em{display:block;font-style:normal;color:var(--c);font-weight:800;font-size:15px}.sx-dtx small{display:block;color:var(--mu,#94a3b8);font-size:12.5px;margin-top:2px}
+.sx-ctl{display:flex;gap:8px;align-items:center}.sx-ctl button{width:44px;height:44px;border-radius:12px;border:1px solid #ffffff2a;background:#ffffff10;color:#fff;display:grid;place-items:center;cursor:pointer}.sx-ctl svg{width:20px;height:20px}
+.sx-map{position:relative;height:min(62vh,560px);overflow:auto;border-radius:16px;background:radial-gradient(circle at center,#1e293b88,#0b11324d 70%);border:1px solid #ffffff14;cursor:grab;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.sx-cv{position:relative}
+.sx-n,.sx-l{position:absolute;left:calc(var(--x)*var(--z)*1px);top:calc(var(--y)*var(--z)*1px);transform:translate(-50%,-50%)}
+.sx-l{border-radius:99px;background:#334155}.sx-l.on{background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 70%,transparent)}
+.sx-n{width:calc(var(--z)*.68px);height:calc(var(--z)*.68px);border-radius:22%;display:grid;place-items:center;padding:0;border:2px solid #475569;background:#1e293b;color:#64748b;cursor:pointer;font:inherit}
+.sx-n svg{width:48%;height:48%}.sx-n i{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);font-style:normal;font-size:11px;font-weight:900;background:#0b1132;border:1px solid var(--c);color:var(--c);border-radius:99px;padding:0 6px;white-space:nowrap}
+.sx-n u{position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;background:#0b1132;border:1px solid #475569;display:grid;place-items:center;text-decoration:none}.sx-n u svg{width:10px;height:10px}
+.sx-n.on{background:var(--c);border-color:#fff8;color:#fff;box-shadow:0 0 16px color-mix(in srgb,var(--c) 65%,transparent)}
+.sx-n.nx{border-color:var(--c);color:var(--c);animation:sxp 1.6s ease-in-out infinite}
+@keyframes sxp{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--c) 22%,transparent)}}
+.sx-n.sel{outline:3px solid #fff;outline-offset:3px;z-index:2}
+.sx-lg{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:13px;color:var(--mu,#94a3b8)}.sx-lg span{display:inline-flex;align-items:center;gap:6px}.sx-lg svg{width:16px;height:16px;color:var(--c)}
+@media(max-width:700px){.sx-top,.sx-box{padding:14px}.sx-tb{flex-direction:column}.sx-ctl{justify-content:flex-end}.sx-map{height:56vh}.sx-st b{font-size:17px}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4a6a165652"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=4a6a165652"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="2840855a8c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=2840855a8c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4278,7 +4305,7 @@ ${ev.length||tms.length?`<h2>Évolution et CT</h2><div class="row" style="margin
 <h2>Niveau automatique</h2><small>Plus aucun bonbon : les Pokémon montent de niveau seuls selon l'étage atteint, et rattrapent vite leur retard.</small></div>`}
 
 function show0(){document.querySelectorAll("#nav [data-t],#qk [data-t],#pan").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));lastE=null;HUDK="";STK="";PSIG="";WXK="";EXSIG="";recomp();
- $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vReb,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,raid:vRaid,set:vSetg,pen:vPen,qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
+ $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vReb,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
 if(tab=="gacha"||tab=="dex"||tab=="prof"||tab=="mine"){const need2=tab=="gacha"?Object.keys(G.cards).map(Number):ids(),miss=need2.filter(i=>!DB[i]);if(miss.length&&!OFF)preload(miss).then(softRefresh)}}
 let sr=0;function softRefresh(){clearTimeout(sr);sr=setTimeout(()=>{if(tab=="mine"&&$("mng"))$("mng").innerHTML=mineGrid();else if(tab=="dex"&&$("dxg"))$("dxg").innerHTML=dexGrid();else if(tab=="gacha"&&$("cgr"))$("cgr").innerHTML=cardGrid()},200)}
 
@@ -11358,6 +11385,161 @@ function build(){
  setInterval(dot,1500);dot();
 }
 if(document.readyState!="loading")build();else document.addEventListener("DOMContentLoaded",build);
+})();
+/* ===== Arbre de compétences : cases débloquées automatiquement selon le nombre de K.O. ===== */
+IP.sk='<circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="4" r="1.7"/><circle cx="12" cy="20" r="1.7"/><circle cx="4" cy="12" r="1.7"/><circle cx="20" cy="12" r="1.7"/><path d="M12 5.7v3.9M12 14.4v3.9M5.7 12h3.9M14.4 12h3.9"/>';
+NAV2.push(["sk","sk","Compétences","#14b8a6","#134e4a"]);NENG.sk="Skills";
+try{NAVX.push(["sk","sk","Compétences","#14b8a6","#134e4a"])}catch(e){}
+{const c=NCAT.find(x=>x[0]=="c_me")[6];if(!c.includes("sk")){c.unshift("sk")}}
+
+/* 4 branches (haut, droite, bas, gauche) · 8 cases chacune · bonus volontairement faibles */
+const SKW=[1,1,1.5,1.5,2,2,2.5,4];                         /* % par niveau */
+const SKQ=[1500,8000,20000,40000,70000,110000,160000,230000]; /* K.O. requis par niveau */
+const SKJ=[1,1.1,1.2,1.3];                                   /* léger décalage entre branches (niveau 2 et +) */
+const SKB=[
+ {k:"f",dx:0,dy:-1,c:"#ef4444",ic:"sword",n:["Force","Strength"],t:i=>["d"]},
+ {k:"g",dx:1,dy:0,c:"#f59e0b",ic:"coin",n:["Fortune","Fortune"],t:i=>["c"]},
+ {k:"i",dx:0,dy:1,c:"#a855f7",ic:"sparkle",n:["Instinct","Instinct"],t:i=>["m"]},
+ {k:"s",dx:-1,dy:0,c:"#22c55e",ic:"target",n:["Savoir","Knowledge"],t:i=>[i%2?"k":"x"]}];
+const SKE={d:["Dégâts","Damage"],c:["Pièces","Coins"],m:["Mutations","Mutations"],x:["Expérience","Experience"],k:["Capture","Capture"]};
+const SKI={d:"sword",c:"coin",m:"sparkle",x:"lvl",k:"target"};
+const SKN=["I","II","III","IV","V","VI","VII","VIII"];
+const SKNODES=(()=>{const a=[{id:"c0",b:-1,l:0,x:0,y:0,ko:0,e:null,v:0,c:"#14b8a6",ic:"user"}];
+ SKB.forEach((b,bi)=>{for(let l=0;l<8;l++){const e=b.t(l)[0];a.push({id:b.k+l,b:bi,l:l+1,x:b.dx*(l+1),y:b.dy*(l+1),ko:Math.round(SKQ[l]*(l?SKJ[bi]:1)),e,v:SKW[l],c:b.c,ic:SKI[e]})}});return a})();
+const skKo=()=>G.ko|0;
+const skOn=n=>skKo()>=n.ko;
+const skPct=x=>String(x).replace(".",",")+" %";
+function skBon(){const r={d:0,c:0,m:0,x:0,k:0};SKNODES.forEach(n=>{if(n.e&&skOn(n))r[n.e]+=n.v/100});return r}
+{const bf0=biFlags;biFlags=function(){bf0.apply(this,arguments);try{const b=skBon();BIF.d*=1+b.d;BIF.c*=1+b.c;BIF.x*=1+b.x;BIF.k*=1+b.k;BIF.m+=b.m}catch(e){}}}
+try{biFlags()}catch(e){}
+let SKSEL=null,SKZ=0;
+const skZs=[64,76,92];
+const skZi=()=>{if(SKZ)return SKZ;let z=-1;try{z=+localStorage.getItem("pid_skz")}catch(e){}if(!(z>=0&&z<3))z=innerWidth<700?0:1;return SKZ=z};
+const skNext=()=>SKNODES.filter(n=>!skOn(n)).sort((a,b)=>a.ko-b.ko)[0]||null;
+const skNm=n=>n.b<0?LS("Dresseur","Trainer"):LS(SKB[n.b].n[0],SKB[n.b].n[1])+" "+SKN[n.l-1];
+function skDet(n){
+ if(!n)return `<div class="sx-dt"><b>${LS("Arbre complet !","Tree complete!")}</b><small>${LS("Toutes les compétences sont débloquées.","All skills are unlocked.")}</small></div>`;
+ const on=skOn(n),ko=skKo(),eff=n.e?LS(SKE[n.e][0],SKE[n.e][1])+" +"+skPct(n.v):LS("Point de départ de l'arbre","Start of the tree");
+ const q=on?1:Math.min(1,ko/n.ko);
+ return `<div class="sx-dt${on?" on":""}" style="--c:${n.c}"><span class="sx-dti">${ico(n.ic)}</span><div class="sx-dtx"><b>${esc(skNm(n))}</b><em>${eff}</em><small>${on?LS("Débloquée","Unlocked"):LS("Débloquée à ","Unlocks at ")+fmt(n.ko)+" K.O. · "+LS("encore ","")+fmt(n.ko-ko)+LS(" K.O."," more K.O.")}</small>${on?"":`<div class="sx-bar"><i style="width:${(q*100).toFixed(1)}%"></i></div>`}</div></div>`}
+function skNodeH(n,nx){const on=skOn(n),cl=on?"on":nx&&nx.id==n.id?"nx":"lk",sel=SKSEL==n.id?" sel":"";
+ return `<button type="button" class="sx-n ${cl}${sel}" data-sk="n:${n.id}" style="--x:${n.x+8.5};--y:${n.y+8.5};--c:${n.c}" aria-label="${esc(skNm(n))}">${ico(n.ic)}${n.e&&on?`<i>+${String(n.v).replace(".",",")}</i>`:""}${!on&&cl=="lk"?`<u>${ico("lock")}</u>`:""}</button>`}
+function skLineH(){let h="";SKB.forEach(b=>{for(let l=0;l<8;l++){const n=SKNODES.find(x=>x.id==b.k+l);h+=`<span class="sx-l${skOn(n)?" on":""}" style="--x:${8.5+b.dx*(l+.5)};--y:${8.5+b.dy*(l+.5)};--c:${b.c};${b.dx?"width:calc(var(--z)*1px);height:6px":"height:calc(var(--z)*1px);width:6px"}"></span>`}});return h}
+function vSk(){
+ const ko=skKo(),tot=SKNODES.length,got=SKNODES.filter(skOn).length,nx=skNext(),b=skBon();
+ if(!SKSEL||!SKNODES.find(n=>n.id==SKSEL))SKSEL=nx?nx.id:"c0";
+ const sel=SKNODES.find(n=>n.id==SKSEL);
+ const chips=["d","c","m","x","k"].map(k=>`<span class="sx-ch${b[k]?" on":""}" style="--c:${k=="d"?"#ef4444":k=="c"?"#f59e0b":k=="m"?"#a855f7":"#22c55e"}">${ico(SKI[k])}<small>${LS(SKE[k][0],SKE[k][1])}</small><b>+${skPct((b[k]*100).toFixed(1).replace(/\.0$/,""))}</b></span>`).join("");
+ setTimeout(skCenter,40);
+ return `<div class="sx" style="--z:${skZs[skZi()]}">
+ <section class="sx-top"><div class="sx-h"><h2>${LS("Arbre de compétences","Skill tree")}</h2><p>${LS("Chaque Pokémon vaincu te rapproche de la prochaine case. Les cases se débloquent toutes seules, de l'intérieur vers l'extérieur, avec de petits bonus permanents.","Every Pokémon you defeat brings you closer to the next node. Nodes unlock on their own, from the centre outwards, with small permanent bonuses.")}</p></div>
+ <div class="sx-st"><div><small>K.O.</small><b>${fmt(ko)}</b></div><div><small>${LS("Cases","Nodes")}</small><b>${got} / ${tot}</b></div><div><small>${LS("Progression","Progress")}</small><b>${Math.floor(got/tot*100)} %</b></div></div>
+ <div class="sx-bar big"><i style="width:${(got/tot*100).toFixed(1)}%"></i></div><div class="sx-chs">${chips}</div></section>
+ <section class="sx-box"><div class="sx-tb"><div class="sx-det" id="sxdet">${skDet(sel)}</div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></div>
+ <div class="sx-map" id="sxmap"><div class="sx-cv" style="width:calc(17*var(--z)*1px);height:calc(17*var(--z)*1px)">${skLineH()}${SKNODES.map(n=>skNodeH(n,nx)).join("")}</div></div>
+ <div class="sx-lg">${SKB.map(b=>`<span style="--c:${b.c}">${ico(b.ic)}${LS(b.n[0],b.n[1])}</span>`).join("")}</div></section></div>`}
+function skCenter(){const m=$("sxmap");if(!m)return;const nx=skNext(),z=skZs[skZi()],n=nx||SKNODES[0];m.scrollLeft=(n.x+8.5)*z-m.clientWidth/2;m.scrollTop=(n.y+8.5)*z-m.clientHeight/2}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-sk]");if(!b)return;e.stopPropagation();e.preventDefault();const [k,a]=b.dataset.sk.split(":");
+ if(k=="n"){SKSEL=a;document.querySelectorAll(".sx-n.sel").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");const d=$("sxdet");if(d)d.innerHTML=skDet(SKNODES.find(n=>n.id==a));try{sfx("coin")}catch(x){}}
+ else if(k=="ctr")skCenter();
+ else{const z=Math.max(0,Math.min(2,skZi()+(k=="z+"?1:-1)));SKZ=z;try{localStorage.setItem("pid_skz",z)}catch(x){}const r=document.querySelector(".sx");if(r)r.style.setProperty("--z",skZs[z]);skCenter()}},true);
+/* défilement à la souris (glisser) */
+{let dn=null;document.addEventListener("pointerdown",e=>{const m=e.target.closest&&e.target.closest("#sxmap");if(m&&e.pointerType=="mouse"&&!e.target.closest("[data-sk]"))dn={m,x:e.clientX,y:e.clientY,l:m.scrollLeft,t:m.scrollTop}});
+ document.addEventListener("pointermove",e=>{if(!dn)return;dn.m.scrollLeft=dn.l-(e.clientX-dn.x);dn.m.scrollTop=dn.t-(e.clientY-dn.y)});document.addEventListener("pointerup",()=>{dn=null})}
+/* notification : nouvelles cases */
+setInterval(()=>{try{const g=G.sk=G.sk&&typeof G.sk=="object"?G.sk:{s:-1},n=SKNODES.filter(skOn).length;if(g.s<0){g.s=n;return}if(n>g.s){const d=n-g.s;g.s=n;toast(LS("Arbre de compétences : "+d+(d>1?" nouvelles cases débloquées !":" nouvelle case débloquée !"),"Skill tree: "+d+(d>1?" new nodes unlocked!":" new node unlocked!")));try{biFlags();recomp()}catch(x){}if(tab=="sk")show()}}catch(e){}},3000);
+/* ===== Wiki : pages Failles, Entraînement, Hôtel de ville, Compétences + mises à jour ===== */
+{
+ const add=(grp,keys)=>{const g=WKG.find(x=>x[0]==grp);keys.forEach(k=>{if(!g[3].includes(k))g[3].push(k)})};
+ add("Combat et progression",["sk"]);add("Modes de jeu",["trn","fz"]);add("Économie",["town"]);
+ Object.assign(WKM,{
+  sk:["Arbre de compétences","Des cases qui se débloquent avec tes K.O., pour de petits bonus permanents","sk"],
+  trn:["Entraînement","Un Pokémon s'entraîne en continu : EV, mutation, taille, Alpha","trn"],
+  fz:["Failles dimensionnelles","Pokémon Dynamax et Paradoxes qui changent toutes les heures","fz"],
+  town:["Hôtel de ville","Jetons, marché entre dresseurs, niveaux de marchand et quêtes","town"]});
+ WKO.length=0;WKG.forEach(g=>g[3].forEach(k=>WKO.push(k)));
+ WSEC.length=0;WKO.forEach(k=>WSEC.push([k,WKM[k][0],WKM[k][0],WKM[k][2]]));
+}
+const wkMin=n=>n>=60?(n/60)+" h":n+" min";
+
+wkBody.sk=()=>{
+ const ko=skKo(),got=SKNODES.filter(skOn).length,tot=SKNODES.length;
+ const rows=SKB.map(b=>[LS(b.n[0],b.n[1]),b.t(0)[0]=="d"?"Dégâts":b.t(0)[0]=="c"?"Pièces":b.t(0)[0]=="m"?"Mutations":"Expérience / Capture",SKW.map(v=>"+"+String(v).replace(".",",")+" %").join(" · ")]);
+ const th=SKQ.map((k,i)=>[SKN[i],SKB.map(b=>fN(SKNODES.find(n=>n.id==b.k+i).ko)).join(" / ")]);
+ return `<p class="lead">L'arbre de compétences est un réseau de <b>${tot} cases</b> qui part du centre et s'étend en quatre branches. Chaque case est <b>débloquée automatiquement</b> quand ton nombre total de <b>K.O.</b> (Pokémon vaincus) atteint son seuil. Il n'y a rien à acheter : les bonus sont permanents et restent après un prestige.</p>
+ ${wf([["Où le trouver","Moi › Compétences"],["Cases",got+" / "+tot],["Tes K.O.",fN(ko)],["Progression",Math.floor(got/tot*100)+" %"]])}
+ ${wsx("Les quatre branches",tbl(["Branche","Bonus","Bonus par case (I à VIII)"],rows))}
+ <p>La branche <b>Savoir</b> alterne l'expérience (cases impaires) et la chance de capture (cases paires). La branche <b>Instinct</b> augmente la chance de mutation des ennemis, comme l'objet « mutation ».</p>
+ ${wsx("Seuils de K.O.",tbl(["Niveau de case","K.O. requis (Force / Fortune / Instinct / Savoir)"],th))}
+ ${wsx("Comment s'en servir",`<ul class="wks2"><li>Touche une case pour voir son bonus et le nombre de K.O. qu'il te reste.</li><li>Les cases lumineuses sont actives, la case qui pulse est la prochaine, les cases avec un cadenas viennent ensuite.</li><li>Les boutons + et − règlent le zoom, la cible recentre l'arbre sur la prochaine case. Sur téléphone, fais glisser le doigt pour te déplacer.</li><li>Un message t'avertit à chaque nouvelle case débloquée.</li></ul>`)}
+ ${wn("info","Des bonus volontairement petits","Chaque case ajoute entre +1 % et +4 %. Ils se multiplient avec le reste (objets, cartes, prestige) mais ne remplacent pas la progression normale.")}`};
+
+wkBody.trn=()=>{
+ const m=TRMODES.map(x=>[x[1],x[3]]);
+ const ch=[["Taille",TRH.sz],["Mutation",TRH.mu],["Alpha",TRH.al],["Chromatique (mode Tout)",TRH.sh]].map(x=>[x[0],Math.round(x[1]*100)+" % par heure"]);
+ return `<p class="lead">L'Entraînement fait combattre <b>un seul Pokémon</b> en continu, dans une arène à part. Pendant qu'il se bat, il peut gagner des EV ou améliorer sa mutation, sa taille ou son statut Alpha.</p>
+ ${wf([["Débloqué à l'étage",LOCKS.trn],["Durée d'un combat","3 s"],["Combats par heure","1 200"],["Rattrapage hors ligne","6 h max"]])}
+ ${wsx("Choisir le Pokémon",`<p>Le bouton <b>Choisir un Pokémon</b> ouvre la liste de ta collection. Tu peux chercher par nom et trier avec les boutons : meilleurs d'abord, attaque, mutation, taille, Alpha, chromatique, niveau, étoiles, captures, EV déjà gagnés, numéro de Pokédex ou nom. La flèche inverse l'ordre.</p>`)}
+ ${wsx("Les objectifs",tbl(["Objectif","Effet"],m))}
+ ${wsx("Chances",tbl(["Résultat","Chance (mode ciblé)"],ch)+`<p>En mode <b>EV</b>, le Pokémon gagne <b>1 EV tous les 6 combats</b> sur la stat choisie (252 maximum par stat, 510 au total). Le mode <b>Tout</b> avance un peu moins vite (×0,6) mais cumule tout.</p>`)}
+ ${wn("tip","Une amélioration n'écrase jamais","Une mutation ou une taille n'est appliquée que si elle est plus rare que celle que le Pokémon possède déjà. Changer d'objectif ne fait rien perdre.")}
+ ${wn("info","Le jeu peut rester fermé","L'entraînement continue hors ligne. Au retour, le jeu rattrape jusqu'à 6 heures de combats.")}`};
+
+wkBody.fz=()=>{
+ const rows=FZT.map(t=>[t[0],fN(t[3])+" /s",fzPct(t[4]),fzPct(t[5]),fzPct(t[6]),fzPct(t[7]),fzPct(t[8]),wkMin(t[9])]);
+ return `<p class="lead">Des brèches instables s'ouvrent entre les dimensions et laissent passer des <b>Pokémon Dynamax</b> et des <b>Paradoxes</b>. Il faut assez de dégâts par seconde pour ouvrir une faille, puis tu la stabilises et tu l'ancres pour capturer le Pokémon.</p>
+ ${wf([["Débloquées à l'étage",LOCKS.fz],["Difficultés","8"],["Changement","toutes les heures"],["Tentatives","1 par faille et par Pokémon"]])}
+ ${wsx("Une rotation commune à tous",`<p>Le Pokémon de chaque faille change <b>toutes les heures</b>, au même moment pour tous les joueurs. Tu n'as qu'<b>une tentative par faille et par Pokémon</b> : une fois tentée, la faille reste fermée jusqu'à l'heure suivante, un compte à rebours indique quand elle change.</p>`)}
+ ${wsx("Les 8 difficultés",tbl(["Faille","DPS requis","Stabilisation","Mutation","Taille","Alpha","Chroma","Recharge"],rows)+`<p>Plus la faille est difficile, plus ses Pokémon sont rares et puissants, et plus les chances de mutation, de grande taille, d'Alpha et de chromatique sont élevées. Les pourcentages sont les chances de base.</p>`)}
+ ${wsx("Déroulement",`<ol class="wks2"><li><b>Préparation</b> : choisis ta façon d'aborder la faille (voir ci-dessous). Ton DPS doit atteindre le seuil de la difficulté.</li><li><b>Stabilisation</b> : une jauge monte toute seule avec tes dégâts. Des pulsations et des surtensions apparaissent et il faut les contrer.</li><li><b>Ancrage</b> : tu as plusieurs tentatives (3 par défaut) pour ancrer le Pokémon. La chance de réussite dépend de la difficulté.</li><li><b>Résultat</b> : capture, ou la faille se referme.</li></ol>`)}
+ ${wsx("Trois façons d'aborder une faille",`<ul class="wks2"><li><b>Chasse rare</b> : mutation, taille, Alpha et chromatique ×1,5, avec 2 ancrages seulement.</li><li><b>Persévérance</b> : 4 ancrages au lieu de 3, mêmes chances.</li><li><b>Butin</b> : pièces ×3 et objets en plus, avec 3 ancrages.</li></ul>`)}
+ ${wsx("Les Pokémon",`<p><b>Dynamax</b> : les Pokémon qui possèdent une forme Dynamax ou Gigamax, avec leur bracelet. <b>Paradoxes</b> : les formes du passé et du futur. Chaque difficulté a son propre groupe. L'<b>Index</b> des failles révèle une case quand tu vois le Pokémon, et une coche indique ceux que tu as capturés.</p>`)}
+ ${wn("tip","Astuce","Si le Pokémon de l'heure ne t'intéresse pas, tu peux ne pas tenter la faille : la tentative n'est consommée que lorsque tu l'ouvres.")}`};
+
+wkBody.town=()=>{
+ const rows=TNT.map(t=>[t.l,LS(t.fr,t.en),t.q,t.f+" %",fN(t.cap)]);
+ return `<p class="lead">L'Hôtel de ville est le <b>marché entre dresseurs</b>. Tu y vends tes Pokémon et tes objets contre des <b>Jetons</b>, et tu achètes ceux des autres joueurs avec ces mêmes Jetons.</p>
+ ${wf([["Débloqué à l'étage",LOCKS.town],["Monnaie","Jetons"],["Niveau maximum",TNMAX],["Connexion","requise"]])}
+ ${wsx("Vendre et acheter",`<ul class="wks2"><li><b>Vendre</b> : tu fixes ton prix en Jetons et tu publies une annonce. Le nombre d'annonces par jour dépend de ton niveau de marchand.</li><li><b>Acheter</b> : tu paies en Jetons, l'objet ou le Pokémon arrive dans ton jeu.</li><li>Une <b>commission</b> est retenue sur chaque vente : elle baisse quand ton niveau monte.</li><li>La valeur des Pokémon est volontairement réduite (×0,4) pour éviter l'inflation des prix.</li></ul>`)}
+ ${wsx("Niveaux de marchand",tbl(["Niveau","Titre","Annonces par jour","Commission","Plafond de ventes par jour (Jetons)"],rows)+`<p>Chaque vente ou achat te fait gagner de l'expérience de marchand. Le plafond du jour limite le total que tu peux vendre : une vente qui le dépasserait est refusée.</p>`)}
+ ${wsx("Quêtes et paliers",`<p>Des quêtes quotidiennes et des paliers de ventes rapportent des Jetons. Terminer toutes les quêtes du jour donne un bonus en plus. Les compteurs se remettent à zéro chaque jour.</p>`)}
+ ${wn("info","Marché hors ligne","Le marché passe par les serveurs du jeu : sans connexion, il affiche « Marché indisponible ». Les onglets Vendre et Quêtes restent consultables.")}`};
+
+/* mises à jour de pages existantes */
+{const p=wkBody.menu;wkBody.menu=()=>{let h=p();
+  h=h.replace("Dresseur, Profil, Wiki, Réglages","Compétences, Dresseur, Profil");
+  h=h.replace("Boutique, Invocations, Casino","Boutique, Invocations, Casino, Hôtel de ville");
+  h=h.replace("Expéditions, Pension","Expéditions, Pension, Entraînement, Failles");
+  h=h.replace("<b>En haut à gauche</b> : Pass de combat, Quêtes, Connexion.","<b>En haut à gauche</b> : Halloween (Pokémon exclusifs), Pass de combat, Quêtes, Connexion, Discord.");
+  h=h.replace("<li><b>En bas à gauche</b>","<li><b>En bas à droite</b> : Nouveautés, Wiki et Paramètres. Sur téléphone, le bouton menu regroupe tous ces raccourcis.</li><li><b>En bas à gauche</b>");
+  const F=[["Entraînement",LOCKS.trn,"Aventure"],["Failles",LOCKS.fz,"Aventure"],["Hôtel de ville",LOCKS.town,"Boutique"]];
+  h=h.replace(/(<tr><td>[^<]*<\/td><td>[^<]*<\/td><td>)(\d+)(<\/td><\/tr>)/,(m,a,b,c)=>m);
+  return h+wsx("Nouveaux onglets",tbl(["Fonction","Catégorie","Étage requis"],F.sort((a,b)=>a[1]-b[1])))+wn("info","Arbre de compétences","L'arbre (Moi › Compétences) se débloque avec ton nombre de K.O., pas avec l'étage.")}}
+{const p=wkBody.items;if(p)wkBody.items=()=>p()+wn("tip","Chariot dans la fiche d'un Pokémon","À côté de l'emplacement d'objet tenu, le petit chariot ouvre la liste des objets que tu peux acheter pour ce Pokémon : ses Méga-Gemmes et son bracelet Dynamax s'il en a, plus les objets classiques (ceinture force, etc.).")}
+{const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
+{const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
+/* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
+(function(){
+ const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
+ const list=()=>MGX().filter(f=>MGM[f]&&ok(MGM[f].s));
+ function pick(sd,L){
+  const n=L.length;if(cache.n!=n||cache.k!=L[0]){cache={n,k:L[0],v:{},last:D0-1,p:-1}}
+  if(sd<D0){const R=rng(sd*7919+13);R();return R()*n|0}
+  if(cache.v[sd]!=null)return cache.v[sd];
+  let p=cache.p,d=cache.last;
+  if(sd<=d){d=D0-1;p=-1}
+  for(d=d+1;d<=sd;d++){const R=rng(d*7919+13);R();let r=R()*n|0;if(n>1&&r==p)r=(r+1)%n;p=r;if(d>sd-3)cache.v[d]=r}
+  cache.last=sd;cache.p=p;return p}
+ const base=mgCur;
+ mgCur=function(t,i){const L=list();if(!L.length)return base.apply(this,arguments);const sd=mgSeed(),f=L[pick(sd,L)],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}};
+ const own=f=>{try{if(G.mgx&&G.mgx[f])return true;if((G.inv["mp"+f]|0)>0)return true;if(G.col[f])return true;for(const k in G.col)if(G.col[k].it==="mp"+f)return true}catch(e){}return false};
+ const c0=exClaim;exClaim=function(r){try{if(r&&r.ok&&r.mf){G.mgx=G.mgx||{};G.mgx[r.mf]=1}}catch(e){}return c0.apply(this,arguments)};
+ const ex0=exIndex;
+ exIndex=function(){let h=ex0.apply(this,arguments);try{
+  const F=[...new Set(list())],n=F.filter(own).length;
+  const row=`<div class="rxr" style="--c:#f472b6"><div class="rxh"><b>${LS("Chasse Méga","Mega hunt")}</b><small>${n} / ${F.length}</small></div><div class="rxg">${F.map(f=>{const k=own(f);return `<div class="rxc${k?"":" hid"}"><span class="rxs">${sp(f,0,1)}</span><b>${k?esc(MGM[f].n):"???"}</b></div>`}).join("")}</div></div>`;
+  const i=h.indexOf('<div class="rxr" style="--c:#f472b6">');
+  if(i>=0){let j=h.lastIndexOf("</div></div>");h=h.slice(0,i)+row+h.slice(j+12)}else h=h.replace(/(<\/div>)$/,row+"$1")}catch(e){}return h}
 })();
 
 /* ============ DÉMARRAGE ============ */
