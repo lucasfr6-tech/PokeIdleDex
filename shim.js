@@ -20,7 +20,7 @@
  var db={collection:function(c){return Q(c,null,null,null)},
   doc:function(p){var a=p.split("/"),c=a[0],id=a[1];return{
    get:function(){return jget("/api/d/"+c+"/"+encodeURIComponent(id)).then(function(j){return mkDoc(id,j.exists?j.d:null)})},
-   set:function(d){return fetch(API+"/api/d/"+c+"/"+encodeURIComponent(id),{method:"PUT",headers:{"Content-Type":"application/json","X-Token":tok},body:JSON.stringify(d)}).then(function(r){if(!r.ok)throw new Error(r.status)})}}}};
+   set:function(d){return fetch(API+"/api/d/"+c+"/"+encodeURIComponent(id),{method:"PUT",headers:{"Content-Type":"application/json","X-Token":tok},body:JSON.stringify(Object.assign({},d,{ep:window.PID_EP||""}))}).then(function(r){if(!r.ok)throw new Error(r.status)})}}}};
  var user={id:function(){return Promise.resolve(uid)}};
  var dl={save:function(o){return new Promise(function(res,rej){try{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([o.data],{type:"text/plain"}));a.download=o.filename||"sauvegarde.txt";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);res()}catch(e){rej(e)}})}};
  window.claude={use:function(n){

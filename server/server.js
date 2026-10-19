@@ -51,6 +51,17 @@ if(db.meta.rankReset!==RANK_RESET){ // remise a zero unique : etages (lb.bf), JC
  db.pvp={};db.twr={};
  for(const k in db.glm){if(db.glm[k]&&typeof db.glm[k]=='object')db.glm[k].gx=0}
  db.meta.rankReset=RANK_RESET;resetChat=1}
+/* remise a zero generale (nouvelle epoque EP) : copie de securite puis tout est efface, sauf les identifiants de compte (pseudo, mot de passe, Google/Discord)
+   et les bannis. Les jeux a jour envoient ep=EP ; les anciennes versions encore ouvertes sont refusees pour ne rien recreer. */
+const EP='r2',FULL_RESET=1;
+if(db.meta.fullReset!==FULL_RESET){
+ try{if(fs.existsSync(DATA))fs.copyFileSync(DATA,DATA+'.avant-reset-'+FULL_RESET)}catch(e){console.error('backup',e.message)}
+ for(const c in COLS)db[c]={};
+ db.mkt={};db.mkd={};db.dm={};
+ const fl={};for(const k in (db.flag||{})){if(db.flag[k]&&db.flag[k].m)fl[k]={m:1,s:[],l:[],t:db.flag[k].t||0}}db.flag=fl;
+ for(const k in db.acc){const a=db.acc[k];if(!(typeof a.save=='string'&&a.save.includes('"ep":"'+EP+'"'))){a.save='';a.t=0}}
+ db.meta.fullReset=FULL_RESET;db.meta.chatReset=CHAT_RESET;db.meta.rankReset=RANK_RESET;resetChat=1;console.log('Remise a zero generale effectuee')}
+const epOk=d=>!!d&&d.ep===EP,svOk=sv=>typeof sv=='string'&&sv.includes('"ep":"'+EP+'"');
 const pwh=(pw,salt)=>crypto.scryptSync(String(pw),salt,32).toString('hex');
 const NAME=/^[\p{L}\p{N}_ -]{2,16}$/u;
 let dirty=resetChat;const flush=()=>{if(!dirty)return;dirty=0;try{fs.writeFileSync(DATA+'.tmp',JSON.stringify(db));fs.renameSync(DATA+'.tmp',DATA)}catch(e){console.error('save',e.message)}};
@@ -108,7 +119,7 @@ function ssoFinish(res,d,tok,p,f){
  if(tok.length>=16){for(const kk in db.acc){const a=db.acc[kk];if(a.tok===tok&&!a[f]){a[f]=p.id;dirty=1;send(res,200,{ok:1,linked:1,name:a.n});return}}}
  if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
  if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
- const sv=typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',want=String(d.want||'').replace(/\s+/g,' ').trim();
+ const sv=typeof d.save=='string'&&d.save.length<MAXSAVE&&svOk(d.save)?d.save:'',want=String(d.want||'').replace(/\s+/g,' ').trim();
  const mk=(n,named)=>{const o={n,salt:crypto.randomBytes(12).toString('hex'),ph:crypto.randomBytes(32).toString('hex'),uid:d.uid,tok,save:sv,t:Date.now()};o[f]=p.id;db.acc[n.toLowerCase()]=o;dirty=1;send(res,200,{ok:1,created:1,named,name:n})};
  if(NAME.test(want)&&pidCensor(want)===want&&!db.acc[want.toLowerCase()]){mk(want,1);return}
  let base=p.un.replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/\s+/g,' ').trim().slice(0,12);if(base.length<2||pidCensor(base)!==base)base='Dresseur';
@@ -176,7 +187,7 @@ http.createServer((req,res)=>{
     if(!ID.test(String(d.uid||''))||tok.length<16||tok.length>100){send(res,400,{e:'id'});return}
     if(Object.keys(db.acc).length>=20000){send(res,507,{e:'full'});return}
     const salt=crypto.randomBytes(12).toString('hex');
-    db.acc[k]={n:nm,salt,ph:pwh(d.pw,salt),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE?d.save:'',t:Date.now()};dirty=1;send(res,200,{ok:1});return}
+    db.acc[k]={n:nm,salt,ph:pwh(d.pw,salt),uid:d.uid,tok,save:typeof d.save=='string'&&d.save.length<MAXSAVE&&svOk(d.save)?d.save:'',t:Date.now()};dirty=1;send(res,200,{ok:1});return}
    if(act=='login'){
     const a=db.acc[k];
     if(!a||!crypto.timingSafeEqual(Buffer.from(pwh(d.pw,a.salt)),Buffer.from(a.ph))){send(res,401,{e:'bad'});return}
@@ -191,6 +202,7 @@ http.createServer((req,res)=>{
     const a=db.acc[k];
     if(!a||a.tok!==tok){send(res,401,{e:'bad'});return}
     if(typeof d.save!='string'||d.save.length>=MAXSAVE){send(res,400,{e:'size'});return}
+    if(!svOk(d.save)){send(res,409,{e:'ep'});return}
     /* synchro multi-appareils : si un autre appareil a sauvegardé depuis la dernière synchro de celui-ci, on refuse (l'appareil récupère alors la version en ligne) */
     if(typeof d.base=='number'&&!d.force&&(a.t||0)>d.base){send(res,409,{e:'stale',t:a.t});return}
     a.save=d.save;a.t=Math.max(Date.now(),(a.t||0)+1);dirty=1;try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1,t:a.t});return}
@@ -239,6 +251,7 @@ http.createServer((req,res)=>{
    if(!dmFr(uid,to)){send(res,403,{e:'friends'});return}
    const k=dmKey(uid,to),c=db.dm[k]=db.dm[k]||{m:[],r:{}};
    if(act=='get'){if(d.mark){c.r[uid]=Date.now();dirty=1}send(res,200,{ok:1,m:c.m.slice(-80),r:c.r[to]||0});return}
+   if(act=='send'&&!epOk(d)){send(res,409,{e:'ep'});return}
    if(act=='send'){const x=pidCensor(String(d.x||'').replace(/\s+/g,' ').trim().slice(0,300));if(!x){send(res,400,{e:'empty'});return}
     const n=Date.now(),lt=dmLast.get(uid)||0;if(n-lt<1500){send(res,429,{e:'slow'});return}dmLast.set(uid,n);
     if(db.dm[k].m.length&&db.dm[k].m[db.dm[k].m.length-1].u==uid&&db.dm[k].m[db.dm[k].m.length-1].x==x&&n-db.dm[k].m[db.dm[k].m.length-1].t<20000){send(res,429,{e:'dup'});return}
@@ -262,6 +275,7 @@ http.createServer((req,res)=>{
     const ids=new Set((Array.isArray(d.ids)?d.ids:[]).slice(0,200).map(String));
     if(db.mkd[uid]){db.mkd[uid]=db.mkd[uid].filter(x=>!ids.has(x.id));if(!db.mkd[uid].length)delete db.mkd[uid];dirty=1}
     send(res,200,{ok:1});return}
+   if((act=='list'||act=='buy')&&!epOk(d)){send(res,409,{e:'ep'});return}
    if(act=='list'){
     const it=mkItem(d.it),p=Math.floor(+d.p);if(!it||!(p>=1&&p<=MK_MAXP)){send(res,400,{e:'item'});return}
     const mine=Object.keys(db.mkt).filter(id=>db.mkt[id].s==uid).length;
@@ -305,6 +319,7 @@ http.createServer((req,res)=>{
     let b='';req.on('data',c=>{b+=c;if(b.length>MAXDOC){req.destroy()}});
     req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
      if(!d||typeof d!='object'||Array.isArray(d)){send(res,400,{e:'obj'});return}
+     if(m[2]!='adm'&&!epOk(d)){send(res,409,{e:'ep'});return}
      const x=col[m[3]],h=sha(tok);
      if(x&&x.h!==h&&m[2]!='adm'){send(res,403,{e:'owner'});return}
      if(!x&&Object.keys(col).length>=MAXDOCS){send(res,507,{e:'full'});return}

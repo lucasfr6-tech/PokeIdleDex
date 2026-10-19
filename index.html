@@ -3821,8 +3821,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b7fa888a1d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=b7fa888a1d"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1d5640dac7"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1d5640dac7"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -3971,6 +3971,22 @@ IT["bottle-cap"].n="Capsule d'Argent";IT["gold-bottle-cap"].n="Capsule d'Or";IT[
 const STABS=[["balls","Poké Balls","Poké Balls"],["heal","Soins","Soins"],["stone","Évolution","Pierres d'évolution"],["vit","Vitamines","Vitamines"],["trn","IV et talents","Entraînement"],["hold","Équipement","Objets de combat"],["typ","Types","Objets de type"],["ber","Baies","Baies"],["tra","Entraînement+","Objets d'entraînement"],["spc","Spécifiques","Objets spécifiques"],["mega","Méga et Dynamax","Méga et Dynamax"],["tm","CT","CT (capacités)"]];
 
 /* ============ DONNÉES POKÉMON (chargées d'un coup depuis PokeAPI, avec cache) ============ */
+/* ===== Remise à zéro générale (nouveau départ pour tous les joueurs) =====
+   Chaque partie locale d'une ancienne époque est effacée : Pokémon, prestiges, amis, JCJ, pass, titres, codes, statistiques...
+   On garde seulement l'identité (identifiant, jeton, compte lié, code ami), les réglages et le cache des données Pokémon. */
+var PID_EP="r2",PID_WIPED=false;
+(function(){try{if(localStorage.getItem("pid_ep")===PID_EP)return;
+ const keep={pid_uid:1,pid_tok:1,pid_acc:1,pid_dcl:1,pid_ggl:1,idle_set:1,dx3:1,evc:1,pid_skz2:1};
+ let fid=null,had=false;
+ Object.keys(localStorage).forEach(k=>{if(k==="idle3"||k.indexOf("idle3:")===0){had=true;if(!fid){try{const o=JSON.parse(localStorage.getItem(k)||"{}");if(o&&o.fd&&/^[A-Z0-9]{8}$/.test(o.fd.id||""))fid=o.fd.id}catch(e){}}}});
+ Object.keys(localStorage).forEach(k=>{if(!keep[k])localStorage.removeItem(k)});
+ if(fid)localStorage.setItem("pid_fid0",fid);
+ if(had){PID_WIPED=true;localStorage.setItem("pid_wiped","1")}
+ localStorage.setItem("pid_ep",PID_EP);
+ try{sessionStorage.clear()}catch(e){}
+}catch(e){}})();
+/* une sauvegarde n'est reprise (compte en ligne, autre appareil) que si elle date de la nouvelle époque */
+function pidEpOk(sv){return typeof sv==="string"&&sv.indexOf('"ep":"'+PID_EP+'"')>=0}
 const SK=(()=>{try{const a=localStorage.getItem("idle_acc");return a?"idle3:"+a:"idle3"}catch(e){return"idle3"}})();
 let PANS=new Set();
 let DB={},EVC={},OFF=false,BULK=false;try{DB=JSON.parse(localStorage.getItem("dx3")||"{}");EVC=JSON.parse(localStorage.getItem("evc")||"{}")}catch(e){}
@@ -4008,7 +4024,7 @@ const wp=(L,f)=>{const w=x=>x[x.length-1]*(f?f(x):1);let r=Math.random()*L.reduc
 /* ============ ÉTAT ============ */
 const init=()=>({m:300,st:0,inv:{"poke-ball":30},col:{19:{n:1,l:5,x:0,h:-1}},cards:{},fl:1,k:0,cl:0,ko:0,auto:true,caps:0,gain:0,t0:Date.now(),rv:0,name:"Dresseur",fav:[0,0,0],ban:0,av:19,ach:{},boss:0,mut:0,last:0,dx:{19:1},mg:{},pt:0,pp:0,pl:{},bf:0,ex:[]});
 let G;try{G=Object.assign(init(),JSON.parse(localStorage.getItem(SK)||"{}"))}catch(e){G=init()}
-var G_BOOTLAST=+G.last||0;
+var G_BOOTLAST=+G.last||0;G.ep=PID_EP;
 let E=null,busy=false,tab="adv",sv=0,lastE=null,PACK=[],OPEN=0,ZV=false,RP=false,OFFMSG=null,PK=null,PKQ='',PO=-1,BP=false,OP=null;
 const SH={tab:"balls",q:""},DX={q:"",hide:false,shiny:false,gen:-1,cat:"mon"},CS={tab:"boost",gen:0,rar:-1,q:"",hide:false};
 let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";const save=()=>{if(NOSAVE)return;try{G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G))}catch(e){}};
@@ -5748,7 +5764,7 @@ function fidGen(){let s="";try{const a=new Uint32Array(8);crypto.getRandomValues
 const fidFmt=s=>s?s.slice(0,4)+"-"+s.slice(4):"";
 const FRB=()=>1+.01*Math.min(FRCAP,(G.fd&&G.fd.n)||0);
 function v22mig(){if(!BAN[G.ban]||!BAN[G.ban].ok())G.ban=0;
- if(!G.fd||typeof G.fd!="object")G.fd={};const d=G.fd;if(!d.id)d.id=fidGen();d.l=Array.isArray(d.l)?d.l.slice(0,60):[];d.n=d.n|0;d.mb=d.mb|0;d.cs=+d.cs||0;d.blk=Array.isArray(d.blk)?d.blk.slice(0,60):[]}
+ if(!G.fd||typeof G.fd!="object")G.fd={};const d=G.fd;if(!d.id){let o=null;try{o=localStorage.getItem("pid_fid0")}catch(e){}d.id=o&&/^[A-Z0-9]{8}$/.test(o)?o:fidGen()}d.l=Array.isArray(d.l)?d.l.slice(0,60):[];d.n=d.n|0;d.mb=d.mb|0;d.cs=+d.cs||0;d.blk=Array.isArray(d.blk)?d.blk.slice(0,60):[]}
 const FD={all:{},inc:[],mut:[],info:{},ready:0,tab:"my",msg:""};
 const CH={docs:new Map(),view:[],rp:null,last:0,busy:0,tab:"g",un:0,ready:0};
 const SCP={o:""};
@@ -10306,6 +10322,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
    const j=await post("load",{name:a,since},ls("pid_tok"));
    if(j.st===404&&j.e==="act"){noLoad=true;return false}
    if(!j.ok||!j.t)return false;
+   if(typeof j.save==="string"&&j.save&&!pidEpOk(j.save)){ls("pid_st",String(j.t));return false}
    if(typeof j.save==="string"&&j.save&&j.t>since){
     if(j.save===ls(SK)){ls("pid_st",String(j.t));last=j.save;return false}
     /* première synchro sur cet appareil : on garde la partie jouée le plus récemment */
@@ -10335,7 +10352,7 @@ const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,
   if(!j.ok)return j;
   NOSAVE=true;
   ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");
-  if(j.save)ls("idle3",j.save);
+  if(j.save&&pidEpOk(j.save))ls("idle3",j.save);
   if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));
   setTimeout(()=>location.reload(),150);
   return j}
@@ -10796,7 +10813,7 @@ async function back(){const q=new URLSearchParams(location.search),st=q.get("dc"
  const want=ls("pid_dcw")||"";ls("pid_dcs",null);ls("pid_dcw",null);
  let j={};try{const r=await fetch(API+"/api/acc/oauth",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({state:st,uid:ls("pid_uid"),save:ls(SK)||"",want})});j=await r.json()}catch(x){j={e:"net"}}
  if(!j.ok){toast(LS("Connexion Discord échouée, réessaie.","Discord sign-in failed, try again."));return}
- if(j.exists){ls("pid_dcl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save)ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Discord trouvé, chargement...","Discord account found, loading..."));setTimeout(()=>location.reload(),300);return}
+ if(j.exists){ls("pid_dcl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Discord trouvé, chargement...","Discord account found, loading..."));setTimeout(()=>location.reload(),300);return}
  if(j.created){ls("pid_acc",j.name);ls("pid_dcl",j.name);ls("pid_sync",String(Date.now()));G.name=j.name;try{save()}catch(x){}ls("pid_land","1");if(!j.named)ls("pid_dcpick","1");toast(LS("Compte créé avec Discord : "+j.name,"Account created with Discord: "+j.name));setTimeout(()=>location.reload(),400);return}
  if(j.linked){ls("pid_dcl",j.name||ls("pid_acc"));try{show()}catch(x){}toast(LS("Discord lié à ton compte.","Discord linked to your account."));return}}
 setTimeout(back,1500);
@@ -10834,7 +10851,7 @@ async function back(){const h=location.hash||"";if(h.indexOf("id_token=")<0&&h.i
  if(!idt||!n){toast(LS("Connexion Google annulée ou expirée.","Google sign-in cancelled or expired."));return}
  let j={};try{const r=await fetch(API+"/api/acc/google",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({idt,nonce:n,uid:ls("pid_uid"),save:ls(SK)||"",want})});j=await r.json()}catch(x){j={e:"net"}}
  if(!j.ok){toast(LS("Connexion Google échouée, réessaie.","Google sign-in failed, try again."));return}
- if(j.exists){ls("pid_ggl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save)ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Google trouvé, chargement...","Google account found, loading..."));setTimeout(()=>location.reload(),300);return}
+ if(j.exists){ls("pid_ggl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Google trouvé, chargement...","Google account found, loading..."));setTimeout(()=>location.reload(),300);return}
  if(j.created){ls("pid_acc",j.name);ls("pid_ggl",j.name);ls("pid_sync",String(Date.now()));G.name=j.name;try{save()}catch(x){}ls("pid_land","1");if(!j.named)ls("pid_dcpick","1");toast(LS("Compte créé avec Google : "+j.name,"Account created with Google: "+j.name));setTimeout(()=>location.reload(),400);return}
  if(j.linked){ls("pid_ggl",j.name||ls("pid_acc"));try{show()}catch(x){}toast(LS("Google lié à ton compte.","Google linked to your account."))}}
 setTimeout(back,1500);
@@ -11054,7 +11071,7 @@ const tnClaimable=()=>{const t=tnS();let n=0;tnQuests().forEach(x=>{if(x.done&&!
 const tnAPI=()=>(window.PID_API||"").replace(/\/$/,"");
 const tnOn=()=>!!tnAPI()&&!!TNLS("pid_uid")&&!!TNLS("pid_tok")&&typeof LB!="undefined"&&LB.ok;
 async function tnReq(act,body){const A=tnAPI();if(!A)return{e:"off"};
- try{const r=await fetch(A+"/api/mkt/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||"",n:G.name||"Dresseur"},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
+ try{const r=await fetch(A+"/api/mkt/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||"",n:G.name||"Dresseur",ep:PID_EP},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
 async function tnBrowse(){const A=tnAPI();if(!A)return null;try{const r=await fetch(A+"/api/mkt/browse?lim=500");const j=await r.json();return j&&j.ok?(j.docs||[]).filter(tnPriceOk):null}catch(e){return null}}
 /* annonces de Pokémon publiées avant la baisse des prix : masquées si leur prix dépasse le nouveau maximum (le vendeur peut les retirer et les remettre en vente) */
 function tnPriceOk(l){try{if(!l||!l.it||l.it.t!="m")return true;if(l.s&&l.s===TNLS("pid_uid"))return true;
@@ -11384,7 +11401,7 @@ BOOST.forEach(b=>{b.p=Math.round(b.p/2)});
 const DMX={w:null,cv:{},msgs:[],r:0,un:0,sig:"",busy:0,ld:0,lt:0};
 const dmOn=()=>{try{return tnOn()}catch(e){return false}};
 async function dmReq(act,body){const A=tnAPI();if(!A)return{e:"off"};
- try{const r=await fetch(A+"/api/dm/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||""},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
+ try{const r=await fetch(A+"/api/dm/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":TNLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:TNLS("pid_uid")||"",ep:PID_EP},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
 const dmName=u=>{const r=rowOf(u);return r&&r.n?r.n:"…"};
 const dmTime=t=>{const d=new Date(t),n=new Date();return d.toDateString()==n.toDateString()?d.toLocaleTimeString(SG.lang=="en"?"en":"fr",{hour:"2-digit",minute:"2-digit"}):d.toLocaleDateString(SG.lang=="en"?"en":"fr",{day:"2-digit",month:"2-digit"})};
 async function dmFetchList(){if(!dmOn()||DMX.ld)return;DMX.ld=1;const j=await dmReq("list",{});DMX.ld=0;if(!j||!j.ok)return;const c={};let un=0;j.c.forEach(x=>{c[x.u]=x;un+=x.n|0});DMX.cv=c;const ch=un!==DMX.un;DMX.un=un;if(ch)try{socBadges()}catch(e){}
@@ -11969,7 +11986,7 @@ setInterval(()=>{try{const r=rdState(),k=rdWeekK();if(r.wk3===k||!WB.ok||WB.wk!=
 
 /* ===== Boss monde : PV calculés une seule fois au début de la semaine (joueurs actifs × dégâts moyens par essai),
    puis figés pour tout le monde jusqu'au boss suivant (document partagé wb/hp-<semaine>, écrit par le premier joueur) ===== */
-const WBTRY=3,WBDAYS=2.5,WBMIN=5e7,WBMAX=1e15;
+const WBTRY=3,WBDAYS=2.5,WBMIN=1e6,WBMAX=1e15;
 var WBHP={m:{},n:{},busy:{}};
 function wbWeekStart(k){const p=String(k||"").split("-");return new Date(+p[0],(+p[1]||1)-1,+p[2]||1).getTime()}
 function wbPerTry(x){const d=+x.d||0;if(d<=0)return 0;if(+x.a>0)return d/(+x.a);
@@ -12492,6 +12509,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Nouveau départ pour tous","Après les nombreuses mises à jour et le rééquilibrage, toutes les données du jeu ont été remises à zéro : Pokémon, prestiges, classements, JCJ, pass de combat, titres, amis et statistiques. Les codes cadeaux du Discord sont de nouveau utilisables et le Pokémon chromatique de départ est offert à nouveau.","A fresh start for everyone","After the many updates and the rebalance, all game data has been reset: Pokémon, prestiges, rankings, PvP, battle pass, titles, friends and stats. Discord gift codes can be used again and the starting shiny Pokémon is offered again."],
   ["imp","Hôtel de ville : Pokémon bien moins chers","La valeur des Pokémon au marché a fortement baissé, surtout pour les chromatiques, mutés, grandes tailles et Alpha : un combo de bonus est maintenant adouci pour rester achetable avec les Jetons des quêtes. Les anciennes annonces trop chères sont masquées ; leur vendeur peut les retirer et les remettre en vente.","Town hall: much cheaper Pokémon","Pokémon market values were cut sharply, especially shinies, mutated, large and Alpha ones: a combo of bonuses is now softened so it stays affordable with quest Tokens. Old overpriced listings are hidden; their seller can withdraw and relist them."],
   ["fix","Synchro du compte entre appareils","Avec un compte Google, Discord ou pseudo, ta partie est maintenant synchronisée dans les deux sens : ce que tu gagnes sur ton téléphone arrive sur ton PC et inversement. En revenant sur un appareil, il récupère automatiquement la version la plus récente.","Account sync across devices","With a Google, Discord or name account, your game now syncs both ways: what you earn on your phone reaches your PC and vice versa. When you come back to a device, it automatically loads the latest version."],
   ["imp","PV du Boss monde calculés chaque semaine","Les PV du Boss monde sont fixés au début de la semaine selon le nombre de joueurs actifs et leurs dégâts, pour qu'il tombe en 2 à 3 jours. Ils ne changent plus pendant la semaine.","World boss HP set weekly","World boss HP is set at the start of the week from active players and their damage, so it falls in 2 to 3 days. It no longer changes during the week."],
@@ -12580,4 +12598,23 @@ var okS=false;try{localStorage.setItem("pid_t","1");okS=localStorage.getItem("pi
 if(!okS)warn("Le stockage de ton navigateur est bloqué (navigation privée ou réglages) : ta progression ne sera pas sauvegardée. Autorise le stockage du site ou quitte la navigation privée.");
 else{try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}}
 if("serviceWorker"in navigator&&location.protocol.indexOf("http")===0&&!window.PID_OLD){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
-window.addEventListener("offline",function(){if(!document.getElementById("pidw"))warn("Tu es hors ligne : le jeu continue, mais images et classement peuvent manquer.")})})()</script></body></html>
+window.addEventListener("offline",function(){if(!document.getElementById("pidw"))warn("Tu es hors ligne : le jeu continue, mais images et classement peuvent manquer.")})})()
+/* ===== Annonce du créateur : nouveau départ (affichée une fois aux joueurs dont la partie a été remise à zéro) ===== */
+;(function(){
+ const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
+ if(ls("pid_wiped")!=="1")return;
+ const FR=`<p>Bonjour à toutes et à tous,</p><p>Nous avons apporté de <b>nombreuses mises à jour</b> et un <b>important rééquilibrage</b> qui rendent l'expérience de jeu bien plus agréable. Pour que chacun reparte sur des bases équitables, <b>toutes les données du jeu ont été réinitialisées</b> : Pokémon, prestiges, classements, JCJ, pass de combat, titres et amis. Tout le monde recommence du début.</p><p>Je présente mes excuses à celles et ceux qui avaient déjà consacré de nombreuses heures au jeu. J'espère que ce nouveau départ vous motivera encore davantage. Les codes cadeaux du Discord sont de nouveau utilisables, et ton Pokémon chromatique de départ t'attend !</p><p>Merci pour votre soutien, et bon jeu sur PokeIdleDex !</p><p class="annsg">Cordialement,<br><b>TS4</b></p>`;
+ const EN=`<p>Hello everyone,</p><p>We have made <b>many updates</b> and a <b>major rebalance</b> that make the game much more enjoyable. So that everyone starts on a fair footing, <b>all game data has been reset</b>: Pokémon, prestiges, rankings, PvP, battle pass, titles and friends. Everyone starts from the beginning.</p><p>I apologise to those of you who had already put many hours into the game. I hope this fresh start will motivate you even more. The Discord gift codes can be used again, and your starting shiny Pokémon is waiting for you!</p><p>Thank you for your support, and have fun on PokeIdleDex!</p><p class="annsg">Best regards,<br><b>TS4</b></p>`;
+ const st=document.createElement("style");st.textContent=`#annm{position:fixed;inset:0;z-index:100040;background:#04061acc;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px}
+#annm .annc{width:min(460px,100%);max-height:90vh;overflow:auto;background:#10143a;border:1px solid #ffffff26;border-radius:22px;padding:22px 22px 16px;box-shadow:0 24px 70px #000c;color:#e5e7eb}
+#annm small{display:block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#fbbf24}#annm h2{margin:4px 0 12px;font-size:21px}
+#annm p{margin:0 0 10px;font-size:14px;line-height:1.55;color:#cbd5e1}#annm p b{color:#fff}#annm .annsg{margin-top:14px;color:#e5e7eb}
+#annm button{width:100%;margin-top:8px;padding:12px;border:0;border-radius:14px;font-weight:800;font-size:15px;color:#1a1300;background:linear-gradient(135deg,#fde047,#f59e0b);cursor:pointer}`;
+ document.head.appendChild(st);
+ const show=()=>{if(document.getElementById("annm"))return;
+  const en=(typeof SG!="undefined"&&SG.lang=="en");const o=document.createElement("div");o.id="annm";
+  o.innerHTML=`<div class="annc" role="dialog" aria-modal="true"><small>${en?"MESSAGE FROM THE CREATOR":"MESSAGE DU CRÉATEUR"}</small><h2>${en?"A fresh start for everyone":"Un nouveau départ pour tous"}</h2>${en?EN:FR}<button>${en?"Let's go!":"C'est parti !"}</button></div>`;
+  document.body.appendChild(o);o.querySelector("button").onclick=()=>{ls("pid_wiped",null);o.remove()}};
+ setTimeout(show,1200);
+})();
+</script></body></html>
