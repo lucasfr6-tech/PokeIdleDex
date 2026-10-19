@@ -3819,8 +3819,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="573e19e9c6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=573e19e9c6"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a91c73f684"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a91c73f684"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7501,7 +7501,7 @@ function pvBotRow(i,idx){const r=pvBotR(i,idx),tm=pvBotTeam(i),g=Math.max(8,Math
 /* ---------- classement en ligne ---------- */
 const PVX={rows:[],ts:0,busy:0,v:"arena",opp:null,q:"",ty:"",pg:1,lt:0,pf:null};
 const pvPick=(m,tm)=>{const o={};(tm||[]).forEach(id=>{if(m&&m[id])o[id]=m[id]});return o};
-const pvDoc=()=>{const p=pvS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",r:p.r,w:p.w,l:p.l,k:p.k,pk:p.pk,pr:p.pr,pf:p.pf,tm:p.tm.slice(0,6),mv:pvPick(p.mv,p.tm),it:pvPick(p.it,p.tm),t:Date.now()}};
+const pvDoc=()=>{const p=pvS(),d=lbDoc();return{n:d.n,av:d.av,avs:d.avs,ai:d.ai||"",fr:d.fr||"f0",tt:d.tt||"t0",r:p.r,w:p.w,l:p.l,k:p.k,pk:p.pk,pr:p.pr,pf:p.pf,tm:p.tm.slice(0,6),mv:pvPick(p.mv,p.tm),it:pvPick(p.it,p.tm),pw:pvPwMap(p.tm.slice(0,6)),t:Date.now()}};
 async function pvPush(){if(!(LB&&LB.ok&&LB.db))return;const p=pvS();if(!p.tm.length)return;try{await LB.db.doc("pvp/"+LB.uid).set(pvDoc())}catch(e){}}
 async function pvFetch(force){if(!(LB&&LB.ok&&LB.db)||PVX.busy)return;if(!force&&Date.now()-PVX.ts<20000)return;PVX.busy=1;
  try{const s=await LB.db.collection("pvp").get();PVX.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));PVX.ts=Date.now()}catch(e){}
@@ -7563,9 +7563,16 @@ const pvNoMf=(id,f)=>{const c=G.col[id],m=c&&c.mf;if(m)c.mf=0;try{return f()}fin
 const pvNm=id=>id>9e4&&SPM[id]?SPM[id].n:I(id).n;
 function pvMake(id,o){o=o||{};return pvNoMf(id,()=>{const S=ST(id),t=tp(id).slice(),mv=pvSetMoves(id,o.mv),st=k=>2*S[k]+31+5,hp=2*S[0]+31+110,it=pvItOk(o.it)?o.it:null;
  const u={id,name:pvNm(id),types:t,max:hp,hp,atk:st(1),def:st(2),spa:st(3),spd:st(4),spe:st(5),bst:S.reduce((a,b)=>a+b,0),moves:mv.slice(),st:null,sT:0,bA:0,bS:0,rc:0,hu:0,dead:0,it,used:0,lk:null,nu:it=="assault-vest"};
- if(it=="choice-band")u.atk=Math.floor(u.atk*1.4);if(it=="choice-specs")u.spa=Math.floor(u.spa*1.4);if(it=="choice-scarf")u.spe=Math.floor(u.spe*1.5);if(it=="assault-vest")u.spd=Math.floor(u.spd*1.5);return u})}
+ if(it=="choice-band")u.atk=Math.floor(u.atk*1.4);if(it=="choice-specs")u.spa=Math.floor(u.spa*1.4);if(it=="choice-scarf")u.spe=Math.floor(u.spe*1.5);if(it=="assault-vest")u.spd=Math.floor(u.spd*1.5);if(o.pw){const f=Math.max(.5,Math.min(1.9,+o.pw||1));u.pf=f;u.max=u.hp=Math.round(u.max*f);u.atk=Math.round(u.atk*f);u.def=Math.round(u.def*f);u.spa=Math.round(u.spa*f);u.spd=Math.round(u.spd*f);u.spe=Math.round(u.spe*Math.sqrt(f))}return u})}
 const pvPow=id=>{try{return pvNoMf(id,()=>ST(id).reduce((a,b)=>a+b,0))}catch(e){return 0}};
-const pvTeamU=(ids,mv,it)=>{const seen={};return ids.map(id=>{let k=it&&it[id];if(k&&seen[k])k=null;if(k)seen[k]=1;return pvMake(id,{mv:mv&&mv[id],it:k})})};
+/* JCJ : la puissance réelle des Pokémon compte (niveau, IV, EV, étoiles, Alpha), atténuée et bornée pour que les types restent décisifs */
+const PVPW_MIN=.5,PVPW_MAX=1.9;
+function pvPwOf(id){try{const c=G.col[id];if(!c)return 1;ens(id);return pvNoMf(id,()=>{const S=ST(id);let re=0,no=0;for(let k=0;k<6;k++){re+=calc(id,k);no+=k==0?2*S[0]+31+110:2*S[k]+31+5}
+ const f=Math.pow(Math.max(.01,re/no),.6)*(1+.03*(c.st||0))*(c.al?1.05:1);return Math.round(Math.max(PVPW_MIN,Math.min(PVPW_MAX,f))*100)/100})}catch(e){return 1}}
+const pvPowR=id=>Math.round(pvPow(id)*pvPwOf(id));
+const pvPwMap=tm=>{const o={};(tm||[]).forEach(id=>{o[id]=pvPwOf(id)});return o};
+const pvBotPw=r=>{const f=Math.round((.8+.8*Math.max(0,Math.min(1,((r&&r.r)||110)-110)/570))*100)/100,o={};((r&&r.tm)||[]).forEach(id=>{o[id]=f});return o};
+const pvTeamU=(ids,mv,it,pw)=>{const seen={};return ids.map(id=>{let k=it&&it[id];if(k&&seen[k])k=null;if(k)seen[k]=1;return pvMake(id,{mv:mv&&mv[id],it:k,pw:pw&&pw[id]})})};
 
 /* ---------- dégâts ---------- */
 function pvDmg(a,d,m,est){const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
@@ -7599,7 +7606,7 @@ function pvBestSwitch(B,s){const o=pvAct(B,pvOth(s));let bi=-1,bv=-9;B[s].tm.for
 
 /* ---------- combat ---------- */
 let PB=null;
-function pvNew(opp,fast){const p=pvS(),mine=pvTeamU(p.tm,p.mv,p.it),foe=pvTeamU(opp.tm,opp.mv,opp.it);
+function pvNew(opp,fast){const p=pvS(),mine=pvTeamU(p.tm,p.mv,p.it,pvPwMap(p.tm)),foe=pvTeamU(opp.tm,opp.mv,opp.it,opp.tuto?null:opp.bot?pvBotPw(opp):opp.pw);
  if(opp.tuto)foe.forEach(u=>{u.max=u.hp=Math.round(u.hp*.55);u.atk*=.45;u.spa*=.45;u.spe*=.7;u.it=null});
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foe.forEach((u,i)=>{u.i=i;u.s="f"});
  return{opp,m:{n:G.name||"Moi",r:p.r,tm:mine,a:0},f:{n:opp.n,r:opp.r,tm:foe,a:0},round:0,log:[],sp:1,auto:false,fast:!!fast,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:opp.tuto?.3:Math.max(.5,Math.min(.97,.45+opp.r/1200)),tuto:!!opp.tuto,friendly:!!opp.fri,prev:opp.tuto||opp.fri?{w:0,l:0,d:0}:pvPrev(opp)}}
@@ -7656,7 +7663,7 @@ async function pvTurn(B,am,af){B.round++;pvUI("round",B);
  if(pvAct(B,"m").dead){let i;if(B.auto||B.fast)i=pvBestSwitch(B,"m");else{B.phase="repl";B.wait=1;pvUI("upd",B);i=await new Promise(r=>{B.replRes=r})}B.wait=null;if(B.over)return;B.phase="anim";await pvSwitchTo(B,"m",i)}
  pvUI("upd",B)}
 /* simulation sans interface (tests et équilibrage) */
-async function pvSim(idsA,idsB,rA,rB,sk,oa,ob){oa=oa||{};ob=ob||{};const A=pvTeamU(idsA,oa.mv,oa.it),Bt=pvTeamU(idsB,ob.mv,ob.it);A.forEach((u,i)=>{u.i=i;u.s="m"});Bt.forEach((u,i)=>{u.i=i;u.s="f"});
+async function pvSim(idsA,idsB,rA,rB,sk,oa,ob){oa=oa||{};ob=ob||{};const A=pvTeamU(idsA,oa.mv,oa.it,oa.pw),Bt=pvTeamU(idsB,ob.mv,ob.it,ob.pw);A.forEach((u,i)=>{u.i=i;u.s="m"});Bt.forEach((u,i)=>{u.i=i;u.s="f"});
  const B={opp:{r:rB||100},m:{n:"A",r:rA||100,tm:A,a:0},f:{n:"B",r:rB||100,tm:Bt,a:0},round:0,log:[],sp:1,fast:true,over:null,sw:{m:0,f:0}},k=sk||.9;const keep=PB;PB=null;
  try{while(!B.over&&B.round<90){await pvTurn(B,pvAIpick(B,"m",k),pvAIpick(B,"f",k))}}finally{PB=keep}
  return B.over||"draw"}
@@ -7749,14 +7756,14 @@ function pvRow(r,full){const t=pvTier(r.r),rw=pvRw(r.rk);
 function pvMini(){const R=pvRows(),top=R.slice(0,10),me=R.find(x=>x.me);return `<div class="pvbox"><h3>${pvIc("crown")} Classement</h3>${pvPodium(R)}<div class="pvlist">${top.slice(3).map(r=>pvRow(r)).join("")}${me&&me.rk>10?`<div class="pvsep">· · ·</div>${pvRow(me)}`:""}</div><button class="pvmore" data-pv="v:rank">Voir le Top 50 et les récompenses</button></div>`}
 function pvClaimBox(){const q=pvPending();if(!q)return"";return `<div class="pvclaim"><div><b>Saison ${pvNum(q.k)} terminée</b><span>Tu as fini ${q.rk}${q.rk==1?"er":"e"} (${q.r} pts)${q.rw?" · "+q.rw.n:""}</span>${pvRwHtml(q.rw||{h:.5,it:[]},1)}</div><button class="pvgo" data-pv="claim">${pvIc("gift")} Récupérer</button></div>`}
 /* ---------- équipe ---------- */
-function pvOwned(){const q=PVX.q.trim().toLowerCase();return ids().filter(id=>{const t=tp(id);if(PVX.ty&&!t.includes(PVX.ty))return false;if(q&&!(pvNm(id).toLowerCase().includes(q)||t.some(x=>TFR[x].toLowerCase().includes(q))))return false;return true}).sort((a,b)=>pvPow(b)-pvPow(a))}
+function pvOwned(){const q=PVX.q.trim().toLowerCase();return ids().filter(id=>{const t=tp(id);if(PVX.ty&&!t.includes(PVX.ty))return false;if(q&&!(pvNm(id).toLowerCase().includes(q)||t.some(x=>TFR[x].toLowerCase().includes(q))))return false;return true}).sort((a,b)=>pvPowR(b)-pvPowR(a))}
 function pvGrid(){const p=pvS(),L=pvOwned(),n=PVX.pg*48;
- return L.slice(0,n).map(id=>{const k=p.tm.indexOf(id),t=pvNoMf(id,()=>tp(id));return `<button class="pvcd ${k>=0?"on":""}" data-pv="tg:${id}">${k>=0?`<i class="pvbd">${k+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(t)}</span><small>Puissance ${pvPow(id)}</small></button>`}).join("")+(L.length>n?`<button class="pvmore" data-pv="more">Afficher plus (${L.length-n})</button>`:"")+(L.length?"":`<small class="pvdim">Aucun Pokémon ne correspond.</small>`)}
+ return L.slice(0,n).map(id=>{const k=p.tm.indexOf(id),t=pvNoMf(id,()=>tp(id));return `<button class="pvcd ${k>=0?"on":""}" data-pv="tg:${id}">${k>=0?`<i class="pvbd">${k+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(t)}</span><small>Puissance ${pvPowR(id)}</small></button>`}).join("")+(L.length>n?`<button class="pvmore" data-pv="more">Afficher plus (${L.length-n})</button>`:"")+(L.length?"":`<small class="pvdim">Aucun Pokémon ne correspond.</small>`)}
 function pvViewTeam(){const p=pvS(),ok=p.tm.length==6;
  return `<div class="pvbox pvtm"><h3>${pvIc("team")} Mon équipe JCJ <span class="pvct ${ok?"ok":""}">${p.tm.length} / 6</span></h3><small class="pvdim">Tous tes Pokémon passent niveau 100 avec des IV au maximum dans ce mode : choisis les 6 meilleurs et la meilleure couverture de types.</small>${pvSlots()}
   <div class="pvtb"><button class="pvgo sm" data-pv="auto">${pvIc("bolt")} Équipe auto</button><button class="pvgo sm gr" data-pv="clear">${pvIc("x")} Vider</button>${ok?`<button class="pvgo sm" data-pv="v:arena">${pvIc("check")||""} Valider</button>`:""}</div></div>
   <div class="pvbox"><div class="pvfl2"><input id="pvq" type="search" placeholder="Rechercher un Pokémon ou un type…" value="${esc(PVX.q)}" autocomplete="off"><div class="pvtys"><button class="${PVX.ty?"":"on"}" data-pv="ty:">Tous</button>${TY.map(t=>`<button class="${PVX.ty==t?"on":""}" data-pv="ty:${t}" style="--c:${TC[t]}">${TFR[t]}</button>`).join("")}</div></div><div class="pvgr" id="pvgr">${pvGrid()}</div></div>`}
-function pvAutoTeam(){const L=ids().map(id=>({id,b:pvPow(id),t:pvNoMf(id,()=>tp(id))})).sort((a,b)=>b.b-a.b),out=[],cnt={};
+function pvAutoTeam(){const L=ids().map(id=>({id,b:pvPowR(id),t:pvNoMf(id,()=>tp(id))})).sort((a,b)=>b.b-a.b),out=[],cnt={};
  for(const x of L){if(out.length>=6)break;if(x.t.some(t=>(cnt[t]||0)>=2))continue;out.push(x.id);x.t.forEach(t=>cnt[t]=(cnt[t]||0)+1)}
  for(const x of L){if(out.length>=6)break;if(!out.includes(x.id))out.push(x.id)}return out}
 
@@ -12285,6 +12292,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","JCJ : la puissance compte","En JCJ, la vraie puissance de tes Pokémon compte maintenant (niveau, IV, EV, étoiles, Alpha), en plus des types. Les avantages de type restent décisifs, mais un Pokémon bien entraîné a un vrai avantage.","PvP: power matters","In PvP, your Pokémon's real power now counts (level, IVs, EVs, stars, Alpha), on top of types. Type matchups stay decisive, but a well-trained Pokémon has a real edge."],
   ["imp","Doublons limités à 330","Chaque Pokémon peut avoir au maximum 330 exemplaires, et la 5e étoile s'obtient au plus tard à 330. Un Pokémon 5 étoiles au niveau maximum n'augmente plus ses dégâts.","Duplicates capped at 330","Each Pokémon can have at most 330 copies, and the 5th star is reached at 330 copies at most. A 5-star Pokémon at max level no longer gains damage."],
   ["imp","Tour rééquilibrée","Les étages de la Tour sont bien moins durs, surtout après l'étage 100 : la difficulté monte maintenant de façon régulière jusqu'à l'étage 300, qui reste un vrai défi.","Tower rebalanced","Tower floors are much easier, especially after floor 100: difficulty now rises steadily up to floor 300, which stays a real challenge."],
   ["imp","Boss monde bien plus résistant","Le boss monde a maintenant 200 G de PV (200 milliards) au lieu de 200 M, pour tenir toute la semaine.","Much tougher world boss","The world boss now has 200G HP (200 billion) instead of 200M, so it lasts the whole week."],
