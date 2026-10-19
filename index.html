@@ -3823,8 +3823,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5eb1923029"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=5eb1923029"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b5f1e8da73"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=b5f1e8da73"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8282,7 +8282,10 @@ function twApply(res,f,o){o=o||{};const t=twS(),win=res=="win",out={win,f,first:
 /* ---------- boucle d'arrière-plan : la Tower continue de farmer sur tous les onglets ---------- */
 let twBusy=0,twPg=0,twLast=Date.now();
 async function twBg(){try{const now=Date.now(),dt=Math.min(180,(now-twLast)/1000);twLast=now;const t=G.tw;if(!t||!t.fm||PB||twBusy||lockOf("twr"))return;
-  t.tm=(t.tm||[]).filter(id=>G.col[id]);if(t.tm.length<3)return;
+  t.tm=(t.tm||[]).filter(id=>G.col[id]);
+  /* équipe auto : après un prestige (ou si un Pokémon de l'équipe n'est plus là), l'équipe est reconstruite toute seule et le farm continue */
+  if(t.tm.length<3&&t.aa){try{twAutoApply(t.f)}catch(e){}if(t.tm.length<3){try{const a=twAutoTeam();if(a&&a.length>=3)t.tm=a.slice(0,3)}catch(e){}}if(t.tm.length>=3){try{save();twPush()}catch(e){}}}
+  if(t.tm.length<3)return;
   twPg+=dt;const per=twPer();if(twPg<per){twHud();return}
   twBusy=1;let n=0,ch=0;
   while(twPg>=per&&n<30&&G.tw.fm&&!PB){twPg-=per;n++;const f=G.tw.f,r=await twSim(f);if(PB)break;const a=twApply(r.res,f,{bg:1});ch=1;if(a.rw)twNote(a.rw)}
@@ -12695,6 +12698,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Tower : reprise automatique après un prestige","Si l'équipe automatique de la Tower est activée, le farm repart tout seul après un prestige avec une nouvelle équipe, sans avoir à le relancer à la main.","Tower: auto restart after prestige","If the Tower's automatic team is on, farming restarts by itself after a prestige with a new team, without restarting it by hand."],
   ["new","Capture : espèces ciblées","Dans les réglages de capture (bouton « … » à côté des balls), tu peux maintenant choisir les espèces à capturer dans chaque zone. Si tu en sélectionnes, seules ces espèces reçoivent une ball, les autres sont mises K.O. Les chromatiques restent capturés si l'option « Ne jamais rater un chromatique » est active.","Capture: targeted species","In the capture settings (the “…” button next to the balls), you can now choose which species to catch in each zone. If you select some, only those get a Ball and the others are KO'd. Shinies are still caught if “Never miss a shiny” is on."],
   ["fix","Le palier d'un Pokémon ne change plus","Certains Pokémon (par exemple Gorythmic, l'évolution d'un Pokémon des étages) passaient parfois au palier « Raid Impossible » et leurs dégâts bondissaient. Chaque Pokémon garde maintenant pour toujours le palier de l'endroit où il a été obtenu, et une évolution garde le palier du Pokémon d'origine. Les paliers devinés à tort ont été corrigés.","A Pokémon's tier no longer changes","Some Pokémon (for example Rillaboom, evolved from a floor Pokémon) sometimes jumped to the “Impossible raid” tier and their damage spiked. Every Pokémon now keeps forever the tier of where it was obtained, and an evolution keeps the original Pokémon's tier. Wrongly guessed tiers have been fixed."],
   ["fix","Bouton Tower qui bougeait","Le bouton Tower à droite descendait parfois un instant : il reste maintenant à sa place.","Moving Tower button","The Tower button on the right sometimes dropped for a moment: it now stays in place."],
