@@ -3611,12 +3611,14 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 .sx-dtx{min-width:0;flex:1}.sx-dtx b{display:block;font-size:16px}.sx-dtx em{display:block;font-style:normal;color:var(--c);font-weight:800;font-size:14px}.sx-dtx small{display:block;color:#94a3b8;font-size:12px}
 .sx-ch{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;background:#ffffff0c;border:1px solid #ffffff1a;color:#94a3b8;font-size:12px}.sx-ch svg{width:14px;height:14px}.sx-ch b{color:#fff}
 @media(max-width:700px){.sx-hd{padding:10px 10px 4px;gap:8px}.sx-tt h2{font-size:17px}.sx-bk span{display:none}.sx-bk{padding:0 12px}.sx-ctl button,.sx-bk{height:42px;width:auto;min-width:42px}.sx-ft{padding:8px 10px calc(10px + env(safe-area-inset-bottom));max-height:34vh;overflow:auto}.sx-bar.big{margin:2px 10px 6px}.sx-lb{font-size:11px}}
+.bgw .tools:has(.rdt-sc){flex-wrap:wrap}.rdt-sc{flex:1 1 100%}.rdt-sc .tr-sb{flex:none}
+@media(min-width:701px){.rdt-sc{flex-wrap:wrap}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="6e33e02227"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=6e33e02227"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fedb26d913"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=fedb26d913"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5846,7 +5848,7 @@ const RT=[
  {n:["Impossible","Impossible"],c:"#c084fc",L:100,hp:52000,am:0.56,cr:.1,rp:500,sec:86400,cap:.018,pool:[90003,90002,491,491],sh:1,f:"sp",rec:100}];
 /* boss monde (change chaque semaine) */
 const RW=[[890,"etern"],[384,"mega"],[493,"n"],[383,"prim"],[382,"prim"],[150,"mega"]];
-const RWHP=5e7;const WBAM=.8;
+const RWHP=8e7;const WBAM=.8;
 
 /* ---- sprites pixel (2D) ---- */
 const GMX={3:10195,6:10196,9:10197,12:10198,68:10201,94:10202,131:10204,143:10206};
@@ -5879,13 +5881,13 @@ function rdState(){const r=G.rd=G.rd||{};r.tm=r.tm||[];r.team=r.team||[];r.mv=r.
 function rdAtt(){const r=rdState(),now=Date.now();r.tm=r.tm.filter(t=>now-t<36e5);return{left:Math.max(0,5-r.tm.length),next:r.tm.length>=5?r.tm[0]+36e5:0}}
 function rdWTries(){const r=rdState(),d=rdDayK();if(r.wt.d!=d){r.wt={d,n:0}}return 5-r.wt.n}
 /* ---- unités ---- */
-function rdUnit(id){const c=G.col[id];ens(id);rq(id);const S=[0,1,2,3,4,5].map(k=>calc(id,k));let qm=(c.q||1)/(c.mf?1.5:1)/(c.dy?2.2:1);qm=1+(Math.max(1,qm)-1)*.6;const he=c.he||null,hp=Math.max(10,Math.floor(S[0]*(c.dy?2:1)*Math.sqrt(qm)));
- return{id,name:dn(id),L:c.l,types:tp(id),hp,max:hp,atk:S[1]*qm,def:S[2]*qm,spa:S[3]*qm,spd:S[4]*qm,spe:S[5],moves:rdMoves(id),mi:Math.min(3,G.rd&&G.rd.mv&&G.rd.mv[id]||0),he,df:c.df||1,cr:.0625+(he&&he.cr?.03:0),st:null,sT:0,bA:0,bS:0,rc:0,svd:0,hld:0,dy:c.dy,pw:c.dy?1.2:1,art:rdArtOf(id),pb:rdBackOf(id),sh:c.sh,dead:0}}
+function rdUnit(id){const c=G.col[id];ens(id);rq(id);const S=[0,1,2,3,4,5].map(k=>calc(id,k));let qm=(c.q||1)/(c.mf?1.5:1)/(c.dy?2.2:1);qm=Math.max(1,qm);const he=c.he||null,hp=Math.max(10,Math.floor(S[0]*(c.dy?2:1)*Math.sqrt(qm)));
+ return{id,dm:base(id)*(EVF.d?EVF.d:1)*BIF.d,name:dn(id),L:c.l,types:tp(id),hp,max:hp,atk:S[1]*qm,def:S[2]*qm,spa:S[3]*qm,spd:S[4]*qm,spe:S[5],moves:rdMoves(id),mi:Math.min(3,G.rd&&G.rd.mv&&G.rd.mv[id]||0),he,df:c.df||1,cr:.0625+(he&&he.cr?.03:0),st:null,sT:0,bA:0,bS:0,rc:0,svd:0,hld:0,dy:c.dy,pw:c.dy?1.2:1,art:rdArtOf(id),pb:rdBackOf(id),sh:c.sh,dead:0}}
 function rdArtOf(id){const c=G.col[id];if(id>9e4)return IMG+(c.sh?"shiny/":"")+id+(c.mf?"m"+c.mf:"")+".png";return rdPixF(c.mf||(c.dy&&GMX[id])||id,c.sh)}
 function rdBackOf(id){const c=G.col[id];if(id>9e4)return rdArtOf(id);return rdPixB(c.mf||(c.dy&&GMX[id])||id,c.sh)}
 const rdEff=(m,types)=>eff(m.t,types);
 /* ---- dégâts (formule des jeux) ---- */
-function rdDamage(a,d,m,mult){const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
+function rdDamage(a,d,m,mult){if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(e>0?1:0,Math.floor(a.dm*Math.min(1.7,Math.max(.6,m.p/90))*(a.types.includes(m.t)?1.2:1)*e*(cr?1.5:1)*rnd*(a.pw||1)*(mult||1))),e,cr}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
  const base=Math.floor(Math.floor(Math.floor(2*a.L/5+2)*m.p*A/Math.max(1,D))/50)+2,stab=a.types.includes(m.t)?1.5:1,e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.85+Math.random()*.15;
  return{v:Math.max(e>0?1:0,Math.floor(base*stab*e*(cr?1.5:1)*rnd*(a.pw||1)*(mult||1))),e,cr}}
 /* ---- combat ---- */
@@ -5941,11 +5943,11 @@ async function rdAct(R,side,u){const boss=R.boss;if(R.over)return;
 function rdPow(R,u){let m=1;if(typeof QB!="undefined"&&QB.d)m*=1+(QB.d-1)*.5;if(R.fuse)m*=1;return m}
 /* un tour */
 async function rdRound(R){R.round++;const boss=R.boss;
- if(!R.enr&&boss.hp<boss.max*.5){R.enr=1;rdBanner(R,boss.big?(boss.form=="dyn"?"DYNAMAX ! La puissance explose":"Le boss entre en fureur !"):"Le boss entre en fureur !","#f43f5e");rdLog(R,boss.name+" entre en fureur !");await rdSleep(900)}
- if(R.round%4==2){R.chargeNext=1;rdBanner(R,boss.name+" accumule de l'énergie…  Prépare la Garde !","#fbbf24");rdPop(R,"b",boss,"!!!","#fbbf24");rdLog(R,"Attention : une attaque dévastatrice arrive au prochain tour");await rdSleep(800)}else if(R.chargeNext){R.chargeNext=0;R.charge=1;rdBanner(R,"ATTAQUE DÉVASTATRICE !","#ef4444");await rdSleep(500)}
+ if(R.kind!="wb"&&!R.enr&&boss.hp<boss.max*.5){R.enr=1;rdBanner(R,boss.big?(boss.form=="dyn"?"DYNAMAX ! La puissance explose":"Le boss entre en fureur !"):"Le boss entre en fureur !","#f43f5e");rdLog(R,boss.name+" entre en fureur !");await rdSleep(900)}
+ if(R.kind!="wb"&&R.round%4==2){R.chargeNext=1;rdBanner(R,boss.name+" accumule de l'énergie…  Prépare la Garde !","#fbbf24");rdPop(R,"b",boss,"!!!","#fbbf24");rdLog(R,"Attention : une attaque dévastatrice arrive au prochain tour");await rdSleep(800)}else if(R.chargeNext){R.chargeNext=0;R.charge=1;rdBanner(R,"ATTAQUE DÉVASTATRICE !","#ef4444");await rdSleep(500)}
  let swd=false;if(R.swReq!=null){const t=R.team[R.swReq];R.swReq=null;if(t&&!t.dead&&t!==R.team[R.ai]){await rdSwitch(R,t.i,"manual");swd=true}}
  const acts=[],au=R.team[R.ai];if(!swd&&au&&!au.dead){const m=rdPlayerMove(au);acts.push({s:"p",u:au,pri:m.e=="pri"?1:0,spe:au.spe*(au.st=="par"?.5:1)*(.95+Math.random()*.1)})}
- const bs=boss.spe*(boss.st=="par"?.5:1);acts.push({s:"b",pri:0,spe:bs});if(R.kind=="wb"||R.enr&&boss.big)acts.push({s:"b",pri:0,spe:bs*.4});
+ const bs=boss.spe*(boss.st=="par"?.5:1);if(R.kind!="wb"){acts.push({s:"b",pri:0,spe:bs});if(R.enr&&boss.big)acts.push({s:"b",pri:0,spe:bs*.4})}
  acts.sort((a,b)=>b.pri-a.pri||b.spe-a.spe);
  for(const a of acts){if(R.over)break;await rdWait();if(R.over)break;if(boss.hp<=0||!rdAlive(R).length)break;if(a.s=="p"&&a.u!==R.team[R.ai])continue;if(R.fuseReq&&R.gauge>=100){R.fuseReq=0;await rdFusion(R);if(boss.hp<=0)break}await rdAct(R,a.s,a.u)}
  /* fin de tour */
@@ -5993,7 +5995,7 @@ function rdSyncAlly(R){const u=R.team[R.ai];if(!u)return;const im=$("rdMe");if(i
  const n=$("rdMn");if(n)n.innerHTML=`<b>${esc(u.name)}</b><span>${LS("Niv.","Lv.")} ${u.L}</span>${tchips(u.types)}`;const m=$("rdMoves");if(m)m.innerHTML=rdMovesHtml(R)}
 function rdSwapUI(R){if(R.fast)return;rdSyncAlly(R);const w=$("rdMeW");if(w)w.animate([{transform:"translateX(-60px) scale(.6)",opacity:0,filter:"brightness(3)"},{transform:"translateX(0) scale(1)",opacity:1,filter:"none"}],{duration:520/R.sp,easing:"cubic-bezier(.3,1.4,.5,1)"})}
 function rdUpd(R){if(R.fast)return;const b=R.boss,hp=$("rdBHp");if(!hp)return;const p=Math.max(0,b.hp/b.max);hp.style.width=(p*100)+"%";hp.className=rdHpC(p);$("rdBHt").textContent=fmt(Math.max(0,Math.ceil(b.hp)))+" / "+fmt(b.max);
- $("rdRd").textContent=LS("Tour ","Round ")+Math.min(R.round,R.max)+" / "+R.max;$("rdDm").textContent=LS("Dégâts ","Damage ")+fmt(R.dealt);
+ $("rdRd").textContent=R.kind=="wb"?LS("Temps restant ","Time left ")+Math.max(0,R.max-R.round)+" s":LS("Tour ","Round ")+Math.min(R.round,R.max)+" / "+R.max;$("rdDm").textContent=LS("Dégâts ","Damage ")+fmt(R.dealt);
  $("rdBSt").innerHTML=rdStTags(b);const u=R.team[R.ai];
  if(u){const q=Math.max(0,u.hp/u.max);$("rdMHp").style.width=(q*100)+"%";$("rdMHp").className=rdHpC(q);$("rdMHt").textContent=Math.max(0,Math.ceil(u.hp))+" / "+u.max;$("rdMSt").innerHTML=rdStTags(u)}
  R.team.forEach(x=>{const c=$("rdC"+x.i);if(!c)return;c.classList.toggle("ko",!!x.dead);c.classList.toggle("act",x.i==R.ai);const q=Math.max(0,x.hp/x.max);c.querySelector(".rdh i").style.width=(q*100)+"%";c.querySelector(".rdh i").className=rdHpC(q);c.querySelector("small").textContent=Math.ceil(x.hp)+"/"+x.max});
@@ -6098,7 +6100,7 @@ function wbInit(){if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;const wk=rdW
  try{WB.sub=LB.db.collection("wb").where("k","==",wk).onSnapshot(s=>{WB.rows=s.docs.map(d=>Object.assign({id:d.id},d.data()));WB.total=WB.rows.reduce((a,x)=>a+(+x.d||0),0);const a=$("rdb");if(tab=="raid"&&!(a&&a.className))rdWbRefresh()},()=>{WB.ok=false})}catch(e){WB.ok=false}}
 async function wbSend(){const r=rdState();if(!(typeof LB!="undefined"&&LB.ok&&LB.db))return;try{await LB.db.doc("wb/"+LB.uid).set({k:r.wd.k,d:r.wd.d,n:G.name||"?",t:Date.now()})}catch(e){}}
 const wbShared=()=>WB.ok?Math.max(WB.total,rdState().wd.k==rdWeekK()?rdState().wd.d:0):(rdState().wd.k==rdWeekK()?rdState().wd.d:0);
-const WBT=[1e5,3e5,8e5,15e5,25e5,4e6,6e6,9e6,13e6,2e7];
+const WBT=[4e5,12e5,32e5,6e6,1e7,16e6,24e6,36e6,52e6,8e7];
 const WBR=[[["great-ball",5],["super-potion",5]],[["ultra-ball",5],["max-potion",3]],[["max-revive",3],["bottle-cap",2]],[["gold-bottle-cap",1],["#pearl",1],["full-restore",5]],[["ability-patch",1],["gold-bottle-cap",2],["master-ball",1],["#pearl",2]],
  [["ultra-ball",10],["max-revive",5],["bottle-cap",3]],[["gold-bottle-cap",2],["full-restore",5],["#pearl",1]],[["ability-patch",1],["gold-bottle-cap",2],["master-ball",1]],[["ability-patch",2],["#pearl",2],["master-ball",1],["gold-bottle-cap",3]],[["ability-patch",3],["#pearl",3],["master-ball",2],["gold-bottle-cap",5]]];
 const wbMy=()=>{const w=rdState().wd;return w.k==rdWeekK()?w.d:0};
@@ -6116,7 +6118,7 @@ async function wbClaim(kind){const r=rdState(),w=r.wd;let d,k,killed=false;
 function rdWBossOf(k){const w=RW[(Math.floor(new Date(k.split("-")[0],k.split("-")[1]-1,k.split("-")[2]).getTime()/6048e5))%RW.length]||RW[0];return rdBossMake(w[0],w[1],110,RWHP,WBAM,.1,"wb")}
 /* ============ v23 : RAIDS — onglet, équipe, boutique, actions ============ */
 const RTB={kind:"raid",tier:0,team:[],q:"",s:"adv",boss:null};
-const RSHOP=[["master-ball",1,450],["ultra-ball",10,25],["quick-ball",10,30],["dusk-ball",10,30],["hyper-potion",10,30],["max-revive",3,35],["full-restore",5,60],["bottle-cap",1,90],["ability-capsule",1,120],["gold-bottle-cap",1,600],["ability-patch",1,3600],["#pearl",1,400],["life-orb",1,700],["choice-band",1,700]];
+const RSHOP=[["master-ball",1,5000],["ultra-ball",10,25],["quick-ball",10,30],["dusk-ball",10,30],["hyper-potion",10,30],["max-revive",3,35],["full-restore",5,60],["bottle-cap",1,90],["ability-capsule",1,120],["gold-bottle-cap",1,2500],["ability-patch",1,3600],["#pearl",1,400],["life-orb",1,700],["choice-band",1,700]];
 const rdMS=n=>{n=Math.max(0,Math.ceil(n/1000));const h=n/3600|0,m=(n%3600)/60|0,s=n%60;return (h?h+" h "+String(m).padStart(2,"0")+" min ":m+" min ")+String(s).padStart(2,"0")+" s"};
 const rdUntilMidnight=()=>{const d=new Date();d.setHours(24,0,0,0);return d-Date.now()};
 const rdUntilMonday=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+(8-((d.getDay()+6)%7+1)));return d-Date.now()};
@@ -6129,9 +6131,9 @@ function rdtOpen(kind,tier){const r=rdState();RTB.kind=kind;RTB.tier=tier;RTB.bo
 const rdFixImg=(u,alt)=>`<img class="rpx" src="${u}" alt="" draggable="false" onerror="${alt?`this.onerror=null;this.src='${alt}'`:"this.style.visibility='hidden'"}">`;
 function rdtRender(){let o=$("rdt");if(!o){o=document.createElement("div");o.id="rdt";document.body.appendChild(o)}
  const b=RTB.boss,r=rdState(),t=RTB.kind=="wb"?{c:"#a78bfa",n:["Boss monde","World boss"],rec:100}:RT[RTB.tier],q=norm(RTB.q),T=new Set(RTB.team);
- let L=ids().filter(id=>!T.has(id)&&(!q||norm(dn(id)).includes(q)));L.sort((a,c)=>base(c)-base(a));L=L.slice(0,q?160:200);
+ let L=ids().filter(id=>!T.has(id)&&(!q||norm(dn(id)).includes(q)));{const K=rdtKey(RTB.s);L.sort((a,c)=>(K?K(c)-K(a):0)||base(c)-base(a));L=L.slice(0,q?160:200)}
  let M=L.map(id=>({id,...rdScore(id,b)}));
- if(RTB.s=="adv")M.sort((a,c)=>c.sc-a.sc);else if(RTB.s=="lvl")M.sort((a,c)=>G.col[c.id].l-G.col[a.id].l||c.sc-a.sc);else M.sort((a,c)=>dn(a.id).localeCompare(dn(c.id),"fr"));
+ if(RTB.s=="adv")M.sort((a,c)=>c.sc-a.sc);else if(RTB.s=="lvl")M.sort((a,c)=>G.col[c.id].l-G.col[a.id].l||c.sc-a.sc);else if(RTB.s=="nm")M.sort((a,c)=>dn(a.id).localeCompare(dn(c.id),"fr"));else{const K=rdtKey(RTB.s);if(K)M.sort((a,c)=>K(c.id)-K(a.id)||c.sc-a.sc)}
  const mx=M.reduce((a,x)=>Math.max(a,x.sc),1),weak=Object.keys(TFR).filter(x=>eff(x,b.types)>1);
  const slot=(i)=>{const id=RTB.team[i];if(!id)return `<div class="tsl em"><span>${i+1}</span><i>${ico("plus")}</i><small>${LS("Choisis un Pokémon dans la liste","Pick a Pokémon below")}</small></div>`;const c=G.col[id],ms=rdMoves(id),cur=Math.min(3,r.mv[id]||0);
   return `<div class="tsl"><span class="tsn">${i==0?LS("Ouvre","Lead"):i+1}</span><button class="rdrm" data-rd="trm" data-i="${id}" title="${LS("Retirer","Remove")}">${ico("x")}</button><div class="tss">${rdFixImg(rdArtOf(id))}</div><b>${dn(id)}</b><small>${LS("Niv.","Lv.")} ${c.l}</small><div class="tty">${tchips(tp(id))}</div><div class="tmv">${ms.map((m,j)=>{const e=m.c=="u"?1:rdEff(m,b.types);return `<button class="${j==cur?"on":""}" data-rd="tmv" data-i="${id}" data-j="${j}" style="--tc:${TC[m.t]}"><b>${esc(m.n)}</b><small>${m.c=="u"?LS("Soutien","Support"):m.p+" · "+(e>1?LS("fort","strong"):e==0?LS("nul","none"):e<1?LS("faible","weak"):"=")}</small></button>`}).join("")}</div></div>`};
@@ -6141,7 +6143,7 @@ function rdtRender(){let o=$("rdt");if(!o){o=document.createElement("div");o.id=
  <small class="tn">${LS("Niveau conseillé ","Advised level ")}${t.rec} · ${RTB.kind=="wb"?LS("Essais : ","Tries: ")+rdWTries()+" / 5":LS("Tentatives : ","Attempts: ")+rdAtt().left+" / 5"}</small></aside>
  <section class="tmain"><div class="tth"><div><h2>${LS("Ton équipe","Your team")} <em>${RTB.team.length} / 4</em></h2><small>${LS("Un seul Pokémon combat à la fois. Le suivant entre quand il tombe, et tu peux changer en plein combat.","One Pokémon fights at a time. The next steps in when one falls, and you can switch mid-battle.")}</small></div><button data-rd="tauto" class="gh">${ico("spark")} ${LS("Équipe conseillée","Best team")}</button></div>
  <div class="tsls">${[0,1,2,3].map(slot).join("")}</div>
- <div class="tlist"><div class="tools"><input type="search" id="rdtq" data-rd="tq" placeholder="${LS("Rechercher un Pokémon","Search a Pokémon")}" value="${esc(RTB.q)}"><select data-rd="ts"><option value="adv" ${RTB.s=="adv"?"selected":""}>${LS("Tri : avantage","Sort: advantage")}</option><option value="lvl" ${RTB.s=="lvl"?"selected":""}>${LS("Tri : niveau","Sort: level")}</option><option value="nm" ${RTB.s=="nm"?"selected":""}>${LS("Tri : nom","Sort: name")}</option></select></div>
+ <div class="tlist"><div class="tools"><input type="search" id="rdtq" data-rd="tq" placeholder="${LS("Rechercher un Pokémon","Search a Pokémon")}" value="${esc(RTB.q)}">${rdtSortH()}</div>
  <div class="rdpl" id="rdtl">${M.map(x=>{const c=G.col[x.id],m=rdMoves(x.id)[x.mv],e=rdEff(m,b.types);return `<button class="rdpr" data-rd="tadd" data-i="${x.id}" ${RTB.team.length>=4?"disabled":""}><span class="spw">${rdFixImg(rdArtOf(x.id))}</span><span class="rdpn"><b>${dn(x.id)}</b><small>${LS("Niv.","Lv.")} ${c.l} · ${esc(m.n)}</small></span><span class="rdpa" style="--w:${Math.round(x.sc/mx*100)}%;--tc:${e>1?"#4ade80":e<1?"#f87171":"#94a3b8"}"><i></i><small>${e>1?LS("Avantage","Strong"):e<1?LS("Désavantage","Weak"):"="}</small></span></button>`}).join("")||`<div class="bgem"><b>${LS("Aucun Pokémon","No Pokémon")}</b></div>`}</div></div>
  <div class="rdtf"><small>${LS("Les potions du sac servent pendant le raid.","Bag potions can be used during the raid.")}</small><button class="go" data-rd="tgo" ${RTB.team.length?"":"disabled"}>${ico("sword")} ${LS("Lancer le raid","Start raid")}</button></div></section></div>`}
 function rdtClose(){const o=$("rdt");if(o){o.className="";o.innerHTML=""}}
@@ -6150,11 +6152,15 @@ function rdStart(){const r=rdState();if(!RTB.team.length)return;
  if(RTB.kind=="wb"&&r.wd.k!=rdWeekK())r.wd={k:rdWeekK(),d:0,cl:0,pe:r.wd.k&&r.wd.d>0&&!r.wd.cl?{k:r.wd.k,d:r.wd.d}:null};
  if(RTB.kind=="wb"&&wbShared()>=RWHP){toast(LS("Le boss monde est déjà vaincu cette semaine","The world boss is already defeated this week"));return}
  r.team=RTB.team.slice();if(RTB.kind=="wb")r.wt.n++;else r.tm.push(Date.now());save();rdtClose();
- const R=rdNew(RTB.kind,RTB.tier,RTB.team);if(RTB.kind=="wb"){R.boss.max=RWHP;R.boss.hp=Math.max(1,RWHP-wbShared())}
+ const R=rdNew(RTB.kind,RTB.tier,RTB.team);if(RTB.kind=="wb"){R.boss.wbk=1;R.max=30;R.boss.max=RWHP;R.boss.hp=Math.max(1,RWHP-wbShared())}
  rdBuild(R);rdSpinUp(R);rdLoop(R)}
 function rdSpinUp(R){RB2=R}
 /* ---- onglet : hub plein écran ---- */
 const RHS={sel:-1};
+const RDTS=[["adv","Avantage","Advantage"],["atk","Attaque","Attack"],["mu","Mutation","Mutation"],["sz","Taille","Size"],["al","Alpha","Alpha"],["sh","Chromatique","Shiny"],["lvl","Niveau","Level"],["st","Étoiles","Stars"],["nm","Nom","Name"]];
+function rdtKey(k){const c=i=>G.col[i]||{};switch(k){case"atk":return i=>base(i);case"mu":return i=>c(i).mi>0&&MU[c(i).mi]?MU[c(i).mi][1]:0;case"sz":return i=>c(i).zi>=3?c(i).zi-2:0;case"al":return i=>c(i).al?1:0;case"sh":return i=>c(i).sh?1:0;case"lvl":return i=>c(i).l||0;case"st":return i=>c(i).st||0}return null}
+function rdtSortH(){return `<div class="tr-sc rdt-sc">${RDTS.map(x=>`<button type="button" class="tr-sb${RTB.s==x[0]?" sel":""}" data-rds="${x[0]}">${LS(x[1],x[2])}</button>`).join("")}</div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rds]");if(!b)return;e.stopPropagation();e.preventDefault();RTB.s=b.dataset.rds;rdtRender()},true);
 const rhPx=(b,cls)=>`<img class="${cls||"rhpx"}" style="--k:${b.sc||1}" src="${b.pix}" alt="" draggable="false" onerror="${b.gm||b.form=="etern"?`this.onerror=null;this.src='${rdPixF(b.sp,b.sh)}'`:"this.style.visibility='hidden'"}">`;
 const rhForm=b=>{const L=[];if(b.gm)L.push(LS("Gigamax","Gigantamax"));else if(b.dyn)L.push("Dynamax");else if(b.form=="etern")L.push("Éternamax");else if(b.mf)L.push(b.name.startsWith("Primo")?LS("Primo-Résurgence","Primal Reversion"):LS("Méga-Évolution","Mega Evolution"));if(b.sp>9e4)L.push(LS("Forme spéciale","Special form"));if(b.sh)L.push(LS("Chromatique garanti","Guaranteed shiny"));return L};
 function rhLadder(){const r=rdState();return [5,4,3,2,1,0].map(i=>{const t=RT[i],b=rdBossOf(i),done=r.cl.d==rdPer()&&(r.cl.t||[]).includes(i);return `<button class="rhl${RHS.sel==i?" on":""}${done?" dn":""}" data-rd="rsel" data-i="${i}" style="--c:${t.c}"><span class="rhlb"></span><span class="rhls">${rhPx(b,"rhmini")}</span><span class="rhlt"><b>${LS(t.n[0],t.n[1])}</b><small>${esc(b.name)}</small></span><span class="rhlv"><em>${LS("Niv.","Lv.")} ${b.L}</em>${done?`<i>${ico("check")}</i>`:""}</span></button>`}).join("")}
@@ -11392,7 +11398,7 @@ if(document.readyState!="loading")build();else document.addEventListener("DOMCon
 IP.sk='<circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="4" r="1.7"/><circle cx="12" cy="20" r="1.7"/><circle cx="4" cy="12" r="1.7"/><circle cx="20" cy="12" r="1.7"/><path d="M12 5.7v3.9M12 14.4v3.9M5.7 12h3.9M14.4 12h3.9"/>';
 NAV2.push(["sk","sk","Compétences","#14b8a6","#134e4a"]);NENG.sk="Skills";
 try{NAVX.push(["sk","sk","Compétences","#14b8a6","#134e4a"])}catch(e){}
-{const c=NCAT.find(x=>x[0]=="c_me")[6];if(!c.includes("sk")){c.unshift("sk")}}
+{const c=NCAT.find(x=>x[0]=="c_me")[6];if(!c.includes("sk")){const k=c.indexOf("gear");c.splice(k<0?0:k+1,0,"sk")}}
 
 /* 6 branches en étoile, chacune se divise en deux puis se rejoint au sommet · bonus volontairement faibles */
 const SKE={d:["Dégâts","Damage","sword"],c:["Pièces","Coins","coin"],x:["XP","XP","lvl"],k:["Capture","Catch","target"],m:["Mutation","Mutation","sparkle"],z:["Taille","Size","resize"],s:["Chroma","Shiny","star"],b:["Boss","Boss","skull"],t:["Talents","Talents","key"],e:["Remise","Discount","bag"],p:["Prestige","Prestige","spark"],h:["PV","HP","heart"]};
@@ -11440,7 +11446,7 @@ function skHtml(){
  if(!SKSEL||!SKNODES.find(n=>n.id==SKSEL))SKSEL=nx?nx.id:"ctr";
  const sel=SKNODES.find(n=>n.id==SKSEL);
  const chips=Object.keys(SKE).filter(k=>sm[k]>0).map(k=>`<span class="sx-ch">${ico(SKE[k][2])}<small>${LS(SKE[k][0],SKE[k][1])}</small><b>${k=="e"?"−":"+"}${skPct(String(Math.round(sm[k]*10)/10).replace(".",","))}</b></span>`).join("")||`<span class="sx-ch"><small>${LS("Aucun bonus pour l'instant","No bonus yet")}</small></span>`;
- return `<header class="sx-hd"><button type="button" class="sx-bk" data-a="tab" data-t="adv">${ico("chevl")}<span>${LS("Retour","Back")}</span></button><div class="sx-tt"><h2>${LS("Arbre de compétences","Skill tree")}</h2><small>${fmt(ko)} K.O. · ${got} / ${tot} ${LS("cases","nodes")} · ${Math.floor(got/tot*100)} %</small></div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></header>
+ return `<header class="sx-hd"><button type="button" class="sx-bk" data-a="tab" data-t="gear">${ico("chevl")}<span>${LS("Retour","Back")}</span></button><div class="sx-tt"><h2>${LS("Arbre de compétences","Skill tree")}</h2><small>${fmt(ko)} K.O. · ${got} / ${tot} ${LS("cases","nodes")} · ${Math.floor(got/tot*100)} %</small></div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></header>
  <div class="sx-bar big"><i style="width:${(got/tot*100).toFixed(1)}%"></i></div>
  <div class="sx-map" id="sxmap"><div class="sx-cv" style="width:calc(${SKW}*var(--z)*1px);height:calc(${SKW}*var(--z)*1px)">${skLines()}${SKNODES.map(n=>skNodeH(n,nx)).join("")}</div></div>
  <footer class="sx-ft"><div class="sx-det" id="sxdet">${skDet(sel)}</div><div class="sx-chs">${chips}</div></footer>`}
@@ -11460,6 +11466,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  document.addEventListener("pointermove",e=>{if(!dn)return;dn.m.scrollLeft=dn.l-(e.clientX-dn.x);dn.m.scrollTop=dn.t-(e.clientY-dn.y)});document.addEventListener("pointerup",()=>{dn=null})}
 /* notification : nouvelles cases */
 setInterval(()=>{try{const g=G.sk=G.sk&&typeof G.sk=="object"?G.sk:{s:-1},n=SKNODES.filter(skOn).length;if(g.s<0){g.s=n;return}if(n>g.s){const d=n-g.s;g.s=n;toast(LS("Arbre de compétences : "+d+(d>1?" nouvelles cases débloquées !":" nouvelle case débloquée !"),"Skill tree: "+d+(d>1?" new nodes unlocked!":" new node unlocked!")));try{biFlags();recomp()}catch(x){}if(tab=="sk")show()}}catch(e){}},3000);
+/* « Moi » ouvre toujours Dresseur, jamais l'arbre plein écran */
+{const p=ncPick;ncPick=function(c){const r=p.apply(this,arguments);return r=="sk"?"gear":r}}
 /* ===== Wiki : pages Failles, Entraînement, Hôtel de ville, Compétences + mises à jour ===== */
 {
  const add=(grp,keys)=>{const g=WKG.find(x=>x[0]==grp);keys.forEach(k=>{if(!g[3].includes(k))g[3].push(k)})};
@@ -11530,6 +11538,7 @@ wkBody.town=()=>{
 {const p=wkBody.items;if(p)wkBody.items=()=>p()+wn("tip","Chariot dans la fiche d'un Pokémon","À côté de l'emplacement d'objet tenu, le petit chariot ouvre la liste des objets que tu peux acheter pour ce Pokémon : ses Méga-Gemmes et son bracelet Dynamax s'il en a, plus les objets classiques (ceinture force, etc.).")}
 {const p=wkBody.combat;if(p)wkBody.combat=()=>p()+wn("info","Points de vie fixes","Les PV d'un ennemi ne dépendent que de l'étage, du niveau, de la rareté, de la taille et de la mutation, pas de tes dégâts ni de tes prestiges. Les bonus permanents de l'arbre de compétences ajoutent un petit plus à tes dégâts et à tes gains.")}
 {const p=wkBody.pres;if(p)wkBody.pres=()=>p()+wn("tip","Ce qui reste après un prestige","Tes K.O. et l'arbre de compétences sont conservés. Tes Pokémon gardés conservent leurs étoiles, seuls les doublons sont perdus.")}
+{const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wn("info","Boss monde : 30 secondes","Le boss monde n'attaque pas. Tu as 30 secondes pour infliger le maximum de dégâts, et chaque attaque de ton Pokémon utilise ses vrais dégâts du jeu (mutation, taille, Alpha et étoiles comprises). Sa barre de PV, commune à tous les joueurs, est de 80 millions. Les raids classiques changent toutes les 2 heures, avec 5 tentatives par heure.")}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
  const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
