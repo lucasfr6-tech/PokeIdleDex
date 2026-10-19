@@ -3644,8 +3644,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="8e318267e6"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=8e318267e6"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d8a38e4b3a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=d8a38e4b3a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10633,7 +10633,9 @@ function tnS(){const t=G.tn=G.tn||{};
  const k=rdDayK();
  if(t.d.k!==k)t.d={k,l:0,sh:0,shj:0,bu:0};
  if(t.q.k!==k){let pf=0;try{pf=pvS().f|0}catch(e){}t.q={k,b:{caps:G.caps|0,ko:G.ko|0,boss:G.boss|0,mut:G.mut|0,pvf:pf},cl:{},bonus:0}}
+ {const wk=tnWk();if(!t.w||t.w.k!==wk){let pf=0;try{pf=pvS().f|0}catch(e){}t.w={k:wk,b:{caps:G.caps|0,ko:G.ko|0,boss:G.boss|0,mut:G.mut|0,pvf:pf},cl:{}}}}
  return t}
+function tnWk(){const d=new Date(),m=new Date(d.getFullYear(),d.getMonth(),d.getDate()-((d.getDay()+6)%7));return m.getFullYear()+"-"+(m.getMonth()+1)+"-"+m.getDate()}
 function tnLvl(){const x=tnS().xs;let l=1;while(l<TNMAX&&x>=tnNeed(l+1))l++;return l}
 function tnXp(n){const t=tnS(),a=tnLvl();t.xs+=n;const b=tnLvl();if(b>a){const A=tnTier(a),B=tnTier(b);setTimeout(()=>{try{sfx("prest");toast(LS("Niveau marchand "+b+(B!==A?" : "+B.fr:"")+" !","Merchant level "+b+(B!==A?": "+B.en:"")+"!"))}catch(e){}},400)}}
 const tnHist=(k,n,j)=>{const t=tnS();t.h.unshift({t:Date.now(),k,n,j});t.h.length=Math.min(t.h.length,40)};
@@ -10691,7 +10693,16 @@ const TNQ=[
 function tnQuests(){const t=tnS();let h=rdStr(t.q.k+"#tnq")||1;const R=()=>{h=(Math.imul(h,1664525)+1013904223)>>>0;return h/4294967296};
  const pool=TNQ.slice(),pick=[];for(let i=0;i<3;i++){const j=Math.floor(R()*pool.length);pick.push(pool.splice(j,1)[0])}
  return pick.map((q,i)=>{const tier=q.T[Math.floor(R()*q.T.length)],cur=Math.min(tier[0],Math.max(0,q.get(t)|0));
-  return{i,q,goal:tier[0],rw:tier[1],cur,done:cur>=tier[0],cl:!!t.q.cl[i],txt:LS(q.fr(tier[0]),q.en(tier[0]))}})}
+  return{i,q,goal:tier[0],rw:1500,cur,done:cur>=tier[0],cl:!!t.q.cl[i],txt:LS(q.fr(tier[0]),q.en(tier[0]))}})}
+const TNW=[
+ {fr:"Capturer 800 Pokémon",en:"Catch 800 Pokémon",ic:"target",g:800,get:t=>(G.caps|0)-t.w.b.caps},
+ {fr:"Vaincre 30 000 ennemis",en:"Defeat 30,000 enemies",ic:"sword",g:30000,get:t=>(G.ko|0)-t.w.b.ko},
+ {fr:"Vaincre 35 boss alpha",en:"Defeat 35 alpha bosses",ic:"skull",g:35,get:t=>(G.boss|0)-t.w.b.boss},
+ {fr:"Capturer 15 Pokémon mutés",en:"Catch 15 mutated Pokémon",ic:"spark",g:15,get:t=>(G.mut|0)-t.w.b.mut},
+ {fr:"Disputer 40 combats JCJ",en:"Play 40 PvP fights",ic:"trophy",g:40,get:t=>{let f=0;try{f=pvS().f|0}catch(e){}return Math.max(0,f-t.w.b.pvf)}}];
+const TNWRW=3000;
+function tnWQuests(){const t=tnS();return TNW.map((q,i)=>{const cur=Math.min(q.g,Math.max(0,q.get(t)|0));return{i,q,goal:q.g,rw:TNWRW,cur,done:cur>=q.g,cl:!!t.w.cl[i],txt:LS(q.fr,q.en)}})}
+function tnWClaim(i){const t=tnS(),x=tnWQuests()[i];if(!x||!x.done||x.cl)return;t.w.cl[i]=1;t.j+=x.rw;t.st.earn+=x.rw;tnHist("quest",x.txt+" ("+LS("semaine","week")+")",x.rw);save();sfx("coin");toast(LS("Quête de la semaine : +"+x.rw+" Jetons","Weekly quest: +"+x.rw+" Tokens"))}
 const TNBONUS=30;
 function tnQClaim(i){const t=tnS(),Q=tnQuests(),x=Q[i];if(!x||!x.done||x.cl)return;t.q.cl[i]=1;t.j+=x.rw;t.st.earn+=x.rw;tnHist("quest",x.txt,x.rw);
  let b=0;if(Q.every(y=>t.q.cl[y.i])&&!t.q.bonus){t.q.bonus=1;t.j+=TNBONUS;t.st.earn+=TNBONUS;b=TNBONUS;tnHist("quest",LS("Bonus : toutes les quêtes du jour","Bonus: all daily quests"),TNBONUS)}
@@ -10705,7 +10716,7 @@ const TNM=[
  {g:"pre",fr:"Prestiges",en:"Prestiges",ic:"spark",get:()=>G.st|0,L:[[1,30],[3,60],[5,100],[10,200]]}];
 function tnMClaim(g,i){const t=tnS(),M=TNM.find(x=>x.g==g);if(!M)return;const L=M.L[i],k=g+":"+i;if(!L||t.m[k]||M.get()<L[0])return;
  t.m[k]=1;t.j+=L[1];t.st.earn+=L[1];tnHist("ms",LS(M.fr,M.en)+" "+(M.lab?M.lab(L[0]):L[0]),L[1]);save();sfx("coin");toast(LS("Palier validé : +"+L[1]+" Jetons","Milestone: +"+L[1]+" Tokens"))}
-const tnClaimable=()=>{const t=tnS();let n=0;tnQuests().forEach(x=>{if(x.done&&!x.cl)n++});TNM.forEach(M=>{const v=M.get();M.L.forEach((L,i)=>{if(v>=L[0]&&!t.m[M.g+":"+i])n++})});return n};
+const tnClaimable=()=>{const t=tnS();let n=0;tnQuests().forEach(x=>{if(x.done&&!x.cl)n++});tnWQuests().forEach(x=>{if(x.done&&!x.cl)n++});TNM.forEach(M=>{const v=M.get();M.L.forEach((L,i)=>{if(v>=L[0]&&!t.m[M.g+":"+i])n++})});return n};
 /* ---- API du marché ---- */
 const tnAPI=()=>(window.PID_API||"").replace(/\/$/,"");
 const tnOn=()=>!!tnAPI()&&!!TNLS("pid_uid")&&!!TNLS("pid_tok")&&typeof LB!="undefined"&&LB.ok;
@@ -10812,6 +10823,7 @@ function tnQuestV(){const t=tnS(),Q=tnQuests(),now=new Date(),nx=new Date(now.ge
  return `<div class="tn-2"><section class="tn-box"><h3>${LS("Quêtes du jour","Daily quests")}<em>${LS("Renouvellement dans ","Resets in ")}${tnTime(nx)}</em></h3>
  <div class="tn-ql">${Q.map(x=>`<div class="tn-q${x.cl?" cl":x.done?" ok":""}"><i>${ico(x.q.ic)}</i><div><b>${esc(x.txt)}</b><div class="tn-bar"><i style="width:${x.cur/x.goal*100}%"></i></div><small>${x.cur} / ${x.goal}</small></div>${tnTok(x.rw)}<button class="${x.done&&!x.cl?"go":""}" data-tn="qc:${x.i}" ${x.done&&!x.cl?"":"disabled"}>${x.cl?LS("Reçu","Claimed"):LS("Récupérer","Claim")}</button></div>`).join("")}</div>
  <div class="tn-bn${t.q.bonus?" cl":""}"><span>${ico("gift")}</span><b>${LS("Bonus : terminer les 3 quêtes","Bonus: finish all 3 quests")}</b>${tnTok(TNBONUS)}<small>${t.q.bonus?LS("Reçu","Claimed"):Q.filter(x=>x.cl).length+" / 3"}</small></div></section>
+${tnWeekHtml()}
  <section class="tn-box"><h3>${LS("Paliers","Milestones")}<em>${LS("Une seule fois","One time only")}</em></h3><div class="tn-ms">${TNM.map(M=>{const v=M.get();return `<div class="tn-mg"><div class="tn-mh"><i>${ico(M.ic)}</i><b>${LS(M.fr,M.en)}</b><small>${M.lab?M.lab(v):fmt(v)}</small></div>
   <div class="tn-mc">${M.L.map((L,i)=>{const k=M.g+":"+i,got=t.m[k],ok=v>=L[0];return `<button class="${got?"got":ok?"ok":""}" data-tn="mc:${M.g}:${i}" ${ok&&!got?"":"disabled"}><span>${M.lab?M.lab(L[0]):L[0]}</span><b>${got?ico("check"):"+"+L[1]}</b></button>`}).join("")}</div></div>`}).join("")}</div></section></div>`}
 /* ---- fenêtres : vente boutique, annonce, achat ---- */
@@ -10872,7 +10884,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(k=="ssok"){const S=TN.sel;if(!S)return;const s=S.s,r=tnShopSell(s.it.t=="m"?{id:s.id,v:s.v}:{k:s.k},S.q);tnModal("");if(r)show()}
  else if(k=="mkok")tnListOk()
  else if(k=="cx")tnCancel(b.dataset.tn.slice(3))
- else if(k=="qc"){tnQClaim(+a);show()}else if(k=="mc"){tnMClaim(a,+c);show()}
+ else if(k=="qc"){tnQClaim(+a);show()}else if(k=="wc"){tnWClaim(+a);show()}else if(k=="mc"){tnMClaim(a,+c);show()}
  else if(k=="mc0")tnModal("")
  else if(k=="q-"||k=="q+"||k=="qm"){const el=$("tnqty");if(!el)return;const mx=tnQtyMax(TN.sel.s,TN.sel.mode);el.value=k=="qm"?mx:Math.max(1,Math.min(mx,(+el.value||1)+(k=="q+"?1:-1)));tnQtyUpd()}
  else if(k=="pk"){const S=TN.sel,el=$("tnpx");if(!S||!el)return;const q=S.s.it.t=="m"?1:S.q;const est=S.s.val*q,hv=S.s.it.t=="m"&&!!(S.s.it.sh||S.s.it.mi||S.s.it.zi||S.s.it.al);el.value=a=="min"?tnMinP(est,hv):Math.max(1,Math.round(est*parseFloat(a)));tnMkUpd()}},true);
@@ -10884,6 +10896,9 @@ document.addEventListener("change",e=>{const t=e.target;if(!t||!t.dataset||!t.da
  if(k=="ty"){TN.ty=t.value;const g=$("tng");if(g)g.innerHTML=tnGrid()}else if(k=="so"){TN.so=t.value;const g=$("tng");if(g)g.innerHTML=tnGrid()}
  else if(k=="vs"){TN.vs=t.value;const g=$("tnsl");if(g)g.innerHTML=tnSellList()}},true);
 setInterval(()=>{if(tab=="town"&&TN.sub=="mk"&&tnOn()&&!$("tnm")&&!document.hidden)tnLoad(true)},40000);
+
+function tnWeekHtml(){const Q=tnWQuests(),now=new Date(),dd=(8-((now.getDay()+6)%7+1))%7||7,nx=new Date(now.getFullYear(),now.getMonth(),now.getDate()+(7-((now.getDay()+6)%7))).getTime()-now.getTime();
+ return `<section class="tn-box"><h3>${LS("Quêtes de la semaine","Weekly quests")}<em>${LS("Renouvellement dans ","Resets in ")}${tnTime(nx)}</em></h3><div class="tn-ql">${Q.map(x=>`<div class="tn-q${x.cl?" cl":x.done?" ok":""}"><i>${ico(x.q.ic)}</i><div><b>${esc(x.txt)}</b><div class="tn-bar"><i style="width:${x.cur/x.goal*100}%"></i></div><small>${fmt(x.cur)} / ${fmt(x.goal)}</small></div>${tnTok(x.rw)}<button class="${x.done&&!x.cl?"go":""}" data-tn="wc:${x.i}" ${x.done&&!x.cl?"":"disabled"}>${x.cl?LS("Reçu","Claimed"):LS("Récupérer","Claim")}</button></div>`).join("")}</div></section>`}
 /* ===== Entraînement : un seul Pokémon, combats en continu, EV / mutations / tailles / alpha ===== */
 IP.trn='<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>';
 NAV2.push(["trn","trn","Entraînement","#22c55e","#14532d"]);NENG.trn="Training";LOCKS.trn=50;
@@ -11552,7 +11567,7 @@ wkBody.town=()=>{
  ${wf([["Débloqué à l'étage",LOCKS.town],["Monnaie","Jetons"],["Niveau maximum",TNMAX],["Connexion","requise"]])}
  ${wsx("Vendre et acheter",`<ul class="wks2"><li><b>Vendre</b> : tu fixes ton prix en Jetons et tu publies une annonce. Le nombre d'annonces par jour dépend de ton niveau de marchand.</li><li><b>Acheter</b> : tu paies en Jetons, l'objet ou le Pokémon arrive dans ton jeu.</li><li>Une <b>commission</b> est retenue sur chaque vente : elle baisse quand ton niveau monte.</li><li>La valeur des Pokémon est volontairement réduite (×0,4) pour éviter l'inflation des prix.</li></ul>`)}
  ${wsx("Niveaux de marchand",tbl(["Niveau","Titre","Annonces par jour","Commission","Plafond de ventes par jour (Jetons)"],rows)+`<p>Chaque vente ou achat te fait gagner de l'expérience de marchand. Le plafond du jour limite le total que tu peux vendre : une vente qui le dépasserait est refusée.</p>`)}
- ${wsx("Quêtes et paliers",`<p>Des quêtes quotidiennes et des paliers de ventes rapportent des Jetons. Terminer toutes les quêtes du jour donne un bonus en plus. Les compteurs se remettent à zéro chaque jour.</p>`)}
+ ${wsx("Quêtes et paliers",`<p>Des quêtes quotidiennes et des paliers de ventes rapportent des Jetons. Chaque quête du jour rapporte 1 500 Jetons, et terminer toutes les quêtes du jour donne un bonus en plus. Cinq quêtes de la semaine, bien plus difficiles (800 captures, 30 000 ennemis, 35 boss alpha, 15 mutés, 40 combats JCJ), rapportent chacune 3 000 Jetons. Les compteurs se remettent à zéro chaque jour, ou chaque lundi pour les quêtes de la semaine.</p>`)}
  ${wn("info","Marché hors ligne","Le marché passe par les serveurs du jeu : sans connexion, il affiche « Marché indisponible ». Les onglets Vendre et Quêtes restent consultables.")}`};
 
 /* mises à jour de pages existantes */
