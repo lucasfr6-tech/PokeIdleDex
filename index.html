@@ -3887,7 +3887,14 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 .rkx-r,.rkm-r,.rkb-large{min-height:96px}
 .rkx-r b,.rkm-r b{font-size:18px}
 @media(max-width:700px){.rkb-podium-card .rkb-podium-sprite{height:80px!important;min-height:80px!important}.rkb-podium-card .rkb-podium-sprite .hv{width:76px!important;height:76px!important}.rkb-podium-card .rkb-podium-sprite .hvi{max-width:76px!important;max-height:76px!important}}
-</style></head><body>
+</style>
+<style id="pid-selection-actions-style">
+/* Actions principales groupées près des choix plutôt qu'au bas des longues listes. */
+.pnm .row:has([data-a="pngo"]),.mc .row:has([data-a="exgo"]),.mc .row:has([data-a="psok"]){display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pnm .row:has([data-a="pngo"]) .go,.mc .row:has([data-a="exgo"]) .go,.mc .row:has([data-a="psok"]) .go{white-space:normal}
+@media(max-width:640px){.pnm .row:has([data-a="pngo"]),.mc .row:has([data-a="exgo"]),.mc .row:has([data-a="psok"]){gap:6px}.pnm .row:has([data-a="pngo"]) button,.mc .row:has([data-a="exgo"]) button,.mc .row:has([data-a="psok"]) button{font-size:12px;padding:8px 10px}}
+</style>
+</head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
@@ -4418,9 +4425,9 @@ function exModal(m){const t=exCur()[EXM.i],req=exReq(t),sum=exDps(EXM.sel),d=I(t
  m.innerHTML=`<div class="mb" data-a="exx"></div><div class="mc" style="max-width:780px"><button class="x" data-a="exx">${ico("x")}</button><div class="exmh">${sp(t.mf||t.id,0,1)}<div><h2 style="margin:0">${t.n}</h2><small>Cible : <b style="color:${RC[t.r]}">${t.mf?t.mn:d.n}</b> niv. ${t.lv} · ${RN[t.r]} · durée ${dur(t.du)}</small></div></div>
  <div class="row sp2" style="margin-top:12px"><small>Dégâts cumulés de l'équipe</small><b class="${sum>=req?"g":"bad"}">${fmt(sum)} / ${fmt(req)}</b></div><div class="bar"><i style="width:${Math.min(100,sum/req*100)}%;background:linear-gradient(90deg,${sum>=req?"#10b981,#34d399":"#f97316,#fbbf24"})"></i></div>
  <div class="psl" style="grid-template-columns:repeat(4,1fr)">${Array.from({length:4},(_,k)=>{const i=EXM.sel[k];return i?`<div class="pss on" data-a="exsel" data-i="${i}">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pss"><small>${k+1}</small></div>`}).join("")}</div>
- <div class="row sp2" style="margin:10px 0"><button data-a="exbest">Prendre les 4 meilleurs</button><small>Capture estimée : <b>${(exCh(t,Math.max(sum,req))*100).toFixed(1)} %</b></small></div>
+ <div class="row sp2" style="margin:10px 0"><button data-a="exbest">Prendre les 4 meilleurs</button><button class="go" data-a="exgo" ${ok?"":"disabled"}>Lancer l'expédition</button><button data-a="exx">Annuler</button><small>Capture estimée : <b>${(exCh(t,Math.max(sum,req))*100).toFixed(1)} %</b></small></div>
  <input type="search" id="exq" data-a="exq" placeholder="Rechercher dans tes Pokémon libres" value="${EXQ}" style="width:100%"><div class="zl" id="exg" style="margin-top:12px">${exGrid()}</div>
- <div class="row" style="margin-top:14px"><button class="go" data-a="exgo" ${ok?"":"disabled"}>Lancer l'expédition</button><button data-a="exx">Annuler</button></div></div>`}
+ </div>`}
 
 /* ============ DÉCORS PIXEL ART ============ */
 const BN=["Prairie","Plage","Nuit","Grotte","Neige"],bio=()=>Math.floor((G.fl-1)/10)%5;let lastB=-1;const BGC={};
@@ -4642,9 +4649,9 @@ function modal0(m){
  if(PS){const n=PS.sel.length,need10=Math.min(SLN(),pIds().length);m.className="on";
   m.innerHTML=`<div class="mb" data-a="psx"></div><div class="mc" style="max-width:780px"><button class="x" data-a="psx">${ico("x")}</button><h2>Choisis tes ${need10} Pokémon de départ</h2><small>Tu repars de l'étage 1 avec 15 % de ton argent et toutes tes Balls. ${LS("Seuls ces Pokémon te suivent, en un seul exemplaire (niveau 1, sans doublons, EV à 0), mais ils gardent leurs étoiles et leur bonus. Tout le reste est perdu : objets, autres Pokémon, doublons. Tu gardes seulement 1 % de tes pièces.","Only these Pokémon follow you, as a single copy (level 1, no duplicates, EVs at 0), but they keep their stars and star bonus. Everything else is lost: items, other Pokémon, duplicates. You keep only 1% of your coins.")} Gain : <b class="g">+${ppGain()} point${ppGain()>1?"s":""} de prestige</b>.</small>
   <div class="psl">${Array.from({length:need10},(_,k)=>{const i=PS.sel[k];return i?`<div class="pss on" data-a="psel" data-i="${i}">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pss"><small>${k+1}</small></div>`}).join("")}</div>
-  <div class="row" style="margin:10px 0"><button data-a="psbest">Prendre les ${need10} plus forts</button><button data-a="psclr">Vider</button></div>
+  <div class="row" style="margin:10px 0"><button data-a="psbest">Prendre les ${need10} plus forts</button><button data-a="psclr">Vider</button><button class="go" data-a="psok" ${n==need10?"":"disabled"}>Prestige avec ${n} / ${need10} Pokémon</button><button data-a="psx">Annuler</button></div>
   <input type="search" id="pss" data-a="pss" placeholder="Rechercher dans tes Pokémon" value="${PSQ}" style="width:100%"><div class="zl" id="psg" style="margin-top:12px">${psGrid()}</div>
-  <div class="row" style="margin-top:14px"><button class="go" data-a="psok" ${n==need10?"":"disabled"}>Prestige avec ${n} / ${need10} Pokémon</button><button data-a="psx">Annuler</button></div></div>`;return}
+  </div>`;return}
  if(EXM){exModal(m);return}
  if(VP){vpModal(m);return}
  if(CF){const T={prestige:["Faire un prestige ?","Tu gagnes <b>"+ppGain()+" point"+(ppGain()>1?"s":"")+" de prestige</b>. Étages, argent et sac repartent de zéro et tes Pokémon perdent 40 % de leurs niveaux. Collection, IV, EV, objets tenus, cartes, succès et améliorations sont conservés.","Oui, faire un prestige"],reset:["Réinitialiser la progression ?","Tout est remis à zéro : Pokémon, cartes, succès, prestige, Pokédex. Seul ton nom de dresseur est conservé.","Oui, tout réinitialiser"],del:["Supprimer le compte ?","Toutes les données enregistrées sont effacées définitivement (nom, avatar, bannière, collection, cartes, succès, prestige), puis le jeu se recharge. Écris SUPPRIMER pour confirmer.","Supprimer définitivement"]}[CF];
@@ -5218,10 +5225,10 @@ function penModal(m){
  const s=PNM.sel;m.className="on";
  m.innerHTML=`<div class="mb" data-a="pnx"></div><div class="mc pnm"><button class="x" data-a="pnx">${ico("x")}</button><h2>${LS("Choisis ton lot","Choose your batch")}</h2><small>${LS("Seuls les Pokémon au niveau maximum de ton étage ("+penLv()+") peuvent entrer. Jusqu'à 10 Pokémon.","Only Pokémon at your current level cap ("+penLv()+") can enter. Up to 10 Pokémon.")}</small>
   <div class="psl">${Array.from({length:10},(_,k)=>{const i=s[k];return i?`<div class="pss on" data-a="pnsel" data-i="${i}">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pss"><small>${k+1}</small></div>`}).join("")}</div>
-  <div class="row" style="margin:10px 0"><button data-a="pnbest">${LS("Prendre les 10 plus forts","Take the 10 strongest")}</button><button data-a="pnclr">${LS("Vider","Clear")}</button></div>
+  <div class="row" style="margin:10px 0"><button data-a="pnbest">${LS("Prendre les 10 plus forts","Take the 10 strongest")}</button><button data-a="pnclr">${LS("Vider","Clear")}</button><button class="go" data-a="pngo" ${s.length?"":"disabled"}>${LS("Lancer la pension","Start the daycare")} (${s.length} / 10 · 25 min)</button><button data-a="pnx">${LS("Annuler","Cancel")}</button></div>
   <input type="search" id="pnq" data-a="pnq" placeholder="${LS("Rechercher dans tes Pokémon","Search your Pokémon")}" value="${esc(PNQ)}" style="width:100%">
   <div class="zl" id="png" style="margin-top:12px">${penGrid()}</div>
-  <div class="row" style="margin-top:14px"><button class="go" data-a="pngo" ${s.length?"":"disabled"}>${LS("Lancer la pension","Start the daycare")} (${s.length} / 10 · 25 min)</button><button data-a="pnx">${LS("Annuler","Cancel")}</button></div></div>`}
+  </div>`}
 function vPenL(N){const p=N?G.pen2:G.pen,run=!!(p&&p.t0),left=run?Math.max(0,PEN_T-(Date.now()-p.t0)):0,ready=run&&left<=0,el=ids().filter(penElig).length;
  const slots=Array.from({length:10},(_,k)=>{const i=run?p.sl[k]:0;return i&&G.col[i]?`<div class="pns on">${sp(i,G.col[i].sh)}<small>${dn(i)}</small></div>`:`<div class="pns${run?" off":""}" ${run?"":`data-a="pen" data-i="${N}"`}>${run?"":ico("plus2")}<small>${run?"":LS("Ajouter","Add")}</small></div>`}).join("");
  const pc=(x)=>{const v=x*100;return (v>=10?v.toFixed(0):v>=1?v.toFixed(1):v.toFixed(2)).replace(".",SG.lang=="en"?".":",")};
