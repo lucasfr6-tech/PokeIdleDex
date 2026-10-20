@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-mutation-backgrounds-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-mutation-backgrounds-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e2a47d34bb"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=e2a47d34bb"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8164,7 +8164,7 @@ function pvAutoTeam(){const L=ids().map(id=>({id,b:pvPowR(id),t:pvNoMf(id,()=>tp
  for(const x of L){if(out.length>=6)break;if(!out.includes(x.id))out.push(x.id)}return out}
 
 /* ---------- classement complet et récompenses ---------- */
-function pvViewRank(){const R=pvRows(),me=R.find(x=>x.me),top=R.slice(0,50);
+function pvViewRank(){try{pvFetch()}catch(e){}const R=pvRows(),me=R.find(x=>x.me),top=R.slice(0,50);
  return `<div class="pvbox pvfr"><h3>${pvIc("trophy")} Classement Top 50 <small>Saison ${pvNum(pvIdx())} · fin dans ${pvCd(pvEnd()-Date.now())}</small>${LB.ok?`<span class="pvon">${pvIc("wifi")} En ligne</span>`:`<span class="pvon off">${pvIc("wifioff")} Hors ligne : IA</span>`}</h3>${pvPodium(R)}
   <div class="pvlist full">${top.slice(3).map(r=>pvRow(r,1)).join("")}${me&&me.rk>50?`<div class="pvsep">· · ·</div>${pvRow(me,1)}`:""}</div></div>
   <div class="pvbox"><h3>${pvIc("gift")} Récompenses de fin de saison</h3>${pvViewRw()}</div>`}
@@ -9212,9 +9212,14 @@ const pidRankBanner=r=>{try{const n=r&&r.ban!=null?Number(r.ban):NaN;return Numb
 const rkRow=(r,i,val,lab)=>`<div class="rkx-r pid-rank-bg${r.me?" me":""}" style="${pidRankBanner(r)}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
 function rkBy(key,lab){const R=lbRows().slice().sort((a,b)=>(b[key]||0)-(a[key]||0)||(a.t||0)-(b.t||0));
  return `<div class="box rkx-box"><h3>${ico("trophy")} ${lab}${LB.ok?"":` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r[key]||0,lab)).join("")}</div></div>`}
-function rkGld(){let L=[];try{L=glState().L.slice().sort((a,b)=>b.lv-a.lv||b.xp-a.xp)}catch(e){}const my=glS().id;
+function rkGld(){try{glFetch()}catch(e){}let L=[];try{L=glState().L.slice().sort((a,b)=>b.lv-a.lv||b.xp-a.xp)}catch(e){}const my=glS().id;
  return `<div class="box rkx-box"><h3>${ico("team")} ${LS("Classement des guildes","Guild ranking")}</h3>${L.length?`<div class="rkx-l">${L.slice(0,50).map((e,i)=>`<div class="rkx-r${e.gd.id==my?" me":""}"><span class="rkx-n">${i+1}</span>${glEm(e.gd.em,38)}<b>${esc(e.gd.n)} <i>[${esc(e.gd.tag)}]</i></b><span class="rkx-m">${ico("team")} ${e.n}/${GLMAX}</span><span class="rkx-v">${LS("Niv.","Lv.")} ${e.lv}<small>${fmt(e.xp)} XP</small></span></div>`).join("")}</div>`:`<small>${LS("Aucune guilde pour le moment.","No guild yet.")}</small>`}</div>`}
-function rkTwr(){let R=[];try{R=twRows()}catch(e){}
+/* classements Tour / JCJ / Guildes : les données sont chargées depuis le serveur aussi depuis l'onglet Classements (avant : seulement en visitant le mode) */
+let RKSG="";
+function rkLoad(v,force){try{if(v=="twr")twFetch(force);else if(v=="pvp")pvFetch(force);else if(v=="gld")glFetch(force)}catch(e){}}
+setInterval(()=>{try{if(tab!="rks"||document.hidden)return;const v=RKX.v;if(v!="twr"&&v!="pvp"&&v!="gld")return;rkLoad(v);
+ const sg=v+"|"+(v=="twr"?(TWX.rows||[]).length+":"+TWX.ts:v=="pvp"?(PVX.rows||[]).length+":"+PVX.ts:GLX.ts);if(sg!==RKSG){RKSG=sg;const a=document.activeElement;if(!(a&&/INPUT|TEXTAREA/.test(a.tagName)))show()}}catch(e){}},3000);
+function rkTwr(){rkLoad("twr");let R=[];try{R=twRows()}catch(e){}
  return `<div class="box rkx-box"><h3>${ico("tower")} ${LS("Classement de la Tour","Tower ranking")}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r.b||0,LS("étage","floor"))).join("")}</div></div>`}
 function vRks(){const v=RKX.v;
  const tabs=`<div class="rkx-tabs">${RKT.map(t=>`<button class="${v==t[0]?"on":""}" data-rk="${t[0]}">${ico(t[1])}<span>${t[2]()}</span></button>`).join("")}</div>`;
@@ -13209,6 +13214,7 @@ const UPD=[
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","Classements Tour, JCJ et Guildes","Ces classements n'affichaient parfois que toi tant que tu n'avais pas ouvert le mode correspondant. Ils se chargent maintenant directement depuis l'onglet Classements et se mettent à jour tout seuls.","Tower, PvP and Guild rankings","These rankings sometimes only showed you until you opened the matching mode. They now load straight from the Rankings tab and update by themselves."],
   ["fix","Raids : compte à rebours","« Nouveaux raids dans » affiche maintenant le vrai temps avant la prochaine rotation (toutes les heures).","Raids: countdown","“New raids in” now shows the real time until the next rotation (every hour)."],
   ["fix","Fiche du meilleur Pokémon","Les détails du meilleur Pokémon (stats, IV, EV…) n'étaient jamais publiés : c'est corrigé, ils apparaissent pour tous les joueurs dès qu'ils jouent.","Best Pokémon sheet","Best Pokémon details (stats, IVs, EVs…) were never published: fixed, they show for every player as soon as they play."],
   ["fix","Index des raids","Un Pokémon de raid (par exemple Celebi) est maintenant révélé dans l'index dès qu'il apparaît dans la rotation, sans attendre de le battre. Pikachu Zénith ne figure plus dans l'index.","Raid index","A raid Pokémon (for example Celebi) is now revealed in the index as soon as it shows up in the rotation, without having to beat it. Zenith Pikachu is no longer listed in the index."],
