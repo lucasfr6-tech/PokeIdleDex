@@ -3827,8 +3827,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c77fe4e3b2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c77fe4e3b2"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ee33654d12"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=ee33654d12"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6664,7 +6664,8 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  if(a=="cart"){biShop();return}if(a=="auto")b.a=b.a?0:1;else if(a=="q"){const Q=[1,5,10,60];b.q=Q[(Q.indexOf(b.q)+1)%Q.length]}else if(a=="use"){const i=+t.dataset.i;if(!biUse(i,b.q)&&!(G.inv[BIT[i].k]>0)){toast(LS("Plus d'objet : achète-en à la boutique ou gagne-en en raid.","None left: buy some in the shop or win them in raids."))}}
  BISG="";biUi();save()},true);
 setInterval(()=>{try{biTick()}catch(e){}},1000);
-RLOOT.forEach((T,t)=>{const a=[[2,4],[3,6],[4,8],[6,12],[8,16],[12,24]][t]||[2,4],p=Math.min(.9,.5+.08*t);T.push(["bi-atk",a[0],a[1],p],["bi-xp",a[0],a[1],p],["bi-coin",a[0],a[1],p],["bi-find",Math.max(1,a[0]-1),a[1]-2,Math.min(.8,.2+.1*t)],["bi-mut",1,Math.max(2,a[1]-4),Math.min(.7,.08+.12*t)],["bi-cap",Math.max(1,a[0]-1),a[1]-2,Math.min(.8,.2+.1*t)])});
+/* objets de combat en raid : beaucoup moins nombreux (avant : jusqu'à 24 de chaque par victoire) */
+RLOOT.forEach((T,t)=>{const a=[[1,1],[1,1],[1,2],[1,2],[1,3],[2,3]][t]||[1,1],p=Math.min(.45,.2+.05*t),q=Math.min(.25,.06+.04*t);T.push(["bi-atk",a[0],a[1],p],["bi-xp",a[0],a[1],p],["bi-coin",a[0],a[1],p],["bi-find",1,1,q],["bi-mut",1,1,q*.7],["bi-cap",1,1,q])});
 
 function RWB(r){return RW2[r]*(BIF.r&&r>=2?(r==2?2:3):1)}
 /* ============ POKÉDEX : arbre d'évolution vertical ============ */
@@ -8890,7 +8891,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(k=="ac"){glAccept(a);rf()}else if(k=="kk"){const m=S.mine.v.find(x=>x.id==a);glModal(`<h2>${LS("Exclure ce membre ?","Kick this member?")}</h2><p class="glx-p">${esc(m?m.n:"")}</p><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button><button class="glx-danger" data-gl="kkok:${a}">${LS("Exclure","Kick")}</button></div>`)}
  else if(k=="kkok"){glClose();glKick(a);rf()}
  else if(k=="so"){glSetOpt({op:+a});rf()}else if(k=="sd"){glSetOpt({ds:($("glsd")||{}).value||""});toast(LS("Description enregistrée.","Description saved."));rf()}
- else if(k=="atk")glFight();
+ else if(k=="atk")glPkOpen();
  else if(k=="bc"){glClaimBoss()}
  else if(k=="cl"){const ch=glChals(S.mine).find(x=>x.id==a);if(ch)glClaim(ch)}
  else if(k=="rq"){GLP={q:"",mode:"req",sel:0};glPickModal("req")}
@@ -8989,12 +8990,12 @@ setInterval(()=>{try{if(SCP.o=="ch"&&CH.tab=="gl"&&document.activeElement!==$("g
 /* ---- combat du boss de guilde : mêmes moteur et décor que la Tower ---- */
 const glTop3=()=>ids().map(i=>({i,d:(()=>{try{return dmg(i)}catch(e){return 0}})()})).sort((a,b)=>b.d-a.d).slice(0,3).map(x=>x.i);
 const glBFloor=wk=>(glH("bf"+wk)%10)*10+5;
-function glBNew(S){const pv=pvS(),mine=twTeamU(glTop3(),pv.mv,pv.it);mine.forEach((u,i)=>{u.i=i;u.s="m"});const n=mine.length,av=k=>mine.reduce((a,u)=>a+u[k],0)/n;
+function glBNew(S){const pv=pvS(),mine=twTeamU(glTeamSel(),pv.mv,pv.it);mine.forEach((u,i)=>{u.i=i;u.s="m"});const n=mine.length,av=k=>mine.reduce((a,u)=>a+u[k],0)/n;
  const sp0=S.boss.sp,u=pvMake(sp0);u.i=0;u.s="f";u.gbs=1;{const mv=u.moves.filter(m=>m.e!="heal"&&m.e!="drain");if(mv.length)u.moves=mv}u.lv=Math.round(av("lv"))||100;const kc=Math.max(1e-9,glPw()*30/(2.5*mine.reduce((a,x)=>a+Math.max(x.atk,x.spa),0)||1)),rem=Math.max(1,S.boss.hp-S.boss.tot);u.max=Math.max(1,Math.ceil(S.boss.hp/kc));u.hp=Math.max(1,Math.min(u.max,Math.ceil(rem/kc)));u.atk=Math.round(av("atk")*.85);u.spa=Math.round(av("spa")*.85);u.def=Math.round(av("def")*.9);u.spd=Math.round(av("spd")*.9);u.spe=Math.max(10,Math.round(av("spe")*.85));u.boss=2;u.it=null;
  return{gb:1,kc,h0:u.hp,wk:S.boss.wk,opp:{id:"gb",n:nm(sp0),r:0,tm:[sp0]},m:{n:G.name||"Moi",r:0,tm:mine,a:0},f:{n:nm(sp0),r:0,tm:[u],a:0},round:0,log:[],sp:1,auto:true,fast:false,over:null,phase:"pick",wait:null,sw:{m:0,f:0},sk:.8,tuto:false,friendly:false,prev:{w:0,l:0,d:0}}}
 function glBWin(B){pvBuild(B);const o=$("pvb"),fl=glBFloor(B.wk),Z=twZone(fl);o.classList.add("tw");o.style.setProperty("--zc",Z.c[0]);twArena($("pvbg"),fl);
  const L=o.querySelector(".pvpn.m"),R=o.querySelector(".pvpn.f");
- if(L){const s=L.querySelector("svg");if(s)s.outerHTML=ico("team");const m=L.querySelector("small");if(m)m.textContent=LS("Mes 3 meilleurs","My top 3")}
+ if(L){const s=L.querySelector("svg");if(s)s.outerHTML=ico("team");const m=L.querySelector("small");if(m)m.textContent=(G.glTm&&G.glTm.filter(i=>G.col[i]).length)?LS("Mon équipe","My team"):LS("Mes 3 meilleurs","My top 3")}
  if(R){const s=R.querySelector("svg");if(s)s.outerHTML=ico("crown");const m=R.querySelector("small");if(m)m.textContent=LS("Boss de guilde","Guild boss")}}
 async function glBStart(){if(PB){toast(LS("Un combat est déjà en cours.","A battle is already running."));return}const S=glState();if(!S.inG||!S.boss||S.boss.dead||glLeft()<=0){toast(LS("Impossible d'attaquer.","Cannot attack."));return}if(!ids().length)return;
  const B=glBNew(S);B.intro=1;PB=B;glBWin(B);document.body.classList.add("pvon2");
@@ -9008,8 +9009,44 @@ function glBFinish(B){if(B.fin)return;B.fin=1;const res=B.over,foe=B.f.tm[0],rm=
   mid:`<div class="pvrl">${LS("Dégâts infligés à la guilde","Damage dealt to the guild")} : <b>${fmt(r.t)}</b></div>`,extra:`<div class="pvrg">${ico("crown")} ${S.boss&&S.boss.dead?LS("Le boss de la semaine est vaincu : récupère tes récompenses dans l'onglet Boss.","The weekly boss is defeated: claim your rewards in the Boss tab."):LS("PV restants du boss de guilde : ","Guild boss HP left: ")+fmt(pct)+" / "+fmt(S.boss.hp)}</div>`,
   btns:(left>0&&!(S.boss&&S.boss.dead)?`<button class="pvgo" data-gl="gbagain">${LS("Réattaquer","Attack again")} (${left})</button>`:"")+`<button class="pvgo gr" data-gl="gbx">${LS("Fermer","Close")}</button>`})}
 {const f0=pvFinish;pvFinish=function(B){if(B&&B.gb)return glBFinish(B);return f0.apply(this,arguments)}}
+/* boss de guilde : PV et dégâts affichés en vrais nombres (comme la barre de la guilde), 30 tours pour faire le maximum de dégâts */
+const GLBR=30;
+{const o0=pvOver;pvOver=function(B){if(B&&B.gb&&B.round>=GLBR&&pvAlive(B,"m").length&&pvAlive(B,"f").length)return"draw";return o0.apply(this,arguments)}}
+{const u0=pvU_upd;pvU_upd=function(B){u0.apply(this,arguments);try{if(B&&B.gb){const u=pvAct(B,"f"),t=$("pvHtf");if(u&&t)t.textContent=fmt(Math.max(0,Math.ceil(u.hp*B.kc)))+" / "+fmt(Math.ceil(u.max*B.kc));const m=document.querySelector("#pvb .pvmid small");if(m)m.textContent=GLBR+" "+LS("tours max","turns max")}}catch(e){}}}
+{const p0=pvU_pop;pvU_pop=function(B,s,t){try{if(B&&B.gb&&s=="f"&&typeof t=="string"){const m=/^-(\d+(?:\.\d+)?)$/.exec(t);if(m)arguments[2]="-"+fmt(Math.round(+m[1]*B.kc))}}catch(e){}return p0.apply(this,arguments)}}
 glFight=function(){return glBStart()};
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gl]");if(!b)return;const k=b.dataset.gl;if(k!="gbx"&&k!="gbagain")return;e.stopPropagation();if(k=="gbx"){pvReset();glRefresh(1)}else{pvReset();glBStart()}},true);
+/* ---- boss de guilde : choix de l'équipe (3 Pokémon) avant d'attaquer ---- */
+function glTeamSel(){const L=(G.glTm||[]).filter(i=>G.col[i]).slice(0,3);if(!L.length)return glTop3();const t=glTop3();for(const i of t){if(L.length>=3)break;if(!L.includes(i))L.push(i)}return L}
+let GLPQ="",GLPS=null;
+function glPkHtml(){const sel=GLPS,q=norm(GLPQ||"");const all=ids().filter(i=>i<9e4||G.col[i]).map(i=>({i,d:(()=>{try{return dmg(i)}catch(e){return 0}})()})).sort((a,b)=>b.d-a.d);
+ const L=all.filter(x=>!q||norm(dn(x.i)).includes(q)).slice(0,120);
+ const slot=k=>{const i=sel[k];return i?`<button class="glpsl on" data-glp="rm" data-v="${i}">${sp(i,G.col[i]&&G.col[i].sh)}<b>${esc(dn(i))}</b><small>${fmt(dmg(i))}/s</small></button>`:`<div class="glpsl"><small>${LS("Emplacement libre","Empty slot")}</small></div>`};
+ return `<div class="glpw"><div class="glph"><div><h3>${LS("Équipe contre le boss de guilde","Team against the guild boss")}</h3><small>${LS("Choisis 3 Pokémon. Ton choix est gardé pour les prochaines attaques.","Pick 3 Pokémon. Your choice is kept for the next attacks.")}</small></div><button class="glpx" data-glp="x" aria-label="x">${ico("x")}</button></div>
+ <div class="glps">${[0,1,2].map(slot).join("")}</div>
+ <div class="glpt"><input id="glpq" placeholder="${LS("Rechercher un Pokémon…","Search a Pokémon…")}" value="${esc(GLPQ)}" autocomplete="off"><button data-glp="auto">${LS("Mes 3 meilleurs","My top 3")}</button></div>
+ <div class="glpl">${L.map(x=>{const on=sel.includes(x.i);return `<button class="glpc${on?" on":""}" data-glp="tg" data-v="${x.i}">${sp(x.i,G.col[x.i].sh)}<b>${esc(dn(x.i))}</b><small>${fmt(x.d)}/s</small>${on?`<i>${ico("check")}</i>`:""}</button>`}).join("")}</div>
+ <button class="go glpgo" data-glp="go" ${sel.length?"":"disabled"}>${glIc("sword")} ${LS("Attaquer le boss","Attack the boss")}</button></div>`}
+function glPkOpen(){GLPS=glTeamSel().slice();GLPQ="";let o=$("glpk");if(!o){o=document.createElement("div");o.id="glpk";document.body.appendChild(o)}o.innerHTML=glPkHtml();o.classList.add("on")}
+function glPkRender(){const o=$("glpk");if(!o)return;const l=o.querySelector(".glpl"),y=l?l.scrollTop:0,f=document.activeElement&&document.activeElement.id=="glpq";o.innerHTML=glPkHtml();const n=o.querySelector(".glpl");if(n)n.scrollTop=y;if(f){const i=$("glpq");if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}}
+document.addEventListener("click",e=>{
+ const b=e.target.closest&&e.target.closest("[data-glp]"),o=$("glpk");if(!b){if(o&&e.target===o)o.classList.remove("on");return}e.stopPropagation();e.preventDefault();const k=b.dataset.glp,v=+b.dataset.v;
+ if(k=="x"){o.classList.remove("on");return}
+ if(k=="tg"){const i=GLPS.indexOf(v);if(i>=0)GLPS.splice(i,1);else if(GLPS.length<3)GLPS.push(v);else toast(LS("Ton équipe est complète : retire un Pokémon d'abord.","Your team is full: remove a Pokémon first."));return glPkRender()}
+ if(k=="rm"){GLPS=GLPS.filter(x=>x!==v);return glPkRender()}
+ if(k=="auto"){GLPS=glTop3().slice();return glPkRender()}
+ if(k=="go"){if(!GLPS.length)return;G.glTm=GLPS.slice();try{save()}catch(x){}o.classList.remove("on");glBStart()}},true);
+document.addEventListener("input",e=>{if(e.target&&e.target.id=="glpq"){GLPQ=e.target.value;glPkRender()}});
+{const st=document.createElement("style");st.textContent=`#glpk{position:fixed;inset:0;z-index:100015;background:#04061acc;backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:14px}#glpk.on{display:flex}
+.glpw{width:min(720px,100%);max-height:calc(100vh - 28px);display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:22px;background:linear-gradient(180deg,#141b3d,#0b1026);border:1px solid var(--ln);box-shadow:0 30px 80px #000c}
+.glph{display:flex;gap:12px;align-items:flex-start}.glph>div{flex:1}.glph h3{margin:0 0 3px;font-size:19px}.glph small{color:var(--mu)}.glpx{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);flex:none}
+.glps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.glpsl{min-height:96px;border-radius:14px;border:2px dashed var(--ln);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px;background:rgba(0,0,0,.2)}
+.glpsl.on{border:2px solid #f87171;background:rgba(248,113,113,.12);cursor:pointer}.glpsl img{width:56px;height:56px;object-fit:contain;image-rendering:pixelated}.glpsl b{font-size:12.5px}.glpsl small{font-size:11px;color:var(--mu)}
+.glpt{display:flex;gap:8px}.glpt input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid var(--ln);color:var(--tx);font:inherit}.glpt button{padding:0 14px;border-radius:12px;font-weight:800;background:rgba(255,255,255,.08);white-space:nowrap}
+.glpl{flex:1;min-height:120px;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;align-content:start;padding-right:2px}
+.glpc{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px;border-radius:12px;background:rgba(0,0,0,.25);border:2px solid transparent}.glpc img{width:52px;height:52px;object-fit:contain;image-rendering:pixelated}
+.glpc b{font-size:12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.glpc small{font-size:10.5px;color:var(--mu)}.glpc.on{border-color:#f87171;background:rgba(248,113,113,.14)}
+.glpc i{position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:#f87171;color:#2a0606;display:grid;place-items:center}.glpc i svg{width:12px;height:12px}.glpgo{width:100%;padding:14px;font-size:16px}`;document.head.appendChild(st)}
 /* bouton Quitter visible dans l'en-tête de la guilde */
 {const f0=glHeader;glHeader=function(M){const h=f0.apply(this,arguments);return h.replace(/^(<div class="glx-hd"[^>]*>)/,`$1<button class="glx-lvb" data-gl="lv" title="${LS("Quitter la guilde","Leave guild")}">${ico("logout")||""}<span>${LS("Quitter","Leave")}</span></button>`)}}
 
@@ -9521,13 +9558,13 @@ document.addEventListener("keydown",e=>{if(e.key=="Escape")kxClose()});
 /* ---- espèces ciblées par zone : si une sélection existe pour la zone, seules ces espèces sont capturées ---- */
 let KXZV=null;
 const kxzSel=z=>{const m=G.kxz||{};const L=m[z];return Array.isArray(L)?L:[]};
-{const w0=kxWant;kxWant=function(e){try{const z=zoneOf(G.fl),L=kxzSel(z);if(L.length&&e&&e.id<9e4){if(L.includes(e.id))return true;if(e.mi==7&&KX().sh)return true;return false}}catch(x){}return w0.apply(this,arguments)}}
+{const w0=kxWant;kxWant=function(e){try{const z=zoneOf(G.fl),L=kxzSel(z);if(L.length&&e&&e.id<9e4){if(L.includes(e.id))return true;/* hors sélection : capturé seulement s'il est chromatique, muté, de taille hors norme ou Alpha */if(e.mi>0||kxOdd(e)||e.boss)return true;return false}}catch(x){}return w0.apply(this,arguments)}}
 function kxzHtml(){const cz=zoneOf(G.fl),z=KXZV==null?cz:KXZV,pool=zonePool(z)||[],L=kxzSel(z),mx=zoneOf(Math.max(G.fl,(typeof bfl=="function"?bfl():G.fl)||G.fl));
  const cells=pool.map(id=>{const on=L.includes(id),seen=!!G.dx[id];let nm="?";try{nm=I(id).n}catch(x){}
   return `<button class="kxzc${on?" on":""}${seen?"":" un"}" data-kx="zsp" data-v="${id}" title="${seen?esc(nm):"???"}">${sp(id,0)}<b>${seen?esc(nm):"???"}</b>${(()=>{try{return rtag(pr(id),1)}catch(x){return ""}})()}${on?`<i>${ico("check")}</i>`:""}</button>`}).join("");
  return `<h4>${LS("Espèces ciblées","Targeted species")}</h4>
  <div class="kxzh"><button class="kxzn" data-kx="zz" data-v="-1" ${z<=0?"disabled":""} aria-label="-">${ico("chevl")}</button><div><b>Zone ${z+1}${z==cz?` <em>${LS("zone actuelle","current zone")}</em>`:""}</b><small>${LS("étages","floors")} ${zs(z)} – ${ze(z)} · ${L.length?LS(L.length+" espèce"+(L.length>1?"s":"")+" ciblée"+(L.length>1?"s":""),L.length+" targeted species"):LS("toutes les espèces","all species")}</small></div><button class="kxzn r" data-kx="zz" data-v="1" ${z>=mx?"disabled":""} aria-label="+">${ico("chevl")}</button></div>
- <p class="kxnt">${LS("Touche les Pokémon que tu veux capturer dans cette zone : seules ces espèces recevront une ball, les autres seront mises K.O. Sans sélection, la stratégie ci-dessus s'applique. Les chromatiques restent capturés si l'option « Ne jamais rater un chromatique » est active.","Tap the Pokémon you want to catch in this zone: only these species get a Ball, the others are KO'd. With no selection, the strategy above applies. Shinies are still caught if “Never miss a shiny” is on.")}</p>
+ <p class="kxnt">${LS("Touche les Pokémon que tu veux capturer dans cette zone : ces espèces reçoivent toujours une ball. Les autres ne sont capturées que si elles sont chromatiques, mutées, de taille hors norme ou Alpha ; sinon elles sont mises K.O. Sans sélection, la stratégie ci-dessus s'applique.","Tap the Pokémon you want to catch in this zone: these species always get a Ball. The others are only caught if they are shiny, mutated, odd-sized or Alpha; otherwise they are KO'd. With no selection, the strategy above applies.")}</p>
  <div class="kxzg">${cells}</div>${L.length?`<button class="kxzx" data-kx="zclr">${LS("Tout désélectionner (capturer selon la stratégie)","Clear selection (catch by strategy)")}</button>`:""}`}
 {const h0=kxHtml;kxHtml=function(){const h=h0.apply(this,arguments);const k=h.indexOf('<h4>',h.indexOf('class="kxg5"'));return k>0?h.slice(0,k)+kxzHtml()+h.slice(k):h+kxzHtml()}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-kx="zsp"],[data-kx="zz"],[data-kx="zclr"]');if(!b)return;ev.stopPropagation();ev.preventDefault();
@@ -12708,6 +12745,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Boss de guilde : choix de l'équipe","Avant d'attaquer le boss de guilde, tu choisis tes 3 Pokémon (recherche, ou « Mes 3 meilleurs »). Ton choix est gardé pour les attaques suivantes.","Guild boss: team choice","Before attacking the guild boss, you pick your 3 Pokémon (search, or “My top 3”). Your choice is kept for the next attacks."],
+  ["imp","Boss de guilde : vrais PV et 30 tours","Les PV du boss s'affichent en vrais nombres (par exemple 120M / 150M) et chaque coup montre les vrais dégâts infligés. Un combat dure maintenant 30 tours au lieu de 80.","Guild boss: real HP and 30 turns","The boss HP is shown as real numbers (for example 120M / 150M) and each hit shows the real damage dealt. A fight now lasts 30 turns instead of 80."],
+  ["imp","Espèces ciblées : les Pokémon spéciaux restent capturés","Avec des espèces ciblées, les autres Pokémon sont quand même capturés s'ils sont chromatiques, mutés, de taille hors norme ou Alpha. Les autres sont mis K.O.","Targeted species: special Pokémon still caught","With targeted species, other Pokémon are still caught if they are shiny, mutated, odd-sized or Alpha. The rest are KO'd."],
+  ["fix","Objets de combat en raid","Les raids donnaient beaucoup trop d'objets de combat (jusqu'à 24 de chaque par victoire). Ils en donnent maintenant 1 à 3, et pas à chaque fois.","Battle items from raids","Raids gave far too many battle items (up to 24 of each per win). They now give 1 to 3, and not every time."],
   ["new","Titre Co-Owner","Nouveau titre privé réservé au co-créateur, avec le même bonus que les titres de l'équipe (+5 % de dégâts et de pièces).","Co-Owner title","New private title for the co-creator, with the same bonus as the team titles (+5% damage and coins)."],
   ["fix","Raids : compte à rebours figé","Le temps avant la prochaine tentative de raid se met maintenant à jour chaque seconde.","Raids: frozen countdown","The time before the next raid attempt now updates every second."],
   ["fix","Failles : images des Pokémon","Les Pokémon de la liste des failles s'affichent de nouveau nets, sans effet de flou.","Rifts: Pokémon images","Pokémon in the rift list are sharp again, without the blur effect."],
