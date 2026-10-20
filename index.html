@@ -3873,6 +3873,11 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 /* ==== TS4 : sprite du Pokémon à la taille du carré rouge ==== */
 .pr .sp,.pr .spw{width:150px;height:130px}
 .pr{padding:12px 14px}
+/* Pokémon List : mêmes sprites animés que les classements, mutation sur le parent. */
+#plist .pl-motion{display:grid;place-items:center;width:100%;height:100%;animation:plHover 3.8s ease-in-out infinite;pointer-events:none}
+#plist .pl-motion img{width:88%;height:88%;max-width:100%;max-height:100%;object-fit:contain;image-rendering:auto;user-select:none}
+@keyframes plHover{0%,100%{transform:translateY(3px)}50%{transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){#plist .pl-motion{animation:none}}
 </style><style id="pid-rank-direct-style">
 /* Render-time banners: no MutationObserver and no resizing loop. */
 .rkx-r.pid-rank-bg,.rkm-r.pid-rank-bg,.rkb-podium-card.pid-rank-bg,.pod.pid-rank-bg,.lrow.pid-rank-bg,.pvpd.pid-rank-bg,.pvrw2.pid-rank-bg{background-size:cover!important;background-position:center center!important;isolation:isolate;position:relative;color:#fff;text-shadow:0 1px 3px #050b22}
@@ -3898,8 +3903,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-hfsprites-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-hfsprites-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-listanim-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-listanim-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4507,7 +4512,7 @@ function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids()
  $("tlf").style.width=Math.min(100,((G.fl-1)%10+G.k/10)/9*100)+"%";
  const wk=W.k+"|"+EV.k;if(WXK!==wk){WXK=wk;$("wxc").innerHTML=wxCard();$("evc2").innerHTML=evCard();$("wx").className="wx "+W.k;$("wxp").innerHTML=ico(WX[W.k].i)+" "+WX[W.k].n;$("evp").innerHTML=EV.k?ico(EVT[EV.k].i)+" "+EVT[EV.k].n:"";$("evp").style.display=EV.k?"":"none"}
  $("wxt").textContent=mmss(W.t);if(EV.k&&$("evt")){$("evt").textContent=mmss(EV.t);$("evb").style.width=EV.t/EV.dd*100+"%"}
- const psig=ids().length+"|"+(G.sort||"atk")+"|"+G.rev+"|"+ids().reduce((a,i)=>a+G.col[i].l*7+G.col[i].n+(G.col[i].mf||0)+(G.col[i].dy?5:0)+(G.col[i].mi||0)*13+(G.col[i].zi||0)*17,0)+"|"+PLQ;
+ const psig=(G.sort||"atk")+"|"+G.rev+"|"+ids().map(i=>{const c=G.col[i];return [i,c.l,c.n,c.mf,c.dy,c.mi,c.zi,c.sh,c.hf,c.hfv,c.al,c.st].join(":")}).join(",")+"|"+SG.anim+"|"+SG.perf+"|"+PLQ;
  if(PSIG!==psig||!$("plist").innerHTML){PSIG=psig;const el=$("plist"),top=el.scrollTop,S=G.sort||"atk",f={atk:i=>base(i),lv:i=>G.col[i].l,n:i=>G.col[i].n,coin:i=>coin(i),rar:i=>pr(i)*1e4+I(i).b,num:i=>-i};
   let L=ids().filter(i=>!PLQ||norm(dn(i)).includes(norm(PLQ))||String(i)==PLQ.trim()).sort(S=="name"?(a,b)=>I(a).n.localeCompare(I(b).n):(a,b)=>f[S](b)-f[S](a));if(G.rev)L.reverse();
   plPatch(el,L.slice(0,150));el.scrollTop=top;plResizer()}}
@@ -4958,7 +4963,19 @@ function etags(e){let h="";if(e.boss)h+=`<span class="et boss">${ico("crown")} A
  if(e.mi==7)h+=`<span class="et big" style="--c:#fde047">${ico("star")} ${LS("CHROMATIQUE","SHINY")}</span>`;else if(e.mi>0)h+=`<span class="et big" style="--c:${MUC[e.mi]}">${ico("spark")} ${e.mu[0].toUpperCase()}</span>`;
  const z=SZ.indexOf(e.sz);if(z!=2)h+=`<span class="et ${z>=4?"big":""}" style="--c:${SZC[z]}">${z>=3?ico("arrowup"):""} ${e.sz[0].toUpperCase()}</span>`;return h}
 /* ---------- liste de Pokémon : variantes visibles + redimensionnable ---------- */
-let plRow=i=>{const c=G.col[i],vc=vcol(c);return `<div class="pr${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${MU[c.mi][3]}"`:""}>${sp(i,c.sh)}</span><span><b>${dn(i)}</b><br>${vb(c)}<small>Atk ${fmt(base(i))}</small></span><span class="r"><small>Niv ${c.l}</small><br><span class="x">×${c.n}</span></span></div>`};
+function plSprite(i,c){
+ /* Les formes créées pour le jeu gardent leur dessin, au lieu de devenir l'espèce normale. */
+ if(i>9e4||(c.hf&&!c.mf&&!c.dy))return `<span class="pl-motion">${sp(i,c.sh)}</span>`;
+ const f=c.mf||(c.dy&&GMX[i])||i,sh=c.sh?1:0,still=!SG.anim||SG.perf||matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const src=still?ART+(sh?"shiny/":"")+f+".png":SPR+"pokemon/other/showdown/"+(sh?"shiny/":"")+f+".gif";
+ return `<span class="pl-motion"><img class="pl-animated" loading="lazy" decoding="async" alt="" draggable="false" src="${src}" data-pl-form="${f}" data-pl-base="${i}" data-pl-shiny="${sh}" data-pl-stage="${still?1:0}" onerror="plSpriteFallback(this)"></span>`}
+function plSpriteFallback(im){
+ /* GIF absent / hors ligne : illustration de la même forme, puis sprite local ; le filtre reste sur .spw. */
+ const f=+im.dataset.plForm,i=+im.dataset.plBase,sh=+im.dataset.plShiny?"shiny/":"";
+ const urls=[...new Set([ART+sh+f+".png",ART+sh+i+".png",IMG+sh+f+".png",IMG+sh+i+".png",ART+i+".png"])];
+ const n=+im.dataset.plStage||0;im.dataset.plStage=n+1;
+ if(n<urls.length)im.src=urls[n];else{im.onerror=null;im.src="icon-192.png"}}
+let plRow=i=>{const c=G.col[i],vc=vcol(c);return `<div class="pr${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${MU[c.mi][3]}"`:""}>${plSprite(i,c)}</span><span><b>${dn(i)}</b><br>${vb(c)}<small>Atk ${fmt(base(i))}</small></span><span class="r"><small>Niv ${c.l}</small><br><span class="x">×${c.n}</span></span></div>`};
 function plResizer(){const h=document.getElementById("plrs");if(!h||h._on)return;h._on=1;const el=$("plist");
  h.addEventListener("pointerdown",e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const y0=e.clientY,h0=el.getBoundingClientRect().height;document.body.classList.add("rsz");
   const mv=ev=>{const v=Math.max(150,Math.min(2400,h0+ev.clientY-y0));el.style.maxHeight=v+"px";el.style.height=v+"px"},up=()=>{h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);document.body.classList.remove("rsz");SG.plh=Math.round(el.getBoundingClientRect().height);svs()};
@@ -12934,7 +12951,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-20",t:["Taille de l’interface à 80 % par défaut","Interface size defaults to 80%"],e:[
+ {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["imp","Pokémon List animée","Les Pokémon de la liste utilisent les sprites animés du classement en conservant leurs mutations et couleurs chromatiques. Les formes exclusives gardent leur apparence.","Animated Pokémon List","The list uses the leaderboard's animated sprites while keeping mutation and shiny colours. Exclusive forms keep their appearance."],
   ["imp","Classement Meilleur Pokémon","Podium des 3 meilleurs Pokémon avec grands sprites, mutations, DPS et fiches cliquables ; lignes du classement agrandies.","Best Pokémon leaderboard","Top 3 podium with larger sprites, mutations, DPS and clickable details; bigger leaderboard rows."],
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
