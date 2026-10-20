@@ -3873,6 +3873,13 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 /* ==== TS4 : sprite du Pokémon à la taille du carré rouge ==== */
 .pr .sp,.pr .spw{width:150px;height:130px}
 .pr{padding:12px 14px}
+/* Pokémon List : mêmes sprites animés que les classements, mutation sur le parent. */
+#plist .pr{overflow:hidden}
+#plist .spw{position:relative;overflow:hidden}
+#plist .pl-motion{position:absolute;inset:12px;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;animation:plHover 3.8s ease-in-out infinite;pointer-events:none}
+#plist .pl-motion img{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain;object-position:center;image-rendering:auto;user-select:none}
+@keyframes plHover{0%,100%{transform:translateY(3px)}50%{transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){#plist .pl-motion{animation:none}}
 </style><style id="pid-rank-direct-style">
 /* Render-time banners: no MutationObserver and no resizing loop. */
 .rkx-r.pid-rank-bg,.rkm-r.pid-rank-bg,.rkb-podium-card.pid-rank-bg,.pod.pid-rank-bg,.lrow.pid-rank-bg,.pvpd.pid-rank-bg,.pvrw2.pid-rank-bg{background-size:cover!important;background-position:center center!important;isolation:isolate;position:relative;color:#fff;text-shadow:0 1px 3px #050b22}
@@ -3898,8 +3905,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-hfsprites-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-hfsprites-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-listanim-hwtrain-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-listanim-hwtrain-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4507,7 +4514,7 @@ function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids()
  $("tlf").style.width=Math.min(100,((G.fl-1)%10+G.k/10)/9*100)+"%";
  const wk=W.k+"|"+EV.k;if(WXK!==wk){WXK=wk;$("wxc").innerHTML=wxCard();$("evc2").innerHTML=evCard();$("wx").className="wx "+W.k;$("wxp").innerHTML=ico(WX[W.k].i)+" "+WX[W.k].n;$("evp").innerHTML=EV.k?ico(EVT[EV.k].i)+" "+EVT[EV.k].n:"";$("evp").style.display=EV.k?"":"none"}
  $("wxt").textContent=mmss(W.t);if(EV.k&&$("evt")){$("evt").textContent=mmss(EV.t);$("evb").style.width=EV.t/EV.dd*100+"%"}
- const psig=ids().length+"|"+(G.sort||"atk")+"|"+G.rev+"|"+ids().reduce((a,i)=>a+G.col[i].l*7+G.col[i].n+(G.col[i].mf||0)+(G.col[i].dy?5:0)+(G.col[i].mi||0)*13+(G.col[i].zi||0)*17,0)+"|"+PLQ;
+ const psig=(G.sort||"atk")+"|"+G.rev+"|"+ids().map(i=>{const c=G.col[i];return [i,c.l,c.n,c.mf,c.dy,c.mi,c.zi,c.sh,c.hf,c.hfv,c.al,c.st].join(":")}).join(",")+"|"+SG.anim+"|"+SG.perf+"|"+PLQ;
  if(PSIG!==psig||!$("plist").innerHTML){PSIG=psig;const el=$("plist"),top=el.scrollTop,S=G.sort||"atk",f={atk:i=>base(i),lv:i=>G.col[i].l,n:i=>G.col[i].n,coin:i=>coin(i),rar:i=>pr(i)*1e4+I(i).b,num:i=>-i};
   let L=ids().filter(i=>!PLQ||norm(dn(i)).includes(norm(PLQ))||String(i)==PLQ.trim()).sort(S=="name"?(a,b)=>I(a).n.localeCompare(I(b).n):(a,b)=>f[S](b)-f[S](a));if(G.rev)L.reverse();
   plPatch(el,L.slice(0,150));el.scrollTop=top;plResizer()}}
@@ -4958,7 +4965,19 @@ function etags(e){let h="";if(e.boss)h+=`<span class="et boss">${ico("crown")} A
  if(e.mi==7)h+=`<span class="et big" style="--c:#fde047">${ico("star")} ${LS("CHROMATIQUE","SHINY")}</span>`;else if(e.mi>0)h+=`<span class="et big" style="--c:${MUC[e.mi]}">${ico("spark")} ${e.mu[0].toUpperCase()}</span>`;
  const z=SZ.indexOf(e.sz);if(z!=2)h+=`<span class="et ${z>=4?"big":""}" style="--c:${SZC[z]}">${z>=3?ico("arrowup"):""} ${e.sz[0].toUpperCase()}</span>`;return h}
 /* ---------- liste de Pokémon : variantes visibles + redimensionnable ---------- */
-let plRow=i=>{const c=G.col[i],vc=vcol(c);return `<div class="pr${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${MU[c.mi][3]}"`:""}>${sp(i,c.sh)}</span><span><b>${dn(i)}</b><br>${vb(c)}<small>Atk ${fmt(base(i))}</small></span><span class="r"><small>Niv ${c.l}</small><br><span class="x">×${c.n}</span></span></div>`};
+function plSprite(i,c){
+ /* Les formes créées pour le jeu gardent leur dessin, au lieu de devenir l'espèce normale. */
+ if(i>9e4||(c.hf&&!c.mf&&!c.dy))return `<span class="pl-motion">${sp(i,c.sh)}</span>`;
+ const f=c.mf||(c.dy&&GMX[i])||i,sh=c.sh?1:0,still=!SG.anim||SG.perf||matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const src=still?ART+(sh?"shiny/":"")+f+".png":SPR+"pokemon/other/showdown/"+(sh?"shiny/":"")+f+".gif";
+ return `<span class="pl-motion"><img class="pl-animated" loading="lazy" decoding="async" alt="" draggable="false" src="${src}" data-pl-form="${f}" data-pl-base="${i}" data-pl-shiny="${sh}" data-pl-stage="${still?1:0}" onerror="plSpriteFallback(this)"></span>`}
+function plSpriteFallback(im){
+ /* GIF absent / hors ligne : illustration de la même forme, puis sprite local ; le filtre reste sur .spw. */
+ const f=+im.dataset.plForm,i=+im.dataset.plBase,sh=+im.dataset.plShiny?"shiny/":"";
+ const urls=[...new Set([ART+sh+f+".png",ART+sh+i+".png",IMG+sh+f+".png",IMG+sh+i+".png",ART+i+".png"])];
+ const n=+im.dataset.plStage||0;im.dataset.plStage=n+1;
+ if(n<urls.length)im.src=urls[n];else{im.onerror=null;im.src="icon-192.png"}}
+let plRow=i=>{const c=G.col[i],vc=vcol(c);return `<div class="pr${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${MU[c.mi][3]}"`:""}>${plSprite(i,c)}</span><span><b>${dn(i)}</b><br>${vb(c)}<small>Atk ${fmt(base(i))}</small></span><span class="r"><small>Niv ${c.l}</small><br><span class="x">×${c.n}</span></span></div>`};
 function plResizer(){const h=document.getElementById("plrs");if(!h||h._on)return;h._on=1;const el=$("plist");
  h.addEventListener("pointerdown",e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const y0=e.clientY,h0=el.getBoundingClientRect().height;document.body.classList.add("rsz");
   const mv=ev=>{const v=Math.max(150,Math.min(2400,h0+ev.clientY-y0));el.style.maxHeight=v+"px";el.style.height=v+"px"},up=()=>{h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);document.body.classList.remove("rsz");SG.plh=Math.round(el.getBoundingClientRect().height);svs()};
@@ -6203,7 +6222,7 @@ const rdMv=id=>{const L=rdMoves(id),c=G.col[id],s=G.rd&&G.rd.mv&&G.rd.mv[id];ret
 SPS.push({id:90003,base:149,n:"Dracolosse Éclipse",t:["dragon","fire"],s:[105,150,100,125,105,115],ab:["Multiécaille"],ha:"Souffle Stellaire",hue:262,hue2:40,sat:1.2,au:"#a78bfa",au2:"#fbbf24",cas:0,
   fr:"Né le jour où la lune a avalé le soleil. Ses écailles reflètent les deux astres, et sa seule présence suffit à faire taire une tempête.",en:"Born the day the moon swallowed the sun. Its scales mirror both stars, and its mere presence silences a storm."});
 SPM[90003]=SPS[SPS.length-1];DB[90003]={n:"Dracolosse Éclipse",t:["dragon","fire"],b:700,lg:0,ba:0,ch:90003,s:[105,150,100,125,105,115],ab:["Multiécaille"],ha:"Souffle Stellaire"};if(!EVC[90003])EVC[90003]=[];
-function spRoll(id){const c=G.col[id];if(!c)return"";const mu=wp(MU),sz=wp(SZ),mi=MU.indexOf(mu),zi=SZ.indexOf(sz);let s="";if(mi>0){if(mi==7)c.sh=1;else c.mi=Math.max(c.mi||0,mi);s+=" · "+(mi==7?"Chromatique":mu[0]);G.mut++}if(zi>=3){c.zi=Math.max(c.zi||0,zi);s+=" · "+sz[0]}rq(id);return s}
+function spRoll(id){const c=G.col[id];if(!c||hwVariantPokemon(id,c))return"";const mu=wp(MU),sz=wp(SZ),mi=MU.indexOf(mu),zi=SZ.indexOf(sz);let s="";if(mi>0){if(mi==7)c.sh=1;else c.mi=Math.max(c.mi||0,mi);s+=" · "+(mi==7?"Chromatique":mu[0]);G.mut++}if(zi>=3){c.zi=Math.max(c.zi||0,zi);s+=" · "+sz[0]}rq(id);return s}
 /* ---- boss ---- */
 /* id, nom, types, stats [PV,Atq,Déf,AtqSpé,DéfSpé,Vit] */
 const RB={143:["Ronflex",["normal"],[160,110,65,65,110,30]],131:["Lokhlass",["water","ice"],[130,85,80,85,95,60]],130:["Léviator",["water","flying"],[95,125,79,60,100,81]],59:["Arcanin",["fire"],[90,110,80,100,80,95]],65:["Alakazam",["psychic"],[55,50,45,135,95,120]],68:["Mackogneur",["fighting"],[90,130,80,65,85,55]],94:["Ectoplasma",["ghost","poison"],[60,65,60,130,75,110]],112:["Rhinoféros",["ground","rock"],[105,130,120,45,45,40]],
@@ -9991,7 +10010,6 @@ const kxBatSvg=`<svg viewBox="0 0 40 20" class="hwbt"><path d="M20 10c-2-5-6-9-1
 const hwArr=d=>`<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="${d?"M9 5l7 7-7 7":"M15 5l-7 7 7 7"}"/></svg>`;
 /* ---------- état ---------- */
 const HW={i:0,v:0,sh:0,busy:0};
-const HWSH=.05; /* chance d'obtenir la version chromatique à l'achat */
 const hwOwn=id=>!!(G.sp&&G.sp[id]);
 const hwImg=(id,mf,sh)=>`<img class="hwsp" alt="" draggable="false" decoding="async" src="${IMG}${sh?"shiny/":""}${id}${mf?"m"+mf:""}.png">`;
 const hwVarName=(x,k)=>{if(!k)return LS("Normal","Normal");const mg=kxHwMg(x.id),w=(MGM[mg[k-1]].n.match(/ (\S+)$/)||[])[1];return "Méga"+(w?" "+w:"")};
@@ -10001,7 +10019,7 @@ function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=g
  const vars=[0].concat(mg.map((_,k)=>k+1)).map(k=>`<button class="${HW.v==k?"on":""}" data-hw="var" data-k="${k}">${hwVarName(x,k)}</button>`).join("");
  const ladder=HWI.map((y,j)=>`<i class="${j==i?"on":j<i?"lo":""}" style="--h:${Math.round(Math.pow(1.2,j)/mx*100)}%"></i>`).join("");
  return `<div class="hwpg" style="--a:${x.au};--b:${x.au2}">
- <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique","Shiny")} · ${Math.round(HWSH*100)} %</span></button></div><small class="hwhint">${LS("Glisse pour faire tourner · double-clic pour un tour complet","Drag to rotate · double-click for a full spin")}</small></div>
+ <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique · pension / entraînement","Shiny · daycare / training")}</span></button></div><small class="hwhint">${LS("Glisse pour faire tourner · double-clic pour un tour complet","Drag to rotate · double-click for a full spin")}</small></div>
  <div class="hwinfo"><div class="hwk">${LS("EXCLUSIVITÉ HALLOWEEN","HALLOWEEN EXCLUSIVE")}</div><h2>${esc(x.n)}</h2>
   <div class="hwtr"><span class="vb vhw">${ico("spark")}Halloween</span>${tchips(x.t)}</div>
   <p class="hwfl">${esc(LS(x.fr,x.en))}</p>
@@ -10041,7 +10059,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(a=="var"){HW.v=+b.dataset.k;hwRender("pop")}
  else if(a=="shiny"){HW.sh=HW.sh?0:1;hwRender("pop")}
  else if(a=="buy"){const x=HWI[HW.i];if(!x)return;if((G.gem||0)<x.p){toast(LS("Il te manque "+fmt(x.p-(G.gem||0))+" gemmes","You are missing "+fmt(x.p-(G.gem||0))+" gems"));return}
-  G.gem-=x.p;spGrant(x.id);try{if(Math.random()<HWSH){const c=G.col[x.id];if(c&&!c.sh){c.sh=1;rq(x.id);toast(LS("Chromatique ! "+x.n+" brille d'un éclat rare.","Shiny! "+x.n+" shines with a rare glow."));sfx("shiny")}}}catch(_){}try{G.col[x.id].hw=1;sfx("prest");checkAch()}catch(_){}toast(LS(x.n+" rejoint ton équipe !",x.n+" joins your team!"));save();hwRender("pop");hwBurst(x);try{ui()}catch(_){}}},true);
+  G.gem-=x.p;spGrant(x.id);try{G.col[x.id].hw=1;sfx("prest");checkAch()}catch(_){}toast(LS(x.n+" rejoint ton équipe !",x.n+" joins your team!"));save();hwRender("pop");hwBurst(x);try{ui()}catch(_){}}},true);
 document.addEventListener("keydown",e=>{const o=$("hwm");if(!o||o.className!="on")return;if(e.key=="Escape")hwClose();else if(e.key=="ArrowRight")hwGo(HW.i+1,1);else if(e.key=="ArrowLeft")hwGo(HW.i-1,-1)});
 {let sx=0,sy=0;document.addEventListener("touchstart",e=>{const o=$("hwm");if(!o||o.className!="on")return;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
  document.addEventListener("touchend",e=>{const o=$("hwm");if(!o||o.className!="on"||(e.target.closest&&e.target.closest(".hwstage")))return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6)hwGo(HW.i+(dx<0?1:-1),dx<0?1:-1)},{passive:true})}
@@ -10761,13 +10779,13 @@ const penBetterMu=(c,v)=>!c.mi||MU[v][4]<MU[c.mi][4];
 penGo=function(){if(!PNM||PNM.mode!="pick"||!PNM.sel.length||penOf(PNL)&&penOf(PNL).t0)return;if(PNL&&!PL("pn2"))return;
  const o={sl:PNM.sel.filter(i=>G.col[i]).slice(0,10),t0:Date.now()};if(PNL)G.pen2=o;else G.pen=o;PNM=null;PENR=false;sfx("click");save()};
 penClaim=function(n){n=+n?1:0;const p=penOf(n);if(!p||Date.now()-p.t0<PEN_T)return;qadd("pen",1);const out=[];
- for(const i of p.sl){const c=G.col[i];if(!c)continue;const o={i,k:"",l:[]};
+ for(const i of p.sl){const c=G.col[i];if(!c)continue;if(hwVariantPokemon(i,c))hfLock(c);const o={i,k:"",l:[]};
   const gz=Math.random()<.10,gm=Math.random()<.10,gh=Math.random()<.03,ga=Math.random()<.05;
   if(gz){const L=[3,4,5,6],v=L[wi(L.map(k=>SZ[k][4]))];if(penBetterSz(c,v)){c.zi=v;o.l.push([SZ[v][0],SZC[v]]);o.k="sz";o.v=v}}
   if(gm){const L=[1,2,3,4,5,6,7,8,9,10],v=L[wi(L.map(k=>MU[k][4]))];if(penBetterMu(c,v)){c.mi=v;o.l.push([MU[v][0],MUC[v]]);o.k="mu";o.v=v}}
   if(ga&&!c.al){c.al=1;o.l.push(["Alpha","#ef4444"]);if(!o.k)o.k="al"}
   if(gh&&!c.sh){c.sh=1;o.l.push([LS("Chromatique","Shiny"),"#fde047"]);o.k="sh"}
-  if(o.l.length)rq(i);out.push(o)}
+  if(o.l.length){hwSaveVariants(i,c);rq(i)}out.push(o)}
  if(n)G.pen2=null;else G.pen=null;P2R=0;PNM={mode:"res",out};PENR=false;save();sfx(out.some(o=>o.k)?"big":"click")};
 function vPen(){
  const h=vPenL(0),k=h.indexOf('<div class="box"><h3>');if(k<0)return h;
@@ -11482,7 +11500,7 @@ const trKey=(k,i)=>{const c=G.col[i];switch(k){case"atk":return calc(i,0);case"m
 const trRoll=(L,w)=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[L.length-1]};
 const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(MU[k]&&MU[k][4]>0)o.push(k);return o};
 function trLog(t,x,c){t.lg.unshift({t:Date.now(),x,c});if(t.lg.length>10)t.lg.length=10}
-function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);const m=t.m,got=[];
+function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);if(hwVariantPokemon(t.i,c))hfLock(c);const m=t.m,got=[];
  const pz=trP(TRH.sz,m),pm=trP(TRH.mu,m),pa=trP(TRH.al,m),ps=trP(TRH.sh,m),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
  for(let k=0;k<n;k++){
   if(useE){t.ea+=evr;while(t.ea>=1){t.ea-=1;const tot=c.ev.reduce((a,b)=>a+b,0);if(c.ev[t.e]<252&&tot<510){c.ev[t.e]++;t.s.ev++}}}
@@ -11492,7 +11510,7 @@ function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);c
   if((m=="al"||m=="all")&&!c.al&&Math.random()<pa){c.al=1;t.s.al++;got.push(["Alpha","#ef4444"])}
   if(m=="all"&&!c.sh&&Math.random()<ps){c.sh=1;t.s.sh++;got.push([LS("Chromatique","Shiny"),"#fde047"])}}
  t.s.k+=n;t.kc+=n;
- if(got.length){got.forEach(g=>{trLog(t,g[0],g[1]);toast(LS("Entraînement : ","Training: ")+g[0]+" !")});try{trFlash(got)}catch(e){}rq(t.i);sfx("big");save()}}
+ if(got.length){hwSaveVariants(t.i,c);got.forEach(g=>{trLog(t,g[0],g[1]);toast(LS("Entraînement : ","Training: ")+g[0]+" !")});try{trFlash(got)}catch(e){}rq(t.i);sfx("big");save()}}
 function trTick(){const t=trS();if(!t.i||!t.on||!G.col[t.i])return;const now=Date.now();if(!t.t0)t.t0=now;
  let due=Math.floor((now-t.t0)/TRK)-t.cr;if(due<=0)return;if(due>TRCAP){t.t0+=(due-TRCAP)*TRK;due=TRCAP}
  t.cr+=due;trCredit(due);if(now-(t.sv||0)>30000){t.sv=now;save()}}
@@ -12607,18 +12625,24 @@ let HFMC=null;
    les paliers suivent la force réelle, donc chaque palier fait plus de dégâts que le précédent */
 function hfMul(id){const x=HFI[id];return x?HFT[x.t].m:1}
 try{preload(HFL.map(x=>x[0])).then(()=>{HFMC=null;try{ids().forEach(i=>{if(G.col[i]&&G.col[i].hf)rq(i)});recomp()}catch(e){}})}catch(e){}
-{const r0=rq;rq=function(id){try{const c=G.col[id];if(c&&c.hf&&HFI[id])hfLock(c)}catch(e){}const q=r0.apply(this,arguments);try{const c=G.col[id];if(c&&c.hf&&HFI[id]){c.q=q*hfMul(id);return c.q}}catch(e){}return q}}
-/* mutation, taille et Alpha d'une forme Halloween : uniquement ceux obtenus dans la bannière (le chromatique, lui, vient de partout) */
-const hfLock=c=>{if(c.hmi===undefined){c.hmi=c.mi|0;c.hzi=c.zi|0;c.hal=c.al?1:0}c.mi=c.hmi||0;c.zi=c.hzi||0;if(c.hal)c.al=1;else delete c.al};
-{const r0=recomp;recomp=function(){try{for(const k in G.col){const c=G.col[k];if(c&&c.hf){if(HFI[k]){c.hw=1;c.spc=1;hfLock(c)}else{delete c.hf;delete c.hfv}}}}catch(e){}return r0.apply(this,arguments)}}
+{const r0=rq;rq=function(id){try{const c=G.col[id];if(hwVariantPokemon(id,c))hfLock(c)}catch(e){}const q=r0.apply(this,arguments);try{const c=G.col[id];if(c&&c.hf&&HFI[id]){c.q=q*hfMul(id);return c.q}}catch(e){}return q}}
+/* Variantes Halloween : seuls penClaim et trCredit enregistrent de nouveaux gains.
+   Les variantes déjà sauvegardées sont conservées lors de la migration. */
+function hwVariantPokemon(id,c){return !!c&&((c.hf&&!!HFI[id])||HWID.includes(+id))}
+function hwSaveVariants(id,c){if(!hwVariantPokemon(id,c))return;c.hmi=c.mi|0;c.hzi=c.zi|0;c.hal=c.al?1:0;c.hsh=c.sh?1:0}
+const hfLock=c=>{if(c.hmi===undefined){c.hmi=c.mi|0;c.hzi=c.zi|0;c.hal=c.al?1:0}if(c.hsh===undefined)c.hsh=c.sh?1:0;c.mi=c.hmi||0;c.zi=c.hzi||0;c.sh=c.hsh||0;if(c.hal)c.al=1;else delete c.al};
+for(const k in G.col){const c=G.col[k];if(hwVariantPokemon(k,c))hfLock(c)}
+{const r0=recomp;recomp=function(){try{for(const k in G.col){const c=G.col[k];if(c&&c.hf){if(HFI[k]){c.hw=1;c.spc=1}else{delete c.hf;delete c.hfv}}if(hwVariantPokemon(k,c))hfLock(c)}}catch(e){}return r0.apply(this,arguments)}}
+/* Règle affichée dans le wiki de la pension et de l'entraînement. */
+for(const k of ["pen","trn"]){const p=wkBody[k];if(p)wkBody[k]=()=>p()+wn("info",TT("Variantes Halloween","Halloween variants"),TT("Les formes de la bannière et les exclusifs Halloween gagnent mutations, tailles, statut Alpha et chromatique uniquement à la pension et à l'entraînement. Les améliorations déjà obtenues sont conservées.","Banner forms and Halloween exclusives earn mutations, sizes, Alpha and shiny status only through daycare and training. Existing upgrades are preserved."))}
 /* --- sprite Halloween partout où l'on affiche un Pokémon possédé --- */
 {const s0=sp;sp=function(id,sh,raw){try{if(!raw){const c=G.col[id];if(c&&c.hf&&HFI[id]&&!c.mf&&!c.dy)return hfImg(id,sh,c.hfv)}}catch(e){}return s0.apply(this,arguments)}}
 /* --- évolution : la forme Halloween suit l'évolution si elle existe, sinon l'évolution est bloquée --- */
 {const c0=canEvo;canEvo=function(e){try{const c=G.col[e[0]];if(c&&c.hf&&!HFI[e[1]])return false}catch(x){}return c0.apply(this,arguments)}}
-{const d0=doEvolve;doEvolve=function(from,to){const c=G.col[from],hf=c&&c.hf,v=c&&c.hfv;const r=d0.apply(this,arguments);try{const t=G.col[to];if(hf&&t&&HFI[to]){const w=t.hf;t.hmi=Math.max(c.hmi||0,w?t.hmi||0:0);t.hzi=Math.max(c.hzi||0,w?t.hzi||0:0);t.hal=(c.hal||(w&&t.hal))?1:0;t.hf=1;t.hw=1;t.spc=1;if(v&&HFV[to]&&HFV[to].includes(v))t.hfv=v;hfLock(t);rq(to);recomp();save()}}catch(e){}return r}}
+{const d0=doEvolve;doEvolve=function(from,to){const c=G.col[from],hf=c&&c.hf,v=c&&c.hfv;const r=d0.apply(this,arguments);try{const t=G.col[to];if(hf&&t&&HFI[to]){const w=t.hf,mi=w?t.hmi||0:0,zi=w?t.hzi||0:0;t.hmi=c.hmi&&penBetterMu({mi},c.hmi)?c.hmi:mi;t.hzi=c.hzi>=3&&penBetterSz({zi},c.hzi)?c.hzi:zi;t.hal=(c.hal||(w&&t.hal))?1:0;t.hsh=(c.hsh||(w&&t.hsh))?1:0;t.hf=1;t.hw=1;t.spc=1;if(v&&HFV[to]&&HFV[to].includes(v))t.hfv=v;hfLock(t);rq(to);recomp();save()}}catch(e){}return r}}
 /* --- prestige : les formes Halloween sont gardées --- */
-{const p0=prestige;prestige=function(sel){const keep={};try{for(const k in G.col){const c=G.col[k];if(c&&c.hf)keep[k]={v:c.hfv,mi:c.hmi|0,zi:c.hzi|0,al:c.hal|0}}}catch(e){}sel=(sel||[]).slice();Object.keys(keep).forEach(k=>{if(sel.indexOf(+k)<0)sel.push(+k)});
- const r=p0.call(this,sel);try{for(const k in keep){const c=G.col[k],K=keep[k];if(c){c.hf=1;c.hw=1;c.spc=1;if(K.v)c.hfv=K.v;c.hmi=K.mi;c.hzi=K.zi;c.hal=K.al;hfLock(c);rq(+k)}}recomp();save()}catch(e){}return r}}
+{const p0=prestige;prestige=function(sel){const keep={};try{for(const k in G.col){const c=G.col[k];if(c&&c.hf)keep[k]={v:c.hfv,mi:c.hmi|0,zi:c.hzi|0,al:c.hal|0,sh:c.hsh|0}}}catch(e){}sel=(sel||[]).slice();Object.keys(keep).forEach(k=>{if(sel.indexOf(+k)<0)sel.push(+k)});
+ const r=p0.call(this,sel);try{for(const k in keep){const c=G.col[k],K=keep[k];if(c){c.hf=1;c.hw=1;c.spc=1;if(K.v)c.hfv=K.v;c.hmi=K.mi;c.hzi=K.zi;c.hal=K.al;c.hsh=K.sh;hfLock(c);rq(+k)}}recomp();save()}catch(e){}return r}}
 /* --- bannière : 5 Pokémon qui changent toutes les 2 heures --- */
 const hfSlot=()=>Math.floor(Date.now()/IVSL);
 let HFB=null;
@@ -12634,13 +12658,13 @@ function hfRoll(L){const S=HFS();S.n++;S.p++;let id;if(S.p>=HFP)id=L[0];else{let
 let HFN=1,HFBUSY=0,IVMODE=null;
 async function hfSummon(n){if(HFBUSY||!HFON())return;const S=HFS();if(S.rs!==hfSlot()){S.rs=hfSlot();S.rc=0}if(S.rc+n>beCap()){toast(LS("Limite d'invocations atteinte pour cette rotation.","Summon limit reached for this rotation."));sfx("err");return}const B=hfBanner(),tot=HFC*n;if(G.m<tot){toast(LS("Il te manque "+fmt(tot-G.m)+" ₽ pour cette invocation.","You are missing "+fmt(tot-G.m)+" coins."));sfx("err");return}
  HFBUSY=1;G.m-=tot;S.rc+=n;const res={};
- for(let i=0;i<n;i++){const id=hfRoll(B.L),x=res[id]=res[id]||{id,k:0,mi:0,zi:0,mc:0};x.k++;if(Math.random()<.01){x.mi=Math.max(x.mi,ivMu());x.mc++}if(Math.random()<.01)x.zi=Math.max(x.zi,ivSz());if(Math.random()<.01)x.al=1;if(Math.random()<.01)x.shn=1}
+ for(let i=0;i<n;i++){const id=hfRoll(B.L),x=res[id]=res[id]||{id,k:0,mi:0,zi:0,mc:0};x.k++}
  const L=Object.values(res);try{await preload(L.map(x=>x.id))}catch(e){}
  let nNew=0;
  L.forEach(x=>{const id=x.id;let c=G.col[id];x.nw=!(c&&c.hf);
   if(c){c.n+=x.k;try{train(id,x.k)}catch(e){}}else{c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}}
-  if(x.nw){nNew++;c.hmi=0;c.hzi=0;c.hal=0}c.hf=1;c.hw=1;c.spc=1;if(HFV[id]&&!c.hfv)c.hfv=HFV[id][Math.random()*HFV[id].length|0];G.dx[id]=1;
-  if(x.mi){c.hmi=Math.max(c.hmi||0,x.mi);G.mut=(G.mut||0)+x.mc}if(x.zi)c.hzi=Math.max(c.hzi||0,x.zi);if(x.al)c.hal=1;if(x.shn){c.sh=1;x.sh=true}hfLock(c);
+  if(x.nw){nNew++;c.hmi=0;c.hzi=0;c.hal=0;c.hsh=0}c.hf=1;c.hw=1;c.spc=1;if(HFV[id]&&!c.hfv)c.hfv=HFV[id][Math.random()*HFV[id].length|0];G.dx[id]=1;
+  hfLock(c);
   rq(id);c.h=mhp(id)});
  IDC=null;recomp();save();HFBUSY=0;sfx(L.some(x=>HFI[x.id].t>=3)?"shiny":"big");
  L.sort((a,b)=>HFI[b.id].r-HFI[a.id].r);
@@ -12652,10 +12676,10 @@ function hfTile(id,x){const c=G.col[id],h=HFI[id],T=HFT[h.t],mi=x?x.mi:0,zi=x?x.
 const hfLeft=()=>{let s=Math.max(0,Math.floor((HFEND-Date.now())/1000));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d>0?d+LS(" j "," d ")+h+" h":h+" h "+String(m).padStart(2,"0")+" min"};
 function vHf(){const B=hfBanner(),S=HFS(),tot=HFC*HFN,ok=G.m>=tot,top=B.L[0],T=HFT[HFI[top].t],p=Math.min(HFP,S.p);
  return `<div class="ivqh hfh"><div class="ivqb"></div><div class="hfbats">${typeof kxBatSvg!="undefined"?kxBatSvg+kxBatSvg+kxBatSvg:""}</div><div class="ivqhs">${hfImg(top,0,HFV[top]?HFV[top][0]:"")}</div><div class="ivqct"><small>${LS("COÛT / INVOCATION","COST / SUMMON")}</small><b>${fmt(HFC)} ₽</b></div><span class="ivqtag hftag">${typeof kxPump!="undefined"?kxPump:""} ${LS("Événement limité","Limited event")}</span>
- <div class="ivqhb"><small class="ivqk">${esc(HFI[top].n)} · ${LS(T.n[0],T.n[1])}</small><h2>${LS("Bannière Halloween","Halloween banner")}</h2><p class="hfp">${LS("Des formes Halloween exclusives, plus fortes que les Méga-Évolutions. Elles remplacent la version normale de l'espèce : sa mutation, sa taille et son Alpha disparaissent, et ne s'obtiennent ensuite que dans cette bannière. Le chromatique se garde et peut aussi venir de la nature.","Exclusive Halloween forms, stronger than Mega Evolutions. They replace the species' normal version: its mutation, size and Alpha are removed and can then only be obtained from this banner. Shiny is kept and can also come from the wild.")}</p>
+ <div class="ivqhb"><small class="ivqk">${esc(HFI[top].n)} · ${LS(T.n[0],T.n[1])}</small><h2>${LS("Bannière Halloween","Halloween banner")}</h2><p class="hfp">${LS("Des formes Halloween exclusives, plus fortes que les Méga-Évolutions. Elles remplacent la version normale sans récupérer ses variantes. Mutations, tailles, statut Alpha et chromatique se gagnent uniquement à la pension et à l'entraînement.","Exclusive Halloween forms, stronger than Mega Evolutions. They replace the normal version without inheriting its variants. Mutations, sizes, Alpha and shiny status can only be earned through daycare and training.")}</p>
  <div class="ivqtm">${ico("clock")} ${LS("5 Pokémon changent dans ","5 Pokémon change in ")}<b id="ivcd">${ivCd()}</b> · ${LS("fin de l'événement dans ","event ends in ")}<b>${hfLeft()}</b></div></div></div>
  <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie : forme la plus rare","Guarantee: rarest form")}</b><span>${p} / ${HFP}</span></div><div class="ivqpb"><i style="width:${p/HFP*100}%;background:${T.c}"></i></div><small>${LS(esc(HFI[top].n)+" (ou la forme la plus rare de la bannière en cours) est garanti dans "+(HFP-p)+" invocation(s). Le compteur continue d'une bannière à l'autre.","The rarest form of the current banner is guaranteed in "+(HFP-p)+" summon(s). The counter carries over between banners.")}</small></div>
- <div class="ivqrt"><small>${LS("Chaque invocation donne une forme Halloween de la bannière. Plus une forme est forte, plus elle est rare. 1 % de chance de mutation, 1 % de taille hors norme, 1 % d'Alpha et 1 % de chromatique (tirages séparés).","Every summon gives a Halloween form from the banner. The stronger the form, the rarer it is. 1% mutation, 1% special size, 1% Alpha and 1% shiny chance (separate rolls).")}</small></div></div>
+ <div class="ivqrt"><small>${LS("Chaque invocation donne une forme Halloween de la bannière. Plus une forme est forte, plus elle est rare. Les mutations, tailles, statuts Alpha et chromatiques se gagnent uniquement à la pension et à l'entraînement.","Every summon gives a Halloween form from the banner. The stronger the form, the rarer it is. Mutations, sizes, Alpha and shiny status can only be earned through daycare and training.")}</small></div></div>
  <div class="box ivqs">${ivQuota(ivUsed(S,hfSlot()),beCap(),"#ff7518")}<div class="ivqn"><b>${LS("COMBIEN INVOQUER ?","HOW MANY?")}</b><div>${ivAmt([1,5],HFN,"hf",beCap()-ivUsed(S,hfSlot()))}</div></div>
  ${ivGo("hf",HFN,ok,tot,beCap()-ivUsed(S,hfSlot())," hfgo")}</div>
  <div class="box ivqpool"><div class="row sp2"><h2>${LS("Les 5 Pokémon de la bannière","The 5 banner Pokémon")}</h2><small>${LS("taux · puissance","rate · power")}</small></div><div class="ivqgrid">${B.L.map(i=>hfTile(i)).join("")}</div></div>
@@ -12934,7 +12958,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-20",t:["Taille de l’interface à 80 % par défaut","Interface size defaults to 80%"],e:[
+ {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["fix","Pokémon centrés","Les sprites animés restent centrés et contenus dans leur case, même pendant leur mouvement.","Centered Pokémon","Animated sprites stay centered and contained in their slot throughout their movement."],
+  ["fix","Variantes Halloween","Les formes de la bannière et les exclusifs Halloween peuvent gagner mutations, tailles, statut Alpha et chromatique uniquement à la pension et à l'entraînement. Les améliorations déjà possédées sont conservées.","Halloween variants","Banner forms and Halloween exclusives can earn mutations, sizes, Alpha and shiny status only through daycare and training. Existing upgrades are preserved."],
+  ["imp","Pokémon List animée","Les Pokémon de la liste utilisent les sprites animés du classement en conservant leurs mutations et couleurs chromatiques. Les formes exclusives gardent leur apparence.","Animated Pokémon List","The list uses the leaderboard's animated sprites while keeping mutation and shiny colours. Exclusive forms keep their appearance."],
   ["imp","Classement Meilleur Pokémon","Podium des 3 meilleurs Pokémon avec grands sprites, mutations, DPS et fiches cliquables ; lignes du classement agrandies.","Best Pokémon leaderboard","Top 3 podium with larger sprites, mutations, DPS and clickable details; bigger leaderboard rows."],
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
