@@ -3873,12 +3873,26 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 /* ==== TS4 : sprite du Pokémon à la taille du carré rouge ==== */
 .pr .sp,.pr .spw{width:150px;height:130px}
 .pr{padding:12px 14px}
+</style><style id="pid-rank-direct-style">
+/* Render-time banners: no MutationObserver and no resizing loop. */
+.rkx-r.pid-rank-bg,.rkm-r.pid-rank-bg,.rkb-podium-card.pid-rank-bg,.pod.pid-rank-bg,.lrow.pid-rank-bg,.pvpd.pid-rank-bg,.pvrw2.pid-rank-bg{background-size:cover!important;background-position:center center!important;isolation:isolate;position:relative;color:#fff;text-shadow:0 1px 3px #050b22}
+.pid-rank-bg:before{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,9,28,.54),rgba(5,9,28,.25) 54%,rgba(5,9,28,.58));border-radius:inherit;z-index:0}
+.pid-rank-bg>*{position:relative;z-index:1}
+.rkb-podium-card .rkb-podium-sprite{height:136px!important;min-height:136px!important}
+.rkb-podium-card .rkb-podium-sprite .hv{width:132px!important;height:132px!important}
+.rkb-podium-card .rkb-podium-sprite .hvi{max-width:132px!important;max-height:132px!important}
+.rkb-r.rkb-large .rkb-s{width:104px!important;height:104px!important}
+.rkb-r.rkb-large .rkb-s .hv{width:102px!important;height:102px!important}
+.rkb-r.rkb-large .rkb-s .hvi{max-width:102px!important;max-height:102px!important}
+.rkx-r,.rkm-r,.rkb-large{min-height:96px}
+.rkx-r b,.rkm-r b{font-size:18px}
+@media(max-width:700px){.rkb-podium-card .rkb-podium-sprite{height:80px!important;min-height:80px!important}.rkb-podium-card .rkb-podium-sprite .hv{width:76px!important;height:76px!important}.rkb-podium-card .rkb-podium-sprite .hvi{max-width:76px!important;max-height:76px!important}}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="bpf8a102026"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=bpf8a102026"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-rankfix-20261020b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-rankfix-20261020b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4833,7 +4847,7 @@ async function lbInit(){try{if(!window.claude||!claude.use)return;const [db,us]=
 function lbRows(){const me=Object.assign({id:LB.uid||"me",me:1},lbDoc()),r=LB.rows.filter(x=>x.id!=me.id&&x.n);r.push(me);return r.sort((a,b)=>(b.bf||0)-(a.bf||0)||(a.t||0)-(b.t||0))}
 const ava=(f,sh,cl)=>`<span class="lav ${cl||""}"><img src="${IMG+(sh?"shiny/":"")+f}.png" alt="" onerror="this.style.visibility='hidden'"></span>`;
 const lbBadges=r=>`${r.st>0?`<span class="bdg pres">${ico("spark")} PRESTIGE ${r.st}</span>`:""}<span class="bdg tt">${ico("crown")} ${ttl(r.dx||0)}</span>`;
-function vLB(){const R=lbRows(),p=R.slice(0,3),pod=(r,k)=>r?`<div class="pod q${k}" data-a="vp" data-t="${r.id}">${k==1?`<span class="crn">${ico("crown")}</span>`:""}${ava2(r,"big")}<b class="pdn">${esc(r.n)}${r.me?' <em>(toi)</em>':""}</b>${ttHtml(r.tt)}<div class="pds">Étage <b>${r.bf||0}</b></div></div>`:`<div class="pod q${k} e"></div>`;
+function vLB(){const R=lbRows(),p=R.slice(0,3),pod=(r,k)=>r?`<div class="pod pid-rank-bg q${k}" style="${pidRankBanner(r)}" data-a="vp" data-t="${r.id}">${k==1?`<span class="crn">${ico("crown")}</span>`:""}${ava2(r,"big")}<b class="pdn">${esc(r.n)}${r.me?' <em>(toi)</em>':""}</b>${ttHtml(r.tt)}<div class="pds">Étage <b>${r.bf||0}</b></div></div>`:`<div class="pod q${k} e"></div>`;
  return `<div class="box lbx"><div class="lbh">${ico("trophy")}<div><h2>Classement général</h2><small>Classé selon l'étage atteint</small></div>${LB.ok?`<span class="bdg on">${ico("wifi")} En ligne · ${R.length} joueur${R.length>1?"s":""}</span>`:`<span class="bdg off">${ico("wifioff")} Local</span>`}</div>
  <div class="podium">${pod(p[1],2)}${pod(p[0],1)}${pod(p[2],3)}</div>
  <div class="lbl" id="lbl">${lbList(R)}</div>
@@ -5285,7 +5299,7 @@ function ptBox(){const me=meAv();
  <h3>${LS("Cadres de profil","Profile frames")} <small>${FRU.size} / ${FRM.length}</small></h3><div class="frg">${FRM.map(f=>{const ok=FRU.has(f[0]);return `<button class="frc${G.fr==f[0]?" on":""}${ok?"":" lk"}" ${ok?`data-a="frs" data-t="${f[0]}"`:""}><span class="lav fx" style="--fg:${f[3]}"><img src="${IMG}25.png" alt="" onerror="this.style.visibility='hidden'"></span><b>${LS(f[1],f[2])}</b><small>${ok?LS("Débloqué","Unlocked"):ico("lock")+" "+LS(f[5],f[6])}</small></button>`}).join("")}</div></div>`}
 /* classement */
 function lbDoc(){const a=G.col[G.av]?G.av:ids()[0]||19,c=G.col[a]||{};return{n:G.name,av:spf(a),avs:c.sh?1:0,ban:G.ban,bf:Math.max(G.cl,G.bf||0),st:G.st,dx:dxn(),caps:G.caps,sh:shinies(),tt:G.tt||"t0",fr:G.fr||"f0",ai:G.avm&&IMGOK(G.avi)?G.avi:"",tl:tlv().l,pd:Math.floor((Date.now()-G.t0)/864e5),fav:favs3().map(x=>({f:x.f,sh:x.sh,n:x.n,l:x.l,ty:x.ty})),t:Date.now()}}
-const lbList=R=>R.slice(3).map((r,i)=>`<div class="lrow ${r.me?"me":""}" data-a="vp" data-t="${esc(r.id)}"><span class="rk">${i+4}</span>${ava2(r)}<div class="lid"><b class="nm2">${esc(r.n)}</b><small>${LS("Zone","Zone")} ${zoneOf(r.bf||1)+1}${r.pd!=null?" · "+(+r.pd|0)+LS(" j"," d"):""}</small></div>${r.st>0?`<span class="bdg pres">${ico("spark")} ${LS("PRESTIGE","PRESTIGE")} ${r.st|0}</span>`:""}${ttHtml(r.tt)}<span class="lvc">Lv.${(+r.tl||0)|0}</span><span class="sc">${r.bf||0}</span></div>`).join("");
+const lbList=R=>R.slice(3).map((r,i)=>`<div class="lrow pid-rank-bg ${r.me?"me":""}" data-a="vp" data-t="${esc(r.id)}" style="${pidRankBanner(r)}"><span class="rk">${i+4}</span>${ava2(r)}<div class="lid"><b class="nm2">${esc(r.n)}</b><small>${LS("Zone","Zone")} ${zoneOf(r.bf||1)+1}${r.pd!=null?" · "+(+r.pd|0)+LS(" j"," d"):""}</small></div>${r.st>0?`<span class="bdg pres">${ico("spark")} ${LS("PRESTIGE","PRESTIGE")} ${r.st|0}</span>`:""}${ttHtml(r.tt)}<span class="lvc">Lv.${(+r.tl||0)|0}</span><span class="sc">${r.bf||0}</span></div>`).join("");
 function vpModal(m){const R=lbRows(),r=R.find(x=>x.id==VP);if(!r){VP=null;m.innerHTML="";m.className="";return}
  const b=BAN[r.ban]||BAN[0],rk=R.indexOf(r)+1,f=frOf(r.fr),sty=(r.st|0)>0;
  m.className="on";m.innerHTML=`<div class="mb" data-a="vpx"></div><div class="mc vpm vpsq"><button class="x" data-a="vpx">${ico("x")}</button>
@@ -7929,10 +7943,10 @@ function pvSeason(){const p=pvS(),t=pvTier(p.r),R=pvRows(),me=R.find(x=>x.me),rk
  return `<div class="pvbox"><h3>${pvIc("trophy")} Saison ${pvNum(pvIdx())}</h3><div class="pvlg">${PVT.map((x,i)=>`<div class="${i==t?"on":""} ${p.r>=x[1]?"ok":""}" style="--c:${x[2]}">${pvEmb(i,34)}<small>${i?x[1]:"départ"}</small></div>`).join("")}</div>
   <div class="pvnow"><span>Si la saison finissait maintenant</span>${rw&&need==0?`<b>Rang ${rk} · ${rw.n}</b>${pvRwHtml(rw,1)}`:need>0?`<b>Encore ${need} combat${need>1?"s":""} classé${need>1?"s":""} pour être récompensé</b>`:`<b>Rang ${rk} · hors du Top 100</b><small>Récompense de participation</small>`}</div>
   <div class="pvseg">${[0,1,2,3,4].map(i=>`<i class="${p.f>i?"on":""}"></i>`).join("")}</div><small class="pvdim">5 combats classés minimum pour toucher la récompense à la fin de la saison.</small></div>`}
-function pvPodium(R){const p=R.slice(0,3),one=(r,k)=>r?`<div class="pvpd q${k}" data-pv="prof:${esc(r.id)}">${k==1?`<span class="pvcr">${pvIc("crown")}</span>`:""}<span class="pvpr">${k}</span>${pvAvatar(r,"md")}<b>${esc(r.n)}${r.me?" (toi)":""}</b>${pvTh(pvTier(r.r))}<em>${r.r}</em></div>`:`<div class="pvpd q${k} e"></div>`;
+function pvPodium(R){const p=R.slice(0,3),one=(r,k)=>r?`<div class="pvpd pid-rank-bg q${k}" style="${pidRankBanner(r)}" data-pv="prof:${esc(r.id)}">${k==1?`<span class="pvcr">${pvIc("crown")}</span>`:""}<span class="pvpr">${k}</span>${pvAvatar(r,"md")}<b>${esc(r.n)}${r.me?" (toi)":""}</b>${pvTh(pvTier(r.r))}<em>${r.r}</em></div>`:`<div class="pvpd q${k} e"></div>`;
  return `<div class="pvpod">${one(p[1],2)}${one(p[0],1)}${one(p[2],3)}</div>`}
 function pvRow(r,full){const t=pvTier(r.r),rw=pvRw(r.rk);
- return `<div class="pvrw2 ${r.me?"me":""} ${r.rk<=3?"t"+r.rk:""}" data-pv="prof:${esc(r.id)}" style="--c:${PVT[t][2]}"><span class="pvn">${r.rk<=3?pvMedal(r.rk):r.rk}</span>${pvAvatar(r,"sm")}<div class="pvnm"><b>${esc(r.n)}${r.me?" (toi)":""}${r.bot?`<em class="pvia">IA</em>`:""}</b><small>${r.w||0}V · ${r.l||0}D</small></div>${full?pvStrip(r.tm,"xs"):""}<span class="pvtg" style="--c:${PVT[t][2]}">${pvEmb(t,18)}</span>${rw&&full?`<span class="pvtier" style="--c:${rw.c}">${rw.n}</span>`:""}<strong>${r.r}</strong></div>`}
+ return `<div class="pvrw2 pid-rank-bg ${r.me?"me":""} ${r.rk<=3?"t"+r.rk:""}" data-pv="prof:${esc(r.id)}" style="--c:${PVT[t][2]};${pidRankBanner(r)}"><span class="pvn">${r.rk<=3?pvMedal(r.rk):r.rk}</span>${pvAvatar(r,"sm")}<div class="pvnm"><b>${esc(r.n)}${r.me?" (toi)":""}${r.bot?`<em class="pvia">IA</em>`:""}</b><small>${r.w||0}V · ${r.l||0}D</small></div>${full?pvStrip(r.tm,"xs"):""}<span class="pvtg" style="--c:${PVT[t][2]}">${pvEmb(t,18)}</span>${rw&&full?`<span class="pvtier" style="--c:${rw.c}">${rw.n}</span>`:""}<strong>${r.r}</strong></div>`}
 function pvMini(){const R=pvRows(),top=R.slice(0,10),me=R.find(x=>x.me);return `<div class="pvbox"><h3>${pvIc("crown")} Classement</h3>${pvPodium(R)}<div class="pvlist">${top.slice(3).map(r=>pvRow(r)).join("")}${me&&me.rk>10?`<div class="pvsep">· · ·</div>${pvRow(me)}`:""}</div><button class="pvmore" data-pv="v:rank">Voir le Top 50 et les récompenses</button></div>`}
 function pvClaimBox(){const q=pvPending();if(!q)return"";return `<div class="pvclaim"><div><b>Saison ${pvNum(q.k)} terminée</b><span>Tu as fini ${q.rk}${q.rk==1?"er":"e"} (${q.r} pts)${q.rw?" · "+q.rw.n:""}</span>${pvRwHtml(q.rw||{h:.5,it:[]},1)}</div><button class="pvgo" data-pv="claim">${pvIc("gift")} Récupérer</button></div>`}
 /* ---------- équipe ---------- */
@@ -8991,7 +9005,9 @@ NAVX.push(["rks","trophy","Classements","#eab308","#854d0e"]);NENG.rks="Rankings
 NCAT.splice(NCAT.findIndex(x=>x[0]=="c_shp"),0,["c_soc","Social","Social","trophy","#e11d48","#881337",["gld","pvp","rks"]]);
 const RKX={v:"lb"};
 const RKT=[["lb","crown",()=>LS("Étage","Floor")],["m","coin",()=>LS("Pièces","Coins")],["bp","sword",()=>LS("Meilleur Pokémon","Best Pokémon")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
-const rkRow=(r,i,val,lab)=>`<div class="rkx-r${r.me?" me":""}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
+/* Classements : bannière équipée appliquée lors du rendu, jamais en post-traitement */
+const pidRankBanner=r=>{try{const n=r&&r.ban!=null?Number(r.ban):NaN;return Number.isInteger(n)&&n>=0&&BAN[n]?`background:${BAN[n].css};`:""}catch(e){return ""}};
+const rkRow=(r,i,val,lab)=>`<div class="rkx-r pid-rank-bg${r.me?" me":""}" style="${pidRankBanner(r)}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
 function rkBy(key,lab){const R=lbRows().slice().sort((a,b)=>(b[key]||0)-(a[key]||0)||(a.t||0)-(b.t||0));
  return `<div class="box rkx-box"><h3>${ico("trophy")} ${lab}${LB.ok?"":` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r[key]||0,lab)).join("")}</div></div>`}
 function rkGld(){let L=[];try{L=glState().L.slice().sort((a,b)=>b.lv-a.lv||b.xp-a.xp)}catch(e){}const my=glS().id;
@@ -9026,7 +9042,7 @@ function rkmPanel(r){const L=r.t5||[];
  const body=L.length?`<div class="rkm-g">${L.map(rkmMon).join("")}</div>`:`<div class="rkm-e">${ico("clock")} ${LS("Ses Pokémon apparaîtront dès qu'il se connectera avec la dernière version du jeu.","Their Pokémon will show up once they play on the latest version.")}</div>`;
  return `<div class="rkm-pi"><div class="rkm-ph"><small>${LS("5 MEILLEURS POKÉMON","TOP 5 POKÉMON")}</small>${r.me?"":`<button class="rkm-pf" data-a="vp" data-t="${esc(String(r.id))}">${ico("user")} ${LS("Voir le profil","View profile")}</button>`}</div>${body}</div>`}
 function rkmRow(r,i){const op=RKM.open===String(r.id);
- return `<div class="rkm-w${op?" op":""}" data-rkw="${esc(String(r.id))}"><div class="rkx-r rkm-r${r.me?" me":""}${i<3?" rkm-"+(i+1):""}" data-rkm="${esc(String(r.id))}" role="button" tabindex="0" aria-expanded="${op}"><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v rkm-v">${fmt(r.m||0)} ₽<small>${LS("pièces","coins")}</small></span><span class="rkm-ch">${ico("chevr")}</span></div><div class="rkm-p">${op?rkmPanel(r):""}</div></div>`}
+ return `<div class="rkm-w${op?" op":""}" data-rkw="${esc(String(r.id))}"><div class="rkx-r rkm-r${r.me?" me":""}${i<3?" rkm-"+(i+1):""}" data-rkm="${esc(String(r.id))}" role="button" tabindex="0" aria-expanded="${op}" style="${pidRankBanner(r)}"><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v rkm-v">${fmt(r.m||0)} ₽<small>${LS("pièces","coins")}</small></span><span class="rkm-ch">${ico("chevr")}</span></div><div class="rkm-p">${op?rkmPanel(r):""}</div></div>`}
 function rkmList(){const R=rkmRows();return R.map(rkmRow).join("")}
 function rkCoins(){rkmFetch();
  const off=!(LB&&LB.ok);
@@ -12728,9 +12744,9 @@ function rkbRows(){const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());
  if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,100)}
 function rkbList(){const R=rkbRows();if(!R.length)return `<small class="rkm-hint">${LS("Aucun record pour le moment.","No record yet.")}</small>`;
  const card=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
- return `<div class="rkb-podium-card rkb-place-${i+1}${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c}"><div class="rkb-podium-head"><span class="rkb-medal">${i===0?ico("crown"):ico("trophy")} ${i+1}</span><span class="rkb-podium-owner">${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</span></div><div class="rkb-podium-sprite">${aSpr(b[0],b[1])}</div><div class="rkb-podium-name">${esc(b[5]||"?")}</div><div class="rkb-podium-tags">${h||""}</div><div class="rkb-podium-dps"><strong>${fmt(r.bpv)}</strong><span>DPS</span></div><small class="rkb-open">${ico("eye")} ${LS("Voir la fiche","View details")}</small></div>`};
+ return `<div class="rkb-podium-card pid-rank-bg rkb-place-${i+1}${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c};${pidRankBanner(r)}"><div class="rkb-podium-head"><span class="rkb-medal">${i===0?ico("crown"):ico("trophy")} ${i+1}</span><span class="rkb-podium-owner">${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</span></div><div class="rkb-podium-sprite">${aSpr(b[0],b[1])}</div><div class="rkb-podium-name">${esc(b[5]||"?")}</div><div class="rkb-podium-tags">${h||""}</div><div class="rkb-podium-dps"><strong>${fmt(r.bpv)}</strong><span>DPS</span></div><small class="rkb-open">${ico("eye")} ${LS("Voir la fiche","View details")}</small></div>`};
  const row=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
- return `<div class="rkx-r rkb-r rkb-large${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c}"><span class="rkx-n">${i+1}</span><span class="rkb-s">${aSpr(b[0],b[1])}</span><span class="rkb-t"><b>${esc(b[5]||"?")}</b><small>${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</small>${h&&h.indexOf("vb")>=0?`<span class="rkb-vb">${h}</span>`:""}</span><span class="rkx-v rkb-v">${fmt(r.bpv)}<small>DPS</small></span><span class="rkb-open-arrow">${ico("chevron-right")}</span></div>`};
+ return `<div class="rkx-r rkb-r rkb-large pid-rank-bg${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c};${pidRankBanner(r)}"><span class="rkx-n">${i+1}</span><span class="rkb-s">${aSpr(b[0],b[1])}</span><span class="rkb-t"><b>${esc(b[5]||"?")}</b><small>${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</small>${h&&h.indexOf("vb")>=0?`<span class="rkb-vb">${h}</span>`:""}</span><span class="rkx-v rkb-v">${fmt(r.bpv)}<small>DPS</small></span><span class="rkb-open-arrow">${ico("chevron-right")}</span></div>`};
  return `<div class="rkb-podium">${R.slice(0,3).map(card).join("")}</div><div class="rkb-list-regular">${R.slice(3).map((r,i)=>row(r,i+3)).join("")}</div>`}
 
 function rkBest(){rkbFetch();bpScan();const off=!(LB&&LB.ok);
@@ -13075,4 +13091,74 @@ window.addEventListener("offline",function(){if(!document.getElementById("pidw")
   document.body.appendChild(o);o.querySelector("button").onclick=()=>{ls("pid_wiped",null);o.remove()}};
  setTimeout(show,1200);
 })();
+</script><script>
+/* Classements : podium, grandes lignes et bannières de profil */
+(function(){
+ var st=document.createElement("style");
+ st.textContent=`
+ .rkx-box,.lbx,.pvfr{overflow:visible!important}
+ .rkx-l,.rkb-list-regular,#rkml,.lbl,.pvlist.full{display:flex!important;flex-direction:column!important;gap:10px!important}
+ .pid-rank-podium,.rkb-podium{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;align-items:stretch!important;margin:12px 0 22px!important;width:100%!important}
+ .rkb-podium>.rkb-place-1{grid-column:2;grid-row:1;border-color:#f9c84b!important}
+ .rkb-podium>.rkb-place-2{grid-column:1;grid-row:1;border-color:#cbd5e1!important}
+ .rkb-podium>.rkb-place-3{grid-column:3;grid-row:1;border-color:#cc925c!important}
+ .rkb-podium-card{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:230px!important;padding:18px 12px!important;text-align:center!important;border-radius:19px!important}
+ .rkb-podium-card .rkb-podium-sprite{height:132px!important;min-height:132px!important;display:grid!important;place-items:center!important}
+ .rkb-podium-card .rkb-podium-sprite .hv{width:128px!important;height:128px!important}
+ .rkb-podium-card .rkb-podium-sprite .hvi{max-width:128px!important;max-height:128px!important}
+ .rkb-podium-card .rkb-podium-name{font-size:22px!important}
+ .rkb-podium-card .rkb-podium-dps strong{font-size:25px!important}
+ .pid-rank-podium>.rkx-r,.pid-rank-podium>.rkm-w{min-width:0!important;min-height:230px!important;border-radius:19px!important}
+ .pid-rank-podium>.rkx-r,.pid-rank-podium>.rkm-w>.rkx-r{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;text-align:center!important;padding:18px 12px!important}
+ .pid-rank-podium .lav{width:92px!important;height:92px!important}
+ .pid-rank-podium .rkx-v{font-size:23px!important;margin:0!important}
+ .pid-rank-podium>:nth-child(1){border:2px solid #cbd5e1!important}
+ .pid-rank-podium>:nth-child(2){border:2px solid #fbbf24!important}
+ .pid-rank-podium>:nth-child(3){border:2px solid #cc925c!important}
+ .rkx-r,.rkm-r,.pvrw2,.rkb-large{position:relative!important;min-height:93px!important;padding:12px 17px!important;gap:15px!important;border-radius:16px!important;overflow:hidden!important;isolation:isolate!important}
+ .rkx-r b,.rkm-r b,.rkb-large .rkb-t>b{font-size:18px!important}
+ .rkx-r .rkx-v,.rkm-r .rkx-v{font-size:21px!important}
+ .rkx-r .lav,.rkm-r .lav{width:74px!important;height:74px!important}
+ .rkb-large .rkb-s{width:104px!important;height:104px!important}
+ .rkb-large .rkb-s .hv{width:102px!important;height:102px!important}
+ .rkb-large .rkb-s .hvi{max-width:102px!important;max-height:102px!important}
+ .pid-bannered{color:#fff!important;position:relative!important;isolation:isolate!important;text-shadow:0 1px 3px #020617b8}
+ .pid-bannered:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(5,8,24,.40),rgba(5,8,24,.22),rgba(5,8,24,.48));border-radius:inherit}
+ @media(max-width:700px){
+ .pid-rank-podium,.rkb-podium{gap:6px!important}
+ .rkb-podium-card,.pid-rank-podium>.rkx-r{min-height:180px!important;padding:9px 4px!important}
+ .rkb-podium-card .rkb-podium-sprite{height:76px!important;min-height:76px!important}
+ .rkb-podium-card .rkb-podium-sprite .hv{width:72px!important;height:72px!important}
+ .rkb-podium-card .rkb-podium-sprite .hvi{max-width:72px!important;max-height:72px!important}
+ .rkb-podium-card .rkb-podium-name{font-size:14px!important}
+ .rkx-r,.rkm-r,.pvrw2,.rkb-large{min-height:74px!important;padding:8px!important;gap:8px!important}
+ .rkb-large .rkb-s{width:60px!important;height:60px!important}
+ .rkb-large .rkb-s .hv{width:58px!important;height:58px!important}
+ .rkb-large .rkb-s .hvi{max-width:58px!important;max-height:58px!important}
+ }`;
+ (document.head||document.documentElement).appendChild(st);
+ function banner(n){try{return Number.isInteger(+n)&&+n>=0&&BAN[+n]&&BAN[+n].css||null}catch(e){return null}}
+ function apply(el,n){if(!el)return;var b=banner(n);if(!b||el.dataset.pidBanner===String(n))return;el.dataset.pidBanner=String(n);el.style.setProperty("background",b,"important");el.classList.add("pid-bannered")}
+ function render(){
+  var map=new Map();
+  try{lbRows().forEach(r=>map.set(String(r.id),r))}catch(e){}
+  try{RKM.rows.forEach(r=>map.set(String(r.id),r))}catch(e){}
+  try{RKB.rows.forEach(r=>map.set(String(r.id),r))}catch(e){}
+  document.querySelectorAll(".rkx-r[data-t],.pod[data-t],.pvpd[data-t],.pvrw2[data-t]").forEach(el=>{var r=map.get(String(el.dataset.t));if(r&&r.ban!=null)apply(el,r.ban)});
+  document.querySelectorAll(".rkm-w[data-rkw]").forEach(el=>{var r=map.get(String(el.dataset.rkw));if(r&&r.ban!=null)apply(el.querySelector(".rkm-r"),r.ban)});
+  document.querySelectorAll(".rkb-podium-card,.rkb-large").forEach(el=>{try{var r=rkbRows()[+(el.dataset.bpr||0)];if(r&&r.ban!=null)apply(el,r.ban)}catch(e){}});
+  document.querySelectorAll(".rkx-l").forEach(list=>{
+   if(list.id==="rkbl"||list.querySelector(":scope > .pid-rank-podium"))return;
+   var rows=Array.from(list.children).filter(el=>el.classList.contains("rkx-r")||el.classList.contains("rkm-w"));
+   if(rows.length<3)return;
+   var pod=document.createElement("div");pod.className="pid-rank-podium";
+   pod.append(rows[1],rows[0],rows[2]);list.insertBefore(pod,list.firstChild);
+  });
+ }
+ var pending=false;
+ function queue(){if(pending)return;pending=true;setTimeout(()=>{pending=false;try{render()}catch(e){}},120)}
+ function boot(){new MutationObserver(queue).observe(document.body,{childList:true,subtree:true});queue()}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
+
 </script></body></html>
