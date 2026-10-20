@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-training-rates-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-training-rates-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-pokemon-gift-codes-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-pokemon-gift-codes-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10521,6 +10521,7 @@ const BUG_URL="https://discord.gg/AP3Y2YQav";/* colle ici le lien d'invitation D
 })();
 /* ===== v147 : Courrier (récompenses du boss monde, défis de guilde, codes cadeaux) + paliers du boss monde ===== */
 const GIFT_CODES={
+ "PARDON":{t:"Deux starters chromatiques",sh2:2},
  "CAPSULEOR":{t:"Une Capsule d’Or offerte",txt:"Merci de jouer à PokeIdleDex ! Voici ta Capsule d’Or.",rw:[["i","gold-bottle-cap",1]],fullCaps:1},
  "1.1.0":{t:"Version 1.1.0",txt:"Merci d'avoir joué à la première version de PokeIdleDex !",rw:[["m",50000000],["i","master-ball",1],["i","ability-patch",1],["i","gold-bottle-cap",1],["i","bottle-cap",1],["i","bi-atk",2],["i","bi-xp",2],["i","bi-coin",2],["i","bi-find",2],["i","bi-mut",2],["i","bi-cap",2]]},
  "MB11-X7K4Q9":{t:"Cadeau",txt:"11 Master Ball pour toi, merci de jouer à PokeIdleDex !",rw:[["i","master-ball",11]]},
@@ -10528,6 +10529,7 @@ const GIFT_CODES={
  "STARTER2":{t:"2 starters chromatiques",txt:"Deux starters chromatiques aléatoires pour toi !",sh2:2},
  /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",30],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
+const GIFT_PRIVATE_CODES={"a092de26c54c6eb15ba288df3461bb2e44f194795fe38af9d0679b116dd559a4":{pk:[{id:384,mf:10079,al:1,src:"r4"},{id:716,al:1,src:"r3"},{id:500,sh:1},{id:930,sh:1},{id:6,dy:1,al:1,zi:4}]}};
 function mailBox(){G.mail=G.mail||[];return G.mail}
 function mailUnread(){return mailBox().filter(m=>!m.c).length}
 function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:title,f:from||"",x:txt||"",d:Date.now(),rw:rw||[],fullCaps:fullCaps?1:0,c:rw&&rw.length?0:1,r:0});if(L.length>80)L.length=80;try{save()}catch(e){}try{mailDot()}catch(e){}}
@@ -10557,8 +10559,9 @@ function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Dat
   else if(k=="disc"){const u=window.PID_DISCORD||BUG_URL;if(u)window.open(u,"_blank","noopener")}
   else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
-   const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c];G.codes=G.codes||{};
+   const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c]||(/^TS4PACK-/.test(c)?GIFT_PRIVATE_CODES[await pidH(c)]:null);G.codes=G.codes||{};
    if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");
+   else if(g.pk){if(ST.claiming)return;ST.claiming=1;try{const names=await giftMonsGrant(g.pk,c);ST.msg=LS("Code accepté : ","Code accepted: ")+names.join(", ")+" !"}catch(x){ST.msg=LS("Impossible de récupérer les Pokémon. Réessaie : ton code reste disponible.","Could not claim Pokémon. Try again: your code is still available.")}finally{ST.claiming=0}}
    else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"",g.fullCaps);ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
    render();mailDot()}
  });
@@ -10598,6 +10601,10 @@ function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Dat
 })();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
+/* Fixed Pokémon gifts validate their forms before awarding the whole pack. */
+async function giftMonsGrant(list,code){await preload(list.map(g=>g.id));for(const g of list){if(!DB[g.id]||g.src&&!PWTV[g.src]||g.mf&&(!MGM[g.mf]||MGM[g.mf].s!==spc(g.id)||!IT["mp"+g.mf])||g.dy&&!canDyn(g.id))throw Error("Invalid Pokémon gift")}
+ const names=[];for(const g of list){const nw=!G.col[g.id],c=G.col[g.id]||(G.col[g.id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n=(c.n||0)+1;c.l=Math.max(c.l,tgtL());ens(g.id);if(g.al)c.al=1;if(g.sh)c.sh=1;if(g.zi!=null&&penBetterSz(c,g.zi))c.zi=g.zi;const item=g.mf?"mp"+g.mf:g.dy?"dynamax-band":"";if(item&&c.it!==item){if(c.it&&IT[c.it])G.inv[c.it]=(G.inv[c.it]||0)+1;c.it=item}G.dx[g.id]=1;IDC=null;rq(g.id);if(g.src)srcUp(g.id,g.src,nw);c.h=mhp(g.id);names.push(dn(g.id))}
+ G.codes=G.codes||{};G.codes[code]=1;recomp();save();toast(LS("Pokémon reçus : ","Pokémon received: ")+names.join(", "));try{sfx("big");show()}catch(e){}return names}
 function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){const i=Math.random()*P.length|0;fin.push(P.splice(i,1)[0])}const names=[];fin.forEach(id=>{const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());c.sh=1;ens(id);G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);names.push(dn(id))});recomp();save();const nm=names.join(", ");toast(LS(fin.length+" starters chromatiques reçus : ",fin.length+" shiny starters received: ")+nm);try{sfx("shiny")}catch(e){}return nm}
 (function(){
  const pool=()=>WMPOOL.filter(i=>true);
@@ -13211,6 +13218,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["new","Code PARDON","Entre PARDON dans le courrier pour recevoir deux starters chromatiques aléatoires distincts, une fois par sauvegarde.","PARDON code","Enter PARDON in Mail for two distinct random shiny starters, once per save."],
+  ["imp","Cadeaux Pokémon","Le courrier accepte des lots privés avec formes, variantes et paliers de raid précis.","Pokémon gifts","Mail supports private packs with specific forms, variants and raid power tiers."],
   ["imp","Entraînement : chances augmentées","Par heure en mode Tout : mutation 15 %, taille spéciale 15 %, Alpha 10 % et chromatique 5 %. En objectif ciblé : mutation 22 %, taille spéciale 22 % ou Alpha 18 %. Les probabilités affichées et le rattrapage hors ligne utilisent ces mêmes taux.","Training: increased chances","Hourly All-mode chances: mutation 15%, special size 15%, Alpha 10% and shiny 5%. Targeted goals: mutation 22%, special size 22% or Alpha 18%. Displayed probabilities and offline catch-up use the same rates."],
   ["fix","Revenu passif versé chaque seconde","Les pièces par seconde sont désormais ajoutées même entre deux adversaires, pendant les captures et la récupération, ainsi qu’en combat accéléré. Le versement ne dépend plus des attaques.","Passive income paid every second","Coins per second are now added between enemies, during captures and recovery, and in accelerated battles. Payments no longer depend on attacks."],
   ["fix","Activation du titre Owner","Activation privée du titre Owner dans le courrier : le titre est débloqué, équipé et sauvegardé immédiatement, avec une confirmation claire.","Owner title activation","Private Owner title activation in Mail unlocks, equips and saves the title immediately with clear confirmation."],
