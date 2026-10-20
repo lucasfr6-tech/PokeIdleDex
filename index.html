@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c6f48a1806"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=c6f48a1806"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="51a29f0ef5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=51a29f0ef5"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11278,10 +11278,6 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
 const HH="111ccd299feeaa3839581a2c06995fe139ee844520ee15a61ae32488267a444a";
 TIT.push(["hlp","Helper","Helper",["#16a34a","#4ade80"],()=>!!G.hlp,"Réservé aux helpers","Helpers only",0]);
 /* titres Owner, Admin et Helper : même bonus que Divinité Céleste */
-/* code secret : +1 000 000 points de prestige (une seule fois par joueur) */
-{const PPH="2607c63cfb9a30a3fd1d157ed13471440393059b4fc1585d8d7d5cda4a8eac1f";document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest('[data-ml="code"]');if(!b)return;const i=document.getElementById("mlin"),v=(i&&i.value||"").trim();if(!v)return;
- try{const hv=await pidH(v),hu=await pidH(v.toUpperCase());if(hv!==PPH&&hu!==PPH)return;G.codes=G.codes||{};const k="pp"+PPH.slice(0,10);if(G.codes[k]){toast(LS("Code déjà utilisé.","Code already used."));return}
-  G.codes[k]=1;G.pp=(G.pp||0)+1e6;G.pt=(G.pt||0)+1e6;save();if(i)i.value="";toast(LS("Code accepté : +1 000 000 points de prestige","Code accepted: +1,000,000 prestige points"));try{sfx("prest")}catch(x){}try{show()}catch(x){}}catch(x){}},true)}
 /* titre Co-Owner (privé, comme Owner) : code secret */
 const COWN_H="c223e15177dbf022f4cdd204d128c0ad7e94ffb144a85307258e32e56bef5397",COWN_H2="7578fb6679363dbe3edad3560cb1c29371d923f29bb486a99725b706da5b37a9";
 TIT.push(["cown","Co-Owner","Co-Owner",["#a855f7","#fbbf24"],()=>!!G.cown,"Réservé au co-créateur","Co-creator only",0]);
