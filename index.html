@@ -3977,8 +3977,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-progress-sprites-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-progress-sprites-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-capsule-code-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-capsule-code-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4992,8 +4992,7 @@ function vSetg(){
  prefCard(LS("Progression et informations","Progress and information"),"",NFC.slice(8).map(c=>prefToggle("nf_"+c[0],LS(c[1],c[2]),"",c[3])).join(""));
  const accountBox=window.pcOn&&window.pidAccBox?window.pidAccBox():acc?`<div class="accn"><div><b>${esc(acc)}</b><small>${LS("Compte local actif","Local account active")}</small></div><button type="button" data-a="alogout">${LS("Déconnexion","Sign out")}</button></div>`:`<div class="accf"><input type="email" id="acm" placeholder="E-mail" autocomplete="email"><input type="password" id="acp" placeholder="${LS("Mot de passe (6 caractères minimum)","Password (at least 6 characters)")}" autocomplete="current-password"><div class="row"><button type="button" class="go" data-a="alogin">${LS("Connexion","Sign in")}</button><button type="button" data-a="acreate">${LS("Créer le compte","Create account")}</button></div></div>`;
  const account=prefCard(LS("Mon compte","My account"),LS("Retrouve ta progression et les options de connexion.","Find your progress and sign-in options."),accountBox+`<div class="oauth">${window.ggBtn?window.ggBtn():""}${window.dcBtn?window.dcBtn():""}</div><p class="pref-note">${prefIcon(LB.ok?"wifi":"wifioff")}${LB.ok?LS("Classement en ligne actif","Online ranking active"):LS("Classement en ligne indisponible ici","Online ranking unavailable here")}</p>`)+
- prefCard(LS("Copie de sauvegarde","Backup copy"),LS("Exporte ta progression dans un fichier, ou colle le code d'une sauvegarde à restaurer.","Export your progress to a file, or paste a backup code to restore."),`<button type="button" class="pref-action go" data-a="expsv">${prefIcon("download")} ${LS("Exporter ma sauvegarde","Export my save")}</button><label class="pref-import" for="imp">${LS("Code de sauvegarde","Backup code")}</label><textarea id="imp" rows="3" spellcheck="false" placeholder="${LS("Colle ton code ici…","Paste your code here…")}"></textarea><button type="button" class="pref-action" data-a="impsv">${prefIcon("download")} ${LS("Restaurer cette sauvegarde","Restore this save")}</button>`)+
- prefCard(LS("Rappel de sauvegarde","Backup reminder"),"",prefToggle("bkOn",LS("Rappel automatique","Automatic reminder"),"","clock")+`<label class="pref-select"><span>${LS("Fréquence","Frequency")}</span><select data-a="bkmin">${BKM.map(m=>`<option value="${m}"${m===(SG.bkMin||15)?" selected":""}>${LS("Toutes les "+m+" minutes","Every "+m+" minutes")}</option>`).join("")}</select></label><button type="button" class="pref-action" data-a="bktest">${LS("Tester le rappel","Test reminder")}</button>`)+
+ prefCard(LS("Restaurer une sauvegarde","Restore a save"),LS("Colle le code d’une sauvegarde existante pour la restaurer.","Paste an existing backup code to restore it."),`<label class="pref-import" for="imp">${LS("Code de sauvegarde","Backup code")}</label><textarea id="imp" rows="3" spellcheck="false" placeholder="${LS("Colle ton code ici…","Paste your code here…")}"></textarea><button type="button" class="pref-action" data-a="impsv">${prefIcon("download")} ${LS("Restaurer cette sauvegarde","Restore this save")}</button>`)+
  prefCard(LS("Actions sensibles","Sensitive actions"),LS("Ces actions demandent une confirmation avant de modifier tes données.","These actions require confirmation before changing your data."),`<details class="pref-danger"><summary>${LS("Afficher les actions sensibles","Show sensitive actions")}</summary><button type="button" class="red" data-a="cf" data-t="reset">${LS("Réinitialiser la progression","Reset progress")}</button><button type="button" class="red" data-a="cf" data-t="del">${LS("Supprimer le compte","Delete account")}</button></details>`);
  const help=prefCard(LS("Bien démarrer","Getting started"),LS("Retrouve les explications du jeu à tout moment.","Revisit the game explanations at any time."),`<button type="button" id="tutb" class="pref-action" data-nw="tut">${prefIcon("book")} ${LS("Revoir le tutoriel","Replay tutorial")}</button><button type="button" class="pref-action" data-a="tab" data-t="wiki">${prefIcon("wiki")} ${LS("Ouvrir le wiki","Open wiki")}</button>`)+
  prefCard(LS("Nouveautés et assistance","Updates and support"),"",`<button type="button" class="pref-action" data-ud="open">${prefIcon("clock")} ${LS("Journal des mises à jour","Update log")}</button><a id="bugb" class="pref-action" href="${esc(window.PID_DISCORD||BUG_URL)}" target="_blank" rel="noopener">${prefIcon("flag")} ${LS("Signaler un bug sur Discord","Report a bug on Discord")}</a><a class="pref-action" href="legal.html" target="_blank" rel="noopener">${prefIcon("book")} ${LS("Mentions légales","Legal information")}</a><p class="pref-note">${LS("Version chargée : ","Loaded version: ")}${esc(window.PID_BUILD||"")}</p>`);
@@ -6241,7 +6240,7 @@ function bkReset(){BK.due=Date.now()+(+SG.bkMin||15)*6e4}
 function bkHide(){const e=$("bkr");if(e)e.remove()}
 function bkShow(){if($("bkr"))return;const d=document.createElement("div");d.id="bkr";
  d.innerHTML=`<i>${ico("download")}</i><div><b>${LS("Pense à sauvegarder","Remember to back up")}</b><small>${LS("Exporte ton code pour ne rien perdre.","Export your code so you lose nothing.")}</small></div><button class="go" data-a="bkgo">${LS("Exporter","Export")}</button><button data-a="bklater">${LS("Plus tard","Later")}</button>`;document.body.appendChild(d)}
-setInterval(()=>{if(SG.bkOn===0||document.hidden||$("bkr"))return;if(Date.now()>=BK.due){bkShow();bkReset()}},20000);
+/* Backup export reminders retired with the copy/export controls. */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=bkgo],[data-a=bklater],[data-a=bktest]");if(!b)return;e.stopPropagation();const a=b.dataset.a;if(a=="bkgo"){bkHide();bkReset();expSave()}else if(a=="bklater"){bkHide();bkReset()}else bkShow()},true);
 document.addEventListener("change",e=>{const s=e.target;if(s&&s.dataset&&s.dataset.a=="bkmin"){SG.bkMin=+s.value||15;svs();bkReset();toast(LS("Rappel toutes les "+SG.bkMin+" min","Reminder every "+SG.bkMin+" min"))}},true);
 const vBk=()=>`<div class="box scd"><h3>${ico("download")} ${LS("Rappel de sauvegarde","Backup reminder")}</h3>${tgl("bkOn",LS("Rappel automatique","Automatic reminder"),"bolt")}<label class="bkl"><b>${LS("Fréquence","Frequency")}</b><select data-a="bkmin">${BKM.map(m=>`<option value="${m}" ${m==(SG.bkMin||15)?"selected":""}>${LS("Toutes les "+m+" min","Every "+m+" min")}</option>`).join("")}</select></label><button class="mini" data-a="bktest">${LS("Tester le rappel","Test the reminder")}</button></div>`;
@@ -10447,6 +10446,7 @@ const BUG_URL="https://discord.gg/AP3Y2YQav";/* colle ici le lien d'invitation D
 })();
 /* ===== v147 : Courrier (récompenses du boss monde, défis de guilde, codes cadeaux) + paliers du boss monde ===== */
 const GIFT_CODES={
+ "CAPSULEOR":{t:"Une Capsule d’Or offerte",txt:"Merci de jouer à PokeIdleDex ! Voici ta Capsule d’Or.",rw:[["i","gold-bottle-cap",1]],fullCaps:1},
  "1.1.0":{t:"Version 1.1.0",txt:"Merci d'avoir joué à la première version de PokeIdleDex !",rw:[["m",50000000],["i","master-ball",1],["i","ability-patch",1],["i","gold-bottle-cap",1],["i","bottle-cap",1],["i","bi-atk",2],["i","bi-xp",2],["i","bi-coin",2],["i","bi-find",2],["i","bi-mut",2],["i","bi-cap",2]]},
  "MB11-X7K4Q9":{t:"Cadeau",txt:"11 Master Ball pour toi, merci de jouer à PokeIdleDex !",rw:[["i","master-ball",11]]},
  "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",30],["i","master-ball",2]]},
@@ -10455,7 +10455,7 @@ const GIFT_CODES={
 };
 function mailBox(){G.mail=G.mail||[];return G.mail}
 function mailUnread(){return mailBox().filter(m=>!m.c).length}
-function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:title,f:from||"",x:txt||"",d:Date.now(),rw:rw||[],c:rw&&rw.length?0:1,r:0});if(L.length>80)L.length=80;try{save()}catch(e){}try{mailDot()}catch(e){}}
+function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:title,f:from||"",x:txt||"",d:Date.now(),rw:rw||[],fullCaps:fullCaps?1:0,c:rw&&rw.length?0:1,r:0});if(L.length>80)L.length=80;try{save()}catch(e){}try{mailDot()}catch(e){}}
 (function(){
  const P=(d)=>`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
  const MI=P('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/>');
@@ -10472,19 +10472,19 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
  const render=()=>{const o=document.getElementById("mlr");if(o&&o.className=="on")o.innerHTML=body()};
  function mailOpen(){ST.msg="";const o=root();o.className="on";o.innerHTML=body()}
  function mailClose(){const o=document.getElementById("mlr");if(o){o.className="";o.innerHTML=""}}
- async function claim(m){if(!m||m.c)return;if(m.wm&&window.wmClaim){mailClose();window.wmClaim(m);return}m.c=1;save();try{const out=await bpGive(m.rw);bpPop(m.t,LS("Courrier","Mail"),out)}catch(e){}save();mailDot();render();try{ui()}catch(e){}}
+ async function claim(m){if(!m||m.c)return;if(m.wm&&window.wmClaim){mailClose();window.wmClaim(m);return}m.c=1;save();try{const out=await (m.fullCaps?capBuy(()=>bpGive(m.rw)):bpGive(m.rw));bpPop(m.t,LS("Courrier","Mail"),out)}catch(e){}save();mailDot();render();try{ui()}catch(e){}}
  window.mailOpen=mailOpen;
  document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-ml]");if(!t)return;const k=t.dataset.ml;
   if(k=="open"){mailOpen();return}
   if(k=="x"){mailClose();return}
   if(k=="c"){await claim(mailBox().find(m=>m.id==t.dataset.i))}
-  else if(k=="all"){const L=mailBox().filter(m=>!m.c&&!m.wm&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await bpGive(m.rw))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
+  else if(k=="all"){const L=mailBox().filter(m=>!m.c&&!m.wm&&m.rw&&m.rw.length);let all=[];for(const m of L){m.c=1;try{all=all.concat(await (m.fullCaps?capBuy(()=>bpGive(m.rw)):bpGive(m.rw)))}catch(x){}}if(all.length)bpPop(LS("Courrier","Mail"),L.length+" "+LS("messages","messages"),all);save();mailDot();render();try{ui()}catch(x){}}
   else if(k=="disc"){const u=window.PID_DISCORD||BUG_URL;if(u)window.open(u,"_blank","noopener")}
   else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
    const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c];G.codes=G.codes||{};
    if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");
-   else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"");ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
+   else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"",g.fullCaps);ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
    render();mailDot()}
  });
  document.addEventListener("keydown",e=>{if(e.key=="Escape")mailClose();if(e.key=="Enter"&&e.target&&e.target.id=="mlin"){const b=document.querySelector('[data-ml="code"]');if(b)b.click()}});
@@ -13124,6 +13124,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["rem","Export de sauvegarde retiré","Les commandes de copie et d’export et leurs rappels sont retirés des paramètres. La connexion au compte et la restauration restent disponibles.","Save export removed","Copy/export controls and their reminders have been removed from settings. Account sign-in and restore remain available."],
+  ["new","Code cadeau CAPSULEOR","Entre CAPSULEOR dans le courrier, puis récupère ton cadeau : une Capsule d’Or, une fois par sauvegarde.","CAPSULEOR gift code","Enter CAPSULEOR in Mail, then claim your gift: one Gold Bottle Cap, once per save."],
   ["fix","Progression mieux proportionnée","L'étage dispose d'une case plus large. Les Pokémon de la zone et l'avance auto occupent deux grandes cases à droite ; le texte reste lisible avec le bouton de vitesse.","Better progress proportions","The floor uses a wider card. Zone Pokémon and auto advance occupy two large cards on the right, with readable text alongside the speed button."],
   ["fix","Sprites sans cadre parasite","Les couleurs de mutation s'appliquent au Pokémon transparent, sans ombre rectangulaire ni cadre qui tremble derrière le sprite.","Sprites without unwanted frames","Mutation colours apply to the transparent Pokémon, without a rectangular shadow or shaking frame behind the sprite."],
   ["fix","Capsules achetées depuis une fiche","La boutique d'entraînement ajoute désormais toutes les capsules achetées au sac, pour les lots de 1, 5 et 10.","Caps bought from a Pokémon profile","The training shop now adds every purchased cap to the bag, in quantities of 1, 5 and 10."],
