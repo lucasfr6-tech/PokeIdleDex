@@ -52,8 +52,8 @@
  .rkb-podium>.rkb-place-2{grid-column:1;grid-row:1;border-color:#cbd5e1!important}
  .rkb-podium>.rkb-place-3{grid-column:3;grid-row:1;border-color:#cc925c!important}
  .rkb-podium-card .rkb-podium-sprite{height:112px!important;min-height:112px!important;display:grid!important;place-items:center!important}
- .rkb-podium-card .rkb-podium-sprite .hv{width:110px!important;height:110px!important}
- .rkb-podium-card .rkb-podium-sprite .hvi{max-width:110px!important;max-height:110px!important}
+ .rkb-podium-card .rkb-podium-sprite .hv{width:128px!important;height:128px!important}
+ .rkb-podium-card .rkb-podium-sprite .hvi{max-width:128px!important;max-height:128px!important}
  .rkb-podium-card .rkb-podium-head{width:100%!important;display:flex!important;justify-content:space-between!important;gap:6px!important}
  .rkb-podium-card .rkb-podium-name{font-size:22px!important;line-height:1.15!important}
  .rkb-podium-card .rkb-podium-owner{font-size:13px!important}
@@ -64,10 +64,10 @@
  .rkx-r .rkx-v,.rkm-r .rkx-v,.pvrw2>strong{font-size:21px!important}
  .rkx-r .lav,.rkm-r .lav,.lbl .lav{width:74px!important;height:74px!important}
  .rkx-r .rkx-n{width:37px!important;height:37px!important;font-size:16px!important}
- .rkb-large .rkb-s{width:90px!important;height:90px!important}
- .rkb-large .rkb-s .hv{width:88px!important;height:88px!important}
- .rkb-large .rkb-s .hvi{max-width:88px!important;max-height:88px!important}
- .pid-bannered{background-image:linear-gradient(90deg,rgba(8,12,34,.72),rgba(8,12,34,.54) 52%,rgba(8,12,34,.75)),var(--pid-banner)!important;background-size:cover!important;background-position:center!important;color:#fff!important;text-shadow:0 1px 3px #020617b8}
+ .rkb-large .rkb-s{width:104px!important;height:104px!important}
+ .rkb-large .rkb-s .hv{width:102px!important;height:102px!important}
+ .rkb-large .rkb-s .hvi{max-width:102px!important;max-height:102px!important}
+ .pid-bannered{color:#fff!important;text-shadow:0 1px 3px #020617b8;position:relative!important;isolation:isolate!important}.pid-bannered:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(5,8,24,.40),rgba(5,8,24,.24) 60%,rgba(5,8,24,.48));border-radius:inherit}
  .pid-bannered:hover{filter:brightness(1.12)!important}
  .pid-bannered .rkx-v,.pid-bannered .rkb-podium-dps,.pid-bannered .pvnm,.pid-bannered .rkb-t{position:relative;z-index:1}
  .pid-rank-podium>:nth-child(1){border:2px solid #cbd5e1!important}
@@ -100,25 +100,32 @@
   if(document.getElementById("pid-unified-rank-css"))return;
   var st=document.createElement("style");st.id="pid-unified-rank-css";st.textContent=css;document.head.appendChild(st);
   function banner(n){try{if(!Number.isInteger(+n)||+n<0||!BAN[+n])return null;return BAN[+n].css||null}catch(e){return null}}
-  function apply(el,n){if(!el)return;var b=banner(n);if(b){el.style.setProperty("--pid-banner",b);el.classList.add("pid-bannered")}}
-  function owners(){var m=new Map();try{lbRows().forEach(r=>m.set(String(r.id),r))}catch(e){};try{RKM.rows.forEach(r=>m.set(String(r.id),r))}catch(e){};try{RKB.rows.forEach(r=>m.set(String(r.id),r))}catch(e){};try{pvRows().forEach(r=>m.set(String(r.id),r))}catch(e){};return m}
+  function apply(el,n){if(!el)return;var b=banner(n);if(!b)return;if(el.dataset.pidBanner===String(n))return;el.dataset.pidBanner=String(n);el.style.setProperty("background",b,"important");el.classList.add("pid-bannered")}
+  function owners(){
+   var m=new Map();
+   try{lbRows().forEach(r=>m.set(String(r.id),r))}catch(e){}
+   try{RKM.rows.forEach(r=>m.set(String(r.id),r))}catch(e){}
+   try{RKB.rows.forEach(r=>m.set(String(r.id),r))}catch(e){}
+   try{var me=lbDoc();m.set(String(LB.uid||"me"),Object.assign({id:LB.uid||"me"},me))}catch(e){}
+   return m;
+  }
   function rank(){
-   var root=document.querySelector(".rkx");if(!root)return;
-   var m=owners(), current=null;try{current=lbDoc()}catch(e){}
-   function find(n){var r=m.get(String(n));return r||current}
-   function decorate(el,r){if(r&&typeof r.ban!="undefined")apply(el,r.ban)}
-   document.querySelectorAll(".rkx-r[data-a='vp'],.rkx-r[data-t]").forEach(el=>decorate(el,find(el.dataset.t)));
-   document.querySelectorAll(".rkm-w").forEach(el=>{var r=find(el.dataset.rkw);decorate(el.querySelector(".rkm-r"),r)});
-   document.querySelectorAll(".rkb-podium-card,.rkb-large").forEach(el=>{var i=+(el.dataset.bpr||0);try{decorate(el,rkbRows()[i])}catch(e){}});
-   document.querySelectorAll(".pod[data-t],.pvpd[data-pv],.pvrw2[data-pv]").forEach(el=>{var id=el.dataset.t||(el.dataset.pv||"").split(":")[1];decorate(el,find(id))});
+   var root=document.querySelector(".rkx"),main=document.getElementById("rkbl");
+   if(!root&&!main&&!document.querySelector(".lbx"))return;
+   var m=owners();
+   function decorate(el,r){if(r&&r.ban!==undefined&&r.ban!==null)apply(el,r.ban)}
+   document.querySelectorAll(".rkx-r[data-t],.pod[data-t],.pvpd[data-t],.pvrw2[data-t]").forEach(el=>decorate(el,m.get(String(el.dataset.t))));
+   document.querySelectorAll(".rkm-w[data-rkw]").forEach(el=>decorate(el.querySelector(".rkm-r"),m.get(String(el.dataset.rkw))));
+   document.querySelectorAll("#rkbl>.rkb-r").forEach((el,i)=>{var r=null;try{r=rkbRows()[i]}catch(e){}decorate(el,r)});
+   document.querySelectorAll(".rkb-podium-card,.rkb-large").forEach(el=>{var idx=+(el.dataset.bpr||0);var r=null;try{r=rkbRows()[idx]}catch(e){}decorate(el,r)});
+   document.querySelectorAll(".pid-rank-podium>.rkb-r").forEach(el=>decorate(el,m.get(String(el.dataset.t))));
    document.querySelectorAll(".rkx-l").forEach(list=>{
-     if(list.id==="rkbl"||list.closest(".rkb-list-regular")||list.querySelector(".pid-rank-podium"))return;
-     var rows=Array.from(list.children).filter(e=>e.classList.contains("rkx-r")||e.classList.contains("rkm-w"));
-     if(rows.length<3)return;
-     var pod=document.createElement("div");pod.className="pid-rank-podium";
-     pod.appendChild(rows[1]);pod.appendChild(rows[0]);pod.appendChild(rows[2]);list.insertBefore(pod,list.firstChild);
+    if(list.id==="rkbl"||list.querySelector(":scope > .pid-rank-podium"))return;
+    var rows=Array.from(list.children).filter(el=>el.classList.contains("rkx-r")||el.classList.contains("rkm-w"));
+    if(rows.length<3)return;
+    var pod=document.createElement("div");pod.className="pid-rank-podium";
+    pod.append(rows[1],rows[0],rows[2]);list.insertBefore(pod,list.firstChild);
    });
-   document.querySelectorAll(".pid-rank-podium .rkm-w").forEach(el=>decorate(el.querySelector(".rkm-r"),find(el.dataset.rkw)));
   }
   var pending=false;function queue(){if(pending)return;pending=true;setTimeout(function(){pending=false;try{rank()}catch(e){}},120)}
   new MutationObserver(queue).observe(document.body,{childList:true,subtree:true});
