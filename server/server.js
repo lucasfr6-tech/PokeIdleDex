@@ -136,9 +136,41 @@ const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
 const CK=new Set(['n','x','nm','name','desc','tag','motd','bio','t0']);
 const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.slice(0,2000)):v.slice(0,2000);if(Array.isArray(v))return v.slice(0,500).map(e=>clean(e,k));if(v&&typeof v=='object'){const o={};for(const k of Object.keys(v).slice(0,200)){if(k=='__proto__'||k=='constructor'||k=='prototype')continue;o[k]=(k=='ai'&&typeof v[k]=='string'&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]*$/.test(v[k]))?v[k].slice(0,9000):clean(v[k],k)}return o}return v};
+/* Fil d'activité public : taille bornée, identité du classement, horodatage serveur. */
+const ACT_EPOCH=EP+'.'+FULL_RESET;
+if(!db.activity||db.activity.epoch!==ACT_EPOCH)db.activity={epoch:ACT_EPOCH,events:[],seen:{},joins:Object.fromEntries(Object.keys(db.lb).map(k=>[k,1])),boss:{}};
+const ACT_RARE=new Set([5,6,7,8,9,10]);
+const actName=d=>pidCensor(String(d.n||'Dresseur').replace(/[<>"&]/g,'').trim().slice(0,24))||'Dresseur';
+function actAdd(e,key){
+ const a=db.activity;if(a.seen[key])return false;const now=Date.now();a.seen[key]=now;a.events.unshift(Object.assign({id:rid('A'),t:now},e));
+ a.events=a.events.filter(x=>now-x.t<7*864e5).slice(0,100);const keys=Object.keys(a.seen);if(keys.length>2000)keys.sort((x,y)=>a.seen[y]-a.seen[x]).slice(1500).forEach(k=>delete a.seen[k]);dirty=1;return true}
+function actJoin(uid,d){if(db.activity.joins[uid]||hidden(uid)||!d||(!d.n)||(/^(Dresseur|Trainer)$/i.test(d.n)&&!(d.caps>30||d.bf>1)))return;db.activity.joins[uid]=1;actAdd({kind:'join',uid,n:actName(d),tt:String(d.tt||'t0').slice(0,32)},'join:'+uid)}
+function actBossState(k){
+ const rows=Object.keys(db.wb).filter(id=>!hidden(id)).map(id=>db.wb[id].d).filter(d=>d&&d.k===k&&d.rg),clamp=x=>Math.max(0,Math.min(1e15,+x||0));
+ const base=rows.reduce((n,x)=>n+clamp(x.pa),0)*11,mins=[15e4,45e4,12e5,22e5,4e6,6e6,9e6,13e6,2e7,3e7],frac=[.01,.02,.04,.06,.09,.13,.18,.25,.33,.45];
+ const thresholds=mins.map((v,i)=>Math.max(v,Math.round(frac[i]*base))),total=rows.reduce((n,x)=>n+clamp(x.d),0);
+ const hp=Math.round(Math.min(1e15,Math.max(1e6,rows.reduce((n,x)=>n+clamp(x.pa)*(1+.03*Math.max(0,thresholds.filter(t=>clamp(x.d)>=t).length-1)),0)*11)));
+ return {dead:!!rows.length&&total>=hp,total,hp}}
+function actBossChanged(k,before){if(!k||!before||before.dead||db.activity.boss[k])return;const now=actBossState(k);if(!now.dead)return;db.activity.boss[k]=Date.now();const keys=Object.keys(db.activity.boss);if(keys.length>50)keys.sort((a,b)=>db.activity.boss[b]-db.activity.boss[a]).slice(40).forEach(k=>delete db.activity.boss[k]);actAdd({kind:'worldboss',uid:'server',n:'Communauté',cycle:String(k).slice(0,64)},'boss:'+k)}
+function actAccept(uid,ev){
+ if(!ev||!['shiny','mutation','size'].includes(ev.kind)||!/^[a-z0-9_-]{8,80}$/i.test(String(ev.k||'')))return false;
+ const id=+ev.id,mi=+ev.mi,zi=+ev.zi;if(!Number.isInteger(id)||!((id>=1&&id<=1025)||(id>=90001&&id<=90099))||!Number.isInteger(mi)||mi<0||mi>10||!Number.isInteger(zi)||zi<0||zi>6)return false;
+ if(ev.kind==='shiny'&&!ev.sh||ev.kind==='mutation'&&!ACT_RARE.has(mi)||ev.kind==='size'&&zi<4)return false;
+ const p=db.lb[uid].d,mf=+ev.mf||0,hfv=['','normal','heat','wash','frost','fan','mow','altered','origin'].includes(ev.hfv)?ev.hfv:'';
+ return actAdd({kind:ev.kind,uid,n:actName(p),tt:/^[a-z0-9_-]{1,32}$/i.test(String(p.tt||''))?p.tt:'t0',p:id,sh:ev.sh?1:0,mi,zi,hf:ev.hf?1:0,hfv,mf:Number.isInteger(mf)&&mf>=10001&&mf<=11000?mf:0},uid+':'+ev.k)}
+
 http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x'),ip=(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();
  if(req.method=='OPTIONS'){send(res,204,{});return}
+ if(u.pathname==='/api/activity'){
+  if(req.method==='GET'){if(limited(ip+'activity-read',240)){send(res,429,{e:'rate'});return}send(res,200,{ok:1,events:db.activity.events.filter(x=>Date.now()-x.t<7*864e5&&(x.uid==='server'||!hidden(x.uid))).slice(0,35)});return}
+  if(req.method==='POST'){
+   if(limited(ip+'activity-post',60)){send(res,429,{e:'rate'});return}let body='';req.on('data',c=>{body+=c;if(body.length>8000)req.destroy()});
+   req.on('end',()=>{let d;try{d=JSON.parse(body)}catch(e){send(res,400,{e:'json'});return}if(!d||!epOk(d)){send(res,409,{e:'ep'});return}
+    const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid||hidden(uid)){send(res,403,{e:'auth'});return}if(limited(uid+'activity',10)){send(res,429,{e:'rate'});return}
+    if(!Array.isArray(d.events)||d.events.length>6){send(res,400,{e:'events'});return}let accepted=0;for(const e of d.events)if(actAccept(uid,e))accepted++;send(res,200,{ok:1,accepted})});return}
+  send(res,405,{e:'method'});return}
+
  if(u.pathname=='/api/seen'&&req.method=='POST'){
   if(limited(ip+'s',60)){send(res,429,{e:'rate'});return}
   let b='';req.on('data',c=>{b+=c;if(b.length>4000)req.destroy()});
@@ -335,7 +367,9 @@ http.createServer((req,res)=>{
      const x=col[m[3]],h=sha(tok);
      if(x&&x.h!==h&&m[2]!='adm'){send(res,403,{e:'owner'});return}
      if(!x&&Object.keys(col).length>=MAXDOCS){send(res,507,{e:'full'});return}
-     col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;if(m[2]=='lb'){try{setFlag(m[3],'l',lbSus(d))}catch(e){}}send(res,200,{ok:1})});
+     const bossBefore=m[2]==='wb'?actBossState(d.k):null;
+     col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;if(m[2]=='lb'){try{setFlag(m[3],'l',lbSus(d));actJoin(m[3],col[m[3]].d)}catch(e){}}
+     if(m[2]==='wb')actBossChanged(d.k,bossBefore);send(res,200,{ok:1})});
     return}
   }
   send(res,400,{e:'bad'});return}
