@@ -3905,8 +3905,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-listanim-hwtrain-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-listanim-hwtrain-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-listmotion-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-listmotion-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4968,9 +4968,9 @@ function etags(e){let h="";if(e.boss)h+=`<span class="et boss">${ico("crown")} A
 function plSprite(i,c){
  /* Les formes créées pour le jeu gardent leur dessin, au lieu de devenir l'espèce normale. */
  if(i>9e4||(c.hf&&!c.mf&&!c.dy))return `<span class="pl-motion">${sp(i,c.sh)}</span>`;
- const f=c.mf||(c.dy&&GMX[i])||i,sh=c.sh?1:0,still=!SG.anim||SG.perf||matchMedia("(prefers-reduced-motion: reduce)").matches;
- const src=still?ART+(sh?"shiny/":"")+f+".png":SPR+"pokemon/other/showdown/"+(sh?"shiny/":"")+f+".gif";
- return `<span class="pl-motion"><img class="pl-animated" loading="lazy" decoding="async" alt="" draggable="false" src="${src}" data-pl-form="${f}" data-pl-base="${i}" data-pl-shiny="${sh}" data-pl-stage="${still?1:0}" onerror="plSpriteFallback(this)"></span>`}
+ /* Comme aSpr dans les classements, le GIF garde ses mouvements propres même en mode performance. */
+ const f=c.mf||(c.dy&&GMX[i])||i,sh=c.sh?1:0,src=SPR+"pokemon/other/showdown/"+(sh?"shiny/":"")+f+".gif";
+ return `<span class="pl-motion"><img class="pl-animated" loading="lazy" decoding="async" alt="" draggable="false" src="${src}" data-pl-form="${f}" data-pl-base="${i}" data-pl-shiny="${sh}" data-pl-stage="0" onerror="plSpriteFallback(this)"></span>`}
 function plSpriteFallback(im){
  /* GIF absent / hors ligne : illustration de la même forme, puis sprite local ; le filtre reste sur .spw. */
  const f=+im.dataset.plForm,i=+im.dataset.plBase,sh=+im.dataset.plShiny?"shiny/":"";
@@ -12959,6 +12959,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["fix","Animations des Pokémon","Les Pokémon de la liste gardent les mouvements de leur sprite animé comme dans le classement, y compris en mode performance.","Pokémon animations","List Pokémon keep their animated sprite movements just like in the leaderboard, including in performance mode."],
   ["fix","Pokémon centrés","Les sprites animés restent centrés et contenus dans leur case, même pendant leur mouvement.","Centered Pokémon","Animated sprites stay centered and contained in their slot throughout their movement."],
   ["fix","Variantes Halloween","Les formes de la bannière et les exclusifs Halloween peuvent gagner mutations, tailles, statut Alpha et chromatique uniquement à la pension et à l'entraînement. Les améliorations déjà possédées sont conservées.","Halloween variants","Banner forms and Halloween exclusives can earn mutations, sizes, Alpha and shiny status only through daycare and training. Existing upgrades are preserved."],
   ["imp","Pokémon List animée","Les Pokémon de la liste utilisent les sprites animés du classement en conservant leurs mutations et couleurs chromatiques. Les formes exclusives gardent leur apparence.","Animated Pokémon List","The list uses the leaderboard's animated sprites while keeping mutation and shiny colours. Exclusive forms keep their appearance."],
