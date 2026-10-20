@@ -3898,8 +3898,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-rankfix-20261020b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-rankfix-20261020b"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-hfsprites-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-hfsprites-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -12595,8 +12595,12 @@ const HFI={};HFL.forEach((x,k)=>HFI[x[0]]={id:x[0],n:x[1],t:x[2],r:k});
 const HFV={479:["normal","heat","wash","frost","fan","mow"],487:["altered","origin"]};
 const HFVN={normal:"",heat:"Chaleur",wash:"Lavage",frost:"Froid",fan:"Hélice",mow:"Tonte",altered:"Alternative",origin:"Originelle"};
 const HFC=1.5e9,HFP=80; /* coût d'une invocation (1,5 milliard) et garantie de la forme la plus rare au bout de 80 */
-const hfPath=(id,sh,v)=>"img/hwf/"+(sh?"shiny/":"")+id+(v?"-"+v:"")+".png";
-const hfImg=(id,sh,v,cls)=>`<img class="${cls||"sp"} hfimg" alt="" draggable="false" loading="lazy" src="${hfPath(id,sh,v)}">`;
+/* Les Pokémon disposant uniquement de sprites de forme doivent toujours choisir un nom réel. */
+const hfForm=(id,v)=>HFV[id]?(HFV[id].includes(v)?v:HFV[id][0]):"";
+const hfPath=(id,sh,v)=>"img/hwf/"+(sh?"shiny/":"")+id+(hfForm(id,v)?"-"+hfForm(id,v):"")+".png";
+/* Repli 1 : sprite normal de la même forme ; repli 2 : illustration générale. */
+const hfImg=(id,sh,v,cls)=>{const first=hfPath(id,sh,v),normal=hfPath(id,false,v),art="img/art/"+id+".webp";
+ return `<img class="${cls||"sp"} hfimg" alt="" draggable="false" loading="lazy" src="${first}" onerror="if(!this.dataset.hfRetry && this.src.indexOf('/shiny/')!==-1){this.dataset.hfRetry='1';this.src='${normal}'}else{this.onerror=null;this.src='${art}'}">`};
 /* --- puissance : chaque forme est strictement plus forte que la précédente, avec un multiplicateur minimum par palier --- */
 let HFMC=null;
 /* bonus fixe et croissant par palier : Commun ×2 < Rare ×2,5 < Épique ×3 < Légendaire ×3,6 ;
