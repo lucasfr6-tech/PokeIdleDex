@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-owner-code-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-owner-code-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-passive-income-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-passive-income-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4477,10 +4477,12 @@ function capFx0(e,bl,nw,pc){const a=$("ar");if(!a||tab!="adv"||!a.animate)return
  setTimeout(()=>w.remove(),1700)}
 function lose(){sfx("lose");G.auto=false;G.fl=Math.max(1,G.fl-1);G.k=0;E=null;G.rv=4}
 let TK=0,TSC=[0,0,-1],STK='',PSIG='',HUDK='',TOF=null,TV=[];
-function tick(){TK++;tick21();capUpd();recomp();wxTick();exTick();if(G.rv>0){if(--G.rv==0)ids().forEach(i=>G.col[i].h=mhp(i));ui();return}
+/* Passive coins are paid once per game second, independently of enemy/capture/revival state. */
+function passiveCredit(){const rate=ids().reduce((sum,i)=>sum+coin(i),0)*(EVF.c||1)*BIF.c;if(!(rate>0)||!Number.isFinite(rate))return 0;const gain=kxI("pas",rate);G.m+=gain;G.gain+=gain;return gain}
+function tick(){TK++;tick21();capUpd();recomp();wxTick();exTick();passiveCredit();if(G.rv>0){if(--G.rv==0)ids().forEach(i=>G.col[i].h=mhp(i));ui();return}
  if(!E){if(!busy&&Date.now()>=CAPU)spawn().then(ui);ui();return}
  const al=ids();if(!al.length){ui();return}if(TK%5==0)healAll();
- let d=0,c=0,fl=0,ct=0;const tour=TK%5==0;al.forEach(i=>{const k=G.col[i],h=k.he;let x=dmg(i)*(i==LDC?1.5:1);if(Math.random()<(h&&h.cr||.0417)){x*=1.5;ct=1}if(h){if(h.qc&&Math.random()<h.qc)x*=2;if(h.kr&&Math.random()<h.kr)fl=1;if(h.sb)k.h=Math.min(mhp(i),k.h+x*h.sb)}d+=x;c+=coin(i)});c*=(EVF.c||1)*BIF.c;G.m+=kxI("pas",c);G.gain+=c;E.hp-=d;
+ let d=0,fl=0,ct=0;const tour=TK%5==0;al.forEach(i=>{const k=G.col[i],h=k.he;let x=dmg(i)*(i==LDC?1.5:1);if(Math.random()<(h&&h.cr||.0417)){x*=1.5;ct=1}if(h){if(h.qc&&Math.random()<h.qc)x*=2;if(h.kr&&Math.random()<h.kr)fl=1;if(h.sb)k.h=Math.min(mhp(i),k.h+x*h.sb)}d+=x});E.hp-=d;
  al.forEach(i=>{const k=G.col[i],h=k.he,mh0=mhp(i);k.h=Math.min(mh0,k.h+mh0*.004);if(tour&&h){if(h.rg)k.h=Math.min(mh0,k.h+mh0*h.rg);if(h.bs){if(tp(i).includes("poison"))k.h=Math.min(mh0,k.h+mh0*.0625);else if(k.h>mh0*.12)k.h-=mh0*.125}if(h.lo&&k.h>mh0*.12)k.h-=mh0*h.lo}});
  ldHit();const s=$("es");if(s&&s.animate){s.animate([{translate:"-14px 0",filter:"brightness(3) sepia(1) hue-rotate(-50deg) saturate(8)"},{translate:"10px 0",offset:.4},{translate:"0 0",filter:"drop-shadow(0 10px 6px rgba(0,0,0,.45))"}],{duration:280});const l=$("sl");l.animate([{opacity:1,scale:".5 .5"},{opacity:0,scale:"1.3 1.3"}],{duration:260})}
  pop("-"+fmt(d),d>E.max*.3?"sup":"dmg",42+Math.random()*16);sfx(d>E.max*.3?"crit":"hit");
@@ -13207,6 +13209,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["fix","Revenu passif versé chaque seconde","Les pièces par seconde sont désormais ajoutées même entre deux adversaires, pendant les captures et la récupération, ainsi qu’en combat accéléré. Le versement ne dépend plus des attaques.","Passive income paid every second","Coins per second are now added between enemies, during captures and recovery, and in accelerated battles. Payments no longer depend on attacks."],
   ["fix","Activation du titre Owner","Activation privée du titre Owner dans le courrier : le titre est débloqué, équipé et sauvegardé immédiatement, avec une confirmation claire.","Owner title activation","Private Owner title activation in Mail unlocks, equips and saves the title immediately with clear confirmation."],
   ["imp","Rebirth : les doublons des étoiles sont conservés","Après un rebirth, les doublons repartent de zéro, mais un Pokémon garde les dégâts des doublons de ses étoiles. Un Pokémon 5 étoiles garde les dégâts de 330 doublons sans avoir à les refarmer.","Rebirth: star duplicates are kept","After a rebirth, duplicates start again from zero, but a Pokémon keeps the damage of its stars' duplicates. A 5-star Pokémon keeps the damage of 330 duplicates without farming them again."],
   ["fix","Zones : uniquement les Pokémon de la zone","Les combats ne font plus apparaître de Pokémon d'une autre zone. Seuls les Pokémon de la liste de ta zone actuelle peuvent apparaître et être capturés, même hors ligne.","Zones: only that zone's Pokémon","Fights no longer spawn Pokémon from another zone. Only the Pokémon listed for your current zone can appear and be caught, even offline."],
