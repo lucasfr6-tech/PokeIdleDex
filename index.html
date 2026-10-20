@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201918"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610201918"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201925"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610201925"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5404,7 +5404,8 @@ function v20mig(){if((G.v||0)<20){G.v=20;G.ul={};G.tt=G.tt||"t0";G.fr=G.fr||"f0"
 const PEN_T=15e5,PEN_P=.03,PEN_W=[.55,.35,.10];
 const penLv=()=>tgtL();
 const penReady=()=>!!((G.pen&&G.pen.t0&&Date.now()-G.pen.t0>=PEN_T)||(G.pen2&&G.pen2.t0&&Date.now()-G.pen2.t0>=PEN_T));
-const penElig=i=>{const c=G.col[i];return !!c&&c.l>=penLv()&&!exBusy().has(i)};
+const penSpc=i=>{const c=G.col[i];return +i>9e4||!!(c&&(c.spc||c.hw||c.hf))};
+const penElig=i=>{const c=G.col[i];return !!c&&(c.l>=penLv()||penSpc(i))&&!exBusy().has(i)};
 let PNM=null,PNQ="";
 const wi=w=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<w.length;k++){r-=w[k];if(r<=0)return k}return w.length-1};
 function penGo(){if(!PNM||PNM.mode!="pick"||!PNM.sel.length||(G.pen&&G.pen.t0))return;G.pen={sl:PNM.sel.filter(i=>G.col[i]).slice(0,10),t0:Date.now()};PNM=null;PENR=false;sfx("click");save()}
@@ -5414,7 +5415,7 @@ function penClaim(){const p=G.pen;if(!p||Date.now()-p.t0<PEN_T)return;qadd("pen"
   out.push(o)}
  G.pen=null;PNM={mode:"res",out};PENR=false;save();sfx(out.some(o=>o.k)?"big":"click")}
 const penKind=o=>o.k=="al"?["Alpha","#ef4444"]:o.k=="sz"?[SZ[o.v][0],SZC[o.v]]:o.k=="mu"?[MU[o.v][0],MUC[o.v]]:[LS("Chromatique","Shiny"),"#fde047"];
-const penGrid=()=>{const s=PNM.sel,q=norm(PNQ),L=ids().filter(penElig).filter(i=>!q||norm(nm(i)).includes(q)).sort((a,b)=>base(b)-base(a)).slice(0,300);return L.map(i=>`<div class="dxc own pkc ${s.includes(i)?"sel":""}" data-a="pnsel" data-i="${i}">${sp(i,G.col[i].sh)}<b>${dn(i)}</b><small>${LS("Niv.","Lv.")} ${G.col[i].l}</small></div>`).join("")||`<small>${LS("Aucun Pokémon éligible : monte tes Pokémon au niveau maximum de ton étage.","No eligible Pokémon: raise your Pokémon to your floor's level cap.")}</small>`};
+const penGrid=()=>{const s=PNM.sel,q=norm(PNQ),L=ids().filter(penElig).filter(i=>!q||norm(nm(i)).includes(q)).sort((a,b)=>(penSpc(b)-penSpc(a))||(base(b)-base(a))).slice(0,300);return L.map(i=>`<div class="dxc own pkc ${s.includes(i)?"sel":""}" data-a="pnsel" data-i="${i}">${sp(i,G.col[i].sh)}<b>${dn(i)}</b><small>${LS("Niv.","Lv.")} ${G.col[i].l}</small></div>`).join("")||`<small>${LS("Aucun Pokémon éligible : monte tes Pokémon au niveau maximum de ton étage.","No eligible Pokémon: raise your Pokémon to your floor's level cap.")}</small>`};
 function penModal(m){
  if(PNM.mode=="res"){const n=PNM.out.filter(o=>o.k).length;m.className="on";
   m.innerHTML=`<div class="mb" data-a="pnx"></div><div class="mc pnm"><button class="x" data-a="pnx">${ico("x")}</button><h2>${LS("Retour de la pension","Back from the daycare")}</h2><small>${n?LS(n+" Pokémon ont changé !",n+" Pokémon changed!"):LS("Pas de changement cette fois. Retente ta chance !","No change this time. Try again!")}</small>
@@ -13201,6 +13202,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["imp","Pension : Pokémon spéciaux acceptés","Tu peux maintenant confier tes Pokémon spéciaux à la Pension, quel que soit leur niveau. Ils apparaissent en haut de la liste.","Daycare: special Pokémon allowed","You can now leave your special Pokémon at the Daycare, whatever their level. They show at the top of the list."],
   ["imp","Fonds de mutation : Matières précieuses","Chaque mutation possède un fond à facettes dédié, dont Aurifère, Glacial et Prismatique. Les Pokémon chromatiques ont aussi leur fond. Les contours des exclusifs et les badges Halloween restent distincts.","Mutation backgrounds: Precious materials","Every mutation has its own faceted background, including Auriferous, Glacial and Prismatic. Shiny Pokémon also have a dedicated background. Exclusive borders and Halloween badges remain distinct."],
   ["fix","Prestige : sélection respectée","Seuls les Pokémon choisis sont conservés parmi les Pokémon ordinaires, même chromatiques, mutés, Alpha ou dotés d’un talent caché. Les exclusifs et les formes Halloween restent conservés automatiquement, sans occuper les places de sélection.","Prestige: selection respected","Only selected ordinary Pokémon are kept, including shiny, mutated, Alpha and hidden-ability Pokémon. Exclusives and Halloween forms remain automatically protected without using selection slots."],
   ["imp","Cases distinctes pour les exclusifs","Les Pokémon exclusifs ont des cartes turquoise biseautées. Les formes de bannière et les exclusifs Halloween ont un fond cuivre et un badge Halloween orange. Le placement Atlas est conservé.","Distinct cards for exclusives","Exclusive Pokémon use turquoise bevelled cards. Halloween banner forms and exclusives use copper backgrounds and an orange Halloween badge. The Atlas layout is preserved."],
