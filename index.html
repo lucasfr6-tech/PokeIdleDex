@@ -2412,7 +2412,7 @@ body.kxlock{overflow:hidden}
 
 /* ---- Tower : sélecteur d'étage ---- */
 .twjp{display:flex;flex-direction:column;gap:10px;margin:2px 0 12px}
-.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
+input.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
 .twjc{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
 .twjc button{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font:800 12.5px Nunito,system-ui,sans-serif}
 .twjc button:hover:not(:disabled){background:rgba(255,255,255,.26)}.twjc button:disabled{opacity:.4}
@@ -2743,7 +2743,7 @@ body.kxlock{overflow:hidden}
 
 /* ---- Tower : sélecteur d'étage ---- */
 .twjp{display:flex;flex-direction:column;gap:10px;margin:2px 0 12px}
-.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
+input.twrg{width:100%;accent-color:#fbbf24;height:26px;cursor:pointer}
 .twjc{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
 .twjc button{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font:800 12.5px Nunito,system-ui,sans-serif}
 .twjc button:hover:not(:disabled){background:rgba(255,255,255,.26)}.twjc button:disabled{opacity:.4}
@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-compact-battle-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-compact-battle-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lr-tower700-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-lr-tower700-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4330,7 +4330,7 @@ const pwBest=(a,b)=>!a?b:!b?a:(PWTV[a]||0)>=(PWTV[b]||0)?a:b;
 function pwZP(){try{return ZPROV}catch(e){return true}}
 function pwWildFam(id){try{if(ZOF[id]!==undefined)return true;const d=DB[id];if(!d||!d.ch)return false;const L=EVC[d.ch]||[];
  for(const e of L){if(e[1]==id&&(ZOF[e[0]]!==undefined||pwWildFam(e[0])))return true}}catch(e){}return false}
-function pwInfer(id,c){if(id>9e4)return"sp";const S=pwSets();let k=null;
+function pwInfer(id,c){if(id>9e4)return id===90005?"t7":"sp";const S=pwSets();let k=null;
  try{if(c.hf&&HFI[id])return"h"+HFI[id].t}catch(e){}
  try{if(pwWildFam(id))k=["wN","wSR","wSSR","wUR"][Math.min(3,Math.max(0,pr(id)|0))];
   else if(typeof kxDiv=="function"&&kxDiv(id))k="bD";
@@ -4367,12 +4367,12 @@ function srcFix(){if(pwZP()||!PWS)return 0;let n=0;
 setInterval(()=>{try{srcFix()}catch(e){}},5000);setTimeout(()=>{try{srcFix()}catch(e){}},2500);
 var SRCNEXT=null;
 function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HFI[id]&&typeof hfMul=="function")q/=hfMul(id)||1}catch(e){}
- /* bonus de catégorie déjà compris dans le palier : Divin ×1,6, spécial ×2,6, forme Méga ×1,5 */
+ /* bonus de catégorie déjà compris dans le palier : LR ×1,6, spécial ×2,6, forme Méga ×1,5 */
  try{if(typeof kxDiv=="function"&&kxDiv(id))q/=1.6;if(id>9e4)q/=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mf)q/=1.5}catch(e){}
  const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
- return PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
-const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
-var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["Divin","Divine"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
+ return (id>9e4&&SPM[id]&&SPM[id].hw?2:1)*PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
+const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*((pr(id)==3||pr(id)==6)?2.5:1)*legM(id)};
+var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["LR","LR"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
 function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
 function pwSp(id,k){return Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)))}
 /* pièces : même ordre que les dégâts, écart adouci (puissance 0,6) pour ne pas faire exploser l'économie */
@@ -4446,7 +4446,7 @@ function xtMu(id){try{const c=G.col[id],cur=c&&c.mi||0,L=MU.map((m,i)=>i).filter
 function xtSz(id){try{const c=G.col[id],cur=c&&c.zi||0;return SZ[Math.min(SZ.length-1,Math.max(3,cur+1))]}catch(e){return SZ[3]}}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=Math.min(100,G.fl+2+(boss?3:0));let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
- const sz=wp(SZ,x=>(SZ.indexOf(x)==2?1:.55)*(SZ.indexOf(x)>=3?(1+.07*PL("pz"))*SKM("z"):1)),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?0.55*(EV.k=="eclipse"?3:1)*(1+.07*PL("pm"))*(1+BIF.m)*(i==7?(1+.1*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][pr(id)||0]*(SZ[SZ.indexOf(sz)]||SZ[2])[2]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
+ const sz=wp(SZ,x=>(SZ.indexOf(x)==2?1:.55)*(SZ.indexOf(x)>=3?(1+.07*PL("pz"))*SKM("z"):1)),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?0.55*(EV.k=="eclipse"?3:1)*(1+.07*PL("pm"))*(1+BIF.m)*(i==7?(1+.1*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][Math.min(3,pr(id)||0)]*(SZ[SZ.indexOf(sz)]||SZ[2])[2]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
  FID++;E={id,d,L,boss,t:30,sz,mu,mi:MU.findIndex(m=>m[0]==mu[0]),hp,max:hp,atk:Math.floor((L*1.1+4)*(1+G.fl/110)*(mu[2]>1?1.3:1)*(boss?1.8:1)),r:pr(id),ph:phy(id)};busy=false;spawnFx()}
 function pop(t,c,x){const f=$("fx");if(!f)return;const d=document.createElement("div");d.className="pp "+c;d.textContent=t;d.style.left=x+"%";f.appendChild(d);setTimeout(()=>d.remove(),1100)}
 function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
@@ -5169,7 +5169,7 @@ function plSpriteFallback(im){
 function plTint(c){return c.mi&&MU[c.mi]?MU[c.mi][3].replace(/drop-shadow\([^)]*\)/g,"").replace(/filter:/g,"--pl-filter:").replace(/opacity:/g,"--pl-opacity:"):""}
 function atlasMutation(c){const themes=["none","spectral","fire","ice","crystal","abyss","gold","shiny","sidereal","prism","primal"],m=themes[c.mi||0];return m&&m!=="none"?m:c.sh?"shiny":"none"}
 function atlasKind(i,c){if(c.hw||c.hf)return"halloween";try{if(SPM[i])return SPM[i].hw?"halloween":"exclusive"}catch(e){}return c.spc?"exclusive":"standard"}
-let plRow=i=>{const c=G.col[i],kind=atlasKind(i,c),display=kind==="halloween"?{...c,hw:1,spc:1}:kind==="exclusive"?{...c,spc:1}:c,vc=vcol(c),z=c.zi==null?2:c.zi,pdex=String(spc(i)).padStart(3,"0"),traits=vb(display)+(!c.mi?`<span class="vb atlas-neutral">${LS("Aucune mutation","No mutation")}</span>`:"")+(!(z>=3)&&SZ[z]?`<span class="vb" style="--c:${SZC[z]||"#a3b4cc"}">${SZ[z][0]}</span>`:"");return `<div class="pr atlas-row${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}" data-pdex="N° ${pdex}" data-atlas-kind="${kind}" data-mutation="${atlasMutation(c)}" role="button" tabindex="0"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${plTint(c)}"`:""}>${plSprite(i,c)}</span><span class="atlas-info"><span class="atlas-name"><b>${dn(i)}</b><br></span><span class="atlas-traits">${traits}</span><span class="atlas-stats"><span class="atlas-power"><small>${LS("ATTAQUE","ATTACK")}</small><b>${fmt(base(i))}</b></span><span><small>${LS("NIVEAU","LEVEL")}</small><b>${c.l}</b></span><span class="r"><small>${LS("CAPTURES","CATCHES")}</small><span class="x">×${c.n}</span></span></span></span></div>`};
+let plRow=i=>{const c=G.col[i],kind=atlasKind(i,c),display=kind==="halloween"?{...c,hw:1,spc:1}:kind==="exclusive"?{...c,spc:1}:c,vc=vcol(c),z=c.zi==null?2:c.zi,pdex=String(spc(i)).padStart(3,"0"),traits=(pr(i)===6?rtag(6,1):"")+vb(display)+(!c.mi?`<span class="vb atlas-neutral">${LS("Aucune mutation","No mutation")}</span>`:"")+(!(z>=3)&&SZ[z]?`<span class="vb" style="--c:${SZC[z]||"#a3b4cc"}">${SZ[z][0]}</span>`:"");return `<div class="pr atlas-row${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}" data-pdex="N° ${pdex}" data-atlas-kind="${kind}" data-mutation="${atlasMutation(c)}" role="button" tabindex="0"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${plTint(c)}"`:""}>${plSprite(i,c)}</span><span class="atlas-info"><span class="atlas-name"><b>${dn(i)}</b><br></span><span class="atlas-traits">${traits}</span><span class="atlas-stats"><span class="atlas-power"><small>${LS("ATTAQUE","ATTACK")}</small><b>${fmt(base(i))}</b></span><span><small>${LS("NIVEAU","LEVEL")}</small><b>${c.l}</b></span><span class="r"><small>${LS("CAPTURES","CATCHES")}</small><span class="x">×${c.n}</span></span></span></span></div>`};
 function plResizer(){const h=document.getElementById("plrs");if(!h||h._on)return;h._on=1;const el=$("plist");
  h.addEventListener("pointerdown",e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const y0=e.clientY,h0=el.getBoundingClientRect().height;document.body.classList.add("rsz");
   const mv=ev=>{const v=Math.max(150,Math.min(2400,h0+ev.clientY-y0));el.style.maxHeight=v+"px";el.style.height=v+"px"},up=()=>{h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);document.body.classList.remove("rsz");SG.plh=Math.round(el.getBoundingClientRect().height);svs()};
@@ -6895,7 +6895,7 @@ function srcWhere(id,k0){let k="";try{k=k0||(PWNEW?pwTier(id):(G.col[id]&&G.col[
  if(k=="sp")return["lors d'un événement spécial","in a special event"];
  if(k=="ex")return["en expédition","on an expedition"];
  if(k=="mg")return["en Chasse Méga","in the Mega Hunt"];
- if(k=="bD")return["dans la bannière (Divin)","from the banner (Divine)"];
+ if(k=="bD")return["dans la bannière (LR)","from the banner (LR)"];
  if(k[0]=="b")return["dans la bannière","from the banner"];
  if(k[0]=="h")return["à l'événement Halloween","in the Halloween event"];
  if(k[0]=="r"){const n=PWNM[k];return n?["au "+n[0].replace("Raid ","raid "),"in the "+n[1]]:["en raid","in a raid"]}
@@ -7365,8 +7365,8 @@ NAV2.push(["inv","summon","Invocation","#22d3ee","#155e75"]);NENG.inv="Summon";L
 (function(){const n=NAV2.find(x=>x[0]=="inv");if(n&&!NAVX.includes(n))NAVX.unshift(n)})();
 const IVSL=2*3600*1000,IV_UR=150,IV_D=350,IVT=["D","UR","SSR","SR","N"];
 const IVC={D:"#22d3ee",UR:"#ff6bd6",SSR:"#ffd23f",SR:"#cdd5e3",N:"#b9814a"};
-const IVNM={D:["Divin","Divine"],UR:["UR","UR"],SSR:["SSR","SSR"],SR:["SR","SR"],N:["N","N"]};
-const IVRT={D:.5,UR:2.5,SSR:9,SR:25,N:63};
+const IVNM={D:["LR","LR"],UR:["UR","UR"],SSR:["SSR","SSR"],SR:["SR","SR"],N:["N","N"]};
+const IVRT={D:1,UR:2.5,SSR:9,SR:25,N:62.5};
 const ivSlot=()=>Math.floor(Date.now()/IVSL);
 const ivRng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
 let IVB=null,IVN=1,IVBUSY=0,IVRS=0;
@@ -7416,10 +7416,10 @@ function vInv(){const B=ivBanner(),S=IV(),c=ivCost(),tot=c*IVN,all=[];IVT.forEac
  const cnt=t=>B[t].length;
  const bar=IVT.map(t=>`<i style="flex:${cnt(t)};background:${IVC[t]}"></i>`).join("");
  return `<div class="ivqh" style="--c:${IVC.D}"><div class="ivqb"></div><div class="ivqhs">${sp(hero,0)}</div><div class="ivqct"><small>${LS("COÛT / INVOCATION","COST / SUMMON")}</small><b>${fmt(c)} ₽</b></div><span class="ivqtag">${ico("star")} ${LS("Bannière en cours","Current banner")}</span>
- <div class="ivqhb"><small class="ivqk">${dn(hero)} · ${LS("Divin","Divine")}</small><h2>${LS("Bannière n°","Banner #")}${B.s%1000}</h2><div class="ivqbar">${bar}</div><div class="ivqlg">${IVT.map(t=>`<span style="--c:${IVC[t]}"><i></i>${LS(IVNM[t][0],IVNM[t][1])} ${cnt(t)}</span>`).join("")}</div><div class="ivqtm">${ico("clock")} ${LS("Change dans ","Changes in ")}<b id="ivcd">${ivCd()}</b></div></div></div>
- <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie Divin","Divine guarantee")}</b><span>${pd} / ${IV_D}</span></div><div class="ivqpb"><i style="width:${pd/IV_D*100}%;background:${IVC.D}"></i></div><small>${LS("Un Pokémon Divin est garanti dans "+(IV_D-pd)+" invocation(s).","A Divine Pokémon is guaranteed in "+(IV_D-pd)+" summon(s).")}</small></div>
- <div class="ivqp"><div class="ivqph"><b>${LS("UR ou mieux","UR or better")}</b><span>${pu} / ${IV_UR}</span></div><div class="ivqpb"><i style="width:${pu/IV_UR*100}%;background:${IVC.UR}"></i></div><small>${LS("UR ou Divin garanti dans "+(IV_UR-pu)+" invocation(s).","UR or Divine guaranteed in "+(IV_UR-pu)+" summon(s).")}</small></div>
- <div class="ivqrt"><button data-iv="rates">${LS("Voir les taux","Show rates")}</button>${IVRS?`<div>${IVT.map(t=>`<span style="--c:${IVC[t]}"><i></i>${LS(IVNM[t][0],IVNM[t][1])} <b>${IVRT[t].toString().replace(".",",")} %</b></span>`).join("")}<small>${LS("Chaque Pokémon invoqué a aussi 5 % de chance d'avoir une mutation, 5 % une taille hors norme, 5 % le statut Alpha et 2 % d'être chromatique (tirages séparés), parmi toutes les variantes qui existent. Les plus rares (Primordial, Cosmique) tombent bien moins souvent que les plus courantes.","Each summoned Pokémon also has a 5% chance of a mutation, 5% a size beyond the norm, 5% Alpha status and 2% of being shiny (separate rolls), among all the variants that exist. The rarest (Primordial, Cosmic) drop far less often than the common ones.")} ${LS("Chaque Pokémon d'une rareté a la même chance. Les doublons s'ajoutent à tes captures. Les Pokémon Divins ne s'obtiennent pas dans la nature.","Each Pokémon of a rarity has equal odds. Duplicates add to your catches. Divine Pokémon cannot be found in the wild.")}</small></div>`:""}</div></div>
+ <div class="ivqhb"><small class="ivqk">${dn(hero)} · ${LS("LR","LR")}</small><h2>${LS("Bannière n°","Banner #")}${B.s%1000}</h2><div class="ivqbar">${bar}</div><div class="ivqlg">${IVT.map(t=>`<span style="--c:${IVC[t]}"><i></i>${LS(IVNM[t][0],IVNM[t][1])} ${cnt(t)}</span>`).join("")}</div><div class="ivqtm">${ico("clock")} ${LS("Change dans ","Changes in ")}<b id="ivcd">${ivCd()}</b></div></div></div>
+ <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie LR","LR guarantee")}</b><span>${pd} / ${IV_D}</span></div><div class="ivqpb"><i style="width:${pd/IV_D*100}%;background:${IVC.D}"></i></div><small>${LS("Un Pokémon LR est garanti dans "+(IV_D-pd)+" invocation(s).","An LR Pokémon is guaranteed in "+(IV_D-pd)+" summon(s).")}</small></div>
+ <div class="ivqp"><div class="ivqph"><b>${LS("UR ou mieux","UR or better")}</b><span>${pu} / ${IV_UR}</span></div><div class="ivqpb"><i style="width:${pu/IV_UR*100}%;background:${IVC.UR}"></i></div><small>${LS("UR ou LR garanti dans "+(IV_UR-pu)+" invocation(s).","UR or LR guaranteed in "+(IV_UR-pu)+" summon(s).")}</small></div>
+ <div class="ivqrt"><button data-iv="rates">${LS("Voir les taux","Show rates")}</button>${IVRS?`<div>${IVT.map(t=>`<span style="--c:${IVC[t]}"><i></i>${LS(IVNM[t][0],IVNM[t][1])} <b>${IVRT[t].toString().replace(".",",")} %</b></span>`).join("")}<small>${LS("Chaque Pokémon invoqué a aussi 5 % de chance d'avoir une mutation, 5 % une taille hors norme, 5 % le statut Alpha et 2 % d'être chromatique (tirages séparés), parmi toutes les variantes qui existent. Les plus rares (Primordial, Cosmique) tombent bien moins souvent que les plus courantes.","Each summoned Pokémon also has a 5% chance of a mutation, 5% a size beyond the norm, 5% Alpha status and 2% of being shiny (separate rolls), among all the variants that exist. The rarest (Primordial, Cosmic) drop far less often than the common ones.")} ${LS("Chaque Pokémon d'une rareté a la même chance. Les doublons s'ajoutent à tes captures. Les Pokémon LR ne s'obtiennent pas dans la nature.","Each Pokémon of a rarity has equal odds. Duplicates add to your catches. LR Pokémon cannot be found in the wild.")}</small></div>`:""}</div></div>
  <div class="box ivqs">${ivQuota(ivUsed(S,ivSlot()),bcCap(),IVC.D)}<div class="ivqn"><b>${LS("COMBIEN INVOQUER ?","HOW MANY?")}</b><div>${ivAmt([1,5,10,25,50,100],IVN,"iv",bcCap()-ivUsed(S,ivSlot()))}</div></div>
  ${ivGo("iv",IVN,ok,tot,bcCap()-ivUsed(S,ivSlot()),"")}</div>
  <div class="box ivqpool"><div class="row sp2"><h2>${LS("Pool d'invocation","Summon pool")}</h2><small>${all.length} ${LS("Pokémon","Pokémon")}</small></div><div class="ivqgrid">${all.map(([i,t])=>ivTile(i,t)).join("")}</div></div>`}
@@ -8485,7 +8485,7 @@ function twWings(g,x,bx0,bx1,by0,by1,S,sh){const w=bx1-bx0,h=by1-by0,cx=(bx0+bx1
  g.restore()}
 
 /* ---------- état ---------- */
-const TWN=300;
+const TWN=700;
 function twS(){const t=G.tw=G.tw||{};
  if(t.f==null)Object.assign(t,{f:1,b:0,tm:[],au:0,af:"nx",fm:0,sc:0,up:{},cl:{},w:0,l:0,ls:0,ap:0,bt:0,tt:0,nt:{}});
  t.up=t.up||{};t.cl=t.cl||{};t.nt=t.nt||{};t.tm=(t.tm||[]).filter(id=>G.col[id]).slice(0,3);
@@ -8575,12 +8575,12 @@ const TWRW={
  95:{h:10,s:1800,it:[["master-ball",2],["gold-bottle-cap",5],["ability-patch",3],["max-revive",10]]},
  100:{h:20,s:4000,big:1,ban:8,gem:15,sp:90004,it:[["master-ball",5],["gold-bottle-cap",12],["ability-patch",8],["dream-ball",30],["max-revive",12]]}};
 const twRwItems=r=>r.it.filter(x=>IT[x[0]]);
-function twGrant(f){const r=TWRW[f],t=twS();if(!r)return null;t.cl[f]=1;const coins=Math.floor(15000*r.h),got=[];
+function twGrant(f){const r=TWRW[f],t=twS();if(!r||t.cl[f])return null;t.cl[f]=1;const coins=Math.floor(15000*r.h),got=[];
  G.m+=kxI("tw",coins);G.gain+=coins;t.sc+=r.s;twRwItems(r).forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n;got.push([k,n])});
  let gem=0,sp=0;if(r.gem){try{BPS()}catch(e){}G.gem=(G.gem||0)+r.gem;gem=r.gem}
  if(r.sp){G.sp=G.sp||{};if(!G.sp[r.sp]){spGrant(r.sp);sp=r.sp}}
  const o={f,coins,items:got,sc:r.s,gem,sp,big:!!r.big};
- toast("Tower, étage "+f+" : +"+fmt(coins)+" ₽, "+got.map(x=>x[1]+" "+(IT[x[0]]?IT[x[0]].n:x[0])).join(", ")+(sp?" et Pikachu Zénith !":""));sfx(r.big?"pvtier":"shiny");return o}
+ toast("Tower, étage "+f+" : +"+fmt(coins)+" ₽, "+got.map(x=>x[1]+" "+(IT[x[0]]?IT[x[0]].n:x[0])).join(", ")+(sp?" et "+SPM[sp].n+" !":""));sfx(r.big?"pvtier":"shiny");return o}
 /* ---------- simulation sans interface ---------- */
 async function twSim(f,opt){opt=opt||{};const t=twS(),pv=pvS(),mine=twTeamU(opt.tm||t.tm,pv.mv,pv.it);twBuff(mine,opt.up||t.up);const foes=twFoes(f);
  mine.forEach((u,i)=>{u.i=i;u.s="m"});foes.forEach((u,i)=>{u.i=i;u.s="f"});
@@ -8737,11 +8737,11 @@ function twViewUp(){const t=twS();
 /* ---------- récompenses ---------- */
 function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m;
  return `<div class="twrc ${r.big?"twmaj":""} ${got?"twdn":""} ${cur?"twnx":""}"><div class="twrh"><b>Étage ${m}</b><em>${got?"Récupérée":t.b>=m?"Prête":r.big?"Majeure":""}</em></div>
-  ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>Pikachu Zénith</b><small>Pokémon spécial · ne évolue pas</small></div></div>`:""}
+  ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>${esc(SPM[r.sp].n)}</b><small>${LS("Pokémon exclusif · sans évolution","Exclusive Pokémon · no evolution")}</small></div></div>`:""}
   <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(15000*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
-function twViewRw(){const L=[];for(let m=5;m<=TWN;m+=5)L.push(m);
- return `<div class="twgr one"><div class="twbx twrsh"><div class="twrp2">${sp(90004,0)}</div><div><small>RÉCOMPENSE FINALE · ÉTAGE 300</small><h3>Pikachu Zénith</h3><p>Électrik et Vol. Un Pikachu bleu nuit aux ailes d'éclairs, sans évolution. Ses attaques : Éclair du Zénith, Tempête Céleste, Boule Élek et Plénitude.</p><div class="pvty">${tchips(["electric","flying"])}</div><div class="pvtb" style="margin-top:16px">${G.sp&&G.sp[90004]?`<span class="pvct ok">Dans ta collection</span>`:`<span class="pvct">À gagner à l'étage 300</span>`}</div></div></div>
-  <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 5 étages, à la première victoire. Les étages 25, 50, 75, 100, 125, 150, 175 et 200 offrent les plus grosses.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
+function twViewRw(){const L=[];for(let m=10;m<=TWN;m+=10)if(TWRW[m])L.push(m);
+ return `<div class="twgr one"><div class="twbx twrsh tw700reward"><div class="twrp2">${sp(90005,0)}</div><div><small>${LS("RÉCOMPENSE FINALE · ÉTAGE 700","FINAL REWARD · FLOOR 700")}</small><h3>Steelix Cristallin</h3><p>${LS("Un gardien en cristal, exclusif au sommet de la Tower. À bonus identiques, sa puissance de base est deux fois celle de Pikachu Zénith, toujours disponible à l’étage 300.","A crystal guardian exclusive to the top of the Tower. With equal bonuses, its base power is twice Zenith Pikachu’s, still available at floor 300.")}</p><div class="pvty">${tchips(["steel","ice"])}</div><div class="pvtb" style="margin-top:16px"><span class="pvct${G.sp&&G.sp[90005]?" ok":""}">${G.sp&&G.sp[90005]?LS("Dans ta collection","In your collection"):LS("À gagner à l’étage 700","Earn at floor 700")}</span></div></div></div>
+  <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 10 étages, à la première victoire. Récompenses majeures tous les 50 étages après le 300, puis Steelix Cristallin à l’étage 700.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
 
 /* ---------- classement ---------- */
 function twPodium(R){const p=R.slice(0,3),one=(r,k)=>r?`<div class="pvpd q${k}" data-tw="prof:${esc(r.id)}">${k==1?`<span class="pvcr">${pvIc("crown")}</span>`:""}<span class="pvpr">${k}</span>${pvAvatar(r,"md")}<b>${esc(r.n)}${r.me?" (toi)":""}</b><span class="twfl">${twTower(14)} Étage ${r.b}</span></div>`:`<div class="pvpd q${k} e"></div>`;
@@ -8755,7 +8755,7 @@ function twViewRank(){const R=twRows(),me=R.find(x=>x.me),top=R.slice(0,50);
 function vTwr(){twS();twFetch();const t=twS(),V=TWX.v;
  const tabs=[["tour","tower","Tour"],["team","team","Équipe"],["up","bolt","Améliorations"],["rw","gift","Récompenses"],["rank","trophy","Classement"]];
  const body=V=="team"?twViewTeam():V=="up"?twViewUp():V=="rw"?twViewRw():V=="rank"?twViewRank():twViewTour();
- return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>300 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
+ return `<div class="pvw twp"><div class="twtt"><div class="twlg">${twTower(34)}</div><div><h2>Tower</h2><p>700 étages. Plus tu montes, plus ils sont nombreux et redoutables.</p></div><div class="twbl"><small>Sceaux</small><b data-twsc>${fmt(t.sc)}</b></div></div>
   <div class="twtabs">${tabs.map(([k,i,n])=>`<button class="${V==k?"on":""}" data-tw="v:${k}">${twIc(i)}<span>${n}</span></button>`).join("")}</div>${body}</div>`}
 /* mises à jour douces (sans tout redessiner) */
 function twRefresh(full){twHud();if(tab!="twr"||PB)return;if($("pvm")&&$("pvm").classList.contains("on"))return;const sy=window.scrollY;
@@ -9443,7 +9443,7 @@ const WKM={
  wx:["Météo et événements","Types renforcés, bonus temporaires et fenêtres à ne pas rater","cloud"],
  pen:["Pension","Faire gagner des tailles, mutations et chromatiques pendant que tu joues ailleurs","pension"],
  pres:["Prestige","Repartir de zéro pour devenir plus fort pour toujours","spark"],
- rarity:["Raretés et paliers","N, SR, SSR, UR, Spécial et Divin : qui apparaît où et pourquoi","star"],
+ rarity:["Raretés et paliers","N, SR, SSR, UR, LR et exclusifs : rareté et origine","star"],
  capture:["Capture et Poké Balls","Comment fonctionne la capture et quelle ball utiliser","target"],
  sizes:["Tailles","De Lilliputien à Cosmique : des Pokémon hors norme","resize"],
  mut:["Mutations et chromatiques","Auras colorées, bonus permanents et chasse au chromatique","sparkle"],
@@ -9453,7 +9453,7 @@ const WKM={
  items:["Objets tenus","Le catalogue complet des objets à équiper, avec recherche","bag"],
  exp:["Expéditions","Des missions qui tournent pendant que tu joues","compass"],
  raid:["Raids","Boss plein écran, récompenses et boss mondial","skull"],
- twr:["Tower","300 étages, Sceaux, améliorations et Pikachu Zénith","tower"],
+ twr:["Tower","700 étages, Sceaux, Pikachu Zénith et Steelix Cristallin","tower"],
  pvp:["JCJ : arène classée","6 contre 6, ligues, saisons et insignes","shield"],
  gld:["Guildes","Rejoindre ou créer une équipe, défis, boss hebdomadaire et entraide","frs"],
  shop:["Boutique et Sac","Acheter, vendre et ranger tes objets","bag"],
@@ -9572,7 +9572,7 @@ ${wsx("Astuces avancées",`<ul class="wks2">
 <li><b>Objets de survie</b> : Ceinture Force, Bandeau et baies de soin évitent les K.O. sur les boss.</li>
 <li><b>Réglages de capture</b> (bouton « … » à côté des balls) : choisis <b>quoi capturer</b> (Tout, Malin, Collection, Élite ou Aucune), laisse le jeu <b>choisir la ball</b> selon ton stock, son prix et ses effets, ou fixe-la toi-même par rareté. Il peut aussi <b>racheter</b> les balls utiles en gardant une réserve d'argent intouchable.</li></ul>`)}
 ${wsx("Glossaire",tbl(["Terme","Sens"],[
-["Alpha","Boss d'étage, tous les 5 étages."],["Palier","Une victoire sur un étage ; il en faut 10."],["N, SR, SSR, UR","Raretés, de la plus courante à la plus rare."],["Divin","Rareté exclusive des invocations."],["IV / EV","Talent génétique et entraînement d'un Pokémon."],["Étoile","Niveau d'ascension d'un Pokémon, de 1 à 5."],["Sceaux","Monnaie de la Tower."],["Insignes","Monnaie de la boutique JCJ."],["Points Raid","Monnaie de la boutique des raids."],["₽","Pièces du jeu."],["Gemmes","Monnaie rare, surtout pour le Pass."]]))}`;
+["Alpha","Boss d'étage, tous les 5 étages."],["Palier","Une victoire sur un étage ; il en faut 10."],["N, SR, SSR, UR, LR","Raretés, de la plus courante à la plus rare."],["LR","Rareté au-dessus de UR, commune à tous les légendaires et fabuleux, quelle que soit leur origine."],["IV / EV","Talent génétique et entraînement d'un Pokémon."],["Étoile","Niveau d'ascension d'un Pokémon, de 1 à 5."],["Sceaux","Monnaie de la Tower."],["Insignes","Monnaie de la boutique JCJ."],["Points Raid","Monnaie de la boutique des raids."],["₽","Pièces du jeu."],["Gemmes","Monnaie rare, surtout pour le Pass."]]))}`;
 
 wkBody.asc=()=>{
  const R=["N","SR","SSR","UR"];
@@ -9590,12 +9590,12 @@ ${wsx("Fonctionnement",`<ol class="wks"><li>Ouvre l'onglet <b>Pension</b> (caté
 ${wn("tip","Qui y mettre ?","Les Pokémon que tu veux le plus rendre précieux : un chromatique ou un Colossal donne un bonus permanent de dégâts à tout le Pokémon.")}`;
 
 wkBody.twr=()=>{
- return `<p class="lead">La Tower est un mode à part : <b>300 étages</b> répartis en 10 zones (les étages 101 à 300 reprennent les zones, avec des adversaires niveau 100 et des équipes choisies pour contrer la tienne), affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
+ return `<p class="lead">La Tower est un mode à part : <b>700 étages</b> répartis en 10 zones (les étages 101 à 700 reprennent les zones, avec des adversaires niveau 100 et des équipes choisies pour contrer la tienne), affrontés avec une équipe de <b>3 Pokémon</b> et leurs vraies attaques. Elle a sa propre monnaie, les Sceaux, et ses propres améliorations.</p>
  ${wf([["Débloquée à l'étage",LOCKS.twr],["Étages",TWN],["Équipe","3 Pokémon"],["Récompense finale","Pikachu Zénith"]])}
  ${wsx("Les onglets",wg([["tower","Tour","Monte étage après étage et lance les combats."],["team","Équipe","Choisis tes 3 Pokémon, leurs attaques et leur objet."],["flask","Améliorations","Dépense tes Sceaux pour renforcer toute l'équipe."],["gift","Récompenses","Une récompense tous les 5 étages."],["trophy","Classement","Compare ton étage max à celui des autres."]]))}
  ${wsx("Sceaux et améliorations",`<p>Tu gagnes des <b>Sceaux</b> à chaque victoire, et beaucoup plus à la <b>première victoire</b> d'un étage. Ils achètent huit améliorations :</p>${tbl(["Amélioration","Effet","Niveau max"],[["Vitalité","PV de toute l'équipe",20],["Force","Attaque physique",20],["Carapace","Défense physique",20],["Esprit","Attaque spéciale",20],["Aura","Défense spéciale",20],["Élan","Vitesse",20],["Cadence","Combat de farm plus rapide : −0,2 s par niveau (6,0 s au départ)",20],["Butin","Plus de Sceaux par victoire",10]])}<p>L'<b>achat automatique</b> dépense tes Sceaux dans l'amélioration la moins chère disponible.</p>`)}
  ${wsx("Mode farm",`<p>Quand un étage est vaincu, tu peux le refaire en <b>mode farm</b>, un combat rapide qui rapporte des Sceaux. Attention : deux défaites d'affilée en farm te ramènent d'un étage en arrière.</p>`)}
- ${wsx("Récompenses",`<p>Une récompense tous les 5 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275 et 300</b> sont des paliers majeurs. Une récompense t'attend tous les 10 étages. Après l'étage 100, tous les adversaires sont niveau 100 et leur équipe est choisie pour contrer la tienne. À l'étage 300, tu obtiens <b>Pikachu Zénith</b>, un Pokémon spécial Électrik/Vol, sans évolution.</p>`)}
+ ${wsx("Récompenses",`<p>Une récompense tous les 10 étages, à la première victoire : pièces, Sceaux, objets, boosters. Les étages <b>25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275 et 300</b> sont des paliers majeurs. Une récompense t'attend tous les 10 étages. Après l'étage 100, tous les adversaires sont niveau 100 et leur équipe est choisie pour contrer la tienne. À l’étage 300, tu obtiens <b>Pikachu Zénith</b>. Du 301 au 700, la puissance augmente progressivement jusqu’à ×100. Au 700, le gardien est <b>Steelix Cristallin</b>, exclusif Acier/Glace sans évolution, deux fois plus puissant que Pikachu Zénith à bonus identiques.</p>`)}
  ${wn("tip","Conseil","Améliore d'abord Force et Esprit pour passer les étages, puis Cadence et Butin pour farmer plus vite.")}`};
 
 wkBody.pvp=()=>{
@@ -9627,18 +9627,18 @@ ${wsx("Sac",`<p>Le Sac affiche tous tes objets : balls, soins, pierres, Méga-Pe
 ${wn("tip","Faire de la place","Les soins ne servent qu'aux raids : garde-en un petit stock et supprime le reste.")}`)}`;
 
 wkBody.inv=()=>{
- const N={D:"Divin",UR:"UR",SSR:"SSR",SR:"SR",N:"N"};
+ const N={D:"LR",UR:"UR",SSR:"SSR",SR:"SR",N:"N"};
  const rt=["D","UR","SSR","SR","N"].map(k=>[N[k],IVRT[k].toString().replace(".",",")+" %"]);
  return `<p class="lead">L'Invocation fait apparaître des Pokémon d'un <b>pool dédié</b> de 26 Pokémon, rotatif toutes les 2 heures avec une bannière mise en avant.</p>
- ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie Divin","350"]])}
+ ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie LR","350"]])}
  ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque Pokémon invoqué a aussi <b>5 %</b> de chance d'avoir une mutation, <b>5 %</b> une taille hors norme, <b>5 %</b> le statut Alpha et <b>2 %</b> d'être chromatique (tirages séparés).</p>`)}
- ${wsx("Garanties",`<ul class="wks2"><li><b>Divin</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
- ${wsx("Prix et lots",`<p>Une invocation coûte <b>40 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Les Pokémon Divins sont uniquement des Pokémon introuvables ailleurs (légendaires, fabuleux, Paradoxes, Ultra-Chimères…) et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
+ ${wsx("Garanties",`<ul class="wks2"><li><b>LR</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
+ ${wsx("Prix et lots",`<p>Une invocation coûte <b>40 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Le pool LR de la bannière regroupe des légendaires, fabuleux, Paradoxes et Ultra-Chimères ; la rareté LR s’applique aussi à leurs captures en raid ou ailleurs et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
  ${wn("info","Doublons","Chaque copie compte pour les étoiles (page Ascensions).")}`};
 
 wkBody.cas=()=>{
  let b=wkOld.cas?wkOld.cas():"";b=b.replace(/^\s*<h1[^>]*>[\s\S]*?<\/h1>/,"");
- return wn("tip","Ticket Premium","Le Pass de combat Premium s'obtient <b>uniquement</b> grâce au Ticket Premium, un lot très rare : 0,04 % au ticket Or et 0,25 % au ticket Platine. S'il tombe alors que tu es déjà Premium, il se change en 300 gemmes.")+b};
+ return wn("tip","Ticket Premium",`Le Pass de combat Premium s'obtient <b>uniquement</b> grâce au Ticket Premium, un lot très rare : ${prc(CP.o.find(x=>x[2]=="bp-ticket")[0]/10000)} au ticket Or et ${prc(CP.p.find(x=>x[2]=="bp-ticket")[0]/10000)} au ticket Platine. S'il tombe alors que tu es déjà Premium, il se change en 300 gemmes.`)+b};
 
 wkBody.bp=()=>`<p class="lead">Le Pass de combat est une piste de <b>${BPMAX} niveaux</b> qui se remplit en jouant. La piste gratuite est disponible dès le début du jeu ; la piste Premium ajoute des récompenses supplémentaires.</p>
 ${wf([["Niveaux",BPMAX],["XP par niveau",BPXP],["Acheter un niveau",BPLVP+" gemmes"],["Récompense finale","Dracolosse Éclipse"]])}
@@ -9689,7 +9689,7 @@ document.addEventListener("input",e=>{const t=e.target;if(!t||t.id!="wkgs")retur
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-a="wk"]');if(!b)return;setTimeout(()=>{const a=$("wka");if(a&&a.getBoundingClientRect().top<0)a.scrollIntoView({block:"start"})},60)},true);
 /* Légendaires et spéciaux : puissance x4 supplémentaire */
 const legM=id=>(id>9e4||LEG.has(id))?4:1;
-{const r1=wkBody.rarity;wkBody.rarity=()=>{if(!PWNEW)return r1();const o=["wN","wSR","wSSR","ex","wUR","mg","bN","bSR","bSSR","bUR","bD","h1","h2","h3","h4","r0","r1","r2","r3","r4","r5","f0","f7","sp","wb"];
+{const r1=wkBody.rarity;wkBody.rarity=()=>{if(!PWNEW)return r1();const o=["wN","wSR","wSSR","ex","wUR","mg","bN","bSR","bSSR","bUR","bD","h1","h2","h3","h4","r0","r1","r2","r3","r4","r5","f0","f7","sp","t7","wb"];
  return `<h1>${LS("Puissance des Pokémon","Pokémon power")}</h1><p class="lead">${LS("La puissance de base (dégâts et pièces) dépend de l'endroit où tu as obtenu le Pokémon. Un Pokémon obtenu par une meilleure source monte de palier, il ne descend jamais. Niveau, étoiles, doublons, mutation, taille, Alpha, chromatique, objets, cartes et prestige se multiplient ensuite par-dessus.","Base power (damage and coins) depends on where you got the Pokémon. A Pokémon obtained from a better source moves up a tier and never down. Level, stars, duplicates, mutation, size, Alpha, shiny, items, cards and prestige then multiply on top.")}</p>`+tbl([LS("Palier","Tier"),LS("Puissance de base","Base power")],o.map(k=>[LS(PWNM[k][0],PWNM[k][1]),"×"+(Math.round(PWTV[k]/PWTV.wN*10)/10).toString().replace(".",",")]))}}
 {const r0=wkBody.rarity;wkBody.rarity=()=>r0()+(PWNEW?"":wn("tip","Légendaires et Pokémon spéciaux","Les Pokémon légendaires et les formes spéciales ont une puissance <b>multipliée par 4</b> en plus de leurs statistiques. Un seul d'entre eux pèse autant qu'une petite équipe."))}
 /* sprite manquant d'une forme (ex. Méga-Zygarde) : on affiche l'espèce de base */
@@ -9700,7 +9700,7 @@ function bonusCard(id){
  const f=x=>"×"+(Math.round(x*100)/100).toString().replace(".",","),L=[];
  const add=(t,n,v,col)=>L.push(`<div class="bnr"><i style="background:${col||"#64748b"}"></i><span>${t}${n?` <b>${n}</b>`:""}</span><em>${v}</em></div>`);
  try{
-  if(PWNEW){const k=pwTier(id);add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24")}
+  if(PWNEW){if(pr(id)===6)add(LS("Rareté","Rarity"),"LR","","#22d3ee");const k=pwTier(id);add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24")}
   else{if(c.spc||id>9e4)add("Forme spéciale","",f(legM(id)*(id>9e4?6.4:1)),"#e879f9");
   else if(LEG.has(id))add("Légendaire","",f(legM(id)),"#f59e0b");
   if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");}
@@ -9782,7 +9782,7 @@ const KXP={
 const KXK=[["r0","N","N"],["r1","SR","SR"],["r2","SSR","SSR"],["r3","UR","UR"],["sp","Mutation ou taille hors norme","Mutation or odd size"],["boss","Boss Alpha","Alpha boss"]];
 const KX=()=>{const c=G.kx||(G.kx={mode:"smart",prof:"bal",rb:1,res:0,lot:10,ms:1,sh:1,sp:0,nb:0});if(!KXP[c.prof])c.prof="bal";return c};
 const kxOdd=e=>e.mi>0||[0,4,5,6].indexOf(SZ.indexOf(e.sz))>=0;
-const kxCls=e=>kxOdd(e)?"sp":e.boss?"boss":"r"+e.r;
+const kxCls=e=>kxOdd(e)?"sp":e.boss?"boss":"r"+Math.min(3,e.r);
 const kxRule=k=>G.rules&&k in G.rules?G.rules[k]:"auto";
 const kxP0=()=>Math.max(1,shopP(IT["poke-ball"]));
 function kxWant(e){const c=KX(),nw=!G.col[e.id],sh=e.mi==7,sp=kxOdd(e);
@@ -9982,7 +9982,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 var SZD=[.6,.8,1,1.6,3,6,12];
 {const mv={1:1.25,2:1.5,3:1.5,4:1.9,5:2.5,6:3.3,8:4.5,9:6.2,10:10};Object.keys(mv).forEach(i=>{if(MU[i])MU[i][1]=mv[i]});}
 
-/* ===== Pokémon Divins : introuvables en zone, étage ou nature ===== */
+/* ===== Pokémon LR : introuvables en zone, étage ou nature ===== */
 function kxDiv(i){return LEG.has(i)||(i>=984&&i<=995)||(i>=1005&&i<=1010)||(i>=1020&&i<=1023)||(i>=793&&i<=799)||(i>=803&&i<=806)||i==772||i==773}
 
 /* ===== Achat rapide des objets de combat depuis l'accueil ===== */
@@ -10161,7 +10161,7 @@ function kxAllyChips(id,c,f){const o=[];
  if(id>9e4)o.push(`<span class="kac kx" style="--mc:#7ee8fa"><i>${LS("Forme","Form")}</i><b>${LS("Exclusif","Exclusive")}</b></span>`);
  else if(c.dy)o.push(`<span class="kac kx" style="--mc:#ff5d73"><i>${LS("Forme","Form")}</i><b>Gigamax</b></span>`);
  else if(c.mf)o.push(`<span class="kac kx" style="--mc:#f472b6"><i>${LS("Forme","Form")}</i><b>${LS("Méga","Mega")}</b></span>`);
- else if(typeof kxDiv=="function"&&kxDiv(id))o.push(`<span class="kac kx" style="--mc:#fbbf24"><i>${LS("Rang","Rank")}</i><b>${LS("Divin","Divine")}</b></span>`);
+ if(pr(id)===6)o.push(`<span class="kac kx" style="--mc:#fbbf24"><i>${LS("Rang","Rank")}</i><b>${LS("LR","LR")}</b></span>`);
  return o.join("")}
 {const u0=ldUi0;ldUi0=function(){u0.apply(this,arguments);try{const w=$("aw"),id=LDC,c=id&&G.col[id];if(!w||!c)return;
   const f=kxAllyFx(id,c),h=$("ahud"),im=$("as");
@@ -10213,7 +10213,7 @@ const HW={i:0,v:0,sh:0,busy:0};
 const hwOwn=id=>!!(G.sp&&G.sp[id]);
 const hwImg=(id,mf,sh)=>`<img class="hwsp" alt="" draggable="false" decoding="async" src="${IMG}${sh?"shiny/":""}${id}${mf?"m"+mf:""}.png">`;
 const hwVarName=(x,k)=>{if(!k)return LS("Normal","Normal");const mg=kxHwMg(x.id),w=(MGM[mg[k-1]].n.match(/ (\S+)$/)||[])[1];return "Méga"+(w?" "+w:"")};
-const hwMP=x=>Math.pow(1.2,HWI.indexOf(x));
+const hwMP=x=>2*Math.pow(1.2,HWI.indexOf(x));
 function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=gem>=x.p,mg=kxHwMg(x.id),mf=HW.v>0?mg[HW.v-1]:0,pw=hwMP(x),mx=Math.pow(1.2,4);
  const stats=x.s.map((v,j)=>`<div class="hwsr"><small>${LS(HWSN[j],HWSE[j])}</small><div class="hwsb"><i style="--w:${Math.round(v/160*100)}%;--d:${j*.06}s"></i></div><b>${v}</b></div>`).join("");
  const vars=[0].concat(mg.map((_,k)=>k+1)).map(k=>`<button class="${HW.v==k?"on":""}" data-hw="var" data-k="${k}">${hwVarName(x,k)}</button>`).join("");
@@ -10224,7 +10224,7 @@ function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=g
   <div class="hwtr"><span class="vb vhw">${ico("spark")}Halloween</span>${tchips(x.t)}</div>
   <p class="hwfl">${esc(LS(x.fr,x.en))}</p>
   <div class="hwcols"><div class="hwbox"><h4>${LS("Statistiques","Stats")}<em>${x.s.reduce((a,b)=>a+b,0)}</em></h4>${stats}<div class="hwab"><small>${LS("Talent","Ability")}</small><b>${esc(x.ab[0])}${x.ha?` <i>/ ${esc(x.ha)}</i>`:""}</b></div></div>
-  <div class="hwbox hwpwb"><h4>${LS("Puissance","Power")}</h4><div class="hwbig">×${pw.toFixed(2).replace(".",",")}</div><div class="hwlad">${ladder}</div><small>${i?LS("+20 % de dégâts par rapport à "+HWI[i-1].n,"+20% damage over "+HWI[i-1].n):LS("Aussi fort qu'Ectoplasma Crépuscule","As strong as Dusk Gengar")}</small>${mg.length?`<div class="hwmb">${ico("bolt")} ${LS("Méga-Évolution : "+mg.length+" forme"+(mg.length>1?"s":""),"Mega Evolution: "+mg.length+" form"+(mg.length>1?"s":""))}</div>`:""}</div></div>
+  <div class="hwbox hwpwb"><h4>${LS("Puissance","Power")}</h4><div class="hwbig">×${pw.toFixed(2).replace(".",",")}</div><div class="hwlad">${ladder}</div><small>${i?LS("+20 % de dégâts par rapport à "+HWI[i-1].n,"+20% damage over "+HWI[i-1].n):LS("Deux fois la puissance d’Ectoplasma Crépuscule","Twice as powerful as Dusk Gengar")}</small>${mg.length?`<div class="hwmb">${ico("bolt")} ${LS("Méga-Évolution : "+mg.length+" forme"+(mg.length>1?"s":""),"Mega Evolution: "+mg.length+" form"+(mg.length>1?"s":""))}</div>`:""}</div></div>
   ${own?`<div class="hwbuy done">${ico("check")}<span>${LS("Dans ta collection","In your collection")} ×${(G.col[x.id]||{}).n||1}</span></div>`:""}<button class="hwbuy${ok?"":" no"}" data-hw="buy"><span class="hwbg">${ico("gem")}<b>${fmt(x.p)}</b></span><span class="hwbl">${ok?(own?LS("Acheter un exemplaire de plus","Buy another copy"):LS("Acheter","Buy now")):LS("Il manque "+fmt(x.p-gem)+" gemmes","Missing "+fmt(x.p-gem)+" gems")}</span><i class="hwsh2"></i></button>
  </div></div>`}
 function hwThumbs(){return HWI.map((x,i)=>{const own=hwOwn(x.id);return `<button class="hwth${i==HW.i?" on":""}${own?" own":""}" data-hw="go" data-k="${i}" style="--a:${x.au}"><span class="hwti">${hwImg(x.id,0,0)}</span><span class="hwtn"><b>${esc(x.n.split(" ")[0])}</b><small>${own?LS("Possédé","Owned"):fmt(x.p)+" "+LS("gemmes","gems")}</small></span></button>`}).join("")}
@@ -10297,7 +10297,7 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  const sync=()=>{const B=st();let dk=(G.ko||0)-B.lk,dc=(G.caps||0)-B.lc;B.lk=G.ko||0;B.lc=G.caps||0;
   if(dk<0)dk=0;if(dc<0)dc=0;B.k3+=dk;B.c3+=dc;let x=0;
   while(B.k3>=BPK){B.k3-=BPK;x++}while(B.c3>=BPC){B.c3-=BPC;x++}if(x)bpAddXp(x)};
- {const f=catchIt;catchIt=function(e){const r=f.apply(this,arguments);try{if(e&&pr(e.id)==3)bpAddXp(BPUR);sync()}catch(x){}return r}}
+ {const f=catchIt;catchIt=function(e){const r=f.apply(this,arguments);try{if(e&&(pr(e.id)==3||pr(e.id)==6))bpAddXp(BPUR);sync()}catch(x){}return r}}
  setInterval(()=>{try{sync()}catch(e){}},700);
 })();
 
@@ -10309,7 +10309,7 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  document.addEventListener("visibilitychange",()=>{if(document.hidden){try{save()}catch(e){}}});
 })();
 
-/* ---------- les Pokémon divins (légendaires, fabuleux…) ne s'obtiennent que par Invocation ---------- */
+/* ---------- les Pokémon LR (légendaires, fabuleux…) ne s'obtiennent que par Invocation ---------- */
 (function(){
  const ok=i=>!kxDiv(i);
  const np=[...EXC].filter(i=>ok(i)&&i<=1025).sort((a,b)=>a-b);
@@ -10471,7 +10471,7 @@ const BUG_URL="https://discord.gg/AP3Y2YQav";/* colle ici le lien d'invitation D
   ["imp","gift","Boutique rééquilibrée","Vitamines, objets IV et talents et bonbons coûtent maintenant 4 fois plus cher."],
   ["imp","shield","Raids sans exclusifs","Les Pokémon exclusifs n'apparaissent plus dans les raids. Le raid Impossible propose 8 légendaires à taux égal."],
   ["imp","gear","Wiki et Paramètres en bas à droite","Un accès rapide permanent, sur ordinateur comme sur mobile."],
-  ["fix","check","Zones sans légendaires divins","Les Pokémon divins (Rayquaza, Mewtwo…) n'apparaissent plus dans les zones, les étages ni les expéditions : uniquement par invocation."],
+  ["fix","check","Zones sans légendaires LR","Les Pokémon LR (Rayquaza, Mewtwo…) n'apparaissent plus dans les zones, les étages ni les expéditions : uniquement par invocation."],
   ["fix","check","Quêtes conservées au rechargement","Recharger la page ne casse plus les expéditions et ne te redemande plus de réclamer les quêtes définitives."]];
  const TYPES={new:["Nouveau","#22c55e"],imp:["Amélioré","#38bdf8"],fix:["Corrigé","#f59e0b"]};
  const SEC=[["new","Nouveautés"],["imp","Améliorations"],["fix","Corrections"]];
@@ -11766,7 +11766,7 @@ function trPoke(){const t=trS(),c=t.i&&G.col[t.i];
  if(!c)return `<section class="tr-box"><h3>${LS("Pokémon entraîné","Trained Pokémon")}</h3><div class="tr-no">${LS("Aucun Pokémon choisi.","None selected.")}</div><button class="go" data-tr="pick">${LS("Choisir un Pokémon","Choose a Pokémon")}</button></section>`;
  ens(t.i);const tot=c.ev.reduce((a,b)=>a+b,0);
  return `<section class="tr-box"><h3>${LS("Pokémon entraîné","Trained Pokémon")}</h3>
-  <div class="tr-pc"><div class="tr-pv">${trVis(t.i,c,1)}</div><div class="tr-pi"><b>${esc(dn(t.i))}</b>${rtag(Math.max(0,Math.min(5,pr(t.i))),1)}<div class="tn-ch">${trChips(c)||`<small class="tr-mu">${LS("Aucune variante","No variant")}</small>`}</div><small>${LS("Niveau","Level")} ${c.l}</small></div></div>
+  <div class="tr-pc"><div class="tr-pv">${trVis(t.i,c,1)}</div><div class="tr-pi"><b>${esc(dn(t.i))}</b>${rtag(Math.max(0,Math.min(6,pr(t.i))),1)}<div class="tn-ch">${trChips(c)||`<small class="tr-mu">${LS("Aucune variante","No variant")}</small>`}</div><small>${LS("Niveau","Level")} ${c.l}</small></div></div>
   <div class="tr-evh"><b>EV</b><small>${tot} / 510</small></div><div class="tr-ev">${trEvBars(c)}</div>
   <div class="tr-ac"><button data-tr="pick">${ico("swap")} ${LS("Changer","Change")}</button><button data-tr="tog">${t.on?LS("Mettre en pause","Pause"):LS("Reprendre","Resume")}</button></div></section>`}
 function trGoal(){const t=trS();
@@ -11888,7 +11888,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 document.addEventListener("keydown",e=>{if(e.target&&e.target.id=="dmin"&&e.key=="Enter"&&!e.shiftKey){e.preventDefault();dmSend()}});
 setInterval(()=>{try{if(!dmOn())return;if(SCP.o=="ch"&&CH.tab=="f"){if(DMX.w)dmFetchConv(true);else dmFetchList()}}catch(e){}},3500);
 setInterval(()=>{try{if(dmOn()&&!(SCP.o=="ch"&&CH.tab=="f"))dmFetchList()}catch(e){}},30000);setTimeout(()=>{try{dmFetchList()}catch(e){}},9000);
-/* ---------- aucun Pokémon divin hors Invocation : Pass de combat ---------- */
+/* ---------- aucun Pokémon LR hors Invocation : Pass de combat ---------- */
 (function(){
  try{BPLEG.splice(0,BPLEG.length,149,248,373,445,376,448,282,635,706,784,612,94,130,131,143,6,3,9)}catch(e){}
 })();
@@ -12484,7 +12484,7 @@ wkBody.town=()=>{
 
  /* ---------- Puissance et rareté ---------- */
  const PWG={w:["Étages","#94a3b8"],e:["Expéditions","#38bdf8"],b:["Bannière","#a78bfa"],h:["Halloween","#fb923c"],r:["Raids","#f87171"],f:["Failles","#22d3ee"],s:["Spéciaux","#f472b6"],x:["Boss monde","#facc15"]};
- const pwG=k=>k=="ex"||k=="mg"?"e":k=="sp"?"s":k=="wb"?"x":k[0]=="w"?"w":k[0]=="b"?"b":k[0]=="h"?"h":k[0]=="r"?"r":"f";
+ const pwG=k=>k=="ex"||k=="mg"?"e":k=="sp"||k=="t7"?"s":k=="wb"?"x":k[0]=="w"?"w":k[0]=="b"?"b":k[0]=="h"?"h":k[0]=="r"?"r":"f";
  const ORD=["wN","wSR","wSSR","wUR","ex","mg","bN","bSR","bSSR","bUR","bD","h1","h2","h3","h4","r0","r1","r2","r3","r4","r5","f0","f1","f2","f3","f4","f5","f6","f7","sp","wb"];
  const nm=k=>(PWNM[k]||[k])[0];
  const fx=v=>"×"+(v>=100?Math.round(v).toLocaleString("fr-FR"):v>=10?v.toFixed(1):v.toFixed(2)).replace(".",",");
@@ -12535,7 +12535,7 @@ wkBody.town=()=>{
 {const p=wkBody.pen;if(p)wkBody.pen=()=>p()+wn("tip",TT("Pokémon déjà au maximum","Already maxed Pokémon"),TT("Tu peux mettre en pension un Pokémon qui a déjà la meilleure mutation ou la meilleure taille : il <b>garde toujours</b> ce qu'il a de mieux (une mutation ou une taille n'est remplacée que par une plus rare) et il peut encore gagner ce qui lui manque, par exemple Alpha ou chromatique. Seule condition : ne pas être en expédition.","You can put a Pokémon that already has the best mutation or size in the daycare: it <b>always keeps</b> its best traits (a mutation or size is only replaced by a rarer one) and can still gain what it lacks, such as Alpha or shiny. Only condition: not being on an expedition."))}
 {const p=wkBody.mut;if(p)wkBody.mut=()=>p()+wn("info",TT("Rareté en combat normal","Odds in normal battles"),TT("En combat normal, les mutations, les tailles hors norme et les chromatiques sont <b>45 % plus rares</b> qu'avant. La pension, l'entraînement, les failles et les raids gardent leurs propres chances.","In normal battles, mutations, odd sizes and shinies are <b>45% rarer</b> than before. The daycare, training, rifts and raids keep their own odds."))}
 {const p=wkBody.sizes;if(p)wkBody.sizes=()=>p()+wn("info",TT("Rareté en combat normal","Odds in normal battles"),TT("Les tailles hors norme sont 45 % plus rares en combat normal. La pension et l'entraînement sont les meilleurs moyens d'en obtenir.","Odd sizes are 45% rarer in normal battles. The daycare and training are the best ways to get them."))}
-{const p=wkBody.pw;if(p)wkBody.pw=()=>p()+wsx(TT("Évolution et rareté","Evolution and rarity"),`<p>${TT("Un Pokémon des étages ou d'une bannière classique prend le palier de <b>sa propre rareté</b>. Quand il évolue, il prend directement celui de sa nouvelle forme : un Tentacool (N) qui évolue en Tentacruel (UR) passe au palier <b>UR</b>. Les autres origines (raids, failles, Halloween, Divin, Boss monde…) gardent leur palier. Un palier ne baisse jamais.","A floor or classic banner Pokémon gets the tier of <b>its own rarity</b>. When it evolves, it immediately takes its new form's tier: a Tentacool (N) evolving into Tentacruel (UR) moves to the <b>UR</b> tier. Other origins (raids, rifts, Halloween, Divine, World boss…) keep their tier. A tier never goes down.")}</p>`)+wsx(TT("Boss monde : palier de capture","World boss: capture tier"),`<p>${TT("Un Pokémon capturé au Boss monde est plus fort selon ton palier de dégâts au moment de la capture : palier 1 = ×1 (environ 372 000), palier 2 = ×1,075 (environ 400 000)… palier 10 = ×1,675.","A Pokémon caught from the World boss is stronger depending on your damage tier at capture: tier 1 = ×1 (about 372,000), tier 2 = ×1.075 (about 400,000)… tier 10 = ×1.675.")}</p>`)}
+{const p=wkBody.pw;if(p)wkBody.pw=()=>p()+wsx(TT("Évolution et rareté","Evolution and rarity"),`<p>${TT("Un Pokémon des étages ou d'une bannière classique prend le palier de <b>sa propre rareté</b>. Quand il évolue, il prend directement celui de sa nouvelle forme : un Tentacool (N) qui évolue en Tentacruel (UR) passe au palier <b>UR</b>. Les autres origines (raids, failles, Halloween, LR, Boss monde…) gardent leur palier. Un palier ne baisse jamais.","A floor or classic banner Pokémon gets the tier of <b>its own rarity</b>. When it evolves, it immediately takes its new form's tier: a Tentacool (N) evolving into Tentacruel (UR) moves to the <b>UR</b> tier. Other origins (raids, rifts, Halloween, LR, World boss…) keep their tier. A tier never goes down.")}</p>`)+wsx(TT("Boss monde : palier de capture","World boss: capture tier"),`<p>${TT("Un Pokémon capturé au Boss monde est plus fort selon ton palier de dégâts au moment de la capture : palier 1 = ×1 (environ 372 000), palier 2 = ×1,075 (environ 400 000)… palier 10 = ×1,675.","A Pokémon caught from the World boss is stronger depending on your damage tier at capture: tier 1 = ×1 (about 372,000), tier 2 = ×1.075 (about 400,000)… tier 10 = ×1.675.")}</p>`)}
 {const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wsx(TT("Boss monde : paliers et difficulté","World boss: tiers and difficulty"),`<p>${TT("Sous chaque palier de dégâts (1 à 10), un pourcentage indique de combien un inscrit augmente la difficulté quand il l'atteint : +0 % au palier 1, puis +3 % par palier, jusqu'à +27 % au palier 10. Le boss est réglé pour tomber vers le 3e jour de son cycle, jamais avant le 2e. Une fois vaincu, tu as <b>autant de lancers de capture que ton palier</b> (1 à 10).","Under each damage tier (1 to 10), a percentage shows how much a signed-up player raises the difficulty on reaching it: +0% at tier 1, then +3% per tier, up to +27% at tier 10. The boss is tuned to fall around day 3 of its cycle, never before day 2. Once defeated, you get <b>as many capture throws as your tier</b> (1 to 10).")}</p>`)}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
@@ -12938,7 +12938,7 @@ async function hfSummon(n){if(HFBUSY||!HFON())return;const S=HFS();if(S.rs!==hfS
  const l=document.querySelector("#rvm .rvl");if(l){l.className="rvl ivqres";l.innerHTML=L.map(x=>hfTile(x.id,x)).join("")}
  if(tab=="inv")show()}
 function hfTile(id,x){const c=G.col[id],h=HFI[id],T=HFT[h.t],mi=x?x.mi:0,zi=x?x.zi:0,fx=mi&&MU[mi]?MU[mi][3].replace(/opacity:[\d.]+;?/,""):"",sh=x?(x.sh||(c&&c.sh)):0,v=c&&c.hfv;
- return `<div class="ivqt hft" style="--c:${T.c}"><span class="hftg">${LS(T.n[0],T.n[1])}</span><div class="ivqsp" style="${fx}">${hfImg(id,sh,v)}</div><b>${esc(h.n)}${v&&HFVN[v]?" "+HFVN[v]:""}</b>${mi||zi>=3||sh?`<div class="vbr">${vb({sh:sh?1:0,mi,zi})}</div>`:""}<i></i>${x?`<small>${x.nw?LS("NOUVEAU","NEW"):LS("Doublon","Duplicate")}${x.k>1?" ×"+x.k:""}</small>`:`<small>${(hfRate(id,hfBanner().L)*100).toFixed(1).replace(".",",")} % · ×${hfMul(id).toFixed(1).replace(".",",")}</small>`}</div>`}
+ return `<div class="ivqt hft" style="--c:${T.c}"><span class="hftg">${LS(T.n[0],T.n[1])}</span><div class="ivqsp" style="${fx}">${hfImg(id,sh,v)}</div><b>${esc(h.n)}${v&&HFVN[v]?" "+HFVN[v]:""}</b>${mi||zi>=3||sh?`<div class="vbr">${vb({sh:sh?1:0,mi,zi})}</div>`:""}<i></i>${x?`<small>${x.nw?LS("NOUVEAU","NEW"):LS("Doublon","Duplicate")}${x.k>1?" ×"+x.k:""}</small>`:`<small>${(hfRate(id,hfBanner().L)*100).toFixed(1).replace(".",",")} % · ×${(hfMul(id)*2).toFixed(1).replace(".",",")}</small>`}</div>`}
 const hfLeft=()=>{let s=Math.max(0,Math.floor((HFEND-Date.now())/1000));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d>0?d+LS(" j "," d ")+h+" h":h+" h "+String(m).padStart(2,"0")+" min"};
 function vHf(){const B=hfBanner(),S=HFS(),tot=HFC*HFN,ok=G.m>=tot,top=B.L[0],T=HFT[HFI[top].t],p=Math.min(HFP,S.p);
  return `<div class="ivqh hfh"><div class="ivqb"></div><div class="hfbats">${typeof kxBatSvg!="undefined"?kxBatSvg+kxBatSvg+kxBatSvg:""}</div><div class="ivqhs">${hfImg(top,0,HFV[top]?HFV[top][0]:"")}</div><div class="ivqct"><small>${LS("COÛT / INVOCATION","COST / SUMMON")}</small><b>${fmt(HFC)} ₽</b></div><span class="ivqtag hftag">${typeof kxPump!="undefined"?kxPump:""} ${LS("Événement limité","Limited event")}</span>
@@ -13112,7 +13112,7 @@ document.addEventListener("click",e=>{const row=e.target.closest&&e.target.close
 @media(max-width:560px){.bph{flex-direction:column;text-align:center}.bpt{align-items:center}.bpimg{width:150px;height:150px}.bpimg img{width:140px;height:140px}.bpif{grid-template-columns:1fr}.bpsr{grid-template-columns:72px 52px minmax(0,1fr) 46px 50px;font-size:12px}}`;document.head.appendChild(st)}
 /* ============ Tour : la puissance compte, comme en JCJ ============ */
 /* attaque des ennemis : ~10 000 à l'étage 1 → ~1 M (100) → ~64 M (200) → ~3 G (300) (3 Pokémon contre jusqu'à 6) ; boss ×1,5, gardien ×2 */
-const twFoePd=(f,boss)=>Math.round(1e4*Math.pow(1e6,(Math.max(1,f)-1)/299)*(f<=100?1:1-.7*Math.min(1,(f-100)/200))*(boss==2?2:boss?1.5:1));
+const twFoePd=(f,boss)=>{const n=Math.max(1,Math.min(TWN,f)),v=n<=300?1e4*Math.pow(1e6,(n-1)/299)*(n<=100?1:1-.7*Math.min(1,(n-100)/200)):3e9*Math.pow(100,(n-300)/400);return Math.round(v*(boss==2?2:boss?1.5:1))};
 {const m0=twMine;twMine=function(id,o){const u=m0.apply(this,arguments);try{const c=G.col[id];u.pd=Math.max(1,base(id));u.mi=c.mi|0;u.zi=c.zi|0;u.sh=c.sh?1:0;u.al=c.al?1:0}catch(e){}return u}}
 {const f0=twFoe;twFoe=function(e,f){const u=f0.apply(this,arguments);try{u.pd=twFoePd(f,e.boss)}catch(x){}return u}}
 {const c0=twFoeCards;twFoeCards=function(f){const h=c0.apply(this,arguments);try{const t=twS(),tm=(t.tm||[]).filter(i=>G.col[i]),my=tm.length?Math.exp(tm.reduce((a,i)=>a+Math.log(Math.max(1,base(i))),0)/tm.length):0,fo=twFoePd(f,0),r=my/fo,mul=Math.max(.1,Math.min(10,Math.sqrt(r))),col=mul>=1.2?"#4ade80":mul>=.8?"#facc15":"#f87171";
@@ -13141,7 +13141,7 @@ setTimeout(()=>pvAutoPush(true),12000);setInterval(()=>pvAutoPush(false),120000)
 /* --- Pokédex > Spéciales > Halloween : les formes Halloween --- */
 {const v0=vSpc;vSpc=function(){let h=v0.apply(this,arguments);try{if(typeof DXSP=="undefined"||DXSP=="spc"||DXSP=="fs")return h;const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;
  h+=`<div class="box hfdx"><div class="row sp2"><h2 style="margin:0">${typeof kxPump!="undefined"?kxPump:""} ${LS("Formes Halloween","Halloween forms")} <small>(${own} / ${HFL.length})</small></h2><small>${LS("Uniquement dans la bannière Halloween de l'Invocation"+(HFON()?", jusqu'au 9 novembre.":"."),"Only from the Halloween banner in Summon"+(HFON()?", until November 9.":"."))}</small></div>
- <div class="hfall">${HFL.slice().reverse().map(([i,n,t])=>{const c=G.col[i],o=c&&c.hf,T=HFT[t];return `<div class="hfa big${o?"":" lk"}" style="--c:${T.c}">${hfImg(i,o&&c.sh,o?c.hfv:(HFV[i]?HFV[i][0]:""))}<b>${o?esc(n):"???"}</b><small>${LS(T.n[0],T.n[1])} · ×${hfMul(i).toFixed(1).replace(".",",")}</small></div>`}).join("")}</div></div>`}catch(e){}return h}}
+ <div class="hfall">${HFL.slice().reverse().map(([i,n,t])=>{const c=G.col[i],o=c&&c.hf,T=HFT[t];return `<div class="hfa big${o?"":" lk"}" style="--c:${T.c}">${hfImg(i,o&&c.sh,o?c.hfv:(HFV[i]?HFV[i][0]:""))}<b>${o?esc(n):"???"}</b><small>${LS(T.n[0],T.n[1])} · ×${(hfMul(i)*2).toFixed(1).replace(".",",")}</small></div>`}).join("")}</div></div>`}catch(e){}return h}}
 {const t0=dxSpTabs;dxSpTabs=function(){let h=t0.apply(this,arguments);try{const own=HFL.filter(x=>G.col[x[0]]&&G.col[x[0]].hf).length;h=h.replace(/(data-k="hw">[\s\S]*?<em>)(\d+)\/(\d+)(<\/em>)/,(m,a,b,c2,d)=>a+(+b+own)+"/"+(+c2+HFL.length)+d)}catch(e){}return h}}
 
 /* ===== Menu ☰ sous le bouton Halloween (regroupe les onglets de gauche) + calendrier des événements =====
@@ -13224,9 +13224,48 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 {const t0=dxSpTabs;dxSpTabs=function(){let h=t0.apply(this,arguments);try{h=h.replace(/<\/div>$/,`<button class="fsdt${DXSP=="fs"?" on":""}" data-hw="dxsp" data-k="fs"><i>${FSS.map(s=>s[4]).join("")}</i><span>Four Seasons</span><em>${LS("Bientôt","Soon")}</em></button></div>`)}catch(e){}return h}}
 {const v0=vSpc;vSpc=function(){if(typeof DXSP!="undefined"&&DXSP=="fs"){const h=v0.apply(this,arguments),i=h.indexOf('<div class="spgrid">');return (i>0?h.slice(0,i):h)+fsHtml(1)}return v0.apply(this,arguments)}}
 
+/* ===== LR, casino ×4 et Tower 700 (les clés de sauvegarde D/bD restent compatibles) ===== */
+(function(){
+ // Transfer only the extra weight from « nothing »; every table still totals exactly 10,000.
+ for(const L of Object.values(CP)){const n=L.find(x=>x[1]==="n");for(const x of L){if(x[1]==="sp"||(x[1]==="i"&&x[2]==="bp-ticket")){const extra=x[0]*3;if(!n||n[0]<extra)throw new Error("Casino weight budget");n[0]-=extra;x[0]*=4}}}
+})();
+// Keep special (4) and Halloween (5) indices stable for existing records and capture rules.
+const LR_RARITY=6;
+RN2.push("LR");RC2.push("#67e8f9");RW2.push(0);CAPB.push(.04);
+function isLR(id){const b=id>9e4&&SPM[id]?SPM[id].base:id;return LEG.has(b)||kxDiv(b)}
+{const old=pr;pr=function(id){return isLR(+id)?LR_RARITY:old.apply(this,arguments)}}
+{const st=document.createElement("style");st.id="pid-lr-rarity";st.textContent='.tw700reward{background:linear-gradient(125deg,#0d3156,#171735);border-color:#67e8f9}.tw700reward .twrp2 img{filter:drop-shadow(0 0 18px #67e8f955)}.rty.r6{color:#a5f3fc;border:1px solid #22d3ee88;background:linear-gradient(120deg,#164e63,#172554);font-weight:900;letter-spacing:.08em}.atlas-traits .rty.r6{font-size:10px;padding:2px 6px;border-radius:4px}';document.head.appendChild(st)}
+// Damage only: passive coin tiers and already-earned mutations are unchanged.
+for(const k of ["h1","h2","h3","h4"])PWTV[k]*=2;
+PWC.clear();
+// The summit exclusive uses its own permanent source, separate from every other special.
+PWTV.t7=PWTV.sp*2;PWTV0.t7=PWTV0.sp*Math.pow(2,.6);PWREF.t7=660;
+PWNM.t7=["Tower 700 · Steelix Cristallin","Tower 700 · Crystal Steelix"];
+const TW700={id:90005,base:208,n:"Steelix Cristallin",t:["steel","ice"],s:[100,140,210,60,100,50],ab:["Fermeté"],ha:"Corps Sain",hue:0,hue2:0,sat:1,au:"#67e8f9",au2:"#c4b5fd",cas:0,
+ fr:"Gardien du 700e étage de la Tower, son armure de cristal reflète chacune de tes victoires. À bonus identiques, sa puissance de base est deux fois celle de Pikachu Zénith.",
+ en:"Guardian of the Tower’s 700th floor, its crystal armor reflects every victory. With equal bonuses, its base power is twice Zenith Pikachu’s."};
+SPS.push(TW700);SPM[90005]=TW700;
+DB[90005]={n:TW700.n,t:TW700.t,b:660,lg:0,ba:0,ch:90005,s:TW700.s,ab:TW700.ab,ha:TW700.ha};EVC[90005]=[];
+RSPM[90005]=["Tête de Fer","Laser Glace","Séisme","Malédiction"];
+SPU.set("90005","img/special/steelix-cristallin.png");SPU.set("90005s","img/special/steelix-cristallin-shiny.png");
+// Six strategic opponents, powerful guardians every 25 floors and rewards every ten.
+for(let f=310;f<=700;f+=10){const k=(f-300)/10,major=f%50===0;
+ TWRW[f]={h:150+k*5,s:10000+k*350,big:major?1:0,gem:major?40+Math.floor(k/5)*5:3,
+ it:[["dream-ball",16+Math.floor(k/5)],["max-revive",6+Math.floor(k/10)],["rare-candy",8+Math.floor(k/5)],...(major?[["master-ball",2],["gold-bottle-cap",3],["ability-patch",1]]:[])]};
+}
+Object.assign(TWRW[700],{h:400,s:30000,big:1,gem:120,sp:90005,it:[["master-ball",4],["gold-bottle-cap",6],["ability-patch",3],["dream-ball",40],["max-revive",20],["rare-candy",25]]});
+Object.assign(TWG,{325:483,350:484,375:487,400:493,425:643,450:644,475:646,500:800,525:888,550:889,575:890,600:384,625:716,650:717,675:150,700:90005});
+{const old=srcWhere;srcWhere=function(id){if(+id===90005)return["au sommet de la Tower (étage 700)","at the Tower summit (floor 700)"];return old.apply(this,arguments)}}
+for(const key of ["rarity","pw"]){const old=wkBody[key];if(old)wkBody[key]=()=>old()+wsx(TT("Rareté LR et origine","LR rarity and origin"),`<p>${TT("<b>N → SR → SSR → UR → LR</b>. LR remplace Divin et inclut tous les légendaires et fabuleux, quelle que soit leur origine. La rareté et le palier d’obtention sont distincts : un LR obtenu en raid Impossible conserve le multiplicateur du raid Impossible. Les formes exclusives restent reconnaissables par leur carte.","<b>N → SR → SSR → UR → LR</b>. LR replaces Divine and includes every legendary and mythical Pokémon, regardless of origin. Rarity is separate from the acquisition tier: an LR from an Impossible raid keeps its Impossible raid multiplier. Exclusive forms keep their distinctive cards.")}</p>`)+wsx(TT("Tower 700","Tower 700"),`<p>${TT("Steelix Cristallin a un palier propre : <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10).toString().replace(".",",")+"</b> par rapport au palier N, soit <b>deux fois la puissance de base de Pikachu Zénith</b> à niveau, doublons, étoiles et variantes identiques.","Crystal Steelix has its own tier: <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10)+"</b> compared with the N tier, or <b>twice Zenith Pikachu’s base power</b> at equal level, duplicates, stars and variants.")}</p>`)}
+{const old=wkBody.inv;wkBody.inv=()=>old()+wn("info",TT("Rareté et source","Rarity and source"),TT("Le taux LR est de 1 % par invocation classique, hors garanties. Les garanties et compteurs déjà accumulés sont conservés. La rareté LR existe aussi pour les légendaires et fabuleux obtenus en raid ou ailleurs.","The classic LR chance is 1% per summon, before guarantees. Existing guarantees and pity counters are kept. Legendary and mythical Pokémon from raids and other sources also have LR rarity."))}
+
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["imp","Casino et bannière classique","Chances de Lucario Aurore, d’Ectoplasma Crépuscule et du Ticket Premium multipliées par 4. La chance LR de la bannière classique passe de 0,5 % à 1 %.","Casino and classic banner","Dawn Lucario, Dusk Gengar and Premium Ticket chances multiplied by 4. The classic banner LR chance increases from 0.5% to 1%."],
+  ["new","Rareté LR","La rareté LR remplace Divin, au-dessus de UR. Tous les légendaires et fabuleux sont LR, y compris ceux de raid : leur palier de puissance d’origine est conservé.","LR rarity","LR replaces Divine, above UR. All legendary and mythical Pokémon are LR, including raid catches, while keeping their original power tier."],
+  ["imp","Puissance Halloween doublée","Les dégâts de toutes les formes de bannière Halloween et des exclusifs Halloween sont multipliés par 2, pour les Pokémon déjà possédés comme pour les prochains.","Halloween power doubled","All Halloween banner forms and Halloween exclusives deal twice the damage, for both existing Pokémon and new catches."],
+  ["new","Tower : 700 étages et Steelix Cristallin","400 nouveaux étages à difficulté croissante. Pikachu Zénith reste à l’étage 300 ; Steelix Cristallin se gagne une seule fois au 700, avec deux fois sa puissance de base à bonus identiques.","Tower: 700 floors and Crystal Steelix","400 new progressively harder floors. Zenith Pikachu stays at floor 300; Crystal Steelix is earned once at floor 700, with twice its base power at equal bonuses."],
   ["imp","Combat : pilotage compact","Étage, progression et captures de zone sont plus lisibles. Les stocks utiles aux règles de capture sont affichés en accès rapide ; un bouton ouvre toutes les Balls. Les revenus restent regroupés avec une durée de session en heures et minutes.","Battle: compact controls","Floor, progress and zone catches are easier to read. Capture-rule stocks appear in a quick view, with all Balls one click away. Earnings stay grouped with session duration in hours and minutes."],
   ["imp","Bandeau Énergie néon","Les statistiques gardent leur placement avec une finition cyan et violette. La bannière dresseur distingue mieux la photo, le titre, le niveau et la progression d’XP.","Neon Energy header","Statistics keep their placement with a cyan and violet finish. The trainer banner makes the photo, title, level and XP progress easier to read."],
   ["imp","Entraînement : chances augmentées","Par heure en mode Tout : mutation 15 %, taille spéciale 15 %, Alpha 10 % et chromatique 5 %. En objectif ciblé : mutation 22 %, taille spéciale 22 % ou Alpha 18 %. Les probabilités affichées et le rattrapage hors ligne utilisent ces mêmes taux.","Training: increased chances","Hourly All-mode chances: mutation 15%, special size 15%, Alpha 10% and shiny 5%. Targeted goals: mutation 22%, special size 22% or Alpha 18%. Displayed probabilities and offline catch-up use the same rates."],
@@ -13303,7 +13342,7 @@ const UPD=[
   ["new","Origine des Pokémon","La fiche d'un Pokémon indique maintenant en petit où il a été obtenu : étages, bannière, raid, faille, Boss monde, Casino…","Pokémon origin","A Pokémon's sheet now shows in small where it was obtained: floors, banner, raid, rift, World boss, Casino…"],
   ["imp","Prestige rééquilibré","Améliorations de prestige : Mutations +7 % par niveau (au lieu de 12 %), Colosses +7 % (au lieu de 10 %), Éclat +10 % (au lieu de 25 %).","Prestige rebalanced","Prestige upgrades: Mutations +7% per level (was 12%), Giants +7% (was 10%), Shine +10% (was 25%)."],
   ["imp","Wiki à jour","Nouvelles sections : tableau des multiplicateurs, doublons et étoiles, puissance en JCJ et dans la Tower, raid Zénith, PV du Boss monde, classements Pièces et Meilleur Pokémon.","Wiki updated","New sections: multiplier table, duplicates and stars, power in PvP and the Tower, Zenith raid, World boss HP, Coins and Best Pokémon rankings."],
-  ["imp","Écart de puissance entre raretés agrandi","Les paliers de puissance sont plus espacés : les Pokémon rares (Divins, raids difficiles, failles, spéciaux, boss monde) prennent plus d'avance sur les Pokémon communs très entraînés. Le niveau de dégâts moyen des joueurs reste le même.","Bigger power gap between rarities","Power tiers are further apart: rare Pokémon (Divine, hard raids, rifts, specials, world boss) gain more ground over heavily trained common Pokémon. Average player damage stays the same."],
+  ["imp","Écart de puissance entre raretés agrandi","Les paliers de puissance sont plus espacés : les Pokémon rares (LR, raids difficiles, failles, spéciaux, boss monde) prennent plus d'avance sur les Pokémon communs très entraînés. Le niveau de dégâts moyen des joueurs reste le même.","Bigger power gap between rarities","Power tiers are further apart: rare Pokémon (LR, hard raids, rifts, specials, world boss) gain more ground over heavily trained common Pokémon. Average player damage stays the same."],
   ["fix","JCJ : puissance toujours prise en compte","Ton équipe JCJ et sa puissance sont maintenant publiées automatiquement. Contre un joueur qui ne l'a pas encore publiée, sa puissance est estimée d'après ses meilleurs Pokémon au classement.","PvP: power always counted","Your PvP team and its power are now published automatically. Against a player who hasn't published it yet, their power is estimated from their best Pokémon in the rankings."],
   ["imp","Failles rééquilibrées","Les DPS requis pour ouvrir les failles sont recalés sur la puissance actuelle des joueurs : la Fissure reste accessible dès le début, le Chaos demande maintenant 10 G de DPS.","Rifts rebalanced","The DPS needed to open rifts now matches current player power: Fissure stays open from the start, Chaos now needs 10G DPS."],
   ["imp","Nouvelle échelle de puissance","La puissance de base d'un Pokémon dépend maintenant de l'endroit où tu l'as obtenu : étages, expéditions, Chasse Méga, bannières, Halloween, raids, failles, spéciaux et boss monde, du plus faible au plus fort. Les pièces gagnées par seconde suivent la même échelle. Mutations, tailles, étoiles et Alpha s'ajoutent comme avant. Un Pokémon obtenu par une meilleure source passe au palier supérieur.","New power scale","A Pokémon's base power now depends on where you got it: floors, expeditions, Mega Hunt, banners, Halloween, raids, rifts, specials and world boss, from weakest to strongest. Coins per second follow the same scale. Mutations, sizes, stars and Alpha still stack on top. A Pokémon obtained from a better source moves up to that tier."],
@@ -13345,7 +13384,7 @@ const UPD=[
   ["imp","Boutique rééquilibrée","Vitamines, objets IV, talents et bonbons coûtent 4 fois plus cher."],
   ["imp","Wiki et Paramètres en bas à droite","Un accès rapide permanent, sur ordinateur comme sur mobile."],
   ["rem","Raids sans exclusifs","Les Pokémon exclusifs n'apparaissent plus dans les raids. Le raid Impossible propose 8 légendaires à taux égal."],
-  ["fix","Zones sans légendaires divins","Les Pokémon divins (Rayquaza, Mewtwo…) n'apparaissent plus dans les zones, les étages ni les expéditions : uniquement par invocation."],
+  ["fix","Zones sans légendaires LR","Les Pokémon LR (Rayquaza, Mewtwo…) n'apparaissent plus dans les zones, les étages ni les expéditions : uniquement par invocation."],
   ["fix","Quêtes conservées au rechargement","Recharger la page ne casse plus les expéditions et ne redemande plus de réclamer les quêtes définitives."]]}
 ];
 /*UPD_END*/
