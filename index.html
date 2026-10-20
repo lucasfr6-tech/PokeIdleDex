@@ -3827,8 +3827,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="ee33654d12"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=ee33654d12"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f36b7d46c3"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=f36b7d46c3"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -12628,6 +12628,43 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 setInterval(()=>{try{if(tab=="rks"&&RKX.v=="bp"&&!document.hidden)rkbFetch()}catch(e){}},5000);
 {const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKB.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
 
+/* ===== Meilleur Pokémon : fiche détaillée (IV, EV, stats, doublons...) publiée avec le record, visible en cliquant dans le classement ===== */
+function bpDet(id){try{const c=G.col[id];if(!c)return null;ens(id);rq(id);const it=c.it&&IT[c.it]?IT[c.it].n:"",mv=c.mv?TM[+c.mv.slice(2)-1]:null;let w=null;try{w=srcWhere(id)}catch(e){}
+ return{l:c.l|0,mx:c.mx||100,n:c.n|0,st:c.st|0,iv:(c.iv||[]).slice(0,6),ev:(c.ev||[]).slice(0,6),s:[0,1,2,3,4,5].map(k=>{try{return calc(id,k)}catch(e){return 0}}),b:Math.round(base(id)),q:Math.round((c.q||1)*100)/100,
+  it,ab:(()=>{try{return abn(id)||""}catch(e){return""}})(),ha:c.ha?1:0,mv:mv?mv[0]:"",tr:(()=>{try{return pwLabel(id)}catch(e){return""}})(),w:w?w:null,mf:c.mf?1:0,dy:c.dy?1:0,ty:tp(id)}}catch(e){return null}}
+{const s0=bpScan;bpScan=function(){s0.apply(this,arguments);try{const r=G.bpk;if(r&&r.i&&G.col[r.i]){const d=bpDet(r.i);if(d)r.d=d}}catch(e){}}}
+{const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{const b=G.bpk;if(b&&b.d)d.bpd=b.d}catch(e){}return d}}
+const BPSN=["PV","Attaque","Défense","Atq. Spé.","Déf. Spé.","Vitesse"],BPSE=["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed"];
+function bpModal(r){const b=r.bp,d=r.bpd||null,o=document.createElement("div");o.id="bpdm";
+ const bar=(v,m,col)=>`<i style="width:${Math.max(2,Math.min(100,v/m*100)).toFixed(1)}%;background:${col}"></i>`;
+ const stat=d?`<div class="bpsg">${[0,1,2,3,4,5].map(k=>`<div class="bpsr"><span>${LS(BPSN[k],BPSE[k])}</span><b>${fmt(d.s[k]||0)}</b><div class="bpsb">${bar(d.s[k]||0,Math.max(...d.s,1),"linear-gradient(90deg,#38bdf8,#818cf8)")}</div><em title="IV">IV ${d.iv[k]??"?"}</em><em title="EV">EV ${d.ev[k]??"?"}</em></div>`).join("")}</div>
+  <div class="bpsm"><span>${LS("Total IV","IV total")} <b>${(d.iv||[]).reduce((a,x)=>a+(x|0),0)} / 186</b></span><span>${LS("Total EV","EV total")} <b>${(d.ev||[]).reduce((a,x)=>a+(x|0),0)} / 510</b></span></div>`:`<p class="bpno">${LS("Ce joueur n'a pas encore publié les détails de son Pokémon (ils apparaîtront à sa prochaine connexion).","This player has not published the details yet (they will appear at their next login).")}</p>`;
+ const info=d?[[LS("Niveau","Level"),d.l+" / "+d.mx],[LS("Doublons","Duplicates"),"×"+d.n],[LS("Étoiles","Stars"),"★".repeat(d.st)+"☆".repeat(Math.max(0,5-d.st))],[LS("Palier","Tier"),d.tr||"?"],[LS("Origine","Origin"),d.w?LS("Obtenu "+d.w[0],"Obtained "+d.w[1]):"?"],[LS("Talent","Ability"),(d.ab||"?")+(d.ha?" ("+LS("caché","hidden")+")":"")],[LS("Objet tenu","Held item"),d.it||LS("Aucun","None")],[LS("Attaque CT","TM move"),d.mv||LS("Aucune","None")],[LS("Puissance permanente","Permanent power"),fmt(d.b)],[LS("Qualité (IV, EV, bonus)","Quality (IV, EV, bonus)"),"×"+String(d.q).replace(".",",")]].map(x=>`<div><small>${x[0]}</small><b>${esc(String(x[1]))}</b></div>`).join(""):"";
+ const ty=(d&&d.ty)||b[7]||[];
+ o.innerHTML=`<div class="bpw" style="--tc:${TC[ty[0]]||"#888"}"><button class="bpx" data-bpd="x" aria-label="x">${ico("x")}</button>
+ <div class="bph"><div class="bpimg">${aSpr(b[0],b[1])}</div><div class="bpt"><small>${LS("MEILLEUR POKÉMON DE","BEST POKÉMON OF")} ${esc(r.n||"?")}</small><h2>${esc(b[5]||"?")}</h2><div class="vbr">${vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]})}</div><div class="bpty">${tchips(ty)}</div><div class="bpdps"><b>${fmt(r.bpv)}</b><small>DPS</small></div></div></div>
+ ${d?`<div class="bpif">${info}</div>`:""}<h4>${LS("Statistiques","Stats")}</h4>${stat}
+ ${r.id&&!r.me?`<button class="bpvp" data-bpd="vp" data-t="${esc(String(r.id))}">${ico("user")} ${LS("Voir le profil du dresseur","View trainer profile")}</button>`:""}</div>`;
+ document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-bpd=x]")){o.remove();return}const v=e.target.closest("[data-bpd=vp]");if(v){o.remove();const t=document.createElement("button");t.dataset.a="vp";t.dataset.t=v.dataset.t;t.style.display="none";document.body.appendChild(t);t.click();t.remove()}})}
+document.addEventListener("click",e=>{const row=e.target.closest&&e.target.closest(".rkb-r");if(!row)return;e.stopPropagation();e.preventDefault();const i=[...row.parentNode.children].indexOf(row),R=rkbRows(),r=R[i];if(!r)return;
+ if(r.me){try{bpScan()}catch(x){}const x=Object.assign({},r,{bpd:G.bpk&&G.bpk.d});return bpModal(x)}bpModal(r)},true);
+{const st=document.createElement("style");st.textContent=`#bpdm{position:fixed;inset:0;z-index:100012;background:#04061acc;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:14px}
+.bpw{position:relative;width:min(640px,100%);max-height:calc(100vh - 28px);overflow:auto;padding:22px;border-radius:24px;background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 22%,#141b3d),#0b1026 55%);border:1px solid var(--ln);box-shadow:0 30px 80px #000c}
+.bpx{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08);z-index:2}
+.bph{display:flex;gap:18px;align-items:center}.bpimg{flex:none;width:180px;height:180px;display:grid;place-items:center;border-radius:20px;background:radial-gradient(circle,color-mix(in srgb,var(--tc) 40%,transparent),transparent 70%)}
+.bpimg img{width:170px;height:170px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 8px 10px #000a)}
+.bpt{min-width:0;display:flex;flex-direction:column;gap:6px}.bpt>small{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--mu)}.bpt h2{margin:0;font-size:28px}
+.bpdps{display:flex;align-items:baseline;gap:6px}.bpdps b{font-size:26px;color:var(--y);font-variant-numeric:tabular-nums}.bpdps small{color:var(--mu);font-weight:800}
+.bpif{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}.bpif>div{padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid var(--ln)}
+.bpif small{display:block;font-size:11px;color:var(--mu);font-weight:700}.bpif b{font-size:14.5px}
+.bpw h4{margin:18px 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--y)}
+.bpsg{display:grid;gap:6px}.bpsr{display:grid;grid-template-columns:92px 64px minmax(0,1fr) 52px 56px;gap:8px;align-items:center;font-size:13px}
+.bpsr>span{color:var(--mu);font-weight:700}.bpsr>b{text-align:right;font-variant-numeric:tabular-nums}.bpsb{height:9px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}.bpsb i{display:block;height:100%;border-radius:99px}
+.bpsr em{font-style:normal;font-size:11.5px;font-weight:800;padding:2px 6px;border-radius:7px;background:rgba(255,255,255,.07);text-align:center}
+.bpsm{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.bpsm span{font-size:12.5px;padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.05);color:var(--mu)}.bpsm b{color:var(--tx)}
+.bpno{color:var(--mu);font-size:14px}.bpvp{margin-top:16px;width:100%;padding:12px;border-radius:14px;font-weight:800;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;gap:8px}
+.rkb-r{cursor:pointer}
+@media(max-width:560px){.bph{flex-direction:column;text-align:center}.bpt{align-items:center}.bpimg{width:150px;height:150px}.bpimg img{width:140px;height:140px}.bpif{grid-template-columns:1fr}.bpsr{grid-template-columns:72px 52px minmax(0,1fr) 46px 50px;font-size:12px}}`;document.head.appendChild(st)}
 /* ============ Tour : la puissance compte, comme en JCJ ============ */
 /* attaque des ennemis : ~10 000 à l'étage 1 → ~1 M (100) → ~64 M (200) → ~3 G (300) (3 Pokémon contre jusqu'à 6) ; boss ×1,5, gardien ×2 */
 const twFoePd=(f,boss)=>Math.round(1e4*Math.pow(1e6,(Math.max(1,f)-1)/299)*(f<=100?1:1-.7*Math.min(1,(f-100)/200))*(boss==2?2:boss?1.5:1));
@@ -12745,6 +12782,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["new","Classement Meilleur Pokémon : fiche détaillée","Clique sur un Pokémon du classement pour voir sa fiche en grand : niveau, doublons, étoiles, palier, origine, talent, objet tenu, CT, statistiques, IV et EV. Un bouton mène au profil du dresseur.","Best Pokémon ranking: detailed sheet","Click a Pokémon in the ranking to see its big sheet: level, duplicates, stars, tier, origin, ability, held item, TM, stats, IVs and EVs. A button leads to the trainer's profile."],
   ["new","Boss de guilde : choix de l'équipe","Avant d'attaquer le boss de guilde, tu choisis tes 3 Pokémon (recherche, ou « Mes 3 meilleurs »). Ton choix est gardé pour les attaques suivantes.","Guild boss: team choice","Before attacking the guild boss, you pick your 3 Pokémon (search, or “My top 3”). Your choice is kept for the next attacks."],
   ["imp","Boss de guilde : vrais PV et 30 tours","Les PV du boss s'affichent en vrais nombres (par exemple 120M / 150M) et chaque coup montre les vrais dégâts infligés. Un combat dure maintenant 30 tours au lieu de 80.","Guild boss: real HP and 30 turns","The boss HP is shown as real numbers (for example 120M / 150M) and each hit shows the real damage dealt. A fight now lasts 30 turns instead of 80."],
   ["imp","Espèces ciblées : les Pokémon spéciaux restent capturés","Avec des espèces ciblées, les autres Pokémon sont quand même capturés s'ils sont chromatiques, mutés, de taille hors norme ou Alpha. Les autres sont mis K.O.","Targeted species: special Pokémon still caught","With targeted species, other Pokémon are still caught if they are shiny, mutated, odd-sized or Alpha. The rest are KO'd."],
