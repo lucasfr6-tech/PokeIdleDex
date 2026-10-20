@@ -3824,12 +3824,31 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 .pvq2{width:100%;box-sizing:border-box;margin:10px 0;padding:11px 14px;border-radius:12px;border:1px solid var(--ln,#334);background:rgba(255,255,255,.06);color:inherit;font:inherit}
 .pvvc.em{display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.5;border-style:dashed;min-height:90px}
 .slbx{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:8px 0 12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--ln,#334)}.slbx b{display:block}.slbx small{opacity:.75}.slbx button{padding:10px 16px;border-radius:12px;font-weight:800;white-space:nowrap}
+
+/* ===== Nuit Astrale · interface combat (TS4) ===== */
+.app{max-width:none;padding:10px 12px;gap:14px}
+nav{background:linear-gradient(180deg,rgba(18,27,72,.9),rgba(9,14,44,.92));backdrop-filter:blur(14px)}
+.tc{background:linear-gradient(180deg,rgba(21,29,92,.92),rgba(10,15,52,.9));backdrop-filter:blur(12px);border-color:rgba(150,170,255,.22);border-radius:16px}
+.tc b{color:#fff}.tc:first-child b{color:var(--y)}
+.box{background:linear-gradient(180deg,rgba(16,24,62,.84),rgba(9,14,46,.92));backdrop-filter:blur(10px)}
+.layout{grid-template-columns:minmax(0,1fr) 430px;gap:12px}
+.arena{height:520px;border-color:rgba(120,165,255,.55)}
+.plist{top:12px}
+.plist .box{padding:14px;background:linear-gradient(180deg,rgba(13,20,56,.92),rgba(7,11,32,.95))}
+#plist{max-height:min(78vh,860px)}
+.pr{gap:12px;padding:9px 12px;border-radius:12px;margin-bottom:6px;border:1px solid var(--ln);background:linear-gradient(90deg,rgba(255,255,255,.035),rgba(0,0,0,.28));transition:.12s}
+.pr:hover{background:var(--gl2);transform:translateX(2px)}
+.pr .sp,.pr .spw{width:62px;height:62px}
+.pr b{font-size:16px}
+.pr .r small{font-size:12px}.pr .x{font-size:15px}
+.pr>span:nth-child(2){min-width:0;flex:1;overflow:hidden}
+.pr small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style></head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9d86073efc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=9d86073efc"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="5b9e17b24b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=5b9e17b24b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4412,11 +4431,11 @@ function drawBg(b){const cv=$("bg");if(!cv)return;const W=256,H=112;cv.width=W;c
 /* ============ AFFICHAGE : COMBAT ============ */
 const bar=(v,c)=>`<div class="bar"><i style="width:${Math.max(0,Math.min(100,v))}%;background:${c}"></i></div>`;
 const tcard=(ic2,bg,l,v,s)=>`<div class="tc" style="--bg:${bg}"><i>${ico(ic2)}</i><div><small>${l}</small><b>${v}</b><span class="sub">${s}</span></div></div>`;
-const TOPS=[["coin","rgba(245,158,11,.4)","Pièces"],["bolt","rgba(239,68,68,.4)","Dégâts"],["target","rgba(16,185,129,.4)","Captures"]];
+const TOPS=[["coin","rgba(245,158,11,.4)","Pièces"],["bolt","rgba(239,68,68,.4)","Dégâts"],["target","rgba(16,185,129,.4)","Captures"],["skull","rgba(148,163,184,.35)","K.O."]];
 function topInit(){$("top").innerHTML=TOPS.map((t,i)=>`<div class="tc" style="--bg:${t[1]}"><i id="ti${i}">${ico(t[0])}</i><div><small>${t[2]}</small><b id="tv${i}"></b><span class="sub" id="ts${i}"></span></div></div>`).join("")+`<div class="tc pchip" id="pchip" data-a="tab" data-t="prof" title="Profil"></div>`;TV=[];TOF=null;PCK=""}
 function setT(i,v,t){const k=v+"|"+t;if(TV[i]!==k){TV[i]=k;$("tv"+i).textContent=v;$("ts"+i).textContent=t}}
 function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids().reduce((t,i)=>t+base(i),0),TK];const cps0=TSC[0]*(EVF.c||1)*BIF.c,dps0=TSC[1]*(EVF.d||1)*BIF.d;
- setT(0,fmt(G.m),"+"+fmt(cps0)+" / seconde");setT(1,fmt(dps0)+"/s","Prestige ×"+sm().toFixed(2)+" · Cartes ×"+GM[0].toFixed(2));setT(2,String(G.caps),dxn()+" / 1025 espèces");
+ setT(0,fmt(G.m),"+"+fmt(cps0)+" / seconde");setT(1,fmt(dps0)+"/s","dégâts / seconde");setT(2,String(G.caps),dxn()+" / 1025 espèces");setT(3,fmt(G.ko),"mis K.O.");
  pchipUpd();
  if(OPEN&&$("mxp")&&G.col[OPEN]){const c=G.col[OPEN];pqLvUp(c)}
  exUi();if(tab!="adv"||!$("ar"))return;if(bio()!=lastB){lastB=bio();drawBg(lastB)}
