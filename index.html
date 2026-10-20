@@ -3828,8 +3828,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="08acbc4e73"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=08acbc4e73"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="9d86073efc"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=9d86073efc"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10237,6 +10237,7 @@ const GIFT_CODES={
  "1.1.0":{t:"Version 1.1.0",txt:"Merci d'avoir joué à la première version de PokeIdleDex !",rw:[["m",50000000],["i","master-ball",1],["i","ability-patch",1],["i","gold-bottle-cap",1],["i","bottle-cap",1],["i","bi-atk",2],["i","bi-xp",2],["i","bi-coin",2],["i","bi-find",2],["i","bi-mut",2],["i","bi-cap",2]]},
  "MB11-X7K4Q9":{t:"Cadeau",txt:"11 Master Ball pour toi, merci de jouer à PokeIdleDex !",rw:[["i","master-ball",11]]},
  "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",30],["i","master-ball",2]]},
+ "STARTER2":{t:"2 starters chromatiques",txt:"Deux starters chromatiques aléatoires pour toi !",sh2:2},
  /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",30],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
 function mailBox(){G.mail=G.mail||[];return G.mail}
@@ -10270,7 +10271,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
    const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c];G.codes=G.codes||{};
    if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");
-   else{G.codes[c]=1;mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"");ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}
+   else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"");ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
    render();mailDot()}
  });
  document.addEventListener("keydown",e=>{if(e.key=="Escape")mailClose();if(e.key=="Enter"&&e.target&&e.target.id=="mlin"){const b=document.querySelector('[data-ml="code"]');if(b)b.click()}});
@@ -10309,6 +10310,7 @@ function mailAdd(title,from,rw,txt){const L=mailBox();L.unshift({id:Date.now().t
 })();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
+function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){const i=Math.random()*P.length|0;fin.push(P.splice(i,1)[0])}const names=[];fin.forEach(id=>{const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());c.sh=1;ens(id);G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);names.push(dn(id))});recomp();save();const nm=names.join(", ");toast(LS(fin.length+" starters chromatiques reçus : ",fin.length+" shiny starters received: ")+nm);try{sfx("shiny")}catch(e){}return nm}
 (function(){
  const pool=()=>WMPOOL.filter(i=>true);
  const root=()=>{let o=document.getElementById("wmr");if(!o){o=document.createElement("div");o.id="wmr";document.body.appendChild(o)}return o};
