@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-passive-income-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-passive-income-20261020"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-training-rates-20261020"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-training-rates-20261020"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11688,8 +11688,10 @@ NAV2.push(["trn","trn","Entraînement","#22c55e","#14532d"]);NENG.trn="Training"
 try{NAVX.push(["trn","trn","Entraînement","#22c55e","#14532d"])}catch(e){}
 {const c=NCAT.find(x=>x[0]=="c_adv")[6];if(!c.includes("trn")){const k=c.indexOf("pen");c.splice(k<0?c.length:k+1,0,"trn")}}
 const TRK=3000,TRCAP=7200,TRKPH=3600000/TRK;           // un combat = 3 s ; 1 200 combats par heure ; 6 h de rattrapage max
-const TRH={sz:.10,mu:.10,al:.04,sh:.02},TREV=6;         // chances par heure (mode ciblé) ; 1 EV tous les 6 combats
-const TRMODES=[["ev","EV","EVs","Gagne des EV sur la stat choisie"],["mu","Mutation","Mutation","Chance d'obtenir une mutation"],["sz","Taille","Size","Chance d'obtenir une taille spéciale"],["al","Alpha","Alpha","Chance de devenir Alpha"],["all","Tout","All","Tout en même temps, un peu moins vite"]];
+const TRH={sz:.22,mu:.22,al:.18,sh:.02},TREV=6;         // chances par heure (mode ciblé) ; 1 EV tous les 6 combats
+const TRMODES=[["ev","EV","EVs","Gagne des EV sur la stat choisie"],["mu","Mutation","Mutation","Chance d'obtenir une mutation"],["sz","Taille","Size","Chance d'obtenir une taille spéciale"],["al","Alpha","Alpha","Chance de devenir Alpha"],["all","Tout","All","EV, mutation, taille, Alpha et chromatique"]];
+const TRALL={mu:.15,sz:.15,al:.10,sh:.05};
+const trHourly=(k,m)=>m==="all"?TRALL[k]:TRH[k];
 const trMult=m=>m=="all"?.6:1;
 const trP=(h,m)=>{const x=h*trMult(m);return 1-Math.pow(1-x,1/TRKPH)};
 function trS(){if(!G.trn||typeof G.trn!="object")G.trn={};const t=G.trn;if(t.m==null)t.m="ev";if(t.e==null)t.e=1;if(!t.s)t.s={k:0,ev:0,sz:0,mu:0,al:0,sh:0};if(!t.lg)t.lg=[];if(t.on==null)t.on=1;if(!t.ea)t.ea=0;if(!t.kc)t.kc=0;if(!t.cr)t.cr=0;return t}
@@ -11700,7 +11702,7 @@ const trRoll=(L,w)=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.
 const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(MU[k]&&MU[k][4]>0)o.push(k);return o};
 function trLog(t,x,c){t.lg.unshift({t:Date.now(),x,c});if(t.lg.length>10)t.lg.length=10}
 function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);if(hwVariantPokemon(t.i,c))hfLock(c);const m=t.m,got=[];
- const pz=trP(TRH.sz,m),pm=trP(TRH.mu,m),pa=trP(TRH.al,m),ps=trP(TRH.sh,m),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
+ const pz=trP(trHourly("sz",m)),pm=trP(trHourly("mu",m)),pa=trP(trHourly("al",m)),ps=trP(trHourly("sh",m)),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
  for(let k=0;k<n;k++){
   if(useE){t.ea+=evr;while(t.ea>=1){t.ea-=1;const tot=c.ev.reduce((a,b)=>a+b,0);if(c.ev[t.e]<252&&tot<510){c.ev[t.e]++;t.s.ev++}}}
   if(!useV&&!xtOn())continue;
@@ -11758,13 +11760,13 @@ function trGoal(){const t=trS();
   <small class="tr-hint">${LS("Le Pokémon combat en continu, même quand le jeu est fermé (6 h maximum de rattrapage). Changer d'objectif ne fait rien perdre.","The Pokémon keeps fighting even while the game is closed (6 h max catch-up). Changing goal loses nothing.")}</small></section>`}
 function trOdds(){const t=trS(),c=t.i&&G.col[t.i],m=t.m,x=trMult(m),R=[];
  if(!c)return `<section class="tr-box tall"><h3>${LS("Probabilités","Odds")}</h3><div class="tr-no">${LS("Choisis un Pokémon pour voir tes chances.","Pick a Pokémon to see your odds.")}</div></section>`;
- const row=(n,h,have,col)=>{const ph=h*x,pk=trP(h,m);return `<div class="tr-od${have?" ok":""}"><i style="--c:${col}"></i><div><b>${n}</b><small>${have?LS("Déjà obtenu","Already owned"):LS("par combat","per fight")+" "+trPc(pk)}</small></div><div class="tr-ov"><b>${have?"✓":trPc(ph)+LS(" / h"," / h")}</b><small>${have?"":"≈ "+trFmtT(1/ph)}</small></div></div>`};
+ const row=(n,k,have,col)=>{const ph=trHourly(k,m),pk=trP(ph);return `<div class="tr-od${have?" ok":""}"><i style="--c:${col}"></i><div><b>${n}</b><small>${have?LS("Déjà obtenu","Already owned"):LS("par combat","per fight")+" "+trPc(pk)}</small></div><div class="tr-ov"><b>${have?"✓":trPc(ph)+LS(" / h"," / h")}</b><small>${have?"":"≈ "+trFmtT(1/ph)}</small></div></div>`};
  if(m=="ev"||m=="all"){const rate=TRKPH*x/TREV,left=Math.max(0,Math.min(252-c.ev[t.e],510-c.ev.reduce((a,b)=>a+b,0)));
   R.push(`<div class="tr-od"><i style="--c:${SCOL[t.e]}"></i><div><b>EV ${SN[t.e]}</b><small>${LS("1 EV tous les ","1 EV every ")}${Math.round(TREV/x)} ${LS("combats","fights")}</small></div><div class="tr-ov"><b>+${Math.round(rate)} / h</b><small>${left?LS("Max dans ≈ ","Max in ≈ ")+trFmtT(left/rate):LS("Maximum atteint","Maxed")}</small></div></div>`)}
- if(m=="mu"||m=="all")R.push(row(LS("Mutation","Mutation"),TRH.mu,0,"#a855f7"));
- if(m=="sz"||m=="all")R.push(row(LS("Taille spéciale","Special size"),TRH.sz,c.zi>=6,"#fb923c"));
- if(m=="al"||m=="all")R.push(row("Alpha",TRH.al,!!c.al,"#ef4444"));
- if(m=="all")R.push(row(LS("Chromatique","Shiny"),TRH.sh,!!c.sh,"#fde047"));
+ if(m=="mu"||m=="all")R.push(row(LS("Mutation","Mutation"),"mu",0,"#a855f7"));
+ if(m=="sz"||m=="all")R.push(row(LS("Taille spéciale","Special size"),"sz",c.zi>=6,"#fb923c"));
+ if(m=="al"||m=="all")R.push(row("Alpha","al",!!c.al,"#ef4444"));
+ if(m=="all")R.push(row(LS("Chromatique","Shiny"),"sh",!!c.sh,"#fde047"));
  let det="";
  if(m=="mu"||m=="all"){const L=trMuL(),tw=L.reduce((a,i)=>a+MU[i][4],0);det+=`<h4>${LS("Répartition des mutations","Mutation split")}</h4><div class="tr-dt">${L.map(i=>`<span class="${c.mi==i?"cur":""}" style="--c:${(typeof MUC!="undefined"&&MUC[i])||"#c084fc"}"><i></i>${MU[i][0]}<b>${trPc(MU[i][4]/tw)}</b></span>`).join("")}</div><small class="tr-hint">${LS("Une mutation n'est appliquée que si elle est plus rare que celle que tu as déjà.","A mutation only applies if rarer than the one you already have.")}</small>`}
  if(m=="sz"||m=="all"){const L=[3,4,5,6],tw=L.reduce((a,i)=>a+SZ[i][4],0);det+=`<h4>${LS("Répartition des tailles","Size split")}</h4><div class="tr-dt">${L.map(i=>`<span class="${c.zi==i?"cur":""}" style="--c:${SZC[i]||"#fb923c"}"><i></i>${SZ[i][0]}<b>${trPc(SZ[i][4]/tw)}</b></span>`).join("")}</div>`}
@@ -12327,12 +12329,12 @@ wkBody.sk=()=>{
 
 wkBody.trn=()=>{
  const m=TRMODES.map(x=>[x[1],x[3]]);
- const ch=[["Taille",TRH.sz],["Mutation",TRH.mu],["Alpha",TRH.al],["Chromatique (mode Tout)",TRH.sh]].map(x=>[x[0],Math.round(x[1]*100)+" % par heure"]);
+ const ch=[["Taille","sz"],["Mutation","mu"],["Alpha","al"],["Chromatique","sh"]].map(([n,k])=>[n,k==="sh"?"—":Math.round(TRH[k]*100)+" %",Math.round(TRALL[k]*100)+" %"]);
  return `<p class="lead">L'Entraînement fait combattre <b>un seul Pokémon</b> en continu, dans une arène à part. Pendant qu'il se bat, il peut gagner des EV ou améliorer sa mutation, sa taille ou son statut Alpha.</p>
  ${wf([["Débloqué à l'étage",LOCKS.trn],["Durée d'un combat","3 s"],["Combats par heure","1 200"],["Rattrapage hors ligne","6 h max"]])}
  ${wsx("Choisir le Pokémon",`<p>Le bouton <b>Choisir un Pokémon</b> ouvre la liste de ta collection. Tu peux chercher par nom et trier avec les boutons : meilleurs d'abord, attaque, mutation, taille, Alpha, chromatique, niveau, étoiles, captures, EV déjà gagnés, numéro de Pokédex ou nom. La flèche inverse l'ordre.</p>`)}
  ${wsx("Les objectifs",tbl(["Objectif","Effet"],m))}
- ${wsx("Chances",tbl(["Résultat","Chance (mode ciblé)"],ch)+`<p>En mode <b>EV</b>, le Pokémon gagne <b>1 EV tous les 6 combats</b> sur la stat choisie (252 maximum par stat, 510 au total). Le mode <b>Tout</b> avance un peu moins vite (×0,6) mais cumule tout.</p>`)}
+ ${wsx("Chances",tbl(["Résultat","Mode ciblé / heure","Tout / heure"],ch)+`<p>En mode <b>EV</b>, le Pokémon gagne <b>1 EV tous les 6 combats</b> sur la stat choisie (252 maximum par stat, 510 au total). Le mode <b>Tout</b> cumule les quatre chances affichées ci-dessus. Seul le gain d’EV est réduit à ×0,6.</p>`)}
  ${wn("tip","Une amélioration n'écrase jamais","Une mutation ou une taille n'est appliquée que si elle est plus rare que celle que le Pokémon possède déjà. Changer d'objectif ne fait rien perdre.")}
  ${wn("info","Le jeu peut rester fermé","L'entraînement continue hors ligne. Au retour, le jeu rattrape jusqu'à 6 heures de combats.")}`};
 
@@ -13209,6 +13211,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["imp","Entraînement : chances augmentées","Par heure en mode Tout : mutation 15 %, taille spéciale 15 %, Alpha 10 % et chromatique 5 %. En objectif ciblé : mutation 22 %, taille spéciale 22 % ou Alpha 18 %. Les probabilités affichées et le rattrapage hors ligne utilisent ces mêmes taux.","Training: increased chances","Hourly All-mode chances: mutation 15%, special size 15%, Alpha 10% and shiny 5%. Targeted goals: mutation 22%, special size 22% or Alpha 18%. Displayed probabilities and offline catch-up use the same rates."],
   ["fix","Revenu passif versé chaque seconde","Les pièces par seconde sont désormais ajoutées même entre deux adversaires, pendant les captures et la récupération, ainsi qu’en combat accéléré. Le versement ne dépend plus des attaques.","Passive income paid every second","Coins per second are now added between enemies, during captures and recovery, and in accelerated battles. Payments no longer depend on attacks."],
   ["fix","Activation du titre Owner","Activation privée du titre Owner dans le courrier : le titre est débloqué, équipé et sauvegardé immédiatement, avec une confirmation claire.","Owner title activation","Private Owner title activation in Mail unlocks, equips and saves the title immediately with clear confirmation."],
   ["imp","Rebirth : les doublons des étoiles sont conservés","Après un rebirth, les doublons repartent de zéro, mais un Pokémon garde les dégâts des doublons de ses étoiles. Un Pokémon 5 étoiles garde les dégâts de 330 doublons sans avoir à les refarmer.","Rebirth: star duplicates are kept","After a rebirth, duplicates start again from zero, but a Pokémon keeps the damage of its stars' duplicates. A 5-star Pokémon keeps the damage of 330 duplicates without farming them again."],
