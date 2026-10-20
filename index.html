@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="7404db6463"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=7404db6463"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="c6f48a1806"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=c6f48a1806"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13002,27 +13002,29 @@ function znAtt(){const r=rdState(),s0=rdPerNext()-36e5;r.zt=(r.zt||[]).filter(t=
 function pkDps(id){try{const c=G.col[id];if(!c)return 0;const h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let m=base(id)*(mv?1+mv[2]/200:1)*(EVF.d||1)*(BIF.d||1);
  if(h){if(h.ph&&phy(id))m*=h.ph;if(h.sc&&!phy(id))m*=h.sc}return isFinite(m)?m:0}catch(e){return 0}}
 function bpScan(){try{if(!G||!G.col)return;let bi=0,bv=0;for(const id of ids()){const v=pkDps(id);if(v>bv){bv=v;bi=id}}if(!bi)return;const r=G.bpk||{};
- if(!(r.v>=bv)){const c=G.col[bi];let f=spf(bi);try{if(c.dy&&typeof GMX!="undefined"&&GMX[bi])f=GMX[bi]}catch(e){}G.bpk={i:bi,v:Math.round(bv),f,sh:c.sh?1:0,mi:c.mi|0,zi:c.zi|0,al:c.al?1:0,n:dn(bi),ty:tp(bi),t:Date.now()}}}catch(e){}}
+ if(r.i!==bi||Math.abs((r.v||0)-bv)>Math.max(1,bv*.002)){const c=G.col[bi];let f=spf(bi);try{if(c.dy&&typeof GMX!="undefined"&&GMX[bi])f=GMX[bi]}catch(e){}G.bpk={i:bi,v:Math.round(bv),f,sh:c.sh?1:0,mi:c.mi|0,zi:c.zi|0,al:c.al?1:0,n:dn(bi),ty:tp(bi),t:Date.now()}}}catch(e){}}
 setInterval(bpScan,6000);setTimeout(bpScan,2500);
 {const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{const b=G.bpk;if(b&&b.v>0){d.bpv=b.v;d.bp=[b.f,b.sh,b.mi,b.zi,b.al,b.n,b.i,b.ty]}}catch(e){}return d}}
 const RKB={rows:[],t:0,busy:0};
-async function rkbFetch(force){if(RKB.busy||(!force&&Date.now()-RKB.t<20000))return;if(!LB||!LB.ok||!LB.db)return;RKB.busy=1;
+async function rkbFetch(force){if(RKB.busy||(!force&&Date.now()-RKB.t<8000))return;if(!LB||!LB.ok||!LB.db)return;RKB.busy=1;
  try{const q=await LB.db.collection("lb").orderBy("bpv","desc").limit(100).get();RKB.rows=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(x=>x&&x.n&&typeof x.bpv=="number"&&Array.isArray(x.bp))}catch(e){}
  RKB.t=Date.now();RKB.busy=0;if(tab=="rks"&&RKX.v=="bp"&&!document.hidden){const el=$("rkbl");if(el){const h=rkbList();if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}}}
 function rkbRows(){const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKB.rows.filter(x=>x.id!=me.id);try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
  if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,100)}
 function rkbList(){const R=rkbRows();if(!R.length)return `<small class="rkm-hint">${LS("Aucun record pour le moment.","No record yet.")}</small>`;
  const card=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
- return `<div class="rkb-podium-card pid-rank-bg rkb-place-${i+1}${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c};${pidRankBanner(r)}"><div class="rkb-podium-head"><span class="rkb-medal">${i===0?ico("crown"):ico("trophy")} ${i+1}</span><span class="rkb-podium-owner">${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</span></div><div class="rkb-podium-sprite">${aSpr(b[0],b[1])}</div><div class="rkb-podium-name">${esc(b[5]||"?")}</div><div class="rkb-podium-tags">${h||""}</div><div class="rkb-podium-dps"><strong>${fmt(r.bpv)}</strong><span>DPS</span></div><small class="rkb-open">${ico("eye")} ${LS("Voir la fiche","View details")}</small></div>`};
+ return `<div class="rkb-podium-card pid-rank-bg rkb-place-${i+1}${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" data-bpu="${r.me?"me":esc(String(r.id||""))}" style="--tc:${c};${pidRankBanner(r)}"><div class="rkb-podium-head"><span class="rkb-medal">${i===0?ico("crown"):ico("trophy")} ${i+1}</span><span class="rkb-podium-owner">${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</span></div><div class="rkb-podium-sprite">${aSpr(b[0],b[1])}</div><div class="rkb-podium-name">${esc(b[5]||"?")}</div><div class="rkb-podium-tags">${h||""}</div><div class="rkb-podium-dps"><strong>${fmt(r.bpv)}</strong><span>DPS</span></div><small class="rkb-open">${ico("eye")} ${LS("Voir la fiche","View details")}</small></div>`};
  const row=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
- return `<div class="rkx-r rkb-r rkb-large pid-rank-bg${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" style="--tc:${c};${pidRankBanner(r)}"><span class="rkx-n">${i+1}</span><span class="rkb-s">${aSpr(b[0],b[1])}</span><span class="rkb-t"><b>${esc(b[5]||"?")}</b><small>${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</small>${h&&h.indexOf("vb")>=0?`<span class="rkb-vb">${h}</span>`:""}</span><span class="rkx-v rkb-v">${fmt(r.bpv)}<small>DPS</small></span><span class="rkb-open-arrow">${ico("chevron-right")}</span></div>`};
+ return `<div class="rkx-r rkb-r rkb-large pid-rank-bg${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" data-bpu="${r.me?"me":esc(String(r.id||""))}" style="--tc:${c};${pidRankBanner(r)}"><span class="rkx-n">${i+1}</span><span class="rkb-s">${aSpr(b[0],b[1])}</span><span class="rkb-t"><b>${esc(b[5]||"?")}</b><small>${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</small>${h&&h.indexOf("vb")>=0?`<span class="rkb-vb">${h}</span>`:""}</span><span class="rkx-v rkb-v">${fmt(r.bpv)}<small>DPS</small></span><span class="rkb-open-arrow">${ico("chevron-right")}</span></div>`};
  return `<div class="rkb-podium">${R.slice(0,3).map(card).join("")}</div><div class="rkb-list-regular">${R.slice(3).map((r,i)=>row(r,i+3)).join("")}</div>`}
 
+/* une ligne du classement retrouve son joueur par identifiant (et non par position, qui peut changer entre l'affichage et le clic) */
+function rkbPick(el){const u=el&&el.dataset&&el.dataset.bpu;const R=rkbRows();if(u)return R.find(x=>u=="me"?x.me:String(x.id)===u)||null;return R[+(el&&el.dataset&&el.dataset.bpr||0)]||null}
 function rkBest(){rkbFetch();bpScan();const off=!(LB&&LB.ok);
- return `<div class="box rkx-box"><h3>${ico("sword")} ${LS("Meilleur Pokémon","Best Pokémon")}${off?` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`:""}</h3><small class="rkm-hint">${LS("Le DPS le plus haut jamais atteint par un Pokémon de chaque joueur, cartes, équipement, prestige et objet tenu compris.","The highest DPS ever reached by each player's Pokémon, including cards, gear, prestige and held item.")}</small><div class="rkx-l" id="rkbl">${rkbList()}</div></div>`}
+ return `<div class="box rkx-box"><h3>${ico("sword")} ${LS("Meilleur Pokémon","Best Pokémon")}${off?` <span class="bdg off">${ico("wifioff")} ${LS("Local","Local")}</span>`:""}</h3><small class="rkm-hint">${LS("Le DPS actuel du meilleur Pokémon de chaque joueur, cartes, équipement, prestige et objet tenu compris. Mis à jour en direct.","The current DPS of each player's best Pokémon, including cards, gear, prestige and held item. Updated live.")}</small><div class="rkx-l" id="rkbl">${rkbList()}</div></div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-rk="bp"]');if(b)rkbFetch(true)});
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-bpr]");if(!b)return;const r=rkbRows()[+b.dataset.bpr];if(r&&r.bp)bpModal(r)});
-document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const b=e.target.closest&&e.target.closest("[data-bpr]");if(!b)return;e.preventDefault();const r=rkbRows()[+b.dataset.bpr];if(r&&r.bp)bpModal(r)});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-bpr]");if(!b)return;const r=rkbPick(b);if(r&&r.bp)bpModal(r)});
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const b=e.target.closest&&e.target.closest("[data-bpr]");if(!b)return;e.preventDefault();const r=rkbPick(b);if(r&&r.bp)bpModal(r)});
 
 setInterval(()=>{try{if(tab=="rks"&&RKX.v=="bp"&&!document.hidden)rkbFetch()}catch(e){}},5000);
 {const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKB.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
@@ -13057,7 +13059,7 @@ const BPDR={};
 {const m0=bpModal;bpModal=function(r){if(r&&!r.bpd&&!r.me&&r.id&&r.bp){const id=+r.bp[6];if(BPDR[r.id]&&BPDR[r.id].i===id){r=Object.assign({},r,{bpd:BPDR[r.id].d})}
   else{const API=(window.PID_API||"").replace(/\/$/,"");if(API){m0(Object.assign({},r,{ld:1}));fetch(API+"/api/bpd/"+encodeURIComponent(r.id)).then(x=>x.json()).then(j=>{const o=$("bpdm");if(!o)return;if(j&&j.ok&&j.c&&+j.i===id){const d=bpDetRemote(id,j.c);BPDR[r.id]={i:id,d};o.remove();m0(Object.assign({},r,{bpd:d}))}else{o.remove();m0(r)}}).catch(()=>{const o=$("bpdm");if(o){o.remove();m0(r)}});return}}}
  return m0.apply(this,[r])}}
-document.addEventListener("click",e=>{const row=e.target.closest&&e.target.closest(".rkb-r");if(!row)return;e.stopPropagation();e.preventDefault();const i=[...row.parentNode.children].indexOf(row),R=rkbRows(),r=R[i];if(!r)return;
+document.addEventListener("click",e=>{const row=e.target.closest&&e.target.closest(".rkb-r");if(!row)return;e.stopPropagation();e.preventDefault();const r=rkbPick(row);if(!r)return;
  if(r.me){try{bpScan()}catch(x){}const x=Object.assign({},r,{bpd:G.bpk&&G.bpk.d});return bpModal(x)}bpModal(r)},true);
 {const st=document.createElement("style");st.textContent=`#bpdm{position:fixed;inset:0;z-index:100012;background:#04061acc;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:14px}
 .bpw{position:relative;width:min(640px,100%);max-height:calc(100vh - 28px);overflow:auto;padding:22px;border-radius:24px;background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 22%,#141b3d),#0b1026 55%);border:1px solid var(--ln);box-shadow:0 30px 80px #000c}
@@ -13218,6 +13220,7 @@ const UPD=[
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","Classement Meilleur Pokémon","Le classement montre maintenant le meilleur Pokémon actuel de chaque joueur (et non plus un ancien record) et se met à jour plus souvent. Cliquer sur un Pokémon ouvre bien la fiche de ce joueur (avant, la fiche d'un autre joueur pouvait s'ouvrir).","Best Pokémon ranking","The ranking now shows each player's current best Pokémon (no longer an old record) and updates more often. Clicking a Pokémon opens that player's sheet (before, another player's sheet could open)."],
   ["fix","Boss de guilde : PV affichés","Pendant le combat, les PV du boss de guilde alternaient entre un pourcentage et les vrais PV, ce qui donnait l'impression qu'il ne perdait rien. Les vrais PV restants s'affichent maintenant en continu.","Guild boss: HP display","During the fight, the guild boss HP flickered between a percentage and the real HP, making it look like it lost nothing. The real remaining HP now shows all the time."],
   ["imp","Invocation d'équipement plus rapide","Tu peux réinvoquer dès que toutes les cartes sont apparues, sans attendre de délai.","Faster gear summon","You can summon again as soon as all cards are shown, with no waiting."],
   ["fix","Classements Tour, JCJ et Guildes","Ces classements n'affichaient parfois que toi tant que tu n'avais pas ouvert le mode correspondant. Ils se chargent maintenant directement depuis l'onglet Classements et se mettent à jour tout seuls.","Tower, PvP and Guild rankings","These rankings sometimes only showed you until you opened the matching mode. They now load straight from the Rankings tab and update by themselves."],
@@ -13446,7 +13449,7 @@ window.addEventListener("offline",function(){if(!document.getElementById("pidw")
   try{RKB.rows.forEach(r=>map.set(String(r.id),r))}catch(e){}
   document.querySelectorAll(".rkx-r[data-t],.pod[data-t],.pvpd[data-t],.pvrw2[data-t]").forEach(el=>{var r=map.get(String(el.dataset.t));if(r&&r.ban!=null)apply(el,r.ban)});
   document.querySelectorAll(".rkm-w[data-rkw]").forEach(el=>{var r=map.get(String(el.dataset.rkw));if(r&&r.ban!=null)apply(el.querySelector(".rkm-r"),r.ban)});
-  document.querySelectorAll(".rkb-podium-card,.rkb-large").forEach(el=>{try{var r=rkbRows()[+(el.dataset.bpr||0)];if(r&&r.ban!=null)apply(el,r.ban)}catch(e){}});
+  document.querySelectorAll(".rkb-podium-card,.rkb-large").forEach(el=>{try{var r=rkbPick(el);if(r&&r.ban!=null)apply(el,r.ban)}catch(e){}});
   document.querySelectorAll(".rkx-l").forEach(list=>{
    if(list.id==="rkbl"||list.querySelector(":scope > .pid-rank-podium"))return;
    var rows=Array.from(list.children).filter(el=>el.classList.contains("rkx-r")||el.classList.contains("rkm-w"));
