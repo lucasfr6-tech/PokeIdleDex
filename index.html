@@ -3828,8 +3828,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="b74452f1b9"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=b74452f1b9"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="a2224b358e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=a2224b358e"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11622,11 +11622,12 @@ document.addEventListener("input",e=>{if(e.target&&e.target.id=="plqi"){PLQ=e.ta
 
 /* ---------- Raids : index des Pokémon disponibles (silhouettes « ??? » levées une fois battus ou obtenus) ---------- */
 {const r0=rdResult;rdResult=function(R,win,rw,cap){try{if(win&&R&&R.boss&&R.boss.sp){G.rdx=G.rdx||{};G.rdx[R.boss.sp]=1}}catch(e){}return r0.apply(this,arguments)}}
-function rdIndex(){G.rdx=G.rdx||{};const kn=i=>!!G.rdx[i]||!!G.col[i];
+setInterval(()=>{try{if(typeof tab!="undefined"&&tab=="raid"){G.rdx=G.rdx||{};rdDaily().forEach(d=>{if(d&&d.sp)G.rdx[d.sp]=1})}}catch(e){}},5000);
+function rdIndex(){G.rdx=G.rdx||{};/* un boss rencontré dans la rotation est révélé */try{rdDaily().forEach(d=>{if(d&&d.sp)G.rdx[d.sp]=1});const w=rdWB();if(w&&w.sp)G.rdx[w.sp]=1}catch(e){}const kn=i=>!!G.rdx[i]||!!G.col[i];
  const row=(t,c,L)=>{L=[...new Set(L)];const n=L.filter(kn).length;return `<div class="rxr" style="--c:${c}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(i=>{const k=kn(i);return `<div class="rxc${k?"":" hid"}" title="${k?esc(dn(i)):"???"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b></div>`}).join("")}</div></div>`};
- let h=RT.map(t=>row(LS(t.n[0],t.n[1]),t.c,t.pool||[])).join("");
+ let h=RT.map((t,j)=>j<=5?row(LS(t.n[0],t.n[1]),t.c,t.pool||[]):"").join("");
  try{h+=row(LS("Boss monde","World boss"),"#a78bfa",RW.map(x=>x[0]))}catch(e){}
- return `<div class="rix"><h3>${ico("book")} ${LS("Index des raids","Raid index")}</h3><small class="rxn">${LS("Bats ou obtiens un Pokémon de raid pour révéler sa case.","Beat or obtain a raid Pokémon to reveal its slot.")}</small>${h}</div>`}
+ return `<div class="rix"><h3>${ico("book")} ${LS("Index des raids","Raid index")}</h3><small class="rxn">${LS("Une case se révèle dès que le Pokémon apparaît dans la rotation des raids, ou quand tu le bats ou l'obtiens.","A slot is revealed as soon as the Pokémon shows up in the raid rotation, or when you beat or obtain it.")}</small>${h}</div>`}
 
 /* ---------- Raids : beaucoup plus de Pokémon (légendaires, fabuleux, paradoxes, Gigamax) ---------- */
 (function(){
@@ -12843,6 +12844,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","Index des raids","Un Pokémon de raid (par exemple Celebi) est maintenant révélé dans l'index dès qu'il apparaît dans la rotation, sans attendre de le battre. Pikachu Zénith ne figure plus dans l'index.","Raid index","A raid Pokémon (for example Celebi) is now revealed in the index as soon as it shows up in the rotation, without having to beat it. Zenith Pikachu is no longer listed in the index."],
   ["imp","Raids : rotation toutes les heures","Les raids changent maintenant toutes les heures au lieu de toutes les 2 heures, et toutes tes tentatives (5 par raid classique, 10 pour le raid Zénith) reviennent à chaque changement.","Raids: hourly rotation","Raids now change every hour instead of every 2 hours, and all your attempts (5 for classic raids, 10 for the Zenith raid) come back at each change."],
   ["imp","Boss monde : paliers plus exigeants","Les dégâts demandés pour chaque palier dépendent maintenant de la force des inscrits (de 1 % des PV de base du boss au palier 1 jusqu'à 45 % au palier 10), avec un minimum fixe. Les récompenses de palier sont donc bien plus dures à obtenir.","World boss: tougher tiers","The damage needed for each tier now depends on the signed-up players' strength (from 1% of the boss base HP at tier 1 up to 45% at tier 10), with a fixed minimum. Tier rewards are much harder to get."],
   ["imp","Wiki à jour","Nouvelles explications : pension pour les Pokémon déjà au maximum, rareté en combat normal, palier selon la rareté et l'évolution, paliers et captures du Boss monde.","Wiki updated","New explanations: daycare for already maxed Pokémon, odds in normal battles, tier by rarity and evolution, World boss tiers and captures."],
