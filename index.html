@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fb907acd62"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=fb907acd62"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="012c608cab"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=012c608cab"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8213,7 +8213,7 @@ function pvUnitImg(u,s){return s=="m"?pvBk(u.id):pvF(u.id)}
 function pvSetSpr(B,s){const w=$("pvS"+s),u=pvAct(B,s);if(!w||!u)return;const im=w.querySelector("img");im.style.visibility="";im.src=pvUnitImg(u,s);im.classList.toggle("fl",s=="m"&&u.id>9e4);im.onerror=function(){if(s=="m"&&!this.dataset.f){this.dataset.f=1;this.src=pvF(u.id);this.classList.add("fl")}else this.style.visibility="hidden"}}
 function pvStT(u){return(u.st?`<em class="s ${u.st}">${{brn:"BRU",par:"PAR",psn:"PSN"}[u.st]}</em>`:"")+(u.bA>0?`<em class="s up">ATQ+</em>`:"")+(u.bS>0?`<em class="s up">SPÉ+</em>`:"")+(u.rc>0?`<em class="s">REC</em>`:"")}
 function pvU_upd(B){if(!$("pvA"))return;
- ["m","f"].forEach(s=>{const u=pvAct(B,s),q=Math.max(0,u.hp/u.max);$("pvN"+s).innerHTML=esc(u.name)+(s=="m"&&u.it?pvIiHtml(u):"");$("pvT"+s).innerHTML=tchips(u.types);const h=$("pvH"+s);h.style.width=(q*100)+"%";h.className=pvHc(q);$("pvHt"+s).textContent=s=="m"?Math.ceil(u.hp)+" / "+u.max:Math.ceil(q*100)+" %";$("pvSt"+s).innerHTML=pvStT(u);$("pvB"+s).innerHTML=pvBalls(B,s)});
+ ["m","f"].forEach(s=>{const u=pvAct(B,s),q=Math.max(0,u.hp/u.max);$("pvN"+s).innerHTML=esc(u.name)+(s=="m"&&u.it?pvIiHtml(u):"");$("pvT"+s).innerHTML=tchips(u.types);const h=$("pvH"+s);h.style.width=(q*100)+"%";h.className=pvHc(q);$("pvHt"+s).textContent=s=="m"?Math.ceil(u.hp)+" / "+u.max:B.gb&&B.kc?fmt(Math.max(0,Math.ceil(u.hp*B.kc)))+" / "+fmt(Math.ceil(u.max*B.kc)):Math.ceil(q*100)+" %";$("pvSt"+s).innerHTML=pvStT(u);$("pvB"+s).innerHTML=pvBalls(B,s)});
  $("pvRd").textContent="Tour "+B.round;
  const u=pvAct(B,"m"),o=pvAct(B,"f"),can=B.phase=="pick"&&!B.over;
  $("pvMv").innerHTML=pvMvHtml(B,u,o,can);
@@ -13214,6 +13214,7 @@ const UPD=[
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["fix","Boss de guilde : PV affichés","Pendant le combat, les PV du boss de guilde alternaient entre un pourcentage et les vrais PV, ce qui donnait l'impression qu'il ne perdait rien. Les vrais PV restants s'affichent maintenant en continu.","Guild boss: HP display","During the fight, the guild boss HP flickered between a percentage and the real HP, making it look like it lost nothing. The real remaining HP now shows all the time."],
   ["imp","Invocation d'équipement plus rapide","Tu peux réinvoquer dès que toutes les cartes sont apparues, sans attendre de délai.","Faster gear summon","You can summon again as soon as all cards are shown, with no waiting."],
   ["fix","Classements Tour, JCJ et Guildes","Ces classements n'affichaient parfois que toi tant que tu n'avais pas ouvert le mode correspondant. Ils se chargent maintenant directement depuis l'onglet Classements et se mettent à jour tout seuls.","Tower, PvP and Guild rankings","These rankings sometimes only showed you until you opened the matching mode. They now load straight from the Rankings tab and update by themselves."],
   ["fix","Raids : compte à rebours","« Nouveaux raids dans » affiche maintenant le vrai temps avant la prochaine rotation (toutes les heures).","Raids: countdown","“New raids in” now shows the real time until the next rotation (every hour)."],
