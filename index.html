@@ -3827,8 +3827,8 @@ html.skon #mbfab,html.skon #vtag{display:none!important}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="f122298388"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=f122298388"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d4b3f75038"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=d4b3f75038"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6577,7 +6577,7 @@ function pkItem(id){const ev=evOpts(id),tms=Object.keys(G.inv).filter(k=>k.start
 function pkAff(id){const A=aff(id),c=G.col[id],mv=c.mv?TM[+c.mv.slice(2)-1]:null,tg=L=>L.map(([t,x])=>`<span class="tag" style="color:${TC[t]};border-color:${TC[t]}">${TFR[t]} ×${x}</span>`).join("")||`<small>${LS("Aucun","None")}</small>`;
  return `<div class="pq2"><div class="pqc"><h3 class="g">${LS("Fort contre","Strong against")}</h3>${tg(A.filter(a=>a[1]>=2))}</div><div class="pqc"><h3 style="color:#ff8a9a">${LS("Peu efficace contre","Weak against")}</h3>${tg(A.filter(a=>a[1]<1))}</div></div><small class="pqnt">${LS("Attaque : ","Move: ")}${mv?mv[0]+" ("+TFR[mv[1]]+")":MV[tp(id)[0]]}. ${LS("Les types de l'adversaire se multiplient.","The opponent's types multiply.")}</small>`}
 /* origine du Pokémon (petit texte sous les badges du profil) */
-function srcWhere(id){let k="";try{k=PWNEW?pwTier(id):(G.col[id]&&G.col[id].src)||""}catch(e){}
+function srcWhere(id,k0){let k="";try{k=k0||(PWNEW?pwTier(id):(G.col[id]&&G.col[id].src)||"")}catch(e){}
  if(id==90001)return["au Casino","at the Casino"];if(id==90002||id==90003)return["au raid Impossible","in the Impossible raid"];if(id==90004)return["au raid Zénith","in the Zenith raid"];
  if(!k)return null;
  if(k=="wb")return["au Boss monde","from the World boss"];
@@ -12640,14 +12640,24 @@ const BPSN=["PV","Attaque","Défense","Atq. Spé.","Déf. Spé.","Vitesse"],BPSE
 function bpModal(r){const b=r.bp,d=r.bpd||null,o=document.createElement("div");o.id="bpdm";
  const bar=(v,m,col)=>`<i style="width:${Math.max(2,Math.min(100,v/m*100)).toFixed(1)}%;background:${col}"></i>`;
  const stat=d?`<div class="bpsg">${[0,1,2,3,4,5].map(k=>`<div class="bpsr"><span>${LS(BPSN[k],BPSE[k])}</span><b>${fmt(d.s[k]||0)}</b><div class="bpsb">${bar(d.s[k]||0,Math.max(...d.s,1),"linear-gradient(90deg,#38bdf8,#818cf8)")}</div><em title="IV">IV ${d.iv[k]??"?"}</em><em title="EV">EV ${d.ev[k]??"?"}</em></div>`).join("")}</div>
-  <div class="bpsm"><span>${LS("Total IV","IV total")} <b>${(d.iv||[]).reduce((a,x)=>a+(x|0),0)} / 186</b></span><span>${LS("Total EV","EV total")} <b>${(d.ev||[]).reduce((a,x)=>a+(x|0),0)} / 510</b></span></div>`:`<p class="bpno">${LS("Ce joueur n'a pas encore publié les détails de son Pokémon (ils apparaîtront à sa prochaine connexion).","This player has not published the details yet (they will appear at their next login).")}</p>`;
- const info=d?[[LS("Niveau","Level"),d.l+" / "+d.mx],[LS("Doublons","Duplicates"),"×"+d.n],[LS("Étoiles","Stars"),"★".repeat(d.st)+"☆".repeat(Math.max(0,5-d.st))],[LS("Palier","Tier"),d.tr||"?"],[LS("Origine","Origin"),d.w?LS("Obtenu "+d.w[0],"Obtained "+d.w[1]):"?"],[LS("Talent","Ability"),(d.ab||"?")+(d.ha?" ("+LS("caché","hidden")+")":"")],[LS("Objet tenu","Held item"),d.it||LS("Aucun","None")],[LS("Attaque CT","TM move"),d.mv||LS("Aucune","None")],[LS("Puissance permanente","Permanent power"),fmt(d.b)],[LS("Qualité (IV, EV, bonus)","Quality (IV, EV, bonus)"),"×"+String(d.q).replace(".",",")]].map(x=>`<div><small>${x[0]}</small><b>${esc(String(x[1]))}</b></div>`).join(""):"";
+  <div class="bpsm"><span>${LS("Total IV","IV total")} <b>${(d.iv||[]).reduce((a,x)=>a+(x|0),0)} / 186</b></span><span>${LS("Total EV","EV total")} <b>${(d.ev||[]).reduce((a,x)=>a+(x|0),0)} / 510</b></span></div>`:`<p class="bpno">${r.ld?LS("Chargement des détails…","Loading details…"):LS("Détails indisponibles : ce joueur n'a pas de compte en ligne et n'a pas encore ouvert la nouvelle version du jeu.","Details unavailable: this player has no online account and has not opened the new game version yet.")}</p>`;
+ const info=d?[[LS("Niveau","Level"),d.l+" / "+d.mx],[LS("Doublons","Duplicates"),"×"+d.n],[LS("Étoiles","Stars"),"★".repeat(d.st)+"☆".repeat(Math.max(0,5-d.st))],[LS("Palier","Tier"),d.tr||"?"],[LS("Origine","Origin"),d.w?LS("Obtenu "+d.w[0],"Obtained "+d.w[1]):"?"],[LS("Talent","Ability"),(d.ab||"?")+(d.ha?" ("+LS("caché","hidden")+")":"")],[LS("Objet tenu","Held item"),d.it||LS("Aucun","None")],[LS("Attaque CT","TM move"),d.mv||LS("Aucune","None")],[LS("Puissance permanente","Permanent power"),d.b?fmt(d.b):"—"],[LS("Qualité (IV, EV, bonus)","Quality (IV, EV, bonus)"),d.q?"×"+String(d.q).replace(".",","):"—"]].map(x=>`<div><small>${x[0]}</small><b>${esc(String(x[1]))}</b></div>`).join(""):"";
  const ty=(d&&d.ty)||b[7]||[];
  o.innerHTML=`<div class="bpw" style="--tc:${TC[ty[0]]||"#888"}"><button class="bpx" data-bpd="x" aria-label="x">${ico("x")}</button>
  <div class="bph"><div class="bpimg">${aSpr(b[0],b[1])}</div><div class="bpt"><small>${LS("MEILLEUR POKÉMON DE","BEST POKÉMON OF")} ${esc(r.n||"?")}</small><h2>${esc(b[5]||"?")}</h2><div class="vbr">${vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]})}</div><div class="bpty">${tchips(ty)}</div><div class="bpdps"><b>${fmt(r.bpv)}</b><small>DPS</small></div></div></div>
  ${d?`<div class="bpif">${info}</div>`:""}<h4>${LS("Statistiques","Stats")}</h4>${stat}
  ${r.id&&!r.me?`<button class="bpvp" data-bpd="vp" data-t="${esc(String(r.id))}">${ico("user")} ${LS("Voir le profil du dresseur","View trainer profile")}</button>`:""}</div>`;
  document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-bpd=x]")){o.remove();return}const v=e.target.closest("[data-bpd=vp]");if(v){o.remove();const t=document.createElement("button");t.dataset.a="vp";t.dataset.t=v.dataset.t;t.style.display="none";document.body.appendChild(t);t.click();t.remove()}})}
+/* détails lus côté serveur (sauvegarde en ligne du joueur) quand le joueur ne les a pas encore publiés */
+function bpDetRemote(id,c){const l=c.l|0||1,iv=(c.iv||[0,0,0,0,0,0]).slice(0,6),ev=(c.ev||[0,0,0,0,0,0]).slice(0,6);let S=[0,0,0,0,0,0];try{S=ST(id)}catch(e){}
+ const s=[0,1,2,3,4,5].map(k=>{const v=Math.floor((2*(S[k]||0)+(iv[k]|0)+((ev[k]|0)>>2))*l/100);return k==0?v+l+10:v+5});
+ let ab="";try{const a=abl(id);ab=c.ha&&a[1]?a[1]:a[0][((c.ai)||0)%a[0].length]}catch(e){}
+ let tr="",w=null;try{if(c.src&&PWNM[c.src]){tr=LS(PWNM[c.src][0],PWNM[c.src][1]);w=srcWhere(id,c.src)}}catch(e){}
+ return{l,mx:c.mx||100,n:c.n|0,st:c.st|0,iv,ev,s,b:0,q:c.q?Math.round(c.q*100)/100:0,it:c.it&&IT[c.it]?IT[c.it].n:"",ab,ha:c.ha?1:0,mv:c.mv&&TM[+String(c.mv).slice(2)-1]?TM[+String(c.mv).slice(2)-1][0]:"",tr,w,ty:tp(id)}}
+const BPDR={};
+{const m0=bpModal;bpModal=function(r){if(r&&!r.bpd&&!r.me&&r.id&&r.bp){const id=+r.bp[6];if(BPDR[r.id]&&BPDR[r.id].i===id){r=Object.assign({},r,{bpd:BPDR[r.id].d})}
+  else{const API=(window.PID_API||"").replace(/\/$/,"");if(API){m0(Object.assign({},r,{ld:1}));fetch(API+"/api/bpd/"+encodeURIComponent(r.id)).then(x=>x.json()).then(j=>{const o=$("bpdm");if(!o)return;if(j&&j.ok&&j.c&&+j.i===id){const d=bpDetRemote(id,j.c);BPDR[r.id]={i:id,d};o.remove();m0(Object.assign({},r,{bpd:d}))}else{o.remove();m0(r)}}).catch(()=>{const o=$("bpdm");if(o){o.remove();m0(r)}});return}}}
+ return m0.apply(this,[r])}}
 document.addEventListener("click",e=>{const row=e.target.closest&&e.target.closest(".rkb-r");if(!row)return;e.stopPropagation();e.preventDefault();const i=[...row.parentNode.children].indexOf(row),R=rkbRows(),r=R[i];if(!r)return;
  if(r.me){try{bpScan()}catch(x){}const x=Object.assign({},r,{bpd:G.bpk&&G.bpk.d});return bpModal(x)}bpModal(r)},true);
 {const st=document.createElement("style");st.textContent=`#bpdm{position:fixed;inset:0;z-index:100012;background:#04061acc;backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:14px}
@@ -12784,6 +12794,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Fiche du meilleur Pokémon : détails pour tous","Les détails (stats, IV, EV, doublons…) s'affichent aussi pour les joueurs qui n'ont pas encore ouvert la nouvelle version, grâce à leur sauvegarde en ligne.","Best Pokémon sheet: details for everyone","Details (stats, IVs, EVs, duplicates…) now also show for players who have not opened the new version yet, using their online save."],
   ["imp","Réglages de capture","Petits ajustements internes des réglages de capture.","Capture settings","Small internal tweaks to the capture settings."],
   ["new","Classement Meilleur Pokémon : fiche détaillée","Clique sur un Pokémon du classement pour voir sa fiche en grand : niveau, doublons, étoiles, palier, origine, talent, objet tenu, CT, statistiques, IV et EV. Un bouton mène au profil du dresseur.","Best Pokémon ranking: detailed sheet","Click a Pokémon in the ranking to see its big sheet: level, duplicates, stars, tier, origin, ability, held item, TM, stats, IVs and EVs. A button leads to the trainer's profile."],
   ["new","Boss de guilde : choix de l'équipe","Avant d'attaquer le boss de guilde, tu choisis tes 3 Pokémon (recherche, ou « Mes 3 meilleurs »). Ton choix est gardé pour les attaques suivantes.","Guild boss: team choice","Before attacking the guild boss, you pick your 3 Pokémon (search, or “My top 3”). Your choice is kept for the next attacks."],

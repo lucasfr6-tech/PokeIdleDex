@@ -128,7 +128,7 @@ function ssoFinish(res,d,tok,p,f){
 const hits=new Map();setInterval(()=>hits.clear(),60000);
 const limited=(ip,n)=>{const v=(hits.get(ip)||0)+1;hits.set(ip,v);return v>n};
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
-const PRES=new Map();
+const PRES=new Map(),BPDC=new Map();
 const LAST=new Map();
 const SEEN_PID='#1397371';
 const pidOfS=u=>{let h=2166136261;for(const c of String(u)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return '#'+(1000000+h%9000000)};
@@ -160,6 +160,18 @@ http.createServer((req,res)=>{
   const n=seen.size+anon;
   if(lst){send(res,200,{n,l:L,a:anon});return}
   send(res,200,{n});return}
+ /* fiche du meilleur Pokémon d'un joueur (classement), lue dans sa sauvegarde en ligne : seulement les champs utiles de ce Pokémon */
+ if(u.pathname.startsWith('/api/bpd/')&&req.method=='GET'){
+  if(limited(ip+'b',60)){send(res,429,{e:'rate'});return}
+  const uid=decodeURIComponent(u.pathname.slice(9));if(!ID.test(uid)){send(res,400,{e:'id'});return}
+  const l=db.lb[uid],bp=l&&l.d&&Array.isArray(l.d.bp)?l.d.bp:null,id=bp?+bp[6]:0;if(!id){send(res,404,{e:'none'});return}
+  let a=null;for(const k in db.acc){if(db.acc[k].uid===uid){a=db.acc[k];break}}
+  if(!a||!a.save){send(res,404,{e:'nosave'});return}
+  const ck=BPDC.get(uid);if(ck&&ck.t===a.t&&ck.i===id){send(res,200,ck.r);return}
+  let g=null;try{g=JSON.parse(a.save)}catch(e){}
+  const c=g&&g.col&&g.col[id];if(!c){send(res,404,{e:'nomon'});return}
+  const pick={};['l','mx','n','st','iv','ev','it','ha','ai','mv','src','mi','zi','sh','al','mf','dy','q'].forEach(k=>{if(c[k]!==undefined)pick[k]=c[k]});
+  const r={ok:1,i:id,c:pick};BPDC.set(uid,{t:a.t,i:id,r});if(BPDC.size>2000)BPDC.clear();send(res,200,r);return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
 
  if(u.pathname=='/api/oauth/discord'&&req.method=='GET'){
