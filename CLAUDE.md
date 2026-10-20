@@ -8,3 +8,5 @@
   3. Vérifier la syntaxe des scripts et tester dans un navigateur avant de pousser.
 - Ne pas utiliser le mot « Pokémon » dans des publicités payantes ; le jeu est un fan-game gratuit, sans achat ni publicité.
 - Nouvel événement : l'ajouter aussi au calendrier (tableau `EVTS` dans `index.html`, dates incluses au format AAAA-MM-JJ).
+
+- **Codes cadeaux et codes privés : ne pas les annoncer dans le journal ni dans l’onglet Mise à jour sans autorisation explicite du propriétaire. Cette exception prime sur la consigne générale de journaliser chaque modification. Les codes peuvent être créés et activés sans annonce publique.**
