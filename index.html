@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201909"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610201909"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201918"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610201918"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4439,12 +4439,12 @@ function rulesHtml(){const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.in
  return `<b class="big" style="font-size:17px">Règles de capture</b><br><small>Choisis la ball selon le Pokémon. La mutation ou la taille hors norme passe avant la rareté. Ball épuisée : la meilleure ball inférieure est utilisée.</small><div class="rules">${RLAB.map(([k,t],j)=>{const cur=rule(k),L=[...new Set([...own,...(cur&&IT[cur]?[cur]:[])])];
  return `<label><b ${j<4?`class="rty r${j}"`:""}>${t}</b><select data-a="rule" data-t="${k}"><option value="">Ne pas lancer</option>${L.map(b=>`<option value="${b}" ${b==cur?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select></label>`}).join("")}</div>`}
 function xtOn(){try{return !!(SG.xt&&x4Me())}catch(e){return false}}
-/* Extra entraînement : chaque combat donne la mutation et la taille juste au-dessus de celles déjà possédées pour cette espèce */
+/* Extra entraînement : dans l'onglet Entraînement, chaque combat donne à coup sûr une meilleure mutation et une meilleure taille (les étages ne changent pas) */
 function xtMu(id){try{const c=G.col[id],cur=c&&c.mi||0,L=MU.map((m,i)=>i).filter(i=>i>cur&&i!=7);if(L.length)return MU[L[0]];if(!(c&&c.sh))return MU[7];return MU[MU.length-1]}catch(e){return MU[1]}}
 function xtSz(id){try{const c=G.col[id],cur=c&&c.zi||0;return SZ[Math.min(SZ.length-1,Math.max(3,cur+1))]}catch(e){return SZ[3]}}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=Math.min(100,G.fl+2+(boss?3:0));let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
- const sz=xtOn()?xtSz(id):wp(SZ,x=>(SZ.indexOf(x)==2?1:.55)*(SZ.indexOf(x)>=3?(1+.07*PL("pz"))*SKM("z"):1)),mu=xtOn()?xtMu(id):wp(MU,x=>{const i=MU.indexOf(x);return i?0.55*(EV.k=="eclipse"?3:1)*(1+.07*PL("pm"))*(1+BIF.m)*(i==7?(1+.1*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][pr(id)||0]*(SZ[SZ.indexOf(sz)]||SZ[2])[2]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
+ const sz=wp(SZ,x=>(SZ.indexOf(x)==2?1:.55)*(SZ.indexOf(x)>=3?(1+.07*PL("pz"))*SKM("z"):1)),mu=wp(MU,x=>{const i=MU.indexOf(x);return i?0.55*(EV.k=="eclipse"?3:1)*(1+.07*PL("pm"))*(1+BIF.m)*(i==7?(1+.1*PL("psh"))*SKM("s")*(PL("pcs")?3:1):1):1}),hp=Math.max(3,Math.floor(HPFIX*hpF(G.fl)*(1+L/40)*[.6,.75,1,1.3][pr(id)||0]*(SZ[SZ.indexOf(sz)]||SZ[2])[2]*[1,1.5,1.8,1.8,2.3,3,3.5,4,5,6,8][Math.max(0,MU.indexOf(mu))]*(boss?3:1)));
  FID++;E={id,d,L,boss,t:30,sz,mu,mi:MU.findIndex(m=>m[0]==mu[0]),hp,max:hp,atk:Math.floor((L*1.1+4)*(1+G.fl/110)*(mu[2]>1?1.3:1)*(boss?1.8:1)),r:pr(id),ph:phy(id)};busy=false;spawnFx()}
 function pop(t,c,x){const f=$("fx");if(!f)return;const d=document.createElement("div");d.className="pp "+c;d.textContent=t;d.style.left=x+"%";f.appendChild(d);setTimeout(()=>d.remove(),1100)}
 function autoUse(){for(const id of ids()){const c=G.col[id],m=mhp(id);
@@ -4455,9 +4455,8 @@ function lvUp(c,tg){const mx=c.mx||100,t=mx>100?Math.min(mx,tgtF()):tg;if(c.l>=t
 function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,3.5,9][E.r|0]||1)*L*kxFlg(G.fl)*E.sz[3]*E.mu[2]*(b?5*(1+.15*PL("pb"))*SKM("b"):1)*sm()*cb(1)*(1+.06*PL("pc"))*(EVF.c||1)*BIF.c)),tg=tgtL();
  G.m+=kxI("kill",g);G.gain+=g;G.ko++;if(b)G.boss++;pop("+"+fmt(g)+" ₽","sup",22);sfx("coin");$("rw")&&($("rw").innerHTML=`<span>NIVEAU CIBLE <b>${tg}</b></span>`);
  ids().forEach(i=>{const c=G.col[i];lvUp(c,tg);const h=c.he;if(h&&h.pw!==undefined&&Math.random()<.5)addEV(c,h.pw>=6?Math.random()*6|0:h.pw,1)});
- const bl=pickBall(E);if(!bl&&!xtOn())noBallFx(E);
- if(xtOn()){const b2=bl||"poke-ball";if(bl)G.inv[bl]--;qadd("thr",1);catchIt(E,b2,1)}
- else if(bl){G.inv[bl]--;{const pc=capPct(E,bl);qadd("thr",1);if(Math.random()<pc)catchIt(E,bl,pc);else missFx(E,bl,pc)}}
+ const bl=pickBall(E);if(!bl)noBallFx(E);
+ if(bl){G.inv[bl]--;{const pc=capPct(E,bl);qadd("thr",1);if(Math.random()<pc)catchIt(E,bl,pc);else missFx(E,bl,pc)}}
  if(b&&Math.random()<.004+.0004*PL("pb")){G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;pop("Master Ball obtenue","cap",50)}
  if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;pmChk();if(G.auto)G.fl++}E=null}
 function xcN(){try{return x4Me()&&G.kx&&G.kx.xc?20:1}catch(e){return 1}}
@@ -5047,7 +5046,7 @@ function vSetg(){
  prefCard(LS("Langue","Language"),LS("Les menus et les descriptions du jeu.","Game menus and descriptions."),prefChoices("lang",LS("Langue","Language"),[["fr","Français","FR"],["en","English","EN"]],SG.lang));
  const effects=prefCard(LS("Fluidité","Smoothness"),LS("Les mouvements des Pokémon restent actifs en mode 3D ; ces options règlent les effets de l'interface.","Pokémon movements stay active in 3D mode; these options control interface effects."),prefToggle("perf",LS("Mode performance","Performance mode"),LS("Allège les effets visuels pour un jeu plus fluide.","Reduces visual effects for smoother gameplay."),"bolt")+prefToggle("anim",LS("Animations de l'interface","Interface animations"),LS("Transitions et mouvements des éléments de l'interface.","Transitions and movement of interface elements."),"spark"))+
  prefCard(LS("Décor et rencontres","Scenery and encounters"),"",prefToggle("fly",LS("Pokémon dans le ciel","Pokémon in the sky"),LS("Affiche les Pokémon qui traversent le décor.","Shows Pokémon flying across the scenery."),"wind")+prefToggle("stars",LS("Étoiles filantes","Shooting stars"),"","star")+prefToggle("alert",LS("Alertes de rencontres rares","Rare encounter alerts"),LS("Met en avant les rencontres exceptionnelles.","Highlights exceptional encounters."),"crown"))+
- (owner?prefCard(LS("Réglage propriétaire","Owner setting"),"",prefToggle("xt",LS("Extra entraînement","Extra training"),LS("Mutation et taille spéciale garanties à chaque combat.","Guaranteed mutation and special size in every battle."),"crown")):"");
+ (owner?prefCard(LS("Réglage propriétaire","Owner setting"),"",prefToggle("xt",LS("Extra entraînement","Extra training"),LS("Dans l'Entraînement : mutation et taille spéciale garanties à chaque combat. Les étages ne changent pas.","In Training: guaranteed mutation and special size every fight. Floors are unchanged."),"crown")):"");
  const audio=prefCard(LS("Volumes","Volume levels"),LS("Tes réglages sont enregistrés automatiquement sur cet appareil.","Your settings are saved automatically on this device."),sld("mv",LS("Volume général","Master volume"),"vol",0,100," %")+sld("mu",LS("Musique","Music"),"music",0,100," %")+sld("sf",LS("Effets sonores","Sound effects"),"bolt",0,100," %"))+
  prefCard(LS("Lecture audio","Audio playback"),"",prefToggle("mute",LS("Tout couper","Mute all sound"),LS("Coupe la musique et les effets sonores.","Mutes music and sound effects."),"mute")+prefToggle("bgm",LS("Musique de fond","Background music"),"","music")+`<button type="button" class="pref-action" data-a="tsnd">${prefIcon("vol")} ${LS("Tester les sons","Test sounds")}</button>`);
  const notices=prefCard(LS("Messages du jeu","Game messages"),LS("Les messages d'erreur restent toujours visibles. Tes choix par catégorie sont conservés lorsque tu coupes toutes les notifications.","Error messages always remain visible. Category preferences are kept when all notifications are muted."),prefToggle("nfOff",LS("Couper toutes les notifications","Mute all notifications"),"","mute"),true)+
@@ -11696,9 +11695,10 @@ function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);i
  const pz=trP(TRH.sz,m),pm=trP(TRH.mu,m),pa=trP(TRH.al,m),ps=trP(TRH.sh,m),useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
  for(let k=0;k<n;k++){
   if(useE){t.ea+=evr;while(t.ea>=1){t.ea-=1;const tot=c.ev.reduce((a,b)=>a+b,0);if(c.ev[t.e]<252&&tot<510){c.ev[t.e]++;t.s.ev++}}}
-  if(!useV)continue;
-  if((m=="sz"||m=="all")&&Math.random()<pz){const L=[3,4,5,6],v=trRoll(L,L.map(i=>SZ[i][4]));if(penBetterSz(c,v)){const o=c.zi>=3&&SZ[c.zi]?SZ[c.zi][0]:LS("Normale","Normal");c.zi=v;t.s.sz++;got.push([LS("Taille · ","Size · ")+o+" → "+SZ[v][0],SZC[v]||"#fb923c"])}}
-  if((m=="mu"||m=="all")&&Math.random()<pm){const L=trMuL(),v=trRoll(L,L.map(i=>MU[i][4]));if(penBetterMu(c,v)){const o=c.mi>0&&MU[c.mi]?MU[c.mi][0]:LS("Aucune","None");c.mi=v;t.s.mu++;got.push([LS("Mutation · ","Mutation · ")+o+" → "+MU[v][0],(typeof MUC!="undefined"&&MUC[v])||"#c084fc"])}}
+  if(!useV&&!xtOn())continue;
+  const xt=xtOn(),xL=(L,f)=>{const B=L.filter(f);return B.length?B:L};
+  if(xt||(m=="sz"||m=="all")&&Math.random()<pz){let L=[3,4,5,6];if(xt)L=xL(L,v=>penBetterSz(c,v));const v=trRoll(L,L.map(i=>SZ[i][4]));if(penBetterSz(c,v)){const o=c.zi>=3&&SZ[c.zi]?SZ[c.zi][0]:LS("Normale","Normal");c.zi=v;t.s.sz++;got.push([LS("Taille · ","Size · ")+o+" → "+SZ[v][0],SZC[v]||"#fb923c"])}}
+  if(xt||(m=="mu"||m=="all")&&Math.random()<pm){let L=trMuL();if(xt)L=xL(L,v=>penBetterMu(c,v));const v=trRoll(L,L.map(i=>MU[i][4]));if(penBetterMu(c,v)){const o=c.mi>0&&MU[c.mi]?MU[c.mi][0]:LS("Aucune","None");c.mi=v;t.s.mu++;got.push([LS("Mutation · ","Mutation · ")+o+" → "+MU[v][0],(typeof MUC!="undefined"&&MUC[v])||"#c084fc"])}}
   if((m=="al"||m=="all")&&!c.al&&Math.random()<pa){c.al=1;t.s.al++;got.push(["Alpha","#ef4444"])}
   if(m=="all"&&!c.sh&&Math.random()<ps){c.sh=1;t.s.sh++;got.push([LS("Chromatique","Shiny"),"#fde047"])}}
  t.s.k+=n;t.kc+=n;
@@ -13036,7 +13036,7 @@ setInterval(()=>{try{if(tab=="rks"&&RKX.v=="bp"&&!document.hidden)rkbFetch()}cat
 {const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKB.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
 
 /* réglage réservé au propriétaire : mutation et taille spéciale garanties à chaque combat */
-{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(x4Me())return h.replace('<div class="stg">',`<div class="stg"><div class="box scd"><h3>${ico("crown")} ${LS("Réservé à toi","Only you")}</h3>${tgl("xt",LS("Extra entraînement : mutation et taille spéciale à chaque combat","Extra training: mutation and special size every fight"),"spark")}</div>`)}catch(e){}return h}}
+{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(x4Me())return h.replace('<div class="stg">',`<div class="stg"><div class="box scd"><h3>${ico("crown")} ${LS("Réservé à toi","Only you")}</h3>${tgl("xt",LS("Extra entraînement : mutation et taille spéciale à chaque combat d'entraînement","Extra training: mutation and special size every training fight"),"spark")}</div>`)}catch(e){}return h}}
 /* ===== Meilleur Pokémon : fiche détaillée (IV, EV, stats, doublons...) publiée avec le record, visible en cliquant dans le classement ===== */
 function bpDet(id){try{const c=G.col[id];if(!c)return null;ens(id);rq(id);const it=c.it&&IT[c.it]?IT[c.it].n:"",mv=c.mv?TM[+c.mv.slice(2)-1]:null;let w=null;try{w=srcWhere(id)}catch(e){}
  return{l:c.l|0,mx:c.mx||100,n:c.n|0,st:c.st|0,iv:(c.iv||[]).slice(0,6),ev:(c.ev||[]).slice(0,6),s:[0,1,2,3,4,5].map(k=>{try{return calc(id,k)}catch(e){return 0}}),b:Math.round(base(id)),q:Math.round((c.q||1)*100)/100,
