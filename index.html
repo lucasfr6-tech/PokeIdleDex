@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="51a29f0ef5"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=51a29f0ef5"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="1c2ded0f00"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=1c2ded0f00"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11070,8 +11070,8 @@ const PKBALL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4
 
 /* titre Owner (réservé au créateur) : se débloque en saisissant un code secret dans le Courrier ; affiché à droite des pseudos dans le chat */
 async function pidH(v){return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)))).map(x=>x.toString(16).padStart(2,"0")).join("")}
-const OWNER_H="1d73b75bd453e5800f4930f667fe1b9b1d3437a88db22a99138989b3e66d9eca";
-TIT.push(["own","Owner","Owner",["#f43f5e","#fbbf24"],()=>!!G.own,"Réservé au créateur","Creator only",0]);
+const OWNER_H="code-desactive";
+TIT.push(["own","Owner","Owner",["#f43f5e","#fbbf24"],()=>{try{if(G.own&&!x4Me()){delete G.own;if(G.tt=="own")G.tt="t0"}return !!G.own&&x4Me()}catch(e){return false}},"Réservé au créateur","Creator only",0]);
 document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest('[data-ml="code"]');if(!b)return;const i=document.getElementById("mlin"),v=(i&&i.value||"").trim();if(!v)return;
  try{const h=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)))).map(x=>x.toString(16).padStart(2,"0")).join("");
   if(h===OWNER_H||await pidH(v.toUpperCase())===OWNER_H){G.own=1;G.tt="own";save();try{lbPush(true)}catch(x){}toast("Titre Owner débloqué et équipé");sfx("big");if(i)i.value="";try{show()}catch(x){}}}catch(x){}
