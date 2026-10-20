@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201925"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610201925"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201938"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610201938"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5046,7 +5046,7 @@ function vSetg(){
  prefCard(LS("Langue","Language"),LS("Les menus et les descriptions du jeu.","Game menus and descriptions."),prefChoices("lang",LS("Langue","Language"),[["fr","Français","FR"],["en","English","EN"]],SG.lang));
  const effects=prefCard(LS("Fluidité","Smoothness"),LS("Les mouvements des Pokémon restent actifs en mode 3D ; ces options règlent les effets de l'interface.","Pokémon movements stay active in 3D mode; these options control interface effects."),prefToggle("perf",LS("Mode performance","Performance mode"),LS("Allège les effets visuels pour un jeu plus fluide.","Reduces visual effects for smoother gameplay."),"bolt")+prefToggle("anim",LS("Animations de l'interface","Interface animations"),LS("Transitions et mouvements des éléments de l'interface.","Transitions and movement of interface elements."),"spark"))+
  prefCard(LS("Décor et rencontres","Scenery and encounters"),"",prefToggle("fly",LS("Pokémon dans le ciel","Pokémon in the sky"),LS("Affiche les Pokémon qui traversent le décor.","Shows Pokémon flying across the scenery."),"wind")+prefToggle("stars",LS("Étoiles filantes","Shooting stars"),"","star")+prefToggle("alert",LS("Alertes de rencontres rares","Rare encounter alerts"),LS("Met en avant les rencontres exceptionnelles.","Highlights exceptional encounters."),"crown"))+
- (owner?prefCard(LS("Réglage propriétaire","Owner setting"),"",prefToggle("xt",LS("Extra entraînement","Extra training"),LS("Dans l'Entraînement : mutation et taille spéciale garanties à chaque combat. Les étages ne changent pas.","In Training: guaranteed mutation and special size every fight. Floors are unchanged."),"crown")):"");
+ (owner?prefCard(LS("Réglage propriétaire","Owner setting"),"",prefToggle("xt",LS("Extra entraînement","Extra training"),LS("Dans l'Entraînement : mutation, taille spéciale et Alpha garantis à chaque combat. Les étages ne changent pas.","In Training: guaranteed mutation, special size and Alpha every fight. Floors are unchanged."),"crown")):"");
  const audio=prefCard(LS("Volumes","Volume levels"),LS("Tes réglages sont enregistrés automatiquement sur cet appareil.","Your settings are saved automatically on this device."),sld("mv",LS("Volume général","Master volume"),"vol",0,100," %")+sld("mu",LS("Musique","Music"),"music",0,100," %")+sld("sf",LS("Effets sonores","Sound effects"),"bolt",0,100," %"))+
  prefCard(LS("Lecture audio","Audio playback"),"",prefToggle("mute",LS("Tout couper","Mute all sound"),LS("Coupe la musique et les effets sonores.","Mutes music and sound effects."),"mute")+prefToggle("bgm",LS("Musique de fond","Background music"),"","music")+`<button type="button" class="pref-action" data-a="tsnd">${prefIcon("vol")} ${LS("Tester les sons","Test sounds")}</button>`);
  const notices=prefCard(LS("Messages du jeu","Game messages"),LS("Les messages d'erreur restent toujours visibles. Tes choix par catégorie sont conservés lorsque tu coupes toutes les notifications.","Error messages always remain visible. Category preferences are kept when all notifications are muted."),prefToggle("nfOff",LS("Couper toutes les notifications","Mute all notifications"),"","mute"),true)+
@@ -5976,7 +5976,7 @@ function z22inf(z){if(ZINF[z])return ZINF[z];const R=rng(9000+z),pk=(A,n)=>{cons
 const zonePool22=z=>{z22init();return z<ZN.length?ZN[z]:z22inf(z)};
 function pr(id){z22init();if(TR[id]!=null)return TR[id];const d=I(id);return d.lg||d.b>=600?3:d.b>=500?2:d.b>=400?1:0}
 const spawnPct=(i,pool)=>{pool=pool||zonePool22(zoneOf(G.fl));const t=pool.reduce((s,x)=>s+RWB(pr(x)),0);return RWB(pr(i))/t};
-function pickId22(){const pool=zpool(),p=OFF?pool.filter(i=>FB[i]):pool,L=p.length?p:Object.keys(FB).map(Number);const w=L.map(i=>RWB(pr(i)));let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[0]}
+function pickId22(){const L=zpool();const w=L.map(i=>RWB(pr(i)));let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[0]}
 /* ---- fenêtre de zone ---- */
 function zoneHtml(z){const zp=zonePool22(z).slice().sort((a,b)=>pr(b)-pr(a)||a-b),tot=zp.reduce((s,x)=>s+RWB(pr(x)),0);
  return `<div class="mb" data-a="close"></div><div class="mc zmc"><button class="x" data-a="close">${ico("x")}</button><h2>Zone ${z+1}</h2><small>${LS("Étages "+zs(z)+" à "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" capturés","Floors "+zs(z)+" to "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" caught")}</small>
@@ -7506,7 +7506,9 @@ LOCKS.raid=30;
 /* Pokémon de la zone : cibler une espèce (apparaît plus souvent) */
 const ZT_K=2;
 const ztCur=()=>{const p=zpool();return G.zt&&p.includes(G.zt)?G.zt:0};
-pickId22=function(){const pool=zpool(),p=OFF?pool.filter(i=>FB[i]):pool,L=p.length?p:Object.keys(FB).map(Number),t=ztCur();const w=L.map(i=>RWB(pr(i))*(i==t?ZT_K:1));let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[0]};
+pickId22=function(){const L=zpool(),t=ztCur();const w=L.map(i=>RWB(pr(i))*(i==t?ZT_K:1));let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[0]};
+/* zones : le Pokémon sauvage en combat doit toujours faire partie de la liste de la zone actuelle, sinon on en fait apparaître un autre */
+setInterval(()=>{try{if(E&&!busy&&!zpool().includes(+E.id))E=null}catch(e){}},1000);
 zoneHtml=function(z){const zp=zonePool22(z).slice().sort((a,b)=>pr(b)-pr(a)||a-b),t=G.zt&&zp.includes(G.zt)?G.zt:0,W=i=>RWB(pr(i))*(i==t?ZT_K:1),tot=zp.reduce((s,x)=>s+W(x),0);
  return `<div class="mb" data-a="close"></div><div class="mc zmc"><button class="x" data-a="close">${ico("x")}</button><h2>Zone ${z+1}</h2><small>${LS("Étages "+zs(z)+" à "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" capturés","Floors "+zs(z)+" to "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" caught")}</small>
  <div class="zsum">${[3,2,1,0].map(r=>{const L=zp.filter(i=>pr(i)==r),p=L.reduce((s,x)=>s+W(x),0)/tot;return `<div class="zs r${r}">${rtag(r)}<b>${L.length}</b><small>${prc(p)}</small></div>`}).join("")}</div>
@@ -11700,7 +11702,7 @@ function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);i
   const xt=xtOn(),xL=(L,f)=>{const B=L.filter(f);return B.length?B:L};
   if(xt||(m=="sz"||m=="all")&&Math.random()<pz){let L=[3,4,5,6];if(xt)L=xL(L,v=>penBetterSz(c,v));const v=trRoll(L,L.map(i=>SZ[i][4]));if(penBetterSz(c,v)){const o=c.zi>=3&&SZ[c.zi]?SZ[c.zi][0]:LS("Normale","Normal");c.zi=v;t.s.sz++;got.push([LS("Taille · ","Size · ")+o+" → "+SZ[v][0],SZC[v]||"#fb923c"])}}
   if(xt||(m=="mu"||m=="all")&&Math.random()<pm){let L=trMuL();if(xt)L=xL(L,v=>penBetterMu(c,v));const v=trRoll(L,L.map(i=>MU[i][4]));if(penBetterMu(c,v)){const o=c.mi>0&&MU[c.mi]?MU[c.mi][0]:LS("Aucune","None");c.mi=v;t.s.mu++;got.push([LS("Mutation · ","Mutation · ")+o+" → "+MU[v][0],(typeof MUC!="undefined"&&MUC[v])||"#c084fc"])}}
-  if((m=="al"||m=="all")&&!c.al&&Math.random()<pa){c.al=1;t.s.al++;got.push(["Alpha","#ef4444"])}
+  if(!c.al&&(xt||(m=="al"||m=="all")&&Math.random()<pa)){c.al=1;t.s.al++;got.push(["Alpha","#ef4444"])}
   if(m=="all"&&!c.sh&&Math.random()<ps){c.sh=1;t.s.sh++;got.push([LS("Chromatique","Shiny"),"#fde047"])}}
  t.s.k+=n;t.kc+=n;
  if(got.length){hwSaveVariants(t.i,c);got.forEach(g=>{trLog(t,g[0],g[1]);toast(LS("Entraînement : ","Training: ")+g[0]+" !")});try{trFlash(got)}catch(e){}rq(t.i);sfx("big");save()}}
@@ -13037,7 +13039,7 @@ setInterval(()=>{try{if(tab=="rks"&&RKX.v=="bp"&&!document.hidden)rkbFetch()}cat
 {const v0=vpModal;vpModal=function(m){try{if(VP&&!lbRows().some(x=>x.id==VP)){const x=RKB.rows.find(y=>y.id==VP);if(x){const l0=lbRows;lbRows=function(){return l0.apply(this,arguments).concat([x])};try{return v0.apply(this,arguments)}finally{lbRows=l0}}}}catch(e){}return v0.apply(this,arguments)}}
 
 /* réglage réservé au propriétaire : mutation et taille spéciale garanties à chaque combat */
-{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(x4Me())return h.replace('<div class="stg">',`<div class="stg"><div class="box scd"><h3>${ico("crown")} ${LS("Réservé à toi","Only you")}</h3>${tgl("xt",LS("Extra entraînement : mutation et taille spéciale à chaque combat d'entraînement","Extra training: mutation and special size every training fight"),"spark")}</div>`)}catch(e){}return h}}
+{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(x4Me())return h.replace('<div class="stg">',`<div class="stg"><div class="box scd"><h3>${ico("crown")} ${LS("Réservé à toi","Only you")}</h3>${tgl("xt",LS("Extra entraînement : mutation, taille spéciale et Alpha à chaque combat d'entraînement","Extra training: mutation, special size and Alpha every training fight"),"spark")}</div>`)}catch(e){}return h}}
 /* ===== Meilleur Pokémon : fiche détaillée (IV, EV, stats, doublons...) publiée avec le record, visible en cliquant dans le classement ===== */
 function bpDet(id){try{const c=G.col[id];if(!c)return null;ens(id);rq(id);const it=c.it&&IT[c.it]?IT[c.it].n:"",mv=c.mv?TM[+c.mv.slice(2)-1]:null;let w=null;try{w=srcWhere(id)}catch(e){}
  return{l:c.l|0,mx:c.mx||100,n:c.n|0,st:c.st|0,iv:(c.iv||[]).slice(0,6),ev:(c.ev||[]).slice(0,6),s:[0,1,2,3,4,5].map(k=>{try{return calc(id,k)}catch(e){return 0}}),b:Math.round(base(id)),q:Math.round((c.q||1)*100)/100,
@@ -13202,6 +13204,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["fix","Zones : uniquement les Pokémon de la zone","Les combats ne font plus apparaître de Pokémon d'une autre zone. Seuls les Pokémon de la liste de ta zone actuelle peuvent apparaître et être capturés, même hors ligne.","Zones: only that zone's Pokémon","Fights no longer spawn Pokémon from another zone. Only the Pokémon listed for your current zone can appear and be caught, even offline."],
   ["imp","Pension : Pokémon spéciaux acceptés","Tu peux maintenant confier tes Pokémon spéciaux à la Pension, quel que soit leur niveau. Ils apparaissent en haut de la liste.","Daycare: special Pokémon allowed","You can now leave your special Pokémon at the Daycare, whatever their level. They show at the top of the list."],
   ["imp","Fonds de mutation : Matières précieuses","Chaque mutation possède un fond à facettes dédié, dont Aurifère, Glacial et Prismatique. Les Pokémon chromatiques ont aussi leur fond. Les contours des exclusifs et les badges Halloween restent distincts.","Mutation backgrounds: Precious materials","Every mutation has its own faceted background, including Auriferous, Glacial and Prismatic. Shiny Pokémon also have a dedicated background. Exclusive borders and Halloween badges remain distinct."],
   ["fix","Prestige : sélection respectée","Seuls les Pokémon choisis sont conservés parmi les Pokémon ordinaires, même chromatiques, mutés, Alpha ou dotés d’un talent caché. Les exclusifs et les formes Halloween restent conservés automatiquement, sans occuper les places de sélection.","Prestige: selection respected","Only selected ordinary Pokémon are kept, including shiny, mutated, Alpha and hidden-ability Pokémon. Exclusives and Halloween forms remain automatically protected without using selection slots."],
