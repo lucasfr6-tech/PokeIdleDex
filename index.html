@@ -3864,8 +3864,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="4481cba5fb"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=4481cba5fb"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="d8e80a1c20"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=d8e80a1c20"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4698,8 +4698,14 @@ document.addEventListener("input",e=>{const s=e.target;if(!s.dataset)return;
  if(s.dataset.a=="cfin"){CFV=s.value;const b=$("cfok");if(b)b.disabled=norm(CFV)!="supprimer"}else if(s.dataset.a=="mq"){MN.q=s.value;MN.lim=120;$("mng").innerHTML=mineGrid()}else if(s.dataset.a=="dxq"){DX.q=s.value;$("dxg").innerHTML=dexGrid()}else if(s.dataset.a=="shq"){SH.q=s.value;$("shl").innerHTML=shopList()}else if(s.dataset.a=="wkq"){WK.q=s.value;$("wki").innerHTML=wkItems()}else if(s.dataset.a=="sl"){SG[s.dataset.t]=+s.value;const q=$("slv-"+s.dataset.t);if(q)q.textContent=s.value+" %";svs();applySt()}else if(s.dataset.a=="pnq"){PNQ=s.value;$("png").innerHTML=penGrid()}else if(s.dataset.a=="pss"){PSQ=s.value;$("psg").innerHTML=psGrid()}else if(s.dataset.a=="exq"){EXQ=s.value;$("exg").innerHTML=exGrid()}else if(s.dataset.a=="pks"){PKQ=s.value;$("pkg").innerHTML=pkGrid()}else if(s.dataset.a=="csq"){CS.q=s.value;$("cgr").innerHTML=cardGrid()}});
 window.addEventListener&&window.addEventListener("beforeunload",save);
 /* ============ v18 : PARAMÈTRES, SON, CIEL ============ */
-const SD={mv:70,mu:35,sf:60,mute:0,bgm:1,lang:"fr",theme:"night",fly:1,stars:1,anim:1,ui:100,cmp:0,alert:1};
+const SD={mv:70,mu:35,sf:60,mute:0,bgm:1,lang:"fr",theme:"night",fly:1,stars:1,anim:1,ui:80,cmp:0,alert:1};
 let SG=Object.assign({},SD);try{Object.assign(SG,JSON.parse(localStorage.getItem("idle_set")||"{}"))}catch(e){}
+// Migration unique : les comptes existants passent à 80 %, puis leurs futurs choix restent enregistrés.
+try{if(localStorage.getItem("pid_ui80_default_v1")!=="1"){
+ SG.ui=80;
+ localStorage.setItem("idle_set",JSON.stringify(SG));
+ localStorage.setItem("pid_ui80_default_v1","1");
+}}catch(e){SG.ui=80}
 const svs=()=>{try{localStorage.setItem("idle_set",JSON.stringify(SG))}catch(e){}};
 const wpick=L=>{let r=Math.random()*L.reduce((s,x)=>s+x[3],0);for(const x of L){r-=x[3];if(r<=0)return x}return L[0]};
 function applySt(){const h=document.documentElement;h.dataset.theme=SG.theme;h.lang=SG.lang;h.classList.toggle("noanim",!SG.anim);h.classList.toggle("cmp",!!SG.cmp);h.classList.toggle("perf",!!SG.perf);document.body.style.zoom=SG.ui==100?"":SG.ui/100;auVol();auTheme()}
@@ -12881,6 +12887,9 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-20",t:["Taille de l’interface à 80 % par défaut","Interface size defaults to 80%"],e:[
+  ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
+ ]},
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
   ["fix","Raids : compte à rebours","« Nouveaux raids dans » affiche maintenant le vrai temps avant la prochaine rotation (toutes les heures).","Raids: countdown","“New raids in” now shows the real time until the next rotation (every hour)."],
   ["fix","Fiche du meilleur Pokémon","Les détails du meilleur Pokémon (stats, IV, EV…) n'étaient jamais publiés : c'est corrigé, ils apparaissent pour tous les joueurs dès qu'ils jouent.","Best Pokémon sheet","Best Pokémon details (stats, IVs, EVs…) were never published: fixed, they show for every player as soon as they play."],
