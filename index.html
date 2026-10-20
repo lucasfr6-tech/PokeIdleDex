@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="e2a47d34bb"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=e2a47d34bb"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="fb907acd62"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=fb907acd62"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11019,7 +11019,7 @@ glChal=function(c){const g=glS(),cl=g.cl[c.id],pc=Math.min(100,Math.floor(c.got/
  return `<div class="glx-ch ${c.done?"done":""}"><div class="glx-ci">${glIc(CHT[c.k].ic)}</div><div class="glx-cb"><b>${nm}</b><div class="glx-goal"><span>${LS("Objectif","Goal")} : <b>${fmt(c.tg)}</b></span><span>${LS("Fait","Done")} : <b>${fmt(Math.min(c.got,c.tg))}</b></span><span class="glx-pc">${pc} %</span></div><div class="glx-bar big"><i style="width:${pc}%"></i><span>${fmt(Math.min(c.got,c.tg))} / ${fmt(c.tg)}</span></div><div class="glx-cm"><small>${LS("Ma part","My share")} : <b>${fmt(c.mine)}</b></small><div class="qrw">${c.rw.map(glRw).join("")}</div></div></div>
   <div class="glx-ca">${cl?`<span class="glx-ok">${ico("check")}${LS("Récupéré","Claimed")}</span>`:c.done?(c.mine>0?`<button class="go" data-gl="cl:${c.id}">${ico("gift")} ${LS("Récupérer","Claim")}</button>`:`<small>${LS("Contribue un peu pour récupérer","Contribute to claim")}</small>`):`<small>${ico("clock")} ${glDur(end-Date.now())}</small>`}</div></div>`};
 /* --- invocation d'équipement : petit délai entre deux invocations --- */
-{let CD=0;try{const f=eSummon;eSummon=function(n){const t=Date.now();if(t<CD){try{toast(LS("Doucement, laisse l'invocation précédente se terminer.","Easy, let the previous summon finish."))}catch(e){}return}CD=t+(+n>=10?3500:2000);return f.apply(this,arguments)}}catch(e){}}
+{let CD=0;try{const f=eSummon;eSummon=function(n){const t=Date.now();if(t<CD){try{toast(LS("Doucement, laisse l'invocation précédente se terminer.","Easy, let the previous summon finish."))}catch(e){}return}CD=t+(+n>=10?1800:650);/* juste le temps que toutes les cartes apparaissent */return f.apply(this,arguments)}}catch(e){}}
 /* --- quêtes : pièces de récompense fixes (ne dépendent plus du revenu) --- */
 {const QF={d:15000,w:120000,m:900000};
  qRew=function(d,p){const r=[["m",QF[p]||15000]],a=d.it&&d.it[{d:1,w:2,m:3}[p]];if(a)r.push(["i",d.it[0],a]);return r};
@@ -13214,6 +13214,7 @@ const UPD=[
   ["imp","Interface à 80 %","La taille de l’interface est réglée à 80 % pour tous lors de cette mise à jour. Tu peux ensuite la personnaliser dans les paramètres.","80% interface size","Interface size is set to 80% for everyone with this update. You can then customize it in settings."]
  ]},
  {d:"2026-10-19",t:["Bannière Halloween, partage et parrainage","Halloween banner, sharing and invites"],e:[
+  ["imp","Invocation d'équipement plus rapide","Tu peux réinvoquer dès que toutes les cartes sont apparues, sans attendre de délai.","Faster gear summon","You can summon again as soon as all cards are shown, with no waiting."],
   ["fix","Classements Tour, JCJ et Guildes","Ces classements n'affichaient parfois que toi tant que tu n'avais pas ouvert le mode correspondant. Ils se chargent maintenant directement depuis l'onglet Classements et se mettent à jour tout seuls.","Tower, PvP and Guild rankings","These rankings sometimes only showed you until you opened the matching mode. They now load straight from the Rankings tab and update by themselves."],
   ["fix","Raids : compte à rebours","« Nouveaux raids dans » affiche maintenant le vrai temps avant la prochaine rotation (toutes les heures).","Raids: countdown","“New raids in” now shows the real time until the next rotation (every hour)."],
   ["fix","Fiche du meilleur Pokémon","Les détails du meilleur Pokémon (stats, IV, EV…) n'étaient jamais publiés : c'est corrigé, ils apparaissent pour tous les joueurs dès qu'ils jouent.","Best Pokémon sheet","Best Pokémon details (stats, IVs, EVs…) were never published: fixed, they show for every player as soon as they play."],
