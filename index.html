@@ -4035,8 +4035,8 @@ main>*{max-width:none;margin-left:0;margin-right:0}
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201938"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610201938"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610201943"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610201943"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4263,6 +4263,8 @@ const tp=id=>{const m=mfo(id);return m?(id>9e4&&SPM[id]?I(id).t:m.t):I(id).t};
 const bs=id=>{const m=mfo(id);return m?(id>9e4&&SPM[id]?I(id).b+(SPM[id].hw?96:Math.round(m.b*.16)):m.b):I(id).b};
 const dn=id=>{const m=mfo(id),c=G.col[id];return (m?(id>9e4&&SPM[id]?m.n+" "+SPM[id].n.split(" ").slice(1).join(" "):m.n):I(id).n)+(c&&c.dy?" Dynamax":"")};
 const NMX=330;/* doublons max par Pokémon */
+/* doublons pris en compte pour les dégâts : après un rebirth, un Pokémon garde les dégâts des doublons de ses étoiles conservées (5 étoiles = 330 doublons) */
+function nEff(c,id){const n=(c&&c.n)||1,k=(c&&c.ks)|0;if(!k)return n;try{const T=starT(id);return Math.max(n,T[Math.min(T.length,k)-1]||1)}catch(e){return n}}
 const capM=n=>1+.3*Math.pow(Math.max(0,Math.min(n,NMX)-1),.8);
 const STC={};function ST(id){const m=mfo(id);if(m)return m.a;const d=I(id);if(d.s&&d.s.length==6)return d.s;const k=id+"|"+d.b;if(STC[k])return STC[k];const h=id*2654435761>>>0,w=[0,1,2,3,4,5].map(i=>.7+((h>>>(i*4))&15)/20),t=w.reduce((a,b)=>a+b,0);return STC[k]=w.map(x=>Math.max(10,Math.round(x/t*d.b)))}
 const ABN={normal:["Attention","Cran"],fire:["Brasier","Torche"],water:["Torrent","Absorb Eau"],electric:["Statik","Paratonnerre"],grass:["Engrais","Chlorophylle"],ice:["Corps Gel","Isograisse"],fighting:["Intimidation","Impassible"],poison:["Puanteur","Point Poison"],ground:["Force Sable","Voile Sable"],flying:["Regard Vif","Pied Véloce"],psychic:["Synchro","Attention"],bug:["Essaim","Œil Composé"],rock:["Fermeté","Tête de Roc"],ghost:["Lévitation","Corps Maudit"],dragon:["Mue","Intimidation"],dark:["Intimidation","Prignon"],steel:["Fermeté","Esprit Vital"],fairy:["Joli Sourire","Envelocape"]};
@@ -4368,14 +4370,14 @@ function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HF
  /* bonus de catégorie déjà compris dans le palier : Divin ×1,6, spécial ×2,6, forme Méga ×1,5 */
  try{if(typeof kxDiv=="function"&&kxDiv(id))q/=1.6;if(id>9e4)q/=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mf)q/=1.5}catch(e){}
  const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
- return PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
-const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
+ return PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
+const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*(pr(id)==3?2.5:1)*legM(id)};
 var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["Divin","Divine"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
 function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
 function pwSp(id,k){return Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)))}
 /* pièces : même ordre que les dégâts, écart adouci (puissance 0,6) pour ne pas faire exploser l'économie */
-function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV0.wN*Math.pow(PWTV0[k]/PWTV0.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*.478}
-const coin=id=>{if(PWNEW)return coinNew(id);const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(c.n)*starC(c)*GM[1]*(c.co||1)*2.55};
+function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV0.wN*Math.pow(PWTV0[k]/PWTV0.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starC(c)*GM[1]*(c.co||1)*.478}
+const coin=id=>{if(PWNEW)return coinNew(id);const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
  let m=base(id)*Math.max(.25,e)*(mv?1+mv[2]/200:1)*(c.wa&&c.wa===W.k?1.4:1)*(EVF.d||1)*BIF.d;
@@ -6900,7 +6902,7 @@ function pkModal(){const id=OPEN,c=id&&G.col[id];if(!c)return "";ens(id);const r
  <section class="pqb"><div class="pqtb">${PKT().map(x=>`<button class="${MT==x[0]?"on":""}" data-mt="${x[0]}">${x[1]}</button>`).join("")}</div><div class="pqbd">${body}</div></section></div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mt]");if(!b)return;e.stopPropagation();MT=b.dataset.mt;modal()},true);
 
-function pqCap(id){const c=G.col[id],n=c.n||1,m=capM(n),b=base(id),g=b-b/m*capM(1),k=n-1,ev=Math.min(510,k*(4+PL("pg")));
+function pqCap(id){const c=G.col[id],n=c.n||1,m=capM(nEff(c,id)),b=base(id),g=b-b/m*capM(1),k=n-1,ev=Math.min(510,k*(4+PL("pg")));
  return `<div class="pqcp"><b>${LS("Bonus de captures","Capture bonus")} ×${n}</b><span>${LS("Dégâts","Damage")} <em>×${m.toFixed(2).replace(".",",")}</em> · <em>+${fmt(g)}</em></span><span>${k>0?`+${Math.min(186,k)} IV · +${ev} EV`:LS("Capture-le encore pour gagner des IV, des EV et des dégâts","Catch it again to gain IV, EV and damage")}</span></div>`}
 /* ============ SPÉCIAUX : sprites pixel 2D mi-3D + forme conservée partout ============ */
 const spf=id=>{const c=G.col[id];if(!c)return id;return c.mf?(id>9e4&&SPM[id]?id+"m"+c.mf:c.mf):id};
@@ -13204,6 +13206,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-20",t:["Pokémon List animée et interface","Animated Pokémon List and interface"],e:[
+  ["imp","Rebirth : les doublons des étoiles sont conservés","Après un rebirth, les doublons repartent de zéro, mais un Pokémon garde les dégâts des doublons de ses étoiles. Un Pokémon 5 étoiles garde les dégâts de 330 doublons sans avoir à les refarmer.","Rebirth: star duplicates are kept","After a rebirth, duplicates start again from zero, but a Pokémon keeps the damage of its stars' duplicates. A 5-star Pokémon keeps the damage of 330 duplicates without farming them again."],
   ["fix","Zones : uniquement les Pokémon de la zone","Les combats ne font plus apparaître de Pokémon d'une autre zone. Seuls les Pokémon de la liste de ta zone actuelle peuvent apparaître et être capturés, même hors ligne.","Zones: only that zone's Pokémon","Fights no longer spawn Pokémon from another zone. Only the Pokémon listed for your current zone can appear and be caught, even offline."],
   ["imp","Pension : Pokémon spéciaux acceptés","Tu peux maintenant confier tes Pokémon spéciaux à la Pension, quel que soit leur niveau. Ils apparaissent en haut de la liste.","Daycare: special Pokémon allowed","You can now leave your special Pokémon at the Daycare, whatever their level. They show at the top of the list."],
   ["imp","Fonds de mutation : Matières précieuses","Chaque mutation possède un fond à facettes dédié, dont Aurifère, Glacial et Prismatique. Les Pokémon chromatiques ont aussi leur fond. Les contours des exclusifs et les badges Halloween restent distincts.","Mutation backgrounds: Precious materials","Every mutation has its own faceted background, including Auriferous, Glacial and Prismatic. Shiny Pokémon also have a dedicated background. Exclusive borders and Halloween badges remain distinct."],
