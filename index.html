@@ -4191,8 +4191,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-casino-repeat-gear30-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-casino-repeat-gear30-20261021"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-exclusive-stars-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-exclusive-stars-20261021"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9571,15 +9571,18 @@ BOOST.forEach(b=>{b.p*=70});
 /* ===== v104 : ascensions (étoiles automatiques selon les exemplaires obtenus, 5 étoiles max) ===== */
 var STOT=0;
 const STT=[15,40,100,250,600],STR=[1,.85,.7,.55],STMX=5;
-function starT(id){let r=0;try{r=pr(id)|0}catch(e){}const f=STR[Math.min(3,Math.max(0,r))],o=[];let p=0;for(const t of STT){const v=Math.min(NMX,Math.max(p+1,2,Math.round(t*f)));o.push(v);p=v}return o}
-function starsOf(id,n){const T=starT(id);let s=0;for(const t of T)if(n>=t)s++;return Math.min(STMX,s)}
+const EX_STAR_HW={"41":1,"42":2,"169":2,"172":1,"200":1,"292":1,"300":1,"301":1,"302":2,"353":1,"354":3,"355":1,"356":3,"425":1,"426":2,"429":2,"442":2,"477":3,"478":2,"479":1,"487":4,"491":4,"562":1,"563":2,"595":1,"596":2,"607":1,"608":2,"609":3,"622":1},EX_STAR_SPECIAL={90011:1,90012:2,90013:3,90014:3,90015:4};
+function exclusiveStarTier(id){id=+id;if(id>=90000)return EX_STAR_SPECIAL[id]||1;return G.col[id]?.hf?(EX_STAR_HW[id]||1):0}
+function copyLimit(id){return exclusiveStarTier(id)?starT(id).at(-1):NMX}
+function starT(id){const tier=exclusiveStarTier(id);if(tier){const f=[0,1,1.5,2,3][tier];return [50,150,350,750,1500].map((n,i)=>i?Math.round(n*f):50)}let r=0;try{r=pr(id)|0}catch(e){}const f=STR[Math.min(3,Math.max(0,r))],o=[];let p=0;for(const t of STT){const v=Math.min(NMX,Math.max(p+1,2,Math.round(t*f)));o.push(v);p=v}return o}
+function starsOf(id,n){const T=starT(id);let s=0;for(const t of T)if(n>=t)s++;return Math.min(STMX,Math.max(s,(G.col[id]&&G.col[id].ks)||0))}
 function starD(c){return(1+.3*((c&&c.st)||0))*(1+Math.min(.25,.0005*(STOT||0)))}
 function starC(c){return 1+.2*((c&&c.st)||0)}
 const STAR_P="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z";
 const starSvg=on=>`<svg class="asv${on?" on":""}" viewBox="0 0 24 24"><path d="${STAR_P}"/></svg>`;
 function starRow(c,mode){const s=(c&&c.st)||0;if(mode=="sm")return s?`<span class="asr sm s${s}" title="${s} ${LS("étoile(s)","star(s)")}">${starSvg(1).repeat(s)}</span>`:"";return `<span class="asr s${s}" title="${s} / 5">${[1,2,3,4,5].map(k=>starSvg(k<=s)).join("")}</span>`}
 let STV=0;
-function starSync(){let tot=0,ups=[];for(const k in G.col){const c=G.col[k];if((c.n|0)>NMX)c.n=NMX;const s=starsOf(+k,c.n||1);tot+=s;if(c.st!==s){const o=c.st;c.st=s;c.mx=100+10*s;if(STV&&o!=null&&s>o)ups.push([+k,s])}else if(!c.mx)c.mx=100+10*s}
+function starSync(){let tot=0,ups=[];for(const k in G.col){const c=G.col[k];if(exclusiveStarTier(k)&&!c.exStarPolicy){c.ks=Math.max(c.ks||0,c.st||0);c.exStarPolicy=1}const limit=copyLimit(k);if((c.n|0)>limit)c.n=limit;const s=starsOf(+k,c.n||1);tot+=s;if(c.st!==s){const o=c.st;c.st=s;c.mx=100+10*s;if(STV&&o!=null&&s>o)ups.push([+k,s])}else if(!c.mx)c.mx=100+10*s}
  const ch=tot!=STOT;STOT=tot;
  if(ups.length){try{recomp()}catch(e){}try{sfx("big")}catch(e){}ups.slice(0,3).forEach(u=>toast(dn(u[0])+" : "+LS("ascension "+u[1]+" étoile"+(u[1]>1?"s":"")+" ! Niveau max "+(100+10*u[1]),"ascension "+u[1]+" star"+(u[1]>1?"s":"")+"! Max level "+(100+10*u[1]))));if(ups.length>3)toast(LS("+"+(ups.length-3)+" autres ascensions","+"+(ups.length-3)+" more ascensions"))}
  else if(ch||!STV){try{recomp()}catch(e){}}
@@ -13628,6 +13631,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["imp","Étoiles des exclusifs : une vraie progression","Première étoile à 50 exemplaires. Pour les exclusifs et Halloween communs : 50, 150, 350, 750 et 1 500. Les paliers suivants augmentent selon la rareté Halloween ; Giratina et Darkrai demandent 4 500 exemplaires pour la cinquième. Les étoiles déjà gagnées sont conservées.","Exclusive stars: meaningful progression","The first star requires 50 copies. Standard exclusives and common Halloween: 50, 150, 350, 750 and 1,500. Later thresholds scale with Halloween rarity; Giratina and Darkrai require 4,500 copies for the fifth star. Previously earned stars are kept."],
  ["new","Les captures renforcent ton exclusif","Si tu possèdes un exclusif, les captures et évolutions de son espèce normale lui donnent des doublons. À son obtention, les exemplaires normaux déjà possédés sont convertis ; leurs objets tenus retournent au sac. Sans exclusif, les évolutions restent normales. Les variantes Halloween restent distinctes.","Catches strengthen your exclusive","When you own an exclusive, catches and evolutions of its ordinary species add duplicates to it. Existing ordinary copies convert when the exclusive is obtained; held items return to your bag. Without an exclusive, evolution stays normal. Halloween variants remain separate."],
  ["new","Casino : refaire le même tirage","Un bouton Refaire apparaît sous les résultats pour rejouer le même ticket dans la même quantité. Le prix est affiché et le bouton attend la fin du tirage.","Casino: repeat your draw","A Play again button below the results repeats the same ticket and quantity. It displays the price and waits until the draw finishes."],
  ["new","Dresseur : invoquer ×30","Invoque 30 équipements en un clic, au prix de trois lots de dix, avec une garantie SR ou mieux par groupe de dix. Les résultats défilent et peuvent être relancés en ×30.","Trainer: summon ×30","Summon 30 items in one click at the price of three ten-pulls, with an SR-or-better guarantee in each group of ten. Results scroll and can be repeated as a thirty-pull."],
