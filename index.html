@@ -4191,8 +4191,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-release111-notifications-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-release111-notifications-20261021"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-version111-badge-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-version111-badge-20261021"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -12006,7 +12006,7 @@ BOOST.forEach(b=>{b.p=Math.round(b.p/2)});
 /* ===== Chasse Méga : 2 millions de DPS requis au lieu de 3 millions ===== */
 {const m=EXT.find(t=>t.mega);if(m)m.rq=40}
 /* ===== Numéro de version, tout petit, en haut à droite (au-dessus de Courrier) ===== */
-(function(){const mk=()=>{if(document.getElementById("vtag"))return;const d=document.createElement("div");d.id="vtag";d.textContent="v1.1.0";d.title=LS("Version du jeu","Game version");document.body.appendChild(d)};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);setInterval(mk,3000)})();
+(function(){const mk=()=>{if(document.getElementById("vtag"))return;const d=document.createElement("div");d.id="vtag";d.textContent="v1.1.1";d.title=LS("Version du jeu","Game version");document.body.appendChild(d)};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);setInterval(mk,3000)})();
 /* ===== Chat « Amis » : messages privés entre amis (seuls les deux participants les voient) ===== */
 const DMX={w:null,cv:{},msgs:[],r:0,un:0,sig:"",busy:0,ld:0,lt:0};
 const dmOn=()=>{try{return tnOn()}catch(e){return false}};
@@ -13652,6 +13652,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["fix","Version affichée à jour","Le numéro en haut à droite affiche désormais v1.1.1.","Updated version label","The top-right version label now displays v1.1.1."],
  ["new","Version 1.1.1 : tout retrouver au même endroit","Une annonce illustrée réunit les mises à jour des 20 et 21 octobre. Elle revient à chaque chargement sauf si tu coches Ne plus afficher. Tu peux la rouvrir depuis Menu.","Version 1.1.1: all updates together","An illustrated announcement brings together the October 20 and 21 updates. It appears on every load unless you select Do not show again. Reopen it from Menu."],
  ["new","Ta cloche de notifications","Menu rassemble les résultats de pension, entraînement, expéditions et failles, les demandes d’amis, les défis reçus en JCJ, les nouvelles bannières et les raids. Filtres, non-lus et historique sauvegardé.","Your notification bell","Menu collects daycare, training, expedition and rift results, friend requests, incoming PvP challenges, new banners and raids. Includes filters, unread counts and saved history."],
  ["new","Rejoins le Discord","Un logo bleu lumineux ouvre notre serveur depuis la barre de gauche. Un rappel discret apparaît toutes les 20 minutes pendant cinq secondes.","Join Discord","A glowing blue logo opens our server from the left rail. A small reminder appears every 20 minutes for five seconds."],
