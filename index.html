@@ -4224,8 +4224,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-care-menu-support-20261021a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-care-menu-support-20261021a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-special-power1250-20261021b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-special-power1250-20261021b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4506,7 +4506,7 @@ const clearSTG=()=>{for(const k in STG)delete STG[k]};
 const stM=id=>id>9e4?6.4:1+.3*(stage(id)-1);
 /* ===== Échelle de puissance par source (PWNEW=1). Mettre PWNEW=0 pour revenir exactement à l'ancienne formule. ===== */
 var PWNEW=1;
-var PWTV={wN:274,wSR:802,wSSR:2218,ex:4471,wUR:7573,mg:16000,bN:968,bSR:2639,bSSR:9254,bUR:19324,bD:39397,h1:1142,h2:3165,h3:11008,h4:49259,r0:1003,r1:2812,r2:9599,r3:20005,r4:36226,r5:59601,f0:1003,f1:1816,f2:2812,f3:5463,f4:9599,f5:20005,f6:36226,f7:59601,sp:151105,wb:372065};
+var PWTV={wN:274,wSR:802,wSSR:2218,ex:4471,wUR:7573,mg:16000,bN:968,bSR:2639,bSSR:9254,bUR:19324,bD:39397,h1:1142,h2:3165,h3:11008,h4:49259,r0:1003,r1:2812,r2:9599,r3:20005,r4:36226,r5:59601,f0:1003,f1:1816,f2:2812,f3:5463,f4:9599,f5:20005,f6:36226,f7:59601,sp:342500,wb:372065};
 /* échelle validée le 19/10 (écart ×1,30 autour de la Chasse Méga) ; ancienne échelle pour les pièces, pour garder l'économie stable */
 var PWTV0={wN:700,wSR:1600,wSSR:3500,ex:6000,wUR:9000,mg:16000,bN:1850,bSR:4000,bSSR:10500,bUR:18500,bD:32000,h1:2100,h2:4600,h3:12000,h4:38000,r0:1900,r1:4200,r2:10800,r3:19000,r4:30000,r5:44000,f0:1900,f1:3000,f2:4200,f3:7000,f4:10800,f5:19000,f6:30000,f7:44000,sp:90000,wb:180000};
 var PWREF={h1:380,h2:450,h3:520,h4:720,wN:330,wSR:440,wSSR:505,wUR:590,ex:500,mg:600,bN:330,bSR:440,bSSR:505,bUR:590,bD:620,r0:430,r1:470,r2:520,r3:600,r4:640,r5:660,f0:420,f1:450,f2:480,f3:500,f4:520,f5:560,f6:600,f7:760,sp:660,wb:680};
@@ -4559,7 +4559,7 @@ function baseNew(id){const c=G.col[id],k=pwTier(id);let q=c.q||1;try{if(c.hf&&HF
  /* bonus de catégorie déjà compris dans le palier : LR ×1,6, spécial ×2,6, forme Méga ×1,5 */
  try{if(typeof kxDiv=="function"&&kxDiv(id))q/=1.6;if(id>9e4)q/=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mf)q/=1.5}catch(e){}
  const sp=Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)));
- return (id>9e4&&SPM[id]&&SPM[id].hw?2:1)*PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
+ return (id>9e4&&SPM[id]&&SPM[id].hw?2*(SPM[id].hm||1):1)*PWK*PWTV[k]*(k=="wb"?1+.075*(Math.max(1,c.wbf||1)-1):1)*sp/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*q*(c.al?1.3:1)*(PANS.has(id)?1.25:1)}
 const base=id=>{if(PWNEW)return baseNew(id);const c=G.col[id];return 4*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starD(c)*GM[0]*stM(id)*(c.q||1)*(c.al?1.3:1)*(PANS.has(id)?1.25:1)*((pr(id)==3||pr(id)==6)?2.5:1)*legM(id)};
 var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSSR:["SSR (étages)","SSR (floors)"],wUR:["UR (étages)","UR (floors)"],ex:["Expédition","Expedition"],mg:["Chasse Méga","Mega Hunt"],bN:["Bannière N","Banner N"],bSR:["Bannière SR","Banner SR"],bSSR:["Bannière SSR","Banner SSR"],bUR:["Bannière UR","Banner UR"],bD:["LR","LR"],h1:["Halloween Commun","Halloween Common"],h2:["Halloween Rare","Halloween Rare"],h3:["Halloween Épique","Halloween Epic"],h4:["Halloween Légendaire","Halloween Legendary"],r0:["Raid Facile","Easy raid"],r1:["Raid Normal","Normal raid"],r2:["Raid Difficile","Hard raid"],r3:["Raid Expert","Expert raid"],r4:["Raid Extrême","Extreme raid"],r5:["Raid Impossible","Impossible raid"],f0:["Faille Fissure","Fissure rift"],f1:["Faille Brèche","Breach rift"],f2:["Faille Rupture","Rupture rift"],f3:["Faille Déchirure","Tear rift"],f4:["Faille Gouffre","Chasm rift"],f5:["Faille Abîme","Abyss rift"],f6:["Faille Singularité","Singularity rift"],f7:["Faille Chaos","Chaos rift"],sp:["Spécial","Special"],wb:["Boss monde","World boss"]};
 function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
@@ -9920,7 +9920,7 @@ function bonusCard(id){
  const f=x=>"×"+(Math.round(x*100)/100).toString().replace(".",","),L=[];
  const add=(t,n,v,col)=>L.push(`<div class="bnr"><i style="background:${col||"#64748b"}"></i><span>${t}${n?` <b>${n}</b>`:""}</span><em>${v}</em></div>`);
  try{
-  if(PWNEW){if(pr(id)===6)add(LS("Rareté","Rarity"),"LR","","#22d3ee");const k=pwTier(id);add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24")}
+  if(PWNEW){if(pr(id)===6)add(LS("Rareté","Rarity"),"LR","","#22d3ee");const k=pwTier(id);add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24");if(id>9e4&&SPM[id]?.hw)add(LS("Bonus Halloween","Halloween bonus"),"",f(2*(SPM[id].hm||1)),"#fb923c")}
   else{if(c.spc||id>9e4)add("Forme spéciale","",f(legM(id)*(id>9e4?6.4:1)),"#e879f9");
   else if(LEG.has(id))add("Légendaire","",f(legM(id)),"#f59e0b");
   if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");}
@@ -10411,7 +10411,7 @@ const HWI=[
  {id:90014,base:130,n:"Léviator Ghastly",t:["water","dark"],s:[95,150,90,90,105,70],ab:["Intimidation"],ha:"Prignon",m:1.728,p:1000,
   au:"#a855f7",au2:"#ff7518",mv:["Surf","Vibrobscur","Laser Glace","Danse-Lames"],
   fr:"Les marins jurent l'avoir vu surgir de la brume le soir de Halloween, le ventre en braise. Aucun navire n'a jamais refait le trajet.",en:"Sailors swear they saw it rise from the fog on Halloween night, belly like embers. No ship ever sailed that way again."},
- {id:90015,base:643,n:"Reshiram Ghastly",t:["dragon","fire"],s:[90,110,90,130,100,80],ab:["Turbo-Brasier"],ha:"",m:2.0736,p:1500,
+ {id:90015,base:643,n:"Reshiram Ghastly",t:["dragon","fire"],s:[90,110,90,130,100,80],ab:["Turbo-Brasier"],ha:"",m:2.25,p:1500,
   au:"#ff7518",au2:"#a78bfa",mv:["Lance-Flammes","Draco-Météore","Boutefeu","Plénitude"],
   fr:"Le dragon de la nuit des morts. Ses ailes de feu éclairent le ciel d'octobre, et son corps d'ombre ne projette aucune lumière.",en:"The dragon of the night of the dead. Its wings of fire light the October sky, while its shadow body casts no light."}];
 const HWSN=["PV","Attaque","Défense","Atq. Spé.","Déf. Spé.","Vitesse"],HWSE=["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed"];
@@ -10433,18 +10433,18 @@ const HW={i:0,v:0,sh:0,busy:0};
 const hwOwn=id=>!!(G.sp&&G.sp[id]);
 let hwImg=(id,mf,sh)=>`<img class="hwsp" alt="" draggable="false" decoding="async" src="${IMG}${sh?"shiny/":""}${id}${mf?"m"+mf:""}.png">`;
 const hwVarName=(x,k)=>{if(!k)return LS("Normal","Normal");const mg=kxHwMg(x.id),w=(MGM[mg[k-1]].n.match(/ (\S+)$/)||[])[1];return "Méga"+(w?" "+w:"")};
-const hwMP=x=>2*Math.pow(1.2,HWI.indexOf(x));
-function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=gem>=x.p,mg=kxHwMg(x.id),mf=HW.v>0?mg[HW.v-1]:0,pw=hwMP(x),mx=Math.pow(1.2,4);
+const hwMP=x=>2*x.m;
+function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=gem>=x.p,mg=kxHwMg(x.id),mf=HW.v>0?mg[HW.v-1]:0,pw=hwMP(x),mx=hwMP(HWI.at(-1));
  const stats=x.s.map((v,j)=>`<div class="hwsr"><small>${LS(HWSN[j],HWSE[j])}</small><div class="hwsb"><i style="--w:${Math.round(v/160*100)}%;--d:${j*.06}s"></i></div><b>${v}</b></div>`).join("");
  const vars=[0].concat(mg.map((_,k)=>k+1)).map(k=>`<button class="${HW.v==k?"on":""}" data-hw="var" data-k="${k}">${hwVarName(x,k)}</button>`).join("");
- const ladder=HWI.map((y,j)=>`<i class="${j==i?"on":j<i?"lo":""}" style="--h:${Math.round(Math.pow(1.2,j)/mx*100)}%"></i>`).join("");
+ const ladder=HWI.map((y,j)=>`<i class="${j==i?"on":j<i?"lo":""}" style="--h:${Math.round(hwMP(y)/mx*100)}%"></i>`).join("");
  return `<div class="hwpg" style="--a:${x.au};--b:${x.au2}">
  <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique · pension / entraînement","Shiny · daycare / training")}</span></button></div><small class="hwhint">${LS("Illustration HD animée · glisse pour incliner","Animated HD artwork · drag to tilt")}</small></div>
  <div class="hwinfo"><div class="hwk">${LS("EXCLUSIVITÉ HALLOWEEN","HALLOWEEN EXCLUSIVE")}</div><h2>${esc(x.n)}</h2>
   <div class="hwtr"><span class="vb vhw">${ico("spark")}Halloween</span>${tchips(x.t)}</div>
   <p class="hwfl">${esc(LS(x.fr,x.en))}</p>
   <div class="hwcols"><div class="hwbox"><h4>${LS("Statistiques","Stats")}<em>${x.s.reduce((a,b)=>a+b,0)}</em></h4>${stats}<div class="hwab"><small>${LS("Talent","Ability")}</small><b>${esc(x.ab[0])}${x.ha?` <i>/ ${esc(x.ha)}</i>`:""}</b></div></div>
-  <div class="hwbox hwpwb"><h4>${LS("Puissance","Power")}</h4><div class="hwbig">×${pw.toFixed(2).replace(".",",")}</div><div class="hwlad">${ladder}</div><small>${i?LS("+20 % de dégâts par rapport à "+HWI[i-1].n,"+20% damage over "+HWI[i-1].n):LS("Deux fois la puissance d’Ectoplasma Cristal","Twice as powerful as Dusk Gengar")}</small>${mg.length?`<div class="hwmb">${ico("bolt")} ${LS("Méga-Évolution : "+mg.length+" forme"+(mg.length>1?"s":""),"Mega Evolution: "+mg.length+" form"+(mg.length>1?"s":""))}</div>`:""}</div></div>
+  <div class="hwbox hwpwb"><h4>${LS("Puissance","Power")}</h4><div class="hwbig">×${pw.toFixed(2).replace(".",",")}</div><small>${LS("Socle ×1 250 · total hors bonus : ×","Base ×1,250 · total before bonuses: ×")}${(1250*pw).toLocaleString(SG.lang==="en"?"en-GB":"fr-FR")}</small><div class="hwlad">${ladder}</div><small>${i?LS("+"+((hwMP(x)/hwMP(HWI[i-1])-1)*100).toFixed(1).replace(".",",")+" % par rapport à "+HWI[i-1].n,"+"+((hwMP(x)/hwMP(HWI[i-1])-1)*100).toFixed(1)+"% over "+HWI[i-1].n):LS("Deux fois la puissance d’Ectoplasma Cristal","Twice as powerful as Dusk Gengar")}</small>${mg.length?`<div class="hwmb">${ico("bolt")} ${LS("Méga-Évolution : "+mg.length+" forme"+(mg.length>1?"s":""),"Mega Evolution: "+mg.length+" form"+(mg.length>1?"s":""))}</div>`:""}</div></div>
   ${own?`<div class="hwbuy done">${ico("check")}<span>${LS("Dans ta collection","In your collection")} ×${(G.col[x.id]||{}).n||1}</span></div>`:""}<button class="hwbuy${ok?"":" no"}" data-hw="buy"><span class="hwbg">${ico("gem")}<b>${fmt(x.p)}</b></span><span class="hwbl">${ok?(own?LS("Acheter un exemplaire de plus","Buy another copy"):LS("Acheter","Buy now")):LS("Il manque "+fmt(x.p-gem)+" gemmes","Missing "+fmt(x.p-gem)+" gems")}</span><i class="hwsh2"></i></button>
  </div></div>`}
 function hwThumbs(){return HWI.map((x,i)=>{const own=hwOwn(x.id);return `<button class="hwth${i==HW.i?" on":""}${own?" own":""}" data-hw="go" data-k="${i}" style="--a:${x.au}"><span class="hwti">${hwImg(x.id,0,0)}</span><span class="hwtn"><b>${esc(x.n.split(" ")[0])}</b><small>${own?LS("Possédé","Owned"):fmt(x.p)+" "+LS("gemmes","gems")}</small></span></button>`}).join("")}
@@ -13168,7 +13168,7 @@ function hfTile(id,x){const c=G.col[id],h=HFI[id],T=HFT[h.t],mi=x?x.mi:0,zi=x?x.
 const hfLeft=()=>{let s=Math.max(0,Math.floor((HFEND-Date.now())/1000));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d>0?d+LS(" j "," d ")+h+" h":h+" h "+String(m).padStart(2,"0")+" min"};
 function vHf(){const B=hfBanner(),S=HFS(),tot=HFC*HFN,ok=G.m>=tot,top=B.L[0],T=HFT[HFI[top].t],p=Math.min(HFP,S.p);
  return `<div class="ivqh hfh"><div class="ivqb"></div><div class="hfbats">${typeof kxBatSvg!="undefined"?kxBatSvg+kxBatSvg+kxBatSvg:""}</div><div class="ivqhs">${hfImg(top,0,HFV[top]?HFV[top][0]:"")}</div><div class="ivqct"><small>${LS("COÛT / INVOCATION","COST / SUMMON")}</small><b>${fmt(HFC)} ₽</b></div><span class="ivqtag hftag">${typeof kxPump!="undefined"?kxPump:""} ${LS("Événement limité","Limited event")}</span>
- <div class="ivqhb"><small class="ivqk">${esc(HFI[top].n)} · ${LS(T.n[0],T.n[1])}</small><h2>${LS("Bannière Halloween","Halloween banner")}</h2><p class="hfp">${LS("Des formes Halloween exclusives, plus fortes que les Méga-Évolutions. Elles remplacent la version normale sans récupérer ses variantes. Mutations, tailles, statut Alpha et chromatique se gagnent uniquement à la pension et à l'entraînement.","Exclusive Halloween forms, stronger than Mega Evolutions. They replace the normal version without inheriting its variants. Mutations, sizes, Alpha and shiny status can only be earned through daycare and training.")}</p>
+ <div class="ivqhb"><small class="ivqk">${esc(HFI[top].n)} · ${LS(T.n[0],T.n[1])}</small><h2>${LS("Bannière Halloween","Halloween banner")}</h2><p class="hfp">${LS("Des formes Halloween exclusives : socle ×1 250, multiplié par leur bonus de rareté. Elles remplacent la version normale sans récupérer ses variantes. Mutations, tailles, statut Alpha et chromatique se gagnent uniquement à la pension et à l'entraînement.","Exclusive Halloween forms: a ×1,250 base multiplied by their rarity bonus. They replace the normal version without inheriting its variants. Mutations, sizes, Alpha and shiny status can only be earned through daycare and training.")}</p>
  <div class="ivqtm">${ico("clock")} ${LS("5 Pokémon changent dans ","5 Pokémon change in ")}<b id="ivcd">${ivCd()}</b> · ${LS("fin de l'événement dans ","event ends in ")}<b>${hfLeft()}</b></div></div></div>
  <div class="box ivqg"><div class="ivqp"><div class="ivqph"><b>${LS("Garantie : forme la plus rare","Guarantee: rarest form")}</b><span>${p} / ${HFP}</span></div><div class="ivqpb"><i style="width:${p/HFP*100}%;background:${T.c}"></i></div><small>${LS(esc(HFI[top].n)+" (ou la forme la plus rare de la bannière en cours) est garanti dans "+(HFP-p)+" invocation(s). Le compteur continue d'une bannière à l'autre.","The rarest form of the current banner is guaranteed in "+(HFP-p)+" summon(s). The counter carries over between banners.")}</small></div>
  <div class="ivqrt"><small>${LS("Chaque invocation donne une forme Halloween de la bannière. Plus une forme est forte, plus elle est rare. Les mutations, tailles, statuts Alpha et chromatiques se gagnent uniquement à la pension et à l'entraînement.","Every summon gives a Halloween form from the banner. The stronger the form, the rarer it is. Mutations, sizes, Alpha and shiny status can only be earned through daycare and training.")}</small></div></div>
@@ -13435,7 +13435,7 @@ function isLR(id){const b=id>9e4&&SPM[id]?SPM[id].base:id;return LEG.has(b)||kxD
 {const old=pr;pr=function(id){return isLR(+id)?LR_RARITY:old.apply(this,arguments)}}
 {const st=document.createElement("style");st.id="pid-lr-rarity";st.textContent='.tw700reward{background:linear-gradient(125deg,#0d3156,#171735);border-color:#67e8f9}.tw700reward .twrp2 img{filter:drop-shadow(0 0 18px #67e8f955)}.rty.r6{color:#a5f3fc;border:1px solid #22d3ee88;background:linear-gradient(120deg,#164e63,#172554);font-weight:900;letter-spacing:.08em}.atlas-traits .rty.r6{font-size:10px;padding:2px 6px;border-radius:4px}';document.head.appendChild(st)}
 // Damage only: passive coin tiers and already-earned mutations are unchanged.
-for(const k of ["h1","h2","h3","h4"])PWTV[k]*=2;
+for(const [k,t] of [["h1",1],["h2",2],["h3",3],["h4",4]])PWTV[k]=PWTV.sp*HFT[t].m*2;
 PWC.clear();
 // The summit exclusive uses its own permanent source, separate from every other special.
 PWTV.t7=PWTV.sp*2;PWTV0.t7=PWTV0.sp*Math.pow(2,.6);PWREF.t7=660;
@@ -13671,6 +13671,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["imp","Puissance des exclusifs : socle ×1 250","Les spéciaux et Halloween partent désormais d’un socle ×1 250. Leurs bonus propres se multiplient ensuite : Reshiram Ghastly ×4,5 donne ×5 625 ; Léviator Ghastly conserve ×3,456. Les bonus de niveau, étoiles et variantes s’ajoutent par multiplication.","Exclusive power: ×1,250 base","Specials and Halloween now start from a ×1,250 base. Their individual bonuses multiply on top: Ghastly Reshiram ×4.5 gives ×5,625; Ghastly Gyarados retains ×3.456. Level, stars and variant bonuses multiply afterward."],
  ["fix","Menu stable et notifications automatiques","Version 1.1.1 reste à côté de Courrier. Paramètres, Nouveautés et Wiki se suivent en bas. Ouvrir Notifications efface automatiquement le compteur.","Stable menu and automatic notifications","Version 1.1.1 stays beside Mail. Settings, News and Wiki are grouped at the bottom. Opening Notifications automatically clears the counter."],
  ["imp","La régularité à la pension est récompensée","Chaque repos terminé augmente les chances de tirage de ce Pokémon, jusqu’à 60 % mutation, 45 % taille, 17 % Alpha et 9 % chromatique. Seules les meilleures variantes sont conservées. Le suivi démarre avec cette mise à jour.","Daycare consistency is rewarded","Each completed stay increases that Pokémon’s roll odds, up to 60% mutation, 45% size, 17% Alpha and 9% shiny. Only better variants apply. Tracking starts with this update."],
  ["imp","Un entraînement qui récompense la durée","Le temps actif cumulé par Pokémon augmente progressivement ses chances jusqu’à ×2,5 après 36 h. Les pauses conservent le bonus ; le rattrapage hors ligne reste limité à 6 h.","Training rewards dedication","Accumulated active time per Pokémon increases odds up to ×2.5 after 36h. Pausing keeps the bonus; offline catch-up remains capped at 6h."],
