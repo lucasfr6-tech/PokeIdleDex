@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wallet-integrity-20261022q"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-wallet-integrity-20261022q"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wallet-integrity-20261022r"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-wallet-integrity-20261022r"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4571,7 +4571,7 @@ function pidWalletProtect(state){
  const current=pidMoneyNumber(state.m),backup=pidWalletRead(state);
  let amount=backup&&(current===null||backup.at>(+state.last||0))?backup.m:(current===null?0:current);
  if(current===null)state.walletRepair={at:Date.now(),source:backup?'checkpoint':'no-valid-checkpoint'};
- const checkpoint=()=>{state.walletV1=pidWalletRecord(state,amount);try{localStorage.setItem(pidWalletKey(),JSON.stringify(state.walletV1))}catch(e){}};
+ const checkpoint=()=>{try{if(NOSAVE)return}catch(e){}state.walletV1=pidWalletRecord(state,amount);try{localStorage.setItem(pidWalletKey(),JSON.stringify(state.walletV1))}catch(e){}};
  const get=function(){return amount};get.pidWallet=true;
  Object.defineProperty(state,'m',{enumerable:true,configurable:true,get,set(value){const n=pidMoneyNumber(value);if(n===null){state.walletRejected=(state.walletRejected||0)+1;return}amount=n;checkpoint()}});
  checkpoint();return state;
