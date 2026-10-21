@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lr20-hpboost-20261021k"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-lr20-hpboost-20261021k"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-auto-advance-persist-20261021l"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-auto-advance-persist-20261021l"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5103,7 +5103,7 @@ function act(a,i,j,t,v){
  {const r=act20(a,i,j,t,v);if(r==2)return;if(r==3){modal();return}if(r==1){autoEvo();recomp();show();save();return}}
  if(a=="tab"){tab=t;RP=false}else if(a=="fl"){G.fl=Math.max(1,Math.min(G.cl+1,G.fl+i));G.k=0;E=null}
  else if(a=="goto"&&i<=G.cl+1){G.fl=i;G.k=0;E=null}else if(false){}
- else if(a=="auto")G.auto=!G.auto;else if(a=="sort")G.sort=v;else if(a=="rev")G.rev=!G.rev;else if(a=="rp")RP=!RP;
+ else if(a=="auto"){G.auto=!G.auto;save()}else if(a=="sort")G.sort=v;else if(a=="rev")G.rev=!G.rev;else if(a=="rp")RP=!RP;
  else if(a=="rule"){G.rules=G.rules||{};G.rules[t]=v}
  else if(a=="buy"){const c=shopP(IT[t])*i;if(uf()>=(IT[t].r||0)&&G.m>=c){G.m-=c;G.inv[t]=(G.inv[t]||0)+i}}
  else if(a=="shtab"){SH.tab=t;SH.q=""}else if(a=="evo"){evolve(i,j);if(OPEN==i&&G.col[j])OPEN=j}
@@ -6557,7 +6557,7 @@ const vNf=()=>`<div class="box scd"><h3>${ico("bolt")} Notifications</h3>${tgl("
 function healAll(){ids().forEach(i=>{const k=G.col[i];if(k)k.h=mhp(i)})}
 function lose(){G.fl=Math.max(1,G.fl-1);G.k=0;E=null}
 /* ---- migration v23 ---- */
-function v23mig(){kxMig();G.auto=true;G.rv=0;NFC.forEach(c=>{if(SG["nf_"+c[0]]===undefined)SG["nf_"+c[0]]=1});if(SG.nfOff===undefined)SG.nfOff=0;if(SG.bkOn===undefined)SG.bkOn=1;if(!SG.bkMin)SG.bkMin=15;
+function v23mig(){kxMig();if(typeof G.auto!=="boolean")G.auto=true;G.rv=0;NFC.forEach(c=>{if(SG["nf_"+c[0]]===undefined)SG["nf_"+c[0]]=1});if(SG.nfOff===undefined)SG.nfOff=0;if(SG.bkOn===undefined)SG.bkOn=1;if(!SG.bkMin)SG.bkMin=15;
  G.sp=G.sp||{};Object.keys(G.sp).forEach(id=>{if(G.col[id])G.col[id].spc=1});
  if(!G.v111mp){G.v111mp=1;MGD.forEach(x=>{const k="mp"+x[0];if(G.inv[k]===1&&!ids().some(i=>G.col[i].it==k))delete G.inv[k]});}
  if(!G.v23){G.v23=1;healAll();if(G.q)for(const p of["d","w","m"]){const I=G.q[p];if(!I||!I.tg)continue;I.ids.forEach(id=>{const d=qDef(id);if(!d||I.cl[id]||d.t[p]===undefined)return;const v=d.t[p],n=qnice(typeof v=="function"?v():v);if(n>I.tg[id])I.tg[id]=n})}}}
@@ -13765,6 +13765,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["fix","Avance auto : choix conservé","Le rafraîchissement et la reconnexion conservent désormais l’état activé ou désactivé de l’avance automatique. Le choix est enregistré dès le clic.","Auto advance: preference preserved","Refreshing and reconnecting now preserve whether auto advance is enabled or disabled. Your choice is saved immediately when clicked."],
  ["imp","Zones de 20 étages et adversaires renforcés","Dès l’étage 1171, une nouvelle zone tous les 20 étages. Les PV sont doublés à l’entrée, puis le renfort augmente de 1 % tous les 20 étages, en continu, jusqu’à ×3 par rapport à la courbe précédente. Les étages antérieurs restent identiques.","20-floor zones and tougher enemies","From floor 1171, a new zone every 20 floors. HP starts at twice the previous curve, with the additional boost growing smoothly by 1% every 20 floors up to ×3. Earlier floors remain unchanged."],
  ["new","Deux LR par zone dès l’étage 1171","Les 125 LR se répartissent sans doublon sur 62 zones : deux LR dans chacune des 61 premières, trois dans la dernière. Chaque LR a un taux fixe de 0,1 % par rencontre. Premier cycle : étages 1171 à 2410, puis nouveau mélange. Chaque zone dure 20 étages et conserve 5 UR, 4 SSR, 4 SR et 9 N.","Two LR per zone from floor 1171","All 125 LR are split without duplicates across 62 zones: two in each of the first 61, three in the last. Each LR has a fixed 0.1% encounter rate. First cycle: floors 1171–2410, then another shuffle. Each zone spans 20 floors and retains 5 UR, 4 SSR, 4 SR and 9 N."],
  ["imp","Victoire de raid : tout voir immédiatement","L’écran de victoire dispose d’une présentation compacte sur deux colonnes sur ordinateur et s’adapte à la hauteur disponible pour afficher le Pokémon, les variantes, les récompenses et les boutons de capture.","Raid victory: everything at a glance","The victory screen uses a compact two-column layout on desktop and adapts to available height to display the Pokémon, variants, rewards and capture controls."],
