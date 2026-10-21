@@ -20,6 +20,63 @@
 #elite-support{position:fixed;left:10px;top:380px;width:72px;min-height:112px;z-index:44;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(155deg,#4c2032,#261822);border:1px solid #ff78949c;border-radius:15px;color:#ff8ca4;text-decoration:none;text-align:center;font:900 11px Nunito,sans-serif;box-shadow:0 0 18px #ed355535,inset 0 0 20px #e7395122}#elite-support svg{width:36px;height:36px;color:#ff476b;filter:drop-shadow(0 0 9px #ff365c);animation:pid-heart 2.4s ease-in-out infinite}#elite-support:hover,#elite-support:focus-visible{outline:2px solid #ff9bb1;outline-offset:3px;box-shadow:0 0 25px #ff365c66}@keyframes pid-heart{50%{filter:drop-shadow(0 0 15px #ff365c);transform:scale(1.08)}}.pnv-care{display:block;font-size:10px;line-height:1.5;margin:9px 0 0;color:#c4dfd7}.care-training{padding:12px 0;font-size:12px;color:#c4dfd7;line-height:1.6}@media(min-width:761px) and (max-width:1100px){#elite-support{left:8px;width:60px}}@media(max-width:760px){#elite-support{display:none}}@media(prefers-reduced-motion:reduce){#elite-support svg{animation:none}}
 #hub .hbg>[data-hb-footer="set"]{grid-column:1}
 .rdcpi{filter:var(--pl-filter,none)}.rd-capture-traits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;margin:12px 0}.rd-capture-traits>span{background:#10182a;border:1px solid #ffffff20;border-radius:10px;padding:10px 6px;min-width:0}.rd-capture-traits small{display:block;font-size:10px;color:#9eacc8}.rd-capture-traits b{display:block;font-size:12px;overflow-wrap:anywhere;color:#edf6ff;margin-top:4px}.ph-mon .ranking-animated{image-rendering:auto!important;object-fit:contain;filter:drop-shadow(0 7px 8px #0005)}@media(max-width:480px){.rd-capture-traits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#rdb .raid-victory{width:min(680px,94vw);max-height:94svh;padding:0;gap:0;border-radius:24px;background:#161923;border:1px solid #535168;color:#f5f1e9;box-shadow:0 22px 70px #0007;scrollbar-color:#675d4c #161923;overscroll-behavior:contain}
+#rdb .raid-victory>*{flex-shrink:0}
+#rdb .raid-victory .rdrh{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid #ffffff12;gap:12px}
+#rdb .raid-victory .rdrh small{color:#bcc3d4;letter-spacing:.13em;font-size:10px;line-height:1.6}
+#rdb .raid-victory .rdrh h2{font:400 32px/1.2 Georgia,serif;color:#f5f1e9;margin:6px 0}
+#rdb .raid-victory .rd-victory-seal{display:flex;align-items:center;gap:5px;font-size:10px;border:1px solid #c0d1bb38;padding:6px 9px;border-radius:7px;color:#b7d6bd;white-space:nowrap}
+#rdb .raid-victory .rd-victory-seal svg{width:13px;height:13px}
+#rdb .raid-victory .rdst{grid-template-columns:repeat(4,minmax(0,1fr));padding:18px 26px;background:#1c202c;gap:12px}
+#rdb .raid-victory .rdst>span{background:none;padding:0;min-width:0}
+#rdb .raid-victory .rdst small{font-size:11px;color:#aab8ca}
+#rdb .raid-victory .rdst b{font-size:17px;color:#e6edf6}
+#rdb .raid-victory .rd-victory-hero{height:235px;min-height:235px;padding:22px;isolation:isolate;background:radial-gradient(ellipse at 50% 60%,#e7bc772b,transparent 68%);overflow:hidden}
+#rdb .raid-victory .rd-victory-hero:before{content:"";position:absolute;width:178px;height:178px;border:1px solid #e7bc7773;border-radius:50%;z-index:-1;box-shadow:0 0 70px #e7bc771f;animation:rd-victory-aura 4s ease-in-out infinite}
+#rdb .raid-victory .rdcpi{width:200px;height:200px;max-height:200px;max-width:90%;object-fit:contain;filter:var(--pl-filter,none) drop-shadow(0 9px 10px #0007);opacity:var(--pl-opacity,1);image-rendering:auto}
+#rdb .raid-victory .rdcpi.in{opacity:0}
+#rdb .raid-victory .rd-victory-identity{text-align:center;margin:-3px 25px 20px;position:relative}
+#rdb .raid-victory .rd-victory-identity small{color:#e7bc77;letter-spacing:.15em;font-size:10px}
+#rdb .raid-victory .rd-victory-identity h3{font:400 27px/1.2 Georgia,serif;margin:5px 0;color:#f5f1e9;overflow-wrap:anywhere}
+#rdb .raid-victory .rd-capture-traits{width:auto;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 25px 22px}
+#rdb .raid-victory .rd-capture-traits>span{background:#202633;border:1px solid #ffffff10;border-radius:10px;padding:11px 6px;text-align:center}
+#rdb .raid-victory .rd-capture-traits small{color:#aeb7ca;font-size:10px}
+#rdb .raid-victory .rd-capture-traits b{color:#e7bc77;font-size:12px}
+#rdb .raid-victory .rdrw{margin:0 25px 20px;padding:17px 18px;background:#101520;border:0;border-radius:13px}
+#rdb .raid-victory .rdrw h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px;color:#a4afc4}
+#rdb .raid-victory .rdrl{display:flex;flex-wrap:wrap;gap:10px 20px}
+#rdb .raid-victory .rdri{padding:0;background:transparent;border:0;display:flex;align-items:center;flex-wrap:wrap;gap:5px;max-width:100%}
+#rdb .raid-victory .rdri b{font-size:12px;font-weight:800;color:#e6edf6}
+#rdb .raid-victory .rdri em{color:#e7bc77;font-size:11px}
+#rdb .raid-victory .rdri svg,#rdb .raid-victory .rdri .ic{width:19px;height:19px}
+#rdb .raid-victory .rdcpw{padding:20px 25px;background:#1c202b;border-top:1px solid #ffffff12}
+#rdb .raid-victory .rdcp{background:none;border:0;border-radius:0;padding:0;gap:10px}
+#rdb .raid-victory .rd-victory-capture-title{font-size:17px;margin:0;text-align:left;color:#f3f3ed}
+#rdb .raid-victory .rdcp>small{display:block;line-height:1.6;color:#b6c3d6;font-size:11px}
+#rdb .raid-victory .rdbl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 7px;width:100%}
+#rdb .raid-victory .rdbl button{display:flex;flex-direction:column;gap:4px;padding:12px 6px;background:#171c29;border:1px solid #353e52;border-radius:11px;min-width:0;font:800 12px Nunito,system-ui,sans-serif;transition:background .15s,border-color .15s}
+#rdb .raid-victory .rdbl button.on{border-color:#e7bc77;background:#e7bc771c}
+#rdb .raid-victory .rdbl img{width:25px;height:25px}
+#rdb .raid-victory .rdbl span{overflow-wrap:anywhere;text-align:center}
+#rdb .raid-victory .rdbl em{font-size:10px;color:#9eacc1}
+#rdb .raid-victory .rdbl small{font-size:16px;color:#bde6c6;order:1}
+#rdb .raid-victory .rdcpc{display:flex;gap:10px;flex-wrap:wrap;width:100%}
+#rdb .raid-victory .rdcpc .go{flex:1;justify-content:center;background:#e7bc77;color:#191921;border:0;border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.5;min-width:0}
+#rdb .raid-victory .rdcpc .gh{background:transparent;color:#b5c0d2;font-size:12px;border:0;padding:10px}
+#rdb .raid-victory button:focus-visible{outline:2px solid #93d5fa;outline-offset:3px}
+@keyframes rd-victory-aura{50%{opacity:.55;transform:scale(.95)}}
+@media(prefers-reduced-motion:reduce){#rdb .raid-victory .rd-victory-hero:before{animation:none}}
+@media(max-width:520px){#rdb .raid-victory{width:96vw;max-height:96svh;border-radius:19px}#rdb .raid-victory .rdrh{padding:20px 18px;flex-wrap:wrap}#rdb .raid-victory .rdrh h2{font-size:28px}#rdb .raid-victory .rdst{padding:15px 16px;gap:5px}#rdb .raid-victory .rdst b{font-size:14px}#rdb .raid-victory .rd-capture-traits{grid-template-columns:repeat(2,minmax(0,1fr));margin:0 16px 18px}#rdb .raid-victory .rdrw{margin-left:16px;margin-right:16px;padding:15px}#rdb .raid-victory .rdcpw{padding:18px 16px}#rdb .raid-victory .rdbl{gap:5px}#rdb .raid-victory .rdbl button{font-size:11px}#rdb .raid-victory .rdcpc .go{flex-basis:100%}#rdb .raid-victory .rdcpc .gh{flex:1}}
+
+
+/* Keep tall, wide and Gigantamax sprites inside a definite portrait box. */
+.ph .ph-best .ph-art{min-height:0;min-width:0;overflow:visible;flex-shrink:0}
+.ph .ph-mon{position:relative;min-height:0;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);overflow:visible}
+.ph .ph-mon .hv{position:relative;min-height:0!important;min-width:0!important;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.ph .ph-mon img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important;margin:0!important}
+.ph .ph-best.ph-champion .ph-art{width:min(100%,168px);height:168px}
+@media(max-width:700px){.ph .ph-best.ph-champion .ph-art{width:min(100%,108px);height:124px}}
+
 </style><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>PokeIdleDex</title><link rel="icon" type="image/png" href="data:image/png;base64,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">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
@@ -4225,8 +4282,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-halloween11-25-144-270-stars45-20261021f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-halloween11-25-144-270-stars45-20261021f"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-raid-ecrin-ranking-framing-20261021h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-raid-ecrin-ranking-framing-20261021h"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6845,7 +6902,8 @@ const RCX={ball:"poke-ball",n:0,cap:0,boss:null,tier:0,busy:false,done:false,ok:
 const rdBalls=()=>RCX.wb?BALLS.filter(b=>b[0]=="great-ball"&&G.inv[b[0]]>0):BALLS.filter(b=>G.inv[b[0]]>0).sort((a,b)=>(BM[b[0]]||1)-(BM[a[0]]||1));
 const rdCapP=ball=>RCX.wb?RCX.cap:ball=="master-ball"?1:Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk")));
 function rdCapTraits(){const b=RCX.boss;if(!b)return null;const old=RCX.captureTraits;if(old&&old.boss===b&&old.wb===RCX.wb&&old.tier===RCX.tier)return old;const t=RCX.tier,f=RCX.wb?8:1+t*1.2,mu=wp(MU,x=>x[0]===""?1:f),raw=b.sh?7:MU.indexOf(mu),sz=wp(SZ,x=>SZ.indexOf(x)>=3?(RCX.wb?6:1+t*1.5):1);return RCX.captureTraits={boss:b,tier:t,wb:RCX.wb,mi:raw===7?0:raw,sh:raw===7?1:0,zi:SZ.indexOf(sz),al:1}}
-function rdCapPreviewArt(){const b=RCX.boss,c=rdCapTraits(),asset=vsAsset(b.sp,{...c,mf:b.mf||0,dy:b.form==="dyn"?1:0});return asset?asset.motion:rdPixF(b.pid||b.sp,c.sh)}
+function rdCapPreviewArt(){const b=RCX.boss,c=rdCapTraits(),asset=vsAsset(b.sp,{...c,mf:b.mf||0,dy:b.form==="dyn"?1:0});return asset?asset.motion:SPR+"pokemon/other/showdown/"+(c.sh?"shiny/":"")+(b.pid||b.sp)+".gif"}
+function rdCapPreviewFallback(){return rdPixF(RCX.boss.pid||RCX.boss.sp,rdCapTraits().sh)}
 function rdCapTraitHtml(){const c=rdCapTraits();if(!c)return '';const labels=[[LS('Mutation','Mutation'),c.mi?MU[c.mi][0]:LS('Aucune','None')],[LS('Chromatique','Shiny'),c.sh?LS('Oui','Yes'):LS('Non','No')],['Alpha',c.al?LS('Oui','Yes'):LS('Non','No')],[LS('Taille','Size'),SZ[c.zi]?.[0]||LS('Normale','Normal')]];return '<div class="rd-capture-traits">'+labels.map(([k,v])=>'<span><small>'+k+'</small><b>'+esc(v)+'</b></span>').join('')+'</div>'+(typeof exclusiveCopyTarget==='function'&&exclusiveCopyTarget(RCX.boss.sp)?'<small>'+LS('Cet exemplaire renforce ton exclusif, dont les variantes sont conservées.','This copy strengthens your exclusive, whose variants are preserved.')+'</small>':'')}
 function rdCapGrant(){const b=RCX.boss,t=RCX.tier;let note="";
  if(b.sp>9e4){spGrant(b.sp);note=spRoll(b.sp);if(b.sh&&!G.col[b.sp].sh){G.col[b.sp].sh=1;rq(b.sp);note+=" · Chromatique"}return {name:b.name,note}}
@@ -6856,7 +6914,7 @@ function rdCapGrant(){const b=RCX.boss,t=RCX.tier;let note="";
 function rdCapHtml(){const b=RCX.boss,B=rdBalls();if(RCX.done)return "";
  if(!B.length)return `<div class="rdcp"><b>${LS("Capture impossible","Cannot capture")}</b><small>${LS("Tu n'as plus de Poké Ball. Achète-en à la boutique ou gagnes-en en raid.","You have no Poké Balls left. Buy some in the shop or win them in raids.")}</small><button data-rd="dn" class="go">${LS("Continuer","Continue")}</button></div>`;
  if(!B.some(x=>x[0]==RCX.ball)||(RCX.def!==RCX.boss&&B.length>1)){RCX.def=RCX.boss;RCX.ball=(B.find(x=>x[0]!="master-ball")||B[0])[0]}
- return `<div class="rdcp"><div class="rdcpa"><img class="rdcpi" id="rdCpI" style="${plTint(rdCapTraits())}" src="${rdCapPreviewArt()}" alt="" draggable="false" onerror="this.style.visibility='hidden'"><div class="rdcpb" id="rdCpB"></div></div>
+ return `<div class="rdcp"><div class="rdcpa"><img class="rdcpi" id="rdCpI" style="${plTint(rdCapTraits())}" src="${rdCapPreviewArt()}" alt="" draggable="false" onerror="this.onerror=null;this.src=rdCapPreviewFallback()"><div class="rdcpb" id="rdCpB"></div></div>
  <b>${LS("Tenter la capture de ","Try to capture ")}${esc(b.name)}</b>${rdCapTraitHtml()}<small>${LS("Lancers restants : ","Throws left: ")}<strong id="rdCpN">${RCX.n}</strong> · ${LS("chance avec la Ball choisie : ","chance with this Ball: ")}<strong id="rdCpP">${Math.round(rdCapP(RCX.ball)*100)} %</strong></small>
  <div class="rdbl">${B.slice(0,10).map(x=>`<button data-rd="bl" data-t="${x[0]}" class="${RCX.ball==x[0]?"on":""}">${ic(x[0],IT[x[0]]&&IT[x[0]].img)}<span>${x[1]}</span><em>×${G.inv[x[0]]}</em><small>${Math.round(rdCapP(x[0])*100)} %</small></button>`).join("")}</div>
  <div class="rdcpc"><button class="go" data-rd="thr" id="rdThr">${ico("target")} ${LS("Lancer la Ball","Throw Ball")}</button><button data-rd="dn" class="gh">${LS("Laisser partir","Let go")}</button></div></div>`}
@@ -13680,6 +13738,8 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["fix","Classements : des Pokémon visibles en entier","Le cadrage des sprites respecte leurs proportions : les Pokémon hauts, larges, Méga ou Gigamax restent centrés et visibles en entier, sur le podium comme dans la liste et sur mobile.","Rankings: full Pokémon portraits","Sprite framing respects proportions: tall, wide, Mega and Gigantamax Pokémon remain centred and fully visible on podiums, lists and mobile."],
+ ["imp","Raids : Écrin de victoire","Le nouvel écran de victoire met en avant le Pokémon animé, ses variantes, les statistiques du combat et les récompenses. Choisis ta Ball avec ses chances affichées avant de la lancer.","Raids: victory showcase","The new victory screen highlights the animated Pokémon, its variants, battle statistics and rewards. Choose your Ball with its odds shown before throwing."],
  ["fix","Paliers de la bannière Halloween corrigés","Commun ×11, rare ×25, épique ×144 et légendaire ×270. Le palier Spécial reste à ×1 250, avec les bonus propres aux exclusifs de la boutique Halloween.","Halloween banner tiers corrected","Common ×11, rare ×25, epic ×144 and legendary ×270. The Special tier remains ×1,250, with the individual Halloween shop exclusive bonuses."],
  ["fix","Classement : les bonnes formes animées","Les exclusifs et Halloween affichent leurs sprites animés, avec la forme, le chromatique et la mutation du propriétaire, y compris en Dynamax et Méga. Les portraits compacts utilisent les animations natives ; les grandes présentations gardent leurs illustrations HD animées.","Rankings: correct animated forms","Exclusive and Halloween portraits use animated sprites and the owner’s form, shiny and mutation, including Dynamax and Mega. Compact portraits use native animation; large showcases retain animated HD illustrations."],
  ["new","Raids : connaître les variantes avant la capture","Mutation, chromatique, Alpha et taille sont affichés avant le lancer. Ces variantes sont tirées une seule fois pour la rencontre et restent identiques pendant les tentatives et à la capture.","Raids: see variants before capture","Mutation, shiny, Alpha and size are shown before throwing. These variants are rolled once per encounter and remain the same across attempts and capture."],
@@ -14157,5 +14217,17 @@ IP.signatureFlame='<path d="M13 3c1 5-4 5-2 9 1-2 3-2 3-4 5 4 6 11 0 13-5 2-10-1
 const signatureVisible=new IntersectionObserver(entries=>{for(const e of entries)if(e.target.isConnected)e.target.classList.toggle('sig-visible',e.isIntersecting)},{rootMargin:'40px'}),signatureObserved=new Set();
 function signatureObserve(){for(const el of signatureObserved)if(!el.isConnected){signatureVisible.unobserve(el);signatureObserved.delete(el)}for(const el of document.querySelectorAll('#plist .signature-banner'))if(!signatureObserved.has(el)){signatureObserved.add(el);signatureVisible.observe(el)}}
 const signatureWatch=new MutationObserver(signatureObserve);signatureWatch.observe(document.getElementById('view')||document.body,{childList:true,subtree:true});signatureObserve();PSIG='';try{ui()}catch(_){}
+
+
+/* Écrin de victoire: native raid rewards, pre-rolled variants and capture controls. */
+function rdVictoryCompactCapture(html){const host=document.createElement('div');host.innerHTML=html;const card=host.firstElementChild;if(!card)return html;card.classList.add('rd-victory-capture');if(card.querySelector('.rdbl')){card.querySelector('.rdcpa')?.remove();card.querySelector(':scope>b')?.remove();card.querySelector('.rd-capture-traits')?.remove();const head=document.createElement('h3');head.className='rd-victory-capture-title';head.textContent=LS('Choisis ta Ball','Choose your Ball');card.prepend(head);const button=card.querySelector('[data-rd="thr"]'),ball=BALLS.find(x=>x[0]===RCX.ball);if(button&&ball)button.innerHTML=ico('target')+' '+LS('Lancer la ','Throw ')+esc(ball[1])+' · '+Math.round(rdCapP(RCX.ball)*100)+' %';card.querySelectorAll('.rdbl button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===RCX.ball)))}return host.innerHTML}
+{const original=rdCapHtml;rdCapHtml=function(){const html=original.apply(this,arguments);return RCX.victoryLayout&&!RCX.wb?rdVictoryCompactCapture(html):html}}
+{const original=rdResult;rdResult=function(R,win,rw,cap){RCX.victoryLayout=false;const result=original.apply(this,arguments);if(!win||!cap||R.kind!=='raid')return result;const root=$('rdRes');if(!root)return result;const capture=root.querySelector('.rdcpw'),hero=capture?.querySelector('.rdcpa'),traits=capture?.querySelector('.rd-capture-traits'),head=root.querySelector('.rdrh'),loot=root.querySelector('.rdrw');if(!capture)return result;
+ root.classList.add('raid-victory');root.dataset.raidDesign='ecrin';root.style.setProperty('--raid-accent','#e7bc77');
+ if(head)head.innerHTML='<div><small>'+LS('RAID ','RAID ')+esc(LS(...RT[R.tier].n)).toUpperCase()+' · '+esc(R.boss.name).toUpperCase()+'</small><h2>'+LS('La victoire est à toi.','Victory is yours.')+'</h2></div><span class="rd-victory-seal">'+ico('check')+LS('Victoire','Victory')+'</span>';
+ const identity=document.createElement('div');identity.className='rd-victory-identity';identity.innerHTML='<small>'+LS('UNE RENCONTRE À SAISIR','A CHANCE TO CATCH')+'</small><h3>'+esc(R.boss.name)+'</h3>';
+ if(hero){hero.classList.add('rd-victory-hero');root.insertBefore(hero,loot||capture)}root.insertBefore(identity,loot||capture);if(traits)root.insertBefore(traits,loot||capture);
+ if(loot)loot.querySelector('h3').textContent=LS('Récompenses obtenues','Rewards received');
+ RCX.victoryLayout=true;capture.innerHTML=rdCapHtml();return result}}
 
 </script></body></html>
