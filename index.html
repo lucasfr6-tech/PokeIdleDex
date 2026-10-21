@@ -4148,8 +4148,8 @@ body:has(.gqh){background:radial-gradient(ellipse at 10% 0,#193148,#0c192a 80%)!
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-editorial-guided-pvp-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-editorial-guided-pvp-20261021"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-ranking-records-banners-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-ranking-records-banners-20261021"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4353,7 +4353,7 @@ const rar=(d)=>d.lg?4:d.ba?0:d.b<320?0:d.b<420?1:d.b<500?2:3;
 const wp=(L,f)=>{const w=x=>x[x.length-1]*(f?f(x):1);let r=Math.random()*L.reduce((s,x)=>s+w(x),0);for(const x of L){r-=w(x);if(r<=0)return x}return L[0]};
 
 /* ============ ÉTAT ============ */
-const init=()=>({ep:PID_EP,m:300,st:0,inv:{"poke-ball":30},col:{19:{n:1,l:5,x:0,h:-1}},cards:{},fl:1,k:0,cl:0,ko:0,auto:true,caps:0,gain:0,t0:Date.now(),rv:0,name:"Dresseur",fav:[0,0,0],ban:0,av:19,ach:{},boss:0,mut:0,last:0,dx:{19:1},mg:{},pt:0,pp:0,pl:{},bf:0,ex:[]});
+const init=()=>({ep:PID_EP,m:300,st:0,inv:{"poke-ball":30},col:{19:{n:1,l:5,x:0,h:-1}},cards:{},fl:1,k:0,cl:0,ko:0,auto:true,caps:0,gain:0,t0:Date.now(),rv:0,name:"Dresseur",fav:[0,0,0],ban:Math.floor(Math.random()*4),av:19,ach:{},boss:0,mut:0,last:0,dx:{19:1},mg:{},pt:0,pp:0,pl:{},bf:0,ex:[]});
 let G;try{G=Object.assign(init(),JSON.parse(localStorage.getItem(SK)||"{}"))}catch(e){G=init()}
 var G_BOOTLAST=+G.last||0;G.ep=PID_EP;
 let E=null,busy=false,tab="adv",sv=0,lastE=null,PACK=[],OPEN=0,ZV=false,RP=false,OFFMSG=null,PK=null,PKQ='',PO=-1,BP=false,OP=null;
@@ -6124,9 +6124,9 @@ let CPK="";function capUpd(){const el=$("cpx");if(!el||!E)return;const h=capRow(
 /* ---- bannières ---- */
 const BANN=[
  {n:"Victoire",t:()=>LS("Bannière de base","Base banner"),base:1,ok:()=>1,pg:()=>[1,1]},
- {n:"Pokémon",t:()=>LS("Atteins l'étage 25","Reach floor 25"),ok:()=>G.cl>=25,pg:()=>[G.cl,25]},
- {n:"Plage",t:()=>LS("Enregistre 50 espèces au Pokédex","Register 50 species in the Pokédex"),ok:()=>dxn()>=50,pg:()=>[dxn(),50]},
- {n:"Pleine lune",t:()=>LS("Capture 5 Pokémon mutants","Catch 5 mutant Pokémon"),ok:()=>(G.mut||0)>=5,pg:()=>[G.mut||0,5]},
+ {n:"Pokémon",t:()=>LS("Bannière de base","Base banner"),base:1,ok:()=>1,pg:()=>[1,1]},
+ {n:"Plage",t:()=>LS("Bannière de base","Base banner"),base:1,ok:()=>1,pg:()=>[1,1]},
+ {n:"Pleine lune",t:()=>LS("Bannière de base","Base banner"),base:1,ok:()=>1,pg:()=>[1,1]},
  {n:"Île Alola",t:()=>LS("Atteins l'étage 50","Reach floor 50"),ok:()=>G.cl>=50,pg:()=>[G.cl,50]},
  {n:"Trente ans",t:()=>LS("Enregistre 250 espèces au Pokédex","Register 250 species in the Pokédex"),ok:()=>dxn()>=250,pg:()=>[dxn(),250]}];
 BAN.length=0;BANN.forEach((b,i)=>BAN.push({n:b.n,css:"var(--bn"+i+")",ok:b.ok,base:b.base,get t(){return b.t()},pg:b.pg}));
@@ -8625,7 +8625,7 @@ function twWings(g,x,bx0,bx1,by0,by1,S,sh){const w=bx1-bx0,h=by1-by0,cx=(bx0+bx1
 const TWN=700;
 function twS(){const t=G.tw=G.tw||{};
  if(t.f==null)Object.assign(t,{f:1,b:0,tm:[],au:0,af:"nx",fm:0,sc:0,up:{},cl:{},w:0,l:0,ls:0,ap:0,bt:0,tt:0,nt:{}});
- t.up=t.up||{};t.cl=t.cl||{};t.nt=t.nt||{};t.tm=(t.tm||[]).filter(id=>G.col[id]).slice(0,3);
+ if(t.bs==null){t.bs=Math.max(0,t.b|0);t.bst=t.bt||0}t.up=t.up||{};t.cl=t.cl||{};t.nt=t.nt||{};t.tm=(t.tm||[]).filter(id=>G.col[id]).slice(0,3);
  t.f=Math.max(1,Math.min(TWN,Math.min(t.f,t.b+1)));return t}
 const TWZ=[
  {n:"Hall d'Entrée",t:["normal","flying"],c:["#38bdf8","#0c4a6e"]},
@@ -13494,6 +13494,8 @@ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-pgg-step
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Collection éditoriale et chemin du champion","Editorial collection and champion’s path"],e:[
+["new","Quatre bannières de départ","Chaque nouveau joueur commence avec une bannière choisie au hasard parmi les quatre bannières de base. Elles sont disponibles dès le début. Les choix existants sont conservés.","Four starter banners","New players start with one of four randomly selected base banners, all available immediately. Existing choices are preserved."],
+["fix","Tower : meilleur record conservé","Correction du contrôle serveur limité à 310 étages, avec rétablissement des joueurs masqués uniquement pour ce motif. Une ancienne sauvegarde ou un prestige ne peut plus réduire un record publié de la même saison.","Tower: preserved best record","Updated the server check still limited to 310 floors, restoring players hidden solely for that reason. An older save or prestige can no longer lower a published record within the same season."],
 ["imp","Mes Pokémon : Collection éditoriale","Grandes fiches aérées, recherche et filtres regroupés, favoris et détails accessibles. Les sprites animés et les couleurs de mutation sont conservés. Adapté au téléphone.","My Pokémon: Editorial collection","Spacious cards, grouped search and filters, favorites and accessible details. Animated sprites and mutation colors are preserved. Phone layout included."],
 ["imp","JCJ : Le chemin du champion","Nouvelle interface sombre en trois étapes : préparer son équipe, choisir un adversaire et vérifier son duel. Saison, quotas et tickets sont lisibles ; objectifs, historique et défis amicaux restent accessibles.","PvP: The champion’s path","A dark three-step interface: prepare your team, choose an opponent and review your duel. Clear season progress, quotas and tickets, with objectives, history and friend battles still available."],
   ["new","Prestige : Repos accéléré","Nouvelle amélioration en 17 niveaux : −1 minute de pension par niveau, de 25 à 8 minutes. Le bonus s’applique aux deux lots, y compris en cours ; les chances par lot restent identiques.","Prestige: Faster rest","A new 17-level upgrade: daycare time drops by 1 minute per level, from 25 to 8 minutes. It affects both batches, including those in progress; odds per batch stay unchanged."],

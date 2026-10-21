@@ -102,8 +102,10 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  if(n(G.mut)>n(G.caps)*.5+5)r.push('mutations '+n(G.mut)+' pour '+n(G.caps)+' captures');
  if(sh>n(G.mut)+40||mu>n(G.mut)+40)r.push('chromatiques/mutes possedes '+sh+'/'+mu+' pour '+n(G.mut)+' mutations captees');
  if(n(G.caps)>n(G.ko)*3+500)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
- if(G.tw&&n(G.tw.b)>310)r.push('tour etage '+n(G.tw.b));
+ if(G.tw&&(!Number.isFinite(+G.tw.b)||n(G.tw.b)>700))r.push('tour etage '+n(G.tw.b));
  return r};
+// Clear only obsolete Tower-limit flags, retaining every other moderation reason.
+for(const uid of Object.keys(db.flag)){const f=db.flag[uid];if(!f||!Array.isArray(f.s))continue;const next=f.s.filter(x=>{const m=/^tour etage (\d+)$/.exec(x);return !m||+m[1]>700});if(next.length!==f.s.length)setFlag(uid,'s',next)}
 const ckT=new Map();
 const lbSus=d=>{const r=[],n=x=>+x||0;if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
@@ -368,6 +370,8 @@ http.createServer((req,res)=>{
      if(x&&x.h!==h&&m[2]!='adm'){send(res,403,{e:'owner'});return}
      if(!x&&Object.keys(col).length>=MAXDOCS){send(res,507,{e:'full'});return}
      const bossBefore=m[2]==='wb'?actBossState(d.k):null;
+     // An authenticated replay, prestige or older device cannot lower a published Tower best.
+     if(m[2]==='twr'&&x&&x.d&&x.d.ep===d.ep&&(+x.d.rs||1)===(+d.rs||1)&&(+x.d.b||0)>=(+d.b||0)){if((+x.d.b||0)>(+d.b||0)){for(const k of ['tm','mv','it','lv','sx','up'])if(x.d[k]!=null)d[k]=x.d[k]}d.b=x.d.b;d.bt=x.d.bt||d.bt}
      col[m[3]]={h,d:clean(d),t:Date.now()};dirty=1;if(m[2]=='lb'){try{setFlag(m[3],'l',lbSus(d));actJoin(m[3],col[m[3]].d)}catch(e){}}
      if(m[2]==='wb')actBossChanged(d.k,bossBefore);send(res,200,{ok:1})});
     return}
