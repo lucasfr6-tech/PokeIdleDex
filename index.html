@@ -4187,8 +4187,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-animated-variants-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-animated-variants-20261021"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-hd-variants-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-hd-variants-20261021"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10396,7 +10396,7 @@ function hwPageHtml(){const x=HWI[HW.i],i=HW.i,own=hwOwn(x.id),gem=G.gem||0,ok=g
  const vars=[0].concat(mg.map((_,k)=>k+1)).map(k=>`<button class="${HW.v==k?"on":""}" data-hw="var" data-k="${k}">${hwVarName(x,k)}</button>`).join("");
  const ladder=HWI.map((y,j)=>`<i class="${j==i?"on":j<i?"lo":""}" style="--h:${Math.round(Math.pow(1.2,j)/mx*100)}%"></i>`).join("");
  return `<div class="hwpg" style="--a:${x.au};--b:${x.au2}">
- <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique · pension / entraînement","Shiny · daycare / training")}</span></button></div><small class="hwhint">${LS("Glisse pour faire tourner · double-clic pour un tour complet","Drag to rotate · double-click for a full spin")}</small></div>
+ <div class="hwstage" data-hw="stage"><span class="hwno">0${i+1}<small>/05</small></span><div class="hwfloor"></div><div class="hwrot" id="hwrot">${hwImg(x.id,mf,HW.sh)}</div><div class="hwtools">${mg.length?`<div class="hwvar">${vars}</div>`:`<div class="hwvar"><button class="on" disabled>${LS("Pas de Méga-Évolution","No Mega Evolution")}</button></div>`}<button class="hwshb${HW.sh?" on":""}" data-hw="shiny" title="${LS("Version chromatique","Shiny version")}">${ico("star")}<span>${LS("Chromatique · pension / entraînement","Shiny · daycare / training")}</span></button></div><small class="hwhint">${LS("Illustration HD animée · glisse pour incliner","Animated HD artwork · drag to tilt")}</small></div>
  <div class="hwinfo"><div class="hwk">${LS("EXCLUSIVITÉ HALLOWEEN","HALLOWEEN EXCLUSIVE")}</div><h2>${esc(x.n)}</h2>
   <div class="hwtr"><span class="vb vhw">${ico("spark")}Halloween</span>${tchips(x.t)}</div>
   <p class="hwfl">${esc(LS(x.fr,x.en))}</p>
@@ -10413,9 +10413,9 @@ function hwRender(anim){const o=$("hwm");if(!o)return;const gem=G.gem||0;
 function hwBind(){const r=$("hwrot"),st=document.querySelector(".hwstage");if(!r||!st)return;let d=0,x0=0,ry=0,spin=0;
  const set=(a,t)=>{r.style.transition=t||"none";r.style.transform=`rotateY(${a}deg)`};
  st.onpointerdown=e=>{if(e.target.closest("button"))return;d=1;x0=e.clientX;ry=0;try{st.setPointerCapture(e.pointerId)}catch(_){}};
- st.onpointermove=e=>{if(!d)return;ry=Math.max(-80,Math.min(80,(e.clientX-x0)*.55));set(ry)};
+ st.onpointermove=e=>{if(!d)return;ry=Math.max(-18,Math.min(18,(e.clientX-x0)*.16));set(ry)};
  const up=()=>{if(!d)return;d=0;set(0,"transform .7s cubic-bezier(.2,1.6,.4,1)")};st.onpointerup=up;st.onpointercancel=up;
- st.ondblclick=e=>{if(e.target.closest("button"))return;spin+=360;r.style.transition="transform 1.1s cubic-bezier(.3,.9,.3,1)";r.style.transform=`rotateY(${spin}deg)`;try{sfx("shiny")}catch(_){}}}
+ st.ondblclick=e=>{if(e.target.closest("button"))return;r.style.transition="transform .45s ease";r.style.transform="rotateY(12deg)";setTimeout(()=>{r.style.transform="rotateY(0deg)"},450);try{sfx("shiny")}catch(_){}}}
 function hwGo(k,dir){if(HW.busy||k<0||k>=HWI.length||k==HW.i)return;HW.busy=1;const v=$("hwview"),d=dir||(k>HW.i?1:-1);if(v)v.className="hwview "+(d>0?"out-l":"out-r");
  setTimeout(()=>{HW.i=k;HW.v=0;HW.sh=0;hwRender(d>0?"in-r":"in-l");HW.busy=0;try{sfx("pvvs")}catch(_){}},230)}
 /* Pokédex > Spéciales : sous-catégories */
@@ -13623,7 +13623,7 @@ const VSK={"41":{"base":41,"halloween":true,"forms":[41]},"42":{"base":42,"hallo
 const VFORMS={479:{normal:479,heat:10008,wash:10009,frost:10010,fan:10011,mow:10012},487:{altered:487,origin:10007}};
 function vsIdentity(input){const m=/^(\d+)(?:m(\d+))?$/.exec(String(input));return m?{id:+m[1],mf:+m[2]||0}:null}
 function vsAsset(input,c,force=false){const p=vsIdentity(input);if(!p)return null;const s=VSK[p.id];if(!s||s.halloween&&!force&&!c?.hf)return null;c=c||{};let form=p.mf||c.mf||(c.dy&&GMX[s.base])||(s.halloween&&VFORMS[p.id]?.[c.hfv])||s.base;if(!s.forms.includes(+form))form=s.base;const stem=`img/variants/${p.id}-${form}${c.sh?'-shiny':''}`;return{id:p.id,form,still:stem+'.png',motion:stem+'.webp'}}
-function vsImg(asset,cls='sp',mode='3d',load='lazy'){return `<img class="${cls} variant-sprite pl-animated" data-variant="${asset.id}" data-variant-form="${asset.form}" data-variant-mode="${mode}" src="${asset.motion}" alt="" draggable="false" loading="${load}" decoding="async" onerror="this.onerror=null;this.src='${asset.still}'">`}
+function vsImg(asset,cls='sp',mode='3d',load='lazy'){const hd=mode!=='2d',src=hd?asset.still.replace('.png','-hd.webp'):asset.motion;return `<img class="${cls} variant-sprite pl-animated" data-variant="${asset.id}" data-variant-form="${asset.form}" data-variant-mode="${mode}" data-variant-quality="${hd?'hd':'native'}" src="${src}" alt="" draggable="false" loading="${load}" decoding="async" onerror="this.onerror=null;this.src='${asset.still}'">`}
 {const old=sp;sp=function(id,sh,raw){const c=raw?{sh:sh?1:0}:{...(G.col[id]||{}),sh:sh?1:0},asset=vsAsset(id,c);return asset?vsImg(asset,'sp'+(c.dy?' dy':''),SG.plMode||'3d'):old.apply(this,arguments)}}
 {const old=plSprite;plSprite=function(id,c){const asset=vsAsset(id,c);return asset?`<span class="pl-motion variant-motion">${vsImg(asset,'pl-animated',SG.plMode||'3d')}</span>`:old.apply(this,arguments)}}
 {const old=aSpr;aSpr=function(f,sh){const p=vsIdentity(f),c={...(p&&G.col[p.id]||{}),sh:sh?1:0},asset=vsAsset(f,c);return asset?`<div class="hv">${vsImg(asset,'hvi')}<i class="hsd"></i></div>`:old.apply(this,arguments)}}
@@ -13648,6 +13648,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Exclusifs et Halloween animés","Animated exclusives and Halloween variants"],e:[
+ ["fix","Des variantes plus nettes","Les vitrines et portraits utilisent désormais des illustrations ombrées en haute définition, animées en 2,5D. Fini les petites animations étirées : les couleurs et les formes sont conservées. Les combats gardent leurs animations pixel d’origine.","Sharper variant portraits","Showcases and portraits now use high-definition shaded artwork with 2.5D animation. Tiny animations are no longer stretched; variant colours and forms are preserved. Battles keep their native pixel animations."],
  ["imp","Tes exclusifs changent d’apparence","Lucario Senkou, Ectoplasma Cristal, Dracolosse Chocolat Blanc, Pikachu Fire, Absol Patch et les quatre Ghastly remplacent leurs anciennes apparences. Les Pokémon déjà obtenus gardent toute leur progression.","Refreshed exclusive appearances","Lucario Senkou, Crystal Gengar, White Chocolate Dragonite, Fire Pikachu, Patch Absol and the four Ghastly variants replace the old appearances. Owned Pokémon keep all their progress."],
  ["imp","Des sprites qui prennent vie","Casino, récompenses de la Tower, collection, pension, entraînement et combats affichent désormais les nouvelles animations. Steelix Cristallin et toute la bannière Halloween en profitent aussi.","Sprites come to life","Casino, Tower rewards, collection, daycare, training and battles display the new animations. Crystal Steelix and the entire Halloween banner benefit too."],
  ["fix","Les couleurs suivent les transformations","Les versions chromatiques, Méga et Gigamax conservent la palette de leur variante au lieu de reprendre celle du Pokémon classique.","Transformations keep their colours","Shiny, Mega and Gigantamax forms keep their variant palette instead of reverting to the regular species colours."],

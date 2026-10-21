@@ -38,3 +38,5 @@ Archive Golett-happy normal and shiny PNGs are identical. Its shiny render retai
 pumpkin orange with a lighter pearlescent finish so the in-game shiny is distinct.
 
 Ordinary species are not restyled unless their saved Halloween flag is active.
+
+HD portraits (`-hd.webp`) use the original shaded artwork at 640×640, with a smooth 24-frame breathing/sway mesh. They are 2.5D artwork animations, not rotatable 3D models. Native small pixel animations remain unchanged for combat and pixel mode.
