@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-native-paradox-mythical-20261021p"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-native-paradox-mythical-20261021p"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wallet-integrity-20261022q"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-wallet-integrity-20261022q"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4554,10 +4554,35 @@ const wp=(L,f)=>{const w=x=>x[x.length-1]*(f?f(x):1);let r=Math.random()*L.reduc
 /* ============ ÉTAT ============ */
 const init=()=>({ep:PID_EP,m:300,st:0,inv:{"poke-ball":30},col:{19:{n:1,l:5,x:0,h:-1}},cards:{},fl:1,k:0,cl:0,ko:0,auto:true,caps:0,gain:0,t0:Date.now(),rv:0,name:"Dresseur",fav:[0,0,0],ban:Math.floor(Math.random()*4),av:19,ach:{},boss:0,mut:0,last:0,dx:{19:1},mg:{},pt:0,pp:0,pl:{},bf:0,ex:[]});
 let G;try{G=Object.assign(init(),JSON.parse(localStorage.getItem(SK)||"{}"))}catch(e){G=init()}
+/* A wallet keeps its last valid amount; invalid arithmetic must never erase it.
+ * Checkpoints are scoped to this save/account and are updated after spending too.
+ */
+function pidMoneyNumber(value){if(typeof value==='string'&&value.trim()!=='')value=Number(value);return typeof value==='number'&&Number.isFinite(value)&&value>=0?value:null}
+function pidWalletKey(){let account='';try{account=localStorage.getItem('pid_acc')||''}catch(e){}return 'pid_wallet_v1:'+SK+':'+account.toLowerCase()}
+function pidWalletRecord(state,m){return {v:1,m,at:Date.now(),ep:PID_EP,st:+state.st||0,t0:+state.t0||0}}
+function pidWalletRead(state){
+ const options=[];if(state.walletV1)options.push(state.walletV1);
+ try{const saved=JSON.parse(localStorage.getItem(pidWalletKey())||'null');if(saved)options.push(saved)}catch(e){}
+ return options.filter(x=>x&&x.ep===PID_EP&&(+x.st||0)===(+state.st||0)&&(+x.t0||0)===(+state.t0||0)&&pidMoneyNumber(x.m)!==null).sort((a,b)=>(+b.at||0)-(+a.at||0))[0]||null;
+}
+function pidWalletProtect(state){
+ if(!state||typeof state!=='object')return state;
+ const d=Object.getOwnPropertyDescriptor(state,'m');if(d?.get?.pidWallet)return state;
+ const current=pidMoneyNumber(state.m),backup=pidWalletRead(state);
+ let amount=backup&&(current===null||backup.at>(+state.last||0))?backup.m:(current===null?0:current);
+ if(current===null)state.walletRepair={at:Date.now(),source:backup?'checkpoint':'no-valid-checkpoint'};
+ const checkpoint=()=>{state.walletV1=pidWalletRecord(state,amount);try{localStorage.setItem(pidWalletKey(),JSON.stringify(state.walletV1))}catch(e){}};
+ const get=function(){return amount};get.pidWallet=true;
+ Object.defineProperty(state,'m',{enumerable:true,configurable:true,get,set(value){const n=pidMoneyNumber(value);if(n===null){state.walletRejected=(state.walletRejected||0)+1;return}amount=n;checkpoint()}});
+ checkpoint();return state;
+}
+function pidWalletIncoming(text){try{const state=JSON.parse(text);if(pidMoneyNumber(state.m)!==null)return text;const backup=pidWalletRead(state);if(!backup)return text;state.m=backup.m;state.walletV1=backup;return JSON.stringify(state)}catch(e){return text}}
+pidWalletProtect(G);
+
 var G_BOOTLAST=+G.last||0;G.ep=PID_EP;
 let E=null,busy=false,tab="adv",sv=0,lastE=null,PACK=[],OPEN=0,ZV=false,RP=false,OFFMSG=null,PK=null,PKQ='',PO=-1,BP=false,OP=null;
 const SH={tab:"balls",q:""},DX={q:"",hide:false,shiny:false,gen:-1,cat:"mon"},CS={tab:"boost",gen:0,rar:-1,q:"",hide:false};
-let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";const save=()=>{if(NOSAVE)return;try{G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G))}catch(e){}};
+let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";const save=()=>{if(NOSAVE)return;try{pidWalletProtect(G);G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G))}catch(e){}};
 const $=id=>document.getElementById(id),fmt=n=>n>=1e12?(n/1e12).toFixed(1)+"T":n>=1e9?(n/1e9).toFixed(1)+"G":n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e4?(n/1e3).toFixed(1)+"k":n>=100?Math.floor(n):Number.isInteger(n)?String(n):n.toFixed(1);
 const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
@@ -4634,6 +4659,9 @@ var PWTV={wN:274,wSR:802,wSSR:2218,ex:4471,wUR:7573,mg:16000,bN:968,bSR:2639,bSS
 var PWTV0={wN:700,wSR:1600,wSSR:3500,ex:6000,wUR:9000,mg:16000,bN:1850,bSR:4000,bSSR:10500,bUR:18500,bD:32000,h1:2100,h2:4600,h3:12000,h4:38000,r0:1900,r1:4200,r2:10800,r3:19000,r4:30000,r5:44000,f0:1900,f1:3000,f2:4200,f3:7000,f4:10800,f5:19000,f6:30000,f7:44000,sp:90000,wb:180000};
 var PWREF={h1:380,h2:450,h3:520,h4:720,wN:330,wSR:440,wSSR:505,wUR:590,ex:500,mg:600,bN:330,bSR:440,bSSR:505,bUR:590,bD:620,r0:430,r1:470,r2:520,r3:600,r4:640,r5:660,f0:420,f1:450,f2:480,f3:500,f4:520,f5:560,f6:600,f7:760,sp:660,wb:680};
 /* facteur global : garde le DPS médian des joueurs au niveau d'avant (les modes restent calibrés), sans changer les écarts */
+/* Coin sources must exist before migrations and offline income execute. */
+PWTV.t7=PWTV.sp*2;PWTV0.t7=PWTV0.sp*Math.pow(2,.6);PWREF.t7=660;
+PWTV.wLR=PWTV.bD;PWTV0.wLR=PWTV0.bD;PWREF.wLR=PWREF.bD;
 var PWK=1.5;
 var PWS=null,PWC=new Map();
 function pwSets(){if(PWS)return PWS;try{const ex=new Set(),rt={},fz={};EXT.forEach(t=>{if(!t.mega)(t.pool||[]).forEach(i=>ex.add(i))});RT.forEach((t,k)=>{if(k<=5)(t.pool||[]).forEach(i=>{if(i<9e4)rt[i]=Math.max(rt[i]|0,k)})});FZD.forEach((L,k)=>L.forEach(i=>{fz[i]=Math.max(fz[i]|0,k)}));void HFI;void ZOF;PWS={ex,rt,fz};PWC.clear()}catch(e){return null}return PWS}
@@ -4688,7 +4716,7 @@ var PWNM={wN:["N (étages)","N (floors)"],wSR:["SR (étages)","SR (floors)"],wSS
 function pwLabel(id){const k=pwTier(id),n=PWNM[k]||[k,k];try{return LS(n[0],n[1])}catch(e){return n[0]}}
 function pwSp(id,k){return Math.max(.8,Math.min(1.25,Math.pow(bs(id)/(PWREF[k]||520),.6)))}
 /* pièces : même ordre que les dégâts, écart adouci (puissance 0,6) pour ne pas faire exploser l'économie */
-function coinNew(id){const c=G.col[id],k=pwTier(id);return PWTV0.wN*Math.pow(PWTV0[k]/PWTV0.wN,.6)*pwSp(id,k)/12.88*(1+(c.l-1)*.12)*capM(nEff(c,id))*starC(c)*GM[1]*(c.co||1)*.478}
+function coinNew(id){const c=G.col[id];if(!c)return 0;const k=pwTier(id),tier=Number.isFinite(PWTV0[k])?PWTV0[k]:PWTV0.wN,level=Number.isFinite(+c.l)&&+c.l>=1?+c.l:1;const rate=PWTV0.wN*Math.pow(tier/PWTV0.wN,.6)*pwSp(id,k)/12.88*(1+(level-1)*.12)*capM(nEff(c,id))*starC(c)*GM[1]*(c.co||1)*.478;return Number.isFinite(rate)&&rate>=0?rate:0}
 const coin=id=>{if(PWNEW)return coinNew(id);const c=G.col[id];return .75*Math.pow(bs(id)/100,2.2)*(1+(c.l-1)*.12)*capM(nEff(c,id))*starC(c)*GM[1]*(c.co||1)*2.55};
 const phy=id=>{const t=ST(id);return t[1]>=t[3]};
 function dmg(id){const c=G.col[id],h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let e=0,bt="";for(const t of tp(id)){const v=eff(t,E.d.t)*(WXm[t]||1);if(v>e){e=v;bt=t}}if(mv){const v=eff(mv[1],E.d.t)*(WXm[mv[1]]||1);if(v>e){e=v;bt=mv[1]}}
@@ -4790,8 +4818,10 @@ function capFx0(e,bl,nw,pc){const a=$("ar");if(!a||tab!="adv"||!a.animate)return
 function lose(){sfx("lose");G.auto=false;G.fl=Math.max(1,G.fl-1);G.k=0;E=null;G.rv=4}
 let TK=0,TSC=[0,0,-1],STK='',PSIG='',HUDK='',TOF=null,TV=[];
 /* Passive coins are paid once per game second, independently of enemy/capture/revival state. */
-function passiveCredit(){const rate=ids().reduce((sum,i)=>sum+coin(i),0)*(EVF.c||1)*BIF.c;if(!(rate>0)||!Number.isFinite(rate))return 0;const gain=kxI("pas",rate);G.m+=gain;G.gain+=gain;return gain}
-function tick(){TK++;tick21();capUpd();recomp();wxTick();exTick();passiveCredit();if(G.rv>0){if(--G.rv==0)ids().forEach(i=>G.col[i].h=mhp(i));ui();return}
+function passiveBaseRate(){let total=0;for(const id of ids()){try{const rate=coin(id);if(Number.isFinite(rate)&&rate>0)total+=rate}catch(e){}}return Number.isFinite(total)?total:0}
+function passiveRate(){const rate=passiveBaseRate()*(Number.isFinite(EVF.c)&&EVF.c>0?EVF.c:1)*(Number.isFinite(BIF.c)&&BIF.c>0?BIF.c:1);return Number.isFinite(rate)&&rate>=0?rate:0}
+function passiveCredit(){pidWalletProtect(G);const rate=passiveRate();if(!(rate>0))return 0;const gain=kxI("pas",rate);G.m+=gain;G.gain=(pidMoneyNumber(G.gain)||0)+gain;return gain}
+function tick(){TK++;recomp();wxTick();passiveCredit();tick21();capUpd();exTick();if(G.rv>0){if(--G.rv==0)ids().forEach(i=>G.col[i].h=mhp(i));ui();return}
  if(!E){if(!busy&&Date.now()>=CAPU)spawn().then(ui);ui();return}
  const al=ids();if(!al.length){ui();return}if(TK%5==0)healAll();
  let d=0,fl=0,ct=0;const tour=TK%5==0;al.forEach(i=>{const k=G.col[i],h=k.he;let x=dmg(i)*(i==LDC?1.5:1);if(Math.random()<(h&&h.cr||.0417)){x*=1.5;ct=1}if(h){if(h.qc&&Math.random()<h.qc)x*=2;if(h.kr&&Math.random()<h.kr)fl=1;if(h.sb)k.h=Math.min(mhp(i),k.h+x*h.sb)}d+=x});E.hp-=d;
@@ -4942,7 +4972,7 @@ const tcard=(ic2,bg,l,v,s)=>`<div class="tc" style="--bg:${bg}"><i>${ico(ic2)}</
 const TOPS=[["coin","rgba(245,158,11,.4)","Pièces"],["bolt","rgba(239,68,68,.4)","Dégâts"],["target","rgba(16,185,129,.4)","Captures"],["skull","rgba(148,163,184,.35)","K.O."]];
 function topInit(){$("top").innerHTML=TOPS.map((t,i)=>`<div class="tc" style="--bg:${t[1]}"><i id="ti${i}">${ico(t[0])}</i><div><small>${t[2]}</small><b id="tv${i}"></b><span class="sub" id="ts${i}"></span></div></div>`).join("")+`<div class="tc pchip" id="pchip" data-a="tab" data-t="prof" title="Profil"></div>`;TV=[];TOF=null;PCK=""}
 function setT(i,v,t){const k=v+"|"+t;if(TV[i]!==k){TV[i]=k;$("tv"+i).textContent=v;$("ts"+i).textContent=t}}
-function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids().reduce((t,i)=>t+base(i),0),TK];const cps0=TSC[0]*(EVF.c||1)*BIF.c,dps0=TSC[1]*(EVF.d||1)*BIF.d;
+function ui(){penUi();if(TSC[2]!==TK)TSC=[ids().reduce((t,i)=>t+coin(i),0),ids().reduce((t,i)=>t+base(i),0),TK];const cps0=passiveRate(),dps0=TSC[1]*(EVF.d||1)*BIF.d;
  setT(0,fmt(G.m),"+"+fmt(cps0)+" / seconde");setT(1,fmt(dps0)+"/s","dégâts / seconde");setT(2,String(G.caps),dxn()+" / 1025 espèces");setT(3,fmt(G.ko),"mis K.O.");
  pchipUpd();
  if(OPEN&&$("mxp")&&G.col[OPEN]){const c=G.col[OPEN];pqLvUp(c)}
@@ -5999,7 +6029,7 @@ function hvApply(im,r){if(!im.isConnected)return;const bw=r.x1-r.x0,bh=r.y1-r.y0
 document.addEventListener("load",e=>{const im=e.target;if(im&&im.classList&&im.classList.contains("hvi")&&im.closest(".pst")){im.style.cssText="";hvMeasure(im)}},true);
 
 /* ============ v21 : QUÊTES et CONNEXION ============ */
-const qcps=()=>Math.floor(ids().reduce((t,i)=>t+coin(i),0)*(EVF.c||1)*BIF.c);
+const qcps=()=>Math.floor(passiveRate());
 function qadd(k,n){const c=G.qc=G.qc||{};c[k]=(c[k]||0)+(n==null?1:n)}
 const qnice=n=>{n=Math.round(n);if(n<100)return Math.max(1,n);const p=Math.pow(10,Math.floor(Math.log10(n))-1);return Math.round(n/p)*p};
 const QP={d:{n:["Journalières","Daily"],ic:"sun",c1:"#38bdf8",c2:"#0369a1",secs:600,min:2500,cnt:4},w:{n:["Hebdomadaires","Weekly"],ic:"cal",c1:"#a78bfa",c2:"#5b21b6",secs:3600,min:25000,cnt:5},m:{n:["Mensuelles","Monthly"],ic:"moon",c1:"#f472b6",c2:"#9d174d",secs:14400,min:250000,cnt:4},p:{n:["Définitives","Permanent"],ic:"crown",c1:"#fbbf24",c2:"#b45309"}};
@@ -10436,7 +10466,7 @@ function opHtml0(B,st){const n=OP.n||1,K=OP.k,T=n>1?3.5:4.3,N=B.cnt,nm0=B.n.toUp
  w.appendChild(d);setTimeout(()=>d.remove(),r==6?3600:3000);try{sfx("shiny");setTimeout(()=>sfx("prest"),260);if(r==6)setTimeout(()=>sfx("prest"),700)}catch(e){}}}
 /* ===== v119 : journal des gains (clic sur GAINS DE SESSION) ===== */
 const KLN={kill:["Victoires en combat","Battle wins","#f87171"],pas:["Pokémon (revenu passif)","Pokémon (passive income)","#fbbf24"],exp:["Expéditions","Expeditions","#4ade80"],tw:["Tower","Tower","#c084fc"],tpal:["Tower : palier","Tower: milestone","#c084fc"],raid:["Raids","Raids","#fb923c"],rew:["Quêtes et récompenses","Quests and rewards","#60a5fa"],pvq:["Quête JCJ","PvP quest","#22d3ee"],dq:["Quête du jour JCJ","PvP daily","#22d3ee"],pvp:["Victoire JCJ","PvP win","#22d3ee"],sell:["Ventes de Pokémon","Pokémon sales","#9aa9c8"],sellit:["Ventes d'objets","Item sales","#9aa9c8"],inv:["Invocation","Summon","#f472b6"],ref:["Remboursements","Refunds","#9aa9c8"],dl:["Bonus de connexion","Login bonus","#34d399"],off:["Gains hors ligne","Offline gains","#94a3b8"]};
-function kxI(s,a){try{if(!(a>0)||!isFinite(a))return a;const L=G.klog=G.klog||[],t=Date.now(),e=L[0];
+function kxI(s,a){try{if(!(typeof a==="number"&&a>0&&Number.isFinite(a)))return 0;const L=G.klog=G.klog||[],t=Date.now(),e=L[0];
  if(e&&e.s==s&&t-e.t<(s=="kill"||s=="pas"?10000:1500)){e.a+=a;e.n++;e.t=t}else{L.unshift({t,s,a,n:1});if(L.length>120)L.length=120}
  if((G.kt0||0)!=G.t0){G.kt0=G.t0;G.kst={}}const T=G.kst=G.kst||{};T[s]=(T[s]||0)+a}catch(x){}return a}
 function kxLogHtml(){const L=G.klog||[],T=G.kst||{},tot=Object.values(T).reduce((x,y)=>x+y,0)||1,nm=s=>(KLN[s]||[s,s,"#fff"]),cl=s=>nm(s)[2];
@@ -11106,13 +11136,13 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  const acc=()=>ls("pid_acc");
  let last="";
  /* synchro multi-appareils : pid_st = horodatage serveur de la dernière version connue par cet appareil */
- let noLoad=false,pulling=false,bootLast=+window.G_BOOTLAST||0;
+ let noLoad=false,pulling=false,pushing=false,bootLast=+window.G_BOOTLAST||0;
  function adopt(sv,t){
-  NOSAVE=true;ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
+  sv=pidWalletIncoming(sv);NOSAVE=true;ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
   try{toast(LS("Progression de ton autre appareil récupérée, chargement...","Progress from your other device loaded, reloading..."))}catch(e){}
   setTimeout(()=>location.reload(),700)}
  async function pull(){
-  const a=acc();if(!API||!a||NOSAVE||noLoad||pulling)return false;
+  const a=acc();if(!API||!a||NOSAVE||noLoad||pulling||pushing)return false;
   pulling=true;
   try{
    const since=+ls("pid_st")||0;
@@ -11125,17 +11155,21 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
     /* première synchro sur cet appareil : on garde la partie jouée le plus récemment */
     if(!since){let sl=0;try{sl=+JSON.parse(j.save).last||0}catch(e){}
      if(sl<=bootLast){ls("pid_st",String(j.t));return false}}
+    /* A delayed server response must not roll back newer local play/spending. */
+    let remoteLast=0;try{remoteLast=+JSON.parse(j.save).last||0}catch(e){}
+    let localLast=+G.last||0;try{localLast=Math.max(localLast,+JSON.parse(ls(SK)||'{}').last||0)}catch(e){}
+    if(remoteLast&&localLast&&remoteLast<localLast){ls("pid_st",String(j.t));return false}
     adopt(j.save,j.t);return true}
    if(!ls("pid_st"))ls("pid_st",String(j.t));
    return false
   }finally{pulling=false}}
  window.pcPull=pull;
  async function push(force){
-  const a=acc();if(!API||!a||NOSAVE)return false;
+  const a=acc();if(!API||!a||NOSAVE||pushing||pulling)return false;
   try{save()}catch(e){}
   const s=ls(SK);if(!s||(!force&&s===last))return false;
   const body={name:a,save:s},st=+ls("pid_st")||0;if(st)body.base=st;
-  const j=await post("save",body,ls("pid_tok"));
+  pushing=true;let j;try{j=await post("save",body,ls("pid_tok"))}finally{pushing=false}
   if(j.ok){last=s;ls("pid_sync",String(Date.now()));if(j.t)ls("pid_st",String(j.t));return true}
   if(j.e==="stale"){await pull();return false}
   return false}
@@ -11149,7 +11183,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
   if(!j.ok)return j;
   NOSAVE=true;
   ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");
-  if(j.save&&pidEpOk(j.save))ls("idle3",j.save);
+  if(j.save&&pidEpOk(j.save))ls("idle3",pidWalletIncoming(j.save));
   if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));
   setTimeout(()=>location.reload(),150);
   return j}
@@ -11454,7 +11488,7 @@ function twAutoApply(f){const t=twS();if(!t.aa)return;const r=twPick(f);if(r&&r.
 {const p1=prestige;prestige=function(sel){const st0=G.st,hn={};try{HWID.forEach(i=>{if(G.col[i]&&G.col[i].n>1)hn[i]=G.col[i].n})}catch(e){}sel=(sel||[]).slice();try{HWID.forEach(i=>{if(hn[i]!=null||G.col[i])if(sel.indexOf(i)<0)sel.push(i)})}catch(e){}const r=p1.call(this,sel);try{if(G.st>st0)for(const i in hn)if(G.col[i])G.col[i].n=hn[i]}catch(e){}G.pmT=0;try{const t=twS();t.f=1;t.ls=0;twPg=0;save()}catch(e){}return r}}
 /* revenus : ~88 % viennent des Pokémon (victoires, passif, hors ligne), ~12 % maximum des raids, JCJ, Tower, quêtes, expéditions… */
 {const k0=kxI,PK={kill:1,pas:1,off:1},OT={exp:1,tw:1,tpal:1,raid:1,rew:1,pvq:1,dq:1,pvp:1,dl:1};
- kxI=function(s,a){try{if(!(a>0)||!isFinite(a))return a;const T=G.kls=G.kls||{p:0,o:0};
+ kxI=function(s,a){try{if(!(typeof a==="number"&&a>0&&Number.isFinite(a)))return 0;const T=G.kls=G.kls||{p:0,o:0};T.p=pidMoneyNumber(T.p)||0;T.o=pidMoneyNumber(T.o)||0;
   if(PK[s]){T.p+=a;return k0(s,a)}
   if(OT[s]){const room=Math.max(0,.12/.88*T.p-T.o),b=Math.min(a,Math.floor(room+2000));T.o+=b;return k0(s,b)}}catch(e){}return k0(s,a)}}
 /* ===== saison de classement : remise a zero des classements etages / JCJ / Tower / guilde (Pokedex et chromatiques intacts) ===== */
@@ -13124,7 +13158,7 @@ setTimeout(afFetch,1200);
 z22init();applySt();navRender();skyBuild();
 
 G.dx=G.dx||{};G.ex=G.ex||[];ids().forEach(i=>G.dx[i]=1);G.mg=G.mg||{};G.pl=G.pl||{};if(!G.mig){G.mig=1;}G.bf=Math.max(G.bf||0,G.cl);fixHp();v19mig();v20mig();v21mig();v22mig();v23mig();socMount();
-if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=ids().reduce((t,i)=>t+coin(i),0)*s*Math.min(1,.5+.05*PL("po"));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
+if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=passiveBaseRate()*s*Math.min(1,.5+.05*PL("po"));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
 setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(Math.random()*120|0);topInit();dailyCheck();recomp();show();lbInit();trSwitch();if(OFFMSG)toast(OFFMSG);bulk().then(()=>{z22fin();fixHp();info(19)});setInterval(tick,1000);
 </script><script>
 /* ===== Parrainage : lien d'invitation (ajout en ami automatique + boost) ===== */
@@ -13833,6 +13867,9 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+ ["fix","Pièces : solde protégé","Correction du calcul des gains hors ligne de Steelix Cristallin. Les valeurs invalides ne peuvent plus effacer le solde ; un point de récupération conserve le dernier montant valide, y compris après un achat.","Coins: protected balance","Fixed Crystal Steelix offline-income calculations. Invalid values can no longer erase the balance; a recovery checkpoint keeps the last valid amount, including after purchases."],
+ ["fix","Revenu affiché et synchronisation","Le revenu affiché utilise le même calcul que les versements. Les réponses de synchronisation plus anciennes ne remplacent plus une progression locale plus récente.","Displayed income and synchronisation","Displayed passive income uses the same calculation as payouts. Older synchronisation responses no longer replace newer local progress."]]},
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
  ["fix","Paradoxes et Fabuleux animés","Les Paradoxes et les Fabuleux utilisent de vraies animations 3D dans la Pokémon List, les failles, les classements et les autres vues. Les formes, les couleurs chromatiques et les effets des mutations sont conservés.","Animated Paradox and Mythical Pokémon","Paradox and Mythical Pokémon now use native 3D animations in the Pokémon List, rifts, rankings and other views. Forms, shiny colours and mutation effects are preserved."],
  ["imp","Failles : Portails de l’aventure","Une nouvelle présentation plus aérée : huit failles à sélectionner, un grand Pokémon animé devant son portail et un panneau clair pour la puissance, la stabilisation et les variantes. Les portraits gagnent un cadrage adapté et un rendu adouci.","Rifts: Adventure Portals","A more spacious layout: eight selectable rifts, a large animated Pokémon in its portal and a clear panel for power, anchoring and variants. Portraits gain tailored framing and smoother rendering."],
