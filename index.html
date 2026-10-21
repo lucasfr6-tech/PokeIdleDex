@@ -4342,12 +4342,13 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 .fzp-shell .fzp-active{width:100%;max-width:1120px}
 .fzp-shell .fzsc .fzbg{opacity:.22}
 
-</style></head><body>
+</style><style id="pid-native-animated3d">img[data-animated3d="1"],img[src*="img/animated3d/"]{image-rendering:auto!important;object-fit:contain} .spw img[data-animated3d="1"]{filter:var(--pl-filter,none);opacity:var(--pl-opacity,1)}</style>
+</head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-rift-portals-20261021o"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-rift-portals-20261021o"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-native-paradox-mythical-20261021p"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-native-paradox-mythical-20261021p"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13833,6 +13834,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+ ["fix","Paradoxes et Fabuleux animés","Les Paradoxes et les Fabuleux utilisent de vraies animations 3D dans la Pokémon List, les failles, les classements et les autres vues. Les formes, les couleurs chromatiques et les effets des mutations sont conservés.","Animated Paradox and Mythical Pokémon","Paradox and Mythical Pokémon now use native 3D animations in the Pokémon List, rifts, rankings and other views. Forms, shiny colours and mutation effects are preserved."],
  ["imp","Failles : Portails de l’aventure","Une nouvelle présentation plus aérée : huit failles à sélectionner, un grand Pokémon animé devant son portail et un panneau clair pour la puissance, la stabilisation et les variantes. Les portraits gagnent un cadrage adapté et un rendu adouci.","Rifts: Adventure Portals","A more spacious layout: eight selectable rifts, a large animated Pokémon in its portal and a clear panel for power, anchoring and variants. Portraits gain tailored framing and smoother rendering."],
  ["new","Combat principal : vitesse ×3 permanente","Une amélioration à 70 000 points de prestige débloque le ×3 sur les étages déjà faits et le ×2 sur les nouveaux étages. Disponible à côté du ×6 dans Prestige, elle accélère réellement les attaques, le chrono et les transitions. Conservée après un prestige et une reconnexion.","Permanent ×3 main combat speed","A 70,000 prestige-point upgrade unlocks ×3 on previously reached floors and ×2 on new floors. Available beside ×6 in Prestige, it speeds up attacks, the countdown and transitions. Kept after prestige and reconnecting."],
   ["imp","Équipe auto : dégâts et types","Dans tous les modes, l'équipe auto tient maintenant compte des dégâts de tes Pokémon (puissance, stats, mutation) et plus seulement des types. Un Pokémon très puissant n'est plus écarté pour un simple avantage de type.","Auto team: damage and types","In every mode, the auto team now considers your Pokémon's damage (power, stats, mutation), not just types. A very strong Pokémon is no longer skipped for a simple type advantage."],
@@ -14383,5 +14385,39 @@ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-fzp-pick
 /* Re-evaluate accessibility when passive progression or equipment changes DPS. */
 let FZPORTAL_ACCESS='';
 setInterval(()=>{if(tab!=='fz'||fzS().cur)return;const d=fzDps(),s=fzPortalStatus(FZPORTAL_PICK,d),key=FZPORTAL_PICK+'|'+s.locked+'|'+s.cool+'|'+fzHour();if(FZPORTAL_ACCESS&&FZPORTAL_ACCESS!==key)show();FZPORTAL_ACCESS=key},1800);
+
+/* Ordinary Paradox/Mythical sprites share local, native 3D body animations.
+ * Resolving artwork never mutates collection traits or substitutes an exclusive skin.
+ */
+const A3_IDS=new Set([151,251,385,386,489,490,491,492,493,494,647,648,649,719,720,721,801,802,807,808,809,893,984,985,986,987,988,989,990,991,992,993,994,995,1005,1006,1007,1008,1009,1010,1020,1021,1022,1023,1025,10001,10002,10003,10006,10018,10024,10075,10086,10147,10192,10208]);
+function a3Asset(id,c={}){id=+id;if(typeof vsAsset==='function'&&vsAsset(id,c))return null;const f=+c.mf||(c.dy&&GMX[id])||id;return A3_IDS.has(+f)?'img/animated3d/'+f+(c.sh?'-shiny':'')+'.webp':null}
+function a3Url(src){
+ if(!src||src.includes('img/variants/')||src.includes('img/animated3d/'))return src;
+ const local=/(?:^|\/)img\/(art|artshiny|back|backshiny|pokemon|shiny)\/(\d+)\.(?:png|webp)(?:\?.*)?$/.exec(src);
+ if(local&&A3_IDS.has(+local[2]))return 'img/animated3d/'+local[2]+(local[1].includes('shiny')?'-shiny':'')+'.webp';
+ if(!(src.startsWith(IMG)||src.startsWith(ART)||src.startsWith(SPR)||src.includes('img/rifts/')))return src;
+ const m=/(?:^|\/)(shiny\/)?(\d+)(-shiny)?(-thumb)?\.(?:png|gif|webp)(?:\?.*)?$/.exec(src);
+ return m&&A3_IDS.has(+m[2])?'img/animated3d/'+m[2]+(m[1]||m[3]?'-shiny':'')+(m[4]?'-thumb':'')+'.webp':src;
+}
+{const old=pxUrl;pxUrl=function(src){return a3Url(old.apply(this,arguments))}}
+function a3Html(html){return String(html).replace(/<img\b[^>]*>/gi,tag=>tag.replace(/\bsrc="([^"]+)"/,(_,src)=>{const url=a3Url(src);return 'src="'+url+'"'+(url!==src?' data-animated3d="1"':'')}))}
+{const old=sp;sp=function(){return a3Html(old.apply(this,arguments))}}
+{const old=plSprite;plSprite=function(){return a3Html(old.apply(this,arguments))}}
+{const old=aSpr;aSpr=function(){return a3Html(old.apply(this,arguments))}}
+{const old=phArt;phArt=function(){return a3Html(old.apply(this,arguments))}}
+{const old=fzPortalArt;fzPortalArt=function(){return a3Html(old.apply(this,arguments))}}
+{const old=ldImg;ldImg=function(id){return a3Asset(id,G.col[id]||{})||old.apply(this,arguments)}}
+{const old=rdArtOf;rdArtOf=function(id){return a3Asset(id,G.col[id]||{})||old.apply(this,arguments)}}
+{const old=rdBackOf;rdBackOf=function(id){return a3Asset(id,G.col[id]||{})||old.apply(this,arguments)}}
+{const old=pvF;pvF=function(){return a3Url(old.apply(this,arguments))}}
+{const old=pvBk;pvBk=function(){return a3Url(old.apply(this,arguments))}}
+{const old=pvUnitImg;pvUnitImg=function(u){return u&&a3Asset(u.id,u)||old.apply(this,arguments)}}
+{const old=rdCapPreviewArt;rdCapPreviewArt=function(){return a3Url(old.apply(this,arguments))}}
+/* Older HTML consumers and captured render functions also use the same registry.
+ * Only src changes: inherited mutation filters, size, Alpha and shiny remain intact.
+ */
+function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const src=im.getAttribute('src'),next=a3Url(src);if(next!==src){im.setAttribute('src',next);im.dataset.animated3d='1'}else if(src?.includes('img/animated3d/'))im.dataset.animated3d='1'}
+const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
+a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
 </script></body></html>

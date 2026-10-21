@@ -1,0 +1,1231 @@
+{
+  "credits": "Pokémon models: Nintendo / Game Freak / Creatures. Animated renders: Lewtwo Pokémon Asset Archive; adamsb0303 SV Sprites; Pokémon Showdown / PokeAPI.",
+  "archive": "https://drive.google.com/drive/folders/16bSaqcst0tOMsz4rGBzPK_iZvgx4DZJX",
+  "paldea": "https://www.reddit.com/r/PokemonScarletViolet/comments/zpz31x/i_created_animated_shiny_and_regular_sprites_for/",
+  "animations": [
+    {
+      "id": 984,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1uH83TZTF8CSJDpUjkXI6HJk2cmkmIvf5",
+        "title": "984 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 984,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1snWMjnALEcjVgMfjU8b5dNjYQACiNLP5",
+        "title": "984 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 985,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1uuA6EKn-2fQIyxQvV8Lwlxqjdi0WvGst",
+        "title": "985 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 985,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1skYLUpC4E4Gi4ZWbI-1D7iI7W6vKAhP5",
+        "title": "985 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 986,
+      "sh": 0,
+      "frames": 33,
+      "source": {
+        "id": "1utxIiUMItvU9jf6D6yJYRpQVgs5m3LlC",
+        "title": "986 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 986,
+      "sh": 1,
+      "frames": 33,
+      "source": {
+        "id": "1szvDhP1YTMqM7Q9QUjZyoCq004zsELPc",
+        "title": "986 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 987,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1ul6c-7H-WN11ir-Br0AqWHN0w0w_ss_u",
+        "title": "987 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 987,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1sxI5OFk0qmGJ3pzWf4KMyNHkO552cgtC",
+        "title": "987 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 988,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1ujF0zuuA6rK7Hh7WBFlMUj9dJ0M0RTWl",
+        "title": "988 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 988,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1svhDPn3gh36GpePAyyGvLobkY1XL8I4f",
+        "title": "988 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 989,
+      "sh": 0,
+      "frames": 35,
+      "source": {
+        "id": "1uylhtsz3uX08TrFFkXzNnpifa1B5JU7O",
+        "title": "989 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 989,
+      "sh": 1,
+      "frames": 35,
+      "source": {
+        "id": "1tHOmDkHD1mdenjUOQLQY5comNliQyATi",
+        "title": "989 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 990,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1uxCnyo5TbBQ6ARu2XBD1gLnrJLfhvu72",
+        "title": "990 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 990,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1t3zItCun4WQC9-OGkT3PAfkoSwKIJdmD",
+        "title": "990 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 991,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1uvBbU4hY0xUXjPiW3TcKBI6io0owlbhr",
+        "title": "991 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 991,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1tOBkioiw1U41vKRTwO9xw_WJPEi9jRXY",
+        "title": "991 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 992,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1v1RnATEXBkOUc6q6apx76K7iz3P2bBSA",
+        "title": "992 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 992,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1tHTQ9XuIZr4-uvAWR46_CViZ4IXZng7q",
+        "title": "992 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 993,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1v-xF-tpmEjvVu3wwNmW10LNthUonS7-f",
+        "title": "993 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 993,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1ta_ZYvgdOJ8f-9uu96Reianzv88z0tpY",
+        "title": "993 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 994,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1uz1OrgR2zzcasFyWyO714GlIG9oc5B-2",
+        "title": "994 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 994,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1t_PbeLuMJopDI--F_JZyAhqoEtjcIglH",
+        "title": "994 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 995,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1v4c1FtBeRAg7yIQVDjParqeMhHM5zcHG",
+        "title": "995 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 995,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1tVlf7iqaFICTD8vo_H5HoVZFru7qG6BR",
+        "title": "995 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1005,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1vUpQegXbUyGKj3pKouwhFITiKNgNS0G-",
+        "title": "1005 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1005,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "1uJIrTKHrKe6dTGDwPgPytro1q5Yd_j8-",
+        "title": "1005 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1006,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1vPFYXoWGxo3uG5fh-ObonOpMyHRbyAXt",
+        "title": "1006 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1006,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "1ufkC_Wmagi6v-5nqJ9JQhKszIqHQxYcl",
+        "title": "1006 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1007,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1w0RqFtJ6HGjEoMh-9gbbkBfXUveg1pX_",
+        "title": "1007 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1007,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1udC5T6HyzHvx-hVuugeQ2xGffYAu3gCC",
+        "title": "1007 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1008,
+      "sh": 0,
+      "frames": 48,
+      "source": {
+        "id": "1w-R9B45M5DueEs97Ji0QuO_MaJHNh3sK",
+        "title": "1008 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1008,
+      "sh": 1,
+      "frames": 48,
+      "source": {
+        "id": "1up97WR35aSn6-Mytj_W_8OyFoKNnPBNT",
+        "title": "1008 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1009,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1w9nM_eHZOfskBlLa6W6x4AF7Kp2-YYM0",
+        "title": "1009 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1009,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1up2Z_A1ZAXE5UvIxhIAsusFDdTF1Dy9j",
+        "title": "1009 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1010,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1w8zE10tBX9pL-pC4BdCJrnB18DOyxPQT",
+        "title": "1010 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1010,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1uhCjcK8UeMEcPKiUQ5JlolmWc5q8-bVN",
+        "title": "1010 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1020,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1wZ6sDKWCFZPv6WnhF2M6O31M9eh9qBci",
+        "title": "1020 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1020,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "1mb8BuvrvTX2cjsRjcn76mZ_ikJAHg5xj",
+        "title": "1020 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1021,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1x-BbngHPt-v36nIF4WJhN-Ou-VLFEWmP",
+        "title": "1021 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1021,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1meeraVEXOsto_Q2_BTWNdm-m_WiwsuK5",
+        "title": "1021 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1022,
+      "sh": 0,
+      "frames": 38,
+      "source": {
+        "id": "1wnfx_PxLAsJmaPyZwkzTG8gOUN7nUobu",
+        "title": "1022 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1022,
+      "sh": 1,
+      "frames": 38,
+      "source": {
+        "id": "1mdZ0qysEQfl9pj3lFqA0wVdQCRiwoi2C",
+        "title": "1022 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1023,
+      "sh": 0,
+      "frames": 38,
+      "source": {
+        "id": "1x8vnTt8nW-kyLzDXYHjMFq2kyGXhR0I6",
+        "title": "1023 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1023,
+      "sh": 1,
+      "frames": 38,
+      "source": {
+        "id": "1mkxKdhtq4XyAIKe8k2Z8QqP1C7TXTtfI",
+        "title": "1023 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 151,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1AlqRqqwrZ0QpHCtWr_iXO3c5rZQtiIM6",
+        "title": "151 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 151,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "1S5Hxacfjxe0aZGBr01oRHnWUilcYHM9u",
+        "title": "151 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 251,
+      "sh": 0,
+      "frames": 38,
+      "source": {
+        "id": "1yNjVWESOw_E7ExAjwK3Cmivl5pDPe4jm",
+        "title": "251 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 251,
+      "sh": 1,
+      "frames": 38,
+      "source": {
+        "id": "1az8r_ZTKETDdt4Qswcg7MH2UcvnKYOsT",
+        "title": "251 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 385,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "17nt6BDJ0dMsvfA_ONbEbWi_7alWy1NSb",
+        "title": "385 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 385,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1mCf-zbV2QpboNk5bDLSfVTYCixeVkP1J",
+        "title": "385 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 386,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "18aSziZavZDDjvZuD-utA6qZula93rq6y",
+        "title": "386 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 386,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1mWNSkVh6jo6y5l0_W2PhATpcozsJficy",
+        "title": "386 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 489,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "14Raa6aDwB-p66TBElI3xU2dpqoHh17Rb",
+        "title": "489 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 489,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1wz7ceJjtiZ20DNsuUeeg4sTEV-fQclod",
+        "title": "489 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 490,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1IXLyls8QfiEfIPbwqv9QFNnugVWcXeVL",
+        "title": "490 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 490,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1wxnps6T1vBrF4T7haYjoY-wY7ofyaaSZ",
+        "title": "490 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 491,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1ISaLAi-Aify-XBlhAaiq9eMardeG8StS",
+        "title": "491 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 491,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1wqSh0PGuDc0A8lwq1iC4Xzhv0Bw9Bgp2",
+        "title": "491 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 492,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1IPibXwjbZIRBc0WKxzAU3JKC5uAGBJEO",
+        "title": "492 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 492,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "1xF5pbAgn5e0DE8q2_z0xhSth07MOfzfO",
+        "title": "492 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 493,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1IgkoW02exgezeZqbeT-1O7it5EU1DxPO",
+        "title": "493 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 493,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "1x2N9IaLx8JfAjYgt-Jw_LeqXOsJTItMY",
+        "title": "493F1 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 494,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1IaQVjvGH0fc3mxb2wWb7M6rFXtFMbbd_",
+        "title": "494 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 494,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1yhnt8z7Jvo7HDRYYvshXNJZJ3Sr16gPj",
+        "title": "494 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 647,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1U3BLa1B7BJHIy17TjGvx7YsyOgIrMbOj",
+        "title": "647 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 647,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "17qfuFHLGoeB-3DJgEYRLycHOQADMZaCn",
+        "title": "647 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 648,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1U-p2aiZ79PJ3b6b9v0Dj0qoJVIW9gjhx",
+        "title": "648 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 648,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "18A1kTMZQZytV3NtbpVt_b98sK-20GdRu",
+        "title": "648 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 649,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1UIJZdet9TBgamJbdEMeg_2N1o7sCElZz",
+        "title": "649 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 649,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "182bAXV6-FRAlezm52_VRw87gS4FE_zVY",
+        "title": "649 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 719,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1bFokswzUDE6EDBp1yLy-OtznT8R6gZEP",
+        "title": "719 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 719,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1DJTTS7m8-P7xMRc63BlMszMvTOmK94yz",
+        "title": "719 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 720,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1bXs5SyrDD9qyudX2YH7S-lXlrO7fFx9T",
+        "title": "720 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 720,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1D6epiSdHHU1cIFAFI1wT-df-QMf-oKUr",
+        "title": "720 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 721,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1bODSdMVvav2s63okb20IEvLe93AQx-KP",
+        "title": "721 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 721,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1DT1g8ARW1cVbfxu0tlqiI-xHzBLzUXSY",
+        "title": "721 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 801,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1hcCn_QTRJVtUN_-9KcRGp6ZlNlowTOm_",
+        "title": "801 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 801,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "10qAkPh7ILz9FHoIQNbGFcdM3mc-48DWL",
+        "title": "801 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 802,
+      "sh": 0,
+      "frames": 58,
+      "source": {
+        "id": "1mNJpx-bWYmeMVBJ-SwPscJh8oH6SB5Dx",
+        "title": "802 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 802,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1mVqRnTsMagmeDiJalWFGGHer4EISu2jT",
+        "title": "802 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 807,
+      "sh": 0,
+      "frames": 48,
+      "source": {
+        "id": "1iAUzOi3HwMdc-2CkLhP5V_g2YOhKv4m3",
+        "title": "807 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 807,
+      "sh": 1,
+      "frames": 47,
+      "source": {
+        "id": "11MwYEBjCEXL0s1Aead42jIb4NKvxBXMm",
+        "title": "807 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 808,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "1i47raYUtee-XF_mGWkF9hyjLGn2tAQ3M",
+        "title": "808 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 808,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "11Cwqq7uz-ToaIjLSlWTvXxoxSay3Prgu",
+        "title": "808 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 809,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "1i1E6jlKNZLA0T-So_04chPr0wgHxgi9o",
+        "title": "809 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 809,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "119m7Tooby56AjF8v493WLxdBMroUXh3W",
+        "title": "809 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 893,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1omNU8G4zBV8TXMuXvEXaihEb6Mj8vZZv",
+        "title": "893 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 893,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "17p20M0jm2-8lvFOb2ZtiF7nbJ2cD1C3_",
+        "title": "893 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1025,
+      "sh": 0,
+      "frames": 50,
+      "source": {
+        "id": "15RAKw8GBpASUeljBsotJQhZJp6RtfFvh",
+        "title": "1025 HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 1025,
+      "sh": 1,
+      "frames": 50,
+      "source": {
+        "id": "15PBL0OKYp1tHduVyb3632OgPwIQXg_Lb",
+        "title": "1025 HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10024,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1U0Sg74W8AW_VFifUZuWd88Zmp1yejwi4",
+        "title": "647R HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10024,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "17pD_Eq1bWvRoPY7_ha8SV340pAIk_BG-",
+        "title": "647R HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10001,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "18UP4-XZT7mxlvAf2FVlI3PTBLPv02NN5",
+        "title": "386A HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10001,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1mU9LQpl-moldPkY7omU1_Q-znEyxyNYC",
+        "title": "386(A HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10002,
+      "sh": 0,
+      "frames": 60,
+      "source": {
+        "id": "18JGAjUuLt9lQesysznmeXi1wG-kRVr4M",
+        "title": "386D HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10002,
+      "sh": 1,
+      "frames": 60,
+      "source": {
+        "id": "1mRoq0IHL647Ijhoz5VUvb_u-ioG-Wrre",
+        "title": "386D HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10003,
+      "sh": 0,
+      "frames": 48,
+      "source": {
+        "id": "18H1BS3iWUTuzXpSifBBRQ_lnl3tr6L37",
+        "title": "386S HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10003,
+      "sh": 1,
+      "frames": 48,
+      "source": {
+        "id": "1mQTX3KmZkUcQxwGucDZ38RGIFRiHTG_e",
+        "title": "386S HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10006,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1IPe6dxoaxDSqtDp9cENicB2uKzWiMomB",
+        "title": "492S HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10006,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1x4APR3VQj5RyChY9GBFx12Am3o1xqZgS",
+        "title": "492S HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10018,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1UPTkAXiEfeEa6l6EW61Rm3kat7QZWysO",
+        "title": "648P HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10018,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "189dS67CFcQ85WKR89tabzxjtYJMAtnoQ",
+        "title": "648P HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10075,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1bARZoor2t7I9jKohZBzIJ8UMuLk3O6AW",
+        "title": "719M HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10075,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "1D6wyYTc4y1-NiROdsF_4Sql65BkJJ-m1",
+        "title": "719M HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10086,
+      "sh": 0,
+      "frames": 38,
+      "source": {
+        "id": "1bQnz_FauNw788NxCphUGe4jtTVsOw-Uy",
+        "title": "720U HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10086,
+      "sh": 1,
+      "frames": 38,
+      "source": {
+        "id": "1DTUAcbJ-IM4AvMYAgt9WusWCsbisvupK",
+        "title": "720U HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10147,
+      "sh": 0,
+      "frames": 45,
+      "source": {
+        "id": "1h_YSaG0nQ9Hv7TU8XPPcQiGKdY-R4PSV",
+        "title": "801O HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10147,
+      "sh": 1,
+      "frames": 45,
+      "source": {
+        "id": "117UP3OhNwh5lxqWd0X36vgKVHsuyDGWq",
+        "title": "801O HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10192,
+      "sh": 0,
+      "frames": 40,
+      "source": {
+        "id": "1okFsQ0FBHPYMWPh-AQUfquH5cUyCzNXI",
+        "title": "893DD HOME-1.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10192,
+      "sh": 1,
+      "frames": 40,
+      "source": {
+        "id": "17o-ohqrSgjEakLaxBHflyZmquM3PSu0o",
+        "title": "893D HOME-2.gif",
+        "mimeType": "image/gif"
+      },
+      "ok": true
+    },
+    {
+      "id": 10208,
+      "sh": 0,
+      "frames": 54,
+      "source": null,
+      "ok": true
+    },
+    {
+      "id": 10208,
+      "sh": 1,
+      "frames": 54,
+      "source": null,
+      "ok": true
+    }
+  ]
+}
