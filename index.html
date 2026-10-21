@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610211536"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610211536"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610211558"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610211558"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10361,6 +10361,20 @@ openBooster=function(k){const B=BOOST[k],n=BNP,t=B.p*n;if(G.m<t){toast(LS("Il te
  preload(cards.map(x=>x.id>=8e4&&x.id<9e4?x.id-8e4:x.id)).then(()=>{if(OP&&OP.ph==1)modal()});modal();
  try{sfx("pvvs")}catch(e){}setTimeout(()=>{try{if(OP&&OP.ph==0)sfx("big")}catch(e){}},n>1?2100:2600);
  setTimeout(()=>{if(OP&&OP.ph==0){OP.ph=1;modal()}},n>1?3500:4300)};
+/* Ouverture automatique des boosters (réservé au créateur) : ouvre le booster choisi jusqu'à ne plus avoir assez de pièces */
+let AO=null;
+function aoOne(k){const B=BOOST[k];if(!B||G.m<B.p)return 0;G.m-=B.p;
+ const draw=()=>{let r=Math.random()*100,q=0;for(const w of B.r){if(r<w)break;r-=w;q++}return Math.min(q,6)};
+ let nw=0;for(let i=0;i<B.cnt;i++){let q=draw();if(i==B.cnt-1)while(q<B.min)q=draw();const L=CBY[q],id=L[Math.random()*L.length|0];if(!G.cards[id])nw++;G.cards[id]=(G.cards[id]||0)+1}return 1+nw*1e-6}
+function aoStop(msg){const a=AO;AO=null;if(a){try{checkAch()}catch(e){}try{recomp()}catch(e){}save();try{toast(msg||LS("Ouverture auto terminée : "+fmt(a.n)+" booster"+(a.n>1?"s":"")+" ouvert"+(a.n>1?"s":"")+", "+a.nw+" nouvelle"+(a.nw>1?"s":"")+" carte"+(a.nw>1?"s":""),"Auto open finished: "+fmt(a.n)+" boosters opened, "+a.nw+" new cards"))}catch(e){}try{show()}catch(e){}}}
+setInterval(()=>{try{if(!AO)return;if(!x4Me()){AO=null;return}const B=BOOST[AO.k];if(!B||bfl()<BFL[AO.k]){aoStop();return}
+ let c=0;while(c<300&&G.m>=B.p){const r=aoOne(AO.k);if(!r)break;AO.n++;AO.nw+=Math.round((r-1)*1e6);c++}
+ if(G.m<B.p){aoStop();return}try{recomp()}catch(e){}save();const el=document.querySelector('[data-ao="'+AO.k+'"] small');if(el)el.textContent=fmt(AO.n)}catch(e){}},400);
+{const b0=bLock;bLock=function(k,B){const h=b0.apply(this,arguments);try{if(!x4Me()||bfl()<BFL[k])return h;const on=AO&&AO.k==k;
+ return h+`<button class="go${on?"":" gr"}" data-ao="${k}" style="margin-top:6px;${on?"background:linear-gradient(135deg,#22c55e,#15803d)":""}">${LS("Auto","Auto")} ${on?"ON":"OFF"}${on?` <small>${fmt(AO.n)}</small>`:""}</button>`}catch(e){return h}}}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-ao]");if(!t)return;e.stopPropagation();e.preventDefault();if(!x4Me())return;const k=+t.dataset.ao;
+ if(AO&&AO.k==k){aoStop();return}if(AO)aoStop();const B=BOOST[k];if(!B||G.m<B.p){try{toast(LS("Pas assez de pièces pour ce booster","Not enough coins for this booster"))}catch(x){}return}
+ AO={k,n:0,nw:0};try{toast(LS("Ouverture auto : "+B.n,"Auto open: "+B.n))}catch(x){}try{show()}catch(x){}},true);
 /* rangées de taux : on n'affiche que les raretés possibles */
 /* ouverture : le booster choisi, dessiné, qui s'ouvre */
 function opHtml0(B,st){const n=OP.n||1,K=OP.k,T=n>1?3.5:4.3,N=B.cnt,nm0=B.n.toUpperCase();
