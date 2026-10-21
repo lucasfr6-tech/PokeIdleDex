@@ -4221,8 +4221,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-signature-banners-hf-bulk-20261021"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-signature-banners-hf-bulk-20261021"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-signature-banners-hf-bulk-20261021b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-signature-banners-hf-bulk-20261021b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14122,8 +14122,8 @@ if(exclusiveNormalize()){recomp();save()}
 /* Couronne solaire for exclusives, Grimoire ardent for Halloween variants. */
 IP.signatureFlame='<path d="M13 3c1 5-4 5-2 9 1-2 3-2 3-4 5 4 6 11 0 13-5 2-10-1-9-6 0-3 3-5 4-8 0 3 1 4 2 5-1-4 3-6 2-9Z"/>';
 {const row=plRow;plRow=function(id){let html=row.apply(this,arguments);const c=G.col[id],kind=c&&atlasKind(id,c);if(!c||!['exclusive','halloween'].includes(kind))return html;const hw=kind==='halloween',label=hw?LS('HALLOWEEN · GRIMOIRE ARDENT','HALLOWEEN · BLAZING GRIMOIRE'):LS('EXCLUSIF · COURONNE SOLAIRE','EXCLUSIVE · SOLAR CROWN');html=html.replace('class="pr atlas-row','class="pr atlas-row signature-banner');html=html.replace('><span class="spw"',`><span class="signature-decor" aria-hidden="true" style="--sig-delay:-${(+id)%7}s"><i class="sig-ring"></i><i class="sig-glow"></i><i class="sig-embers"></i><i class="sig-gems"></i></span><span class="spw"`);return html.replace('<span class="atlas-info">',`<span class="atlas-info"><span class="signature-label">${ico(hw?'signatureFlame':'crown')}<span>${label}</span></span>`)}}
-const signatureVisible=new IntersectionObserver(entries=>{for(const e of entries)e.target.classList.toggle('sig-visible',e.isIntersecting)},{rootMargin:'40px'}),signatureObserved=new WeakSet();
-function signatureObserve(){for(const el of document.querySelectorAll('#plist .signature-banner'))if(!signatureObserved.has(el)){signatureObserved.add(el);signatureVisible.observe(el)}}
+const signatureVisible=new IntersectionObserver(entries=>{for(const e of entries)if(e.target.isConnected)e.target.classList.toggle('sig-visible',e.isIntersecting)},{rootMargin:'40px'}),signatureObserved=new Set();
+function signatureObserve(){for(const el of signatureObserved)if(!el.isConnected){signatureVisible.unobserve(el);signatureObserved.delete(el)}for(const el of document.querySelectorAll('#plist .signature-banner'))if(!signatureObserved.has(el)){signatureObserved.add(el);signatureVisible.observe(el)}}
 const signatureWatch=new MutationObserver(signatureObserve);signatureWatch.observe(document.getElementById('view')||document.body,{childList:true,subtree:true});signatureObserve();PSIG='';try{ui()}catch(_){}
 
 </script></body></html>
