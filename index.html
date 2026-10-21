@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610211513"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=202610211513"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="202610211536"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=202610211536"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6759,6 +6759,7 @@ function rdUnit(id){const c=G.col[id];ens(id);rq(id);const S=[0,1,2,3,4,5].map(k
 function rdArtOf(id){const c=G.col[id];if(id>9e4)return IMG+(c.sh?"shiny/":"")+id+(c.mf?"m"+c.mf:"")+".png";return rdPixF(c.mf||(c.dy&&GMX[id])||id,c.sh)}
 function rdBackOf(id){const c=G.col[id];if(id>9e4)return rdArtOf(id);return rdPixB(c.mf||(c.dy&&GMX[id])||id,c.sh)}
 const rdEff=(m,types)=>eff(m.t,types);
+function atPd(id){try{return Math.max(1,base(id))}catch(e){return 1}}
 /* ---- dégâts (formule des jeux) ---- */
 function rdDamage(a,d,m,mult){if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(1,Math.floor(a.dm*.8/30*(.97+Math.random()*.06))),e:1,cr:false}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
  const base=Math.floor(Math.floor(Math.floor(2*a.L/5+2)*m.p*A/Math.max(1,D))/50)+2,stab=a.types.includes(m.t)?1.5:1,e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.85+Math.random()*.15;
@@ -7008,8 +7009,9 @@ const rdUntilMonday=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getD
 function rdScore(id,boss){const ms=rdMoves(id),A1=calc(id,1),A3=calc(id,3),st=tp(id);let best=0,bi=0;
  ms.forEach((m,j)=>{if(m.c=="u")return;const v=m.p*(m.c=="p"?A1:A3)*rdEff(m,boss.types)*(st.includes(m.t)?1.5:1)*(m.a/100)*(m.e=="cd"?.6:1);if(v>best){best=v;bi=j}});
  let df=0;boss.types.forEach(bt=>{df+=eff(bt,st)});df=df/boss.types.length||1;
- return{sc:best*Math.sqrt(calc(id,0))/Math.max(.35,df)/100,mv:bi}}
-function rdtAuto(){const b=RTB.boss,A=ids().map(id=>({id,...rdScore(id,b)})).sort((a,c)=>c.sc-a.sc),r=rdState();RTB.team=[];A.forEach(x=>{if(RTB.team.length<4){RTB.team.push(x.id);r.mv[x.id]=x.mv}});save()}
+ const c=G.col[id];let qm=1;try{qm=Math.max(1,(c.q||1)/(c.mf?1.5:1)/(c.dy?2.2:1))*(c.dy?1.2:1)}catch(e){}
+ return{sc:best*qm*Math.sqrt(calc(id,0)*qm)/Math.max(.35,df)/100,mv:bi}}
+function rdtAuto(){const b=RTB.boss,A=ids().map(id=>{const r=rdScore(id,b);if(RTB.kind=="wb")r.sc=atPd(id);return{id,...r}}).sort((a,c)=>c.sc-a.sc),r=rdState();RTB.team=[];A.forEach(x=>{if(RTB.team.length<4){RTB.team.push(x.id);r.mv[x.id]=x.mv}});save()}
 function rdtOpen(kind,tier){const r=rdState();RTB.kind=kind;RTB.tier=tier;RTB.boss=kind=="wb"?rdWBoss():rdBossOf(tier);RTB.q="";const own=new Set(ids());RTB.team=(r.team||[]).filter(i=>own.has(i)).slice(0,4);if(!RTB.team.length)rdtAuto();rdtRender()}
 const rdFixImg=(u,alt)=>`<img class="rpx" src="${u}" alt="" draggable="false" onerror="${alt?`this.onerror=null;this.src='${alt}'`:"this.style.visibility='hidden'"}">`;
 function rdtRender(){let o=$("rdt");if(!o){o=document.createElement("div");o.id="rdt";document.body.appendChild(o)}
@@ -9021,7 +9023,7 @@ function twFarmTxt(){const t=twS();if(!t.fm)return `<b>Farm à l'arrêt</b><smal
 function twOwned(){const q=TWX.q.trim().toLowerCase();return ids().filter(id=>{if(q&&!(pvNm(id).toLowerCase().includes(q)||pvNoMf(id,()=>tp(id)).some(x=>TFR[x].toLowerCase().includes(q))))return false;return true}).sort((a,b)=>twPow(b)-twPow(a))}
 function twGrid(){const t=twS(),L=twOwned(),n=TWX.pg*48;
  return L.slice(0,n).map(id=>{const k=t.tm.indexOf(id),ty=pvNoMf(id,()=>tp(id));return `<button class="pvcd ${k>=0?"on":""}" data-tw="tg:${id}">${k>=0?`<i class="pvbd">${k+1}</i>`:""}${pvImg(id,"big")}<b>${esc(pvNm(id))}</b><span class="pvty">${tchips(ty)}</span><small>Niv. ${G.col[id].l} · Puissance ${twPow(id)}</small></button>`}).join("")+(L.length>n?`<button class="pvmore" data-tw="more">Afficher plus (${L.length-n})</button>`:"")+(L.length?"":`<small class="pvdim">Aucun Pokémon ne correspond.</small>`)}
-function twAutoTeam(){const L=ids().map(id=>({id,b:twPow(id),t:pvNoMf(id,()=>tp(id))})).sort((a,b)=>b.b-a.b),out=[],cnt={};
+function twAutoTeam(){const L=ids().map(id=>({id,b:twPow(id)*Math.sqrt(atPd(id)),t:pvNoMf(id,()=>tp(id))})).sort((a,b)=>b.b-a.b),out=[],cnt={};
  for(const x of L){if(out.length>=3)break;if(x.t.some(t=>(cnt[t]||0)>=1))continue;out.push(x.id);x.t.forEach(t=>cnt[t]=(cnt[t]||0)+1)}
  for(const x of L){if(out.length>=3)break;if(!out.includes(x.id))out.push(x.id)}return out}
 function twViewTeam(){const t=twS();
@@ -9615,7 +9617,8 @@ document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#gl
 document.addEventListener("keydown",e=>{if(e.target&&e.target.id=="glcin"&&e.key=="Enter"&&!e.shiftKey){e.preventDefault();glcSend()}});
 setInterval(()=>{try{if(SCP.o=="ch"&&CH.tab=="gl"&&document.activeElement!==$("glcin"))chRender(false)}catch(e){}},4000);
 /* ---- combat du boss de guilde : mêmes moteur et décor que la Tower ---- */
-const glTop3=()=>ids().map(i=>({i,d:(()=>{try{return dmg(i)}catch(e){return 0}})()})).sort((a,b)=>b.d-a.d).slice(0,3).map(x=>x.i);
+const glTop3=()=>{let bt=null;try{const S=glState();if(S&&S.boss&&S.boss.sp)bt=pvNoMf(S.boss.sp,()=>tp(S.boss.sp))}catch(e){}
+ return ids().map(i=>({i,d:(()=>{try{if(!bt)return dmg(i);const t=pvNoMf(i,()=>tp(i)),ex=Math.max(.25,...t.map(a=>eff(a,bt))),dfn=Math.max(.25,...bt.map(a=>eff(a,t)));return Math.sqrt(atPd(i))*Math.max(calc(i,1),calc(i,3))*(.5+.5*ex)/Math.sqrt(.5+.5*dfn)}catch(e){return 0}})()})).sort((a,b)=>b.d-a.d).slice(0,3).map(x=>x.i)};
 const glBFloor=wk=>(glH("bf"+wk)%10)*10+5;
 function glBNew(S){const pv=pvS(),mine=twTeamU(glTeamSel(),pv.mv,pv.it);mine.forEach((u,i)=>{u.i=i;u.s="m"});const n=mine.length,av=k=>mine.reduce((a,u)=>a+u[k],0)/n;
  const sp0=S.boss.sp,u=pvMake(sp0);u.i=0;u.s="f";u.gbs=1;{const mv=u.moves.filter(m=>m.e!="heal"&&m.e!="drain");if(mv.length)u.moves=mv}u.lv=Math.round(av("lv"))||100;const kc=Math.max(1e-9,glPw()*30/(2.5*mine.reduce((a,x)=>a+Math.max(x.atk,x.spa),0)||1)),rem=Math.max(1,S.boss.hp-S.boss.tot);u.max=Math.max(1,Math.ceil(S.boss.hp/kc));u.hp=Math.max(1,Math.min(u.max,Math.ceil(rem/kc)));u.atk=Math.round(av("atk")*.85);u.spa=Math.round(av("spa")*.85);u.def=Math.round(av("def")*.9);u.spd=Math.round(av("spd")*.9);u.spe=Math.max(10,Math.round(av("spe")*.85));u.boss=2;u.it=null;
@@ -11382,9 +11385,11 @@ const twStarM=id=>1+TWSTAR*((G.col[id]&&G.col[id].st)||0);
 {const ob=twBuff;twBuff=function(tm,up){ob(tm,up);tm.forEach(u=>{if(u.s&&u.s!="m")return;const m=twStarM(u.id);if(m>1){u.max=u.hp=Math.round(u.max*m);u.atk=Math.floor(u.atk*m);u.def=Math.floor(u.def*m);u.spa=Math.floor(u.spa*m);u.spd=Math.floor(u.spd*m)}})}}
 {const ol=twListS;twListS=function(f){const op=pvPool;pvPool=function(){const P=op(),N=P.length,e=Math.min(N,Math.max(90,N-90+Math.round(90*(f-100)/100)));return P.slice(0,e)};try{return ol(f)}finally{pvPool=op}}}
 function twPick(f,pool){const t=twS();let foes;try{foes=twList(f).map(e=>({t:pvNoMf(e.id,()=>tp(e.id)),p:twPow(e.id),b:e.boss}))}catch(e){return null}
- const C=(pool||ids()).filter(id=>G.col[id]).map(id=>({id,p:twPow(id)*twStarM(id),t:pvNoMf(id,()=>tp(id))}));if(C.length<3)return null;
- const mx=Math.max(1,...C.map(c=>c.p)),fm=Math.max(1,...foes.map(x=>x.p));
- const sc=c=>{let s=0;foes.forEach(x=>{const w=.5+x.p/fm+(x.b?.6:0);const off=Math.max(...c.t.map(a=>eff(a,x.t))),def=Math.max(...x.t.map(a=>eff(a,c.t)));s+=w*(off*1.1-def*.9)});return s/foes.length*1.2+c.p/mx*3};
+ const C=(pool||ids()).filter(id=>G.col[id]).map(id=>({id,p:twPow(id)*twStarM(id),pd:atPd(id),t:pvNoMf(id,()=>tp(id))}));if(C.length<3)return null;
+ const fm=Math.max(1,...foes.map(x=>x.p)),cl=v=>Math.max(.1,Math.min(10,v));
+ /* équipe auto : les dégâts réels comptent (puissance du Pokémon, stats) autant que les types */
+ const sc=c=>{let s=0;foes.forEach(x=>{const w=.5+x.p/fm+(x.b?.6:0);let fp=1;try{fp=twFoePd(f,x.b)}catch(e){}const off=Math.max(.25,...c.t.map(a=>eff(a,x.t))),def=Math.max(.25,...x.t.map(a=>eff(a,c.t)));
+  const dealt=c.p*cl(Math.sqrt(c.pd/fp))*(.5+.5*off),taken=cl(Math.sqrt(fp/c.pd))*(.5+.5*def);s+=w*dealt/Math.sqrt(taken)});return s};
  C.forEach(c=>c.s=sc(c));C.sort((a,b)=>b.s-a.s);
  const out=[],cnt={};for(const c of C){if(out.length>=3)break;if(c.t.some(x=>cnt[x]>=1))continue;out.push(c);c.t.forEach(x=>cnt[x]=1)}
  for(const c of C){if(out.length>=3)break;if(!out.includes(c))out.push(c)}
@@ -13776,6 +13781,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
+  ["imp","Équipe auto : dégâts et types","Dans tous les modes, l'équipe auto tient maintenant compte des dégâts de tes Pokémon (puissance, stats, mutation) et plus seulement des types. Un Pokémon très puissant n'est plus écarté pour un simple avantage de type.","Auto team: damage and types","In every mode, the auto team now considers your Pokémon's damage (power, stats, mutation), not just types. A very strong Pokémon is no longer skipped for a simple type advantage."],
  ["fix","Avance auto : choix conservé","Le rafraîchissement et la reconnexion conservent désormais l’état activé ou désactivé de l’avance automatique. Le choix est enregistré dès le clic.","Auto advance: preference preserved","Refreshing and reconnecting now preserve whether auto advance is enabled or disabled. Your choice is saved immediately when clicked."],
  ["imp","Zones de 20 étages et adversaires renforcés","Dès l’étage 1171, une nouvelle zone tous les 20 étages. Les PV sont doublés à l’entrée, puis le renfort augmente de 1 % tous les 20 étages, en continu, jusqu’à ×3 par rapport à la courbe précédente. Les étages antérieurs restent identiques.","20-floor zones and tougher enemies","From floor 1171, a new zone every 20 floors. HP starts at twice the previous curve, with the additional boost growing smoothly by 1% every 20 floors up to ×3. Earlier floors remain unchanged."],
  ["new","Deux LR par zone dès l’étage 1171","Les 125 LR se répartissent sans doublon sur 62 zones : deux LR dans chacune des 61 premières, trois dans la dernière. Chaque LR a un taux fixe de 0,1 % par rencontre. Premier cycle : étages 1171 à 2410, puis nouveau mélange. Chaque zone dure 20 étages et conserve 5 UR, 4 SSR, 4 SR et 9 N.","Two LR per zone from floor 1171","All 125 LR are split without duplicates across 62 zones: two in each of the first 61, three in the last. Each LR has a fixed 0.1% encounter rate. First cycle: floors 1171–2410, then another shuffle. Each zone spans 20 floors and retains 5 UR, 4 SSR, 4 SR and 9 N."],
