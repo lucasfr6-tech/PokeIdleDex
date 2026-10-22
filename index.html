@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-hwfix-202610220338"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-hwfix-202610220338"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-mball-202610220350"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-mball-202610220350"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10189,7 +10189,7 @@ function kxAuto(e,k,live){const c=KX(),P=KXP[c.prof],p0=kxP0(),ceil=P.c[k]*p0,tg
  if(live&&!s.own){const n=Math.max(1,Math.min(c.lot,Math.floor((G.m-c.res)*.25/s.price)));const cost=s.price*n;
   if(G.m<cost)return null;G.m-=cost;G.inv[s.b]=(G.inv[s.b]||0)+n;c.sp=(c.sp||0)+cost;c.nb=(c.nb||0)+n;try{qadd("buy",n);qadd("spend",cost)}catch(x){}s.own=1}
  return s}
-function kxFix(r){const c=KX(),it=IT[r];if(!it||!it.m||r=="master-ball")return null;if((G.inv[r]||0)>0)return r;
+function kxFix(r){const c=KX(),it=IT[r];if(!it||!it.m)return null;if((G.inv[r]||0)>0)return r;if(r=="master-ball")return null;
  if(c.rb&&it.p&&uf()>=(it.r||0)){const price=shopP(it);if(G.m-price>=c.res){const n=Math.max(1,Math.min(c.lot,Math.floor((G.m-c.res)*.25/price))),cost=price*n;
   if(G.m>=cost){G.m-=cost;G.inv[r]=(G.inv[r]||0)+n;c.sp=(c.sp||0)+cost;c.nb=(c.nb||0)+n;try{qadd("buy",n);qadd("spend",cost)}catch(x){}return r}}}
  return null}
@@ -10219,7 +10219,7 @@ function kxGrid(k,r,L){let e=null;try{e=kxSynth(k)}catch(x){}
  const tile=(v,im,n,sub,cls,dis)=>`<button class="kxt ${v===r?"on":""} ${cls||""}" data-kx="set" data-k="${k}" data-v="${v}" ${dis?"disabled":""}>${im?`<img src="${im}" alt="">`:`<i class="kxti">${v==="auto"?"A":"×"}</i>`}<b>${n}</b><small>${sub}</small></button>`;
  const bs=L.map(b=>{const o=(G.inv[b]||0)>0,lk=!o&&uf()<(IT[b].r||0);let pc=0;try{pc=e?capPct(e,b):0}catch(x){}return{b,o,lk,pc}}).sort((a,c)=>(c.o-a.o)||(a.lk-c.lk)||(c.pc-a.pc));
  return `<div class="kxgr">${tile("auto","",LS("Automatique","Automatic"),LS("le jeu choisit","game picks"),"kxta")}${tile("","",LS("Ne pas lancer","No throw"),LS("laisser fuir","let it flee"),"")}${bs.map(x=>tile(x.b,kxIm(x.b),IT[x.b].n,[x.o?"×"+fmt(G.inv[x.b]):"",x.lk?LS("étage ","floor ")+IT[x.b].r:x.o?"":fmt(shopP(IT[x.b]))+" ₽",x.pc?Math.round(x.pc*100)+" %":""].filter(Boolean).join(" · "),x.o?"":"kxno",x.lk)).join("")}</div>`}
-function kxAllBalls(cur){const L=Object.keys(IT).filter(b=>IT[b]&&IT[b].m&&b!="master-ball"&&!IT[b].mf&&!IT[b].dy&&((G.inv[b]||0)>0||IT[b].p||b==cur));return L.sort((a,b)=>(IT[a].p||0)-(IT[b].p||0))}
+function kxAllBalls(cur){const L=Object.keys(IT).filter(b=>IT[b]&&IT[b].m&&!IT[b].mf&&!IT[b].dy&&((G.inv[b]||0)>0||IT[b].p||b==cur||b=="master-ball"));return L.sort((a,b)=>(IT[a].p||0)-(IT[b].p||0))}
 const kxIm=b=>ITM+((IT[b]&&IT[b].img)||b)+".png";
 const kxSw=(key,on,lab,sub)=>`<button class="kxsw${on?" on":""}" data-kx="${key}"><span><b>${lab}</b>${sub?`<small>${sub}</small>`:""}</span><i></i></button>`;
 function kxHtml(){const c=KX(),own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.inv[k]>0).sort((a,b)=>IT[b].m-IT[a].m);
@@ -14364,6 +14364,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["imp","Règles de capture : Master Ball","Tu peux maintenant choisir la Master Ball pour une rareté (N, SR, SSR, UR, LR), pour les Pokémon mutés ou pour les boss Alpha. Elle est utilisée tant qu'il t'en reste ; ensuite, la ball par défaut prend le relais.","Capture rules: Master Ball","You can now choose the Master Ball for a rarity (N, SR, SSR, UR, LR), for mutated Pokémon or for Alpha bosses. It is used while you have some left; then the default ball takes over."],
   ["fix","Étages Halloween : zone et règles de capture","En étages Halloween, « Pokémon de la zone » affiche bien les 5 Pokémon Halloween de ta zone, même si tu as dépassé l'étage 1171 en mode normal. Les Règles de capture montrent aussi les espèces de ta zone Halloween : tu peux y choisir celles à capturer.","Halloween floors: zone and capture rules","On Halloween floors, “Zone Pokémon” now shows the 5 Halloween Pokémon of your zone, even past floor 1171 in normal mode. Capture rules also show your Halloween zone species, so you can choose which ones to catch."],
   ["new","Donjons des Échos","Nouvel onglet dans Jouer (dès l'étage 60). Trois environnements : Jardin des Vestiges, Crypte de Minuit et Observatoire fracturé. Déplace-toi case par case (ZQSD, flèches ou boutons) en évitant rochers et pièges. Le contact avec un adversaire lance un vrai combat de raid en manuel : quatre attaques, types, garde et objets.","Echo Dungeons","New Play tab (from floor 60). Three environments: Garden of Relics, Midnight Crypt and Fractured Observatory. Move tile by tile (ZQSD, arrows or buttons) and avoid rocks and traps. Touching a foe starts a real manual raid battle: four moves, types, guard and items."],
   ["new","Donjons : salles, chemins et gardiens","Difficulté d'entrée niveau 50 ou 100. PV adverses +6,5 % par salle, élite ×1,6, gardien ×3 toutes les 10 salles. Après une salle, choisis parmi trois chemins : rencontre, élite, trésor, événement, bivouac, marchand, autel ou passage piégé.","Dungeons: rooms, paths and guardians","Entry difficulty level 50 or 100. Foe HP +6.5% per room, elite ×1.6, guardian ×3 every 10 rooms. After a room, pick one of three paths: encounter, elite, treasure, event, camp, merchant, altar or trapped passage."],
