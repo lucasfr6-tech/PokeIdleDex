@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-xtsh-202610221337"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-xtsh-202610221337"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-rkst-202610221347"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-rkst-202610221347"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9624,7 +9624,7 @@ G.gp={};
 NAVX.push(["rks","trophy","Classements","#eab308","#854d0e"]);NENG.rks="Rankings";
 NCAT.splice(NCAT.findIndex(x=>x[0]=="c_shp"),0,["c_soc","Social","Social","trophy","#e11d48","#881337",["gld","pvp","rks"]]);
 const RKX={v:"lb"};
-const RKT=[["lb","crown",()=>LS("Étage","Floor")],["m","coin",()=>LS("Pièces","Coins")],["bp","sword",()=>LS("Meilleur Pokémon","Best Pokémon")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
+const RKT=[["lb","crown",()=>LS("Étage","Floor")],["st","spark",()=>LS("Renaissances","Rebirths")],["m","coin",()=>LS("Pièces","Coins")],["bp","sword",()=>LS("Meilleur Pokémon","Best Pokémon")],["pvp","sword",()=>LS("JCJ","PvP")],["gld","team",()=>LS("Guildes","Guilds")],["twr","tower",()=>LS("Tour","Tower")],["dx","book",()=>LS("Pokédex","Pokédex")],["sh","star",()=>LS("Chromatiques","Shinies")]];
 /* Classements : bannière équipée appliquée lors du rendu, jamais en post-traitement */
 const pidRankBanner=r=>{try{const n=r&&r.ban!=null?Number(r.ban):NaN;return Number.isInteger(n)&&n>=0&&BAN[n]?`background:${BAN[n].css};`:""}catch(e){return ""}};
 const rkRow=(r,i,val,lab)=>`<div class="rkx-r pid-rank-bg${r.me?" me":""}" style="${pidRankBanner(r)}" ${r.id&&!r.me?`data-a="vp" data-t="${esc(String(r.id))}"`:""}><span class="rkx-n">${i+1}</span>${ava2(r,"")}<b>${esc(r.n||"?")}${r.me?` <em>(${LS("toi","you")})</em>`:""}</b><span class="rkx-v">${fmt(val)}<small>${lab}</small></span></div>`;
@@ -9641,7 +9641,7 @@ function rkTwr(){rkLoad("twr");let R=[];try{R=twRows()}catch(e){}
  return `<div class="box rkx-box"><h3>${ico("tower")} ${LS("Classement de la Tour","Tower ranking")}</h3><div class="rkx-l">${R.slice(0,50).map((r,i)=>rkRow(r,i,r.b||0,LS("étage","floor"))).join("")}</div></div>`}
 function vRks(){const v=RKX.v;
  const tabs=`<div class="rkx-tabs">${RKT.map(t=>`<button class="${v==t[0]?"on":""}" data-rk="${t[0]}">${ico(t[1])}<span>${t[2]()}</span></button>`).join("")}</div>`;
- let b="";try{b=v=="lb"?vLB():v=="m"?rkCoins():v=="bp"?rkBest():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
+ let b="";try{b=v=="lb"?vLB():v=="m"?rkCoins():v=="bp"?rkBest():v=="pvp"?pvViewRank():v=="gld"?rkGld():v=="twr"?rkTwr():v=="st"?rkBy("st",LS("Renaissances","Rebirths")):v=="dx"?rkBy("dx",LS("Espèces","Species")):rkBy("sh",LS("Chromatiques","Shinies"))}catch(e){b=""}
  return `<div class="rkx">${tabs}${b}</div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rk]");if(!b)return;RKX.v=b.dataset.rk;if(RKX.v=="pvp"){try{pvS();pvFetch()}catch(_){}}show()});
 {const s0=show;show=function(){if(tab=="lb"){tab="rks";RKX.v="lb"}if(tab=="gem")tab="adv";return s0.apply(this,arguments)}}
@@ -14263,10 +14263,10 @@ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-pgg-step
 
 /* Shared Panthéon presentation: original ranking sources and profile actions. */
 const PH={q:{}};
-function phTitle(k){return ({lb:LS('Étages','Floors'),m:LS('Pièces','Coins'),bp:LS('Meilleur Pokémon','Best Pokémon'),pvp:'JCJ',gld:LS('Guildes','Guilds'),twr:LS('Tour','Tower'),dx:'Pokédex',sh:LS('Chromatiques','Shinies')})[k]}
+function phTitle(k){return ({lb:LS('Étages','Floors'),m:LS('Pièces','Coins'),bp:LS('Meilleur Pokémon','Best Pokémon'),pvp:'JCJ',gld:LS('Guildes','Guilds'),twr:LS('Tour','Tower'),dx:'Pokédex',sh:LS('Chromatiques','Shinies'),st:LS('Renaissances','Rebirths')})[k]}
 function phRows(k){if(k==='m')return rkmRows();if(k==='bp')return rkbRows();if(k==='pvp')return pvRows();if(k==='twr')return twRows();if(k==='gld'){const mine=glS().id;return glState().L.slice().sort((a,b)=>b.lv-a.lv||b.xp-a.xp).map(x=>({...x.gd,id:x.gd.id,me:x.gd.id===mine,lv:x.lv,xp:x.xp,members:x.n,em:x.gd.em}))}const key=k==='lb'?'bf':k;return lbRows().slice().sort((a,b)=>(b[key]||0)-(a[key]||0)||(a.t||0)-(b.t||0))}
-function phValue(r,k){return k==='gld'?String(r.lv||1):fmt(r[({lb:'bf',m:'m',bp:'bpv',pvp:'r',twr:'b',dx:'dx',sh:'sh'})[k]]||0)}
-function phUnit(k){return ({lb:LS('étages','floors'),m:'₽',bp:'DPS',pvp:LS('points','points'),gld:LS('niveau','level'),twr:LS('étages','floors'),dx:LS('espèces','species'),sh:LS('chromatiques','shinies')})[k]}
+function phValue(r,k){return k==='gld'?String(r.lv||1):fmt(r[({lb:'bf',m:'m',bp:'bpv',pvp:'r',twr:'b',dx:'dx',sh:'sh',st:'st'})[k]]||0)}
+function phUnit(k){return ({lb:LS('étages','floors'),m:'₽',bp:'DPS',pvp:LS('points','points'),gld:LS('niveau','level'),twr:LS('étages','floors'),dx:LS('espèces','species'),sh:LS('chromatiques','shinies'),st:LS('renaissances','rebirths')})[k]}
 function phAction(r,k,i){if(k==='bp')return `data-bpr="${i}" data-bpu="${r.me?'me':esc(String(r.id))}"`;if(k==='m')return `data-ph-coin="${esc(String(r.id))}" aria-expanded="${RKM.open===String(r.id)}"`;if(k==='twr')return `data-tw="prof:${esc(String(r.id))}"`;if(k==='pvp')return `data-pv="prof:${esc(String(r.id))}"`;if(k==='gld')return r.me?'data-ph-guild':'';return `data-a="vp" data-t="${esc(String(r.id))}"`}
 const rankingBaseArt=aSpr;
 function rankingVariant(r){const b=r.bp||[],p=vsIdentity(b[0]),id=+b[6]||p?.id||0,d=r.bpd||{},own=r.me?G.col[id]:null,s=VSK[id];if(!s)return null;const c={sh:b[1]?1:0,mi:+b[2]||0,zi:b[3]??2,al:b[4]?1:0,mf:own?.mf||p?.mf||(+d.mf>1?+d.mf:0),dy:own?.dy||d.dy||(/Dynamax|Gigamax|Gigantamax/i.test(b[5]||'')?1:0),hf:own?.hf||d.hf||(/Halloween/i.test(d.tr||'')?1:0),hfv:own?.hfv||d.hfv||''};if(!c.mf&&+b[0]!==id&&s.forms.includes(+b[0])){if(+b[0]===GMX[s.base])c.dy=1;else c.mf=+b[0]}return vsAsset(id,c)?{id,c,asset:vsAsset(id,c)}:null}
@@ -14387,6 +14387,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 const UPD=[
  {d:"2026-10-22",t:["Donjons : puissance réelle et nouvelles difficultés","Dungeons: real power and new difficulties"],e:[["imp","PV et puissance","PV initiaux de 10 M à 10 T, +25 % par salle. Les attaques utilisent la puissance permanente du Pokémon, avec les types et bonus de combat. Rencontres plus rares aux difficultés élevées.","HP and power","Starting HP from 10 M to 10 T, +25% per room. Attacks use each Pokémon’s permanent power with type and combat bonuses. Higher difficulties offer rarer encounters."],["fix","Annuler la pension","Le bouton Annuler libère le lot en cours et désactive sa relance automatique.","Cancel daycare","Cancel frees the current batch and disables automatic repeats."]]},
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["new","Classement des renaissances","Nouvel onglet « Renaissances » dans les Classements : les dresseurs qui ont fait le plus de prestiges.","Rebirth ranking","New “Rebirths” tab in Rankings: the trainers with the most prestiges."],
 ["imp","Donjons : expédition immersive","Grande carte à cases alignées, Pokémon directionnels, choix du meneur, marchand et fontaine dans le décor. Élites sur 4 cases et gardiens sur 9. Six difficultés ; entrée à 1 T puis prix doublé à chaque tentative du jour.","Dungeons: immersive expedition","Large aligned tile map, directional sprites, selectable leader, shop and fountain. Elites occupy 4 tiles and guardians 9. Six difficulties; entry costs 1 T and doubles each daily attempt."],
 ["imp","Gardevoir Chic animée","Sprites 3D animés pour Gardevoir Chic et sa Méga, avec leurs palettes normales et chromatiques.","Animated Gardevoir Chic","Animated 3D sprites for Gardevoir Chic and its Mega with normal and shiny palettes."],
 ["new","Perle Origine","La perle de Giratina Origine est disponible dans la boutique Méga et Dynamax.","Origin Pearl","Giratina’s Origin Pearl is available in the Mega and Dynamax shop."],
