@@ -4354,12 +4354,20 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 #nwr .nwtab button{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:var(--gl2);border:1px solid var(--ln);color:var(--tx);font-weight:800}
 #nwr .nwtab button:hover{filter:brightness(1.25)}</style>
 
+<style>/* ==== TS4 : bouton Changement d'étage agrandi + compte à rebours Halloween ==== */
+#combat-head .rpbtn.hwsw{min-height:72px;min-width:249px;padding:12px 16px;border-radius:16px;display:flex;align-items:center;gap:12px;font-size:17px;font-weight:800;border:2px solid #ff7518;background:linear-gradient(125deg,#2a1506,#4c1d95);color:#fff;box-shadow:0 0 18px #ff751866,0 0 36px #ff751833,inset 0 1px 0 #fff3;animation:hwGlow 1.8s ease-in-out infinite;text-align:left}
+#combat-head .rpbtn.hwsw.on{background:linear-gradient(125deg,#7c2d12,#4c1d95)!important;border-color:#ff9d3f!important;color:#fff!important}
+#combat-head .rpbtn.hwsw .hwtx{display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.2}
+#combat-head .rpbtn.hwsw .hwtx b{font-size:17px;color:#fff}
+#combat-head .rpbtn.hwsw .hwcd{font-style:normal;font-size:13px;font-weight:900;color:#ffb26b;letter-spacing:.02em;text-shadow:0 0 10px #ff7518,0 0 18px #ff7518}
+@keyframes hwGlow{0%,100%{box-shadow:0 0 14px #ff751866,0 0 28px #ff751833,inset 0 1px 0 #fff3}50%{box-shadow:0 0 28px #ff9d3fcc,0 0 56px #ff751877,inset 0 1px 0 #fff3}}
+</style>
 </head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-2.0.0-r2-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-2.0.0-r2-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-2.0.0-r3-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-2.0.0-r3-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13934,7 +13942,7 @@ function hwUi(){if(!hwOn()||tab!="adv")return;const t=hwT(),z=hwZone(t.fl),P=hwP
  s("cf",t.fl);const fk=$("fkb");if(fk)fk.style.width=t.k*10+"%";s("fkt",t.k+" / 10");s("zpt","Halloween · Zone "+(z+1)+" · "+own+" / 5 "+LS("possédés","owned"));
  document.querySelectorAll('.st[data-a="goto"]').forEach(x=>x.style.visibility="hidden");
  const h=document.getElementById("combat-head");if(h)h.classList.add("hw-mode")}
-function hwBtn(){if(tab!="adv")return;const a=document.querySelector("#combat-head .ch-actions");if(!a)return;let b=a.querySelector(".hwsw");const on=hwOn();if(!b){b=document.createElement("button");b.className="rpbtn hwsw";b.dataset.hwsw="1";a.insertBefore(b,a.firstChild)}const lab=(on?"🎃 ":"")+LS("Changement d'étage","Change floors");if(b.dataset.l!==lab){b.dataset.l=lab;b.innerHTML=`${ico("map")}<span>${lab}</span>${ico("chevr")}`}b.classList.toggle("on",on);if(!on){const h=document.getElementById("combat-head");if(h)h.classList.remove("hw-mode");document.querySelectorAll('.st[data-a="goto"]').forEach(x=>x.style.visibility="")}}
+function hwBtn(){if(tab!="adv")return;const a=document.querySelector("#combat-head .ch-actions");if(!a)return;let b=a.querySelector(".hwsw");const on=hwOn();if(!b){b=document.createElement("button");b.className="rpbtn hwsw";b.dataset.hwsw="1";a.insertBefore(b,a.firstChild)}const lab=(on?"🎃 ":"")+LS("Changement d'étage","Change floors");if(b.dataset.l!==lab){b.dataset.l=lab;b.innerHTML=`${ico("map")}<span class="hwtx"><b>${lab}</b><em class="hwcd"></em></span>${ico("chevr")}`}const e=b.querySelector(".hwcd");if(e){if(HFON()){const v=LS("Fin Halloween · ","Halloween ends · ")+hfLeft();if(e.textContent!==v)e.textContent=v}else e.textContent=""}b.classList.toggle("on",on);if(!on){const h=document.getElementById("combat-head");if(h)h.classList.remove("hw-mode");document.querySelectorAll('.st[data-a="goto"]').forEach(x=>x.style.visibility="")}}
 {const u0=ui;ui=function(){const r=u0.apply(this,arguments);try{hwBtn();hwUi()}catch(e){}return r}}
 function hwSwitch(on){if(on&&!HFON()){toast(LS("L'événement Halloween est terminé.","The Halloween event is over."));return}G.hwm=on?1:0;E=null;busy=false;CAPU=0;save();const m=document.getElementById("hwsm");if(m)m.remove();try{show()}catch(e){}toast(on?LS("Étages Halloween : bonne chasse !","Halloween floors: happy hunting!"):LS("Retour aux étages normaux","Back to the normal floors"))}
 function hwModal(){const t=hwT(),z=hwZone(t.fl),on=hwOn(),o=document.createElement("div");o.id="hwsm";o.className="hwsm";
