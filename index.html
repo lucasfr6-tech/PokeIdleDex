@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-gchic-diamond-202610220246"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-gchic-diamond-202610220246"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lab-202610220256"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-lab-202610220256"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5162,7 +5162,7 @@ ${ev.length||tms.length?`<h2>Évolution et CT</h2><div class="row" style="margin
 <h2>Niveau automatique</h2><small>Plus aucun bonbon : les Pokémon montent de niveau seuls selon l'étage atteint, et rattrapent vite leur retard.</small></div>`}
 
 function show0(){document.querySelectorAll("#nav [data-t],#qk [data-t],#pan").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));lastE=null;HUDK="";STK="";PSIG="";WXK="";EXSIG="";recomp();
- $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vRebX,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
+ $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vRebX,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,lab:()=>window.vLab?window.vLab():"",qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
 if(tab=="gacha"||tab=="dex"||tab=="prof"||tab=="mine"){const need2=tab=="gacha"?Object.keys(G.cards).map(Number):ids(),miss=need2.filter(i=>!DB[i]);if(miss.length&&!OFF)preload(miss).then(softRefresh)}}
 let sr=0;function softRefresh(){clearTimeout(sr);sr=setTimeout(()=>{if(tab=="mine"&&$("mng"))$("mng").innerHTML=mineGrid();else if(tab=="dex"&&$("dxg"))$("dxg").innerHTML=dexGrid();else if(tab=="gacha"&&$("cgr"))$("cgr").innerHTML=cardGrid()},200)}
 
@@ -13664,6 +13664,99 @@ CP.d.unshift([10000-CP.d.reduce((a,x)=>a+x[0],0),"n"]);
  return `<svg class="cxem" viewBox="0 0 64 64" width="${sz||64}" height="${sz||64}">${g}<path d="M32 4 56 26 32 60 8 26z" ${f}/><path d="M8 26h48M32 4l-10 22 10 34 10-34z" fill="none" stroke="#fffb" stroke-width="1.6" stroke-linejoin="round"/><circle cx="44" cy="15" r="2.4" fill="#fff"/></svg>`}}
 {const s0=cxoSp;cxoSp=function(T){if(T!="d")return s0.apply(this,arguments);return `<div class="cxosp"><div class="cxopk" title="Gardevoir Chic"><div class="cxopi">${sp(90006,0,1)}</div><em>${prc(GCH_W/10000)}</em></div></div>`}}
 {const st=document.createElement("style");st.id="pid-diamond";st.textContent=".astral .cxtks,.cxtks{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important}.cxtk[data-k=d]{box-shadow:0 0 0 1px #7dd3fc66,0 0 22px #38bdf833}.as-gchic{display:flex;align-items:center;gap:6px;justify-content:center;font-size:11px;font-weight:800;color:#bae6fd;margin:6px 0}.as-gchic img,.as-gchic .sp{width:44px!important;height:44px!important;image-rendering:pixelated}";document.head.appendChild(st)}
+/* ===================== LABORATOIRE : recherches de mutation, taille, Alpha et chromatique ===================== */
+IP.lab='<path d="M9 2.5h6"/><path d="M10 2.5v6.2L4.6 18.4A2 2 0 0 0 6.4 21.5h11.2a2 2 0 0 0 1.8-3.1L14 8.7V2.5"/><path d="M7.2 14h9.6"/><circle cx="10.5" cy="17" r=".9"/><circle cx="14" cy="18.2" r=".7"/>';
+IP.echo='<path d="M12 2.5 19.5 7v10L12 21.5 4.5 17V7z"/><path d="M12 2.5v19M4.5 7 12 12l7.5-5"/>';
+NAV2.push(["lab","lab","Laboratoire","#38bdf8","#0e7490"]);NENG.lab="Laboratory";LOCKS.lab=40;
+try{NAVX.push(["lab","lab","Laboratoire","#38bdf8","#0e7490"])}catch(e){}
+{const c=NCAT.find(x=>x[0]=="c_adv")[6];if(!c.includes("lab")){const k=c.indexOf("pen");c.splice(k<0?c.length:k+1,0,"lab")}}
+/* [clé, nom FR, nom EN, prix, chance initiale %, gain par échec (points), plafond %] */
+const LABR=[["mu","Mutation","Mutation",2e10,20,3,75],["sz","Taille","Size",1.5e10,20,3,75],["al","Alpha","Alpha",6e10,5,2,40],["sh","Chromatique","Shiny",1e11,1,.5,15]];
+/* mutations par palier (de la plus courante à la plus rare) ; la mutation « Chromatique » n'est pas dans l'échelle */
+const LABMU=[[0],[1],[2,3],[4],[5],[6],[8],[9],[10]];
+const LABCAT=5,LABCATP=10;
+const ECH=()=>Math.max(0,Math.floor(G.ech||0));
+const LAB=()=>{const L=G.lab=G.lab||{};L.p=L.p||{};return L};
+let LABQ="",LABCK=0,LABFX=null;
+function labTreeBonus(){try{return typeof treeLabBonus=="function"?treeLabBonus():0}catch(e){return 0}}
+function labFails(id,k){const p=LAB().p[id];return p&&p[k]||0}
+function labChance(id,k,cat){const r=LABR.find(x=>x[0]==k);let v=r[4]+r[5]*labFails(id,k)+labTreeBonus()+(cat?LABCATP:0);return Math.min(r[6],v)}
+function labMuTier(mi){mi=mi|0;const t=LABMU.findIndex(g=>g.includes(mi));return t<0?(mi==7?5:0):t}
+function labMax(id,k){const c=G.col[id];if(!c)return true;if(k=="mu")return labMuTier(c.mi)>=LABMU.length-1;if(k=="sz")return (c.zi|0)>=SZ.length-1;if(k=="al")return !!c.al;if(k=="sh")return !!c.sh;return true}
+function labNext(id,k){const c=G.col[id];if(k=="mu"){const g=LABMU[Math.min(LABMU.length-1,labMuTier(c.mi)+1)];return g[Math.random()*g.length|0]}if(k=="sz"){const z=c.zi==null?2:c.zi;return z<3?3:Math.min(SZ.length-1,z+1)}return 1}
+function labRun(id,k){const c=G.col[id],r=LABR.find(x=>x[0]==k);if(!c||!r)return;if(labMax(id,k)){toast(LS("Cet attribut est déjà au maximum.","This attribute is already maxed."));return}
+ if(G.m<r[3]){toast(LS("Il te manque "+fmt(r[3]-G.m)+" ₽","You are missing "+fmt(r[3]-G.m)+" coins"));try{sfx("err")}catch(e){}return}
+ const cat=LABCK&&ECH()>=LABCAT,ch=labChance(id,k,cat);G.m-=r[3];if(cat)G.ech=ECH()-LABCAT;
+ const L=LAB(),P=L.p[id]=L.p[id]||{};L.n=(L.n||0)+1;
+ try{if(hwVariantPokemon(id,c))hfLock(c)}catch(e){}
+ const ok=Math.random()*100<ch;let lab="";
+ if(ok){P[k]=0;L.ok=(L.ok||0)+1;
+  if(k=="mu"){const v=labNext(id,"mu");c.mi=v;lab=MU[v][0];G.mut=(G.mut||0)+1}
+  else if(k=="sz"){const v=labNext(id,"sz");c.zi=v;lab=SZ[v][0]}
+  else if(k=="al"){c.al=1;lab="Alpha"}
+  else if(k=="sh"){c.sh=1;lab=LS("Chromatique","Shiny")}
+  try{hwSaveVariants(id,c)}catch(e){}try{rq(id)}catch(e){}try{recomp()}catch(e){}
+ }else P[k]=(P[k]||0)+1;
+ LABFX={id,k,ok,lab,ch,t:Date.now()};save();try{sfx(ok?"shiny":"flee")}catch(e){}
+ toast(ok?LS("Recherche réussie : ","Research succeeded: ")+lab+" !":LS("Recherche échouée ("+fmtP(ch)+"). Prochaine chance : "+fmtP(labChance(id,k,0))+".","Research failed ("+fmtP(ch)+"). Next chance: "+fmtP(labChance(id,k,0))+"."));
+ show()}
+const fmtP=v=>(Math.round(v*10)/10).toString().replace(".",SG.lang=="en"?".":",")+" %";
+function labSel(){const L=LAB();if(L.sel&&G.col[L.sel])return L.sel;const b=ids().slice().sort((a,c)=>base(c)-base(a))[0];L.sel=b||0;return L.sel}
+function labPick(){const q=norm(LABQ),sel=labSel();const L=ids().filter(i=>!q||norm(nm(i)).includes(q)).sort((a,b)=>base(b)-base(a)).slice(0,120);
+ return L.map(i=>{const c=G.col[i];return `<button class="lab-pk${i==sel?" on":""}" data-lab="sel" data-i="${i}"><span class="lab-pki">${sp(i,c.sh)}</span><span class="lab-pkn"><b>${dn(i)}</b><small>${c.mi?MU[c.mi][0]:LS("Sans mutation","No mutation")} · ${SZ[c.zi==null?2:c.zi][0]}${c.al?" · Alpha":""}${c.sh?" · ★":""}</small></span></button>`}).join("")||`<p class="lab-empty">${LS("Aucun Pokémon trouvé.","No Pokémon found.")}</p>`}
+function labCard(id,r){const k=r[0],c=G.col[id],mx=labMax(id,k),cat=LABCK&&ECH()>=LABCAT,ch=labChance(id,k,cat),f=labFails(id,k),can=!mx&&G.m>=r[3];
+ const cur=k=="mu"?(c.mi?MU[c.mi][0]:LS("Aucune","None")):k=="sz"?SZ[c.zi==null?2:c.zi][0]:k=="al"?(c.al?LS("Oui","Yes"):LS("Non","No")):(c.sh?LS("Oui","Yes"):LS("Non","No"));
+ const nxt=mx?LS("Maximum atteint","Maximum reached"):k=="mu"?LS("Palier suivant : ","Next tier: ")+LABMU[Math.min(LABMU.length-1,labMuTier(c.mi)+1)].map(v=>MU[v][0]).join(" / "):k=="sz"?LS("Palier suivant : ","Next tier: ")+SZ[(c.zi==null?2:c.zi)<3?3:Math.min(SZ.length-1,(c.zi|0)+1)][0]:LS("Obtenir le statut","Gain the status");
+ const fx=LABFX&&LABFX.id==id&&LABFX.k==k&&Date.now()-LABFX.t<4000?(LABFX.ok?" win":" lose"):"";
+ return `<div class="lab-rc lab-${k}${mx?" mx":""}${fx}"><div class="lab-rch"><span class="lab-rci">${ico(k=="mu"?"spark":k=="sz"?"target":k=="al"?"crown":"star")}</span><div><b>${LS(r[1],r[2])}</b><small>${LS("Actuel : ","Current: ")}${cur}</small></div></div>
+ <div class="lab-ch"><div class="lab-chv"><b>${mx?"—":fmtP(ch)}</b><small>${LS("de réussite","success")}</small></div><div class="lab-bar"><i style="width:${mx?100:ch/r[6]*100}%"></i></div><small>${LS("Départ ","Start ")}${fmtP(r[4])} · +${String(r[5]).replace(".",",")} ${LS("pt par échec","pt per failure")} · ${LS("plafond ","cap ")}${fmtP(r[6])}</small></div>
+ <p class="lab-nx">${nxt}</p><div class="lab-ft"><span>${LS("Échecs : ","Failures: ")}<b>${f}</b></span><button class="go" data-lab="run" data-k="${k}" ${can?"":"disabled"}>${ico("lab")} ${mx?LS("Terminé","Done"):fmt(r[3])+" ₽"}</button></div></div>`}
+function vLab(){const id=labSel(),c=G.col[id],L=LAB();
+ if(!id||!c)return `<div class="lab"><div class="box"><h2>${LS("Laboratoire","Laboratory")}</h2><p>${LS("Capture d'abord un Pokémon.","Catch a Pokémon first.")}</p></div></div>`;
+ const tb=labTreeBonus();
+ return `<div class="lab"><header class="lab-hd"><div><small>${LS("AVENTURE / LABORATOIRE","ADVENTURE / LABORATORY")}</small><h1>${LS("Laboratoire","Laboratory")}</h1><p>${LS("Paie une recherche pour améliorer un attribut. Chaque échec augmente la chance suivante de ce Pokémon, jusqu'au plafond. Les meilleurs attributs sont toujours conservés.","Pay for research to improve one attribute. Each failure raises this Pokémon's next chance, up to the cap. Better attributes are always kept.")}</p></div>
+ <div class="lab-wal"><span>${ico("coin")}<b>${fmt(G.m)} ₽</b></span><span title="${LS("Fragments d'Écho (Donjons)","Echo shards (Dungeons)")}">${ico("echo")}<b>${fmt(ECH())}</b></span></div></header>
+ <div class="lab-g"><aside class="lab-side"><label class="lab-q">${ico("search")}<input id="labq" placeholder="${LS("Chercher un Pokémon","Search a Pokémon")}" value="${esc(LABQ)}"></label><div class="lab-list" id="lablist">${labPick()}</div></aside>
+ <section class="lab-main"><div class="lab-poke"><div class="lab-pimg">${sp(id,c.sh)}</div><div><small>${LS("SUJET DE RECHERCHE","RESEARCH SUBJECT")}</small><h2>${dn(id)}</h2><div class="lab-tags">${vb(c)}${!c.mi?`<span class="vb">${LS("Aucune mutation","No mutation")}</span>`:""}<span class="vb">${SZ[c.zi==null?2:c.zi][0]}</span></div><small>${LS("Recherches menées : ","Research done: ")}${fmt(L.n||0)} · ${LS("réussites : ","successes: ")}${fmt(L.ok||0)}${tb?` · ${LS("bonus de l'arbre : +","tree bonus: +")}${String(tb).replace(".",",")} pt`:""}</small></div></div>
+ <label class="lab-cat${ECH()<LABCAT?" off":""}"><input type="checkbox" data-lab="cat" ${LABCK?"checked":""} ${ECH()<LABCAT?"disabled":""}><span>${ico("echo")}<b>${LS("Catalyseur","Catalyst")}</b> · ${LS("consomme "+LABCAT+" fragments d'Écho pour +"+LABCATP+" points de chance (dans la limite du plafond)","uses "+LABCAT+" Echo shards for +"+LABCATP+" chance points (within the cap)")}</span><em>${fmt(ECH())} / ${LABCAT}</em></label>
+ <div class="lab-rg">${LABR.map(r=>labCard(id,r)).join("")}</div>
+ <p class="lab-note">${LS("Une réussite fait monter la mutation ou la taille d'un seul palier et remet à zéro le compteur d'échecs de cette recherche uniquement. Un attribut au maximum ne peut plus être acheté. Les compteurs sont propres à chaque Pokémon et sont conservés au prestige.","A success raises mutation or size by one tier and resets only this research's failure counter. A maxed attribute can no longer be bought. Counters belong to each Pokémon and are kept through prestige.")}</p></section></div></div>`}
+window.vLab=vLab;window.labRun=labRun;window.labSel=labSel;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-lab]");if(!b||tab!="lab")return;const a=b.dataset.lab;
+ if(a=="sel"){e.preventDefault();LAB().sel=+b.dataset.i;LABFX=null;const y=scrollY;show();scrollTo(0,y)}
+ else if(a=="run"){e.preventDefault();if(b.disabled)return;const y=scrollY;labRun(labSel(),b.dataset.k);scrollTo(0,y)}});
+document.addEventListener("change",e=>{const t=e.target;if(t&&t.dataset&&t.dataset.lab=="cat"){LABCK=t.checked?1:0;const y=scrollY;show();scrollTo(0,y)}});
+document.addEventListener("input",e=>{const t=e.target;if(t&&t.id=="labq"){LABQ=t.value;const l=$("lablist");if(l)l.innerHTML=labPick()}});
+{const st=document.createElement("style");st.id="pid-lab";st.textContent=`
+.lab{display:flex;flex-direction:column;gap:16px;color:#e8eefc;width:100%;max-width:100%;box-sizing:border-box;padding-right:14px}.lab *{box-sizing:border-box}.lab-pk,.lab-pk b{color:#e8eefc}.lab-pimg .sp,.lab-pimg img{width:104px!important;height:104px!important;object-fit:contain;image-rendering:pixelated}.lab-pki .sp,.lab-pki img{width:40px!important;height:40px!important;object-fit:contain}
+.lab-hd{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}.lab-hd small{font-size:10px;font-weight:900;letter-spacing:.14em;color:#7dd3fc}.lab-hd h1{margin:4px 0;font-size:30px}.lab-hd p{margin:0;max-width:640px;color:#a9b8d4;font-size:13px}
+.lab-wal{display:flex;gap:10px;flex-wrap:wrap}.lab-wal span{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:#0f1a2e;border:1px solid #38bdf844}.lab-wal .i{width:16px;height:16px;color:#7dd3fc}
+.lab-g{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:16px}
+.lab-side{background:#0e1626;border:1px solid #233250;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px;max-height:760px}
+.lab-q{display:flex;align-items:center;gap:8px;background:#0a111d;border:1px solid #2a3a5c;border-radius:10px;padding:8px 10px}.lab-q input{flex:1;min-width:0;background:none;border:0;color:inherit;font:inherit;outline:none}.lab-q .i{width:15px;height:15px;opacity:.7}
+.lab-list{overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:2px}
+.lab-pk{display:flex;align-items:center;gap:10px;text-align:left;padding:6px 8px;border-radius:12px;background:#111c30;border:1px solid transparent;color:inherit;cursor:pointer}.lab-pk:hover{border-color:#38bdf866}.lab-pk.on{border-color:#38bdf8;background:linear-gradient(90deg,#0c4a6e66,#111c30)}
+.lab-pki{width:44px;height:44px;flex:none;display:grid;place-items:center}.lab-pki img,.lab-pki .sp{max-width:44px;max-height:44px}.lab-pkn{display:flex;flex-direction:column;min-width:0}.lab-pkn b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lab-pkn small{font-size:11px;color:#8ea2c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lab-main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.lab-poke{display:flex;gap:16px;align-items:center;padding:16px;border-radius:18px;background:radial-gradient(circle at 12% 50%,#0ea5e933,transparent 45%),#0e1626;border:1px solid #233250}.lab-pimg{width:120px;height:120px;flex:none;display:grid;place-items:center;border-radius:16px;background:#0a111d;border:1px solid #1f2d48}.lab-pimg img,.lab-pimg .sp{max-width:112px;max-height:112px}
+.lab-poke small{color:#8ea2c4;font-size:11px}.lab-poke>div>small:first-child{letter-spacing:.14em;font-weight:900;color:#7dd3fc;font-size:10px}.lab-poke h2{margin:2px 0 8px}.lab-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.lab-cat{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:#0f1a2e;border:1px dashed #38bdf866;font-size:13px;cursor:pointer}.lab-cat.off{opacity:.55;cursor:default}.lab-cat span{flex:1;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.lab-cat .i{width:16px;height:16px;color:#7dd3fc}.lab-cat em{font-style:normal;font-weight:800;color:#7dd3fc}
+.lab-rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.lab-rc{position:relative;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:#0e1626;border:1px solid #233250;overflow:hidden}.lab-rc.mx{opacity:.7}
+.lab-rc.lab-mu{--c:#e879f9}.lab-rc.lab-sz{--c:#2dd4bf}.lab-rc.lab-al{--c:#f87171}.lab-rc.lab-sh{--c:#fde047}
+.lab-rc:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.lab-rch{display:flex;gap:10px;align-items:center}.lab-rci{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}.lab-rci .i{width:18px;height:18px}.lab-rch b{display:block}.lab-rch small{color:#8ea2c4;font-size:12px}
+.lab-chv{display:flex;align-items:baseline;gap:6px}.lab-chv b{font-size:26px;color:var(--c)}.lab-chv small{color:#8ea2c4}
+.lab-bar{height:7px;border-radius:9px;background:#1b2740;overflow:hidden;margin:4px 0 6px}.lab-bar i{display:block;height:100%;background:var(--c);border-radius:9px;transition:width .4s}
+.lab-ch>small{font-size:11px;color:#7f93b6}.lab-nx{margin:0;font-size:12px;color:#c9d5ec;min-height:16px}
+.lab-ft{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.lab-ft span{font-size:12px;color:#8ea2c4}.lab-ft .go{white-space:nowrap}
+.lab-rc.win{animation:labwin 1.2s ease}.lab-rc.lose{animation:labl .5s ease}
+@keyframes labwin{0%{box-shadow:0 0 0 0 var(--c)}30%{box-shadow:0 0 0 4px var(--c),0 0 40px var(--c)}100%{box-shadow:0 0 0 0 transparent}}
+@keyframes labl{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.lab-note{font-size:12px;color:#8ea2c4;margin:0}.lab-empty{color:#8ea2c4;font-size:13px}
+:root[data-theme=day] .lab-side,:root[data-theme=day] .lab-rc,:root[data-theme=day] .lab-poke,:root[data-theme=day] .lab-cat,:root[data-theme=day] .lab-wal span{background:#f3f7fd;border-color:#c9d6ea;color:#1c2a44}:root[data-theme=day] .lab-pk{background:#e8eef8;color:#1c2a44}:root[data-theme=day] .lab-q{background:#fff}:root[data-theme=day] .lab-pimg{background:#fff}
+@media(max-width:760px){.lab-g{grid-template-columns:1fr}.lab-side{max-height:300px}.lab-poke{flex-direction:column;text-align:center}.lab-tags{justify-content:center}}
+`;document.head.appendChild(st)}
 {const x0=cxShow;cxShow=function(k){return x0.apply(this,arguments).filter(x=>x[1]!="gc")}}
 setTimeout(()=>{const v0=vCas;vCas=function(){let h=v0.apply(this,arguments);try{const i=h.indexOf('data-k="d"');if(i>0){const j=h.indexOf('<div class="cxpz">',i);if(j>0)h=h.slice(0,j)+`<div class="as-gchic">${sp(90006,0,1)}<span>Gardevoir Chic · ${prc(GCH_W/10000)}</span></div>`+h.slice(j)}
  h=h.replace(LS('Quatre tickets lumineux.','Four glowing tickets.'),LS('Cinq tickets lumineux.','Five glowing tickets.')).replace('</span><b>'+LS('Formes exclusives','Exclusive forms'),sp(90006,0)+'</span><b>'+LS('Formes exclusives','Exclusive forms')).replace(LS('Lucario Senkou · Ectoplasma Cristal','Dawn Lucario · Dusk Gengar'),LS('Lucario Senkou · Ectoplasma Cristal · Gardevoir Chic','Dawn Lucario · Dusk Gengar · Gardevoir Chic'))}catch(e){}return h}},0);
@@ -13895,6 +13988,8 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["new","Laboratoire","Nouvel onglet dans Aventure (dès l'étage 40). Choisis un Pokémon et paie une recherche : Mutation (20 G, 20 %), Taille (15 G, 20 %), Alpha (60 G, 5 %) ou Chromatique (100 G, 1 %). Chaque échec augmente la chance suivante de ce Pokémon jusqu'au plafond (75 %, 75 %, 40 %, 15 %). Une réussite fait monter la mutation ou la taille d'un palier, sans jamais toucher aux autres attributs.","Laboratory","New Adventure tab (from floor 40). Pick a Pokémon and pay for research: Mutation (20 G, 20%), Size (15 G, 20%), Alpha (60 G, 5%) or Shiny (100 G, 1%). Each failure raises that Pokémon's next chance up to the cap (75%, 75%, 40%, 15%). A success raises mutation or size by one tier and never touches other attributes."],
+  ["new","Laboratoire : catalyseur","Un catalyseur facultatif utilise 5 fragments d'Écho pour +10 points de chance, dans la limite du plafond.","Laboratory: catalyst","An optional catalyst uses 5 Echo shards for +10 chance points, within the cap."],
   ["new","Nouvel exclusif : Gardevoir Chic","Une Gardevoir en robe de nacre, Psy et Fée. Elle ne s'obtient qu'avec le nouveau ticket Diamant du casino (0,06 % par ticket) et n'apparaît dans aucun autre tirage.","New exclusive: Gardevoir Chic","A pearl-gowned Gardevoir, Psychic and Fairy. It can only be obtained with the new casino Diamond ticket (0.06% per ticket) and appears in no other draw."],
   ["new","Casino : ticket Diamant","Cinquième ticket, à prix fixe de 2 G. Lots : pièces, Rêve Balls, Rappels Max, capsules, Méga-Perles, Master Ball et Gardevoir Chic. En moyenne, les pièces gagnées restent inférieures à la mise.","Casino: Diamond ticket","Fifth ticket, fixed price of 2 G. Prizes: coins, Dream Balls, Max Revives, capsules, Mega Pearls, Master Ball and Gardevoir Chic. On average, coin winnings stay below the bet."],
   ["imp","Invocations : LR plus accessible","Bannière classique : 2 % de LR par invocation (au lieu de 1 %) et LR garanti à 200 invocations (au lieu de 350). Bannière Halloween : 2,5 % pour le légendaire avant la garantie.","Summons: more accessible LR","Classic banner: 2% LR per summon (instead of 1%) and LR guaranteed at 200 summons (instead of 350). Halloween banner: 2.5% for the legendary before pity."],
