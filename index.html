@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-guild-cosmetics-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-guild-cosmetics-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-update-20261022-2"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-update-20261022-2"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11460,13 +11460,12 @@ function repairShinyMutation(){let changed=false;for(const [key,c] of Object.ent
   try{rq(+key)}catch(e){}changed=true}
  if(changed){try{recomp()}catch(e){}save();if(tab==="pk"||tab==="cos")show()}return changed}
 repairShinyMutation();setTimeout(repairShinyMutation,2500);setInterval(repairShinyMutation,15000);
-/* Codes privés distincts, liés au compte du créateur. Seules leurs empreintes sont publiées. */
+/* Codes non annoncés : utilisables une fois par sauvegarde. Seules leurs empreintes sont publiées. */
 const PID_REWARD_HASH="9377c3cfdfc8059440aaabedad75c561611613987c66264ab4141a141ecef239";
 const PID_DONOR_HASH="3eaa005a655fbc9ca322a8bf424f5e5d7753d16b60890537fa97339cfd1c54ce";
-TIT.push(["don","Donateur","Supporter",["#fb7185","#fbbf24"],()=>!!G.don&&x4Me(),"Soutien privé du jeu","Private game supporter",0]);
+TIT.push(["don","Donateur","Supporter",["#fb7185","#fbbf24"],()=>!!G.don,"Soutien du jeu","Game supporter",0]);
 window.pidPrivateRedeem=async function(code){
  if(!code||(!code.startsWith("TIDO-")&&!code.startsWith("DONA-")))return null;
- if(!x4Me())return LS("Ce code est réservé au compte du créateur.","This code is reserved for the creator account.");
  const hash=await pidH(code);
  if(hash!==PID_REWARD_HASH&&hash!==PID_DONOR_HASH)return LS("Code inconnu.","Unknown code.");
  G.codes=G.codes||{};
