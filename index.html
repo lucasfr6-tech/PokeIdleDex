@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lab-202610220256"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-lab-202610220256"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-collections-202610220304"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-collections-202610220304"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5162,7 +5162,7 @@ ${ev.length||tms.length?`<h2>Évolution et CT</h2><div class="row" style="margin
 <h2>Niveau automatique</h2><small>Plus aucun bonbon : les Pokémon montent de niveau seuls selon l'étage atteint, et rattrapent vite leur retard.</small></div>`}
 
 function show0(){document.querySelectorAll("#nav [data-t],#qk [data-t],#pan").forEach(b=>b.classList.toggle("on",b.dataset.t==tab));lastE=null;HUDK="";STK="";PSIG="";WXK="";EXSIG="";recomp();
- $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vRebX,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,lab:()=>window.vLab?window.vLab():"",qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
+ $("view").innerHTML=({adv:vAdv,exp:vExp,mine:vMine,dex:vDex,shop:vShop2,gacha:vGacha,gear:vGear,pvp:vPvp,twr:vTwr,gld:vGld,rks:vRks,prof:vProf,reb:vRebX,wiki:vWiki,lb:vLB,pan:vPan,bag:vBag,town:vTown,trn:vTrn,fz:vFz,sk:vSk,raid:vRaid,set:vSetg,pen:vPen,lab:()=>window.vLab?window.vLab():"",cos:()=>window.vCos?window.vCos():"",qst:vQst,log:vLog,cas:vCas,gem:vGem,bp:vBp,inv:vInv})[tab]();if(tab!==LT){LT=tab;const v=$("view");v.classList.remove("tin");void v.offsetWidth;v.classList.add("tin")}lastB=-1;ui();modal();
 if(tab=="gacha"||tab=="dex"||tab=="prof"||tab=="mine"){const need2=tab=="gacha"?Object.keys(G.cards).map(Number):ids(),miss=need2.filter(i=>!DB[i]);if(miss.length&&!OFF)preload(miss).then(softRefresh)}}
 let sr=0;function softRefresh(){clearTimeout(sr);sr=setTimeout(()=>{if(tab=="mine"&&$("mng"))$("mng").innerHTML=mineGrid();else if(tab=="dex"&&$("dxg"))$("dxg").innerHTML=dexGrid();else if(tab=="gacha"&&$("cgr"))$("cgr").innerHTML=cardGrid()},200)}
 
@@ -12668,7 +12668,7 @@ const skZs=[84,104,128];
 const skZi=()=>{if(SKZ>=0)return SKZ;let z=-1;try{const v=localStorage.getItem("pid_skz2");if(v!=null)z=+v}catch(e){}if(!(z>=0&&z<3))z=innerWidth<700?0:1;return SKZ=z};
 const skNext=()=>SKNODES.filter(n=>!skOn(n)).sort((a,b)=>a.ko-b.ko)[0]||null;
 const skNm=n=>n.b<0?LS("Dresseur","Trainer"):LS(SKB[n.b].n[0],SKB[n.b].n[1])+" "+SKTIER[n.j].l;
-const SKW=15.4;
+const SKW=21;
 function skDet(n){
  if(!n)return `<div class="sx-dt"><b>${LS("Arbre complet !","Tree complete!")}</b></div>`;
  const on=skOn(n),ko=skKo(),eff=n.e?LS(SKEL[n.e][0],SKEL[n.e][1])+" +"+skPct(n.v):LS("Point de départ de l'arbre","Start of the tree");
@@ -13728,7 +13728,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 document.addEventListener("change",e=>{const t=e.target;if(t&&t.dataset&&t.dataset.lab=="cat"){LABCK=t.checked?1:0;const y=scrollY;show();scrollTo(0,y)}});
 document.addEventListener("input",e=>{const t=e.target;if(t&&t.id=="labq"){LABQ=t.value;const l=$("lablist");if(l)l.innerHTML=labPick()}});
 {const st=document.createElement("style");st.id="pid-lab";st.textContent=`
-.lab{display:flex;flex-direction:column;gap:16px;color:#e8eefc;width:100%;max-width:100%;box-sizing:border-box;padding-right:14px}.lab *{box-sizing:border-box}.lab-pk,.lab-pk b{color:#e8eefc}.lab-pimg .sp,.lab-pimg img{width:104px!important;height:104px!important;object-fit:contain;image-rendering:pixelated}.lab-pki .sp,.lab-pki img{width:40px!important;height:40px!important;object-fit:contain}
+.lab{display:flex;flex-direction:column;gap:16px;color:#e8eefc;width:100%;max-width:100%;box-sizing:border-box;padding-right:14px}.lab *{box-sizing:border-box}.lab-pk,.lab-pk b{color:#e8eefc!important}.lab-pimg .sp,.lab-pimg img{width:104px!important;height:104px!important;object-fit:contain;image-rendering:pixelated}.lab-pki .sp,.lab-pki img{width:40px!important;height:40px!important;object-fit:contain}
 .lab-hd{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}.lab-hd small{font-size:10px;font-weight:900;letter-spacing:.14em;color:#7dd3fc}.lab-hd h1{margin:4px 0;font-size:30px}.lab-hd p{margin:0;max-width:640px;color:#a9b8d4;font-size:13px}
 .lab-wal{display:flex;gap:10px;flex-wrap:wrap}.lab-wal span{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:#0f1a2e;border:1px solid #38bdf844}.lab-wal .i{width:16px;height:16px;color:#7dd3fc}
 .lab-g{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:16px}
@@ -13757,6 +13757,109 @@ document.addEventListener("input",e=>{const t=e.target;if(t&&t.id=="labq"){LABQ=
 :root[data-theme=day] .lab-side,:root[data-theme=day] .lab-rc,:root[data-theme=day] .lab-poke,:root[data-theme=day] .lab-cat,:root[data-theme=day] .lab-wal span{background:#f3f7fd;border-color:#c9d6ea;color:#1c2a44}:root[data-theme=day] .lab-pk{background:#e8eef8;color:#1c2a44}:root[data-theme=day] .lab-q{background:#fff}:root[data-theme=day] .lab-pimg{background:#fff}
 @media(max-width:760px){.lab-g{grid-template-columns:1fr}.lab-side{max-height:300px}.lab-poke{flex-direction:column;text-align:center}.lab-tags{justify-content:center}}
 `;document.head.appendChild(st)}
+/* ===================== COLLECTIONS : ensembles esthétiques (aura, socle, cadre, apparition, signature) ===================== */
+IP.cos='<path d="M12 3l2.4 4.8 5.3.8-3.8 3.7.9 5.2L12 15l-4.8 2.5.9-5.2-3.8-3.7 5.3-.8z"/><path d="M5 21h14"/>';
+NAV2.push(["cos","cos","Collections","#f472b6","#9d174d"]);NENG.cos="Collections";LOCKS.cos=30;
+try{NAVX.push(["cos","cos","Collections","#f472b6","#9d174d"])}catch(e){}
+{const c=NCAT.find(x=>x[0]=="c_shp");if(c&&!c[6].includes("cos"))c[6].push("cos")}
+const COSAP=["rise","zoom","spin","flash","drop"];
+/* 30 collections universelles : [nom FR, nom EN, couleur aura, couleur socle] ; prix 1 à 6 T, bonus 1 à 3 % */
+const COSN=[["Aube dorée","Golden dawn","#fbbf24","#b45309"],["Marée lunaire","Lunar tide","#60a5fa","#1e3a8a"],["Braise royale","Royal ember","#f97316","#7c2d12"],["Jardin de jade","Jade garden","#34d399","#065f46"],["Givre astral","Astral frost","#a5f3fc","#155e75"],
+["Orage d'azur","Azure storm","#38bdf8","#1d4ed8"],["Nébuleuse","Nebula","#c084fc","#581c87"],["Rose des vents","Compass rose","#fda4af","#9f1239"],["Sakura","Sakura","#f9a8d4","#be185d"],["Abysses","Abyss","#2dd4bf","#0f172a"],
+["Aurore boréale","Northern lights","#86efac","#4c1d95"],["Cendres","Ashes","#a8a29e","#292524"],["Corail","Coral","#fb7185","#c2410c"],["Ambre du désert","Desert amber","#fcd34d","#92400e"],["Forêt ancienne","Ancient forest","#4ade80","#14532d"],
+["Galaxie","Galaxy","#818cf8","#1e1b4b"],["Glacier","Glacier","#e0f2fe","#0369a1"],["Lagon","Lagoon","#22d3ee","#0e7490"],["Lavande","Lavender","#d8b4fe","#6b21a8"],["Météore","Meteor","#fdba74","#7f1d1d"],
+["Minuit","Midnight","#6366f1","#020617"],["Obsidienne","Obsidian","#94a3b8","#0b0b0f"],["Opale","Opal","#f5d0fe","#0891b2"],["Prisme","Prism","#f0abfc","#0ea5e9"],["Rubis","Ruby","#f43f5e","#4c0519"],
+["Saphir","Sapphire","#3b82f6","#172554"],["Solstice","Solstice","#fde047","#ea580c"],["Tempête","Tempest","#7dd3fc","#334155"],["Topaze","Topaz","#fbbf24","#78350f"],["Volcan","Volcano","#ef4444","#1c1917"]];
+const COS=COSN.map((x,i)=>{const t=1+i%6;return{id:"c"+String(i+1).padStart(2,"0"),n:[x[0],x[1]],a:x[2],b:x[3],ap:COSAP[i%5],p:t*1e12,bo:+(1+(t-1)*.4).toFixed(1),sig:x[0]}});
+/* signatures réservées aux exclusifs : [id Pokémon, nom FR, nom EN, aura, socle, prix T] */
+[[90001,"Aura d'aurore","Dawn aura","#5eead4","#be185d",12],[90002,"Rire de braise","Ember laugh","#fb923c","#4c1d95",12],[90003,"Douceur stellaire","Stellar sweetness","#fde68a","#7c3aed",13],[90004,"Cime foudroyante","Thunder summit","#fde047","#0e7490",13],[90005,"Sommet de cristal","Crystal summit","#67e8f9","#4338ca",15],[90006,"Bal de nacre","Pearl ball","#fbcfe8","#6366f1",15]]
+ .forEach(x=>COS.push({id:"x"+x[0],n:[x[1],x[2]],a:x[3],b:x[4],ap:"flash",p:x[5]*1e12,bo:3,sig:x[1],only:x[0]}));
+/* Nuit des citrouilles : collection Halloween, en vente en octobre, toujours équipable ensuite */
+COS.push({id:"hw1",n:["Nuit des citrouilles","Pumpkin night"],a:"#ff7518",b:"#4c1d95",ap:"drop",p:8e12,bo:3,sig:"Nuit des citrouilles",hw:1});
+const COSM={};COS.forEach(c=>COSM[c.id]=c);
+const COSS=()=>{const s=G.cos=G.cos||{};s.own=s.own||{};s.eq=s.eq||{};s.fr=s.fr||{};return s};
+const cosOn=id=>{const c=G.col&&G.col[id],k=c&&G.cos&&G.cos.eq&&G.cos.eq[id];return k&&COSM[k]&&G.cos.own&&G.cos.own[k]?COSM[k]:null};
+const cosSale=c=>!c.hw||new Date().getMonth()===9;
+function cosMul(id){const c=cosOn(id);return c?1+Math.min(3,c.bo)/100:1}
+{const b0=baseNew;baseNew=function(id){return b0.apply(this,arguments)*cosMul(id)}}
+function cosTag(h,id,raw){if(raw)return h;const c=cosOn(id);if(!c||typeof h!="string")return h;return h.replace(/<(img|video|canvas)\b/,`<$1 data-cosx="${c.id}" data-cosap="${c.ap}"`)}
+setTimeout(()=>{{const s0=sp;sp=function(id,sh,raw){return cosTag(s0.apply(this,arguments),id,raw)}}{const p0=plSprite;plSprite=function(id){return cosTag(p0.apply(this,arguments),id)}}
+ {const r0=plRow;plRow=function(i){let h=r0.apply(this,arguments);try{const c=cosOn(i);if(c&&typeof h=="string"){h=h.replace(/^<div class="([^"]*)"/,(m,k)=>`<div class="${k} cos-card" data-cosc="${c.id}"`);const k=h.indexOf('>');h=h.slice(0,k+1)+`<span class="cos-sig" style="--ca:${c.a}">✦ ${esc(LS(c.n[0],c.n[1]))}</span>`+h.slice(k+1)}}catch(e){}return h}}},0);
+{const st=document.createElement("style");st.id="pid-cos-sets";let css="";COS.forEach(c=>{css+=`[data-cosx="${c.id}"]{--ca:${c.a};--cb:${c.b}}[data-cosc="${c.id}"]{--ca:${c.a};--cb:${c.b}}`});
+ st.textContent=css+`
+[data-cosx]{background:radial-gradient(ellipse 44% 8% at 50% 94%,color-mix(in srgb,var(--cb) 85%,#fff 15%),transparent 72%),radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--ca) 55%,transparent),transparent 62%)!important;border-radius:18%;animation:cos-aura 3.2s ease-in-out infinite}
+[data-cosap=rise]{animation:cos-rise .7s ease-out,cos-aura 3.2s .7s ease-in-out infinite}[data-cosap=zoom]{animation:cos-zoom .6s cubic-bezier(.3,1.6,.5,1),cos-aura 3.2s .6s ease-in-out infinite}[data-cosap=spin]{animation:cos-spin .8s ease-out,cos-aura 3.2s .8s ease-in-out infinite}[data-cosap=flash]{animation:cos-flash .8s ease-out,cos-aura 3.2s .8s ease-in-out infinite}[data-cosap=drop]{animation:cos-drop .7s cubic-bezier(.3,1.4,.5,1),cos-aura 3.2s .7s ease-in-out infinite}
+@keyframes cos-aura{0%,100%{background-size:100% 100%,100% 100%}50%{background-size:110% 100%,118% 118%}}
+@keyframes cos-rise{from{opacity:0;transform:translateY(18px)}}@keyframes cos-zoom{from{opacity:0;transform:scale(.4)}}@keyframes cos-spin{from{opacity:0;transform:rotate(-200deg) scale(.5)}}@keyframes cos-flash{0%{opacity:0;filter:brightness(4)}60%{opacity:1;filter:brightness(1.8)}}@keyframes cos-drop{from{opacity:0;transform:translateY(-40px)}}
+.cos-card{outline:2px solid var(--ca)!important;outline-offset:-3px;box-shadow:inset 0 0 0 2px var(--ca),0 0 18px color-mix(in srgb,var(--ca) 45%,transparent)!important;position:relative}
+.cos-sig{position:absolute;left:12px;bottom:6px;z-index:5;font:italic 800 11px Georgia,serif;letter-spacing:.04em;color:var(--ca);text-shadow:0 0 8px color-mix(in srgb,var(--ca) 70%,transparent);pointer-events:none;white-space:nowrap}
+.cosv{display:flex;flex-direction:column;gap:16px;color:#e8eefc;width:100%;box-sizing:border-box;padding-right:14px}.cosv *{box-sizing:border-box}
+.cos-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}.cos-hd small{font-size:10px;font-weight:900;letter-spacing:.14em;color:#f9a8d4}.cos-hd h1{margin:4px 0;font-size:30px}.cos-hd p{margin:0;max-width:660px;color:#a9b8d4;font-size:13px}
+.cos-wal{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:12px;background:#1a1226;border:1px solid #f472b655;font-weight:800}
+.cos-tabs{display:flex;gap:8px;flex-wrap:wrap}.cos-tabs button{padding:8px 14px;border-radius:999px;background:#151b2c;border:1px solid #2b3550;color:#cbd5e1;font-weight:800;cursor:pointer}.cos-tabs button.on{background:linear-gradient(90deg,#be185d,#7c3aed)!important;border-color:transparent!important;color:#fff!important}
+.cos-g{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:16px}
+.cos-pv{position:sticky;top:10px;align-self:start;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:#121726;border:1px solid #2b3550}
+.cos-stage{height:200px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 50% 120%,#3b1d4a,#0b0f1a 70%)}.cos-stage .sp,.cos-stage img{width:150px!important;height:150px!important;object-fit:contain;image-rendering:pixelated}
+.cos-pv h3{margin:0}.cos-pv small{color:#94a3b8;font-size:12px}
+.cos-pl{display:flex;flex-direction:column;gap:6px;max-height:330px;overflow:auto}.cos-pk{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:10px;background:#0f1422;border:1px solid transparent;color:#e8eefc;cursor:pointer;text-align:left}.cos-pk.on{border-color:#f472b6;background:#2a1430!important;color:#fff!important}.cos-pk b{color:inherit!important}.cos-pk .sp,.cos-pk img{width:34px!important;height:34px!important;object-fit:contain}.cos-pk b{font-size:12px}
+.cos-q{display:flex;gap:8px;align-items:center;background:#0b0f1a;border:1px solid #2b3550;border-radius:10px;padding:7px 9px}.cos-q input{flex:1;min-width:0;background:none;border:0;color:inherit;font:inherit;outline:none}
+.cos-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;align-content:start}
+.cos-it{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;background:linear-gradient(160deg,color-mix(in srgb,var(--ca) 16%,#111827),#0d1220 70%);border:1px solid color-mix(in srgb,var(--ca) 35%,#273049)}
+.cos-it.eq{box-shadow:0 0 0 2px var(--ca),0 0 20px color-mix(in srgb,var(--ca) 40%,transparent)}
+.cos-sw{height:64px;border-radius:12px;background:radial-gradient(ellipse 40% 12% at 50% 88%,var(--cb),transparent 75%),radial-gradient(circle at 50% 45%,var(--ca),transparent 60%),#0b0f1a;display:grid;place-items:center;font:italic 800 13px Georgia,serif;color:#fff;text-shadow:0 0 10px var(--ca)}
+.cos-it b{font-size:14px}.cos-it small{color:#a5b4cc;font-size:11px}.cos-row{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:auto}.cos-row .go{white-space:nowrap;padding:8px 10px;width:100%;justify-content:center}
+.cos-fr{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.cos-fri{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;border-radius:16px;background:#121726;border:1px solid #2b3550}
+.cos-fri .lav{width:76px!important;height:76px!important}
+@property --fa{syntax:'<angle>';inherits:true;initial-value:0deg}
+.lav.fx.cosa,.cos-fri .lav{animation:cos-fa 5s linear infinite!important}@keyframes cos-fa{to{--fa:360deg}}
+:root[data-theme=day] .cos-pv,:root[data-theme=day] .cos-fri{background:#f3f7fd;border-color:#c9d6ea;color:#1c2a44}:root[data-theme=day] .cos-pk{background:#e8eef8;color:#1c2a44}
+@media(max-width:760px){.cos-g{grid-template-columns:1fr}.cos-pv{position:static}}
+`;document.head.appendChild(st)}
+/* cadres de profil animés (achetables, sans bonus) */
+const COSFR=[["fa1","Halo tournant","Spinning halo","conic-gradient(from var(--fa),#f472b6,#a78bfa,#38bdf8,#f472b6)",2],["fa2","Braises","Embers","conic-gradient(from var(--fa),#7c2d12,#f97316,#fde047,#f97316,#7c2d12)",2],["fa3","Marée","Tide","conic-gradient(from var(--fa),#0e7490,#67e8f9,#1e3a8a,#67e8f9,#0e7490)",3],["fa4","Jardin","Garden","conic-gradient(from var(--fa),#14532d,#86efac,#fde68a,#86efac,#14532d)",3],["fa5","Nacre","Pearl","conic-gradient(from var(--fa),#fbcfe8,#e0e7ff,#a5f3fc,#fde68a,#fbcfe8)",4],["fa6","Éclipse","Eclipse","conic-gradient(from var(--fa),#020617,#fbbf24,#020617,#a855f7,#020617)",4]];
+COSFR.forEach(f=>FRM.push([f[0],f[1],f[2],f[3],()=>!!(G.cos&&G.cos.fr&&G.cos.fr[f[0]]),LS("Boutique des collections","Collections shop"),"Collections shop"]));
+{const a0=ava2;ava2=function(r){let h=a0.apply(this,arguments);try{if(r&&/^fa\d/.test(r.fr))h=h.replace('class="lav fx','class="lav fx cosa')}catch(e){}return h}}
+/* succès et titres (sans bonus de statistiques pour les titres) */
+const XACH=[["la1","Apprenti chercheur","Lance 10 recherches au Laboratoire",()=>(G.lab&&G.lab.n)||0,10],["la2","Savant fou","Lance 100 recherches au Laboratoire",()=>(G.lab&&G.lab.n)||0,100],["la3","Percée","Réussis 10 recherches au Laboratoire",()=>(G.lab&&G.lab.ok)||0,10],
+ ["co1","Chic","Achète une collection",()=>Object.keys((G.cos&&G.cos.own)||{}).length,1],["co2","Garde-robe","Achète 10 collections",()=>Object.keys((G.cos&&G.cos.own)||{}).length,10],
+ ["dn1","Écho lointain","Atteins la salle 10 d'un Donjon des Échos",()=>(G.dng&&G.dng.best)||0,10],["dn2","Gardien capturé","Capture un boss de Donjon des Échos",()=>(G.dng&&G.dng.caps)||0,1]];
+XACH.forEach(a=>ACH.push(a));
+[["tla1","Chercheur","Researcher",["#38bdf8","#a5f3fc"],"la1"],["tla2","Savant fou","Mad scientist",["#22d3ee","#e879f9"],"la2"],["tla3","Pionnier","Pioneer",["#2dd4bf","#fde047"],"la3"],["tco1","Élégant","Elegant",["#f472b6","#fbcfe8"],"co1"],["tco2","Icône de mode","Style icon",["#f9a8d4","#a78bfa"],"co2"],["tdn1","Voyageur des Échos","Echo traveller",["#a78bfa","#67e8f9"],"dn1"],["tdn2","Dompteur d'Échos","Echo tamer",["#c084fc","#fbbf24"],"dn2"]]
+ .forEach(t=>{const a=XACH.find(x=>x[0]==t[4]);TIT.push([t[0],t[1],t[2],t[3],()=>!!(G.ach&&G.ach[t[4]]),a[2],a[2],0])});
+/* boutique */
+let COSV="col",COSQ="",COSP=0;
+function cosSel(){if(COSP&&G.col[COSP])return COSP;const b=ids().slice().sort((a,c)=>base(c)-base(a))[0];COSP=b||0;return COSP}
+function cosBuy(k){const c=COSM[k],S=COSS();if(!c||S.own[k])return;if(!cosSale(c)){toast(LS("Cette collection n'est en vente qu'en octobre.","This collection is only sold in October."));return}if(G.m<c.p){toast(LS("Il te manque "+fmt(c.p-G.m)+" ₽","You are missing "+fmt(c.p-G.m)+" coins"));try{sfx("err")}catch(e){}return}
+ G.m-=c.p;S.own[k]=1;try{checkAch()}catch(e){}save();try{sfx("big")}catch(e){}toast(LS("Collection achetée : ","Collection bought: ")+LS(c.n[0],c.n[1]))}
+function cosEquip(k){const c=COSM[k],S=COSS(),id=cosSel();if(!c||!S.own[k]||!id)return;if(c.only&&c.only!=id){toast(LS("Cette signature est réservée à ","This signature is reserved for ")+nm(c.only));return}
+ if(S.eq[id]==k)delete S.eq[id];else S.eq[id]=k;try{recomp()}catch(e){}save();try{sfx("coin")}catch(e){}}
+function cosFrBuy(k){const f=COSFR.find(x=>x[0]==k),S=COSS();if(!f||S.fr[k])return;const p=f[4]*1e12;if(G.m<p){toast(LS("Il te manque "+fmt(p-G.m)+" ₽","You are missing "+fmt(p-G.m)+" coins"));return}G.m-=p;S.fr[k]=1;G.fr=k;try{ttRefresh(true)}catch(e){}save();try{sfx("big")}catch(e){}toast(LS("Cadre acheté et équipé : ","Frame bought and equipped: ")+LS(f[1],f[2]))}
+function cosItem(c,id){const S=COSS(),own=!!S.own[c.id],eq=S.eq[id]==c.id,lock=c.only&&!G.col[c.only],wrong=c.only&&c.only!=id,sale=cosSale(c);
+ const btn=!own?`<button class="go" data-cos="b:${c.id}" ${G.m>=c.p&&sale&&!lock?"":"disabled"}>${sale?fmt(c.p)+" ₽":LS("Octobre","October")}</button>`:`<button class="go${eq?" gr":""}" data-cos="e:${c.id}" ${wrong?"disabled":""}>${eq?LS("Retirer","Remove"):LS("Équiper","Equip")}</button>`;
+ return `<div class="cos-it${eq?" eq":""}" style="--ca:${c.a};--cb:${c.b}"><div class="cos-sw">✦ ${esc(LS(c.n[0],c.n[1]))}</div><b>${esc(LS(c.n[0],c.n[1]))}</b><small>${c.only?LS("Signature de ","Signature of ")+nm(c.only):c.hw?LS("Halloween · en vente en octobre","Halloween · on sale in October"):LS("Aura, socle, cadre, apparition et signature","Aura, pedestal, frame, entrance and signature")} · ${LS("puissance +","power +")}${String(c.bo).replace(".",",")} %</small><div class="cos-row"><small>${own?LS("Possédée","Owned"):""}</small>${btn}</div></div>`}
+function vCos(){const id=cosSel(),c=id&&G.col[id],S=COSS(),q=norm(COSQ);
+ const L=COSV=="col"?COS.filter(x=>!x.only&&!x.hw):COSV=="sig"?COS.filter(x=>x.only||x.hw):null;
+ const pk=ids().filter(i=>!q||norm(nm(i)).includes(q)).sort((a,b)=>base(b)-base(a)).slice(0,100).map(i=>`<button class="cos-pk${i==id?" on":""}" data-cos="p:${i}">${sp(i,G.col[i].sh)}<b>${dn(i)}</b></button>`).join("");
+ const eq=id&&cosOn(id);
+ return `<div class="cosv"><header class="cos-hd"><div><small>${LS("BOUTIQUE / COLLECTIONS","SHOP / COLLECTIONS")}</small><h1>${LS("Collections","Collections")}</h1><p>${LS("Chaque collection est un ensemble complet : aura, socle, cadre, apparition et signature. Un seul ensemble équipé par Pokémon ; son bonus de puissance (1 à 3 %) ne se cumule pas avec tes autres achats.","Each collection is a full set: aura, pedestal, frame, entrance and signature. One set equipped per Pokémon; its power bonus (1 to 3%) does not stack with your other purchases.")}</p></div><span class="cos-wal">${ico("coin")} ${fmt(G.m)} ₽</span></header>
+ <div class="cos-tabs">${[["col",LS("Collections","Collections")],["sig",LS("Signatures","Signatures")],["fr",LS("Cadres de profil","Profile frames")]].map(t=>`<button data-cos="v:${t[0]}" class="${COSV==t[0]?"on":""}">${t[1]}</button>`).join("")}</div>
+ ${COSV=="fr"?`<div class="cos-fr">${COSFR.map(f=>{const own=!!S.fr[f[0]],on=G.fr==f[0];return `<div class="cos-fri"><span class="lav fx cosa" style="--fg:${f[3]}">${ico("user")}</span><b>${LS(f[1],f[2])}</b><small>${LS("Cadre animé, visible sur ton profil partagé","Animated frame, shown on your shared profile")}</small>${own?`<button class="go${on?" gr":""}" data-cos="fe:${f[0]}">${on?LS("Équipé","Equipped"):LS("Équiper","Equip")}</button>`:`<button class="go" data-cos="fb:${f[0]}" ${G.m>=f[4]*1e12?"":"disabled"}>${fmt(f[4]*1e12)} ₽</button>`}</div>`}).join("")}</div>`:
+ `<div class="cos-g"><aside class="cos-pv"><div class="cos-stage">${id?sp(id,c.sh):""}</div><h3>${id?dn(id):"—"}</h3><small>${eq?LS("Équipé : ","Equipped: ")+LS(eq.n[0],eq.n[1])+" · +"+String(eq.bo).replace(".",",")+" %":LS("Aucune collection équipée","No collection equipped")}</small><label class="cos-q">${ico("search")}<input id="cosq" value="${esc(COSQ)}" placeholder="${LS("Chercher un Pokémon","Search a Pokémon")}"></label><div class="cos-pl" id="cospl">${pk}</div></aside>
+ <section class="cos-list">${L.map(x=>cosItem(x,id)).join("")}</section></div>`}</div>`}
+window.vCos=vCos;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cos]");if(!b||tab!="cos")return;e.preventDefault();const [k,a]=b.dataset.cos.split(":"),y=scrollY;
+ if(k=="v")COSV=a;else if(k=="p")COSP=+a;else if(k=="b")cosBuy(a);else if(k=="e")cosEquip(a);else if(k=="fb")cosFrBuy(a);else if(k=="fe"){G.fr=a;save()}
+ show();scrollTo(0,y)});
+document.addEventListener("input",e=>{const t=e.target;if(t&&t.id=="cosq"){COSQ=t.value;const l=$("cospl");if(l){const q=norm(COSQ),id=cosSel();l.innerHTML=ids().filter(i=>!q||norm(nm(i)).includes(q)).sort((a,b)=>base(b)-base(a)).slice(0,100).map(i=>`<button class="cos-pk${i==id?" on":""}" data-cos="p:${i}">${sp(i,G.col[i].sh)}<b>${dn(i)}</b></button>`).join("")}}});
+/* ===================== ARBRE : trois branches (Exploration, Recherche, Maîtrise), 6 cases chacune ===================== */
+Object.assign(SKE,{o:["Fragments","Shards","echo"],g:["Donjons","Dungeons","sword"]});
+Object.assign(SKEL,{o:["Fragments d'Écho gagnés","Echo shards earned"],g:["Dégâts dans les Donjons","Dungeon damage"]});
+[{k:"g",n:["Exploration","Exploration"],c:"#38bdf8",e:"ogogog",v:[2,2,3,3,4,5],an:0},{k:"h",n:["Recherche","Research"],c:"#2dd4bf",e:"mzmsmz",v:[.5,.5,.5,.5,1,1],an:120,lab:1},{k:"i",n:["Maîtrise","Mastery"],c:"#f43f5e",e:"dhcdhd",v:[1,1,1.5,1.5,2,2.5],an:240}].forEach(B=>{
+ const bi=SKB.length;SKB.push({k:B.k,n:B.n,c:B.c,e:B.e,lab:B.lab});const th=B.an*Math.PI/180;
+ for(let j=0;j<6;j++){const r=2.6+j*1.3;SKNODES.push({id:B.k+j,b:bi,j,x:+(Math.cos(th)*r).toFixed(3),y:+(Math.sin(th)*r).toFixed(3),ko:Math.round([30000,60000,100000,160000,250000,400000][j]*(1+.05*(bi-6))),e:B.e[j],v:B.v[j],c:B.c,par:[j==0?"ctr":B.k+(j-1)],lab:B.lab?1:0})}});
+function treeLabBonus(){try{return SKNODES.filter(n=>n.lab&&skOn(n)).length*.5}catch(e){return 0}}
+window.treeLabBonus=treeLabBonus;
+{const d0=skDet;skDet=function(n){let h=d0.apply(this,arguments);try{if(n&&n.lab)h=h.replace("</em>"," · "+LS("Laboratoire +0,5 point","Laboratory +0.5 point")+"</em>")}catch(e){}return h}}
 {const x0=cxShow;cxShow=function(k){return x0.apply(this,arguments).filter(x=>x[1]!="gc")}}
 setTimeout(()=>{const v0=vCas;vCas=function(){let h=v0.apply(this,arguments);try{const i=h.indexOf('data-k="d"');if(i>0){const j=h.indexOf('<div class="cxpz">',i);if(j>0)h=h.slice(0,j)+`<div class="as-gchic">${sp(90006,0,1)}<span>Gardevoir Chic · ${prc(GCH_W/10000)}</span></div>`+h.slice(j)}
  h=h.replace(LS('Quatre tickets lumineux.','Four glowing tickets.'),LS('Cinq tickets lumineux.','Five glowing tickets.')).replace('</span><b>'+LS('Formes exclusives','Exclusive forms'),sp(90006,0)+'</span><b>'+LS('Formes exclusives','Exclusive forms')).replace(LS('Lucario Senkou · Ectoplasma Cristal','Dawn Lucario · Dusk Gengar'),LS('Lucario Senkou · Ectoplasma Cristal · Gardevoir Chic','Dawn Lucario · Dusk Gengar · Gardevoir Chic'))}catch(e){}return h}},0);
@@ -13988,6 +14091,11 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["new","Boutique : Collections","Nouvel onglet dans Boutique. 30 collections universelles (1 à 6 T) : chacune est un ensemble complet avec aura, socle, cadre, apparition et signature. Un seul ensemble équipé par Pokémon ; son bonus de puissance va de 1 à 3 % et ne se cumule pas avec tes autres achats.","Shop: Collections","New Shop tab. 30 universal collections (1 to 6 T): each is a full set with aura, pedestal, frame, entrance and signature. One set equipped per Pokémon; its power bonus ranges from 1 to 3% and does not stack with your other purchases."],
+  ["new","Signatures des exclusifs","Signatures réservées à chaque exclusif (12 à 15 T), dont Bal de nacre pour Gardevoir Chic. La collection Nuit des citrouilles (8 T) est en vente en octobre et reste équipable ensuite.","Exclusive signatures","Signatures reserved for each exclusive (12 to 15 T), including Pearl ball for Gardevoir Chic. The Pumpkin night collection (8 T) is on sale in October and stays equippable afterwards."],
+  ["new","Cadres de profil animés","Six cadres animés entre 2 et 4 T, visibles sur ton profil partagé. Ils ne donnent aucun bonus.","Animated profile frames","Six animated frames between 2 and 4 T, shown on your shared profile. They give no bonus."],
+  ["new","Sept succès et titres","Nouveaux succès pour le Laboratoire, les Collections et les Donjons des Échos, chacun avec son titre (sans bonus de statistiques).","Seven achievements and titles","New achievements for the Laboratory, Collections and Echo Dungeons, each with its title (no stat bonus)."],
+  ["new","Arbre : trois nouvelles branches","Exploration, Recherche et Maîtrise, six cases chacune, débloquées par K.O. comme le reste de l'arbre. Chaque case Recherche ajoute aussi +0,5 point de chance au Laboratoire.","Tree: three new branches","Exploration, Research and Mastery, six nodes each, unlocked by KOs like the rest of the tree. Each Research node also adds +0.5 chance point in the Laboratory."],
   ["new","Laboratoire","Nouvel onglet dans Aventure (dès l'étage 40). Choisis un Pokémon et paie une recherche : Mutation (20 G, 20 %), Taille (15 G, 20 %), Alpha (60 G, 5 %) ou Chromatique (100 G, 1 %). Chaque échec augmente la chance suivante de ce Pokémon jusqu'au plafond (75 %, 75 %, 40 %, 15 %). Une réussite fait monter la mutation ou la taille d'un palier, sans jamais toucher aux autres attributs.","Laboratory","New Adventure tab (from floor 40). Pick a Pokémon and pay for research: Mutation (20 G, 20%), Size (15 G, 20%), Alpha (60 G, 5%) or Shiny (100 G, 1%). Each failure raises that Pokémon's next chance up to the cap (75%, 75%, 40%, 15%). A success raises mutation or size by one tier and never touches other attributes."],
   ["new","Laboratoire : catalyseur","Un catalyseur facultatif utilise 5 fragments d'Écho pour +10 points de chance, dans la limite du plafond.","Laboratory: catalyst","An optional catalyst uses 5 Echo shards for +10 chance points, within the cap."],
   ["new","Nouvel exclusif : Gardevoir Chic","Une Gardevoir en robe de nacre, Psy et Fée. Elle ne s'obtient qu'avec le nouveau ticket Diamant du casino (0,06 % par ticket) et n'apparaît dans aucun autre tirage.","New exclusive: Gardevoir Chic","A pearl-gowned Gardevoir, Psychic and Fairy. It can only be obtained with the new casino Diamond ticket (0.06% per ticket) and appears in no other draw."],
