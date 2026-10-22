@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lab3-202610220309"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-lab3-202610220309"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-casfix-202610220318"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-casfix-202610220318"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13863,6 +13863,8 @@ Object.assign(SKEL,{o:["Fragments d'Écho gagnés","Echo shards earned"],g:["Dé
 function treeLabBonus(){try{return SKNODES.filter(n=>n.lab&&skOn(n)).length*.5}catch(e){return 0}}
 window.treeLabBonus=treeLabBonus;
 {const d0=skDet;skDet=function(n){let h=d0.apply(this,arguments);try{if(n&&n.lab)h=h.replace("</em>"," · "+LS("Laboratoire : +5 % de l'écart vers le plafond","Laboratory: +5% of the gap to the cap")+"</em>")}catch(e){}return h}}
+/* casino : un rafraîchissement de l'écran ne doit jamais effacer un tirage en cours ni son résultat (bouton « Refaire ») */
+setTimeout(()=>{const s0=show;show=function(){let keep=null;try{if(tab=="cas"){const o=document.getElementById("csst");if(o&&/\bgo\b/.test(o.className))keep=o}}catch(e){}const r=s0.apply(this,arguments);try{if(keep&&tab=="cas"){const n=document.getElementById("csst");if(n&&n!==keep)n.replaceWith(keep)}}catch(e){}return r}},0);
 {const x0=cxShow;cxShow=function(k){return x0.apply(this,arguments).filter(x=>x[1]!="gc")}}
 setTimeout(()=>{const v0=vCas;vCas=function(){let h=v0.apply(this,arguments);try{const i=h.indexOf('data-k="d"');if(i>0){const j=h.indexOf('<div class="cxpz">',i);if(j>0)h=h.slice(0,j)+`<div class="as-gchic">${sp(90006,0,1)}<span>Gardevoir Chic · ${prc(GCH_W/10000)}</span></div>`+h.slice(j)}
  h=h.replace(LS('Quatre tickets lumineux.','Four glowing tickets.'),LS('Cinq tickets lumineux.','Five glowing tickets.')).replace('</span><b>'+LS('Formes exclusives','Exclusive forms'),sp(90006,0)+'</span><b>'+LS('Formes exclusives','Exclusive forms')).replace(LS('Lucario Senkou · Ectoplasma Cristal','Dawn Lucario · Dusk Gengar'),LS('Lucario Senkou · Ectoplasma Cristal · Gardevoir Chic','Dawn Lucario · Dusk Gengar · Gardevoir Chic'))}catch(e){}return h}},0);
@@ -14094,6 +14096,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["fix","Casino : tirages jamais annulés","Un rafraîchissement de l'écran pendant un tirage effaçait les cartes et donnait l'impression que le tirage était annulé. Le tirage en cours et le bouton « Refaire » restent maintenant affichés.","Casino: draws never cancelled","A screen refresh during a draw used to clear the cards, making the draw look cancelled. The running draw and the “Play again” button now stay on screen."],
   ["new","Boutique : Collections","Nouvel onglet dans Boutique. 30 collections universelles (1 à 6 T) : chacune est un ensemble complet avec aura, socle, cadre, apparition et signature. Un seul ensemble équipé par Pokémon ; son bonus de puissance va de 1 à 3 % et ne se cumule pas avec tes autres achats.","Shop: Collections","New Shop tab. 30 universal collections (1 to 6 T): each is a full set with aura, pedestal, frame, entrance and signature. One set equipped per Pokémon; its power bonus ranges from 1 to 3% and does not stack with your other purchases."],
   ["new","Signatures des exclusifs","Signatures réservées à chaque exclusif (12 à 15 T), dont Bal de nacre pour Gardevoir Chic. La collection Nuit des citrouilles (8 T) est en vente en octobre et reste équipable ensuite.","Exclusive signatures","Signatures reserved for each exclusive (12 to 15 T), including Pearl ball for Gardevoir Chic. The Pumpkin night collection (8 T) is on sale in October and stays equippable afterwards."],
   ["new","Cadres de profil animés","Six cadres animés entre 2 et 4 T, visibles sur ton profil partagé. Ils ne donnent aucun bonus.","Animated profile frames","Six animated frames between 2 and 4 T, shown on your shared profile. They give no bonus."],
