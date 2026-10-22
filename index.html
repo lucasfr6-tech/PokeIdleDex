@@ -4343,12 +4343,13 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 .fzp-shell .fzsc .fzbg{opacity:.22}
 
 </style><style id="pid-native-animated3d">img[data-animated3d="1"],img[src*="img/animated3d/"]{image-rendering:auto!important;object-fit:contain} .spw img[data-animated3d="1"]{filter:var(--pl-filter,none);opacity:var(--pl-opacity,1)}</style>
+<style>/* ==== TS4 : badge "Bientôt" ==== */ .dk .soon{display:block;font-style:normal;font-weight:800;font-size:8.5px;color:#fbbf24;letter-spacing:.05em;text-transform:uppercase;margin-top:2px}</style>
 </head><body>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-chic-origin-prestige-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-chic-origin-prestige-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-donjon-bientot-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-donjon-bientot-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5709,13 +5710,13 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 const bfl=()=>Math.max(G.cl,G.bf||0,G.fl||0);
 const LOCKS={exp:15,gacha:30,reb:15,pen:30},BFL=[30,30,50,70,90];
 const prestigeTab=t=>["lab","dng","cos"].includes(t);
-const lockOf=t=>prestigeTab(t)?((G.st||0)<1?-1:0):(LOCKS[t]&&bfl()<LOCKS[t]?LOCKS[t]:0);
-const lockTxt=n=>n===-1?LS("Débloqué après ton premier prestige","Unlocks after your first prestige"):LS("Se débloque à l'étage "+n+" · meilleur étage : "+bfl(),"Unlocks at floor "+n+" · best floor: "+bfl());
+const SOON=["dng"];const lockOf=t=>SOON.includes(t)?-2:(prestigeTab(t)?((G.st||0)<1?-1:0):(LOCKS[t]&&bfl()<LOCKS[t]?LOCKS[t]:0));
+const lockTxt=n=>n===-2?LS("Bientôt","Coming soon"):n===-1?LS("Débloqué après ton premier prestige","Unlocks after your first prestige"):LS("Se débloque à l'étage "+n+" · meilleur étage : "+bfl(),"Unlocks at floor "+n+" · best floor: "+bfl());
 NENG.pen="Daycare";
 const NAVX=[["pen","pension","Pension","#f97316","#9a3412"]];
 let NX=!!SG.nx,PENR=false,PEN_ALERT=0;
-function dk(n){const lk=lockOf(n[0]),nm=SG.lang=="en"?NENG[n[0]]:n[2];
- return `<button class="dk${lk?" lk":""}" data-a="tab" data-t="${n[0]}"${lk?` data-tip="${lockTxt(lk)}"`:` title="${nm}"`}><span class="ni" style="--c1:${n[3]};--c2:${n[4]}">${ico(n[1])}${lk?`<i class="lkb">${ico("lock")}</i>`:""}</span><em>${nm}</em>${n[0]=="pen"&&penReady()?'<i class="dot"></i>':""}</button>`}
+function dk(n){const lk=lockOf(n[0]),so=SOON.includes(n[0]),nm=SG.lang=="en"?NENG[n[0]]:n[2];
+ return `<button class="dk${lk?" lk":""}" data-a="tab" data-t="${n[0]}"${lk?` data-tip="${lockTxt(lk)}"`:` title="${nm}"`}><span class="ni" style="--c1:${n[3]};--c2:${n[4]}">${ico(n[1])}${lk?`<i class="lkb">${ico("lock")}</i>`:""}</span><em>${nm}${so?`<i class="soon">${LS("Bientôt","Soon")}</i>`:""}</em>${n[0]=="pen"&&penReady()?'<i class="dot"></i>':""}</button>`}
 function navRender(){const g=id=>NAV2.find(n=>n[0]==id),M=["adv","bag","mine","dex","shop","exp"];
  $("nav").innerHTML=`<div class="dgl">${dk(g("lb"))}</div><div class="dgm">${M.map(id=>dk(g(id))).join("")}<button class="dk dxa${NX?" on":""}" data-a="nx" title="${LS("Plus d'onglets","More tabs")}"><span class="ni" style="--c1:#475569;--c2:#1e293b">${ico("chevr")}</span><em>${LS("Plus","More")}</em>${penReady()?'<i class="dot"></i>':""}</button></div><div class="dgr">${dk(g("prof"))}${dk(g("wiki"))}${dk(g("set"))}</div>`;
  let p=$("pan");if(!p){p=document.createElement("button");p.id="pan";p.className="panb";p.dataset.a="tab";p.dataset.t="pan";document.body.appendChild(p)}p.innerHTML=`<span class="prr"></span><span class="pi">${ico("pantheon")}</span><em>${SG.lang=="en"?"Pantheon":"Panthéon"}</em>`;p.classList.toggle("on",tab=="pan");
@@ -6006,8 +6007,8 @@ function bqUpd(sync){if(!BQ)return;const i=IT[BQ.k],p=shopP(i),c=p*BQ.q,ok=G.m>=
 function bqBuy(){if(!BQ)return;const i=IT[BQ.k],c=shopP(i)*BQ.q;if(G.m<c||BQ.q<1||uf()<(i.r||0))return;G.m-=c;G.inv[BQ.k]=(G.inv[BQ.k]||0)+BQ.q;qadd("buy",BQ.q);qadd("spend",c);sfx("coin");toast(LS("Acheté : ","Bought: ")+BQ.q+" × "+i.n);bqClose();save();if(tab=="shop")show()}
 document.addEventListener("keydown",e=>{if(e.key=="Escape"&&BQ)bqClose();else if(e.key=="Enter"&&BQ&&e.target.id=="bqi"){bqBuy()}});
 /* ---------- dock : onglets supplémentaires à la suite de Prestige / Wiki ---------- */
-function dk(n,x){const lk=lockOf(n[0]),nm=SG.lang=="en"?NENG[n[0]]:n[2];
- return `<button class="dk${lk?" lk":""}${x||""}" data-a="tab" data-t="${n[0]}"${lk?` data-tip="${lockTxt(lk)}"`:` title="${nm}"`}><span class="ni" style="--c1:${n[3]};--c2:${n[4]}">${ico(n[1])}${lk?`<i class="lkb">${ico("lock")}</i>`:""}</span><em>${nm}</em>${n[0]=="pen"&&penReady()?'<i class="dot"></i>':""}</button>`}
+function dk(n,x){const lk=lockOf(n[0]),so=SOON.includes(n[0]),nm=SG.lang=="en"?NENG[n[0]]:n[2];
+ return `<button class="dk${lk?" lk":""}${x||""}" data-a="tab" data-t="${n[0]}"${lk?` data-tip="${lockTxt(lk)}"`:` title="${nm}"`}><span class="ni" style="--c1:${n[3]};--c2:${n[4]}">${ico(n[1])}${lk?`<i class="lkb">${ico("lock")}</i>`:""}</span><em>${nm}${so?`<i class="soon">${LS("Bientôt","Soon")}</i>`:""}</em>${n[0]=="pen"&&penReady()?'<i class="dot"></i>':""}</button>`}
 let NXA=false;
 function navRender(){const g=id=>NAV2.find(n=>n[0]==id),M=["adv","bag","mine","dex","shop","exp"];
  const ex=NX?NAVX.map(n=>dk(n,NXA?" xin":"")).join(""):"";
