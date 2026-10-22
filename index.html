@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-collection-scenes-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-collection-scenes-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-journal-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-journal-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10982,6 +10982,8 @@ function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Dat
   else if(k=="disc"){const u=window.PID_DISCORD||BUG_URL;if(u)window.open(u,"_blank","noopener")}
   else if(k=="clr"){G.mail=mailBox().filter(m=>!m.c);save();render()}
   else if(k=="code"){const i=document.getElementById("mlin"),c=(i&&i.value||"").trim().toUpperCase();ST.code="";
+   const privateResult=window.pidPrivateRedeem?await window.pidPrivateRedeem(c):null;
+   if(privateResult){ST.msg=privateResult;render();mailDot();return}
    const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c]||(/^TS4PACK-/.test(c)?GIFT_PRIVATE_CODES[await pidH(c)]:null);G.codes=G.codes||{};
    if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");else if(tlv().l<(g.minLv||10)){ST.msg=LS("Niveau de dresseur "+(g.minLv||10)+" requis pour ce code.","Trainer level "+(g.minLv||10)+" required for this code.");}
    else if(g.pk){if(ST.claiming)return;ST.claiming=1;try{const names=await giftMonsGrant(g.pk,c);ST.msg=LS("Code accepté : ","Code accepted: ")+names.join(", ")+" !"}catch(x){ST.msg=LS("Impossible de récupérer les Pokémon. Réessaie : ton code reste disponible.","Could not claim Pokémon. Try again: your code is still available.")}finally{ST.claiming=0}}
@@ -11434,6 +11436,19 @@ const x2Ok=()=>!!G.mainX3||((G.st|0)>0&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0))||(S
 const x2On=()=>x2Ok()&&SG.x2!==0;
 /* x4 réservé au compte du propriétaire (ID ami 4BWS-KL9Q) */
 const x4Me=()=>!!(G.fd&&G.fd.id==="4BWSKL9Q");
+/* Récompense privée, liée au compte du créateur. Seule l'empreinte du code est publiée. */
+const PID_DONOR_HASH="790891df6ba408758abc1d45cd51409fe1d36b62a1655d53b633101b33c42f91";
+TIT.push(["don","Donateur","Supporter",["#fb7185","#fbbf24"],()=>!!G.don&&x4Me(),"Soutien privé du jeu","Private game supporter",0]);
+window.pidPrivateRedeem=async function(code){
+ if(!code||!code.startsWith("TIDO-"))return null;
+ if(!x4Me())return LS("Ce code est réservé au compte du créateur.","This code is reserved for the creator account.");
+ if(await pidH(code)!==PID_DONOR_HASH)return LS("Code inconnu.","Unknown code.");
+ G.codes=G.codes||{};
+ if(G.codes[code]||G.don)return LS("Code déjà utilisé.","Code already used.");
+ G.codes[code]=1;G.don=1;G.m=Math.max(0,Number(G.m)||0)+2e12;G.inv=G.inv||{};G.inv["master-ball"]=(G.inv["master-ball"]||0)+30;G.tt="don";
+ try{ttRefresh(true);save();lbPush(true);show();sfx("big")}catch(e){try{save()}catch(x){}}
+ return LS("Code accepté : titre Donateur équipé, 30 Master Balls et 2 T de pièces ajoutés.","Code accepted: Supporter title equipped, 30 Master Balls and 2 T coins added.");
+};
 const x2M=()=>!x2On()?1:Math.max(G.mainX3&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0)?3:2,x4Me()?(SG.x2===3?15:SG.x2===2?4:2):2);
 const mainExtraRate=()=>.06*PL("ps")+(x2M()-1);
 let XACC=0,XLAST=Date.now();
@@ -14428,6 +14443,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-22",t:["Nouveautés et journal remis à jour","New features and updated log"],e:[["fix","Journal des mises à jour","Les nouveautés récentes apparaissent maintenant en tête du journal, avec une section indépendante pour chaque livraison. Les changements ajoutés par les deux équipes sont regroupés dans cette chronologie.","Update log","Recent updates now appear at the top of the log, with a separate section for each release. Changes from both teams are included in this timeline."]]},
  {d:"2026-10-22",t:["Bannières et signatures des exclusifs","Exclusive banners and signatures"],e:[["imp","Atelier esthétique","20 décors avec socles matériels et 20 signatures à acheter séparément pour les Pokémon exclusifs. Aperçu dans la collection, la fiche et le classement. Bonus équipés : +1 % pour la bannière et +0,5 % pour la signature. Les auras esthétiques disparaissent.","Style workshop","20 scenes with solid pedestals and 20 separately purchasable signatures for exclusive Pokémon. Preview them in the collection, detail view and rankings. Equipped bonuses: +1% for the banner and +0.5% for the signature. Cosmetic auras are removed."]]},
  {d:"2026-10-22",t:["Donjons : puissance réelle et nouvelles difficultés","Dungeons: real power and new difficulties"],e:[["imp","PV et puissance","PV initiaux de 10 M à 10 T, +25 % par salle. Les attaques utilisent la puissance permanente du Pokémon, avec les types et bonus de combat. Rencontres plus rares aux difficultés élevées.","HP and power","Starting HP from 10 M to 10 T, +25% per room. Attacks use each Pokémon’s permanent power with type and combat bonuses. Higher difficulties offer rarer encounters."],["fix","Annuler la pension","Le bouton Annuler libère le lot en cours et désactive sa relance automatique.","Cancel daycare","Cancel frees the current batch and disables automatic repeats."]]},
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
@@ -14683,19 +14699,19 @@ const UPD=[
  const ic='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg>';
  function render(){const o=document.getElementById("udm");if(!o||!o.classList.contains("on"))return;const sn=o.dataset.seen||"";
   const cnt=k=>UPD.reduce((a,v)=>a+v.e.filter(e=>k=="all"||e[0]==k).length,0);
-  const ver=(v,i)=>{const E=v.e.filter(e=>F=="all"||e[0]==F);if(!E.length)return"";const isNew=!sn||v.d>sn,open=F!="all"||OP.has(v.d);
+  const ver=(v,i)=>{const E=v.e.filter(e=>F=="all"||e[0]==F);if(!E.length)return"";const isNew=readRecord?v.e.some(e=>!readRecord.items.includes(entryKey(v,e))):!sn||v.d>=sn,open=F!="all"||OP.has(i);
    const sum=Object.keys(TY).map(k=>{const n=v.e.filter(e=>e[0]==k).length;const PL2={new:["nouveauté","new feature"],imp:["amélioration","improvement"],fix:["correction","fix"],rem:["retrait","removal"]}[k];return n?`<i style="--c:${TY[k][2]}">${n} ${LS(PL2[0],PL2[1])}${n>1?(SG&&SG.lang=="en"&&k=="fix"?"es":"s"):""}</i>`:""}).join("");
-   return `<section class="udv${open?" op":""}"><button class="udh" data-ud="t" data-d="${v.d}"><span class="udd"><b>${fmtD(v.d)}</b>${isNew?`<em>${LS("NOUVEAU","NEW")}</em>`:""}</span><span class="udt">${esc(ttl(v))}</span><span class="uds">${sum}</span><span class="udc">${open?"−":"+"}</span></button>
+   return `<section class="udv${open?" op":""}"><button class="udh" data-ud="t" data-i="${i}"><span class="udd"><b>${fmtD(v.d)}</b>${isNew?`<em>${LS("NOUVEAU","NEW")}</em>`:""}</span><span class="udt">${esc(ttl(v))}</span><span class="uds">${sum}</span><span class="udc">${open?"−":"+"}</span></button>
     ${open?`<ul class="udl">${E.map(e=>{const t=TY[e[0]]||TY.new;return `<li style="--c:${t[2]}"><span class="udg">${t[3]} ${LS(t[0],t[1])}</span><div><b>${esc(LS(e[1],e[3]||e[1]))}</b><p>${esc(LS(e[2],e[4]||e[2]))}</p></div></li>`}).join("")}</ul>`:""}</section>`};
   o.querySelector(".udb").innerHTML=UPD.map(ver).join("")||`<p class="mu">${LS("Rien dans cette catégorie.","Nothing in this category.")}</p>`;
   o.querySelectorAll("[data-ud=f]").forEach(b=>b.classList.toggle("on",b.dataset.f==F))}
  function open(){let o=document.getElementById("udm");if(!o){o=document.createElement("div");o.id="udm";document.body.appendChild(o);o.addEventListener("click",e=>{if(e.target===o||e.target.closest("[data-udx]"))o.classList.remove("on")})}
-  o.dataset.seen=seen();F="all";OP=new Set(UPD.length?[UPD[0].d]:[]);
+  o.dataset.seen=seen();F="all";OP=new Set(UPD.slice(0,4).map((_,i)=>i));
   o.innerHTML=`<div class="udw"><button class="rxx" data-udx>${ico("x")}</button><div class="udhd"><span class="udi">${ic}</span><div><h3>${LS("Mises à jour","Update log")}</h3><small>${LS("Tout ce qui change dans PokeIdleDex, du plus récent au plus ancien.","Everything that changes in PokeIdleDex, newest first.")}</small></div></div>
    <div class="udf">${[["all",LS("Tout","All"),"#94a3b8"]].concat(Object.keys(TY).map(k=>[k,LS(TY[k][0],TY[k][1]),TY[k][2]])).map(f=>`<button data-ud="f" data-f="${f[0]}" style="--c:${f[2]}">${f[1]}</button>`).join("")}</div><div class="udb"></div></div>`;
   o.classList.add("on");render();markRead();inj(1);refreshVisible()}
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ud]");if(!b)return;e.stopPropagation();e.preventDefault();
-  if(b.dataset.ud=="open")open();else if(b.dataset.ud=="f"){F=b.dataset.f;render()}else if(b.dataset.ud=="t"){const d=b.dataset.d;if(F!="all"){F="all";OP=new Set([d])}else if(OP.has(d))OP.delete(d);else OP.add(d);render()}},true);
+  if(b.dataset.ud=="open")open();else if(b.dataset.ud=="f"){F=b.dataset.f;render()}else if(b.dataset.ud=="t"){const i=Number(b.dataset.i);if(F!="all"){F="all";OP=new Set([i])}else if(OP.has(i))OP.delete(i);else OP.add(i);render()}},true);
  function inj(force){const q=$("qk");if(!q)return;let b=q.querySelector(".qkud");
   if(!b){b=document.createElement("button");b.className="qkb qkud";b.dataset.ud="open";const dc=q.querySelector(".qkdc");if(dc&&dc.nextSibling)q.insertBefore(b,dc.nextSibling);else q.appendChild(b);force=1}
   const n=unreadCount(),u=n>0,sig=n+"|"+(SG&&SG.lang);if(!force&&b.dataset.s==sig)return;b.dataset.s=sig;
@@ -15058,4 +15074,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-collection-scenes-20261022"><script src="collection-scenes.js?v=pid-collection-scenes-20261022"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-journal-20261022"><script src="collection-scenes.js?v=pid-journal-20261022"></script></body></html>
