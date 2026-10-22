@@ -39,6 +39,7 @@
 .ph-entry-button.cs-ranking .ph-art{overflow:visible!important}
 .ph-entry-button.cs-ranking .ph-art img{object-fit:contain!important}
 .ph-entry-button.cs-ranking .ph-person>b,.ph-entry-button.cs-ranking .ph-score strong{color:#fff3d8!important;text-shadow:0 2px 5px #12121c}
+.ph-entry-button.cs-ranking .ph-person .ph-subtitle,.cs-ranking .rkb-podium-owner,.cs-ranking .rkb-t small{color:#17202a!important;background:#f8f3e8e8;border:1px solid #fff9;border-radius:6px;padding:2px 7px;text-shadow:none!important;font-weight:900!important;width:max-content;max-width:100%;box-shadow:0 1px 5px #10152255}
 .ph-champion .ph-entry-button.cs-ranking .ph-art{width:130px!important;height:120px!important}
 .ph-champion .ph-entry-button.cs-ranking .ph-art img{max-width:130px!important;max-height:120px!important}
 .ph-best.ph-champion .ph-entry-button.cs-ranking .ph-art .ph-mon,.ph-best.ph-champion .ph-entry-button.cs-ranking .ph-art .ranking-animated{width:130px!important;height:118px!important;max-width:130px!important;max-height:118px!important;object-fit:contain!important}

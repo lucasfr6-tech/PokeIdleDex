@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-qa-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-qa-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-guild-cosmetics-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-guild-cosmetics-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4435,6 +4435,7 @@ const eff=(a,def)=>def.reduce((m,d)=>{const e=EF[a];return m*(e[0].includes(d)?2
 const RN=["Commun","Peu commun","Rare","Épique","Légendaire"],RC=["#9aa9c8","#4ade80","#60a5fa","#c084fc","#ffcb3d"];
 const SZ=[["Lilliputien",.6,.6,.7,2.5],["Menu",.8,.8,.9,8],["Standard",1,1,1,84],["Imposant",1.15,1.3,1.4,4],["Colossal",1.35,1.8,2,.8],["Titanesque",1.55,2.5,3.5,.15]];
 const MU=[["",1,1,"",1000],["Spectral",1.2,2,"opacity:.7;filter:hue-rotate(170deg) drop-shadow(0 0 14px #9ff)",12],["Incandescent",1.4,2.5,"filter:saturate(2) drop-shadow(0 0 16px #f60)",8],["Glacial",1.4,2.5,"filter:hue-rotate(150deg) drop-shadow(0 0 14px #8ef)",8],["Cristallin",1.6,3,"filter:brightness(1.3) saturate(.5) drop-shadow(0 0 16px #fff)",4],["Abyssal",2,4,"filter:brightness(.55) drop-shadow(0 0 16px #a0f)",2],["Aurifère",1.5,6,"filter:sepia(1) saturate(4) drop-shadow(0 0 18px gold)",1.5],["Chromatique",1.5,8,"filter:drop-shadow(0 0 18px #fff)",.2535]];
+const muUpgrade=(old,next)=>next>0&&next!==7&&!!MU[next]&&(!old||old===7||MU[next][1]>(MU[old]?.[1]||1));
 const GN=["Kanto","Johto","Hoenn","Sinnoh","Unys","Kalos","Alola","Galar","Paldea"],GENS=[[1,151],[152,251],[252,386],[387,493],[494,649],[650,721],[722,809],[810,905],[906,1025]];
 // Légendaires et fabuleux (servent aux raretés et aux zones)
 const LEG=new Set([144,145,146,150,151,243,244,245,249,250,251,...rg(377,386),...rg(480,494),...rg(638,649),...rg(716,721),...rg(785,792),800,801,802,807,808,809,...rg(888,898),905,...rg(1001,1004),1007,1008,...rg(1014,1017),1024,1025]);
@@ -4636,7 +4637,7 @@ function rq(id){const c=G.col[id];if(!c)return 1;ens(id);
  let h=it&&it.h?it.h:null;if(h&&h.sp&&!h.sp.includes(id))h=null;if(h&&h.ot&&!tp(id).includes(h.ot))h=null;c.he=h;
  c.df=(h&&h.df||1)*(h&&h.ev&&evOpts(id).length?h.ev:1);c.co=h&&h.co||1;c.xm=h&&h.xp||1;
  const a=Math.max(c.iv[1]+c.ev[1]/8,c.iv[3]+c.ev[3]/8)/62.5,o=(c.iv[4]+c.iv[5])/62*.05+(c.ev[4]+c.ev[5])/504*.15,hh=c.ha&&abl(id)[1]?.1:0;c.wa=WAB[abn(id)]||"";
- let q=1+a*.5+o+hh;if(c.mf)q*=1.5;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.5;if(kxDiv(id))q*=1.6;if(id>9e4)q*=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=(typeof SZD!='undefined'&&SZD[c.zi])||SZ[c.zi][1];return c.q=q}
+  let q=1+a*.5+o+hh;if(c.mf)q*=2.2;if(c.dy)q*=2.2;if(h&&h.d)q*=h.d;if(c.sh)q*=1.5;if(kxDiv(id))q*=1.6;if(id>9e4)q*=2.6*((SPM[id]&&SPM[id].hm)||1);if(c.mi)q*=MU[c.mi][1];if(c.zi)q*=(typeof SZD!='undefined'&&SZD[c.zi])||SZ[c.zi][1];return c.q=q}
 const calc=(id,k)=>{const c=G.col[id],B=ST(id)[k],v=Math.floor((2*B+c.iv[k]+(c.ev[k]>>2))*c.l/100);return k==0?v+c.l+10:v+5};
 function train(id,k){const c=G.col[id];if(!c)return;ens(id);for(let j=0;j<k;j++){
  const a=[0,1,2,3,4,5].filter(x=>c.iv[x]<31);if(a.length)c.iv[a[Math.random()*a.length|0]]++;
@@ -4803,7 +4804,7 @@ function rulesHtml(){const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.in
  return `<label><b ${j<4?`class="rty r${j}"`:""}>${t}</b><select data-a="rule" data-t="${k}"><option value="">Ne pas lancer</option>${L.map(b=>`<option value="${b}" ${b==cur?"selected":""}>${IT[b].n} (×${G.inv[b]||0})</option>`).join("")}</select></label>`}).join("")}</div>`}
 function xtOn(){try{return !!(SG.xt&&x4Me())}catch(e){return false}}
 /* Extra entraînement : dans l'onglet Entraînement, chaque combat donne à coup sûr une meilleure mutation et une meilleure taille (les étages ne changent pas) */
-function xtMu(id){try{const c=G.col[id],cur=c&&c.mi||0,L=MU.map((m,i)=>i).filter(i=>i>cur&&i!=7);if(L.length)return MU[L[0]];if(!(c&&c.sh))return MU[7];return MU[MU.length-1]}catch(e){return MU[1]}}
+ function xtMu(id){try{const c=G.col[id],cur=c&&c.mi||0,L=MU.map((m,i)=>i).filter(i=>i>cur&&i!=7);return MU[L.length?L[0]:MU.length-1]}catch(e){return MU[1]}}
 function xtSz(id){try{const c=G.col[id],cur=c&&c.zi||0;return SZ[Math.min(SZ.length-1,Math.max(3,cur+1))]}catch(e){return SZ[3]}}
 async function spawn(){busy=true;const boss=G.fl%5==0&&G.k>=9,L=Math.min(100,G.fl+2+(boss?3:0));let id=pickId(),d=await info(id);
  for(let i=0;i<6;i++){if(boss||true)break;id=pickId();d=await info(id)}
@@ -4823,7 +4824,7 @@ function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,
  if(b&&Math.random()<.004+.0004*PL("pb")){G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;pop("Master Ball obtenue","cap",50)}
  if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;pmChk();if(G.auto)G.fl++}E=null}
 function xcN(){try{return x4Me()&&G.kx&&G.kx.xc?20:1}catch(e){return 1}}
-function catchIt(e,bl,pc){const n=xcN(),nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t"))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(e.mi>0)c.mi=Math.max(c.mi||0,e.mi);{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
+ function catchIt(e,bl,pc){const n=xcN(),nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t"))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(muUpgrade(c.mi,e.mi))c.mi=e.mi;{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
 function flee(){sfx("flee");pop("Trop tard ! Il s'enfuit","dmg",45);toast("Le Pokémon s'est enfui : il fallait le battre en 30 secondes");if(E.boss)G.k=Math.min(G.k,5);E=null}
 function capFx(e,bl,nw,pc){try{capFx0(e,bl,nw,pc)}catch(x){}}
 function capFx0(e,bl,nw,pc){const a=$("ar");if(!a||tab!="adv"||!a.animate)return;const w=document.createElement("div");w.className="capfx";
@@ -5114,7 +5115,7 @@ const pkGrid=()=>{const q=norm(PKQ);return ids().filter(i=>!q||norm(nm(i)).inclu
 function modal(){const m=$("md"),q0=m.querySelector&&m.querySelector(".mc"),s0=q0?q0.scrollTop:0;modal0(m);if(s0){const q1=m.querySelector(".mc");if(q1)q1.scrollTop=s0}}
 function itxt(it){const L=LS,TY=t=>L(TFR[t],t[0].toUpperCase()+t.slice(1)),SE=["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed"];
  if(it.formChange)return L("Définitif · Giratina prend sa forme Origine et conserve ses attributs.","Permanent · Giratina takes its Origin Forme and keeps its traits.");
- if(it.mf){const m=MGM[it.mf],dl=m.b-I(m.s).b;return L("Définitif · stats de la méga-forme (","Permanent · Mega form stats (")+(dl>=0?"+":"")+dl+L(" au total), puissance ×1,5"," total), power ×1.5")}
+  if(it.mf){const m=MGM[it.mf],dl=m.b-I(m.s).b;return L("Définitif · stats de la méga-forme (","Permanent · Mega form stats (")+(dl>=0?"+":"")+dl+L(" au total), puissance ×2,2"," total), power ×2.2")}
  if(it.dy)return L("Définitif · Pokémon géant : puissance ×2,2 et PV ×2. Réservé aux Pokémon qui ont une forme Dynamax ou Gigamax","Permanent · Giant Pokémon: power ×2.2 and HP ×2");
  const h=it.h||{},o=[],x=v=>L(String(v).replace(".",","),String(v)),pc=v=>Math.round(v*100)+(L(" %","%")),WN={snow:L("neige","snow"),sand:L("sable","sand"),sun:L("soleil","sun"),rain:L("pluie","rain")};
  if(h.d)o.push(L("Dégâts ×","Damage ×")+x(h.d));
@@ -5529,7 +5530,9 @@ function plSpriteFallback(im){
 function plTint(c){return c.mi&&MU[c.mi]?MU[c.mi][3].replace(/drop-shadow\([^)]*\)/g,"").replace(/filter:/g,"--pl-filter:").replace(/opacity:/g,"--pl-opacity:"):""}
 function atlasMutation(c){const themes=["none","spectral","fire","ice","crystal","abyss","gold","shiny","sidereal","prism","primal"],m=themes[c.mi||0];return m&&m!=="none"?m:c.sh?"shiny":"none"}
 function atlasKind(i,c){if(c.hw||c.hf)return"halloween";try{if(SPM[i])return SPM[i].hw?"halloween":"exclusive"}catch(e){}return c.spc?"exclusive":"standard"}
-let plRow=i=>{const c=G.col[i],kind=atlasKind(i,c),display=kind==="halloween"?{...c,hw:1,spc:1}:kind==="exclusive"?{...c,spc:1}:c,vc=vcol(c),z=c.zi==null?2:c.zi,pdex=String(spc(i)).padStart(3,"0"),traits=(pr(i)===6?rtag(6,1):"")+vb(display)+(!c.mi?`<span class="vb atlas-neutral">${LS("Aucune mutation","No mutation")}</span>`:"")+(!(z>=3)&&SZ[z]?`<span class="vb" style="--c:${SZC[z]||"#a3b4cc"}">${SZ[z][0]}</span>`:"");return `<div class="pr atlas-row${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}" data-pdex="N° ${pdex}" data-atlas-kind="${kind}" data-mutation="${atlasMutation(c)}" role="button" tabindex="0"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${plTint(c)}"`:""}>${plSprite(i,c)}</span><span class="atlas-info"><span class="atlas-name"><b>${dn(i)}</b><br></span><span class="atlas-traits">${traits}</span><span class="atlas-stats"><span class="atlas-power"><small>${LS("ATTAQUE","ATTACK")}</small><b>${fmt(base(i))}</b></span><span><small>${LS("NIVEAU","LEVEL")}</small><b>${c.l}</b></span><span class="r"><small>${LS("CAPTURES","CATCHES")}</small><span class="x">×${c.n}</span></span></span></span></div>`};
+function pkDps(id){try{const c=G.col[id];if(!c)return 0;const h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let m=base(id)*(mv?1+mv[2]/200:1)*(EVF.d||1)*(BIF.d||1);
+ if(h){if(h.ph&&phy(id))m*=h.ph;if(h.sc&&!phy(id))m*=h.sc}return isFinite(m)?m:0}catch(e){return 0}}
+ let plRow=i=>{const c=G.col[i],kind=atlasKind(i,c),display=kind==="halloween"?{...c,hw:1,spc:1}:kind==="exclusive"?{...c,spc:1}:c,vc=vcol(c),z=c.zi==null?2:c.zi,pdex=String(spc(i)).padStart(3,"0"),traits=(pr(i)===6?rtag(6,1):"")+vb(display)+(!c.mi?`<span class="vb atlas-neutral">${LS("Aucune mutation","No mutation")}</span>`:"")+(!(z>=3)&&SZ[z]?`<span class="vb" style="--c:${SZC[z]||"#a3b4cc"}">${SZ[z][0]}</span>`:"");return `<div class="pr atlas-row${c.spc?" spr":""}${c.hw?" hw":""}${vc?" vr":""}${c.sh?" shn":""}" data-a="open" data-i="${i}" data-pdex="N° ${pdex}" data-atlas-kind="${kind}" data-mutation="${atlasMutation(c)}" role="button" tabindex="0"${vc?` style="--mc:${vc}"`:""}><span class="spw"${c.mi?` style="${plTint(c)}"`:""}>${plSprite(i,c)}</span><span class="atlas-info"><span class="atlas-name"><b>${dn(i)}</b><br></span><span class="atlas-traits">${traits}</span><span class="atlas-stats"><span class="atlas-power"><small>DPS</small><b>${fmt(pkDps(i))}</b></span><span><small>${LS("NIVEAU","LEVEL")}</small><b>${c.l}</b></span><span class="r"><small>${LS("CAPTURES","CATCHES")}</small><span class="x">×${c.n}</span></span></span></span></div>`};
 function plResizer(){const h=document.getElementById("plrs");if(!h||h._on)return;h._on=1;const el=$("plist");
  h.addEventListener("pointerdown",e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const y0=e.clientY,h0=el.getBoundingClientRect().height;document.body.classList.add("rsz");
   const mv=ev=>{const v=Math.max(150,Math.min(2400,h0+ev.clientY-y0));el.style.maxHeight=v+"px";el.style.height=v+"px"},up=()=>{h.removeEventListener("pointermove",mv);h.removeEventListener("pointerup",up);document.body.classList.remove("rsz");SG.plh=Math.round(el.getBoundingClientRect().height);svs()};
@@ -6789,7 +6792,7 @@ const rdMv=id=>{const L=rdMoves(id),c=G.col[id],s=G.rd&&G.rd.mv&&G.rd.mv[id];ret
 SPS.push({id:90003,base:149,n:"Dracolosse Chocolat Blanc",t:["dragon","fire"],s:[105,150,100,125,105,115],ab:["Multiécaille"],ha:"Souffle Stellaire",hue:262,hue2:40,sat:1.2,au:"#a78bfa",au2:"#fbbf24",cas:0,
   fr:"Né le jour où la lune a avalé le soleil. Ses écailles reflètent les deux astres, et sa seule présence suffit à faire taire une tempête.",en:"Born the day the moon swallowed the sun. Its scales mirror both stars, and its mere presence silences a storm."});
 SPM[90003]=SPS[SPS.length-1];DB[90003]={n:"Dracolosse Chocolat Blanc",t:["dragon","fire"],b:700,lg:0,ba:0,ch:90003,s:[105,150,100,125,105,115],ab:["Multiécaille"],ha:"Souffle Stellaire"};if(!EVC[90003])EVC[90003]=[];
-function spRoll(id){const c=G.col[id];if(!c||hwVariantPokemon(id,c))return"";const mu=wp(MU),sz=wp(SZ),mi=MU.indexOf(mu),zi=SZ.indexOf(sz);let s="";if(mi>0){if(mi==7)c.sh=1;else c.mi=Math.max(c.mi||0,mi);s+=" · "+(mi==7?"Chromatique":mu[0]);G.mut++}if(zi>=3){c.zi=Math.max(c.zi||0,zi);s+=" · "+sz[0]}rq(id);return s}
+ function spRoll(id){const c=G.col[id];if(!c||hwVariantPokemon(id,c))return"";const mu=wp(MU),sz=wp(SZ),mi=MU.indexOf(mu),zi=SZ.indexOf(sz);let s="";if(mi>0){if(mi==7)c.sh=1;else if(muUpgrade(c.mi,mi))c.mi=mi;s+=" · "+(mi==7?"Chromatique":mu[0]);G.mut++}if(zi>=3){c.zi=Math.max(c.zi||0,zi);s+=" · "+sz[0]}rq(id);return s}
 /* ---- boss ---- */
 /* id, nom, types, stats [PV,Atq,Déf,AtqSpé,DéfSpé,Vit] */
 const RB={143:["Ronflex",["normal"],[160,110,65,65,110,30]],131:["Lokhlass",["water","ice"],[130,85,80,85,95,60]],130:["Léviator",["water","flying"],[95,125,79,60,100,81]],59:["Arcanin",["fire"],[90,110,80,100,80,95]],65:["Alakazam",["psychic"],[55,50,45,135,95,120]],68:["Mackogneur",["fighting"],[90,130,80,65,85,55]],94:["Ectoplasma",["ghost","poison"],[60,65,60,130,75,110]],112:["Rhinoféros",["ground","rock"],[105,130,120,45,45,40]],
@@ -8925,7 +8928,8 @@ const twLvl=(f,boss)=>Math.max(1,Math.min(100,Math.round(6+.94*f+(boss==2?5:boss
 const twIvBase=f=>f>100?Math.min(31,Math.round(24+.07*(f-100))):Math.round(2+.22*f);
 function twFoe(e,f){const u=pvMake(e.id),s=twSc(f),b=e.boss==2?1.3:e.boss?1.2:1,k=e.boss?1.08:1,L=twLvl(f,e.boss),R=rng(f*7919+e.id*31+(e.boss||0)),iv=Array.from({length:6},()=>Math.max(0,Math.min(31,Math.round(twIvBase(f)+(R()-.5)*10)))),S=pvNoMf(e.id,()=>ST(e.id));
  const st=i=>Math.floor((2*S[i]+iv[i])*L/100),hp=st(0)+L+10;
- u.lv=L;u.iv=iv;u.max=u.hp=Math.max(20,Math.round(hp*s.h*b));u.atk=Math.round((st(1)+5)*s.a*k);u.spa=Math.round((st(3)+5)*s.a*k);u.def=Math.round((st(2)+5)*s.d*k);u.spd=Math.round((st(4)+5)*s.d*k);u.spe=Math.max(10,Math.round((st(5)+5)*s.p));u.boss=e.boss;u.it=null;return u}
+ const summit=Math.max(0,Math.min(1,(f-300)/400));
+ u.lv=L;u.iv=iv;u.max=u.hp=Math.max(20,Math.round(hp*s.h*b*(1-.5*summit)));u.atk=Math.round((st(1)+5)*s.a*k);u.spa=Math.round((st(3)+5)*s.a*k);u.def=Math.round((st(2)+5)*s.d*k);u.spd=Math.round((st(4)+5)*s.d*k);u.spe=Math.max(10,Math.round((st(5)+5)*s.p));u.boss=e.boss;u.it=null;return u}
 /* mes Pokémon : leur vrai niveau, leurs vrais IV et EV (même calcul que dans le reste du jeu) */
 function twMine(id,o){o=o||{};ens(id);const c=G.col[id],t=tp(id).slice(),mv=pvSetMoves(id,o.mv),it=pvItOk(o.it)?o.it:null,S=ST(id),hp=calc(id,0);
  const u={id,name:pvNm(id),types:t,max:hp,hp,atk:calc(id,1),def:calc(id,2),spa:calc(id,3),spd:calc(id,4),spe:calc(id,5),bst:S.reduce((a,b)=>a+b,0),moves:mv.slice(),st:null,sT:0,bA:0,bS:0,rc:0,hu:0,dead:0,it,used:0,lk:null,nu:it=="assault-vest",lv:c.l,iv:c.iv.slice()};
@@ -9451,6 +9455,7 @@ async function glFetch(force){if(glSrc()!="on"||GLX.busy)return;if(!force&&Date.
  GLX.busy=0;glSync();if(typeof glRefresh=="function")glRefresh(1)}
 /* cartes reçues, échanges, simulation des membres */
 function glSync(){const g=glS();if(!g.id)return;const S=glState(),M=S.mine;if(!M)return;const me=S.me,now=Date.now();
+  if(M.gd.ow===me&&(M.gd.transferAt||0)>(g.mt||0)){g.mod=M.gd.mod||{acc:[],kick:[]};g.mt=M.gd.transferAt;glPush(1);GLX.st=null;save()}
  const lm=M.lead.mod||{};
  if(g.pend&&M.lead.id!=me&&(lm.acc||[]).includes(me)){g.a=1;g.pend=0;glPush(1);toast(LS("Ta demande a été acceptée.","Your request was accepted."))}
  if((lm.kick||[]).some(k=>k.u==me&&(g.jd||0)<=k.ts)){toast(LS("Tu as été retiré de la guilde.","You were removed from the guild."));glDrop();return}
@@ -9475,6 +9480,13 @@ function glJoin(id){const g=glS();if(g.id)return;const e=glState().L.find(x=>x.g
  Object.assign(g,{id,gd:e.gd,jd:Date.now(),gx:0,pend:e.op===0?1:0,a:e.op===0?0:1,last:glMet(),ct:{wk:"",w:{},dk:"",d:{}},cl:{},bcl:{},rq:null,gv:[],rc:[],of:null,ac:[],ok:{},bs:{wk:"",dmg:0,n:0,dk:"",dn:0},ch:[],mod:{acc:[],kick:[]},sgs:{}});
  glRoll();glPush(1);GLX.st=null;if(g.pend&&glSrc()=="sim"){g.pend=0;g.a=1;toast(LS("Demande acceptée (mode solo).","Request accepted (solo mode)."))}save()}
 function glLeave(){const g=glS();if(!g.id)return;glDrop()}
+async function glTransfer(uid){const S=glState(),M=S.mine,g=glS();
+ if(!S.inG||!S.isLead||!M||uid===S.me||!M.v.some(m=>m.id===uid&&!m.pend))return LS("Choisis un membre de ta guilde.","Choose a guild member.");
+ if(glSrc()!=="on")return LS("Le transfert nécessite la guilde en ligne.","Transfer requires an online guild.");
+ const api=(window.PID_API||"").replace(/\/$/,""),tok=localStorage.getItem("pid_tok");
+ try{clearTimeout(glPT);const r=await fetch(api+"/api/guild/transfer",{method:"POST",headers:{"Content-Type":"application/json","X-Token":tok},body:JSON.stringify({ep:window.PID_EP||"",uid:S.me,guild:g.id,target:uid})});
+  if(!r.ok)throw new Error(String(r.status));glLeave();GLX.gl=GLX.gl.map(x=>x.id===M.gd.id?Object.assign({},x,{ow:uid}):x);GLX.st=null;return ""}
+ catch(e){return LS("Transfert impossible pour le moment. Réessaie.","Transfer unavailable right now. Please retry.")}}
 function glAccept(uid){const g=glS();g.mod.acc=(g.mod.acc||[]).concat([uid]);glPush(1);GLX.st=null}
 function glKick(uid){const g=glS();g.mod.kick=(g.mod.kick||[]).filter(k=>k.u!=uid).concat([{u:uid,ts:Date.now()}]).slice(-40);if(glSrc()=="sim"){GLX.st=null}glPush(1);GLX.st=null}
 function glSetOpt(o){const g=glS();if(o.ds!=null)g.mod.ds=String(o.ds).slice(0,120);if(o.op!=null)g.mod.op=o.op;glPush(1);GLX.st=null;save()}
@@ -9572,12 +9584,14 @@ function glHelpV(S){const g=glS(),M=S.mine,now=Date.now(),mine=M.v.filter(m=>m.i
   <div class="glx-box"><h3>${glIc("swap")}${LS("Mon échange","My trade")}</h3>${g.of?`<div class="glx-of"><div>${glCard(g.of.g)}<small>${LS("Je donne","I give")}</small></div><span class="glx-ar">${glIc("swap")}</span><div>${glCard(g.of.w)}<small>${LS("Je veux","I want")}</small></div></div><button data-gl="uo">${LS("Annuler l'échange","Cancel trade")}</button>`:`<p class="glx-p">${LS("Propose un de tes doubles contre une carte qui te manque. Un autre membre peut accepter.","Offer one of your spares for a card you need. Another member can accept.")}</p><button class="go glx-big" data-gl="of">${glIc("swap")} ${LS("Proposer un échange","Offer a trade")}</button>`}</div></div>
  <div class="glx-box"><h3>${glIc("frs")}${LS("Demandes des membres","Member requests")}<span class="glx-sub">${LS("Dons aujourd'hui","Gifts today")} ${(glRoll(),g.dn.n)} / 10</span></h3><div class="glx-reqs">${mine.filter(m=>m.rq&&now-m.rq.ts<864e5).map(m=>{const have=G.cards[m.rq.c]||0,ok=have>=2&&g.dn.n<10,done=(m.gv||[]).length&&false;return `<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${glAgo(m.rq.ts)}</small></div>${glCard(m.rq.c,`<i>×${have}</i>`)}<button class="${ok?"go":""}" data-gl="gv:${m.id}:${m.rq.c}" ${ok?"":"disabled"}>${ok?LS("Donner","Give"):have<2?LS("Pas de double","No spare"):LS("Limite atteinte","Limit reached")}</button></div>`}).join("")||`<div class="glx-empty"><span>${LS("Aucune demande en cours.","No request right now.")}</span></div>`}</div></div>
  <div class="glx-box"><h3>${glIc("swap")}${LS("Échanges proposés","Open trades")}</h3><div class="glx-reqs">${mine.filter(m=>m.of&&now-m.of.ts<864e5).map(m=>{const have=G.cards[m.of.w]||0,ok=have>=2;return `<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${glAgo(m.of.ts)}</small></div><div class="glx-of s">${glCard(m.of.g)}<span class="glx-ar">${glIc("swap")}</span>${glCard(m.of.w,`<i>×${have}</i>`)}</div><button class="${ok?"go":""}" data-gl="tk:${m.id}" ${ok?"":"disabled"}>${ok?LS("Échanger","Trade"):LS("Pas de double","No spare")}</button></div>`}).join("")||`<div class="glx-empty"><span>${LS("Aucun échange proposé.","No open trades.")}</span></div>`}</div></div>`}
+function glTransferModal(){const S=glState();if(!S.inG||!S.isLead||!S.mine)return;const members=S.mine.v.filter(m=>m.id!==S.me&&!m.pend);
+ glModal(`<button class="glx-x" data-gl="mc">${ico("x")}</button><h2>${LS("Choisir le nouveau chef","Choose the new leader")}</h2><p class="glx-p">${LS("Choisis un membre : il recevra les droits de chef et tu quitteras la guilde après confirmation.","Choose a member: they will receive leader permissions and you will leave after confirmation.")}</p><div class="glx-reqs">${members.map(m=>`<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1}</small></div><button class="go" data-gl="trpick:${esc(m.id)}">${LS("Choisir","Choose")}</button></div>`).join("")}</div><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button></div>`)}
 function glMemV(S){const M=S.mine,g=glS(),lead=M.lead.id,isL=S.isLead,wk=glWk(Date.now()),pt=m=>Math.floor(CHK.reduce((a,k)=>a+(((m.ct&&m.ct.wk==wk&&m.ct.w)||{})[k]||0)*(GXW[k]||0),0));
  const rows=M.v.slice().sort((a,b)=>(a.id==lead?-1:b.id==lead?1:0)||pt(b)-pt(a));
  return `<div class="glx-box"><h3>${glIc("team")}${LS("Membres","Members")}<span class="glx-sub">${M.n} / ${GLMAX}</span></h3><div class="glx-mem">${rows.map(m=>`<div class="glx-mr ${m.id==S.me?"me":""}">${(window.PIDREG&&PIDREG(m),"")}<span ${m.id!=S.me?`data-a="fvp" data-t="${esc(String(m.id))}" style="cursor:pointer"`:""}>${glAvT(m)}</span><div class="glx-mn" ${m.id!=S.me?`data-a="fvp" data-t="${esc(String(m.id))}" style="cursor:pointer"`:""}><b>${esc(m.n)}${m.id==lead?`<span class="glx-cr">${glIc("crown")}${LS("Chef","Leader")}</span>`:""}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1} · ${fmt(m.pw||0)} ${LS("dégâts/s","dmg/s")}</small></div><div class="glx-mp"><b>${fmt(pt(m))}</b><small>${LS("pts / semaine","pts / week")}</small></div>${isL&&m.id!=S.me?`<button class="glx-kk" data-gl="kk:${m.id}" title="${LS("Exclure","Kick")}">${ico("x")}</button>`:"<span></span>"}</div>`).join("")}${Array.from({length:Math.max(0,GLMAX-M.n)},()=>`<div class="glx-mr e"><span class="glx-em0">${glIc("plus")}</span><small>${LS("Place libre","Free slot")}</small></div>`).join("")}</div></div>
  ${isL&&M.pend.length?`<div class="glx-box"><h3>${glIc("uadd")}${LS("Demandes d'adhésion","Join requests")}</h3><div class="glx-reqs">${M.pend.map(m=>`<div class="glx-rr2">${glAvT(m)}<div><b>${esc(m.n)}</b><small>${LS("Niv. dresseur","Trainer lv.")} ${m.tl||1}</small></div><button class="go" data-gl="ac:${m.id}">${LS("Accepter","Accept")}</button></div>`).join("")}</div></div>`:""}
  ${isL?`<div class="glx-box"><h3>${glIc("sliders")}${LS("Réglages de la guilde","Guild settings")}</h3><label class="glx-lab2">${LS("Description","Description")}<input class="glx-in" id="glsd" value="${esc(M.ds||"")}" maxlength="120" autocomplete="off"></label><div class="glx-seg"><button class="${M.op!==0?"glon":""}" data-gl="so:1">${LS("Ouverte à tous","Open to all")}</button><button class="${M.op===0?"glon":""}" data-gl="so:0">${LS("Sur demande","On request")}</button></div><button class="go" data-gl="sd">${LS("Enregistrer la description","Save description")}</button></div>`:""}
- <div class="glx-lv2"><button class="glx-danger" data-gl="lv">${LS("Quitter la guilde","Leave guild")}</button></div>`}
+  <div class="glx-lv2">${isL&&M.v.length>1?`<button class="go" data-gl="tr">${glIc("crown")}${LS("Transmettre le rôle de chef et quitter","Transfer leadership and leave")}</button>`:`<button class="glx-danger" data-gl="lv">${LS("Quitter la guilde","Leave guild")}</button>`}</div>`}
 function glChatV(S){const M=S.mine,L=[];M.v.forEach(m=>(m.ch||[]).forEach(c=>L.push({t:c.t,x:c.x,n:m.n,me:m.id==S.me,av:m.av,avs:m.avs})));L.sort((a,b)=>a.t-b.t);const R=L.slice(-40);
  return `<div class="glx-box glx-cht"><h3>${glIc("chat")}${LS("Chat de guilde","Guild chat")}</h3><div class="glx-msgs" id="glmsgs">${R.map(c=>`<div class="glx-mg ${c.me?"me":""}">${glAvT(c)}<div><b>${esc(c.n)} <small>${new Date(c.t).toLocaleTimeString(SG.lang=="en"?"en":"fr",{hour:"2-digit",minute:"2-digit"})}</small></b><p>${esc(c.x)}</p></div></div>`).join("")||`<div class="glx-empty"><span>${LS("Aucun message. Écris le premier !","No message yet. Write the first one!")}</span></div>`}</div>
  <form class="glx-send" data-gl-form="say"><input class="glx-in" id="glsay" maxlength="160" placeholder="${LS("Écrire un message…","Write a message…")}" autocomplete="off"><button class="go" type="submit">${glIc("send")}</button></form></div>`}
@@ -9599,7 +9613,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  else if(k=="fi"){GLF.i=a;glCreateModal()}else if(k=="fc"){GLF.c=+a;glCreateModal()}else if(k=="fo"){GLF.op=+a;glCreateModal()}
  else if(k=="mk"){GLF.n=($("glfn")||{}).value||GLF.n;GLF.ds=($("glfd")||{}).value||GLF.ds;const er=glCreate({n:GLF.n,tag:GLF.tag,i:GLF.i,c:GLF.c,ds:GLF.ds,op:GLF.op});if(er){const el=$("glerr");if(el)el.textContent=er;sfx("err")}else{glClose();sfx("prest");toast(LS("Guilde créée !","Guild created!"));GLX.v="home";show()}}
  else if(k=="join"){glJoin(a);GLX.v="home";show()}
- else if(k=="lv"){glModal(`<h2>${LS("Quitter la guilde ?","Leave the guild?")}</h2><p class="glx-p">${LS("Tu perdras les bonus et ta contribution. Le prix de création n'est pas remboursé.","You will lose the bonuses and your contribution. The creation cost is not refunded.")}</p><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button><button class="glx-danger" data-gl="lvok">${LS("Quitter","Leave")}</button></div>`)}
+  else if(k=="lv"){if(S.isLead&&S.mine.v.length>1){glTransferModal();return}glModal(`<h2>${LS("Quitter la guilde ?","Leave the guild?")}</h2><p class="glx-p">${LS("Tu perdras les bonus et ta contribution. Le prix de création n'est pas remboursé.","You will lose the bonuses and your contribution. The creation cost is not refunded.")}</p><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button><button class="glx-danger" data-gl="lvok">${LS("Quitter","Leave")}</button></div>`)}
+  else if(k=="tr")glTransferModal()
+  else if(k=="trpick"){const m=S.mine&&S.mine.v.find(x=>x.id===a&&x.id!==S.me);if(!S.isLead||!m)return;glModal(`<button class="glx-x" data-gl="mc">${ico("x")}</button><h2>${LS("Confirmer le transfert ?","Confirm the transfer?")}</h2><p class="glx-p">${LS("Tu donnes le rôle de chef à ","You give leadership to ")}<b>${esc(m.n)}</b>${LS(" et quittes la guilde. Le transfert est immédiat."," and leave the guild. The transfer is immediate.")}</p><div class="glx-ft"><button data-gl="tr">${LS("Retour","Back")}</button><button class="glx-danger" data-gl="trok:${m.id}">${LS("Transmettre et quitter","Transfer and leave")}</button></div>`)}
+  else if(k=="trok"){b.disabled=true;glTransfer(a).then(er=>{glClose();if(er){toast(er);rf()}else{toast(LS("Rôle transmis. Tu as quitté la guilde.","Leadership transferred. You left the guild."));GLX.v="home";show()}})}
  else if(k=="lvok"){glClose();glLeave();GLX.v="home";show()}
  else if(k=="ac"){glAccept(a);rf()}else if(k=="kk"){const m=S.mine.v.find(x=>x.id==a);glModal(`<h2>${LS("Exclure ce membre ?","Kick this member?")}</h2><p class="glx-p">${esc(m?m.n:"")}</p><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button><button class="glx-danger" data-gl="kkok:${a}">${LS("Exclure","Kick")}</button></div>`)}
  else if(k=="kkok"){glClose();glKick(a);rf()}
@@ -10113,7 +10130,7 @@ function bonusCard(id){
   if(c.sh)add("Chromatique","",f(1.5),"#facc15");
   if(c.mi)add("Mutation",MU[c.mi][0],f(MU[c.mi][1]),(typeof MUC!="undefined"&&MUC[c.mi])||"#22d3ee");
   if(c.zi&&c.zi!=2)add("Taille",SZ[c.zi][0],f((typeof SZD!="undefined"&&SZD[c.zi])||SZ[c.zi][1]),(typeof SZC!="undefined"&&SZC[c.zi])||"#60a5fa");
-  if(c.mf&&!PWNEW)add("Méga / Primo","",f(1.5),"#a78bfa");
+   if(c.mf)add("Méga / Primo","",f(2.2),"#a78bfa");
   if(c.dy)add("Dynamax","",f(2.2),"#fb7185");
   if(G.fav&&G.fav.includes(id))add("Panthéon","",f(1.25),"#fbbf24");
   if(c.st)add("Étoiles",c.st+" ★",f(starD(c)),"#fde047");
@@ -11408,14 +11425,14 @@ function careTrainingFactor(c){return c?1+Math.min(1.5,careState(c).t/(1200*24))
 function carePenText(c){const o=carePenOdds(c);return LS('Prochain repos : ','Next stay: ')+[[LS('mutation','mutation'),'mu'],[LS('taille','size'),'sz'],['Alpha','al'],[LS('chroma','shiny'),'sh']].map(([n,k])=>n+' '+(o[k]*100).toFixed(1).replace('.0','')+' %').join(' · ')}
 
 const penBetterSz=(c,v)=>!(c.zi>=3)||SZ[v][4]<SZ[c.zi][4];
-const penBetterMu=(c,v)=>!c.mi||MU[v][4]<MU[c.mi][4];
+const penBetterMu=(c,v)=>muUpgrade(c.mi,v)&&(!c.mi||c.mi===7||MU[v][4]<MU[c.mi][4]);
 penGo=function(){if(!PNM||PNM.mode!="pick"||!PNM.sel.length||penOf(PNL)&&penOf(PNL).t0)return;if(PNL&&!PL("pn2"))return;
  const sl=[...new Set(PNM.sel.map(Number))].filter(penElig).slice(0,10);if(!sl.length){toast(LS("Ces Pokémon sont déjà occupés. Choisis un autre Pokémon.","These Pokémon are already busy. Choose another Pokémon."));return}const o={sl,t0:Date.now()};if(PNL)G.pen2=o;else G.pen=o;PNM=null;PENR=false;sfx("click");save()};
 penClaim=function(n){n=+n?1:0;const p=penOf(n);if(!p||Date.now()-p.t0<penDuration())return;qadd("pen",1);const out=[];
  for(const i of new Set(p.sl)){const c=G.col[i];if(!c)continue;if(hwVariantPokemon(i,c))hfLock(c);const o={i,k:"",l:[]},ch=carePenOdds(c);careState(c).v++;
   const gz=Math.random()<ch.sz,gm=Math.random()<ch.mu,gh=Math.random()<ch.sh,ga=Math.random()<ch.al;
   if(gz){const L=[3,4,5,6],v=L[wi(L.map(k=>SZ[k][4]))];if(penBetterSz(c,v)){c.zi=v;o.l.push([SZ[v][0],SZC[v]]);o.k="sz";o.v=v}}
-  if(gm){const L=[1,2,3,4,5,6,7,8,9,10],v=L[wi(L.map(k=>MU[k][4]))];if(penBetterMu(c,v)){c.mi=v;o.l.push([MU[v][0],MUC[v]]);o.k="mu";o.v=v}}
+   if(gm){const L=[1,2,3,4,5,6,8,9,10],v=L[wi(L.map(k=>MU[k][4]))];if(penBetterMu(c,v)){c.mi=v;o.l.push([MU[v][0],MUC[v]]);o.k="mu";o.v=v}}
   if(ga&&!c.al){c.al=1;o.l.push(["Alpha","#ef4444"]);if(!o.k)o.k="al"}
   if(gh&&!c.sh){c.sh=1;o.l.push([LS("Chromatique","Shiny"),"#fde047"]);o.k="sh"}
   if(o.l.length){hwSaveVariants(i,c);rq(i)}out.push(o)}
@@ -11436,18 +11453,29 @@ const x2Ok=()=>!!G.mainX3||((G.st|0)>0&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0))||(S
 const x2On=()=>x2Ok()&&SG.x2!==0;
 /* x4 réservé au compte du propriétaire (ID ami 4BWS-KL9Q) */
 const x4Me=()=>!!(G.fd&&G.fd.id==="4BWSKL9Q");
-/* Récompense privée, liée au compte du créateur. Seule l'empreinte du code est publiée. */
-const PID_DONOR_HASH="9377c3cfdfc8059440aaabedad75c561611613987c66264ab4141a141ecef239";
+function repairShinyMutation(){let changed=false;for(const [key,c] of Object.entries(G.col||{})){if(!c||c.mi!==7)continue;
+  if(+key===90004&&!G.fd?.id)continue;
+  c.sh=1;c.mi=+key===90004&&x4Me()?9:0;
+  if(c.hmi===7)c.hmi=c.mi;if(c.hsh!=null)c.hsh=1;
+  try{rq(+key)}catch(e){}changed=true}
+ if(changed){try{recomp()}catch(e){}save();if(tab==="pk"||tab==="cos")show()}return changed}
+repairShinyMutation();setTimeout(repairShinyMutation,2500);setInterval(repairShinyMutation,15000);
+/* Codes privés distincts, liés au compte du créateur. Seules leurs empreintes sont publiées. */
+const PID_REWARD_HASH="9377c3cfdfc8059440aaabedad75c561611613987c66264ab4141a141ecef239";
+const PID_DONOR_HASH="3eaa005a655fbc9ca322a8bf424f5e5d7753d16b60890537fa97339cfd1c54ce";
 TIT.push(["don","Donateur","Supporter",["#fb7185","#fbbf24"],()=>!!G.don&&x4Me(),"Soutien privé du jeu","Private game supporter",0]);
 window.pidPrivateRedeem=async function(code){
- if(!code||!code.startsWith("TIDO-"))return null;
+ if(!code||(!code.startsWith("TIDO-")&&!code.startsWith("DONA-")))return null;
  if(!x4Me())return LS("Ce code est réservé au compte du créateur.","This code is reserved for the creator account.");
- if(await pidH(code)!==PID_DONOR_HASH)return LS("Code inconnu.","Unknown code.");
+ const hash=await pidH(code);
+ if(hash!==PID_REWARD_HASH&&hash!==PID_DONOR_HASH)return LS("Code inconnu.","Unknown code.");
  G.codes=G.codes||{};
- if(G.codes[code]||G.don)return LS("Code déjà utilisé.","Code already used.");
- G.codes[code]=1;G.don=1;G.m=Math.max(0,Number(G.m)||0)+2e12;G.inv=G.inv||{};G.inv["master-ball"]=(G.inv["master-ball"]||0)+30;G.tt="don";
+ if(G.codes[code]||(hash===PID_DONOR_HASH&&G.don))return LS("Code déjà utilisé.","Code already used.");
+ G.codes[code]=1;
+ if(hash===PID_REWARD_HASH){G.m=Math.max(0,Number(G.m)||0)+2e12;G.inv=G.inv||{};G.inv["master-ball"]=(G.inv["master-ball"]||0)+30}
+ else{G.don=1;G.tt="don"}
  try{ttRefresh(true);save();lbPush(true);show();sfx("big")}catch(e){try{save()}catch(x){}}
- return LS("Code accepté : titre Donateur équipé, 30 Master Balls et 2 T de pièces ajoutés.","Code accepted: Supporter title equipped, 30 Master Balls and 2 T coins added.");
+ return hash===PID_REWARD_HASH?LS("Code accepté : 30 Master Balls et 2 T de pièces ajoutés.","Code accepted: 30 Master Balls and 2 T coins added."):LS("Code accepté : titre Donateur débloqué et équipé.","Code accepted: Supporter title unlocked and equipped.");
 };
 const x2M=()=>!x2On()?1:Math.max(G.mainX3&&(G.fl|0)<=Math.max(G.bf||0,G.cl||0)?3:2,x4Me()?(SG.x2===3?15:SG.x2===2?4:2):2);
 const mainExtraRate=()=>.06*PL("ps")+(x2M()-1);
@@ -12157,7 +12185,7 @@ const TRX={q:"",pk:0,li:-1,ph:-1,so:"best",rv:0};
 const TRSO=[["best","Meilleurs d'abord","Best first"],["atk","Attaque","Attack"],["mu","Mutation (la plus forte)","Mutation (strongest)"],["sz","Taille (la plus grande)","Size (biggest)"],["al","Alpha","Alpha"],["sh","Chromatique","Shiny"],["lv","Niveau","Level"],["st","Étoiles","Stars"],["n","Captures","Catches"],["ev","EV déjà gagnés","EVs earned"],["num","N° Pokédex","Pokédex no."],["name","Nom","Name"]];
 const trKey=(k,i)=>{const c=G.col[i];switch(k){case"atk":return calc(i,0);case"mu":return c.mi>0&&MU[c.mi]?MU[c.mi][2]:0;case"sz":return c.zi>=3?c.zi-2:0;case"al":return c.al?1:0;case"sh":return c.sh?1:0;case"lv":return c.l;case"st":return typeof starC=="function"?starC(c):(c.n||0);case"n":return c.n||0;case"ev":return(c.ev||[]).reduce((a,b)=>a+b,0);case"num":return -i;default:return(c.sh?3:0)+(c.al?3:0)+(c.mi?2:0)+(c.zi>=3?1:0)}};
 const trRoll=(L,w)=>{let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[L.length-1]};
-const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(MU[k]&&MU[k][4]>0)o.push(k);return o};
+const trMuL=()=>{const o=[];for(let k=1;k<MU.length;k++)if(k!==7&&MU[k]&&MU[k][4]>0)o.push(k);return o};
 function trLog(t,x,c){t.lg.unshift({t:Date.now(),x,c});if(t.lg.length>10)t.lg.length=10}
 function trCredit(n){const t=trS(),c=t.i&&G.col[t.i];if(!c||!n)return;ens(t.i);if(hwVariantPokemon(t.i,c))hfLock(c);const m=t.m,got=[];
  const useV=m!="ev",useE=m=="ev"||m=="all",evr=(m=="all"?.6:1)/TREV;
@@ -13445,8 +13473,6 @@ document.addEventListener("keydown",e=>{const d=$("flp");
 {const up0=pvU_upd;pvU_upd=function(B){const r=up0.apply(this,arguments);try{["m","f"].forEach(s=>{const u=pvAct(B,s),n=$("pvN"+s);if(!u||!n)return;const h=vb({sh:u.sh,mi:u.mi,zi:u.zi,al:u.al}),row=n.closest(".pvpl");if(!row)return;let el=row.querySelector(".pvvbr");if(!el){el=document.createElement("div");el.className="pvvbr";row.querySelector(".pvpn1").insertAdjacentElement("afterend",el)}const k=[u.id,u.sh,u.mi,u.zi,u.al].join();if(el.dataset.k!==k){el.dataset.k=k;el.innerHTML=h||""}el.style.display=h&&h.indexOf("vb")>=0?"":"none"})}catch(e){}return r}}
 
 /* ============ Classement « Meilleur Pokémon » : record de DPS (cartes, équipement, prestige, objet tenu, CT) ============ */
-function pkDps(id){try{const c=G.col[id];if(!c)return 0;const h=c.he,mv=c.mv&&!(h&&h.lk)?TM[+c.mv.slice(2)-1]:null;let m=base(id)*(mv?1+mv[2]/200:1)*(EVF.d||1)*(BIF.d||1);
- if(h){if(h.ph&&phy(id))m*=h.ph;if(h.sc&&!phy(id))m*=h.sc}return isFinite(m)?m:0}catch(e){return 0}}
 function bpScan(){try{if(!G||!G.col)return;let bi=0,bv=0;for(const id of ids()){const v=pkDps(id);if(v>bv){bv=v;bi=id}}if(!bi)return;const r=G.bpk||{};
  if(r.i!==bi||Math.abs((r.v||0)-bv)>Math.max(1,bv*.002)){const c=G.col[bi];let f=spf(bi);try{if(c.dy&&typeof GMX!="undefined"&&GMX[bi])f=GMX[bi]}catch(e){}G.bpk={i:bi,v:Math.round(bv),f,sh:c.sh?1:0,mi:c.mi|0,zi:c.zi|0,al:c.al?1:0,n:dn(bi),ty:tp(bi),t:Date.now()}}}catch(e){}}
 setInterval(bpScan,6000);setTimeout(bpScan,2500);
@@ -13455,7 +13481,7 @@ const RKB={rows:[],t:0,busy:0};
 async function rkbFetch(force){if(RKB.busy||(!force&&Date.now()-RKB.t<8000))return;if(!LB||!LB.ok||!LB.db)return;RKB.busy=1;
  try{const q=await LB.db.collection("lb").orderBy("bpv","desc").limit(100).get();RKB.rows=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(x=>x&&x.n&&typeof x.bpv=="number"&&Array.isArray(x.bp))}catch(e){}
  RKB.t=Date.now();RKB.busy=0;if(tab=="rks"&&RKX.v=="bp"&&!document.hidden){const el=$("rkbl");if(el){const h=rkbList();if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}}}
-function rkbRows(){const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKB.rows.filter(x=>x.id!=me.id);try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
+function rkbRows(){bpScan();const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKB.rows.filter(x=>x.id!=me.id);try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
  if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,100)}
 function rkbList(){const R=rkbRows();if(!R.length)return `<small class="rkm-hint">${LS("Aucun record pour le moment.","No record yet.")}</small>`;
  const card=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
@@ -13537,7 +13563,7 @@ document.addEventListener("click",e=>{const row=e.target.closest&&e.target.close
 @media(max-width:560px){.bph{flex-direction:column;text-align:center}.bpt{align-items:center}.bpimg{width:150px;height:150px}.bpimg img{width:140px;height:140px}.bpif{grid-template-columns:1fr}.bpsr{grid-template-columns:72px 52px minmax(0,1fr) 46px 50px;font-size:12px}}`;document.head.appendChild(st)}
 /* ============ Tour : la puissance compte, comme en JCJ ============ */
 /* attaque des ennemis : ~10 000 à l'étage 1 → ~1 M (100) → ~64 M (200) → ~3 G (300) (3 Pokémon contre jusqu'à 6) ; boss ×1,5, gardien ×2 */
-const twFoePd=(f,boss)=>{const n=Math.max(1,Math.min(TWN,f)),v=n<=300?1e4*Math.pow(1e6,(n-1)/299)*(n<=100?1:1-.7*Math.min(1,(n-100)/200)):3e9*Math.pow(100,(n-300)/125);return Math.round(v*(boss==2?2:boss?1.5:1))};
+const twFoePd=(f,boss)=>{const n=Math.max(1,Math.min(TWN,f)),summit=Math.max(0,Math.min(1,(n-300)/400)),v=n<=300?1e4*Math.pow(1e6,(n-1)/299)*(n<=100?1:1-.7*Math.min(1,(n-100)/200)):3e9*Math.pow(100,(n-300)/125)*Math.pow(.1,summit);return Math.round(v*(boss==2?2:boss?1.5:1))};
 {const m0=twMine;twMine=function(id,o){const u=m0.apply(this,arguments);try{const c=G.col[id];u.pd=Math.max(1,base(id));u.mi=c.mi|0;u.zi=c.zi|0;u.sh=c.sh?1:0;u.al=c.al?1:0}catch(e){}return u}}
 {const f0=twFoe;twFoe=function(e,f){const u=f0.apply(this,arguments);try{u.pd=twFoePd(f,e.boss)}catch(x){}return u}}
 {const c0=twFoeCards;twFoeCards=function(f){const h=c0.apply(this,arguments);try{const t=twS(),tm=(t.tm||[]).filter(i=>G.col[i]),my=tm.length?Math.exp(tm.reduce((a,i)=>a+Math.log(Math.max(1,base(i))),0)/tm.length):0,fo=twFoePd(f,0),r=my/fo,mul=Math.max(.1,Math.min(10,Math.sqrt(r))),col=mul>=1.2?"#4ade80":mul>=.8?"#facc15":"#f87171";
@@ -13719,13 +13745,13 @@ function labTreeBonus(){try{return typeof treeLabBonus=="function"?treeLabBonus(
 function labFails(id,k){const p=LAB().p[id];return p&&p[k]||0}
 function labChance(id,k,cat){const r=LABR.find(x=>x[0]==k);let v=r[4]+r[5]*labFails(id,k)+labTreeBonus()*(r[6]-r[4])/10+(cat?labCatP(k):0);return Math.min(r[6],v)}
 function labMuTier(mi){mi=mi|0;const t=LABMU.findIndex(g=>g.includes(mi));return t<0?(mi==7?5:0):t}
-function labMax(id,k){const c=G.col[id];if(!c)return true;if(k=="mu")return labMuTier(c.mi)>=LABMU.length-1;if(k=="sz")return (c.zi|0)>=SZ.length-1;if(k=="al")return !!c.al;if(k=="sh")return !!c.sh;return true}
-function labNext(id,k){const c=G.col[id];if(k=="mu"){const g=LABMU[Math.min(LABMU.length-1,labMuTier(c.mi)+1)];return g[Math.random()*g.length|0]}if(k=="sz"){const z=c.zi==null?2:c.zi;return z<3?3:Math.min(SZ.length-1,z+1)}return 1}
-function labRun(id,k){if(lockOf("lab")){toast(lockTxt(-1));return;}const c=G.col[id],r=LABR.find(x=>x[0]==k);if(!c||!r)return;if(labMax(id,k)){toast(LS("Cet attribut est déjà au maximum.","This attribute is already maxed."));return}
+function labMuChoices(c){const current=c.mi===7?0:c.mi|0,power=MU[current]?.[1]||1;for(let tier=labMuTier(current)+1;tier<LABMU.length;tier++){const better=LABMU[tier].filter(v=>v!==7&&MU[v]?.[1]>power);if(better.length)return better}return []}
+function labMax(id,k){const c=G.col[id];if(!c)return true;if(k=="mu")return !labMuChoices(c).length;if(k=="sz")return (c.zi==null?2:c.zi)>=SZ.length-1;if(k=="al")return !!c.al;if(k=="sh")return !!c.sh;return true}
+function labNext(id,k){const c=G.col[id];if(k=="mu"){const choices=labMuChoices(c);return choices.length?choices[Math.random()*choices.length|0]:0}if(k=="sz"){const z=c.zi==null?2:c.zi;return z<3?3:Math.min(SZ.length-1,z+1)}return 1}
+function labRun(id,k){if(lockOf("lab")){toast(lockTxt(-1));return;}const c=G.col[id],r=LABR.find(x=>x[0]==k);if(!c||!r)return;try{if(hwVariantPokemon(id,c))hfLock(c)}catch(e){}if(labMax(id,k)){toast(LS("Cet attribut est déjà au maximum.","This attribute is already maxed."));return}
  const pr=labPrice(id,k);if(G.m<pr){toast(LS("Il te manque "+fmt(pr-G.m)+" ₽","You are missing "+fmt(pr-G.m)+" coins"));try{sfx("err")}catch(e){}return}
  const cat=LABCK&&ECH()>=LABCAT,ch=labChance(id,k,cat);G.m-=pr;if(cat)G.ech=ECH()-LABCAT;
  const L=LAB(),P=L.p[id]=L.p[id]||{};L.n=(L.n||0)+1;
- try{if(hwVariantPokemon(id,c))hfLock(c)}catch(e){}
  const ok=Math.random()*100<ch;let lab="";
  if(ok){P[k]=0;L.ok=(L.ok||0)+1;
   if(k=="mu"){const v=labNext(id,"mu");c.mi=v;lab=MU[v][0];G.mut=(G.mut||0)+1}
@@ -13743,7 +13769,7 @@ function labPick(){const q=norm(LABQ),sel=labSel();const L=ids().filter(i=>!q||n
  return L.map(i=>{const c=G.col[i];return `<button class="lab-pk${i==sel?" on":""}" data-lab="sel" data-i="${i}"><span class="lab-pki">${sp(i,c.sh)}</span><span class="lab-pkn"><b>${dn(i)}</b><small>${c.mi?MU[c.mi][0]:LS("Sans mutation","No mutation")} · ${SZ[c.zi==null?2:c.zi][0]}${c.al?" · Alpha":""}${c.sh?" · ★":""}</small></span></button>`}).join("")||`<p class="lab-empty">${LS("Aucun Pokémon trouvé.","No Pokémon found.")}</p>`}
 function labCard(id,r){const k=r[0],c=G.col[id],mx=labMax(id,k),cat=LABCK&&ECH()>=LABCAT,ch=labChance(id,k,cat),f=labFails(id,k),pr=labPrice(id,k),can=!mx&&G.m>=pr;
  const cur=k=="mu"?(c.mi?MU[c.mi][0]:LS("Aucune","None")):k=="sz"?SZ[c.zi==null?2:c.zi][0]:k=="al"?(c.al?LS("Oui","Yes"):LS("Non","No")):(c.sh?LS("Oui","Yes"):LS("Non","No"));
- const nxt=mx?LS("Maximum atteint","Maximum reached"):k=="mu"?LS("Palier suivant : ","Next tier: ")+LABMU[Math.min(LABMU.length-1,labMuTier(c.mi)+1)].map(v=>MU[v][0]).join(" / "):k=="sz"?LS("Palier suivant : ","Next tier: ")+SZ[(c.zi==null?2:c.zi)<3?3:Math.min(SZ.length-1,(c.zi|0)+1)][0]:LS("Obtenir le statut","Gain the status");
+ const nxt=mx?LS("Maximum atteint","Maximum reached"):k=="mu"?LS("Palier suivant : ","Next tier: ")+labMuChoices(c).map(v=>MU[v][0]).join(" / "):k=="sz"?LS("Palier suivant : ","Next tier: ")+SZ[(c.zi==null?2:c.zi)<3?3:Math.min(SZ.length-1,(c.zi|0)+1)][0]:LS("Obtenir le statut","Gain the status");
  const fx=LABFX&&LABFX.id==id&&LABFX.k==k&&Date.now()-LABFX.t<4000?(LABFX.ok?" win":" lose"):"";
  return `<div class="lab-rc lab-${k}${mx?" mx":""}${fx}"><div class="lab-rch"><span class="lab-rci">${ico(k=="mu"?"spark":k=="sz"?"target":k=="al"?"crown":"star")}</span><div><b>${LS(r[1],r[2])}</b><small>${LS("Actuel : ","Current: ")}${cur}</small></div></div>
  <div class="lab-ch"><div class="lab-chv"><b>${mx?"—":fmtP(ch)}</b><small>${LS("de réussite","success")}</small></div><div class="lab-bar"><i style="width:${mx?100:ch/r[6]*100}%"></i></div><small>${LS("Départ ","Start ")}${fmtP(r[4])} · +${String(r[5]).replace(".",",")} ${LS("pt par échec","pt per failure")} · ${LS("plafond ","cap ")}${fmtP(r[6])}</small></div>
@@ -13757,7 +13783,7 @@ function vLab(){if(lockOf("lab"))return `<div class="box"><h2>${lockTxt(-1)}</h2
  <section class="lab-main"><div class="lab-poke"><div class="lab-pimg">${sp(id,c.sh)}</div><div><small>${LS("SUJET DE RECHERCHE","RESEARCH SUBJECT")}</small><h2>${dn(id)}</h2><div class="lab-tags">${vb(c)}${!c.mi?`<span class="vb">${LS("Aucune mutation","No mutation")}</span>`:""}<span class="vb">${SZ[c.zi==null?2:c.zi][0]}</span></div><small>${LS("Recherches menées : ","Research done: ")}${fmt(L.n||0)} · ${LS("réussites : ","successes: ")}${fmt(L.ok||0)}${tb?` · ${LS("bonus de l'arbre : +","tree bonus: +")}${tb*10} % ${LS("de l'écart vers le plafond","of the gap to the cap")}`:""}</small></div></div>
  <label class="lab-cat${ECH()<LABCAT?" off":""}"><input type="checkbox" data-lab="cat" ${LABCK?"checked":""} ${ECH()<LABCAT?"disabled":""}><span>${ico("echo")}<b>${LS("Catalyseur","Catalyst")}</b> · ${LS("consomme "+LABCAT+" fragments d'Écho pour ajouter un quart de l'écart entre la chance de départ et le plafond","uses "+LABCAT+" Echo shards to add a quarter of the gap between starting chance and cap")}</span><em>${fmt(ECH())} / ${LABCAT}</em></label>
  <div class="lab-rg">${LABR.map(r=>labCard(id,r)).join("")}</div>
- <p class="lab-note">${LS("Une réussite fait monter la mutation ou la taille d'un seul palier et remet à zéro le compteur d'échecs de cette recherche uniquement. Un attribut au maximum ne peut plus être acheté. Les compteurs sont propres à chaque Pokémon et sont conservés au prestige.","A success raises mutation or size by one tier and resets only this research's failure counter. A maxed attribute can no longer be bought. Counters belong to each Pokémon and are kept through prestige.")}</p></section></div></div>`}
+ <p class="lab-note">${LS("Une réussite atteint le prochain palier plus puissant sans jamais réduire un attribut et remet à zéro le compteur d'échecs de cette recherche uniquement. Un attribut au maximum ne peut plus être acheté. Les compteurs sont propres à chaque Pokémon et sont conservés au prestige.","A success reaches the next stronger tier without ever lowering an attribute and resets only this research's failure counter. A maxed attribute can no longer be bought. Counters belong to each Pokémon and are kept through prestige.")}</p></section></div></div>`}
 window.vLab=vLab;window.labRun=labRun;window.labSel=labSel;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-lab]");if(!b||tab!="lab")return;const a=b.dataset.lab;
  if(a=="sel"){e.preventDefault();LAB().sel=+b.dataset.i;LABFX=null;const y=scrollY;show();scrollTo(0,y)}
@@ -14075,8 +14101,8 @@ function dgAfter(R){const r=DG().run;rdClose();if(!r){show();return}const e=r.en
  r.inF=1;r.py=Math.min(DGH-1,r.py+1);save();show();toast(LS("Temps écoulé : l'adversaire garde ses PV.","Time's up: the foe keeps its HP."))}
 function dgCapture(){const d=DG(),r=d.run;if(!r||!r.cap||r.cap.done)return;const C=r.cap;C.done=1;save();
  const ok=Math.random()<Math.min(.95,C.ch*LUCK());C.ok=ok?1:0;
- if(ok){const id=C.sp;let c=G.col[id];if(c){c.n++;if(C.mi&&(!c.mi||MU[C.mi][4]<MU[c.mi][4]))c.mi=C.mi;if(C.zi>=3&&!(c.zi>=C.zi))c.zi=C.zi;if(C.al)c.al=1;if(C.sh)c.sh=1}
-  else{c=G.col[id]={n:1,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);c.mi=C.mi||0;c.zi=C.zi==null?2:C.zi;if(C.al)c.al=1;if(C.sh)c.sh=1;c.src=DGL[r.lv].src;c.srq=1}
+  if(ok){const id=C.sp;let c=G.col[id];if(c){c.n++;if(muUpgrade(c.mi,C.mi))c.mi=C.mi;if(C.mi===7||C.sh)c.sh=1;if(C.zi>=3&&!(c.zi>=C.zi))c.zi=C.zi;if(C.al)c.al=1}
+   else{c=G.col[id]={n:1,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);c.mi=C.mi===7?0:C.mi||0;c.zi=C.zi==null?2:C.zi;if(C.al)c.al=1;if(C.mi===7||C.sh)c.sh=1;c.src=DGL[r.lv].src;c.srq=1}
   G.dx[id]=1;try{rq(id);c.h=mhp(id)}catch(e){}IDC=null;try{recomp()}catch(e){}d.caps++;try{checkAch()}catch(e){}try{sfx("shiny")}catch(e){}}
  else try{sfx("flee")}catch(e){}
  save();show()}
@@ -14443,6 +14469,8 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+  {d:"2026-10-22",t:["Guildes, Méga-Évolutions et bannières","Guilds, Mega Evolution and banners"],e:[["new","Transmission de guilde","Le chef peut choisir un membre, lui transmettre la direction et quitter la guilde en une seule opération.","Guild leadership transfer","The leader can choose a member, transfer leadership and leave the guild in one step."],["imp","Bannières pour tous","Les 20 bannières et 20 signatures peuvent être équipées sur tous les Pokémon possédés, y compris Halloween. La rubrique des collections classiques est retirée.","Banners for everyone","All 20 banners and 20 signatures can be equipped on any owned Pokémon, including Halloween. The classic collections section has been removed."],["imp","Bonus de Méga-Évolution","Une Méga-Évolution équipée donne un bonus de puissance ×2,2, visible dans la fiche du Pokémon.","Mega Evolution power","An equipped Mega Evolution grants ×2.2 power, shown on the Pokémon's detail page."],["fix","Puissance cohérente","La collection affiche maintenant le même DPS que la fiche et le classement, bonus compris.","Consistent power","The collection now shows the same DPS as profiles and rankings, including bonuses."],["fix","Chromatique et mutation séparés","La pension et l'entraînement ne remplacent plus une mutation par le statut chromatique. Le laboratoire ne diminue plus la puissance d'une mutation acquise.","Shiny and mutation separated","Daycare and training no longer replace a mutation with the shiny status. The laboratory never lowers an acquired mutation's power."]] },
+ {d:"2026-10-22",t:["Tour et lisibilité des classements","Tower and ranking readability"],e:[["imp","Sommet de la tour rééquilibré","Après l'étage 300, les PV et la puissance des adversaires augmentent plus doucement. À l'étage 700, trois Pokémon d'environ 1,1 QA chacun et des améliorations de tour développées peuvent vaincre le gardien ; les types et les attaques restent importants.","Tower summit rebalanced","After floor 300, enemy HP and power rise more gently. At floor 700, three Pokémon around 1.1 QA each with developed Tower upgrades can beat the guardian; types and moves still matter."],["fix","Pseudos sur les bannières","Dans le classement, le pseudo du dresseur apparaît en noir foncé sur un fond clair discret, pour rester lisible sur les bannières claires et animées.","Player names on banners","In rankings, the trainer name is dark on a subtle light backing, so it stays readable on light and animated banners."]]},
  {d:"2026-10-22",t:["Affichage des dégâts et journal","Damage display and update log"],e:[["fix","Dégâts au-delà de T","À partir de 1 000 T, les dégâts et autres valeurs utilisent maintenant l'unité QA : 1 800 T s'affiche 1,8 QA.","Values beyond T","From 1,000 T onward, damage and other values now use the QA unit: 1,800 T displays as 1.8 QA."],["fix","Journal des mises à jour","Les nouveautés récentes apparaissent maintenant en tête du journal, avec une section indépendante pour chaque livraison. Les changements ajoutés par les deux équipes sont regroupés dans cette chronologie.","Update log","Recent updates now appear at the top of the log, with a separate section for each release. Changes from both teams are included in this timeline."]]},
  {d:"2026-10-22",t:["Bannières et signatures des exclusifs","Exclusive banners and signatures"],e:[["imp","Atelier esthétique","20 décors avec socles matériels et 20 signatures à acheter séparément pour les Pokémon exclusifs. Aperçu dans la collection, la fiche et le classement. Bonus équipés : +1 % pour la bannière et +0,5 % pour la signature. Les auras esthétiques disparaissent.","Style workshop","20 scenes with solid pedestals and 20 separately purchasable signatures for exclusive Pokémon. Preview them in the collection, detail view and rankings. Equipped bonuses: +1% for the banner and +0.5% for the signature. Cosmetic auras are removed."]]},
  {d:"2026-10-22",t:["Donjons : puissance réelle et nouvelles difficultés","Dungeons: real power and new difficulties"],e:[["imp","PV et puissance","PV initiaux de 10 M à 10 T, +25 % par salle. Les attaques utilisent la puissance permanente du Pokémon, avec les types et bonus de combat. Rencontres plus rares aux difficultés élevées.","HP and power","Starting HP from 10 M to 10 T, +25% per room. Attacks use each Pokémon’s permanent power with type and combat bonuses. Higher difficulties offer rarer encounters."],["fix","Annuler la pension","Le bouton Annuler libère le lot en cours et désactive sa relance automatique.","Cancel daycare","Cancel frees the current batch and disables automatic repeats."]]},
@@ -15074,4 +15102,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-qa-20261022"><script src="collection-scenes.js?v=pid-qa-20261022"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-guild-cosmetics-20261022"><script src="collection-scenes.js?v=pid-guild-cosmetics-20261022"></script></body></html>

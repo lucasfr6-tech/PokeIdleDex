@@ -207,6 +207,22 @@ http.createServer((req,res)=>{
   const pick={};['l','mx','n','st','iv','ev','it','ha','ai','mv','src','mi','zi','sh','al','mf','dy','q'].forEach(k=>{if(c[k]!==undefined)pick[k]=c[k]});
   const r={ok:1,i:id,c:pick};BPDC.set(uid,{t:a.t,i:id,r});if(BPDC.size>2000)BPDC.clear();send(res,200,r);return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
+  if(u.pathname==='/api/guild/transfer'&&req.method==='POST'){
+   if(limited(ip+'guild-transfer',20)){send(res,429,{e:'rate'});return}
+   let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
+   req.on('end',()=>{let d;try{d=JSON.parse(body)}catch(e){send(res,400,{e:'json'});return}
+    if(!epOk(d)){send(res,409,{e:'ep'});return}
+    const uid=mkAuth(d.uid,req.headers['x-token']),gid=String(d.guild||''),target=String(d.target||'');
+    if(!uid||!ID.test(gid)||!ID.test(target)||uid===target){send(res,403,{e:'auth'});return}
+    const guild=db.gld[gid],from=db.glm[uid],to=db.glm[target];
+    if(!guild||!from||!to||guild.d.ow!==uid||from.d.g!==gid||to.d.g!==gid||to.d.pend||!to.d.a){send(res,409,{e:'member'});return}
+    const mod=from.d.mod||{};
+    if((mod.kick||[]).some(k=>k.u===target&&(+to.d.jd||0)<=k.ts)){send(res,409,{e:'kicked'});return}
+    // The guild document must become writable with the successor's own token.
+    guild.d.ow=target;guild.d.mod=mod;guild.d.transferAt=Date.now();guild.h=to.h;guild.t=Date.now();
+    to.d.mod=Object.assign({},mod,{kick:(mod.kick||[]).filter(k=>k.u!==target)});
+    from.d.g='';from.d.pend=0;from.d.a=0;from.t=Date.now();dirty=1;
+    send(res,200,{ok:1,owner:target})});return}
 
  if(u.pathname=='/api/oauth/discord'&&req.method=='GET'){
   const back=q=>{res.writeHead(302,{Location:SITE+'/?'+q});res.end()};
