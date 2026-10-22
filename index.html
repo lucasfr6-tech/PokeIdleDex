@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-penmax-202610221644"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-penmax-202610221644"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-collection-scenes-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-collection-scenes-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14428,6 +14428,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-22",t:["Bannières et signatures des exclusifs","Exclusive banners and signatures"],e:[["imp","Atelier esthétique","20 décors avec socles matériels et 20 signatures à acheter séparément pour les Pokémon exclusifs. Aperçu dans la collection, la fiche et le classement. Bonus équipés : +1 % pour la bannière et +0,5 % pour la signature. Les auras esthétiques disparaissent.","Style workshop","20 scenes with solid pedestals and 20 separately purchasable signatures for exclusive Pokémon. Preview them in the collection, detail view and rankings. Equipped bonuses: +1% for the banner and +0.5% for the signature. Cosmetic auras are removed."]]},
  {d:"2026-10-22",t:["Donjons : puissance réelle et nouvelles difficultés","Dungeons: real power and new difficulties"],e:[["imp","PV et puissance","PV initiaux de 10 M à 10 T, +25 % par salle. Les attaques utilisent la puissance permanente du Pokémon, avec les types et bonus de combat. Rencontres plus rares aux difficultés élevées.","HP and power","Starting HP from 10 M to 10 T, +25% per room. Attacks use each Pokémon’s permanent power with type and combat bonuses. Higher difficulties offer rarer encounters."],["fix","Annuler la pension","Le bouton Annuler libère le lot en cours et désactive sa relance automatique.","Cancel daycare","Cancel frees the current batch and disables automatic repeats."]]},
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
   ["imp","Pension : Pokémon déjà au maximum ignorés","« Prendre les 10 plus forts » ne choisit plus les Pokémon qui ont déjà tout au maximum (Primordial, Cosmique, Alpha et chromatique) : la pension ne pourrait plus rien leur apporter. Tu peux toujours les ajouter à la main.","Daycare: maxed Pokémon skipped","“Take the 10 strongest” no longer picks Pokémon that already have everything maxed (Primordial, Cosmic, Alpha and shiny): the daycare could not improve them. You can still add them by hand."],
@@ -15057,4 +15058,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-collection-scenes-20261022"><script src="collection-scenes.js?v=pid-collection-scenes-20261022"></script></body></html>
