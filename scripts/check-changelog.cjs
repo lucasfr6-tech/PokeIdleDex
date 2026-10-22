@@ -1,6 +1,6 @@
 const {execFileSync}=require('node:child_process');
 const base=process.argv[2]||'HEAD^',head=process.argv[3]||'HEAD';
-const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:64*1024*1024}).trim();
 const files=git('diff','--name-only',base,head).split(/\r?\n/).filter(Boolean);
 const sources=new Set(['index.html','shim.js','config.js','sw.js','dungeon-immersive.js','dungeon-immersive.css','collection-scenes.js','collection-scenes.css']);
 if(!files.some(f=>sources.has(f))){console.log('No game source change.');process.exit(0)}
