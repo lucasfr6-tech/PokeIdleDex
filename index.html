@@ -4347,8 +4347,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wallet-integrity-20261022r"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-wallet-integrity-20261022r"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-gchic-diamond-202610220246"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-gchic-diamond-202610220246"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6378,7 +6378,7 @@ function cxEm(k,sz){const g=`<defs><linearGradient id="cg${k}" x1="0" y1="0" x2=
  if(k=="o")b=`<path d="M9 48 6 20l16 13 10-19 10 19 16-13-3 28z" ${f}/><rect x="9" y="50" width="46" height="7" rx="2" ${f}/><circle cx="32" cy="14" r="3" fill="#fff"/><circle cx="6" cy="20" r="3" fill="#fff"/><circle cx="58" cy="20" r="3" fill="#fff"/>`;
  if(k=="p")b=`<path d="M18 12h28l14 16-28 30L4 28z" ${f}/><path d="M4 28h56M24 12l-6 16 14 30 14-30-6-16M18 28 32 12l14 16" fill="none" stroke="#fffa" stroke-width="1.6" stroke-linejoin="round"/>`;
  return `<svg class="cxem" viewBox="0 0 64 64" width="${sz||64}" height="${sz||64}">${g}${b}</svg>`}
-const cxOdds=p=>"1 / "+fmt(Math.round(10000/p[0]));
+const cxOdds=p=>{p=p||(CP.d||[]).find(x=>x[1]=="gc");return p?"1 / "+fmt(Math.round(10000/p[0])):"—"};
 /* aspect d'un lot : [html de l'icône, texte principal, sous-texte] */
 function cxFace(o){const p=o.p;
  if(o.sp)return [`<img class="cxsp" src="${ART+o.sp}.png" alt="" onerror="this.style.visibility='hidden'">`,SPM[o.sp].n,LS("Forme spéciale","Special form")];
@@ -7720,7 +7720,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 IP.summon='<circle cx="12" cy="12" r="8.5"/><path d="M12 6.5l1.7 3.8 3.8 1.7-3.8 1.7L12 17.5l-1.7-3.8L6.5 12l3.8-1.7z"/>';
 NAV2.push(["inv","summon","Invocation","#22d3ee","#155e75"]);NENG.inv="Summon";LOCKS.inv=20;
 (function(){const n=NAV2.find(x=>x[0]=="inv");if(n&&!NAVX.includes(n))NAVX.unshift(n)})();
-const IVSL=2*3600*1000,IV_UR=150,IV_D=350,IVT=["D","UR","SSR","SR","N"];
+const IVSL=2*3600*1000,IV_UR=150,IV_D=200,IVT=["D","UR","SSR","SR","N"];
 const IVC={D:"#22d3ee",UR:"#ff6bd6",SSR:"#ffd23f",SR:"#cdd5e3",N:"#b9814a"};
 const IVNM={D:["LR","LR"],UR:["UR","UR"],SSR:["SSR","SSR"],SR:["SR","SR"],N:["N","N"]};
 const IVRT={D:1,UR:2.5,SSR:9,SR:25,N:62.5};
@@ -10012,9 +10012,9 @@ wkBody.inv=()=>{
  const N={D:"LR",UR:"UR",SSR:"SSR",SR:"SR",N:"N"};
  const rt=["D","UR","SSR","SR","N"].map(k=>[N[k],IVRT[k].toString().replace(".",",")+" %"]);
  return `<p class="lead">L'Invocation fait apparaître des Pokémon d'un <b>pool dédié</b> de 26 Pokémon, rotatif toutes les 2 heures avec une bannière mise en avant.</p>
- ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie LR","350"]])}
+ ${wf([["Débloquée à l'étage",LOCKS.inv],["Pool","26 Pokémon"],["Bannière","toutes les 2 h"],["Garantie LR","200"]])}
  ${wsx("Taux",tbl(["Rareté","Chance"],rt)+`<p>Chaque Pokémon invoqué a aussi <b>5 %</b> de chance d'avoir une mutation, <b>5 %</b> une taille hors norme, <b>5 %</b> le statut Alpha et <b>2 %</b> d'être chromatique (tirages séparés).</p>`)}
- ${wsx("Garanties",`<ul class="wks2"><li><b>LR</b> : garanti au plus tard à la 350<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
+ ${wsx("Garanties",`<ul class="wks2"><li><b>LR</b> : garanti au plus tard à la 200<sup>e</sup> invocation.</li><li><b>UR ou mieux</b> : garanti au plus tard à la 150<sup>e</sup>.</li></ul><p>Les compteurs se voient dans l'écran d'invocation.</p>`)}
  ${wsx("Prix et lots",`<p>Une invocation coûte <b>40 M ₽</b>. Tu peux lancer ×1, ×5, ×10, ×50 ou ×100 d'un coup. Le bouton « Voir les taux » donne le détail du pool. Le pool LR de la bannière regroupe des légendaires, fabuleux, Paradoxes et Ultra-Chimères ; la rareté LR s’applique aussi à leurs captures en raid ou ailleurs et ils sont <b>1,6 fois plus puissants</b> que la normale, et toujours moins forts que les Pokémon exclusifs.</p>`)}
  ${wn("info","Doublons","Chaque copie compte pour les étoiles (page Ascensions).")}`};
 
@@ -13326,7 +13326,7 @@ function hfBanner(){const s=hfSlot();if(HFB&&HFB.s==s)return HFB;const R=ivRng(s
  const pick=(a,n)=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=R()*(i+1)|0;[b[i],b[j]]=[b[j],b[i]]}return b.slice(0,n)};
  const L=[...pick(by(4),1),...pick(by(3),1),...pick(by(2),1),...pick(by(1),2)].sort((a,b)=>HFI[b].r-HFI[a].r);
  HFB={s,L};return HFB}
-const hfW=id=>{if(HFI[id].t!==4)return HFT[HFI[id].t].w;const ordinary=HFT[1].w*2+HFT[2].w+HFT[3].w,base=HFT[4].w/(ordinary+HFT[4].w),p=base+.01;return ordinary*p/(1-p)};
+const hfW=id=>{if(HFI[id].t!==4)return HFT[HFI[id].t].w;const ordinary=HFT[1].w*2+HFT[2].w+HFT[3].w,p=.025;return ordinary*p/(1-p)};
 const hfRate=(id,L)=>hfW(id)/L.reduce((a,i)=>a+hfW(i),0);
 const HFS=()=>G.hfs||(G.hfs={n:0,p:0});
 function hfRoll(L){const S=HFS();S.n++;S.p++;let id;if(S.p>=HFP)id=L[0];else{let r=Math.random()*L.reduce((a,i)=>a+hfW(i),0);id=L[L.length-1];for(const i of L){r-=hfW(i);if(r<=0){id=i;break}}}if(id==L[0])S.p=0;return id}
@@ -13641,6 +13641,33 @@ SPS.push(TW700);SPM[90005]=TW700;
 DB[90005]={n:TW700.n,t:TW700.t,b:660,lg:0,ba:0,ch:90005,s:TW700.s,ab:TW700.ab,ha:TW700.ha};EVC[90005]=[];
 RSPM[90005]=["Tête de Fer","Laser Glace","Séisme","Malédiction"];
 SPU.set("90005","img/special/steelix-cristallin.png");SPU.set("90005s","img/special/steelix-cristallin-shiny.png");
+/* ===== Gardevoir Chic : exclusif du ticket Diamant (casino) ===== */
+IVRT.D=2;IVRT.N=61.5;
+const GCHIC={id:90006,base:282,n:"Gardevoir Chic",t:["psychic","fairy"],s:[78,70,70,135,125,92],ab:["Synchro","Calque"],ha:"Bal de Nacre",hue:0,hue2:0,sat:1,au:"#f9a8d4",au2:"#a5b4fc",cas:0,
+ fr:"Une Gardevoir qui ne sort qu'aux grands bals. Sa robe de nacre change de reflet à chaque pas, et sa révérence suffit à calmer les combats les plus tendus.",
+ en:"A Gardevoir that only appears at grand balls. Its pearl gown shifts colour with every step, and its curtsy is enough to calm the fiercest battles."};
+SPS.push(GCHIC);SPM[90006]=GCHIC;
+DB[90006]={n:GCHIC.n,t:GCHIC.t,b:600,lg:0,ba:0,ch:90006,s:GCHIC.s,ab:GCHIC.ab,ha:GCHIC.ha};EVC[90006]=[];
+RSPM[90006]=["Éclat Magique","Psyko","Ball'Ombre","Plénitude"];
+SPU.set("90006","img/special/gardevoir-chic.png");SPU.set("90006s","img/special/gardevoir-chic-shiny.png");
+{const old=srcWhere;srcWhere=function(id){if(+id===90006)return["au ticket Diamant du casino","from the casino Diamond ticket"];return old.apply(this,arguments)}}
+/* ticket Diamant : prix fixe 2 G, Gardevoir Chic 0,06 % (6 / 10 000), gains en pièces inférieurs à la mise en moyenne */
+const GCH_W=6;
+CT.push({id:"d",n:["Diamant","Diamond"],mult:0,fl:2e9,c1:"#e0f2fe",c2:"#0284c7"});
+CXM.d=["#bae6fd","#0284c7"];
+CP.d=[[2600,"m",.5],[900,"m",1],[220,"m",2],[30,"m",5],[900,"i","dream-ball",20],[600,"i","max-revive",10],[400,"i","ability-capsule",3],[150,"mp"],[60,"mb"],[GCH_W,"gc"]];
+CP.d.unshift([10000-CP.d.reduce((a,x)=>a+x[0],0),"n"]);
+{const r0=casRar;casRar=function(p){return p&&p[1]=="gc"?5:r0.apply(this,arguments)}}
+{const l0=casLab;casLab=function(p){return p&&p[1]=="gc"?"Gardevoir Chic":l0.apply(this,arguments)}}
+{const f0=casRoll;casRoll=function(k){const o=f0.apply(this,arguments);try{if(o&&o.p&&o.p[1]=="gc"){spGrant(90006);o.sp=90006;o.lab="Gardevoir Chic"+spRoll(90006);o.r=5}}catch(e){}return o}}
+{const e0=cxEm;cxEm=function(k,sz){if(k!="d")return e0.apply(this,arguments);const g=`<defs><linearGradient id="cgd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${CXM.d[0]}"/><stop offset="1" stop-color="${CXM.d[1]}"/></linearGradient></defs>`,f=`fill="url(#cgd)" stroke="#fff8" stroke-width="1.5" stroke-linejoin="round"`;
+ return `<svg class="cxem" viewBox="0 0 64 64" width="${sz||64}" height="${sz||64}">${g}<path d="M32 4 56 26 32 60 8 26z" ${f}/><path d="M8 26h48M32 4l-10 22 10 34 10-34z" fill="none" stroke="#fffb" stroke-width="1.6" stroke-linejoin="round"/><circle cx="44" cy="15" r="2.4" fill="#fff"/></svg>`}}
+{const s0=cxoSp;cxoSp=function(T){if(T!="d")return s0.apply(this,arguments);return `<div class="cxosp"><div class="cxopk" title="Gardevoir Chic"><div class="cxopi">${sp(90006,0,1)}</div><em>${prc(GCH_W/10000)}</em></div></div>`}}
+{const st=document.createElement("style");st.id="pid-diamond";st.textContent=".astral .cxtks,.cxtks{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important}.cxtk[data-k=d]{box-shadow:0 0 0 1px #7dd3fc66,0 0 22px #38bdf833}.as-gchic{display:flex;align-items:center;gap:6px;justify-content:center;font-size:11px;font-weight:800;color:#bae6fd;margin:6px 0}.as-gchic img,.as-gchic .sp{width:44px!important;height:44px!important;image-rendering:pixelated}";document.head.appendChild(st)}
+{const x0=cxShow;cxShow=function(k){return x0.apply(this,arguments).filter(x=>x[1]!="gc")}}
+setTimeout(()=>{const v0=vCas;vCas=function(){let h=v0.apply(this,arguments);try{const i=h.indexOf('data-k="d"');if(i>0){const j=h.indexOf('<div class="cxpz">',i);if(j>0)h=h.slice(0,j)+`<div class="as-gchic">${sp(90006,0,1)}<span>Gardevoir Chic · ${prc(GCH_W/10000)}</span></div>`+h.slice(j)}
+ h=h.replace(LS('Quatre tickets lumineux.','Four glowing tickets.'),LS('Cinq tickets lumineux.','Five glowing tickets.')).replace('</span><b>'+LS('Formes exclusives','Exclusive forms'),sp(90006,0)+'</span><b>'+LS('Formes exclusives','Exclusive forms')).replace(LS('Lucario Senkou · Ectoplasma Cristal','Dawn Lucario · Dusk Gengar'),LS('Lucario Senkou · Ectoplasma Cristal · Gardevoir Chic','Dawn Lucario · Dusk Gengar · Gardevoir Chic'))}catch(e){}return h}},0);
+
 // Six strategic opponents, powerful guardians every 25 floors and rewards every ten.
 for(let f=310;f<=700;f+=10){const k=(f-300)/10,major=f%50===0;
  TWRW[f]={h:150+k*5,s:10000+k*350,big:major?1:0,gem:major?40+Math.floor(k/5)*5:3,
@@ -13650,7 +13677,7 @@ Object.assign(TWRW[700],{h:400,s:30000,big:1,gem:120,sp:90005,it:[["master-ball"
 Object.assign(TWG,{325:483,350:484,375:487,400:493,425:643,450:644,475:646,500:800,525:888,550:889,575:890,600:384,625:716,650:717,675:150,700:90005});
 {const old=srcWhere;srcWhere=function(id){if(+id===90005)return["au sommet de la Tower (étage 700)","at the Tower summit (floor 700)"];return old.apply(this,arguments)}}
 for(const key of ["rarity","pw"]){const old=wkBody[key];if(old)wkBody[key]=()=>old()+wsx(TT("Rareté LR et origine","LR rarity and origin"),`<p>${TT("<b>N → SR → SSR → UR → LR</b>. LR remplace Divin et inclut tous les légendaires et fabuleux, quelle que soit leur origine. La rareté et le palier d’obtention sont distincts : un LR obtenu en raid Impossible conserve le multiplicateur du raid Impossible. Les formes exclusives restent reconnaissables par leur carte.","<b>N → SR → SSR → UR → LR</b>. LR replaces Divine and includes every legendary and mythical Pokémon, regardless of origin. Rarity is separate from the acquisition tier: an LR from an Impossible raid keeps its Impossible raid multiplier. Exclusive forms keep their distinctive cards.")}</p>`)+wsx(TT("Tower 700","Tower 700"),`<p>${TT("Steelix Cristallin a un palier propre : <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10).toString().replace(".",",")+"</b> par rapport au palier N, soit <b>deux fois la puissance de base de Pikachu Fire</b> à niveau, doublons, étoiles et variantes identiques.","Crystal Steelix has its own tier: <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10)+"</b> compared with the N tier, or <b>twice Zenith Pikachu’s base power</b> at equal level, duplicates, stars and variants.")}</p>`)}
-{const old=wkBody.inv;wkBody.inv=()=>old()+wn("info",TT("Rareté et source","Rarity and source"),TT("Le taux LR est de 1 % par invocation classique, hors garanties. Les garanties et compteurs déjà accumulés sont conservés. La rareté LR existe aussi pour les légendaires et fabuleux obtenus en raid ou ailleurs.","The classic LR chance is 1% per summon, before guarantees. Existing guarantees and pity counters are kept. Legendary and mythical Pokémon from raids and other sources also have LR rarity."))}
+{const old=wkBody.inv;wkBody.inv=()=>old()+wn("info",TT("Rareté et source","Rarity and source"),TT("Le taux LR est de 2 % par invocation classique, hors garanties. Les garanties et compteurs déjà accumulés sont conservés. La rareté LR existe aussi pour les légendaires et fabuleux obtenus en raid ou ailleurs.","The classic LR chance is 1% per summon, before guarantees. Existing guarantees and pity counters are kept. Legendary and mythical Pokémon from raids and other sources also have LR rarity."))}
 
 function trSprite(id,c){c=c||{};return `<span class="tr-sprite" style="${plTint(c)}">${plSprite(id,{...c,sh:c.sh||0})}</span>`}
 function trTerrain(){const t=trS(),types=t.i&&G.col[t.i]?tp(t.i):[],kind=types.some(x=>["grass","bug","poison"].includes(x))?4:types.some(x=>["water","ice"].includes(x))?3:types.includes("fire")?2:types.some(x=>["dragon","psychic","fairy","ghost","dark"].includes(x))?5:1;return{k:kind,n:LS(["Stade des étoiles","Prairie des brises","Forge des braises","Lac céleste","Clairière profonde","Observatoire des dragons"][kind],["Starlight stadium","Breezy meadow","Ember forge","Celestial lake","Deep woodland","Dragon observatory"][kind])}}
@@ -13868,6 +13895,9 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+  ["new","Nouvel exclusif : Gardevoir Chic","Une Gardevoir en robe de nacre, Psy et Fée. Elle ne s'obtient qu'avec le nouveau ticket Diamant du casino (0,06 % par ticket) et n'apparaît dans aucun autre tirage.","New exclusive: Gardevoir Chic","A pearl-gowned Gardevoir, Psychic and Fairy. It can only be obtained with the new casino Diamond ticket (0.06% per ticket) and appears in no other draw."],
+  ["new","Casino : ticket Diamant","Cinquième ticket, à prix fixe de 2 G. Lots : pièces, Rêve Balls, Rappels Max, capsules, Méga-Perles, Master Ball et Gardevoir Chic. En moyenne, les pièces gagnées restent inférieures à la mise.","Casino: Diamond ticket","Fifth ticket, fixed price of 2 G. Prizes: coins, Dream Balls, Max Revives, capsules, Mega Pearls, Master Ball and Gardevoir Chic. On average, coin winnings stay below the bet."],
+  ["imp","Invocations : LR plus accessible","Bannière classique : 2 % de LR par invocation (au lieu de 1 %) et LR garanti à 200 invocations (au lieu de 350). Bannière Halloween : 2,5 % pour le légendaire avant la garantie.","Summons: more accessible LR","Classic banner: 2% LR per summon (instead of 1%) and LR guaranteed at 200 summons (instead of 350). Halloween banner: 2.5% for the legendary before pity."],
  ["fix","Pièces : solde protégé","Correction du calcul des gains hors ligne de Steelix Cristallin. Les valeurs invalides ne peuvent plus effacer le solde ; un point de récupération conserve le dernier montant valide, y compris après un achat.","Coins: protected balance","Fixed Crystal Steelix offline-income calculations. Invalid values can no longer erase the balance; a recovery checkpoint keeps the last valid amount, including after purchases."],
  ["fix","Revenu affiché et synchronisation","Le revenu affiché utilise le même calcul que les versements. Les réponses de synchronisation plus anciennes ne remplacent plus une progression locale plus récente.","Displayed income and synchronisation","Displayed passive income uses the same calculation as payouts. Older synchronisation responses no longer replace newer local progress."]]},
  {d:"2026-10-21",t:["Version 1.1.1 — Nouveautés et notifications","Version 1.1.1 — Updates and notifications"],e:[
