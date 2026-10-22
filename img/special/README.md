@@ -15,3 +15,5 @@ Sprites supplied by the owner (Gardevoir Tana 2013, normal and shiny), cropped f
 - `gardevoir-chic-shiny.png` (shiny)
 
 In-game exclusive species: 90006, Casino Diamond ticket only.
+
+`gardevoir-chic-anim.webp` and `gardevoir-chic-shiny-anim.webp` are animated (36 frames, 60 ms) shaded 2.5D versions generated from those sprites: 4× pixel upscale, light gradient, rim light, floating, breathing and dress flutter. The matching `.png` files are their first frames.
