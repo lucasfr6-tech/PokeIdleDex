@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-immersive-dungeon-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-immersive-dungeon-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-dungeon-power-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-dungeon-power-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6852,7 +6852,7 @@ function rdBackOf(id){const c=G.col[id];if(id>9e4)return rdArtOf(id);return rdPi
 const rdEff=(m,types)=>eff(m.t,types);
 function atPd(id){try{return Math.max(1,base(id))}catch(e){return 1}}
 /* ---- dégâts (formule des jeux) ---- */
-function rdDamage(a,d,m,mult){if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(1,Math.floor(a.dm*.8/30*(.97+Math.random()*.06))),e:1,cr:false}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
+function rdDamage(a,d,m,mult){if(a.dgPower!=null){const ph=m.c=="p",e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),boost=(ph?a.bA:a.bS)>0?1.5:1,burn=ph&&a.st=="brn"?.5:1;return {v:Math.max(0,Math.floor(a.dgPower*e*boost*burn*(cr?1.5:1)*(mult||1))),e,cr}}if(a.dm&&d.wbk){const e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.9+Math.random()*.1;return{v:Math.max(1,Math.floor(a.dm*.8/30*(.97+Math.random()*.06))),e:1,cr:false}}const ph=m.c=="p";let A=ph?a.atk:a.spa,D=ph?d.def:d.spd;if(ph&&a.bA>0)A*=1.5;if(!ph&&a.bS>0)A*=1.5;if(ph&&a.st=="brn")A*=.5;
  const base=Math.floor(Math.floor(Math.floor(2*a.L/5+2)*m.p*A/Math.max(1,D))/50)+2,stab=a.types.includes(m.t)?1.5:1,e=rdEff(m,d.types),cr=Math.random()<(a.cr+(m.e=="crit"?.125:0)),rnd=.85+Math.random()*.15;
  return{v:Math.max(e>0?1:0,Math.floor(base*stab*e*(cr?1.5:1)*rnd*(a.pw||1)*(mult||1))),e,cr}}
 /* ---- combat ---- */
@@ -6905,7 +6905,7 @@ async function rdAct(R,side,u){const boss=R.boss;if(R.over)return;
   else if(t.he&&t.he.hl&&!t.hld&&t.hp<t.max*t.he.hl[0]){t.hld=1;rdHeal(t,t.max*t.he.hl[1]);rdPop(R,"p",t,"Baie !","#4ade80")}
   const fx=rdApplyEff(R,boss,t,m,v);if(fx.some(x=>x=="brn"||x=="par"||x=="psn"))rdPop(R,"p",t,{brn:"Brûlé !",par:"Paralysé !",psn:"Empoisonné !"}[fx.find(x=>x=="brn"||x=="par"||x=="psn")],"#fbbf24")}
  if(nuke&&R.guard){R.gauge=Math.min(100,R.gauge+25);rdBanner(R,"Garde parfaite !","#4ade80")}if(nuke)R.guard=0;rdLog(R,boss.name+" utilise "+m.n+(spread?" sur toute l'équipe":""));if(m.e=="cd")R.bossRc=1;rdUpd(R);await rdSleep(460)}
-function rdPow(R,u){let m=1;if(typeof QB!="undefined"&&QB.d)m*=1+(QB.d-1)*.5;if(R.fuse)m*=1;return m}
+function rdPow(R,u){if(R.kind=="dng")return 1;let m=1;if(typeof QB!="undefined"&&QB.d)m*=1+(QB.d-1)*.5;if(R.fuse)m*=1;return m}
 /* un tour */
 async function rdRound(R){R.round++;const boss=R.boss;
  if(R.kind!="wb"&&!R.enr&&boss.hp<boss.max*.5){R.enr=1;rdBanner(R,boss.big?(boss.form=="dyn"?"DYNAMAX ! La puissance explose":"Le boss entre en fureur !"):"Le boss entre en fureur !","#f43f5e");rdLog(R,boss.name+" entre en fureur !");await rdSleep(900)}
@@ -14009,8 +14009,8 @@ function dgMake(run,type){const R=dgRng(run.seed+run.room*7919),E=DGE[run.env],c
  const ents=[],put=(t,o)=>{for(let k=0;k<200;k++){const x=R()*DGW|0,y=1+(R()*(DGH-3)|0);if(free(x,y)){cells.add(key(x,y));ents.push({t,x,y,...(o||{})});return}}};
  const nr=type=="trp"?6:8+(R()*5|0);for(let i=0;i<nr;i++)put("rock");
  const nt=type=="trp"?14:type=="tre"?4:type=="enc"||type=="eli"?3:2;for(let i=0;i<nt;i++)put("trap");
- const lv=DGL[run.lv],hm=Math.pow(1.065,run.room-1);
- if(type=="enc"||type=="eli"||type=="bos"){const pool=type=="bos"?E.boss:E.pool,sp=pool[R()*pool.length|0];const o={sp,hp:Math.floor(lv.hp*hm*(type=="eli"?1.6:type=="bos"?3:1)),el:type=="eli"?1:0,bos:type=="bos"?1:0};
+ const lv=DGL[run.lv],hm=dgHealth(run)/lv.hp;
+ if(type=="enc"||type=="eli"||type=="bos"){const pool=dgPool(run,type=="bos"),sp=pool[R()*pool.length|0];const o={sp,hp:Math.floor(lv.hp*hm*(type=="eli"?1.6:type=="bos"?3:1)),el:type=="eli"?1:0,bos:type=="bos"?1:0};
   if(type=="bos"){const L=LUCK();o.mi=R()<.25*L?[1,2,3,4,5,6,8,9][R()*8|0]:0;o.zi=R()<.25*L?[3,4,5][R()*3|0]:2;o.al=R()<.15*L?1:0;o.sh=R()<.03*L?1:0}
   o.x=7+(R()*2|0);o.y=2;cells.add(key(o.x,o.y));ents.push({t:"foe",...o})}
  if(type=="tre"||type=="trp")put("chest",{n:type=="trp"?5:4+(R()*3|0)});
@@ -14031,7 +14031,7 @@ function dgMove(dx,dy){const r=DG().run;if(!r||r.path||r.pop||RB2)return;const n
  if(e&&e.t=="foe"){r.px=nx;r.py=ny;save();return dgFight(e)}
  r.px=nx;r.py=ny;
  if(e){const R2=r;if(e.t=="trap"){if(R2.shield>0){R2.shield--;dgLog(R2,LS("L'Égide d'Écho annule le piège.","The Echo aegis cancels the trap."))}else{R2.team.forEach(i=>{if(R2.hp[i]>0)R2.hp[i]=Math.max(.01,R2.hp[i]-.1)});dgLog(R2,LS("Piège ! L'équipe perd 10 % de PV.","Trap! The team loses 10% HP."));try{sfx("hit")}catch(x){}}e.t="trapx"}
-  else if(e.t=="chest"){const n=Math.max(1,Math.round(e.n*dgFragMul())),c=Math.floor(DGL[r.lv].hp*2e5*Math.pow(1.065,r.room));R2.frag+=n;G.m+=c;dgLog(R2,LS("Coffre : +"+n+" fragments d'Écho et +"+fmt(c)+" ₽","Chest: +"+n+" Echo shards and +"+fmt(c)+" coins"));r.ents=r.ents.filter(x=>x!==e);try{sfx("coin")}catch(x){}}
+  else if(e.t=="chest"){const n=Math.max(1,Math.round(e.n*dgFragMul())),c=Math.floor(DGL[r.lv].reward*2e5*Math.pow(1.065,r.room));R2.frag+=n;G.m+=c;dgLog(R2,LS("Coffre : +"+n+" fragments d'Écho et +"+fmt(c)+" ₽","Chest: +"+n+" Echo shards and +"+fmt(c)+" coins"));r.ents=r.ents.filter(x=>x!==e);try{sfx("coin")}catch(x){}}
   else if(e.t=="camp"){dgHeal(r,.5);dgLog(r,LS("Bivouac : l'équipe récupère 50 % de PV.","Camp: the team recovers 50% HP."));r.ents=r.ents.filter(x=>x!==e);try{sfx("prest")}catch(x){}}
   else if(e.t=="shop"){r.pop="shop"}else if(e.t=="altar"){r.pop="altar"}else if(e.t=="orb"){r.pop="evt";r.evt=(r.seed+r.room)%3}}
  save();dgRender()}
@@ -14043,7 +14043,7 @@ function dgFight(e){const r=DG().run,lv=DGL[r.lv];const alive=dgAlive(r);if(!ali
  const boss=rdBossMake(e.sp,"n",lv.L,e.hp,lv.am*(e.el?1.15:e.bos?1.3:1),lv.cr,"dng",!!e.sh);if(e.bos)boss.name=LS("Gardien · ","Guardian · ")+boss.name;else if(e.el)boss.name=LS("Élite · ","Elite · ")+boss.name;
  if(r.ehp!=null&&r.ehp>0&&r.inF)boss.hp=Math.min(boss.max,r.ehp);
  const dm=(1+.15*dgRel("dmg"))*(typeof SKM=="function"?SKM("g"):1),hm=1+.15*dgRel("hp");
- const T=r.team.filter(i=>G.col[i]).map(rdUnit);T.forEach((u,i)=>{u.i=i;u.atk*=dm;u.spa*=dm;u.max=Math.floor(u.max*hm);u.hp=Math.max(0,Math.floor(u.max*(r.hp[u.id]||0)));if(u.hp<=0)u.dead=1;u.cr+=.05*dgRel("cr")});
+ const T=r.team.filter(i=>G.col[i]).map(rdUnit);T.forEach((u,i)=>{u.i=i;u.dgPower=base(u.id)*dm;u.atk*=dm;u.spa*=dm;u.max=Math.floor(u.max*hm);u.hp=Math.max(0,Math.floor(u.max*(r.hp[u.id]||0)));if(u.hp<=0)u.dead=1;u.cr+=.05*dgRel("cr")});
  const ai=Math.max(0,T.findIndex(u=>!u.dead));
  const R={kind:"dng",tier:lv.tier,boss,team:T,ai,swReq:null,pick:null,round:0,max:50,gauge:0,guard:0,gcd:0,gleft:3,items:3,sp:gpRaidSp(),auto:false,pause:false,over:false,dealt:0,log:[],charge:0,ws:{},enr:0,fusions:0,ko:0,dg:e};
  r.inF=1;if(r.ehp==null)r.ehp=boss.hp;save();rdBuild(R);rdSpinUp(R);rdLoop(R)}
@@ -14051,7 +14051,7 @@ function dgFight(e){const r=DG().run,lv=DGL[r.lv];const alive=dgAlive(r);if(!ali
 {const g0=rdRound;rdRound=async function(R){const out=await g0.apply(this,arguments);try{if(R&&R.kind=="dng"){const r=DG().run;if(r){r.ehp=Math.max(0,R.boss.hp);R.team.forEach(u=>{r.hp[u.id]=u.dead?0:Math.max(0,u.hp/u.max)});save()}}}catch(e){}return out}}
 function dgAfter(R){const r=DG().run;rdClose();if(!r){show();return}const e=r.ents.find(x=>x.t=="foe");R.team.forEach(u=>{r.hp[u.id]=u.dead?0:Math.max(0,u.hp/u.max)});
  if(R.over=="win"){r.inF=0;r.ehp=null;r.ents=r.ents.filter(x=>x.t!="foe");r.open=1;if(dgRel("heal"))dgHeal(r,.2*dgRel("heal"));
-  const n=Math.max(1,Math.round((e&&e.bos?5:e&&e.el?3:1)*dgFragMul()));r.frag+=n;const c=Math.floor(DGL[r.lv].hp*1e5*Math.pow(1.065,r.room)*(e&&e.bos?5:e&&e.el?2:1));G.m+=c;G.ko=(G.ko|0)+1;
+  const n=Math.max(1,Math.round((e&&e.bos?5:e&&e.el?3:1)*dgFragMul()));r.frag+=n;const c=Math.floor(DGL[r.lv].reward*1e5*Math.pow(1.065,r.room)*(e&&e.bos?5:e&&e.el?2:1));G.m+=c;G.ko=(G.ko|0)+1;
   dgLog(r,LS("Victoire : +"+n+" fragments et +"+fmt(c)+" ₽","Victory: +"+n+" shards and +"+fmt(c)+" coins"));
   if(e&&e.bos){r.sec+=r.frag;G.ech=(G.ech||0)+r.frag;dgLog(r,LS(r.frag+" fragments sécurisés !",r.frag+" shards secured!"));r.frag=0;r.cap={sp:e.sp,mi:e.mi,zi:e.zi,al:e.al,sh:e.sh,ch:dgCapCh(r.room),done:0};r.pop="cap"}
   save();show();try{sfx("big")}catch(x){}return}
@@ -14074,7 +14074,7 @@ function dgAltar(ok){const r=DG().run;if(!r)return;r.ents=r.ents.filter(x=>x.t!=
 function dgEvt(ok){const r=DG().run;if(!r)return;r.ents=r.ents.filter(x=>x.t!="orb");r.pop=null;const v=r.evt;
  if(v==0){dgHeal(r,.3);dgLog(r,LS("Fontaine d'Écho : +30 % de PV.","Echo fountain: +30% HP."))}
  else if(v==1){const n=Math.max(1,Math.round(3*dgFragMul()));r.frag+=n;dgLog(r,LS("Écho mystérieux : +"+n+" fragments.","Mysterious echo: +"+n+" shards."))}
- else if(ok){const E=DGE[r.env],R=dgRng(r.seed+r.room*13),sp=E.pool[R()*E.pool.length|0],lv=DGL[r.lv];const f={t:"foe",sp,hp:Math.floor(lv.hp*Math.pow(1.065,r.room-1)*1.6),el:1,x:r.px,y:Math.max(0,r.py-1)};r.ents=r.ents.filter(x=>!(x.x==f.x&&x.y==f.y));r.ents.push(f);r.open=0;dgLog(r,LS("Embuscade ! Une élite surgit.","Ambush! An elite appears."))}
+ else if(ok){const E=DGE[r.env],R=dgRng(r.seed+r.room*13),pool=dgPool(r),sp=pool[R()*pool.length|0],lv=DGL[r.lv];const f={t:"foe",sp,hp:dgHealth(r,1.6),el:1,x:r.px,y:Math.max(0,r.py-1)};r.ents=r.ents.filter(x=>!(x.x==f.x&&x.y==f.y));r.ents.push(f);r.open=0;dgLog(r,LS("Embuscade ! Une élite surgit.","Ambush! An elite appears."))}
  save();show()}
 /* rendu */
 const dgPos=(x,y)=>`left:${((DGX0+x*DGT)/1536*100).toFixed(3)}%;top:${((DGY0+y*DGT)/1024*100).toFixed(3)}%;width:${(DGT/1536*100).toFixed(3)}%;height:${(DGT/1024*100).toFixed(3)}%`;
@@ -14332,7 +14332,9 @@ let PNA_BUSY=false;
 function pnaState(n,create=false){if(create){G.pna=G.pna||{};G.pna[n]=G.pna[n]||{on:false,sl:[],cycles:0}}return G.pna?.[n]||{on:false,sl:[],cycles:0}}
 function pnaLast(n){const p=penOf(n),list=p?.t0?p.sl:pnaState(n).sl;return [...new Set((list||[]).map(Number))].filter(i=>Number.isFinite(i)&&i>0).slice(0,10)}
 function pnaBlocked(n){const list=pnaLast(n);if(!list.length)return LS('Choisis un premier lot pour mémoriser ses Pokémon.','Choose a first batch to remember its Pokémon.');if(list.some(i=>!G.col[i]))return LS('En attente : certains Pokémon ne sont plus dans ta collection.','Waiting: some Pokémon are no longer in your collection.');const busy=list.filter(i=>!penElig(i));if(!penOf(n)?.t0&&busy.length)return LS('En attente : ','Waiting: ')+busy.length+' '+LS('Pokémon occupé(s). Le lot sera relancé dès leur retour.','Pokémon busy. The batch will restart once they return.');return ''}
-function pnaControl(n){const s=pnaState(n),last=pnaLast(n),message=pnaBlocked(n);return `<div class="pnv-auto${s.on?' on':''}"><div><b>${ico('swap')}${LS('Répéter le dernier lot','Repeat the last batch')}</b><p>${s.on?message||LS('Récupération puis relance automatiques avec les mêmes Pokémon.','Automatically collect and restart with the same Pokémon.'):message||LS('Le dernier choix est mémorisé : ','Your last selection is remembered: ')+last.length+' Pokémon.'}</p>${s.on?`<small>${s.cycles||0} ${LS('cycle(s) automatique(s) terminé(s) · arrêter laisse le lot en cours terminer son repos.','automatic cycle(s) completed · stopping lets the current batch finish resting.')}</small>`:''}</div><button type="button" data-pna="${n}" class="${s.on?'on':''}" aria-pressed="${!!s.on}" ${!last.length?'disabled':''}>${ico(s.on?'pause':'bolt')}${s.on?LS('Arrêter l’auto','Stop auto'):LS('Activer l’auto','Enable auto')}</button></div>`}
+function pnaControl(n){const s=pnaState(n),last=pnaLast(n),message=pnaBlocked(n);return `<div class="pnv-auto${s.on?' on':''}"><div><b>${ico('swap')}${LS('Répéter le dernier lot','Repeat the last batch')}</b><p>${s.on?message||LS('Récupération puis relance automatiques avec les mêmes Pokémon.','Automatically collect and restart with the same Pokémon.'):message||LS('Le dernier choix est mémorisé : ','Your last selection is remembered: ')+last.length+' Pokémon.'}</p>${s.on?`<small>${s.cycles||0} ${LS('cycle(s) automatique(s) terminé(s) · arrêter laisse le lot en cours terminer son repos.','automatic cycle(s) completed · stopping lets the current batch finish resting.')}</small>`:''}</div><button type="button" data-pna="${n}" class="${s.on?'on':''}" aria-pressed="${!!s.on}" ${!last.length?'disabled':''}>${ico(s.on?'pause':'bolt')}${s.on?LS('Arrêter l’auto','Stop auto'):LS('Activer l’auto','Enable auto')}</button><button type="button" data-pna-cancel="${n}" ${!penOf(n)?.t0&&!s.on?'disabled':''}>${LS('Annuler','Cancel')}</button></div>`}
+function pnaCancel(n){n=+n?1:0;const s=pnaState(n,true);s.on=false;if(n)G.pen2=null;else G.pen=null;PNM=null;PENR=false;P2R=0;save();show();toast(LS('Lot annulé : tes Pokémon sont disponibles. Auto désactivé.','Batch cancelled: your Pokémon are available. Auto disabled.'))}
+document.addEventListener('click',e=>{const b=e.target.closest?.('[data-pna-cancel]');if(b&&!b.disabled)pnaCancel(b.dataset.pnaCancel)});
 {const batch=pnvBatch;pnvBatch=function(n){const html=batch.apply(this,arguments);return (!n||PL('pn2'))?html.replace(/<\/section>$/,pnaControl(n)+'</section>'):html}}
 {const start=penGo;penGo=function(){const n=PNL?1:0,before=penOf(n)?.t0;const result=start.apply(this,arguments),p=penOf(n);if(p?.t0&&p.t0!==before){pnaState(n,true).sl=p.sl.slice();save()}return result}}
 {const claim=penClaim;penClaim=function(n){n=n?1:0;const p=penOf(n),list=p?.sl?.slice(),stamp=p?.t0;const result=claim.apply(this,arguments);if(stamp&&!penOf(n)){pnaState(n,true).sl=list||[];save()}return result}}
@@ -14383,6 +14385,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-22",t:["Donjons : puissance réelle et nouvelles difficultés","Dungeons: real power and new difficulties"],e:[["imp","PV et puissance","PV initiaux de 10 M à 10 T, +25 % par salle. Les attaques utilisent la puissance permanente du Pokémon, avec les types et bonus de combat. Rencontres plus rares aux difficultés élevées.","HP and power","Starting HP from 10 M to 10 T, +25% per room. Attacks use each Pokémon’s permanent power with type and combat bonuses. Higher difficulties offer rarer encounters."],["fix","Annuler la pension","Le bouton Annuler libère le lot en cours et désactive sa relance automatique.","Cancel daycare","Cancel frees the current batch and disables automatic repeats."]]},
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
 ["imp","Donjons : expédition immersive","Grande carte à cases alignées, Pokémon directionnels, choix du meneur, marchand et fontaine dans le décor. Élites sur 4 cases et gardiens sur 9. Six difficultés ; entrée à 1 T puis prix doublé à chaque tentative du jour.","Dungeons: immersive expedition","Large aligned tile map, directional sprites, selectable leader, shop and fountain. Elites occupy 4 tiles and guardians 9. Six difficulties; entry costs 1 T and doubles each daily attempt."],
 ["imp","Gardevoir Chic animée","Sprites 3D animés pour Gardevoir Chic et sa Méga, avec leurs palettes normales et chromatiques.","Animated Gardevoir Chic","Animated 3D sprites for Gardevoir Chic and its Mega with normal and shiny palettes."],
@@ -15001,4 +15004,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-immersive-dungeon-20261022"><script src="dungeon-immersive.js?v=pid-immersive-dungeon-20261022"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script></body></html>
