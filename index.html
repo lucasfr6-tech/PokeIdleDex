@@ -4367,8 +4367,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-sp-ranking-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-sp-ranking-20261022"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-immersive-dungeon-20261022"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-immersive-dungeon-20261022"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5729,7 +5729,7 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 const bfl=()=>Math.max(G.cl,G.bf||0,G.fl||0);
 const LOCKS={exp:15,gacha:30,reb:15,pen:30},BFL=[30,30,50,70,90];
 const prestigeTab=t=>["lab","dng","cos"].includes(t);
-const SOON=["dng"];const lockOf=t=>SOON.includes(t)?-2:(prestigeTab(t)?((G.st||0)<1?-1:0):(LOCKS[t]&&bfl()<LOCKS[t]?LOCKS[t]:0));
+const SOON=[];const lockOf=t=>SOON.includes(t)?-2:(prestigeTab(t)?((G.st||0)<1?-1:0):(LOCKS[t]&&bfl()<LOCKS[t]?LOCKS[t]:0));
 const lockTxt=n=>n===-2?LS("Bientôt","Coming soon"):n===-1?LS("Débloqué après ton premier prestige","Unlocks after your first prestige"):LS("Se débloque à l'étage "+n+" · meilleur étage : "+bfl(),"Unlocks at floor "+n+" · best floor: "+bfl());
 NENG.pen="Daycare";
 const NAVX=[["pen","pension","Pension","#f97316","#9a3412"]];
@@ -10874,7 +10874,7 @@ const BUG_URL="https://discord.gg/AP3Y2YQav";/* colle ici le lien d'invitation D
   gear:P('<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>')};
  /* contenu des nouveautés : [type, icône, titre, texte] */
  const NEWS=[
- ["new","sword","Donjons des Échos","Explore salle après salle, choisis ton chemin et affronte les gardiens toutes les 10 salles. Bientôt disponible !"],
+ ["new","sword","Donjons des Échos","Explore une grande carte à cases, choisis ton meneur et affronte les gardiens toutes les 10 salles. Disponible après le premier prestige."],
  ["new","bolt","Laboratoire","Recherche des mutations, des tailles, du statut Alpha et du chromatique pour améliorer tes Pokémon."],
  ["new","gift","Collections","Des collections esthétiques : cadres de profil animés, titres et succès à débloquer."],
  ["new","ghost","Gardevoir Chic","Un Pokémon exclusif animé, avec sa Méga-Évolution et ses palettes chromatiques."],
@@ -14384,6 +14384,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-22",t:["Correction des pièces et sauvegardes","Wallet and save fixes"],e:[
+["imp","Donjons : expédition immersive","Grande carte à cases alignées, Pokémon directionnels, choix du meneur, marchand et fontaine dans le décor. Élites sur 4 cases et gardiens sur 9. Six difficultés ; entrée à 1 T puis prix doublé à chaque tentative du jour.","Dungeons: immersive expedition","Large aligned tile map, directional sprites, selectable leader, shop and fountain. Elites occupy 4 tiles and guardians 9. Six difficulties; entry costs 1 T and doubles each daily attempt."],
 ["imp","Gardevoir Chic animée","Sprites 3D animés pour Gardevoir Chic et sa Méga, avec leurs palettes normales et chromatiques.","Animated Gardevoir Chic","Animated 3D sprites for Gardevoir Chic and its Mega with normal and shiny palettes."],
 ["new","Perle Origine","La perle de Giratina Origine est disponible dans la boutique Méga et Dynamax.","Origin Pearl","Giratina’s Origin Pearl is available in the Mega and Dynamax shop."],
 ["imp","Après le premier prestige","Le laboratoire, les donjons et les collections esthétiques se débloquent après le premier prestige. Tous les prix du laboratoire sont divisés par trois.","After first prestige","The laboratory, dungeons and cosmetic collections unlock after the first prestige. All laboratory prices are divided by three."],
@@ -15000,4 +15001,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-immersive-dungeon-20261022"><script src="dungeon-immersive.js?v=pid-immersive-dungeon-20261022"></script></body></html>
