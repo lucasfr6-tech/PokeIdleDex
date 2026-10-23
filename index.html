@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-steelix-traits-20261023p"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-steelix-traits-20261023p"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-gift-20261023r"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-gift-20261023r"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11015,6 +11015,17 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
   try{mailDot()}catch(x){}}catch(x){console.error(x)}
 },true);
 })();
+/* --- code privé (haché) : 400 T de pièces, une seule utilisation par joueur --- */
+(function(){
+const CH="b5d8c1b6eec22069c712e0e7114c654d76228c7f778ad10a36a8e1f15b48b102";
+document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest('[data-ml="code"]');if(!b)return;const i=document.getElementById("mlin"),v=(i&&i.value||"").trim().toUpperCase();if(!v)return;
+ try{const h=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)))).map(x=>x.toString(16).padStart(2,"0")).join("");
+  if(h!==CH)return;e.stopPropagation();G.codes=G.codes||{};const k="h"+CH.slice(0,10);
+  if(G.codes[k]){toast(LS("Code déjà utilisé.","Code already used."));return}
+  G.codes[k]=1;G.m+=4e14;try{recomp()}catch(x){}
+  save();if(i)i.value="";try{mailClose()}catch(x){}try{show()}catch(x){}toast(LS("Code accepté : +400 T de pièces !","Code accepted: +400 T coins!"));try{sfx("big")}catch(x){}}catch(x){console.error(x)}
+},true);
+})();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
 /* Fixed Pokémon gifts validate their forms before awarding the whole pack. */
@@ -14878,4 +14889,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-steelix-traits-20261023p"><script src="dungeon-immersive.js?v=pid-steelix-traits-20261023p"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-steelix-traits-20261023p"><script src="collection-scenes.js?v=pid-steelix-traits-20261023p"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-gift-20261023r"><script src="dungeon-immersive.js?v=pid-gift-20261023r"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-gift-20261023r"><script src="collection-scenes.js?v=pid-gift-20261023r"></script></body></html>
