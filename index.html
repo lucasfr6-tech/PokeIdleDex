@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-booster-fit-20261023g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-booster-fit-20261023g"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-mega-lr-20261023"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-mega-lr-20261023"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10696,15 +10696,15 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
  document.addEventListener("visibilitychange",()=>{if(document.hidden){try{save()}catch(e){}}});
 })();
 
-/* ---------- les Pokémon LR (légendaires, fabuleux…) ne s'obtiennent que par Invocation ---------- */
+/* ---------- Expéditions ordinaires : exclusion LR ; Chasse Méga : LR compatibles autorisés ---------- */
 (function(){
  const ok=i=>!kxDiv(i);
  const np=[...EXC].filter(i=>ok(i)&&i<=1025).sort((a,b)=>a-b);
  const sx=EXT.find(t=>t.n=="Sanctuaire oublié");if(sx&&np.length)sx.pool=np;
  const base=mgCur;
- mgCur=function(t,i){const sd=mgSeed(),L=MGX().filter(f=>MGM[f]&&ok(MGM[f].s));if(!L.length)return base.apply(this,arguments);const R=rng(sd*7919+13);R();const f=L[R()*L.length|0],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}};
+ mgCur=function(t,i){const sd=mgSeed(),L=MGX().filter(f=>MGM[f]);if(!L.length)return base.apply(this,arguments);const R=rng(sd*7919+13);R();const f=L[R()*L.length|0],m=MGM[f];return {...t,i,sd,id:m.s,mf:f,mn:m.n}};
  const c0=exClaim;
- exClaim=function(r,auto){try{if(r&&r.ok&&!ok(r.id)){const L=sx?sx.pool:np;r.id=L[Math.random()*L.length|0];r.mf=0}}catch(e){}return c0.apply(this,arguments)};
+ exClaim=function(r,auto){try{if(r&&r.ok&&!ok(r.id)&&!(r.mf&&MGM[r.mf]&&MGM[r.mf].s===r.id&&MGX().includes(r.mf))){const L=sx?sx.pool:np;r.id=L[Math.random()*L.length|0];r.mf=0}}catch(e){}return c0.apply(this,arguments)};
 })();
 
 /* ---------- récap de fin d'expédition (aussi en mode auto) ---------- */
@@ -12107,7 +12107,7 @@ const rxBtn=k=>`<button class="rxb" data-rxi="${k}">${ico("book")} Index</button
 function exIndex(){const kn=i=>!!G.col[i];
  const row=(t,c,L)=>{L=[...new Set(L)];const n=L.filter(kn).length;return `<div class="rxr" style="--c:${c}"><div class="rxh"><b>${t}</b><small>${n} / ${L.length}</small></div><div class="rxg">${L.map(i=>{const k=kn(i);return `<div class="rxc${k?"":" hid"}"><span class="rxs">${sp(i,0)}</span><b>${k?esc(dn(i)):"???"}</b></div>`}).join("")}</div></div>`};
  let h=EXT.filter(t=>!t.mega).map(t=>row(esc(t.n)+" · "+esc(t.z),t.col[0],t.pool)).join("");
- try{const M=[...new Set(MGX().map(f=>MGM[f]&&MGM[f].s).filter(x=>x&&!kxDiv(x)))];h+=row(LS("Chasse Méga","Mega hunt"),"#f472b6",M)}catch(e){}
+ try{const M=[...new Set(MGX().map(f=>MGM[f]&&MGM[f].s).filter(Boolean))];h+=row(LS("Chasse Méga","Mega hunt"),"#f472b6",M)}catch(e){}
  return `<div class="rix"><h3>${ico("book")} ${LS("Index des expéditions","Expedition index")}</h3><small class="rxn">${LS("Capture un Pokémon pour révéler sa case.","Catch a Pokémon to reveal its slot.")}</small>${h}</div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rxi]");if(!b)return;e.stopPropagation();e.preventDefault();rxOpen(b.dataset.rxi=="raid"?rdIndex():exIndex())},true);
 /* ---------- Expéditions : plus de Pokémon dans les zones ---------- */
@@ -12647,8 +12647,8 @@ wkBody.fz=()=>{
 {const p=wkBody.raid;if(p)wkBody.raid=()=>p()+wsx(TT("Boss monde : paliers et difficulté","World boss: tiers and difficulty"),`<p>${TT("Sous chaque palier de dégâts (1 à 10), un pourcentage indique de combien un inscrit augmente la difficulté quand il l'atteint : +0 % au palier 1, puis +3 % par palier, jusqu'à +27 % au palier 10. Le boss est réglé pour tomber vers le 3e jour de son cycle, jamais avant le 2e. Une fois vaincu, tu as <b>autant de lancers de capture que ton palier</b> (1 à 10).","Under each damage tier (1 to 10), a percentage shows how much a signed-up player raises the difficulty on reaching it: +0% at tier 1, then +3% per tier, up to +27% at tier 10. The boss is tuned to fall around day 3 of its cycle, never before day 2. Once defeated, you get <b>as many capture throws as your tier</b> (1 to 10).")}</p>`)}
 /* ===== Chasse Méga : jamais le même Méga deux jours de suite + index fiable ===== */
 (function(){
- const ok=i=>!kxDiv(i),D0=20000;let cache={n:0,v:{}};
- const list=()=>MGX().filter(f=>MGM[f]&&ok(MGM[f].s));
+ const D0=20000;let cache={n:0,v:{}};
+ const list=()=>MGX().filter(f=>MGM[f]);
  function pick(sd,L){
   const n=L.length;if(cache.n!=n||cache.k!=L[0]){cache={n,k:L[0],v:{},last:D0-1,p:-1}}
   if(sd<D0){const R=rng(sd*7919+13);R();return R()*n|0}
@@ -14121,6 +14121,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["LR en Chasse Méga","LR Mega Hunt"],e:[["imp","Des LR dans la rotation Méga","Les LR compatibles rejoignent la Chasse Méga et son index. Une chasse réussie donne le Pokémon annoncé et sa Méga-Perle, sans remplacement par une autre espèce.","LR Mega Hunt rotation","Eligible LR Pokémon join the Mega Hunt and its index. Successful hunts award the advertised Pokémon and its Mega Pearl without replacing the species."]]},
  {d:"2026-10-23",t:["Boosters : tout visible","Boosters: everything visible"],e:[["imp","Boutons toujours accessibles","À l'ouverture de plusieurs boosters, les boutons « Tout révéler » et « Terminer » restent affichés en bas de l'écran, sans avoir à descendre. Quand il y a beaucoup de cartes (×10), elles sont réduites pour tenir à l'écran.","Buttons always reachable","When opening several boosters, the “Reveal all” and “Done” buttons stay at the bottom of the screen, no scrolling needed. With many cards (×10), they are shrunk to fit the screen."]]},
  {d:"2026-10-23",t:["Pension : variantes visibles","Daycare: visible variants"],e:[["imp","Mutation, taille et plus dans le choix","Quand tu choisis les Pokémon à mettre en pension, chaque carte affiche maintenant sa mutation, sa taille, son statut Alpha et chromatique, pour savoir d'un coup d'œil lesquels envoyer au repos.","Variants shown when choosing","When picking Pokémon for the daycare, each card now shows its mutation, size, Alpha and shiny status, so you can see at a glance which ones to send to rest."]]},
  {d:"2026-10-23",t:["Donjons : Pokémon selon le niveau","Dungeons: Pokémon by level"],e:[["imp","Plus de rares aux niveaux élevés","Les Pokémon rencontrés dépendent du niveau : Découverte et Aventure restent surtout communs, Vétéran ajoute des SSR et quelques UR, Expert beaucoup d'UR et 2 LR, Cauchemar des UR et 8 LR, Légende surtout des LR. Les gardiens suivent la même progression. L'index affiche aussi un groupe LR.","More rares at high levels","Encounters now depend on the level: Discovery and Adventure stay mostly common, Veteran adds SSRs and a few URs, Expert has many URs and 2 LRs, Nightmare has URs and 8 LRs, Legend is mostly LRs. Guardians follow the same progression. The index also shows an LR group."]]},
