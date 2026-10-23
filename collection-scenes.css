@@ -76,3 +76,7 @@
 .cs-option>button:disabled{opacity:.55;cursor:default}
 @media(max-width:750px){.cs-feature-wrap{grid-template-columns:1fr}.cs-feature{height:260px}.cs-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.cs-ranking.rkb-podium-card{min-height:215px!important;padding:8px 4px 29px!important}.cs-ranking .rkb-podium-sprite{height:90px!important;min-height:90px!important}.cs-ranking .rkb-podium-sprite .hv,.cs-ranking .rkb-podium-sprite .hvi{max-width:85px!important;max-height:85px!important}.cs-ranking .cs-sign{font-size:9px!important}.ph-champion .ph-entry-button.cs-ranking .ph-art{width:78px!important;height:85px!important}.ph-champion .ph-entry-button.cs-ranking .ph-art img{max-width:78px!important;max-height:85px!important}.ph-champion .ph-entry-button.cs-ranking{min-height:310px!important;padding-bottom:29px!important}.cs-atlas{min-height:145px!important}}
 @media(prefers-reduced-motion:reduce){.cs-profile .sp{animation:none!important}}
+
+/* Artwork exclusif : image du Pokémon, légèrement floutée, qui épouse la forme du cadre (liste, fiche, classement). */
+.cs-scene>.cs-art{position:absolute!important;inset:-8px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(180deg,#0a0c1400 52%,#0a0c1499),var(--art);background-size:cover,cover;background-position:center,center;background-repeat:no-repeat;filter:blur(2.5px) saturate(1.08)}
+.cs-ranking>.cs-art{inset:-6px}
