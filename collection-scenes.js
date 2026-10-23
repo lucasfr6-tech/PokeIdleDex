@@ -1,27 +1,6 @@
 /* Décors de collection : vingt scènes et vingt signatures indépendantes. */
 (()=>{'use strict';
-const B=[
- ['Palais de nacre','Pearl palace','palace','#30273f','#d9bfbe','#ae859f'],
- ['Cité des orages','City of storms','storm','#253a4b','#d6ac73','#7999ac'],
- ['Crypte du rire','Crypt of laughter','crypt','#211c36','#bd829e','#836b9e'],
- ['Observatoire blanc','Ivory observatory','observatory','#293e51','#e2d8b8','#8bacc3'],
- ['Temple des anciens','Temple of the ancients','temple','#493628','#dfbc79','#9b7952'],
- ['Trône boréal','Boreal throne','throne','#1d3547','#a9dae0','#5ca7ad'],
- ['Bibliothèque interdite','Forbidden library','library','#332438','#c49b77','#895678'],
- ['Jardin de verre','Glass garden','garden','#21443e','#afe3bc','#6ba994'],
- ['Port des étoiles','Star harbor','harbor','#222e4b','#d7c68d','#6b93b7'],
- ['Forêt des ancêtres','Ancient forest','forest','#1c392f','#b8c892','#658e68'],
- ['Forge des Titans','Forge of Titans','forge','#34414b','#d8a36c','#818997'],
- ['Théâtre des ombres','Shadow theater','theater','#342337','#d6af84','#a57189'],
- ['Cité engloutie','Sunken city','sunken','#203b50','#a6d4cd','#6bafbd'],
- ['Horloge céleste','Celestial clock','clock','#2e314d','#d7c185','#8185b1'],
- ['Arène rubis','Ruby arena','arena','#4c2833','#deae91','#b36870'],
- ['Sanctuaire de glace','Ice sanctuary','ice','#254357','#d9eff1','#87bfd3'],
- ['Serre météore','Meteor greenhouse','greenhouse','#353447','#c6d0a0','#9985a1'],
- ['Cathédrale du crépuscule','Twilight cathedral','cathedral','#3b2a48','#ddbb9e','#8f719a'],
- ['Cour du dragon','Dragon court','dragon','#43372f','#e5bd87','#a18262'],
- ['Hall des mirages','Hall of mirages','mirage','#3a2d4d','#d8b7d4','#9c8fca']
-].map((v,i)=>({id:'b'+String(i+1).padStart(2,'0'),n:v.slice(0,2),kind:v[2],dark:v[3],light:v[4],mid:v[5],price:(12+i*2)*1e12}));
+const B=[];
 const AB=[
  ['Danse psychique','Psychic dance'],['Éclats de Méga-Steelix','Mega Steelix shards'],['Vérité et Idéal','Truth and Ideals'],['Trio spectral','Spectral trio'],
  ['Aura de Lucario','Lucario aura'],['Dragon des mers','Sea dragon'],['Fureur des abysses','Fury of the deep'],['Désastre blanc','White calamity'],
@@ -51,13 +30,16 @@ const defaults={90001:7,90002:2,90003:4,90004:1,90005:5,90006:0,90011:2,90012:16
 /* Bannière illustrée par défaut de chaque Pokémon exclusif (id Pokémon -> id de bannière). */
 const EXDEF={90001:'a05',90002:'a04',90003:'a06',90004:'a11',90005:'a02',90006:'a01',90011:'a08',90012:'a09',90013:'a10',90014:'a07',90015:'a03'};
 const special=id=>(+id>90000&&+id<90100&&!!SPM[id]&&!SPM[id].hw)||!!EXDEF[id];
-const hasScene=(id,ban,sig)=>special(id)||!!store().beq[id]||!!store().seq[id]||!!B.find(x=>x.id===ban)||!!S.find(x=>x.id===sig);
-const store=()=>{const c=COSS();c.bown=c.bown||{};c.beq=c.beq||{};c.sown=c.sown||{};c.seq=c.seq||{};return c};
-const bi=id=>{const c=store(),v=c.beq[id];return B.find(x=>x.id===v)||(EXDEF[id]&&B.find(x=>x.id===EXDEF[id]))||B[defaults[id]??0]};
+const hasScene=(id,ban,sig)=>special(id)||!!B.find(x=>x.id===store().beq[id])||!!store().seq[id]||!!B.find(x=>x.id===ban)||!!S.find(x=>x.id===sig);
+let cleaned=false;
+const store=()=>{const c=COSS();c.bown=c.bown||{};c.beq=c.beq||{};c.sown=c.sown||{};c.seq=c.seq||{};if(!cleaned&&B.length){cleaned=true;for(const k of Object.keys(c.beq))if(!B.find(x=>x.id===c.beq[k]))delete c.beq[k]}return c};
+const NONE={id:'none',n:['Aucune','None']};
+const exBan=id=>EXDEF[id]&&B.find(x=>x.id===EXDEF[id]);
+const bi=id=>{const c=store(),v=c.beq[id];return B.find(x=>x.id===v)||exBan(id)||NONE};
 const si=id=>{const c=store(),v=c.seq[id];return S.find(x=>x.id===v)||S[defaults[id]??0]};
 const basePower=baseNew;baseNew=function(id){const value=basePower.apply(this,arguments);const c=G.cos||{},ban=c.beq?.[id],sig=c.seq?.[id];return value*(ban&&c.bown?.[ban]?1.01:1)*(sig&&c.sown?.[sig]?1.005:1)};
 const valid=(v,list)=>list.find(x=>x.id===v);
-const art=(id,ban,sig)=>({banner:valid(ban,B)||bi(id),signature:valid(sig,S)||si(id)});
+const art=(id,ban,sig)=>({banner:valid(ban,B)||(ban!==undefined&&ban!==null?(exBan(id)||NONE):bi(id)),signature:valid(sig,S)||si(id)});
 function scene(cv,theme,tm=0){const box=cv.getBoundingClientRect();if(!box.width||!box.height)return;const d=Math.min(devicePixelRatio||1,2),w=box.width,h=box.height;cv.width=Math.ceil(w*d);cv.height=Math.ceil(h*d);const q=cv.getContext('2d');q.scale(d,d);const C={};for(const k of ['dark','light','mid'])C[k]=theme[k];const rect=(x,y,a,b,c)=>{q.fillStyle=c;q.fillRect(x,y,a,b)},line=(x,y,a,b,c,n=1)=>{q.strokeStyle=c;q.lineWidth=n;q.beginPath();q.moveTo(x,y);q.lineTo(a,b);q.stroke()},poly=(p,c)=>{q.fillStyle=c;q.beginPath();p.forEach(([x,y],i)=>i?q.lineTo(x,y):q.moveTo(x,y));q.closePath();q.fill()},oval=(x,y,a,b,c)=>{q.fillStyle=c;q.beginPath();q.ellipse(x,y,a,b,0,0,7);q.fill()},ring=(x,y,r,c,n)=>{q.strokeStyle=c;q.lineWidth=n;q.beginPath();q.arc(x,y,r,0,7);q.stroke()};
 rect(0,0,w,h,C.dark);const floor=h*.73,kind=theme.kind;
 const pillars=(count=4)=>{for(let i=0;i<count;i++){let x=(i+.5)*w/count;rect(x-7,22,14,floor-12,C.mid);rect(x-12,20,24,6,C.light);rect(x-12,floor-13,24,8,C.light)}};
@@ -92,7 +74,7 @@ rect(0,floor,w,h-floor,C.dark);for(let i=0;i<9;i++)line(w/2,floor-10,i*w/8,h,C.m
 oval(w/2,h-30,w*.29,21,'#10121a');poly([[w*.23,h-57],[w*.35,h-70],[w*.65,h-70],[w*.77,h-57],[w*.74,h-30],[w*.26,h-30]],C.mid);poly([[w*.24,h-58],[w*.36,h-78],[w*.64,h-78],[w*.76,h-58],[w*.65,h-46],[w*.35,h-46]],C.light);poly([[w*.32,h-59],[w*.38,h-68],[w*.62,h-68],[w*.68,h-59],[w*.62,h-53],[w*.38,h-53]],C.dark);for(let i=0;i<7;i++)oval(w*.29+i*w*.07,h-36,2,2,C.light);
 }
 function sigNode(s){const el=document.createElement('span');el.className='cs-sign cs-'+s.material;el.textContent=s.icon+' '+LS(...s.n);return el}
-function paint(root){for(const box of root.querySelectorAll('[data-cs-banner]')){const b=B.find(v=>v.id===box.dataset.csBanner);if(!b)continue;if(b.img){let d=box.querySelector(':scope > .cs-art');if(!d){d=document.createElement('div');d.className='cs-art';d.setAttribute('aria-hidden','true');box.prepend(d)}if(d._img!==b.img){d.style.setProperty('--art','url('+b.img+')');d._img=b.img}const old=box.querySelector(':scope > canvas.cs-canvas');if(old)old.remove();continue}{const d=box.querySelector(':scope > .cs-art');if(d)d.remove()}let cv=box.querySelector(':scope > canvas.cs-canvas');if(!cv){cv=document.createElement('canvas');cv.className='cs-canvas';cv.setAttribute('aria-hidden','true');box.prepend(cv)}if(cv._theme!==b.id||cv.width!==Math.ceil(cv.getBoundingClientRect().width*Math.min(devicePixelRatio||1,2))){scene(cv,b);cv._theme=b.id}}}
+function paint(root){for(const box of root.querySelectorAll('[data-cs-banner]')){const b=B.find(v=>v.id===box.dataset.csBanner);if(!b){for(const q of box.querySelectorAll(':scope > .cs-art,:scope > canvas.cs-canvas'))q.remove();continue}if(b.img){let d=box.querySelector(':scope > .cs-art');if(!d){d=document.createElement('div');d.className='cs-art';d.setAttribute('aria-hidden','true');box.prepend(d)}if(d._img!==b.img){d.style.setProperty('--art','url('+b.img+')');d._img=b.img}const old=box.querySelector(':scope > canvas.cs-canvas');if(old)old.remove();continue}{const d=box.querySelector(':scope > .cs-art');if(d)d.remove()}let cv=box.querySelector(':scope > canvas.cs-canvas');if(!cv){cv=document.createElement('canvas');cv.className='cs-canvas';cv.setAttribute('aria-hidden','true');box.prepend(cv)}if(cv._theme!==b.id||cv.width!==Math.ceil(cv.getBoundingClientRect().width*Math.min(devicePixelRatio||1,2))){scene(cv,b);cv._theme=b.id}}}
 const origPl=plRow;plRow=function(id){let h=origPl.apply(this,arguments);if(!hasScene(id))return h;const a=art(id),t=document.createElement('template');t.innerHTML=h;const row=t.content.firstElementChild;row.classList.add('cs-scene','cs-atlas');row.dataset.csBanner=a.banner.id;row.appendChild(sigNode(a.signature));return t.innerHTML};
 const origPk=pkModal;pkModal=function(){let h=origPk.apply(this,arguments);if(!hasScene(OPEN))return h;const a=art(OPEN),t=document.createElement('template');t.innerHTML=h;const stage=t.content.querySelector('.pqst');if(stage){stage.classList.add('cs-scene','cs-profile');stage.dataset.csBanner=a.banner.id;stage.appendChild(sigNode(a.signature))}return t.innerHTML};
 const origScan=bpScan;bpScan=function(){origScan.apply(this,arguments);const b=G.bpk;if(b&&hasScene(b.i)){b.ban=bi(b.i).id;b.sig=si(b.i).id}};
