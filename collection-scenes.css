@@ -78,5 +78,13 @@
 @media(prefers-reduced-motion:reduce){.cs-profile .sp{animation:none!important}}
 
 /* Artwork exclusif : image du Pokémon, légèrement floutée, qui épouse la forme du cadre (liste, fiche, classement). */
-.cs-scene>.cs-art{position:absolute!important;inset:-5px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(180deg,#0a0c1400 52%,#0a0c1499),var(--art);background-size:cover,cover;background-position:center,center;background-repeat:no-repeat;filter:blur(1.1px) saturate(1.08)}
-.cs-ranking>.cs-art{inset:-4px}
+.cs-scene>.cs-art{position:absolute!important;inset:-7px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(90deg,#080a12d9 0%,#080a12ab 52%,#080a1266 100%),linear-gradient(180deg,#0a0c1400 45%,#0a0c14b3),var(--art);background-size:cover,cover,cover;background-position:center,center,center;background-repeat:no-repeat;filter:blur(1.6px) saturate(1.05)}
+.cs-ranking>.cs-art{inset:-6px}
+
+/* Lisibilité du texte par-dessus les illustrations */
+.cs-profile>.cs-art,.cs-feature>.cs-art,.cs-option-scene>.cs-art{background-image:linear-gradient(#080a1266,#080a1266),linear-gradient(180deg,#0a0c1400 45%,#0a0c14b3),var(--art)}
+.cs-ranking>.cs-art{background-image:linear-gradient(#080a1288,#080a1288),linear-gradient(180deg,#0a0c1400 40%,#0a0c14c0),var(--art)}
+.cs-scene .atlas-info,.cs-scene .atlas-info *,.cs-ranking *:not(.cs-sign):not(.cs-art),.cs-profile *:not(.cs-sign):not(.cs-art){text-shadow:0 1px 2px #000,0 0 6px #000c}
+.cs-scene .atlas-info small{color:#f1f2fc!important;opacity:1!important}
+.cs-scene .vb,.cs-scene .atlas-info [class*="tag"],.cs-scene .atlas-info [class*="chip"]{box-shadow:inset 0 0 0 99px #0a0c14a6}
+.cs-scene .atlas-info b,.cs-scene .atlas-info strong{color:#fff}
