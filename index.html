@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-top-titles-20261023l"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-top-titles-20261023l"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-suggest-20261023m"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-suggest-20261023m"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14130,6 +14130,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["Suggestions et bugs","Suggestions and bugs"],e:[["new","Bouton Suggestion ou bug","Un bouton en bas à gauche (et dans le Menu) permet d'envoyer une suggestion ou de signaler un bug en quelques mots. Le message est lu directement par le créateur.","Suggestion or bug button","A button at the bottom left (and in the Menu) lets you send a suggestion or report a bug in a few words. The message is read directly by the creator."]]},
  {d:"2026-10-23",t:["Nouveaux titres des hauts étages","New high-floor titles"],e:[["new","Trois titres de légende","Empereur du Zénith (étage 1300, +6 % de dégâts et de pièces), Archonte du Néant Stellaire (étage 1700, +7 %) et Souverain de l'Éternité (étage maximum 2410, +8 %). À équiper dans le profil.","Three legendary titles","Zenith Emperor (floor 1300, +6% damage and coins), Archon of the Stellar Void (floor 1700, +7%) and Sovereign of Eternity (max floor 2410, +8%). Equip them in your profile."],["fix","Titres et cadres de nouveau débloqués","Un conflit de nom avec la carte TikTok empêchait la mise à jour des titres et des cadres : un titre ou un cadre gagné ne se débloquait plus et son bonus ne s'appliquait plus. C'est corrigé.","Titles and frames unlock again","A name clash with the TikTok card stopped titles and frames from refreshing: an earned title or frame no longer unlocked and its bonus no longer applied. Fixed."]]},
  {d:"2026-10-23",t:["Laboratoire : plus de chances, moins cher","Laboratory: better odds, half price"],e:[["imp","Plafonds de réussite relevés","Les chances maximales passent à 2,5 % pour la Mutation et la Taille, 4 % pour l'Alpha et 1,5 % pour le Chromatique. La chance de départ ne change pas : elle monte avec chaque échec jusqu'au nouveau plafond.","Higher success caps","Maximum odds are now 2.5% for Mutation and Size, 4% for Alpha and 1.5% for Shiny. The starting odds are unchanged: they rise with each failure up to the new cap."],["imp","Prix divisés par 2","Toutes les recherches du Laboratoire coûtent deux fois moins cher.","Prices halved","Every Laboratory research now costs half as much."],["imp","Chance d'une meilleure mutation","Dans le Laboratoire, la carte Mutation indique la chance d'obtenir une meilleure mutation, et la liste des mutations possibles en cas de réussite : uniquement des mutations meilleures que l'actuelle, jamais parmi toutes.","Chance of a better mutation","In the Laboratory, the Mutation card shows the chance of a better mutation and the mutations possible on success: only ones better than the current one, never among all."]]},
  {d:"2026-10-23",t:["Synchronisation entre appareils","Cross-device sync"],e:[["fix","Progression retrouvée sur un autre appareil","Quand tu jouais sur un appareil puis sur un autre, l'appareil resté en retard pouvait garder sa vieille partie et écraser la sauvegarde en ligne, effaçant la progression de l'autre. La sauvegarde en ligne la plus récente est maintenant toujours récupérée.","Progress found on another device","When you played on one device and then another, the device that was behind could keep its old game and overwrite the online save, erasing the other device's progress. The most recent online save is now always loaded."],["new","Restaurer ma partie","Quand une partie en ligne remplace celle de l'appareil, l'ancienne est mise de côté. Le bouton « Restaurer ma partie d'avant la synchro » du compte permet de la remettre.","Restore my game","When an online save replaces the one on the device, the old one is kept aside. The “Restore my game from before the sync” button in the account box puts it back."]]},
@@ -14623,6 +14624,59 @@ function pidTikTokLinks(){const mk=(id,cls,html)=>{const a=document.createElemen
  if(!$("elite-tiktok"))document.body.appendChild(mk("elite-tiktok","",PID_TT_ICON+`<b>TikTok</b><small>${LS("1 like =<br>1 récompense","1 like =<br>1 reward")}</small><em></em>`));
  const u=$("utl");if(u&&!$("pid-tiktok-menu"))u.appendChild(mk("pid-tiktok-menu","qkb",`<span class="qki" style="--c1:#111;--c2:#000">${PID_TT_ICON}</span><span class="qkt"><b>TikTok</b><small></small></span>`));ttkRefresh()}
 pidTikTokLinks();setInterval(pidTikTokLinks,3000);setInterval(ttkRefresh,20000);
+
+/* ===== Suggestions et bugs : bouton en bas à gauche ; les messages arrivent dans le courrier du propriétaire (#7458921) ===== */
+const SUG_PID="#7458921",SUG_ICON='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10h7M8.5 13.5h4.5"/></svg>';
+{const st=document.createElement("style");st.id="pid-suggest-styles";st.textContent=`
+#elite-suggest{position:fixed;left:10px;top:max(640px,calc(100vh - 68px));width:72px;min-height:56px;z-index:44;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 2px;background:linear-gradient(160deg,#1e3a5f,#312e81);border:1px solid #7dd3fc55;border-radius:15px;color:#e0f2fe;cursor:pointer;text-align:center;font:900 11px Nunito,sans-serif;box-shadow:0 0 12px #38bdf844}
+#elite-suggest svg{width:24px;height:24px}#elite-suggest b{font-size:11.5px;line-height:1.1}#elite-suggest small{font-size:9px;color:#bae6fd;font-weight:800}
+#elite-suggest:hover,#elite-suggest:focus-visible{outline:2px solid #7dd3fc;outline-offset:3px}
+@media(min-width:761px) and (max-width:1100px){#elite-suggest{left:8px;width:60px}}
+@media(max-width:760px){#elite-suggest{display:none}}
+#sugm{position:fixed;inset:0;z-index:100040;background:#000a;display:grid;place-items:center;padding:16px}
+#sugm .sgc{width:min(480px,100%);max-height:94vh;overflow:auto;background:#10172b;border:1px solid #38bdf855;border-radius:20px;padding:20px;color:#e8eefc;box-shadow:0 20px 60px #000c;display:flex;flex-direction:column;gap:12px;position:relative}
+#sugm h2{margin:0;font:900 22px "Baloo 2",Nunito,sans-serif}#sugm p{margin:0;color:#a9b8d8;font-size:13px}
+#sugm .sgk{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#sugm .sgk button{padding:10px;border-radius:12px;border:2px solid #2b3550;background:#151c30;color:#cbd5e1;font:800 14px Nunito,sans-serif;cursor:pointer}
+#sugm .sgk button.on{border-color:#38bdf8;background:#0c2a44;color:#fff}#sugm .sgk button[data-k=b].on{border-color:#fb7185;background:#3b1220}
+#sugm textarea{width:100%;min-height:140px;resize:vertical;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid #334066;background:#0b1224;color:#fff;font:600 14px Nunito,system-ui,sans-serif}
+#sugm .sgf{display:flex;align-items:center;justify-content:space-between;gap:10px}#sugm .sgn{font-size:12px;color:#8ea0c8}
+#sugm .sge{min-height:18px;font-size:13px;color:#fca5a5;font-weight:700}#sugm .sge.ok{color:#86efac}
+#sugm .sgx{position:absolute;right:12px;top:10px;background:none;border:0;color:#9fb0d4;font-size:24px;cursor:pointer}
+`;document.head.appendChild(st)}
+const sugLS=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+async function sugPost(act,body){const A=(window.PID_API||"").replace(/\/$/,"");if(!A||!sugLS("pid_uid")||!sugLS("pid_tok"))return{e:"off"};
+ try{const r=await fetch(A+"/api/sug/"+act,{method:"POST",headers:{"Content-Type":"application/json","X-Token":sugLS("pid_tok")||""},body:JSON.stringify(Object.assign({uid:sugLS("pid_uid")||""},body||{}))});let j={};try{j=await r.json()}catch(e){}j.st=r.status;return j}catch(e){return{e:"net"}}}
+function sugOpen(){if($("sugm"))return;let kind="s";const o=document.createElement("div");o.id="sugm";
+ o.innerHTML=`<div class="sgc" role="dialog" aria-modal="true" aria-label="${LS("Suggestion ou bug","Suggestion or bug")}"><button class="sgx" aria-label="x">×</button><h2>${LS("Suggestion ou bug","Suggestion or bug")}</h2><p>${LS("Dis-nous ce que tu aimerais voir dans le jeu, ou ce qui ne marche pas. Ton message est lu directement par le créateur.","Tell us what you would like to see in the game, or what is not working. Your message is read directly by the creator.")}</p>
+ <div class="sgk"><button data-k="s" class="on">${LS("Suggestion","Suggestion")}</button><button data-k="b">${LS("Bug","Bug")}</button></div>
+ <textarea maxlength="1000" placeholder="${LS("Écris ton message ici…","Write your message here…")}"></textarea>
+ <div class="sgf"><span class="sgn"><b id="sgcount">0</b> / 1000</span><button class="go" id="sgsend">${LS("Envoyer","Send")}</button></div><div class="sge" id="sge"></div></div>`;
+ document.body.appendChild(o);const ta=o.querySelector("textarea"),er=o.querySelector("#sge"),bt=o.querySelector("#sgsend"),close=()=>o.remove();
+ o.querySelector(".sgx").onclick=close;o.addEventListener("click",e=>{if(e.target===o)close()});
+ o.querySelectorAll(".sgk button").forEach(b=>b.onclick=()=>{kind=b.dataset.k;o.querySelectorAll(".sgk button").forEach(x=>x.classList.toggle("on",x===b))});
+ ta.addEventListener("input",()=>{o.querySelector("#sgcount").textContent=ta.value.length});setTimeout(()=>ta.focus(),60);
+ bt.onclick=async()=>{const x=ta.value.trim();er.className="sge";if(x.length<5){er.textContent=LS("Écris au moins quelques mots.","Write at least a few words.");return}
+  bt.disabled=true;er.textContent="...";
+  let meta="";try{meta=[window.PID_BUILD||"",myPid(),"étage "+bfl(),navigator.userAgent.slice(0,120)].join(" · ")}catch(e){}
+  const j=await sugPost("send",{k:kind,x,n:G.name||"Dresseur",m:meta});bt.disabled=false;
+  if(j.ok){er.className="sge ok";er.textContent=LS("Merci ! Ton message a bien été envoyé.","Thank you! Your message was sent.");ta.value="";o.querySelector("#sgcount").textContent="0";setTimeout(close,1600);return}
+  er.textContent=j.e==="slow"?LS("Patiente quelques secondes avant d'envoyer un autre message.","Please wait a few seconds before sending another message."):j.e==="day"?LS("Tu as atteint la limite de messages pour aujourd'hui.","You reached today's message limit."):j.e==="short"?LS("Écris au moins quelques mots.","Write at least a few words."):j.e==="off"||j.st===401?LS("Il faut être connecté en ligne pour envoyer un message. Réessaie dans un instant.","You need to be online to send a message. Try again in a moment."):LS("Envoi impossible pour le moment, réessaie plus tard.","Could not send right now, try again later.")}}
+function pidSuggestLinks(){if(!$("elite-suggest")){const b=document.createElement("button");b.id="elite-suggest";b.type="button";b.setAttribute("aria-label",LS("Envoyer une suggestion ou signaler un bug","Send a suggestion or report a bug"));b.innerHTML=SUG_ICON+`<b>${LS("Suggestion","Suggestion")}</b><small>${LS("ou bug","or bug")}</small>`;b.addEventListener("click",sugOpen);document.body.appendChild(b)}
+ const u=$("utl");if(u&&!$("pid-suggest-menu")){const a=document.createElement("button");a.id="pid-suggest-menu";a.type="button";a.className="qkb";a.innerHTML=`<span class="qki" style="--c1:#38bdf8;--c2:#4f46e5">${SUG_ICON}</span><span class="qkt"><b>${LS("Suggestion ou bug","Suggestion or bug")}</b><small>${LS("Écris au créateur","Write to the creator")}</small></span>`;a.addEventListener("click",sugOpen);u.appendChild(a)}}
+pidSuggestLinks();setInterval(pidSuggestLinks,3000);
+/* réception (propriétaire uniquement, vérifié côté serveur) : chaque message arrive dans le courrier */
+let SUG_BUSY=0;
+async function sugPull(){if(SUG_BUSY)return;let me="";try{me=myPid()}catch(e){}if(me!==SUG_PID)return;SUG_BUSY=1;
+ try{const j=await sugPost("inbox",{});if(!j.ok||!Array.isArray(j.l)||!j.l.length)return;G.sugSeen=Array.isArray(G.sugSeen)?G.sugSeen:[];const done=[];let n=0;
+  for(const m of j.l){if(!m||!m.id)continue;if(!G.sugSeen.includes(m.id)){const bug=m.k==="b";
+    mailAdd((bug?"Bug":"Suggestion")+" · "+String(m.n||"Dresseur"),"Joueur "+String(m.p||""),[],String(m.x||"")+"\n\n— "+String(m.n||"Dresseur")+" ("+String(m.p||"")+")"+(m.m?"\n"+String(m.m):""));G.sugSeen.push(m.id);n++}
+   done.push(m.id)}
+  if(G.sugSeen.length>300)G.sugSeen=G.sugSeen.slice(-300);try{save()}catch(e){}
+  if(done.length)await sugPost("ack",{ids:done});
+  if(n)try{toast(LS(n+" nouveau(x) message(s) de joueurs dans ton courrier","New player message(s) in your mail: "+n))}catch(e){}}
+ finally{SUG_BUSY=0}}
+setTimeout(sugPull,9000);setInterval(()=>{if(!document.hidden)sugPull()},90000);
 setTimeout(()=>{try{if(localStorage.getItem(PID_111_KEY)!=='1')pid111Open()}catch(_){}},1800);
 
 /* Personal event history: stored with the player's save, bounded and deduplicated. */
@@ -14802,4 +14856,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-top-titles-20261023l"><script src="dungeon-immersive.js?v=pid-top-titles-20261023l"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-top-titles-20261023l"><script src="collection-scenes.js?v=pid-top-titles-20261023l"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-suggest-20261023m"><script src="dungeon-immersive.js?v=pid-suggest-20261023m"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-suggest-20261023m"><script src="collection-scenes.js?v=pid-suggest-20261023m"></script></body></html>

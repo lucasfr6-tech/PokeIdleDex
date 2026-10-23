@@ -70,6 +70,7 @@ setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});proc
 
 /* ---- messages prives ---- */
 db.dm=db.dm||{};
+db.sug=Array.isArray(db.sug)?db.sug:[];
 if(db.mkt||db.mkd){delete db.mkt;delete db.mkd;dirty=1}
 const dmKey=(a,b)=>a<b?a+'.'+b:b+'.'+a,dmLast=new Map();
 const dmFr=(a,b)=>{const f=x=>{const o=db.fr[x]&&db.fr[x].d;return o&&Array.isArray(o.f)?o.f:[]};return f(a).includes(b)&&f(b).includes(a)};
@@ -126,6 +127,7 @@ const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const PRES=new Map(),BPDC=new Map();
 const LAST=new Map();
 const SEEN_PID='#1397371';
+const SUG_PID='#7458921',sugLast=new Map(),sugDay=new Map();
 const pidOfS=u=>{let h=2166136261;for(const c of String(u)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return '#'+(1000000+h%9000000)};
 const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token','Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
@@ -166,6 +168,28 @@ http.createServer((req,res)=>{
     if(!Array.isArray(d.events)||d.events.length>6){send(res,400,{e:'events'});return}let accepted=0;for(const e of d.events)if(actAccept(uid,e))accepted++;send(res,200,{ok:1,accepted})});return}
   send(res,405,{e:'method'});return}
 
+/* suggestions et bugs : tout joueur connecte peut envoyer ; seul le proprietaire (SUG_PID) peut les lire */
+ if(u.pathname.startsWith('/api/sug/')&&req.method=='POST'){
+  const act=u.pathname.slice(9);
+  if(limited(ip+'g',30)){send(res,429,{e:'rate'});return}
+  let b='';req.on('data',c=>{b+=c;if(b.length>8000)req.destroy()});
+  req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
+   const me=d&&typeof d=='object'?mkAuth(d.uid,req.headers['x-token']):null;if(!me){send(res,401,{e:'auth'});return}
+   if(act=='send'){
+    const x=String(d.x||'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').replace(/\r/g,'').trim().slice(0,1000);
+    if(x.length<5){send(res,400,{e:'short'});return}
+    const now=Date.now(),day=new Date(now).toISOString().slice(0,10);
+    if(now-(sugLast.get(me)||0)<30000){send(res,429,{e:'slow'});return}
+    const dd=sugDay.get(me);const cnt=dd&&dd.d==day?dd.n:0;if(cnt>=10){send(res,429,{e:'day'});return}
+    sugLast.set(me,now);sugDay.set(me,{d:day,n:cnt+1});if(sugLast.size>20000){sugLast.clear();sugDay.clear()}
+    const n=String(d.n||'Dresseur').replace(/[<>"&\u0000-\u001f]/g,'').trim().slice(0,20)||'Dresseur';
+    const m=String(d.m||'').replace(/[\u0000-\u001f]/g,' ').trim().slice(0,300);
+    db.sug.unshift({id:rid('S'),t:now,u:me,p:pidOfS(me),n,k:d.k=='b'?'b':'s',x,m});
+    if(db.sug.length>300)db.sug.length=300;dirty=1;send(res,200,{ok:1});return}
+   if(pidOfS(me)!==SUG_PID){send(res,403,{e:'no'});return}
+   if(act=='inbox'){send(res,200,{ok:1,l:db.sug.slice(0,50).reverse()});return}
+   if(act=='ack'){const ids=new Set((Array.isArray(d.ids)?d.ids:[]).slice(0,100).map(String));db.sug=db.sug.filter(v=>!ids.has(v.id));dirty=1;send(res,200,{ok:1});return}
+   send(res,404,{e:'act'})});return}
  if(u.pathname=='/api/seen'&&req.method=='POST'){
   if(limited(ip+'s',60)){send(res,429,{e:'rate'});return}
   let b='';req.on('data',c=>{b+=c;if(b.length>4000)req.destroy()});
