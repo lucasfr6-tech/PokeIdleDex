@@ -1770,6 +1770,10 @@ nav#nav.cn{left:92px;right:92px;bottom:12px;padding:0;border-radius:0;background
 @keyframes wfl{0%{opacity:.9}100%{opacity:0}}
 .gc .gart img{filter:none!important}
 .opw .opt{animation:none!important}
+.opw .ocards:has(.fc:nth-child(31)){--cw:clamp(68px,min(6.6vw,10.8vh),108px);gap:clamp(6px,.9vw,12px)!important;margin:1.2vh 0}
+.opw .ocards:has(.fc:nth-child(31)) .fc{animation-duration:.35s!important}
+.opw>.row{position:sticky;bottom:12px;z-index:30;width:max-content;max-width:94vw;margin:6px auto 0;padding:8px 12px;border-radius:16px;background:#070b1ccc;border:1px solid #ffffff2e;backdrop-filter:blur(8px);box-shadow:0 8px 30px #000a}
+@media(max-width:700px){.opw .ocards:has(.fc:nth-child(31)){--cw:clamp(52px,17vw,84px)}}
 .ocards.nd .fc{animation:none!important}.ocards.skip .fi{transition:none!important}.ocards.skip .fc.on .fr{animation:none!important}
 .lgx{background:radial-gradient(circle,rgba(255,226,140,.5),rgba(20,10,0,.6) 70%);animation:lgfade2 2.6s both!important}
 .lgx.ep{animation-duration:1.1s!important}
@@ -4305,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-pension-traits-20261023f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-pension-traits-20261023f"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-booster-fit-20261023g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-booster-fit-20261023g"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14117,6 +14121,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["Boosters : tout visible","Boosters: everything visible"],e:[["imp","Boutons toujours accessibles","À l'ouverture de plusieurs boosters, les boutons « Tout révéler » et « Terminer » restent affichés en bas de l'écran, sans avoir à descendre. Quand il y a beaucoup de cartes (×10), elles sont réduites pour tenir à l'écran.","Buttons always reachable","When opening several boosters, the “Reveal all” and “Done” buttons stay at the bottom of the screen, no scrolling needed. With many cards (×10), they are shrunk to fit the screen."]]},
  {d:"2026-10-23",t:["Pension : variantes visibles","Daycare: visible variants"],e:[["imp","Mutation, taille et plus dans le choix","Quand tu choisis les Pokémon à mettre en pension, chaque carte affiche maintenant sa mutation, sa taille, son statut Alpha et chromatique, pour savoir d'un coup d'œil lesquels envoyer au repos.","Variants shown when choosing","When picking Pokémon for the daycare, each card now shows its mutation, size, Alpha and shiny status, so you can see at a glance which ones to send to rest."]]},
  {d:"2026-10-23",t:["Donjons : Pokémon selon le niveau","Dungeons: Pokémon by level"],e:[["imp","Plus de rares aux niveaux élevés","Les Pokémon rencontrés dépendent du niveau : Découverte et Aventure restent surtout communs, Vétéran ajoute des SSR et quelques UR, Expert beaucoup d'UR et 2 LR, Cauchemar des UR et 8 LR, Légende surtout des LR. Les gardiens suivent la même progression. L'index affiche aussi un groupe LR.","More rares at high levels","Encounters now depend on the level: Discovery and Adventure stay mostly common, Veteran adds SSRs and a few URs, Expert has many URs and 2 LRs, Nightmare has URs and 8 LRs, Legend is mostly LRs. Guardians follow the same progression. The index also shows an LR group."]]},
  {d:"2026-10-23",t:["Donjons : prix par niveau et index","Dungeons: price by level and index"],e:[["imp","Entrée de plus en plus chère","Le prix d'entrée dépend maintenant du niveau : 50 M au niveau 50, puis 400 M, 3,5 G, 30 G, 250 G et 2 T au niveau 400. Fini le doublement à chaque entrée.","Entry gets pricier","The entry price now depends on the level: 50 M at level 50, then 400 M, 3.5 G, 30 G, 250 G and 2 T at level 400. No more doubling with each entry."],["new","Index des Pokémon du donjon","Un bouton sous les niveaux affiche tous les Pokémon que l'on peut croiser dans l'environnement choisi, classés par rareté (UR, SSR, SR, Commun) avec les salles où ils apparaissent et ceux des gardiens. Il change selon le niveau.","Dungeon Pokémon index","A button under the levels lists every Pokémon you can meet in the chosen environment, sorted by rarity (UR, SSR, SR, Common) with the rooms where they appear, including guardians. It changes with the level."]]},
@@ -14784,4 +14789,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-pension-traits-20261023f"><script src="dungeon-immersive.js?v=pid-pension-traits-20261023f"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-pension-traits-20261023f"><script src="collection-scenes.js?v=pid-pension-traits-20261023f"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-booster-fit-20261023g"><script src="dungeon-immersive.js?v=pid-booster-fit-20261023g"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-booster-fit-20261023g"><script src="collection-scenes.js?v=pid-booster-fit-20261023g"></script></body></html>
