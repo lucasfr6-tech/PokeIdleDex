@@ -36,9 +36,9 @@ const S=[
 ].map((v,i)=>({id:'s'+String(i+1).padStart(0,'0'),n:v.slice(0,2),icon:v[2],material:v[3],price:(4+i*.4)*1e12}));
 const defaults={90001:7,90002:2,90003:4,90004:1,90005:5,90006:0,90011:2,90012:16,90013:14,90014:12,90015:18};
 /* Artwork de bannière propre à chaque Pokémon exclusif (affiché flouté derrière le Pokémon, quelle que soit la forme du cadre). */
-const ART={90001:1,90002:1,90003:1,90004:1,90005:1,90006:1,90011:1,90012:1,90013:1,90014:1,90015:1};
-const artOf=id=>ART[id]?(typeof IMG==='string'?IMG:'img/')+'banners/'+id+'.webp':null;
-const special=id=>(+id>90000&&+id<90100&&!!SPM[id]&&!SPM[id].hw)||!!ART[id];
+const EXART={90001:1,90002:1,90003:1,90004:1,90005:1,90006:1,90011:1,90012:1,90013:1,90014:1,90015:1};
+const artOf=id=>EXART[id]?'img/banners/'+id+'.webp':null;
+const special=id=>(+id>90000&&+id<90100&&!!SPM[id]&&!SPM[id].hw)||!!EXART[id];
 const hasScene=(id,ban,sig)=>special(id)||!!store().beq[id]||!!store().seq[id]||!!B.find(x=>x.id===ban)||!!S.find(x=>x.id===sig);
 const store=()=>{const c=COSS();c.bown=c.bown||{};c.beq=c.beq||{};c.sown=c.sown||{};c.seq=c.seq||{};return c};
 const bi=id=>{const c=store(),v=c.beq[id];return B.find(x=>x.id===v)||B[defaults[id]??0]};
