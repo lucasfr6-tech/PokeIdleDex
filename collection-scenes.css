@@ -78,5 +78,5 @@
 @media(prefers-reduced-motion:reduce){.cs-profile .sp{animation:none!important}}
 
 /* Artwork exclusif : image du Pokémon, légèrement floutée, qui épouse la forme du cadre (liste, fiche, classement). */
-.cs-scene>.cs-art{position:absolute!important;inset:-8px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(180deg,#0a0c1400 52%,#0a0c1499),var(--art);background-size:cover,cover;background-position:center,center;background-repeat:no-repeat;filter:blur(2.5px) saturate(1.08)}
-.cs-ranking>.cs-art{inset:-6px}
+.cs-scene>.cs-art{position:absolute!important;inset:-5px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(180deg,#0a0c1400 52%,#0a0c1499),var(--art);background-size:cover,cover;background-position:center,center;background-repeat:no-repeat;filter:blur(1.1px) saturate(1.08)}
+.cs-ranking>.cs-art{inset:-4px}
