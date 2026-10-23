@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-sync-fix-20261023h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-sync-fix-20261023h"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-lab-boost-20261023i"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-lab-boost-20261023i"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13391,7 +13391,7 @@ NAV2.push(["lab","lab","Laboratoire","#38bdf8","#0e7490"]);NENG.lab="Laboratory"
 try{NAVX.push(["lab","lab","Laboratoire","#38bdf8","#0e7490"])}catch(e){}
 {const c=NCAT.find(x=>x[0]=="c_adv")[6];if(!c.includes("lab")){const k=c.indexOf("pen");c.splice(k<0?c.length:k+1,0,"lab")}}
 /* [clé, nom FR, nom EN, prix, chance initiale %, gain par échec (points), plafond %] */
-const LABR=[["mu","Mutation","Mutation",5e12,.1,.05,1],["sz","Taille","Size",5e12,.1,.05,1],["al","Alpha","Alpha",2e12,.5,.1,2],["sh","Chromatique","Shiny",7e12,.1,.02,.5]];
+const LABR=[["mu","Mutation","Mutation",2.5e12,.1,.05,2.5],["sz","Taille","Size",2.5e12,.1,.05,2.5],["al","Alpha","Alpha",1e12,.5,.1,4],["sh","Chromatique","Shiny",3.5e12,.1,.02,1.5]];
 /* prix : mutation et taille de plus en plus chères à chaque palier déjà atteint (×1,5) */
 IT.mp10007.n="Perle Origine · Giratina";
 IT.mp10007.formChange=1;
@@ -14125,6 +14125,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["Laboratoire : plus de chances, moins cher","Laboratory: better odds, half price"],e:[["imp","Plafonds de réussite relevés","Les chances maximales passent à 2,5 % pour la Mutation et la Taille, 4 % pour l'Alpha et 1,5 % pour le Chromatique. La chance de départ ne change pas : elle monte avec chaque échec jusqu'au nouveau plafond.","Higher success caps","Maximum odds are now 2.5% for Mutation and Size, 4% for Alpha and 1.5% for Shiny. The starting odds are unchanged: they rise with each failure up to the new cap."],["imp","Prix divisés par 2","Toutes les recherches du Laboratoire coûtent deux fois moins cher.","Prices halved","Every Laboratory research now costs half as much."]]},
  {d:"2026-10-23",t:["Synchronisation entre appareils","Cross-device sync"],e:[["fix","Progression retrouvée sur un autre appareil","Quand tu jouais sur un appareil puis sur un autre, l'appareil resté en retard pouvait garder sa vieille partie et écraser la sauvegarde en ligne, effaçant la progression de l'autre. La sauvegarde en ligne la plus récente est maintenant toujours récupérée.","Progress found on another device","When you played on one device and then another, the device that was behind could keep its old game and overwrite the online save, erasing the other device's progress. The most recent online save is now always loaded."],["new","Restaurer ma partie","Quand une partie en ligne remplace celle de l'appareil, l'ancienne est mise de côté. Le bouton « Restaurer ma partie d'avant la synchro » du compte permet de la remettre.","Restore my game","When an online save replaces the one on the device, the old one is kept aside. The “Restore my game from before the sync” button in the account box puts it back."]]},
  {d:"2026-10-23",t:["LR en Chasse Méga","LR Mega Hunt"],e:[["imp","Des LR dans la rotation Méga","Les LR compatibles rejoignent la Chasse Méga et son index. Une chasse réussie donne le Pokémon annoncé et sa Méga-Perle, sans remplacement par une autre espèce.","LR Mega Hunt rotation","Eligible LR Pokémon join the Mega Hunt and its index. Successful hunts award the advertised Pokémon and its Mega Pearl without replacing the species."]]},
  {d:"2026-10-23",t:["Boosters : tout visible","Boosters: everything visible"],e:[["imp","Boutons toujours accessibles","À l'ouverture de plusieurs boosters, les boutons « Tout révéler » et « Terminer » restent affichés en bas de l'écran, sans avoir à descendre. Quand il y a beaucoup de cartes (×10), elles sont réduites pour tenir à l'écran.","Buttons always reachable","When opening several boosters, the “Reveal all” and “Done” buttons stay at the bottom of the screen, no scrolling needed. With many cards (×10), they are shrunk to fit the screen."]]},
@@ -14795,4 +14796,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-sync-fix-20261023h"><script src="dungeon-immersive.js?v=pid-sync-fix-20261023h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-sync-fix-20261023h"><script src="collection-scenes.js?v=pid-sync-fix-20261023h"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-lab-boost-20261023i"><script src="dungeon-immersive.js?v=pid-lab-boost-20261023i"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-lab-boost-20261023i"><script src="collection-scenes.js?v=pid-lab-boost-20261023i"></script></body></html>
