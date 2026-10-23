@@ -1769,7 +1769,7 @@ nav#nav.cn{left:92px;right:92px;bottom:12px;padding:0;border-radius:0;background
 @keyframes wfl{0%{opacity:.9}100%{opacity:0}}
 .gc .gart img{filter:none!important}
 .opw .opt{animation:none!important}
-.ocards.nd .fc{animation:none!important}
+.ocards.nd .fc{animation:none!important}.ocards.skip .fi{transition:none!important}.ocards.skip .fc.on .fr{animation:none!important}
 .lgx{background:radial-gradient(circle,rgba(255,226,140,.5),rgba(20,10,0,.6) 70%);animation:lgfade2 2.6s both!important}
 .lgx.ep{animation-duration:1.1s!important}
 .lgx .lgr{width:120vmax!important;will-change:transform}
@@ -4376,8 +4376,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-summon-max-20261023b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-summon-max-20261023b"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-booster-skip-20261023"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-booster-skip-20261023"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7948,6 +7948,13 @@ function opFx(r){const w=document.querySelector(".opw");if(!w)return;const d=doc
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-a=flip],[data-a=revall]");if(!b||!OP)return;
  if(b.dataset.a=="flip"){const i=+b.dataset.i;if(OP.rev[i])return;const r=crd(OP.cards[i].id);if(r>=3)setTimeout(()=>opFx(r),320);return}
  const idx=OP.cards.map((c,i)=>i).filter(i=>!OP.rev[i]);let top=-1,tk=0;idx.forEach((i,k)=>{const r=crd(OP.cards[i].id);if(r>top){top=r;tk=k}});if(top>=3)setTimeout(()=>opFx(top),tk*140+420)},true);
+/* Clic n'importe où sur l'écran d'ouverture d'un booster (×1, ×5, ×10) : saute l'animation et affiche directement toutes les cartes révélées */
+document.addEventListener("click",e=>{if(!OP||!OP.cards)return;const t=e.target;if(!t||!t.closest)return;
+ if(t.closest("[data-a=flip],[data-a=revall],[data-a=oclose],[data-a=close]"))return;
+ const md=$("md");if(!md||!md.contains(t))return;
+ if(OP.ph==0){OP.rev=OP.cards.map(()=>true);OP._r1=1;OP.ph=1;modal();const w=md.querySelector(".ocards");if(w)w.classList.add("skip");e.stopPropagation();return}
+ if(OP.ph==1&&OP.rev.some(r=>!r)){OP.rev=OP.rev.map(()=>true);const w=md.querySelector(".ocards");if(w)w.classList.add("skip");md.querySelectorAll(".ocards .fc").forEach(f=>f.classList.add("on"));e.stopPropagation()}
+},true);
 /* ===== Onglet Dresseur : équipements, invocation, apparence ===== */
 const ER=[["N","#9ca3af"],["R","#4ade80"],["SR","#60a5fa"],["SSR","#c084fc"],["UR","#fbbf24"]];
 const ETS=[1,1,.45,.4,.5,.55],EBV=[1,2.5,5,9,15];
@@ -14483,6 +14490,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["Boosters : passer l'animation","Boosters: skip the animation"],e:[["imp","Un clic pour tout afficher","À l'ouverture d'un booster (×1, ×5 ou ×10), un clic n'importe où sur l'écran saute l'animation et révèle directement toutes les cartes. Il ne reste plus qu'à appuyer sur Terminer.","One click to show everything","When opening a booster (×1, ×5 or ×10), clicking anywhere on the screen skips the animation and reveals all the cards at once. Just press Done."]]},
  {d:"2026-10-23",t:["Invocation : bouton MAX","Summon: MAX button"],e:[["new","Bouton MAX","Dans Invocation, les bannières classique et Halloween ont un bouton MAX qui sélectionne le plus grand nombre d'invocations possible, selon la limite de la rotation et tes pièces.","MAX button","In Summon, the classic and Halloween banners have a MAX button that picks the largest possible number of summons, based on the rotation limit and your coins."]]},
  {d:"2026-10-23",t:["Boutique de bannières illustrées","Illustrated banner shop"],e:[["new","18 bannières illustrées en vente","Dans Collections > Bannières, La boutique propose maintenant 18 bannières illustrées avec le Pokémon en fond : Gardevoir, Steelix, Lucario, Arceus, Mewtwo et Mew, Écorcia et bien d'autres. Elles se vendent de 50 M ₽ à 1 T ₽ et s'équipent sur n'importe quel Pokémon. Les anciens décors dessinés ne sont plus en vente ; ceux que tu avais déjà achetés restent affichés.","18 illustrated banners for sale","In Collections > Banners, The shop now offers 18 illustrated banners with the Pokémon in the background: Gardevoir, Steelix, Lucario, Arceus, Mewtwo and Mew, Ecruteak and more. They cost from 50 M ₽ to 1 T ₽ and can be equipped on any Pokémon. The old drawn scenes are no longer for sale; ones you already bought stay displayed."],["imp","Illustrations plus nettes","Les illustrations épousent la forme du cadre (liste des Pokémon, fiche, classement) et sont désormais moins floutées. Chaque Pokémon exclusif garde son illustration par défaut. Le texte (noms, niveaux, mutations) est plus lisible par-dessus les illustrations.","Sharper artwork","Artworks fit the frame shape (Pokémon list, profile, ranking) and are now less blurred. Each exclusive Pokémon keeps its own artwork by default."]]},
  {d:"2026-10-23",t:["Bannières des Pokémon exclusifs","Exclusive Pokémon banners"],e:[["new","Une bannière illustrée par exclusif","Chaque Pokémon exclusif (Lucario Senkou, Ectoplasma Cristal, Dracolosse Chocolat Blanc, Pikachu Fire, Steelix Cristallin, Gardevoir Chic et les cinq Ghastly d'Halloween) a désormais sa propre illustration, légèrement floutée, derrière lui. Elle s'adapte à la forme du cadre : liste des Pokémon, fiche de profil et classement.","One illustrated banner per exclusive","Each exclusive Pokémon (Lucario Senkou, Crystal Gengar, White Chocolate Dragonite, Pikachu Fire, Crystal Steelix, Chic Gardevoir and the five Halloween Ghastlies) now has its own slightly blurred artwork behind it. It fits the frame shape: Pokémon list, profile card and ranking."]]},
@@ -15145,4 +15153,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-summon-max-20261023b"><script src="collection-scenes.js?v=pid-summon-max-20261023b"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-dungeon-power-20261022"><script src="dungeon-immersive.js?v=pid-dungeon-power-20261022"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-booster-skip-20261023"><script src="collection-scenes.js?v=pid-booster-skip-20261023"></script></body></html>
