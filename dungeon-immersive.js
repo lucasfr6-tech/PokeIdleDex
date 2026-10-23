@@ -5,19 +5,34 @@ Object.assign(DGL,{150:{L:150,hp:45000,am:.5,cr:.09,tier:4,src:'r4'},200:{L:200,
 // Combat HP and coin rewards intentionally have separate scales.
 for(const [l,hp,reward] of [[50,1e7,3000],[100,1e8,15000],[150,1e9,45000],[200,1e11,100000],[300,1e12,250000],[400,1e13,600000]])Object.assign(DGL[l],{hp,reward});
 window.dgHealth=(r,m=1)=>Math.floor(Math.min(1e100,DGL[r.lv].hp*Math.pow(1.25,Math.min(900,Math.max(0,r.room-1)))*m));
-window.dgPool=(r,boss=false)=>{const E=DGE[r.env],rank=[50,100,150,200,300,400].indexOf(+r.lv),depth=Math.floor((r.room-1)/10),stage=Math.min(5,rank+Math.floor(depth/2));const elite=E.boss.filter(i=>!isLR(i)),rare=ALL.filter(i=>i<10000&&isLR(i)&&DB[i]);if(boss&&stage>=3)return rare;if(boss)return E.boss;if(stage>=4)return [...elite,...rare];if(stage>=2)return [...E.pool,...elite];return E.pool;};
+/* Composition des rencontres par niveau : N / SR / SSR / UR (hors LR) et LR (légendaires et fabuleux) */
+const DGBK=['N','SR','SSR','UR','LR'];
+const DGCOMP={
+ 50:{pool:1,add:{},boss:{eb:1}},
+ 100:{pool:1,add:{SR:8,SSR:4},boss:{eb:1,UR:2}},
+ 150:{eb:1,add:{SR:4,SSR:12,UR:6},boss:{UR:10}},
+ 200:{add:{SSR:6,UR:24,LR:2},boss:{UR:8,LR:2}},
+ 300:{add:{UR:24,LR:8},boss:{UR:6,LR:8}},
+ 400:{add:{UR:8,LR:40},boss:{LR:40}}};
+let dgBk=null;
+window.dgBucket=id=>isLR(id)?'LR':DGBK[Math.max(0,Math.min(3,pr(id)|0))];
+function dgBuckets(){if(dgBk&&dgBk.n===ALL.length)return dgBk;const o={n:ALL.length};DGBK.forEach(k=>o[k]=[]);ALL.filter(i=>i<10000&&DB[i]).forEach(i=>o[dgBucket(i)].push(i));return dgBk=o}
+function dgDraw(env,k,n){const l=dgBuckets()[k].slice(),R=dgRng(env*7919+DGBK.indexOf(k)*104729+11);for(let i=l.length-1;i>0;i--){const j=R()*(i+1)|0;[l[i],l[j]]=[l[j],l[i]]}return l.slice(0,n)}
+window.dgPool=(r,boss=false)=>{const E=DGE[r.env],C=DGCOMP[+r.lv]||DGCOMP[50],spec=boss?C.boss:C.add,out=new Set();
+ if(!boss&&C.pool)E.pool.forEach(i=>out.add(i));if(boss?C.boss.eb:C.eb)E.boss.forEach(i=>out.add(i));
+ for(const k of DGBK)if(spec[k])dgDraw(r.env,k,spec[k]).forEach(i=>out.add(i));
+ if(!out.size)E.pool.forEach(i=>out.add(i));return [...out]};
 window.dgEntryDay=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const DGPRICE={50:5e7,100:4e8,150:3.5e9,200:3e10,300:2.5e11,400:2e12};
 window.dgEntryPrice=(l)=>DGPRICE[+(l||DGUI.lv)]||DGPRICE[50];
 /* Index des Pokémon rencontrables : environnement + niveau choisis, regroupés par rareté */
-const dgIdxCache={};
-function dgIdxData(env,lv){const k=env+'/'+lv;if(dgIdxCache[k])return dgIdxCache[k];const M=new Map(),at=(id,room,boss)=>{let o=M.get(id);if(!o){o={id,n0:0,n1:0,b0:0};M.set(id,o)}if(boss){if(!o.b0)o.b0=room}else{if(!o.n0)o.n0=room;o.n1=room}};
- for(let room=1;room<=130;room++){const r={env,lv,room};dgPool(r,false).forEach(i=>at(i,room,false));if(room%10===0)dgPool(r,true).forEach(i=>at(i,room,true))}
- return dgIdxCache[k]=[...M.values()]}
-function dgIdxLabel(o){const a=[];if(o.n0)a.push(o.n1>=125?(o.n0===1?'Dès la salle 1':'Dès la salle '+o.n0):'Salles '+o.n0+'–'+o.n1);if(o.b0)a.push('Gardien dès la salle '+o.b0);return a.join(' · ')}
-function dgIdxHtml(){const L=dgIdxData(DGUI.env,+DGUI.lv),E=DGE[DGUI.env],names0=['Commun','SR','SSR','UR'];
- const groups=[3,2,1,0].map(q=>({q,l:L.filter(o=>pr(o.id)===q).sort((a,b)=>(a.n0||999)-(b.n0||999)||(a.b0||999)-(b.b0||999)||a.id-b.id)})).filter(g=>g.l.length);
- return `<div class="di-idx"><p class="di-idxh">${esc(E.n[0])} · Niveau ${DGUI.lv} · ${L.length} Pokémon rencontrables (le niveau décale l'apparition des plus rares)</p>${groups.map(g=>`<section><h4>${rtag(g.q)} <small>${g.l.length}</small></h4><div class="di-idxg">${g.l.map(o=>`<div class="di-idxc">${sp(o.id,0)}<b>${esc(dn(o.id))}</b><small>${dgIdxLabel(o)}</small></div>`).join('')}</div></section>`).join('')}</div>`}
+function dgIdxData(env,lv){const r={env,lv},M=new Map();dgPool(r,false).forEach(i=>M.set(i,{id:i,n:1,b:0}));dgPool(r,true).forEach(i=>{const o=M.get(i)||{id:i,n:0,b:0};o.b=1;M.set(i,o)});return [...M.values()]}
+window.dgIdxData=dgIdxData;
+const dgIdxLabel=o=>o.n&&o.b?'Rencontres · Gardien':o.b?'Gardien':'Rencontres';
+function dgIdxHtml(){const L=dgIdxData(DGUI.env,+DGUI.lv),E=DGE[DGUI.env];
+ const groups=['LR','UR','SSR','SR','N'].map(q=>({q,l:L.filter(o=>dgBucket(o.id)===q).sort((a,b)=>b.b-a.b||a.id-b.id)})).filter(g=>g.l.length);
+ const tag=q=>q==='LR'?'<span class="rty r3" style="background:linear-gradient(135deg,#7c3aed,#ec4899 60%,#f59e0b);color:#fff">LR</span>':rtag(['N','SR','SSR','UR'].indexOf(q));
+ return `<div class="di-idx"><p class="di-idxh">${esc(E.n[0])} · Niveau ${DGUI.lv} · ${L.length} Pokémon rencontrables</p>${groups.map(g=>`<section><h4>${tag(g.q)} <small>${g.l.length}</small></h4><div class="di-idxg">${g.l.map(o=>`<div class="di-idxc">${sp(o.id,0)}<b>${esc(dn(o.id))}</b><small>${dgIdxLabel(o)}</small></div>`).join('')}</div></section>`).join('')}</div>`}
 const GOODS={heal:{n:'Potion d’équipe',desc:'Rend 40 % de PV aux compagnons vivants.',img:'hyper-potion',p:4e10,stock:3},rev:{n:'Graine de rappel',desc:'Relève un compagnon K.O. à 50 % de PV.',img:'miracle-seed',p:12e10,stock:2},sh:{n:'Égide d’Écho',desc:'Annule le prochain piège de l’équipe.',img:'cleanse-tag',p:6e10,stock:3},guard:{n:'Éther de garde',desc:'Une utilisation de Garde en plus au prochain combat.',img:'ether',p:9e10,stock:2},tonic:{n:'Élixir de bravoure',desc:'+10 % d’Attaque et d’Attaque Spéciale au prochain combat.',img:'x-attack',p:15e10,stock:2},rope:{n:'Corde de retour',desc:'Quitte le donjon et sécurise la moitié des fragments en jeu.',img:'escape-rope',p:3e11,stock:1}};
 const item=(key)=>`<img class="di-item" src="img/items/${key}.png" alt="">`;
 const size=e=>e.t==='foe'?(e.bos?3:e.el?2:1):['shop','camp'].includes(e.t)?2:1;
