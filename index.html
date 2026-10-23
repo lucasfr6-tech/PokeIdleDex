@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-mega-lr-20261023"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-mega-lr-20261023"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-sync-fix-20261023h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-sync-fix-20261023h"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11122,9 +11122,9 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  const acc=()=>ls("pid_acc");
  let last="";
  /* synchro multi-appareils : pid_st = horodatage serveur de la dernière version connue par cet appareil */
- let noLoad=false,pulling=false,pushing=false,bootLast=+window.G_BOOTLAST||0;
+ let noLoad=false,pulling=false,pushing=false,sent="",bootLast=+window.G_BOOTLAST||0;
  function adopt(sv,t){
-  sv=pidWalletIncoming(sv);NOSAVE=true;ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
+  sv=pidWalletIncoming(sv);NOSAVE=true;try{const cur=ls(SK);if(cur&&cur!==sv){ls("pid_bak",cur);ls("pid_bakt",String(Date.now()))}}catch(e){}ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
   try{toast(LS("Progression de ton autre appareil récupérée, chargement...","Progress from your other device loaded, reloading..."))}catch(e){}
   setTimeout(()=>location.reload(),700)}
  async function pull(){
@@ -11141,10 +11141,10 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
     /* première synchro sur cet appareil : on garde la partie jouée le plus récemment */
     if(!since){let sl=0;try{sl=+JSON.parse(j.save).last||0}catch(e){}
      if(sl<=bootLast){ls("pid_st",String(j.t));return false}}
-    /* A delayed server response must not roll back newer local play/spending. */
-    let remoteLast=0;try{remoteLast=+JSON.parse(j.save).last||0}catch(e){}
-    let localLast=+G.last||0;try{localLast=Math.max(localLast,+JSON.parse(ls(SK)||'{}').last||0)}catch(e){}
-    if(remoteLast&&localLast&&remoteLast<localLast){ls("pid_st",String(j.t));return false}
+    /* Une sauvegarde plus récente sur le serveur vient d'un autre appareil : on l'adopte.
+       (G.last est remis à « maintenant » à chaque sauvegarde locale, il ne dit rien de l'avancement.)
+       On ignore seulement notre propre envoi précédent, dont la réponse s'est perdue. */
+    if(j.save===sent){ls("pid_st",String(j.t));last=j.save;return false}
     adopt(j.save,j.t);return true}
    if(!ls("pid_st"))ls("pid_st",String(j.t));
    return false
@@ -11155,7 +11155,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
   try{save()}catch(e){}
   const s=ls(SK);if(!s||(!force&&s===last))return false;
   const body={name:a,save:s},st=+ls("pid_st")||0;if(st)body.base=st;
-  pushing=true;let j;try{j=await post("save",body,ls("pid_tok"))}finally{pushing=false}
+  sent=s;pushing=true;let j;try{j=await post("save",body,ls("pid_tok"))}finally{pushing=false}
   if(j.ok){last=s;ls("pid_sync",String(Date.now()));if(j.t)ls("pid_st",String(j.t));return true}
   if(j.e==="stale"){await pull();return false}
   return false}
@@ -11188,12 +11188,15 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
   b.onclick=go;p.addEventListener("keydown",k=>{if(k.key=="Enter")go()})};
  window.pidAccBox=function(){
   const a=acc(),t=+ls("pid_sync")||0,when=t?new Date(t).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}):"";
-  if(a)return `<div class="accn"><div><b>${a}</b><small>${LS("Sauvegarde en ligne active","Online save active")}${when?" · "+when:""}</small></div><button class="mini" data-pc="out">${LS("Déconnexion","Sign out")}</button></div><div class="row"><button class="go" data-pc="sync">${LS("Sauvegarder maintenant","Save now")}</button></div>`;
+  if(a)return `<div class="accn"><div><b>${a}</b><small>${LS("Sauvegarde en ligne active","Online save active")}${when?" · "+when:""}</small></div><button class="mini" data-pc="out">${LS("Déconnexion","Sign out")}</button></div><div class="row"><button class="go" data-pc="sync">${LS("Sauvegarder maintenant","Save now")}</button></div>${ls("pid_bak")?`<div class="row"><button data-pc="restore" title="${LS("Remet la partie que cet appareil avait avant la dernière synchronisation","Puts back the game this device had before the last sync")}">${LS("Restaurer ma partie d'avant la synchro","Restore my game from before the sync")} (${new Date(+ls("pid_bakt")||0).toLocaleString([],{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})})</button></div>`:""}`;
   return `<div class="accf"><small>${LS("Crée un compte pour reprendre ta partie sur un autre appareil.","Create an account to continue your game on another device.")}</small><input type="text" id="pcn" maxlength="16" placeholder="${LS("Pseudo","Name")}" value="${(G.name&&G.name!="Dresseur"?G.name:"").replace(/["<>&]/g,"")}" autocomplete="username"><input type="password" id="pcp" placeholder="${LS("Mot de passe (4 car. min.)","Password (4 chars min.)")}" autocomplete="new-password"><div class="row"><button class="go" data-pc="reg">${LS("Créer le compte","Create account")}</button><button data-pc="log">${LS("Se connecter","Sign in")}</button></div><small>${LS("Se connecter remplace la partie de cet appareil.","Signing in replaces the game on this device.")}</small></div>`};
  document.addEventListener("click",async ev=>{
   const b=ev.target.closest&&ev.target.closest("[data-pc]");if(!b)return;
   const k=b.dataset.pc,n=document.getElementById("pcn"),p=document.getElementById("pcp");
   if(k=="out"){try{await push(true)}catch(e){}NOSAVE=true;ls("pid_acc",null);ls("pid_sync",null);ls("pid_st",null);location.reload();return}
+  if(k=="restore"){const bk=ls("pid_bak");if(!bk||!pidEpOk(bk)){toast(LS("Aucune sauvegarde à restaurer.","Nothing to restore."));return}
+   if(!window.confirm(LS("Remplacer la partie actuelle (et celle en ligne) par celle que cet appareil avait avant la dernière synchronisation ?","Replace the current game (and the online one) with the one this device had before the last sync?")))return;
+   NOSAVE=true;ls(SK,bk);if(SK!=="idle3")ls("idle3",bk);ls("pid_bak",null);ls("pid_bakt",null);ls("pid_forcepush","1");location.reload();return}
   if(k=="sync"){b.disabled=true;if(await pull())return;const ok=await push(true);b.disabled=false;toast(ok?LS("Sauvegarde envoyée","Save sent"):LS("Échec de la sauvegarde","Save failed"));try{show()}catch(e){}return}
   if(!n||!p)return;const nm=n.value.trim();
   if(k=="reg"){b.disabled=true;const j=await register(nm,p.value);b.disabled=false;if(j.ok){G.name=G.name&&G.name!="Dresseur"?G.name:nm;try{save()}catch(e){}toast(LS("Compte créé, ta partie est sauvegardée en ligne","Account created, your game is saved online"))}else{toast(msg(j));try{sfx("err")}catch(e){}}try{show()}catch(e){}return}
@@ -11203,8 +11206,9 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
   document.addEventListener("visibilitychange",()=>{if(document.hidden)push(false);else pull()});
   window.addEventListener("pagehide",()=>{try{push(false)}catch(e){}});
   window.addEventListener("focus",()=>{pull()});
-  setTimeout(()=>pull(),2500);
-  setTimeout(async()=>{if(!(await pull()))push(false)},8000)}
+  setTimeout(()=>{if(!ls("pid_forcepush"))pull()},2500);
+  setTimeout(async()=>{if(ls("pid_forcepush")){ls("pid_forcepush",null);try{save()}catch(e){}const s2=ls(SK),a2=acc();if(s2&&a2){const j=await post("save",{name:a2,save:s2,force:1},ls("pid_tok"));if(j.ok){last=s2;if(j.t)ls("pid_st",String(j.t));try{toast(LS("Ta partie restaurée est sauvegardée en ligne.","Your restored game is saved online."))}catch(e){}}}return}
+   if(!(await pull()))push(false)},8000)}
 })();
 /* ===== les visiteurs qui n'ont encore rien fait n'apparaissent pas au classement ===== */
 (function(){
@@ -14121,6 +14125,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-23",t:["Synchronisation entre appareils","Cross-device sync"],e:[["fix","Progression retrouvée sur un autre appareil","Quand tu jouais sur un appareil puis sur un autre, l'appareil resté en retard pouvait garder sa vieille partie et écraser la sauvegarde en ligne, effaçant la progression de l'autre. La sauvegarde en ligne la plus récente est maintenant toujours récupérée.","Progress found on another device","When you played on one device and then another, the device that was behind could keep its old game and overwrite the online save, erasing the other device's progress. The most recent online save is now always loaded."],["new","Restaurer ma partie","Quand une partie en ligne remplace celle de l'appareil, l'ancienne est mise de côté. Le bouton « Restaurer ma partie d'avant la synchro » du compte permet de la remettre.","Restore my game","When an online save replaces the one on the device, the old one is kept aside. The “Restore my game from before the sync” button in the account box puts it back."]]},
  {d:"2026-10-23",t:["LR en Chasse Méga","LR Mega Hunt"],e:[["imp","Des LR dans la rotation Méga","Les LR compatibles rejoignent la Chasse Méga et son index. Une chasse réussie donne le Pokémon annoncé et sa Méga-Perle, sans remplacement par une autre espèce.","LR Mega Hunt rotation","Eligible LR Pokémon join the Mega Hunt and its index. Successful hunts award the advertised Pokémon and its Mega Pearl without replacing the species."]]},
  {d:"2026-10-23",t:["Boosters : tout visible","Boosters: everything visible"],e:[["imp","Boutons toujours accessibles","À l'ouverture de plusieurs boosters, les boutons « Tout révéler » et « Terminer » restent affichés en bas de l'écran, sans avoir à descendre. Quand il y a beaucoup de cartes (×10), elles sont réduites pour tenir à l'écran.","Buttons always reachable","When opening several boosters, the “Reveal all” and “Done” buttons stay at the bottom of the screen, no scrolling needed. With many cards (×10), they are shrunk to fit the screen."]]},
  {d:"2026-10-23",t:["Pension : variantes visibles","Daycare: visible variants"],e:[["imp","Mutation, taille et plus dans le choix","Quand tu choisis les Pokémon à mettre en pension, chaque carte affiche maintenant sa mutation, sa taille, son statut Alpha et chromatique, pour savoir d'un coup d'œil lesquels envoyer au repos.","Variants shown when choosing","When picking Pokémon for the daycare, each card now shows its mutation, size, Alpha and shiny status, so you can see at a glance which ones to send to rest."]]},
@@ -14790,4 +14795,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-booster-fit-20261023g"><script src="dungeon-immersive.js?v=pid-booster-fit-20261023g"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-booster-fit-20261023g"><script src="collection-scenes.js?v=pid-booster-fit-20261023g"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-sync-fix-20261023h"><script src="dungeon-immersive.js?v=pid-sync-fix-20261023h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-sync-fix-20261023h"><script src="collection-scenes.js?v=pid-sync-fix-20261023h"></script></body></html>
