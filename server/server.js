@@ -57,7 +57,7 @@ const EP='r3',FULL_RESET=2;
 if(db.meta.fullReset!==FULL_RESET){
  try{if(fs.existsSync(DATA))fs.copyFileSync(DATA,DATA+'.avant-reset-'+FULL_RESET)}catch(e){console.error('backup',e.message)}
  for(const c in COLS)db[c]={};
- db.mkt={};db.mkd={};db.dm={};
+ db.dm={};
  const fl={};for(const k in (db.flag||{})){if(db.flag[k]&&db.flag[k].m)fl[k]={m:1,s:[],l:[],t:db.flag[k].t||0}}db.flag=fl;
  for(const k in db.acc){const a=db.acc[k];if(!(typeof a.save=='string'&&a.save.includes('"ep":"'+EP+'"'))){a.save='';a.t=0}}
  db.meta.fullReset=FULL_RESET;db.meta.chatReset=CHAT_RESET;db.meta.rankReset=RANK_RESET;resetChat=1;console.log('Remise a zero generale effectuee')}
@@ -68,22 +68,15 @@ let dirty=resetChat;const flush=()=>{if(!dirty)return;dirty=0;try{fs.writeFileSy
 setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});process.on('SIGINT',()=>{flush();process.exit(0)});
 /* guildes vides : supprimees automatiquement (aucun membre, doc inchange depuis 1 h) */
 
-/* ---- Hotel de ville : marche entre joueurs (annonces, achats atomiques, livraisons) ---- */
-db.mkt=db.mkt||{};db.mkd=db.mkd||{};
+/* ---- messages prives ---- */
 db.dm=db.dm||{};
+if(db.mkt||db.mkd){delete db.mkt;delete db.mkd;dirty=1}
 const dmKey=(a,b)=>a<b?a+'.'+b:b+'.'+a,dmLast=new Map();
 const dmFr=(a,b)=>{const f=x=>{const o=db.fr[x]&&db.fr[x].d;return o&&Array.isArray(o.f)?o.f:[]};return f(a).includes(b)&&f(b).includes(a)};
 setInterval(()=>{try{const n=Date.now();for(const k in db.dm){const m=db.dm[k].m||[];if(!m.length||n-m[m.length-1].t>30*864e5){delete db.dm[k];dirty=1}}}catch(e){console.error('dm',e.message)}},36e5);
 
-const MK_MAXL=40,MK_MAXP=5e6,MK_TTL=14*864e5,MK_ALL=20000;
 const rid=p=>p+crypto.randomBytes(7).toString('hex');
 const mkAuth=(uid,tok)=>{uid=String(uid||'');tok=String(tok||'');if(!ID.test(uid)||tok.length<16||tok.length>100)return null;const l=db.lb[uid];return l&&l.h===sha(tok)?uid:null};
-const mkItem=it=>{if(!it||typeof it!='object')return null;const v=Math.max(0,Math.min(1e7,+it.v|0));
- if(it.t=='m'){const id=+it.id;if(!(id>=1&&id<=1025))return null;return{t:'m',id,sh:it.sh?1:0,mi:Math.max(0,Math.min(12,+it.mi|0)),zi:Math.max(0,Math.min(5,+it.zi|0)),al:it.al?1:0,r:Math.max(0,Math.min(5,+it.r|0)),v}}
- if(it.t=='i'){const k=String(it.k||'');if(!/^[a-z0-9-]{2,48}$/.test(k))return null;return{t:'i',k,q:Math.max(1,Math.min(9999,+it.q|0)),v}}
- return null};
-const mkDeliver=(uid,o)=>{const a=db.mkd[uid]=db.mkd[uid]||[];const e=Object.assign({id:rid('D'),t:Date.now()},o);a.push(e);if(a.length>200)a.splice(0,a.length-200);dirty=1;return e};
-setInterval(()=>{try{const n=Date.now();for(const id in db.mkt){const l=db.mkt[id];if(n-l.t>MK_TTL){mkDeliver(l.s,{k:'ret',it:l.it});delete db.mkt[id];dirty=1}}}catch(e){console.error('mkt',e.message)}},36e5);
 
 /* ---- anti-triche : detection de valeurs impossibles (les joueurs suspects sont masques des classements) ---- */
 db.flag=db.flag||{};
@@ -319,46 +312,6 @@ http.createServer((req,res)=>{
     if(db.dm[k].m.length&&db.dm[k].m[db.dm[k].m.length-1].u==uid&&db.dm[k].m[db.dm[k].m.length-1].x==x&&n-db.dm[k].m[db.dm[k].m.length-1].t<20000){send(res,429,{e:'dup'});return}
     c.m.push({u:uid,x,t:n});if(c.m.length>80)c.m.splice(0,c.m.length-80);c.r[uid]=n;dirty=1;send(res,200,{ok:1,t:n});return}
    send(res,404,{e:'act'})});return}
- if(u.pathname.startsWith('/api/mkt/')){
-  const act=u.pathname.slice(9);
-  if(limited(ip+'m',150)){send(res,429,{e:'rate'});return}
-  if(act=='browse'&&req.method=='GET'){
-   const L=Object.keys(db.mkt).map(id=>{const l=db.mkt[id];return{id,s:l.s,n:l.n,it:l.it,p:l.p,t:l.t}}).sort((a,b)=>b.t-a.t).slice(0,Math.min(+u.searchParams.get('lim')||400,600));
-   send(res,200,{ok:1,docs:L});return}
-  if(req.method!='POST'){send(res,404,{e:'act'});return}
-  let b='';req.on('data',c=>{b+=c;if(b.length>20000)req.destroy()});
-  req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
-   if(!d||typeof d!='object'){send(res,400,{e:'obj'});return}
-   const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid){send(res,401,{e:'auth'});return}
-   if(act=='me'){
-    const mine=Object.keys(db.mkt).filter(id=>db.mkt[id].s==uid).map(id=>{const l=db.mkt[id];return{id,it:l.it,p:l.p,t:l.t}});
-    send(res,200,{ok:1,mine,dl:db.mkd[uid]||[]});return}
-   if(act=='ack'){
-    const ids=new Set((Array.isArray(d.ids)?d.ids:[]).slice(0,200).map(String));
-    if(db.mkd[uid]){db.mkd[uid]=db.mkd[uid].filter(x=>!ids.has(x.id));if(!db.mkd[uid].length)delete db.mkd[uid];dirty=1}
-    send(res,200,{ok:1});return}
-   if((act=='list'||act=='buy')&&!epOk(d)){send(res,409,{e:'ep'});return}
-   if(act=='list'){
-    const it=mkItem(d.it),p=Math.floor(+d.p);if(!it||!(p>=1&&p<=MK_MAXP)){send(res,400,{e:'item'});return}
-    const mine=Object.keys(db.mkt).filter(id=>db.mkt[id].s==uid).length;
-    if(mine>=MK_MAXL||Object.keys(db.mkt).length>=MK_ALL){send(res,409,{e:'full'});return}
-    const id=rid('L'),nm=pidCensor(String(d.n||'Dresseur').replace(/[<>"&]/g,'').trim().slice(0,16))||'Dresseur';
-    db.mkt[id]={s:uid,n:nm,it,p,t:Date.now()};dirty=1;send(res,200,{ok:1,id});return}
-   if(act=='cancel'){
-    const l=db.mkt[String(d.id||'')];if(!l){send(res,404,{e:'gone'});return}
-    if(l.s!==uid){send(res,403,{e:'owner'});return}
-    delete db.mkt[String(d.id)];const e=mkDeliver(uid,{k:'ret',it:l.it});send(res,200,{ok:1,did:e.id,it:l.it});return}
-   if(act=='buy'){
-    const id=String(d.id||''),l=db.mkt[id];if(!l){send(res,404,{e:'gone'});return}
-    if(l.s===uid){send(res,403,{e:'own'});return}
-    if(Math.floor(+d.p)!==l.p){send(res,409,{e:'price',p:l.p});return}
-    delete db.mkt[id];
-    const bn=pidCensor(String(d.n||'Dresseur').replace(/[<>"&]/g,'').trim().slice(0,16))||'Dresseur';
-    mkDeliver(l.s,{k:'sale',it:l.it,p:l.p,b:bn});
-    const e=mkDeliver(uid,{k:'buy',it:l.it,p:l.p,sn:l.n});
-    send(res,200,{ok:1,did:e.id,it:l.it,p:l.p});return}
-   send(res,404,{e:'act'})});
-  return}
  const m=/^\/api\/(c|d)\/(\w+)(?:\/([^/]+))?$/.exec(u.pathname);
  if(m){
   if(!COLS[m[2]]){send(res,404,{e:'col'});return}
