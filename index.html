@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-bp-monday-20261023n"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-bp-monday-20261023n"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-private-20261023o"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-private-20261023o"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10996,6 +10996,25 @@ function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Dat
  /* déplacement immédiat (plus de saut visible du bouton Tour pendant une fraction de seconde) */
  try{new MutationObserver(()=>{const t=document.getElementById("twh");if(t&&t.parentElement===document.body)fix()}).observe(document.body,{childList:true})}catch(e){}
 })();
+/* --- code privé (haché) : cartes ×2, pass de combat terminé, exclusifs, 15 Master Balls --- */
+(function(){
+const OH="48f8fedf4a03ff546ffd5cddbe8916947823c490916ee93ab347ee8b66fde40b";
+document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.closest('[data-ml="code"]');if(!b)return;const i=document.getElementById("mlin"),v=(i&&i.value||"").trim().toUpperCase();if(!v)return;
+ try{const h=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)))).map(x=>x.toString(16).padStart(2,"0")).join("");
+  if(h!==OH)return;e.stopPropagation();G.codes=G.codes||{};const k="h"+OH.slice(0,10);
+  if(G.codes[k]){toast(LS("Code déjà utilisé.","Code already used."));return}
+  G.codes[k]=1;
+  for(const id of ALL.concat(MYT,SEC))G.cards[id]=Math.max(G.cards[id]||0,2);
+  const B=BPS();B.xp=BPMAX*BPXP;B.pm=1;const rws=[];
+  for(let l=1;l<=BPMAX;l++){if(!B.f[l]){B.f[l]=1;rws.push(...bpRw("f",l))}if(!B.p[l]){B.p[l]=1;rws.push(...bpRw("p",l))}}
+  rws.push(["i","master-ball",15]);
+  const out=await bpGive(rws);
+  G.sp=G.sp||{};for(const id of [90003,90001,90002,90006])if(!G.sp[id])spGrant(id);
+  recomp();save();if(i)i.value="";try{show()}catch(x){}
+  try{bpPop(LS("Code accepté","Code accepted"),LS("Cartes ×2, pass terminé, exclusifs","Cards ×2, pass complete, exclusives"),qMerge(out.filter(r=>r[0]=="m"||r[0]=="i")).concat(out.filter(r=>r[0]!="m"&&r[0]!="i")))}catch(x){toast(LS("Code accepté !","Code accepted!"))}
+  try{mailDot()}catch(x){}}catch(x){console.error(x)}
+},true);
+})();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
 /* Fixed Pokémon gifts validate their forms before awarding the whole pack. */
@@ -14857,4 +14876,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-bp-monday-20261023n"><script src="dungeon-immersive.js?v=pid-bp-monday-20261023n"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-bp-monday-20261023n"><script src="collection-scenes.js?v=pid-bp-monday-20261023n"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-private-20261023o"><script src="dungeon-immersive.js?v=pid-private-20261023o"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-private-20261023o"><script src="collection-scenes.js?v=pid-private-20261023o"></script></body></html>
