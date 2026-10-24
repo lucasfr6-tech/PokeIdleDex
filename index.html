@@ -1826,7 +1826,7 @@ nav#nav.cn{left:92px;right:92px;bottom:12px;padding:0;border-radius:0;background
 .et:hover{transform:translateY(-2px)}
 .et.on{outline:2px solid #fff;outline-offset:1px}
 .et.no{filter:grayscale(.85) brightness(.6);cursor:default}.et.no:hover{transform:none}
-.et.r3,.et.r4{box-shadow:0 0 14px color-mix(in srgb,var(--c) 50%,transparent)}
+.et.r3,.et.r4{box-shadow:0 0 14px color-mix(in srgb,var(--c) 50%,transparent)}.et.r5{background:linear-gradient(165deg,#4a0a56,#0a1c4a 70%);border-color:#ff5dd8;box-shadow:0 0 22px #ff5dd8aa,0 0 40px #22d3ee55;animation:lrg 3s linear infinite}.et.r5 .etr,.esl.r5 .etr{background:linear-gradient(100deg,#f472b6,#fbbf24,#4ade80,#22d3ee,#a78bfa,#f472b6);background-size:260% 100%;animation:rtrb 3.4s linear infinite;color:#1b0b2e}@keyframes lrg{50%{box-shadow:0 0 30px #22d3eeaa,0 0 50px #ff5dd855}}.eoc.r5 .et{animation:lrg 1.6s ease-in-out infinite}.lgx.lrx b{background:linear-gradient(90deg,#f472b6,#fbbf24,#4ade80,#22d3ee,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 12px #fff8)}.eplr b{background:linear-gradient(90deg,#f472b6,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
 .et.r4{background:linear-gradient(165deg,#6a4a00,#241238 75%)}
 .eti{display:block;width:60px;height:60px}.eti svg,.eti img{width:100%;height:100%;object-fit:contain}
 .etn{font:800 11.5px Nunito,system-ui,sans-serif;line-height:1.15;min-height:2.3em;display:grid;align-items:center}
@@ -7969,9 +7969,15 @@ EPK.forEach((p,i)=>eqMk("sh",i,p[1],p[2],p[3],{pk:p[0]}));
 const ETR=[["Albert","falkner",0,3],["Hector","bugsy",0,4],["Blanche","whitney",0,2],["Pierre","brock",1,1],["Ondine","misty",1,5],["Jasmine","jasmine",1,2],["Mortimer","morty",2,2],["Chuck","chuck",2,0],["Érika","erika",2,5],["Jeannine","janine",2,3],["Major Bob","ltsurge",3,3],["Morgane","sabrina",3,5],["Frédo","pryce",3,4],["Auguste","blaine",3,0],["Sandra","clair",4,0],["Blue","blue",4,1],["Peter","lance",4,0]];
 ETR.forEach((t,i)=>eqMk("tr",i,t[0],t[2],t[3],{tp:t[1]}));
 const trUrl=o=>"https://play.pokemonshowdown.com/sprites/trainers/"+o.tp+".png",trUrl2=o=>"https://raw.githubusercontent.com/smogon/pokemon-showdown-client/master/play.pokemonshowdown.com/sprites/trainers/"+o.tp+".png";
+/* ---- accessoires LR (rareté 5) : 3 par catégorie (tête, tenue, écharpe, compagnon), bien plus forts et plus rares que les UR ---- */
+ER.push(["LR","#ff5dd8"]);EBV.push(34);
+[["ha",[["Diadème du Néant",20,"#1b1033","#a78bfa",0],["Halo d'Arceus",21,"#fbbf24","#fff7ae",1],["Couronne Infinie",22,"#fbbf24","#f472b6",2]]],
+ ["ja",[["Armure du Néant",20,"#1b1033","#8b5cf6",0],["Manteau Astral",21,"#1e1b4b","#fbbf24",1],["Tenue du Créateur",22,"#f8fafc","#fbbf24",3]]],
+ ["ca",[["Cape Cosmique",20,"#0f0a2e","#fbbf24",1],["Ailes d'Ombre",21,"#111827","#a78bfa",0],["Écharpe Infinie",22,"#f472b6","#22d3ee",4]]]].forEach(([sl,L])=>L.forEach((it,k)=>{const o=eqMk(sl,13+k,it[0],5,it[4],{st:it[1],c1:it[2],c2:it[3]});o.v.push([(it[4]+1)%6,+(EBV[5]*ETS[(it[4]+1)%6]*.3).toFixed(1)])}));
+[[487,"Giratina",0],[890,"Éternatus",1],[800,"Necrozma",5]].forEach((p,k)=>{const o=eqMk("sh",EPK.length+k,p[1],5,p[2],{pk:p[0]});o.v.push([(p[2]+1)%6,+(EBV[5]*ETS[(p[2]+1)%6]*.3).toFixed(1)])});
 const EQM={};EQ.forEach(o=>EQM[o.id]=o);
-const EQBR=[0,1,2,3,4].map(r=>EQ.filter(o=>o.r==r));
-const E_=()=>{const e=G.eq=G.eq||{};if(!e.ti){e.ti=1;e.o=e.o||{};e.e=e.e||{};["tr0","tr1","tr2"].forEach(k=>e.o[k]=e.o[k]||1);if(!e.e.tr)e.e.tr="tr0"}e.o=e.o||{};e.e=e.e||{};e.lk=e.lk||{};e.n=e.n||0;e.pS=e.pS||0;e.pU=e.pU||0;const l=e.lk;if(l.sk==null){l.sk=1;l.hr=0;l.hc=3;l.ey=2;l.oc=0;l.bg=0}return e};
+const EQBR=[0,1,2,3,4,5].map(r=>EQ.filter(o=>o.r==r));
+const E_=()=>{const e=G.eq=G.eq||{};if(!e.ti){e.ti=1;e.o=e.o||{};e.e=e.e||{};["tr0","tr1","tr2"].forEach(k=>e.o[k]=e.o[k]||1);if(!e.e.tr)e.e.tr="tr0"}e.o=e.o||{};e.e=e.e||{};e.lk=e.lk||{};e.n=e.n||0;e.pS=e.pS||0;e.pU=e.pU||0;e.pL=e.pL||0;const l=e.lk;if(l.sk==null){l.sk=1;l.hr=0;l.hc=3;l.ey=2;l.oc=0;l.bg=0}return e};
 const eStar=id=>{const n=E_().o[id]||0;return Math.min(n,5)};
 const eMul=id=>1+.15*(Math.max(1,eStar(id))-1);
 const eVal=(o,k)=>o.v.map(([t,x])=>[t,+(x*eMul(o.id)).toFixed(2)]);
@@ -7980,13 +7986,13 @@ function eqEff(){const T=eqTot(),K=[.6,.35,.5,.5],d=i=>{const S=T[i+2]/100;retur
 {const rc0=recomp;recomp=function(){rc0.apply(this,arguments);try{const b=eqEff();GM[0]*=1+b.dmg;GM[1]*=1+b.coin}catch(e){}}}
 {const bf0=biFlags;biFlags=function(){bf0();try{const b=eqEff();BIF.m+=b.luck;BIF.d*=1+b.spd;BIF.k*=1+b.cap;BIF.x*=1+b.xp}catch(e){}}}
 const ePrice=()=>10000000;
-const ERT=[52,29,14,4.2,.8],EPS=45,EPU=150;
+const ERT=[51.9,29,14,4.2,.8,.1],EPS=45,EPU=150,EPL=1000;
 function ePull(n){const e=E_(),out=[];
- for(let j=0;j<n;j++){let r=0,x=Math.random()*100;for(let q=0;q<5;q++){if(x<ERT[q]){r=q;break}x-=ERT[q];r=q}
-  e.n++;e.pS++;e.pU++;
-  if(e.pU>=EPU)r=4;else if(e.pS>=EPS&&r<3)r=3;
+ for(let j=0;j<n;j++){let r=0,x=Math.random()*100;for(let q=0;q<6;q++){if(x<ERT[q]){r=q;break}x-=ERT[q];r=q}
+  e.n++;e.pS++;e.pU++;e.pL++;
+  if(e.pL>=EPL)r=5;else if(e.pU>=EPU&&r<4)r=4;else if(e.pS>=EPS&&r<3)r=3;
   if(n>=10&&(j+1)%10===0&&r<2&&!out.slice(j-9,j).some(o=>o.o.r>=2))r=2;
-  if(r>=4)e.pU=0;if(r>=3)e.pS=0;
+  if(r>=5)e.pL=0;if(r>=4)e.pU=0;if(r>=3)e.pS=0;
   const L=EQBR[r],o=L[Math.random()*L.length|0],had=e.o[o.id]||0;e.o[o.id]=had+1;
   out.push({o,nw:!had,dup:had>=5,ref:had>=5?Math.round(ePrice()*.15):0})}
  return out}
@@ -8131,10 +8137,10 @@ function eTabEq(){const e=E_(),sl=GS,nm=ESN[sl],items=EQ.filter(o=>o.sl==sl),cur
  return `<div class="eph"><b>${LS(nm[0],nm[1])}</b><small>${items.filter(o=>e.o[o.id]>0).length} / ${items.length}</small>${co?`<button data-gu="${sl}">${LS("Retirer","Unequip")}</button>`:""}</div>
  ${co?`<div class="ecur" style="--c:${ER[co.r][1]}"><span class="eti">${eIcon(co)}</span><div><b>${co.n}</b><div class="etb">${eChips(co)}</div></div></div>`:`<p class="ehint">${LS("Choisis un objet que tu possèdes pour l'équiper. Il apparaît tout de suite sur ton dresseur.","Pick an item you own to equip it. It shows on your trainer right away.")}</p>`}
  <div class="egrid">${items.slice().sort((a,b)=>b.r-a.r||a.i-b.i).map(o=>eTile(o,{on:cur==o.id,attr:` data-ge="${o.id}"`})).join("")}</div>`}
-function eTabSum(){const e=E_(),p=ePrice(),tot=EQ.length,pS=Math.max(0,EPS-e.pS),pU=Math.max(0,EPU-e.pU);
+function eTabSum(){const e=E_(),p=ePrice(),tot=EQ.length,pS=Math.max(0,EPS-e.pS),pU=Math.max(0,EPU-e.pU),pL=Math.max(0,EPL-(e.pL||0));
  return `<div class="esm"><div class="esb"><div class="esorb"><i></i><i></i><i></i><span>${ico("sparkle")}</span></div><h3>${LS("Invocation d'équipement","Gear summon")}</h3><p>${LS("Dresseurs, vêtements, Poké Balls, ceintures, auras et Pokémon compagnons : tout sort du même portail.","Hats, boots, Poké Balls, chips, auras and shoulder Pokémon: everything comes from the same portal.")}</p></div>
  <div class="erates">${ER.map((r,i)=>`<span style="--c:${r[1]}"><b>${r[0]}</b>${ERT[i]} %</span>`).join("")}</div>
- <div class="epity"><div><small>${LS("SSR ou mieux garanti dans","SSR or better guaranteed in")}</small><b>${pS}</b></div><div><small>${LS("UR garanti dans","UR guaranteed in")}</small><b>${pU}</b></div><div><small>${LS("Collection","Collection")}</small><b>${eOwned()} / ${tot}</b></div></div>
+ <div class="epity"><div><small>${LS("SSR ou mieux garanti dans","SSR or better guaranteed in")}</small><b>${pS}</b></div><div><small>${LS("UR garanti dans","UR guaranteed in")}</small><b>${pU}</b></div><div class="eplr"><small>${LS("LR garanti dans","LR guaranteed in")}</small><b>${pL}</b></div><div><small>${LS("Collection","Collection")}</small><b>${eOwned()} / ${tot}</b></div></div>
  <div class="esbt"><button class="go" data-gp="1" ${G.m>=p?"":"disabled"}>${LS("Invoquer ×1","Summon ×1")}<small>${fmt(p)} ₽</small></button><button class="go gold" data-gp="10" ${G.m>=p*9?"":"disabled"}>${LS("Invoquer ×10","Summon ×10")}<small>${fmt(p*9)} ₽ · ${LS("1 SR garanti","1 SR guaranteed")}</small></button><button class="go gold" data-gp="30" ${G.m>=p*27?"":"disabled"}>${LS("Invoquer ×30","Summon ×30")}<small>${fmt(p*27)} ₽ · ${LS("3 SR garantis","3 SR guaranteed")}</small></button></div>
  <small class="enote">${LS("Les doublons montent un objet jusqu'à 5 étoiles (+15 % de bonus par étoile). Au-delà, ils sont revendus en pièces.","Duplicates raise an item up to 5 stars (+15% bonus per star). Beyond that they are sold for coins.")}</small></div>`}
 function eTabLook(){const L=E_().lk;
@@ -8143,6 +8149,34 @@ let AMARTID=0;const atelierArt=(kind,color='#f4ce78',accent='#8ce6e4')=>{let p='
 
 const amLegacyIcon=eIcon;
 eIcon=function(o){if(!o)return '';if(o.tp||o.pk)return amLegacyIcon(o);const kind=o.sl==='ha'?(o.st===7?'band':o.st===4?'crown':o.st===5?'helmet':o.st===2||o.st===3?'hat':'cap'):({gl:'glasses',ja:'coat',ca:'scarf',ba:'ball',ch:'belt',bo:'boots',au:'aura'})[o.sl];return kind?atelierArt(kind,o.c1||'#a7b8c8',o.c2||'#e3c49a'):amLegacyIcon(o)};
+/* ---- rendu des accessoires LR ---- */
+{const hat0=pHat,ja0=pJa,ca0=pCa,caf0=pCaF;
+ const GL=(R,c,cx,cy,rx,ry,o)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${R.rg(c,o||.6)}"/>`;
+ const gem=(R,x,y,r,c)=>`<path d="M${x} ${y-r}L${x+r*.8} ${y}L${x} ${y+r*1.1}L${x-r*.8} ${y}Z" fill="${R.g(c)}" stroke="${sh(c,55)}" stroke-width="1.3"/><path d="M${x-r*.35} ${y-r*.2}L${x} ${y-r*.65}" stroke="#fff" stroke-width="1.4" opacity=".8"/>`;
+ const RB=["#f87171","#fbbf24","#4ade80","#22d3ee","#a78bfa","#f472b6"];
+ pHat=function(R,o){const a=o.c1,b=o.c2;switch(o.st){
+  case 20:return GL(R,b,150,62,86,56,.55)+P_(R,"M104 92L108 48L128 68L150 26L172 68L192 48L196 92Q150 104 104 92Z",a)+`<path d="M108 52L128 70L150 30L172 70L192 52" stroke="${b}" stroke-width="2.5" fill="none" opacity=".9"/>`+gem(R,150,66,11,b)+[[112,54],[188,54],[150,28]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="${b}"/>`).join("")+[[86,50],[214,44],[96,24],[204,26]].map((p,i)=>`<path d="M${p[0]} ${p[1]-7}L${p[0]+4} ${p[1]}L${p[0]} ${p[1]+7}L${p[0]-4} ${p[1]}Z" fill="${i%2?"#c4b5fd":b}" class="aup" style="--d:${i*.4}s;--y:6px"/>`).join("");
+  case 21:return GL(R,"#fde047",150,30,84,34,.55)+`<ellipse cx="150" cy="30" rx="58" ry="14" fill="none" stroke="${sh(a,45)}" stroke-width="9"/><ellipse cx="150" cy="30" rx="58" ry="14" fill="none" stroke="${R.g(a)}" stroke-width="6"/><ellipse cx="150" cy="28" rx="58" ry="14" fill="none" stroke="${b}" stroke-width="1.6" opacity=".9"/>`+Array.from({length:8},(_,i)=>{const an=i/8*6.283,x=150+Math.cos(an)*70,y=30+Math.sin(an)*20;return `<path d="M${x.toFixed(0)} ${(y-6).toFixed(0)}l2 5 5 .5-4 3.5 1.2 5-4.2-2.8-4.2 2.8 1.2-5-4-3.5 5-.5z" fill="${b}" class="aup" style="--d:${i*.3}s;--y:5px"/>`}).join("")+P_(R,"M106 90Q110 76 150 74Q190 76 194 90Q150 84 106 90Z",a,2)+gem(R,150,80,7,"#ef4444");
+  case 22:return GL(R,"#f0abfc",150,56,90,52,.5)+P_(R,"M104 92L106 52L126 70L150 38L174 70L194 52L196 92Q150 104 104 92Z",a)+`<path d="M150 74C144 62 128 62 128 74S144 86 150 74 156 62 172 62 172 86 150 74Z" fill="none" stroke="${b}" stroke-width="4.2" stroke-linejoin="round"/>`+[[106,52],[126,70],[150,38],[174,70],[194,52]].map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="5.5" fill="${RB[i]}" stroke="#fff" stroke-width="1.3"/>`).join("");
+  default:return hat0(R,o)}};
+ const sl2=(R,a)=>P_(R,"M100 182Q82 190 80 232L76 270Q90 278 102 270L108 224Z",a)+P_(R,"M200 182Q218 190 220 232L224 270Q210 278 198 270L192 224Z",a);
+ pJa=function(R,o,oc){const a=o.c1,b=o.c2;switch(o.st){
+  case 20:return sl2(R,a)+P_(R,"M98 180L142 176L146 300L98 300Z",a)+P_(R,"M202 180L158 176L154 300L202 300Z",a)+`<circle cx="96" cy="186" r="21" fill="${R.g(sh(a,5))}" stroke="${b}" stroke-width="2.5"/><circle cx="204" cy="186" r="21" fill="${R.g(sh(a,5))}" stroke="${b}" stroke-width="2.5"/>`+P_(R,"M120 192L180 192L172 262Q150 276 128 262Z",sh(a,10),2.5)+`<path d="M150 196V268M128 214H172M134 238L150 228L166 238" stroke="${b}" stroke-width="3" fill="none" stroke-linecap="round"/>`+gem(R,150,222,9,b)+`<path d="M110 200V296M190 200V296" stroke="${b}" stroke-width="2.4" opacity=".8"/>`+RC_(R,98,282,104,14,3,sh(a,10),1.5)+GL(R,b,150,226,44,50,.3);
+  case 21:return sl2(R,a)+P_(R,"M96 180L144 176L148 342L90 338Z",a)+P_(R,"M204 180L156 176L152 342L210 338Z",a)+`<path d="M96 180L90 338M204 180L210 338" stroke="${b}" stroke-width="4"/>`+[[118,204],[132,236],[112,262],[176,214],[188,250],[164,286],[124,300],[184,318],[110,320]].map((p,i)=>`<path d="M${p[0]} ${p[1]-5}l1.6 3.4 3.7.5-2.7 2.5.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.5 3.7-.5z" fill="${b}" opacity=".9"/>`).join("")+`<circle cx="98" cy="186" r="20" fill="${R.g(b)}" stroke="${sh(b,58)}" stroke-width="2"/><circle cx="202" cy="186" r="20" fill="${R.g(b)}" stroke="${sh(b,58)}" stroke-width="2"/>`+`<path d="M98 176Q150 200 202 176" stroke="${b}" stroke-width="3" fill="none"/>`;
+  case 22:return sl2(R,a)+P_(R,"M98 180L142 176L146 322L92 320Z",a)+P_(R,"M202 180L158 176L154 322L208 320Z",a)+`<path d="M98 180L92 320M202 180L208 320M146 190V322M154 190V322" stroke="${b}" stroke-width="3.2"/>`+P_(R,"M100 266Q150 286 200 266L200 282Q150 302 100 282Z",b,2)+`<circle cx="150" cy="268" r="17" fill="${R.g("#fff7ae")}" stroke="${sh(b,55)}" stroke-width="2.5"/><circle cx="150" cy="268" r="9" fill="none" stroke="${b}" stroke-width="2"/>`+Array.from({length:10},(_,i)=>{const an=i/10*6.283;return `<path d="M${(150+Math.cos(an)*21).toFixed(0)} ${(268+Math.sin(an)*21).toFixed(0)}L${(150+Math.cos(an)*30).toFixed(0)} ${(268+Math.sin(an)*30).toFixed(0)}" stroke="${b}" stroke-width="2.4" stroke-linecap="round"/>`}).join("")+`<path d="M110 190L140 176M190 190L160 176" stroke="${b}" stroke-width="3"/>`;
+  default:return ja0(R,o,oc)}};
+ pCa=function(R,o){const a=o.c1,b=o.c2;switch(o.st){
+  case 20:return P_(R,"M102 178Q50 262 62 372Q150 396 238 372Q250 262 198 178Z",a)+GL(R,"#6d28d9",150,300,90,90,.35)+Array.from({length:22},(_,i)=>{const x=82+(i*47)%136,y=214+(i*71)%140;return `<circle cx="${x}" cy="${y}" r="${1.2+(i%3)*.8}" fill="${i%3?"#fff":b}" opacity=".9"/>`}).join("")+`<path d="M62 372Q150 396 238 372" stroke="${b}" stroke-width="6" fill="none"/><path d="M102 178Q50 262 62 372M198 178Q250 262 238 372" stroke="${b}" stroke-width="2.5" fill="none" opacity=".8"/>`;
+  case 21:return P_(R,"M104 188Q30 140 6 236Q30 258 50 250Q30 284 66 316Q96 292 104 250Z",a)+P_(R,"M196 188Q270 140 294 236Q270 258 250 250Q270 284 234 316Q204 292 196 250Z",a)+`<path d="M24 236Q60 214 100 222M40 262Q72 240 100 238M60 292Q84 266 102 256M276 236Q240 214 200 222M260 262Q228 240 200 238M240 292Q216 266 198 256" stroke="${b}" stroke-width="3.4" fill="none" opacity=".85" stroke-linecap="round"/>`+GL(R,b,60,250,60,60,.28)+GL(R,b,240,250,60,60,.28);
+  case 22:return `<path d="M200 190Q262 230 232 290Q206 340 246 392" stroke="#0006" stroke-width="22" fill="none" stroke-linecap="round" transform="translate(3 3)"/>`+RB.map((c,i)=>`<path d="M${200+i*0} ${190}Q262 230 232 290Q206 340 246 392" stroke="${c}" stroke-width="${22-i*3}" fill="none" stroke-linecap="round"/>`).join("");
+  default:return ca0(R,o)}};
+ pCaF=function(R,o){const a=o.c1,b=o.c2;switch(o.st){
+  case 20:return `<path d="M108 180Q150 200 192 180" stroke="${b}" stroke-width="5" fill="none"/>`+gem(R,150,194,8,b);
+  case 21:return P_(R,"M104 176Q150 206 196 176L200 192Q150 224 100 192Z",a,2)+Array.from({length:7},(_,i)=>`<path d="M${108+i*14} ${186+Math.abs(i-3)*-2}l4 10-8 0z" fill="${b}" opacity=".9"/>`).join("");
+  case 22:return RB.map((c,i)=>`<path d="M${110+i*0} ${172+i*2.4}Q150 ${194+i*2.4} 190 ${172+i*2.4}" stroke="${c}" stroke-width="3.4" fill="none" stroke-linecap="round"/>`).join("")+`<path d="M168 188L196 200L192 246L164 238Z" fill="${R.g(a)}" stroke="${sh(a,58)}" stroke-width="2"/>`+RB.map((c,i)=>`<path d="M${168+i*0} ${196+i*7}L${194} ${206+i*7}" stroke="${c}" stroke-width="3.4"/>`).join("");
+  default:return caf0(R,o)}};
+ const ei0=eIcon;eIcon=function(o){if(o&&o.r==5&&!o.pk&&o.st>=20){const R=mkR();let b="";const vb={ha:"52 -4 196 118",ja:"60 164 180 200",ca:"0 140 300 270"}[o.sl];
+  if(o.sl=="ha")b=pHat(R,o);else if(o.sl=="ja")b=pJa(R,o,"#475569");else b=pCa(R,o)+pCaF(R,o);return R.svg(vb,b,"eis")}return ei0.apply(this,arguments)}}
 /* Atelier du Maître: presentation state only; equipment ownership and bonuses use existing model. */
 const amPct=x=>Number(Number(x).toFixed(2)).toLocaleString(SG.lang==='en'?'en-US':'fr-FR',{maximumFractionDigits:2});
 let AM={sel:{},filter:'owned',q:'',sort:'rarity'};
@@ -8164,9 +8198,9 @@ let EO=null;
 function eoHtml(){const R=EO.r,n=R.length,one=n==1;
  return `<div class="eoo" id="eo"><div class="eob"></div><div class="eow${n===30?' many':''}"><h2 class="opt">${LS("Invocation","Summon")}${n>1?" ×"+n:""}</h2><div class="eocs${one?" one":""}">${R.map((x,i)=>`<div class="eoc r${x.o.r}" style="--i:${i};--c:${ER[x.o.r][1]}">${eTile(x.o,{nw:x.nw})}${x.dup?`<small class="eod">+${fmt(x.ref)} ₽</small>`:""}</div>`).join("")}</div>
  <div class="row" style="justify-content:center;gap:10px"><button data-gx="1">${LS("Terminer","Done")}</button><button class="go" data-gx="again" ${G.m>=ePrice()*(n===30?27:n===10?9:1)?"":"disabled"}>${LS("Invoquer encore","Summon again")} (${fmt(ePrice()*(n===30?27:n===10?9:1))} ₽)</button></div></div></div>`}
-function eoFx(r){const w=$("eo");if(!w)return;const d=document.createElement("div");d.className="lgx"+(r<4?" ep":"");
- d.innerHTML=r>=4?`<i class="lgr"></i><i class="lgr b"></i><i class="lgc"></i><b>${LS("ULTIME !","ULTIMATE!")}</b>${Array.from({length:18},(_,i)=>`<s style="--a:${i*20}deg;--d:${(i*53)%40+40}px;--w:${(i%5)*.06}s"></s>`).join("")}`:`<i class="lgc"></i>${Array.from({length:10},(_,i)=>`<s style="--a:${i*36}deg;--d:50px;--w:0s"></s>`).join("")}`;
- w.appendChild(d);setTimeout(()=>d.remove(),r>=4?2600:1100);try{sfx(r>=4?"prest":"big")}catch(e){}}
+function eoFx(r){const w=$("eo");if(!w)return;const d=document.createElement("div");d.className="lgx"+(r<4?" ep":"")+(r>=5?" lrx":"");
+ d.innerHTML=r>=4?`<i class="lgr"></i><i class="lgr b"></i><i class="lgc"></i><b>${r>=5?LS("LÉGENDE ABSOLUE !","ABSOLUTE LEGEND!"):LS("ULTIME !","ULTIMATE!")}</b>${Array.from({length:18},(_,i)=>`<s style="--a:${i*20}deg;--d:${(i*53)%40+40}px;--w:${(i%5)*.06}s"></s>`).join("")}`:`<i class="lgc"></i>${Array.from({length:10},(_,i)=>`<s style="--a:${i*36}deg;--d:50px;--w:0s"></s>`).join("")}`;
+ w.appendChild(d);setTimeout(()=>d.remove(),r>=5?3800:r>=4?2600:1100);try{sfx(r>=4?"prest":"big");if(r>=5){setTimeout(()=>sfx("shiny"),300);setTimeout(()=>sfx("prest"),900)}}catch(e){}}
 function eSummon(n){if(![1,10,30].includes(n))return;const p=ePrice()*(n===30?27:n===10?9:1);if(G.m<p){toast(LS("Il te manque "+fmt(p-G.m)+" ₽","You need "+fmt(p-G.m)+" more ₽"));return}
  G.m-=p;const R=ePull(n),e=E_();let ref=0;R.forEach(x=>{if(x.ref)ref+=x.ref});if(ref)G.m+=kxI("ref",ref);
  R.forEach(x=>{const o=x.o;if(x.nw&&!(e.e[o.sl]&&e.o[e.e[o.sl]]))e.e[o.sl]=o.id});
@@ -10037,7 +10071,7 @@ ${wsx("Récompenses",`<p>Chaque niveau donne une récompense gratuite et une ré
 ${wn("warn","Premium","Le Premium n'est pas en vente : il se trouve au casino ou dans la bannière Halloween (0,1 % par invocation).")}`;
 
 wkBody.gear=()=>`<p class="lead">Ton dresseur porte neuf pièces d'équipement. Chacune apporte des bonus passifs qui s'additionnent. Ouvre l'onglet <b>Dresseur</b> dans la catégorie Moi.</p>
-${wf([["Débloqué à l'étage",LOCKS.gear],["Emplacements",9],["Raretés","N, R, SR, SSR, UR"]])}
+${wf([["Débloqué à l'étage",LOCKS.gear],["Emplacements",9],["Raretés","N, R, SR, SSR, UR, LR"]])}
 ${wsx("Emplacements",wg([["user","Tête","Couronnes, casques, casquettes"],["search","Lunettes","Précision et savoir"],["bag","Tenue","Le plus gros des bonus"],["flag","Écharpe","Effets mineurs"],["heart","Compagnon","Un petit Pokémon qui te suit"],["target","Poké Ball","Bonus de capture"],["gear","Ceinture","Équilibre"],["bolt","Chaussures","Vitesse"],["sparkle","Aura","Effet visuel et bonus rares"]]))}
 ${wsx("Bonus",`<p>Les équipements augmentent six statistiques : <b>Dégâts, Pièces, Chance, Vitesse, Capture, Savoir</b>. La rareté (N, R, SR, SSR, UR) décide de la taille des bonus.</p>`)}
 ${wsx("Trois onglets",`<ul class="wks2"><li><b>Équipement</b> : choisis un objet pour chaque emplacement.</li><li><b>Invocation</b> : tire de nouveaux équipements.</li><li><b>Apparence</b> : personnalise l'aspect de ton dresseur.</li></ul>`)}`;
