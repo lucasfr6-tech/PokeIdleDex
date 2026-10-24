@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wbtier-20261024c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-wbtier-20261024c"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-saveguard-20261024d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-saveguard-20261024d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4546,7 +4546,13 @@ pidWalletProtect(G);
 var G_BOOTLAST=+G.last||0;G.ep=PID_EP;
 let E=null,busy=false,tab="adv",sv=0,lastE=null,PACK=[],OPEN=0,ZV=false,RP=false,OFFMSG=null,PK=null,PKQ='',PO=-1,BP=false,OP=null;
 const SH={tab:"balls",q:""},DX={q:"",hide:false,shiny:false,gen:-1,cat:"mon"},CS={tab:"boost",gen:0,rar:-1,q:"",hide:false};
-let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";const save=()=>{if(NOSAVE)return;try{pidWalletProtect(G);G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G))}catch(e){}};
+let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";/* garde-fou d'avancement : une page restée ouverte avec une vieille partie (autre onglet / autre appareil) ne doit jamais écraser une partie plus avancée */
+const pidProg=o=>[(o&&o.st)|0,+(o&&o.caps)||0,+(o&&o.ko)||0];
+const pidProgCmp=(a,b)=>{for(let i=0;i<3;i++){if(a[i]!==b[i])return a[i]>b[i]?1:-1}return 0};
+function pidProgClr(){try{localStorage.removeItem("pid_prog:"+SK);localStorage.removeItem("pid_prog:idle3")}catch(e){}}
+const save=()=>{if(NOSAVE)return;try{pidWalletProtect(G);const sc=pidProg(G),pk="pid_prog:"+SK;let pv=null;try{pv=JSON.parse(localStorage.getItem(pk)||"null")}catch(e){}
+ if(pv&&pidProgCmp(sc,pv)<0){const t=+sessionStorage.getItem("pid_stt")||0;if(Date.now()-t>30000){sessionStorage.setItem("pid_stt",String(Date.now()));NOSAVE=true;try{toast("Une partie plus avancée existe : rechargement...")}catch(e){}setTimeout(()=>location.reload(),400);return}}
+ G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G));localStorage.setItem(pk,JSON.stringify(sc))}catch(e){}};
 const $=id=>document.getElementById(id),fmt=n=>n>=1e15?(n/1e15).toFixed(1).replace(".",SG.lang==="en"?".":",")+" QA":n>=1e12?(n/1e12).toFixed(1)+"T":n>=1e9?(n/1e9).toFixed(1)+"G":n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e4?(n/1e3).toFixed(1)+"k":n>=100?Math.floor(n):Number.isInteger(n)?String(n):n.toFixed(1);
 const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
@@ -4813,7 +4819,7 @@ function prestige(sel){const g=ppGain();if(g<1||!sel)return;sel=sel.slice();ids(
  sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:(c.ev||[0,0,0,0,0,0]).map(()=>0),ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0,spc:c.spc||0,al:c.al||0,it:(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))?c.it:undefined}});
  Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:1,k:0,cl:0,pm:0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
 function resetAll(){const n=G.name;G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
-function delAccount(){NOSAVE=true;try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
+function delAccount(){NOSAVE=true;pidProgClr();try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
 const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,1.3],["ps","Cadence d'attaque","Coups plus rapides : dégâts par seconde",l=>"+"+l*6+" %",40,3,1.3],
 ["pc","Fortune","Pièces gagnées (combats et revenu passif)",l=>"+"+l*6+" %",50,2,1.3],["px","Entraînement","Niveau cible des Pokémon selon l'étage",l=>"+"+l*3+" %",30,2,1.28],
 ["ph","Endurance","Points de vie de l'équipe",l=>"+"+l*10+" %",30,2,1.28],["pk","Chasseur","Chances de capture",l=>"+"+l*8+" %",25,4,1.35],
@@ -11209,7 +11215,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  /* synchro multi-appareils : pid_st = horodatage serveur de la dernière version connue par cet appareil */
  let noLoad=false,pulling=false,pushing=false,sent="",bootLast=+window.G_BOOTLAST||0;
  function adopt(sv,t){
-  sv=pidWalletIncoming(sv);NOSAVE=true;try{const cur=ls(SK);if(cur&&cur!==sv){ls("pid_bak",cur);ls("pid_bakt",String(Date.now()))}}catch(e){}ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
+  sv=pidWalletIncoming(sv);NOSAVE=true;pidProgClr();try{const cur=ls(SK);if(cur&&cur!==sv){ls("pid_bak",cur);ls("pid_bakt",String(Date.now()))}}catch(e){}ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
   try{toast(LS("Progression de ton autre appareil récupérée, chargement...","Progress from your other device loaded, reloading..."))}catch(e){}
   setTimeout(()=>location.reload(),700)}
  async function pull(){
@@ -11230,6 +11236,8 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
        (G.last est remis à « maintenant » à chaque sauvegarde locale, il ne dit rien de l'avancement.)
        On ignore seulement notre propre envoi précédent, dont la réponse s'est perdue. */
     if(j.save===sent){ls("pid_st",String(j.t));last=j.save;return false}
+    /* garde-fou : si la partie de cet appareil est plus avancée que celle du serveur, on la garde et on l'envoie au serveur */
+    try{const rs=pidProg(JSON.parse(j.save)),lc=JSON.parse(ls(SK)||"null");if(lc&&pidProgCmp(pidProg(G),rs)>0&&pidProgCmp(pidProg(lc),rs)>=0){ls("pid_st",String(j.t));last="";setTimeout(()=>{try{push(true)}catch(e){}},300);return false}}catch(e){}
     adopt(j.save,j.t);return true}
    if(!ls("pid_st"))ls("pid_st",String(j.t));
    return false
@@ -11252,7 +11260,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  async function login(name,pw){
   const j=await post("login",{name,pw});
   if(!j.ok)return j;
-  NOSAVE=true;
+  NOSAVE=true;pidProgClr();
   ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");
   if(j.save&&pidEpOk(j.save))ls("idle3",pidWalletIncoming(j.save));
   if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));
@@ -11278,10 +11286,10 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  document.addEventListener("click",async ev=>{
   const b=ev.target.closest&&ev.target.closest("[data-pc]");if(!b)return;
   const k=b.dataset.pc,n=document.getElementById("pcn"),p=document.getElementById("pcp");
-  if(k=="out"){try{await push(true)}catch(e){}NOSAVE=true;ls("pid_acc",null);ls("pid_sync",null);ls("pid_st",null);location.reload();return}
+  if(k=="out"){try{await push(true)}catch(e){}NOSAVE=true;pidProgClr();ls("pid_acc",null);ls("pid_sync",null);ls("pid_st",null);location.reload();return}
   if(k=="restore"){const bk=ls("pid_bak");if(!bk||!pidEpOk(bk)){toast(LS("Aucune sauvegarde à restaurer.","Nothing to restore."));return}
    if(!window.confirm(LS("Remplacer la partie actuelle (et celle en ligne) par celle que cet appareil avait avant la dernière synchronisation ?","Replace the current game (and the online one) with the one this device had before the last sync?")))return;
-   NOSAVE=true;ls(SK,bk);if(SK!=="idle3")ls("idle3",bk);ls("pid_bak",null);ls("pid_bakt",null);ls("pid_forcepush","1");location.reload();return}
+   NOSAVE=true;pidProgClr();ls(SK,bk);if(SK!=="idle3")ls("idle3",bk);ls("pid_bak",null);ls("pid_bakt",null);ls("pid_forcepush","1");location.reload();return}
   if(k=="sync"){b.disabled=true;if(await pull())return;const ok=await push(true);b.disabled=false;toast(ok?LS("Sauvegarde envoyée","Save sent"):LS("Échec de la sauvegarde","Save failed"));try{show()}catch(e){}return}
   if(!n||!p)return;const nm=n.value.trim();
   if(k=="reg"){b.disabled=true;const j=await register(nm,p.value);b.disabled=false;if(j.ok){G.name=G.name&&G.name!="Dresseur"?G.name:nm;try{save()}catch(e){}toast(LS("Compte créé, ta partie est sauvegardée en ligne","Account created, your game is saved online"))}else{toast(msg(j));try{sfx("err")}catch(e){}}try{show()}catch(e){}return}
@@ -11758,7 +11766,7 @@ async function back(){const q=new URLSearchParams(location.search),st=q.get("dc"
  const want=ls("pid_dcw")||"";ls("pid_dcs",null);ls("pid_dcw",null);
  let j={};try{const r=await fetch(API+"/api/acc/oauth",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({state:st,uid:ls("pid_uid"),save:ls(SK)||"",want})});j=await r.json()}catch(x){j={e:"net"}}
  if(!j.ok){toast(LS("Connexion Discord échouée, réessaie.","Discord sign-in failed, try again."));return}
- if(j.exists){ls("pid_dcl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Discord trouvé, chargement...","Discord account found, loading..."));setTimeout(()=>location.reload(),300);return}
+ if(j.exists){ls("pid_dcl",j.name);NOSAVE=true;pidProgClr();ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Discord trouvé, chargement...","Discord account found, loading..."));setTimeout(()=>location.reload(),300);return}
  if(j.created){ls("pid_acc",j.name);ls("pid_dcl",j.name);ls("pid_sync",String(Date.now()));G.name=j.name;try{save()}catch(x){}ls("pid_land","1");if(!j.named)ls("pid_dcpick","1");toast(LS("Compte créé avec Discord : "+j.name,"Account created with Discord: "+j.name));setTimeout(()=>location.reload(),400);return}
  if(j.linked){ls("pid_dcl",j.name||ls("pid_acc"));try{show()}catch(x){}toast(LS("Discord lié à ton compte.","Discord linked to your account."));return}}
 setTimeout(back,1500);
@@ -11796,7 +11804,7 @@ async function back(){const h=location.hash||"";if(h.indexOf("id_token=")<0&&h.i
  if(!idt||!n){toast(LS("Connexion Google annulée ou expirée.","Google sign-in cancelled or expired."));return}
  let j={};try{const r=await fetch(API+"/api/acc/google",{method:"POST",headers:{"Content-Type":"application/json","X-Token":ls("pid_tok")||""},body:JSON.stringify({idt,nonce:n,uid:ls("pid_uid"),save:ls(SK)||"",want})});j=await r.json()}catch(x){j={e:"net"}}
  if(!j.ok){toast(LS("Connexion Google échouée, réessaie.","Google sign-in failed, try again."));return}
- if(j.exists){ls("pid_ggl",j.name);NOSAVE=true;ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Google trouvé, chargement...","Google account found, loading..."));setTimeout(()=>location.reload(),300);return}
+ if(j.exists){ls("pid_ggl",j.name);NOSAVE=true;pidProgClr();ls("pid_uid",j.uid);ls("pid_tok",j.tok);ls("pid_acc",j.name);ls("idle_acc",null);ls("pid_land","1");if(j.save&&pidEpOk(j.save))ls("idle3",j.save);if(j.t)ls("pid_st",String(j.t));else ls("pid_st",null);ls("pid_sync",String(Date.now()));toast(LS("Compte Google trouvé, chargement...","Google account found, loading..."));setTimeout(()=>location.reload(),300);return}
  if(j.created){ls("pid_acc",j.name);ls("pid_ggl",j.name);ls("pid_sync",String(Date.now()));G.name=j.name;try{save()}catch(x){}ls("pid_land","1");if(!j.named)ls("pid_dcpick","1");toast(LS("Compte créé avec Google : "+j.name,"Account created with Google: "+j.name));setTimeout(()=>location.reload(),400);return}
  if(j.linked){ls("pid_ggl",j.name||ls("pid_acc"));try{show()}catch(x){}toast(LS("Google lié à ton compte.","Google linked to your account."))}}
 setTimeout(back,1500);
@@ -14210,6 +14218,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-24",t:["Sauvegarde protégée","Save protection"],e:[["fix","Plus de perte de progression avec une vieille page ouverte","Une page restée ouverte (autre onglet ou autre appareil) avec une ancienne partie ne peut plus écraser une partie plus avancée, ni en local ni en ligne. Si une partie plus avancée existe, la page se recharge pour la récupérer.","No more lost progress with an old page open","A page left open (another tab or device) with an old game can no longer overwrite a more advanced game, locally or online. If a more advanced game exists, the page reloads to pick it up."]]},
  {d:"2026-10-24",t:["Palier Boss monde","World boss tier"],e:[["fix","Un Pokémon capturé au boss monde garde le palier Boss monde","Un Pokémon obtenu au boss monde garde maintenant toujours le palier Boss monde (et non le palier LR ou un autre), même s’il est ensuite rencontré ailleurs.","World boss tier kept","A Pokémon obtained from the world boss now always keeps the World boss tier (not the LR or another tier), even if it is met elsewhere afterwards."]]},
  {d:"2026-10-24",t:["Merci à vous","Thank you"],e:[["new","Message de remerciement et cadeau","Les joueurs ayant au moins 45 minutes de jeu reçoivent un message de remerciement à leur prochaine connexion, avec un cadeau : 10 Master Balls, 10 Patchs Talent, 10 Capsules d’Or, 10 de chaque objet de combat et un Pokémon chromatique aléatoire.","Thank-you message and gift","Players with at least 45 minutes of play get a thank-you message on their next visit, with a gift: 10 Master Balls, 10 Ability Patches, 10 Gold Bottle Caps, 10 of each battle item and a random shiny Pokémon."]]},
  {d:"2026-10-24",t:["Boss monde","World boss"],e:[["fix","Le bonus du boss monde est conservé à l’évolution","Un Pokémon obtenu au boss monde qui évolue vers un Pokémon que tu possèdes déjà garde maintenant son niveau de boss (jusqu’à +67 % de puissance). Avant, ce bonus était perdu.","World boss bonus kept on evolution","A Pokémon from the world boss that evolves into one you already own now keeps its boss tier (up to +67% power). Before, that bonus was lost."]]},
@@ -14942,4 +14951,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-wbtier-20261024c"><script src="dungeon-immersive.js?v=pid-wbtier-20261024c"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-wbtier-20261024c"><script src="collection-scenes.js?v=pid-wbtier-20261024c"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-saveguard-20261024d"><script src="dungeon-immersive.js?v=pid-saveguard-20261024d"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-saveguard-20261024d"><script src="collection-scenes.js?v=pid-saveguard-20261024d"></script></body></html>
