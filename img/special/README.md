@@ -29,3 +29,12 @@ In-game exclusive species: 90007 (Lugia Ombre, Battle Pass season 2 level 50, Pr
 - mewtwo-black-mega-x/y(.png, -shiny.png): Mewtwo Black Mega X/Y (recolored from Mega Mewtwo sprites; black palette)
 
 - `booster-equilibre.png` : image du booster Équilibre (boutique de cartes, ouverture animée).
+
+# Roitiflam Plante
+
+Sprites supplied by the owner in `pokeIdleDex Game.zip`. Original archive paths:
+
+- `poke/grass/emboar.png` → `roitiflam-plante.png`
+- `poke/grass/emboars.png` → `roitiflam-plante-shiny.png`
+
+The PNG artwork is copied unchanged. In-game exclusive species: 90009, Tower floor 1000.
