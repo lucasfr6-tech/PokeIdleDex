@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wbboss-20261024a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-wbboss-20261024a"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-thanks-20261024b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-thanks-20261024b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11026,6 +11026,56 @@ document.addEventListener("click",async e=>{const b=e.target.closest&&e.target.c
   save();if(i)i.value="";try{mailClose()}catch(x){}try{show()}catch(x){}toast(LS("Code accepté : +400 T de pièces !","Code accepted: +400 T coins!"));try{sfx("big")}catch(x){}}catch(x){console.error(x)}
 },true);
 })();
+/* ===== annonce de remerciement : joueurs avec au moins 45 min de jeu, une seule fois, avec cadeau ===== */
+(function(){
+const MINMS=45*60000,GIFT=[["master-ball",10],["ability-patch",10],["gold-bottle-cap",10],["bi-atk",10],["bi-xp",10],["bi-coin",10],["bi-find",10],["bi-mut",10],["bi-cap",10]];
+const DISC=()=>window.PID_DISCORD||(typeof BUG_URL!="undefined"&&BUG_URL)||"";
+const css=document.createElement("style");css.id="pid-thanks-styles";css.textContent=`#pthx{position:fixed;inset:0;z-index:100010;display:flex;align-items:center;justify-content:center;padding:14px;background:radial-gradient(ellipse at center,#2a2160ee 0,#0a0b1cf7 72%);backdrop-filter:blur(4px)}
+#pthx .pt-box{width:min(560px,100%);max-height:94vh;overflow:auto;border:2px solid #fbbf24;border-radius:22px;background:linear-gradient(165deg,#1b1840,#0d0f26 70%);box-shadow:0 0 40px #fbbf2455,0 20px 60px #000a;padding:26px 24px;text-align:center;color:#e5e7eb}
+#pthx small.pt-k{display:block;color:#fbbf24;font-weight:800;letter-spacing:.14em;font-size:12px}
+#pthx h2{margin:6px 0 12px;font:900 30px "Baloo 2",Nunito,system-ui,sans-serif;color:#fde68a}
+#pthx p{margin:0 0 10px;line-height:1.5;font-size:15px}
+#pthx .pt-g{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+#pthx .pt-g span{border:1px solid #4b5fc4;border-radius:12px;background:#151a3d;padding:7px 11px;font-size:13px;font-weight:800}
+#pthx .pt-g span b{color:#fde68a}
+#pthx .pt-sh{border:1px solid #fbbf24;border-radius:14px;background:linear-gradient(90deg,#3b2a05,#1b1840);padding:9px 12px;font-weight:800;color:#fde68a;margin-bottom:14px}
+#pthx .pt-r{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
+#pthx .pt-r img{width:150px;height:150px;object-fit:contain;filter:drop-shadow(0 0 18px #fde68a)}
+#pthx .pt-r b{font-size:24px;color:#fff}
+#pthx .pt-a{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+#pthx a.pt-d,#pthx button{border-radius:14px;padding:12px 20px;font:900 15px Nunito,system-ui,sans-serif;cursor:pointer;text-decoration:none}
+#pthx a.pt-d{border:2px solid #5865f2;background:#232a6b;color:#fff}
+#pthx button.go{border:2px solid #fbbf24;background:linear-gradient(180deg,#fbbf24,#d97706);color:#2a1700}`;
+document.head.appendChild(css);
+const gearHtml=()=>GIFT.map(g=>`<span><b>×${g[1]}</b> ${esc((IT[g[0]]&&IT[g[0]].n)||g[0])}</span>`).join("");
+function pthxShow(){
+ if(document.getElementById("pthx"))return;const d=document.createElement("div");d.id="pthx";
+ const dl=DISC();
+ d.innerHTML=`<div class="pt-box" role="dialog" aria-modal="true"><small class="pt-k">${LS("MERCI DE JOUER","THANKS FOR PLAYING")}</small><h2>${LS("Merci à toi, dresseur !","Thank you, trainer!")}</h2>
+ <p>${LS("Merci beaucoup de jouer à PokeIdleDex. Ce n’est que le début du projet, et j’espère sincèrement que le jeu te plaît.","Thank you so much for playing PokeIdleDex. This is only the beginning of the project, and I sincerely hope you enjoy it.")}</p>
+ <p>${LS("N’hésite pas à rejoindre le Discord et à faire des suggestions : lire tes idées me fait très plaisir et aide le jeu à grandir.","Feel free to join the Discord and send suggestions: reading your ideas makes me really happy and helps the game grow.")}</p>
+ <p><b>${LS("Pour te remercier, voici un cadeau :","To thank you, here is a gift:")}</b></p>
+ <div class="pt-g">${gearHtml()}</div><div class="pt-sh">${LS("+ 1 Pokémon chromatique aléatoire parmi tout le jeu","+ 1 random shiny Pokémon from the whole game")}</div>
+ <div class="pt-a">${dl?`<a class="pt-d" href="${esc(dl)}" target="_blank" rel="noopener">Discord</a>`:""}<button class="go" id="pthxgo">${LS("Récupérer mon cadeau","Claim my gift")}</button></div></div>`;
+ document.body.appendChild(d);
+ document.getElementById("pthxgo").onclick=async function(){const b=this;if(b.disabled)return;b.disabled=true;
+  try{if(G.thx){d.remove();return}
+   let names=[],tries=0,id=0;
+   while(tries++<12){id=1+Math.floor(Math.random()*1025);try{names=await giftMonsGrant([{id,sh:1}],"thx2610");break}catch(e){id=0}}
+   if(!id)throw Error("no mon");
+   G.thx=1;G.inv=G.inv||{};(window.capBuy||(f=>f()))(()=>{GIFT.forEach(g=>{G.inv[g[0]]=(G.inv[g[0]]||0)+g[1]})});
+   try{recomp()}catch(e){}save();try{sfx("shiny")}catch(e){}
+   const box=d.querySelector(".pt-box");
+   box.innerHTML=`<small class="pt-k">${LS("CADEAU REÇU","GIFT RECEIVED")}</small><h2>${LS("Bonne aventure !","Enjoy your adventure!")}</h2><div class="pt-r"><img src="${ART+id}.png" alt=""><b>${esc(dn(id))}</b><div class="pt-sh" style="margin:0">${LS("Pokémon chromatique","Shiny Pokémon")}</div></div><div class="pt-g">${gearHtml()}</div><div class="pt-a"><button class="go" id="pthxok">${LS("Merci !","Thanks!")}</button></div>`;
+   document.getElementById("pthxok").onclick=()=>{d.remove();try{show()}catch(e){}}
+  }catch(e){b.disabled=false;try{toast(LS("Impossible de récupérer le cadeau, réessaie.","Could not claim the gift, try again."))}catch(x){}}}
+}
+function pthxCheck(){try{if(typeof G!="object"||!G||G.thx||document.getElementById("pthx"))return;if(!G.t0||Date.now()-G.t0<MINMS)return;
+ if(document.getElementById("lnd")||document.querySelector("#wmr.on"))return;
+ if(!document.getElementById("utl")&&!document.querySelector("nav,#nav"))return;
+ pthxShow()}catch(e){}}
+setTimeout(pthxCheck,7000);setInterval(pthxCheck,8000);
+})();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
 /* Fixed Pokémon gifts validate their forms before awarding the whole pack. */
@@ -14160,6 +14210,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-24",t:["Merci à vous","Thank you"],e:[["new","Message de remerciement et cadeau","Les joueurs ayant au moins 45 minutes de jeu reçoivent un message de remerciement à leur prochaine connexion, avec un cadeau : 10 Master Balls, 10 Patchs Talent, 10 Capsules d’Or, 10 de chaque objet de combat et un Pokémon chromatique aléatoire.","Thank-you message and gift","Players with at least 45 minutes of play get a thank-you message on their next visit, with a gift: 10 Master Balls, 10 Ability Patches, 10 Gold Bottle Caps, 10 of each battle item and a random shiny Pokémon."]]},
  {d:"2026-10-24",t:["Boss monde","World boss"],e:[["fix","Le bonus du boss monde est conservé à l’évolution","Un Pokémon obtenu au boss monde qui évolue vers un Pokémon que tu possèdes déjà garde maintenant son niveau de boss (jusqu’à +67 % de puissance). Avant, ce bonus était perdu.","World boss bonus kept on evolution","A Pokémon from the world boss that evolves into one you already own now keeps its boss tier (up to +67% power). Before, that bonus was lost."]]},
  {d:"2026-10-23",t:["Steelix Cristallin","Crystal Steelix"],e:[["fix","Steelix Cristallin garde le meilleur","Quand tu captures un Steelix normal, le Steelix Cristallin récupère aussi sa meilleure taille, son Alpha et son statut chromatique en plus de la mutation. Laboratoire et entraînement vérifiés.","Crystal Steelix keeps the best","When you catch a regular Steelix, Crystal Steelix now also takes its best size, Alpha and shiny status on top of the mutation. Laboratory and training checked."]]},
  {d:"2026-10-23",t:["Compte à rebours du pass","Pass countdown"],e:[["imp","Fin du pass : lundi minuit","Le compte à rebours du Pass de combat (Dracolosse Chocolat Blanc) se termine maintenant lundi à minuit, heure de Paris.","Pass ends Monday midnight","The Battle Pass (Eclipse Dragonite) countdown now ends on Monday at midnight, Paris time."]]},
@@ -14890,4 +14941,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-wbboss-20261024a"><script src="dungeon-immersive.js?v=pid-wbboss-20261024a"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-wbboss-20261024a"><script src="collection-scenes.js?v=pid-wbboss-20261024a"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-thanks-20261024b"><script src="dungeon-immersive.js?v=pid-thanks-20261024b"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-thanks-20261024b"><script src="collection-scenes.js?v=pid-thanks-20261024b"></script></body></html>
