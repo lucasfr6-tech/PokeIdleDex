@@ -7333,14 +7333,18 @@ PU.unshift(["pw","Emplacements","Pokémon conservés à chaque prestige (les Pok
 PUI.pw=["team","#3b82f6"];
 /* ============ v48 : PASS DE COMBAT, GEMMES, BOUTIQUE ============ */
 IP.gem='<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21 9 9m3 12 3-12"/>';
-const BPXP=1000,BPMAX=50,BPPRICE=600,BPLVP=80;
-const BPS=()=>{const b=G.bp=G.bp||{};if(b.xp==null){b.xp=0;b.pm=0;b.f={};b.p={};b.d=null;b.w=null}if(G.gem==null)G.gem=0;return b};
+const BPXP=1000,BPMAX=100,BPPRICE=600,BPLVP=80,BPSEASON=2;
+const BPS=()=>{const b=G.bp=G.bp||{},had=b.xp!=null;if(!had){b.xp=0;b.pm=0;b.f={};b.p={};b.d=null;b.w=null}if(b.s!==BPSEASON)bpMigrate(b,had);if(G.gem==null)G.gem=0;return b};
+/* nouvelle saison : les récompenses de la saison 1 non récupérées sont versées, puis le pass repart de zéro */
+function bpMigrate(b,had){const xp=b.xp||0,pm=b.pm,f=b.f||{},p=b.p||{};b.s=BPSEASON;b.xp=0;b.pm=0;b.f={};b.p={};if(!had||!xp)return;
+ const lv=Math.min(50,Math.floor(xp/BPXP)),rws=[];for(let l=1;l<=lv;l++){if(!f[l])rws.push(...bpRw1("f",l));if(pm&&!p[l])rws.push(...bpRw1("p",l))}
+ if(rws.length)setTimeout(()=>{try{bpGive(rws).then(out=>{try{bpPop(LS("Saison 1 terminée","Season 1 is over"),LS("Tes récompenses non récupérées ont été ajoutées","Your unclaimed rewards were added"),qMerge(out.filter(r=>r[0]=="m"||r[0]=="i")).concat(out.filter(r=>r[0]!="m"&&r[0]!="i")))}catch(x){}save()})}catch(x){}},1500)}
 const bpLvl=()=>Math.min(BPMAX,Math.floor(BPS().xp/BPXP));
 /* ---------- récompenses ---------- */
 const bpMon=(l,k)=>["m",Math.floor(30000*k*(1+l/5))];
 const BPFI=[["ultra-ball",10],["hyper-potion",8],["max-revive",3],["protein",2],["iron",2],["calcium",2],["zinc",2],["carbos",2],["hp-up",2],["max-potion",8]];
 const BPPI=[["bottle-cap",1],["ability-capsule",1],["max-revive",4],["protein",3],["hp-up",3],["dream-ball",6],["iron",3],["zinc",3],["calcium",3],["carbos",3]];
-function bpRw(tr,l){const u=Math.floor(l/10);
+function bpRw1(tr,l){const u=Math.floor(l/10);
  if(tr=="f"){
   if(l==50)return[["leg"],["g",100],["i","master-ball",2]];
   if(l==25)return[["leg0"],bpMon(l,3)];
@@ -7359,14 +7363,15 @@ const BPLEG=[144,145,146,150,243,244,245,249,250,377,378,379,380,381,382,383,384
 function bpLeg(plain,mo){const id=BPLEG[Math.random()*BPLEG.length|0],mi=plain?0:1+(Math.random()*6|0);
  const go=()=>{const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());if(!plain){if(!mo)c.sh=1;c.mi=Math.max(c.mi||0,mi);G.mut=(G.mut||0)+1}ens(id);G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);recomp();return["leg",id,mi,mo?1:0]};
  return DB[id]?Promise.resolve(go()):preload([id]).then(go)}
-function bpGive(rws){const base=[],gem=[];let sp=0,legs=[];
- rws.forEach(r=>{if(r[0]=="g")gem.push(r);else if(r[0]=="sp")sp=1;else if(r[0]=="leg")legs.push(bpLeg());else if(r[0]=="leg0")legs.push(bpLeg(true));else if(r[0]=="legm")legs.push(bpLeg(false,true));else base.push(r)});
+function bpGive(rws){const base=[],gem=[],spx=[];let sp=0,legs=[];
+ rws.forEach(r=>{if(r[0]=="g")gem.push(r);else if(r[0]=="sp")sp=1;else if(r[0]=="spx"){spGrant(r[1]);spx.push(["spx",r[1]])}else if(r[0]=="lr")legs.push(bpLR());else if(r[0]=="leg")legs.push(bpLeg());else if(r[0]=="leg0")legs.push(bpLeg(true));else if(r[0]=="legm")legs.push(bpLeg(false,true));else base.push(r)});
  const out=qGive(base);const gn=gem.reduce((a,r)=>a+r[1],0);if(gn){BPS();G.gem+=gn;out.push(["g",gn])}
  if(sp){spGrant(90003);out.push(["sp"])}
+ spx.forEach(x=>out.push(x));
  return Promise.all(legs).then(L=>out.concat(L))}
-const bpBig=r=>r[0]=="g"?`<div class="rvi">${ico("gem")}<b>×${fmt(r[1])}</b><small>${LS("Gemmes","Gems")}</small></div>`:r[0]=="sp"?`<div class="rvi bpsp">${sp(90003,0)}<b>Dracolosse Chocolat Blanc</b><small>${LS("Pokémon spécial","Special Pokémon")}</small></div>`:r[0]=="leg"?`<div class="rvi bpsp">${sp(r[1],r[3]?0:1)}<b>${dn(r[1])}</b><small>${r[2]?(r[3]?LS("Mutation · ","Mutation · "):LS("Chromatique · ","Shiny · "))+MU[r[2]][0]:LS("Légendaire","Legendary")}</small></div>`:rwBig(r);
+const bpBig=r=>r[0]=="spx"?`<div class="rvi bpsp">${sp(r[1],0)}<b>${SPM[r[1]].n}</b><small>${LS("Pokémon exclusif","Exclusive Pokémon")}</small></div>`:r[0]=="lr"?`<div class="rvi bpsp">${sp(r[1],1)}<b>${dn(r[1])}</b><small>${LS("Chromatique · ","Shiny · ")}${MU[r[2]]?MU[r[2]][0]:""}</small></div>`:r[0]=="g"?`<div class="rvi">${ico("gem")}<b>×${fmt(r[1])}</b><small>${LS("Gemmes","Gems")}</small></div>`:r[0]=="sp"?`<div class="rvi bpsp">${sp(90003,0)}<b>Dracolosse Chocolat Blanc</b><small>${LS("Pokémon spécial","Special Pokémon")}</small></div>`:r[0]=="leg"?`<div class="rvi bpsp">${sp(r[1],r[3]?0:1)}<b>${dn(r[1])}</b><small>${r[2]?(r[3]?LS("Mutation · ","Mutation · "):LS("Chromatique · ","Shiny · "))+MU[r[2]][0]:LS("Légendaire","Legendary")}</small></div>`:rwBig(r);
 function bpPop(t,sub,out,cls){revealPop(t,sub,[],cls||"qv gold");const l=document.querySelector("#rvm .rvl");if(l)l.innerHTML=out.map(bpBig).join("")}
-const bpChip=r=>r[0]=="g"?`<span class="qr bpgc">${ico("gem")}<b>${r[1]}</b> ${LS("gemmes","gems")}</span>`:r[0]=="sp"?`<span class="qr bpbg">${sp(90003,0)}<span><b>Dracolosse Chocolat Blanc</b><small>${LS("spécial","special")}</small></span></span>`:r[0]=="legm"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire muté","Mutated legendary")}</b><small>${LS("au hasard, mutation aléatoire","random, random mutation")}</small></span></span>`:r[0]=="leg0"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire aléatoire","Random legendary")}</b></span></span>`:r[0]=="leg"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire chromatique","Shiny legendary")}</b><small>${LS("au hasard, avec mutation","random, with a mutation")}</small></span></span>`:rwChip(r);
+const bpChip=r=>r[0]=="spx"?`<span class="qr bpbg">${sp(r[1],0)}<span><b>${SPM[r[1]].n}</b><small>${LS("exclusif","exclusive")}</small></span></span>`:r[0]=="lr"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Pokémon LR chromatique muté","Mutated shiny LR Pokémon")}</b></span></span>`:r[0]=="g"?`<span class="qr bpgc">${ico("gem")}<b>${r[1]}</b> ${LS("gemmes","gems")}</span>`:r[0]=="sp"?`<span class="qr bpbg">${sp(90003,0)}<span><b>Dracolosse Chocolat Blanc</b><small>${LS("spécial","special")}</small></span></span>`:r[0]=="legm"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire muté","Mutated legendary")}</b><small>${LS("au hasard, mutation aléatoire","random, random mutation")}</small></span></span>`:r[0]=="leg0"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire aléatoire","Random legendary")}</b></span></span>`:r[0]=="leg"?`<span class="qr bpbg">${ico("crown")}<span><b>${LS("Légendaire chromatique","Shiny legendary")}</b><small>${LS("au hasard, avec mutation","random, with a mutation")}</small></span></span>`:rwChip(r);
 /* ---------- quêtes du pass ---------- */
 const BQD=[
 {id:"ko",k:"ko",ic:"sword",f:["Vaincre {n} Pokémon","Defeat {n} Pokémon"],t:{d:900,w:9000}},
@@ -7395,14 +7400,14 @@ function bpAvail(){const B=BPS(),lv=bpLvl();let n=0;for(let l=1;l<=lv;l++){if(!B
 /* ---------- vue Pass ---------- */
 let BPT="r",BPSG="";
 const bpSig=()=>{const B=BPS();let s=BPT+B.pm+"|"+bpLvl()+"|"+Object.keys(B.f).length+"|"+Object.keys(B.p).length+"|"+(G.gem||0)+SG.lang;if(BPT=="q")["d","w"].forEach(p=>{const I=B[p];if(I)s+=p+I.k+bqList(p).map(x=>(x.done?1:0)+""+(x.cl?1:0)).join("")+I.bn});return s};
-const bpBg=r=>r[0]=="m"?`<div class="bpb2">${ico("coin")}<b>${fmt(r[1])}</b><small>${LS("Pièces","Coins")}</small></div>`:r[0]=="g"?`<div class="bpb2 g">${ico("gem")}<b>×${r[1]}</b><small>${LS("Gemmes","Gems")}</small></div>`:r[0]=="st"?`<div class="bpb2">${ico("spark")}<b>×${r[1]}</b><small>${LS("Pierres","Stones")}</small></div>`:r[0]=="sp"?`<div class="bpb2 sp">${sp(90003,0)}<b>Dracolosse Chocolat Blanc</b></div>`:r[0]=="legm"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire muté","Mutated legendary")}</small></div>`:r[0]=="leg0"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire aléatoire","Random legendary")}</small></div>`:r[0]=="leg"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire chromatique muté","Mutated shiny legendary")}</small></div>`:`<div class="bpb2">${ic(r[1],IT[r[1]].img)}<b>×${fmt(r[2])}</b><small>${IT[r[1]].n}</small></div>`;
+const bpBg=r=>r[0]=="spx"?`<div class="bpb2 sp">${sp(r[1],0)}<b>${SPM[r[1]].n}</b></div>`:r[0]=="lr"?`<div class="bpb2 lr"><span class="bzlrq">${[150,250,487].map(i=>sp(i,0,1)).join("")}<b>?</b></span><small>${LS("LR chroma muté","Mutated shiny LR")}</small></div>`:r[0]=="m"?`<div class="bpb2">${ico("coin")}<b>${fmt(r[1])}</b><small>${LS("Pièces","Coins")}</small></div>`:r[0]=="g"?`<div class="bpb2 g">${ico("gem")}<b>×${r[1]}</b><small>${LS("Gemmes","Gems")}</small></div>`:r[0]=="st"?`<div class="bpb2">${ico("spark")}<b>×${r[1]}</b><small>${LS("Pierres","Stones")}</small></div>`:r[0]=="sp"?`<div class="bpb2 sp">${sp(90003,0)}<b>Dracolosse Chocolat Blanc</b></div>`:r[0]=="legm"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire muté","Mutated legendary")}</small></div>`:r[0]=="leg0"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire aléatoire","Random legendary")}</small></div>`:r[0]=="leg"?`<div class="bpb2 lg">${ico("crown")}<b>?</b><small>${LS("Légendaire chromatique muté","Mutated shiny legendary")}</small></div>`:`<div class="bpb2">${ic(r[1],IT[r[1]].img)}<b>×${fmt(r[2])}</b><small>${IT[r[1]].n}</small></div>`;
 function bpCell(tr,l){const B=BPS(),lv=bpLvl(),got=(tr=="f"?B.f:B.p)[l],lock=tr=="p"&&!B.pm,rdy=!got&&!lock&&l<=lv,rw=bpRw(tr,l),big=rw.some(r=>r[0]=="sp"||r[0]=="leg"||r[0]=="leg0"||r[0]=="legm");
  return `<div class="bpc ${tr}${got?" got":""}${rdy?" rdy":""}${lock?" lk":""}${big?" big":""}"${rdy?` data-bp="clm" data-tr="${tr}" data-l="${l}"`:""}><div class="bpcc">${rw.map(bpBg).join("")}</div>${got?`<i class="bpk">${ico("check")}</i>`:lock?`<i class="bpk">${ico("lock")}</i>`:rdy?`<i class="bpk go">${ico("gift")}</i>`:""}</div>`}
 function bpShow(){const S=SPM[90003],B=BPS();return `<div class="bpsh"><div class="bpsa"></div><small class="bpsk">${LS("RÉCOMPENSE FINALE · NIVEAU 50","FINAL REWARD · LEVEL 50")}</small><div class="bpsi">${sp(90003,0)}</div><h3>${S.n}</h3><div class="bpst">${tchips(S.t)}</div><small class="bpsd">${LS(S.fr,S.en)}</small>${B.pm?`<span class="bppm">${ico("crown")} ${LS("Premium actif","Premium active")}</span>`:`<button class="go bpbuy" data-bp="prem">${ico("crown")} ${LS("Débloquer pour","Unlock for")} ${BPPRICE} ${ico("gem")}</button>`}</div>`}
 let BPSL=null,BPFIRST=true;
-const BPCW=178;
+const BPCW=158;
 function bpScroll(){const sc=$("bpsc");if(!sc)return;sc.onwheel=e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){sc.scrollLeft+=e.deltaY;e.preventDefault()}};
- if(BPFIRST){BPFIRST=false;BPSL=Math.max(0,(Math.max(1,bpLvl())-1)*BPCW-60)}if(BPSL!=null)sc.scrollLeft=BPSL}
+ if(BPFIRST){BPFIRST=false;BPSL=bzPos(sc,Math.max(1,bpLvl()))}if(BPSL!=null)sc.scrollLeft=BPSL}
 document.addEventListener("scroll",e=>{if(e.target&&e.target.id=="bpsc")BPSL=e.target.scrollLeft},true);
 function bpQuests(){const B=BPS();return["d","w"].map(p=>{const P=BQP[p],L=bqList(p),dn=L.filter(s=>s.done).length;
  return `<div class="box bqp" style="--c1:${P.c1};--c2:${P.c2}"><div class="bqh"><div><b>${LS(P.n[0],P.n[1])}</b><small>${ico("clock")} ${LS("Renouvellement dans ","Resets in ")}<span id="bqcd${p}">${qHms(qEnd(p)-Date.now())}</span></small></div><div class="qbar big"><i style="width:${dn/L.length*100}%"></i><span>${dn} / ${L.length}</span></div></div>
@@ -7431,7 +7436,7 @@ let GMS=null;
 function vGem(){BPS();
  return `<div class="box gmh"><div class="gmhi">${ico("gem")}</div><div class="gmhb"><h2>${LS("Boutique","Store")}</h2><small>${LS("Les gemmes servent à acheter le Pass de combat et des offres spéciales.","Gems buy the Battle Pass and special offers.")}</small></div><div class="bpgm big">${ico("gem")}<b id="gmbal">${fmt(G.gem||0)}</b></div></div>
  <div class="gmdemo">${ico("lock")} ${LS("Version de démonstration : aucun paiement réel n'est possible ici. Un achat ajoute simplement les gemmes, sans débit.","Demo version: no real payment is possible here. A purchase simply adds the gems, with no charge.")}</div>
- <div class="box gmpass"><div><b>${ico("crown")} ${LS("Pass de combat · Premium","Battle Pass · Premium")}</b><small>${LS("50 niveaux, récompenses doubles, Dracolosse Chocolat Blanc au niveau 50 (un légendaire chromatique muté en gratuit) et un légendaire chromatique muté au niveau 25.","50 levels, double rewards, Dracolosse Eclipse at level 50 and a mutated shiny legendary at level 25.")}</small></div>${BPS().pm?`<span class="bppm">${LS("Actif","Active")}</span>`:`<button class="go" data-bp="prem">${BPPRICE} ${ico("gem")} · 6 €</button>`}<button data-a="tab" data-t="bp">${LS("Voir le pass","View pass")}</button></div>
+ <div class="box gmpass"><div><b>${ico("crown")} ${LS("Pass de combat · Premium","Battle Pass · Premium")}</b><small>${LS("100 niveaux, Lugia Ombre au niveau 50 et Mewtwo Black au niveau 100 en Premium, un Pokémon LR chromatique muté aux paliers 25, 50 et 100 en gratuit.","100 levels, Shadow Lugia at level 50 and Black Mewtwo at level 100 with Premium, a mutated shiny LR Pokémon at levels 25, 50 and 100 for free.")}</small></div>${BPS().pm?`<span class="bppm">${LS("Actif","Active")}</span>`:`<button class="go" data-bp="prem">${BPPRICE} ${ico("gem")} · 6 €</button>`}<button data-a="tab" data-t="bp">${LS("Voir le pass","View pass")}</button></div>
  <h3 class="gmt">${LS("Gemmes","Gems")}</h3>
  <div class="gmg">${GMP.map(p=>`<button class="gmc${GMS==p.id?" on":""}" data-bp="pack" data-i="${p.id}">${p.tag?`<em>${LS(p.tag[0],p.tag[1])}</em>`:""}<span class="gmi">${ico("gem")}</span><b>${fmt(p.g)}</b>${p.b?`<small>+${p.b} ${LS("offerts","bonus")}</small>`:`<small>&nbsp;</small>`}<span class="gmp">${p.e} €</span></button>`).join("")}</div>
  ${GMS?(()=>{const p=GMP.find(x=>x.id==GMS);return `<div class="box gmcf"><b>${LS("Confirmer l'achat","Confirm purchase")}</b><span>${fmt(p.g+p.b)} ${ico("gem")} · ${p.e} €</span><small>${LS("Démonstration : aucun paiement n'est effectué.","Demo: no payment is made.")}</small><div class="row"><button class="go" data-bp="packok">${LS("Confirmer","Confirm")}</button><button data-bp="packno">${LS("Annuler","Cancel")}</button></div></div>`})():""}
@@ -9328,12 +9333,12 @@ const phBox0=()=>BPS().pm?`<span class="bppm">${ico("crown")} ${LS("Pass Premium
 {const f0=bpShow;bpShow=function(){return f0.apply(this,arguments).replace(/<button class="go bpbuy" data-bp="prem">.*?<\/button>/g,phBox)}}
 vGem=function(){BPS();
  return `<div class="box gmh"><div class="gmhi">${ico("gem")}</div><div class="gmhb"><h2>${LS("Boutique","Store")}</h2><small>${LS("Aucun achat réel dans ce jeu. Les gemmes se gagnent en jouant (quêtes, pass, Tour) et servent à acheter des offres.","No real-money purchases in this game. Gems are earned by playing (quests, pass, Tower) and buy offers.")}</small></div><div class="bpgm big">${ico("gem")}<b id="gmbal">${fmt(G.gem||0)}</b></div></div>
- <div class="box gmpass"><div><b>${ico("crown")} ${LS("Pass de combat · Premium","Battle Pass · Premium")}</b><small>${LS("Gratuit : joue "+BPHRS+" heures pour le débloquer. 50 niveaux, récompenses doubles, un Pokémon exclusif au niveau 50.","Free: play "+BPHRS+" hours to unlock it. 50 levels, double rewards, an exclusive Pokémon at level 50.")}</small></div>${phBox()}<button data-a="tab" data-t="bp">${LS("Voir le pass","View pass")}</button></div>
+ <div class="box gmpass"><div><b>${ico("crown")} ${LS("Pass de combat · Premium","Battle Pass · Premium")}</b><small>${LS("Saison 2 : 100 niveaux, Lugia Ombre au niveau 50 et Mewtwo Black au niveau 100 en Premium (Casino ou bannière Halloween).","Season 2: 100 levels, Shadow Lugia at level 50 and Black Mewtwo at level 100 with Premium (Casino or Halloween banner).")}</small></div>${phBox()}<button data-a="tab" data-t="bp">${LS("Voir le pass","View pass")}</button></div>
  <div class="box gmpass"><div><b>${ico("check")} ${LS("Bonus permanents","Permanent boosts")}</b><small>${LS("Fortune, Puissance, Expérience, Boîte, Raid et Filet d'or sont actifs pour tout le monde, gratuitement.","Fortune, Power, Experience, Box, Raid and Golden net are active for everyone, for free.")}</small></div></div>
  <h3 class="gmt">${LS("Offres","Offers")}</h3>
  <div class="gmo">${GMO.map(o=>{const ok=(G.gem||0)>=o.p;return `<div class="gmoc"><div class="gmoi">${ico(o.ic)}</div><div class="gmob"><b>${LS(o.n[0],o.n[1])}</b><small>${LS(o.d[0],o.d[1])}</small><div class="qrw">${o.rw().map(bpChip).join("")}</div></div><button class="${ok?"go":""}" data-bp="offer" data-i="${o.id}" ${ok?"":"disabled"}>${o.p} ${ico("gem")}</button></div>`}).join("")}</div>`};
 
-const phBox=()=>BPS().pm?`<span class="bppm">${ico("crown")} ${LS("Pass Premium actif","Premium Pass active")}</span>`:`<div class="bpfree"><b>${ico("ticket")} ${LS("Premium : obtenable uniquement au Casino","Premium: only available in the Casino")}</b><small>${LS("Ticket Premium très rare (tirages Or et Platine), plus rare que les Pokémon exclusifs.","Very rare Premium ticket (Gold and Platinum draws), rarer than the exclusive Pokémon.")}</small><button class="go" data-a="tab" data-t="cas">${ico("coin")} ${LS("Aller au Casino","Go to the Casino")}</button></div>`;
+const phBox=()=>BPS().pm?`<span class="bppm">${ico("crown")} ${LS("Pass Premium actif","Premium Pass active")}</span>`:`<div class="bpfree"><b>${ico("ticket")} ${LS("Premium : Casino ou bannière Halloween","Premium: Casino or Halloween banner")}</b><small>${LS("Ticket Premium très rare (tirages Or et Platine du Casino, et 0,1 % des invocations de la bannière Halloween).","Very rare Premium ticket (Casino Gold and Platinum draws, and 0.1% of Halloween banner summons).")}</small><button class="go" data-a="tab" data-t="cas">${ico("coin")} ${LS("Aller au Casino","Go to the Casino")}</button></div>`;
 /* ===== v97 : GUILDES (moteur) ===== */
 const GLMAX=20,GLT=[0,1500,5000,11000,20000,33000,50000,74000,105000,150000];
 const glLv=x=>{let l=1;while(l<10&&x>=GLT[l])l++;return l};
@@ -9843,7 +9848,7 @@ const WKM={
  cards:["Cartes, succès, niveau","Les bonus permanents de collection et de progression","cards"],
  inv:["Invocations de Pokémon","Bannières, taux et garanties","gem"],
  cas:["Casino","Tickets, lots rares et Ticket Premium","dice"],
- bp:["Pass de combat","50 niveaux, piste gratuite et piste Premium","ticket"],
+ bp:["Pass de combat","100 niveaux, piste gratuite et piste Premium","ticket"],
  qst:["Quêtes et connexion","Objectifs quotidiens, hebdomadaires, mensuels et définitifs","quest"],
  gear:["Équipement du dresseur","Neuf emplacements pour habiller et renforcer ton dresseur","user"],
  soc:["Amis et chat","Ajouter des amis, discuter et bonus d'amitié","frs"],
@@ -10024,11 +10029,11 @@ wkBody.cas=()=>{
  return wn("tip","Ticket Premium",`Le Pass de combat Premium s'obtient <b>uniquement</b> grâce au Ticket Premium, un lot très rare : ${prc(CP.o.find(x=>x[2]=="bp-ticket")[0]/10000)} au ticket Or et ${prc(CP.p.find(x=>x[2]=="bp-ticket")[0]/10000)} au ticket Platine. S'il tombe alors que tu es déjà Premium, il se change en 300 gemmes.`)+b};
 
 wkBody.bp=()=>`<p class="lead">Le Pass de combat est une piste de <b>${BPMAX} niveaux</b> qui se remplit en jouant. La piste gratuite est disponible dès le début du jeu ; la piste Premium ajoute des récompenses supplémentaires.</p>
-${wf([["Niveaux",BPMAX],["XP par niveau",BPXP],["Acheter un niveau",BPLVP+" gemmes"],["Récompense finale","Dracolosse Chocolat Blanc"]])}
-${wsx("Gratuit et Premium",tbl(["Piste","Comment l'obtenir"],[["Gratuite","Disponible dès le début du jeu"],["Premium","Uniquement avec le Ticket Premium du casino"]]))}
+${wf([["Niveaux",BPMAX],["XP par niveau",BPXP],["Acheter un niveau",BPLVP+" gemmes"],["Récompense finale","Mewtwo Black"]])}
+${wsx("Gratuit et Premium",tbl(["Piste","Comment l'obtenir"],[["Gratuite","Disponible dès le début du jeu"],["Premium","Ticket Premium du Casino ou de la bannière Halloween"]]))}
 ${wsx("Gagner de l'XP",`<p>L'XP vient de tes actions habituelles et des <b>quêtes du Pass</b>. Chaque niveau demande ${BPXP} XP. Tu peux aussi acheter un niveau pour ${BPLVP} gemmes.</p>`)}
-${wsx("Récompenses",`<p>Chaque niveau donne une récompense gratuite et une récompense Premium. Le niveau ${BPMAX} offre le Pokémon spécial <b>Dracolosse Chocolat Blanc</b>. Récupère tout d'un clic avec « Tout récupérer ».</p>`)}
-${wn("warn","Premium","Le Premium n'est pas en vente : il se trouve uniquement au casino.")}`;
+${wsx("Récompenses",`<p>Chaque niveau donne une récompense gratuite et une récompense Premium. Aux paliers 25, 50 et 100, la piste gratuite offre un <b>Pokémon LR chromatique muté</b>. En Premium, le palier 50 offre <b>Lugia Ombre</b> (×1,4 Steelix Cristallin) et le palier 100 <b>Mewtwo Black</b> (×2 Steelix Cristallin, avec ses Méga X et Y). Récupère tout d'un clic avec « Tout récupérer ».</p>`)}
+${wn("warn","Premium","Le Premium n'est pas en vente : il se trouve au casino ou dans la bannière Halloween (0,1 % par invocation).")}`;
 
 wkBody.gear=()=>`<p class="lead">Ton dresseur porte neuf pièces d'équipement. Chacune apporte des bonus passifs qui s'additionnent. Ouvre l'onglet <b>Dresseur</b> dans la catégorie Moi.</p>
 ${wf([["Débloqué à l'étage",LOCKS.gear],["Emplacements",9],["Raretés","N, R, SR, SSR, UR"]])}
@@ -11093,10 +11098,9 @@ window.pidTsRedeem=async function(code){
  await preload([id]);G.codes[k]=1;
  {const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());ens(id);c.sh=1;if(muUpgrade(c.mi||0,mi))c.mi=mi;if(!(c.zi>=zi))c.zi=zi;G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);G.mut=(G.mut||0)+1}
  best(90004,1,1,9,"Titanesque");best(90001,0,0,8,"Colossal");best(90002,0,0,8,"Colossal");
- const B=BPS();B.pm=1;B.xp=Math.max(B.xp||0,40*BPXP);
  G.inv=G.inv||{};[["master-ball",20]].concat(["bi-atk","bi-xp","bi-coin","bi-find","bi-mut","bi-cap"].map(x=>[x,20])).forEach(g=>{G.inv[g[0]]=(G.inv[g[0]]||0)+g[1]});
  try{recomp()}catch(x){}save();try{sfx("shiny")}catch(x){}
- return LS("Code accepté : Pikachu Fire, Lucario Senkou, Ectoplasma Cristal, pass niveau 40, objets et ","Code accepted: Pikachu Fire, Lucario Senkou, Crystal Gengar, pass level 40, items and ")+dn(id)+" !"};
+ return LS("Code accepté : Pikachu Fire, Lucario Senkou, Ectoplasma Cristal, objets et ","Code accepted: Pikachu Fire, Lucario Senkou, Crystal Gengar, items and ")+dn(id)+" !"};
 })();
 /* ===== v148 : cadeau de bienvenue animé (Pokémon chromatique) + alerte de mise à jour ===== */
 const WMPOOL=[1,4,7,152,155,158,252,255,258,387,390,393,495,498,501,650,653,656,722,725,728,810,813,816,906,909,912];/* starters de base, toutes générations */
@@ -14188,12 +14192,133 @@ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-counter-
 document.addEventListener('change',e=>{if(e.target.matches?.('[data-counter-sort]')){COUNTER.sort=e.target.value;const list=document.getElementById('shl');if(list)list.innerHTML=shopList()}});
 
 /* Battle Pass: a shared seven-day countdown, independent of saves and page reloads. */
-const BPC_START=Date.UTC(2026,9,21,2,15,0),BPC_END=Date.UTC(2026,9,26,23,0,0);
+const BPC_START=Date.UTC(2026,9,26,23,0,0),BPC_END=Date.UTC(2026,10,23,23,0,0);
 function bpcParts(now=Date.now()){const s=Math.max(0,Math.ceil((BPC_END-now)/1000));return{d:Math.floor(s/86400),h:Math.floor(s%86400/3600),m:Math.floor(s%3600/60),s:s%60,done:s===0}}
 function bpcDate(){return new Intl.DateTimeFormat(SG.lang==='en'?'en-GB':'fr-FR',{timeZone:'Europe/Paris',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(BPC_END)}
-function bpcHtml(){const t=bpcParts();return `<section class="bp-countdown" aria-label="${LS('Compte à rebours du pass de combat','Battle pass countdown')}"><div class="bp-countdown-copy">${ico('clock')}<div><small>${LS('PASS DE COMBAT · SAISON 1','BATTLE PASS · SEASON 1')}</small><h2 data-bpc-title>${t.done?LS('Compte à rebours terminé','Countdown finished'):LS('Temps restant','Time remaining')}</h2><p>${LS('Échéance : ','Deadline: ')}<time datetime="${new Date(BPC_END).toISOString()}">${bpcDate()}</time> · ${LS('heure de Paris','Paris time')}</p></div></div><div class="bp-countdown-values" role="timer" aria-live="off">${[['d',LS('jours','days')],['h',LS('heures','hours')],['m',LS('minutes','minutes')],['s',LS('secondes','seconds')]].map(([k,label])=>`<span><b data-bpc="${k}">${String(t[k]).padStart(2,'0')}</b><small>${label}</small></span>`).join('')}</div></section>`}
+function bpcHtml(){const t=bpcParts();return `<section class="bp-countdown" aria-label="${LS('Compte à rebours du pass de combat','Battle pass countdown')}"><div class="bp-countdown-copy">${ico('clock')}<div><small>${LS('PASS DE COMBAT · SAISON 2','BATTLE PASS · SEASON 2')}</small><h2 data-bpc-title>${t.done?LS('Compte à rebours terminé','Countdown finished'):LS('Temps restant','Time remaining')}</h2><p>${LS('Échéance : ','Deadline: ')}<time datetime="${new Date(BPC_END).toISOString()}">${bpcDate()}</time> · ${LS('heure de Paris','Paris time')}</p></div></div><div class="bp-countdown-values" role="timer" aria-live="off">${[['d',LS('jours','days')],['h',LS('heures','hours')],['m',LS('minutes','minutes')],['s',LS('secondes','seconds')]].map(([k,label])=>`<span><b data-bpc="${k}">${String(t[k]).padStart(2,'0')}</b><small>${label}</small></span>`).join('')}</div></section>`}
 function bpcUi(){if(tab!=='bp')return;const t=bpcParts();document.querySelectorAll('[data-bpc]').forEach(e=>{const v=String(t[e.dataset.bpc]).padStart(2,'0');if(e.textContent!==v)e.textContent=v});const title=document.querySelector('[data-bpc-title]');if(title)title.textContent=t.done?LS('Compte à rebours terminé','Countdown finished'):LS('Temps restant','Time remaining')}
 {const view=vBp;vBp=function(){return bpcHtml()+view.apply(this,arguments)}}
+/* ============ Pass de combat · saison 2 « Black » : 100 paliers, interface « Le Chemin » ============ */
+const BZ_FG={},BZ_PG={};[10,20,30,40,60,70,80,90].forEach(l=>BZ_FG[l]=30);[5,15,35,45,55,65,85,95].forEach(l=>BZ_FG[l]=20);BZ_FG[75]=60;BZ_FG[99]=40;
+for(let l=10;l<=90;l+=10)BZ_PG[l]=40;for(let l=5;l<=95;l+=10)BZ_PG[l]=30;for(let l=3;l<=98;l+=5)BZ_PG[l]=(BZ_PG[l]||0)+15;BZ_PG[50]=200;BZ_PG[100]=180;
+const BZ_FMB=[20,40,60,80],BZ_PMB=[15,30,45,65,80,95],BZ_FGC=[30,70],BZ_PGC=[20,40,60,80,90];
+const BZ_FI=[["ultra-ball",10],["max-revive",3],["protein",2],["rare-candy",1]],BZ_PI=[["dream-ball",6],["bottle-cap",1],["moon-stone",2],["fire-stone",2]];
+function bpRw(tr,l){if(BPSEASON<2)return bpRw1(tr,l);const r=[];
+ if(tr=="f"){
+  if(l==25||l==50||l==100)r.push(["lr"]);
+  else if(l%2)r.push(bpMon(l,1));
+  else{const x=BZ_FI[(l/2)%4];r.push(["i",x[0],x[1]+Math.floor(l/25)])}
+  if(BZ_FG[l])r.push(["g",BZ_FG[l]]);
+  if(BZ_FMB.includes(l))r.push(["i","master-ball",1]);
+  if(BZ_FGC.includes(l))r.push(["i","gold-bottle-cap",1]);
+ }else{
+  if(l==50)r.push(["spx",90007]);
+  else if(l==100)r.push(["spx",90008]);
+  else if(l%2)r.push(bpMon(l,2));
+  else{const x=BZ_PI[(l/2)%4];r.push(["i",x[0],x[1]+Math.floor(l/30)])}
+  if(BZ_PG[l])r.push(["g",BZ_PG[l]]);
+  if(BZ_PMB.includes(l))r.push(["i","master-ball",1]);
+  if(BZ_PGC.includes(l))r.push(["i","gold-bottle-cap",1]);
+ }
+ return r}
+/* Pokémon LR chromatique muté aléatoire (paliers gratuits 25 / 50 / 100) */
+function bpLR(){const lr=ALL.filter(x=>isLR(x)),id=lr[Math.random()*lr.length|0],MIL=[2,3,4,5,6,8,9,10],mi=MIL[Math.random()*MIL.length|0],zi=2+(Math.random()*3|0);
+ const go=()=>{const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());ens(id);c.sh=1;if(muUpgrade(c.mi||0,mi))c.mi=mi;if(!(c.zi>=zi))c.zi=zi;G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);G.mut=(G.mut||0)+1;recomp();return["lr",id,c.mi,c.zi]};
+ return DB[id]?Promise.resolve(go()):preload([id]).then(go)}
+const BZ_CSS=`
+.bz{--bz-bg:#06060a;--bz-p1:#0e0e14;--bz-p2:#15151e;--bz-p3:#1d1d2a;--bz-ln:#3b3b4b;--bz-ln2:#55556b;--bz-tx:#ececf4;--bz-mu:#9a9ab0;--bz-vi:#8b5cf6;--bz-vi2:#c4b5fd;--bz-go:#f5c242;--bz-cy:#22d3ee;--bz-gr:#4ade80;display:flex;flex-direction:column;gap:12px;width:100%;color:var(--bz-tx)}
+.bz *{box-sizing:border-box}
+.bzhd{display:flex;align-items:center;flex-wrap:wrap;gap:16px 20px;border:2px solid var(--bz-ln);border-radius:20px;padding:12px 18px;background:linear-gradient(180deg,#171722,#0d0d13);box-shadow:0 8px 0 #000a}
+.bzbr{display:flex;align-items:center;gap:12px}.bzlogo{width:54px;height:54px;border-radius:16px;border:2px solid var(--bz-ln2);background:radial-gradient(circle at 50% 30%,#3a2a6a,#0b0b11);display:flex;align-items:center;justify-content:center}
+.bzpbl{width:34px;height:34px;border-radius:50%;border:2.5px solid #fff;background:linear-gradient(180deg,#ef4444 0 45%,#111 45% 55%,#f8fafc 55%);position:relative}.bzpbl:after{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:#fff;border:2px solid #111}
+.bzbr h1{margin:0;font:900 22px Nunito,sans-serif;letter-spacing:.04em;line-height:1}.bzbr small{color:var(--bz-mu);font-weight:800;font-size:12px;letter-spacing:.14em}
+.bzlv{display:flex;align-items:center;gap:14px;flex:1;min-width:260px;max-width:560px}
+.bzring{position:relative;width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--bz-vi) calc(var(--p)*1%),#23232f 0);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 18px #8b5cf655}
+.bzring:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#0b0b11;border:2px solid var(--bz-ln)}.bzring b{position:relative;font:900 28px Nunito,sans-serif}
+.bzlv small{display:block;color:var(--bz-mu);font-weight:800;font-size:12px;margin-bottom:5px}.bzlv .nx{font-weight:800;font-size:12px;margin-top:5px;color:var(--bz-vi2)}
+.bzxp{height:16px;border-radius:9px;background:#0b0b11;border:2px solid var(--bz-ln);overflow:hidden}.bzxp i{display:block;height:100%;background:repeating-linear-gradient(90deg,#8b5cf6 0 12px,#7c3aed 12px 16px);box-shadow:0 0 12px #8b5cf6aa}
+.bzcta{margin-left:auto;display:flex;align-items:center;flex-wrap:wrap;gap:12px}.bztimer{text-align:right;font-weight:800;font-size:12px;color:var(--bz-mu)}.bztimer b{display:block;color:var(--bz-tx);font-size:16px}
+.bzprem{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.bzprem small{color:var(--bz-go);font-weight:900;letter-spacing:.1em}
+.bz button.bzb{border:2px solid var(--bz-ln2);border-bottom-width:4px;border-radius:14px;background:var(--bz-p3);color:var(--bz-tx);font:900 14px Nunito,sans-serif;padding:8px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.bz button.bzb .i{width:18px;height:18px}.bz button.bzb.go{border-color:#7a5200;background:linear-gradient(180deg,#fcd34d,#f59e0b);color:#2a1700}.bz button.bzb.vi{border-color:#3b1d8a;background:linear-gradient(180deg,#a78bfa,#7c3aed);color:#fff}.bz button.bzb:hover{filter:brightness(1.1)}
+.bzpm{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:14px;border:2px solid #7a5200;background:#251c08;color:var(--bz-go);font-weight:900}.bzpm .i{width:18px;height:18px}
+.bztabs{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.bztabs button.on{background:linear-gradient(180deg,#3a2a6a,#241a48);border-color:var(--bz-vi);color:#fff}.bztabs .bzsp{flex:1}
+.bztrack{position:relative;flex:none;height:388px;display:flex;border:2px solid var(--bz-ln);border-radius:20px;background:linear-gradient(180deg,#111118,#0a0a0f);overflow:hidden}
+.bzlab{width:104px;flex:none;display:flex;flex-direction:column;border-right:2px solid var(--bz-ln);background:#0c0c12;z-index:2}.bzlab div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:900;letter-spacing:.08em;font-size:12px}
+.bzlab .lp{flex:1;color:var(--bz-go);border-bottom:2px solid var(--bz-ln)}.bzlab .lm{height:70px;color:var(--bz-mu);border-bottom:2px solid var(--bz-ln)}.bzlab .lf{flex:1;color:#d4d4e0}.bzlab .i{width:28px;height:28px}
+.bzscr{flex:1;overflow-x:auto;overflow-y:hidden;position:relative;scrollbar-width:thin;scrollbar-color:#3b3b4b transparent}
+.bzrow{display:flex;height:100%;width:max-content;position:relative}
+.bzcol{width:158px;flex:none;display:flex;flex-direction:column;padding:12px 7px}
+.bzcol .bzc{flex:1;margin:0}.bzcol .bzc.big{margin:-4px -2px}
+.bznd{height:46px;display:flex;align-items:center;justify-content:center;position:relative;margin:6px 0}
+.bznd:before{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:6px;margin-top:-3px;background:#23232f;border-radius:3px}
+.bzcol.done .bznd:before,.bzcol.cur .bznd:before{background:linear-gradient(90deg,#7c3aed,#a78bfa)}.bzcol.cur .bznd:before{right:50%}
+.bznd span{position:relative;z-index:1;min-width:38px;height:38px;border-radius:50%;border:3px solid var(--bz-ln2);background:#14141c;display:flex;align-items:center;justify-content:center;font:900 15px Nunito,sans-serif;padding:0 4px}
+.bzcol.done .bznd span{border-color:var(--bz-vi);background:#2a1d55}.bzcol.cur .bznd span{border-color:#fff;background:var(--bz-vi);box-shadow:0 0 0 4px #8b5cf655,0 0 18px #8b5cf6;transform:scale(1.25)}
+.bzcol.key .bznd span{border-color:var(--bz-go);color:var(--bz-go);width:46px;height:46px}.bzcol.key.done .bznd span{color:#fff}
+.bzc{position:relative;border:2px solid var(--bz-ln);border-radius:14px;background:linear-gradient(180deg,var(--bz-p2),var(--bz-p1));display:flex;flex-wrap:wrap;align-items:center;justify-content:center;align-content:center;gap:4px 6px;padding:8px 6px;overflow:hidden;min-height:0}
+.bzc.p{border-color:#6b5320;background:linear-gradient(180deg,#221b0c,#120e06)}
+.bzc.big{gap:2px 6px;border-color:var(--bz-vi);box-shadow:0 0 16px #8b5cf655,inset 0 0 18px #8b5cf622;z-index:1}.bzc.p.big{border-color:var(--bz-go);box-shadow:0 0 18px #f5c24266,inset 0 0 20px #f5c24222}
+.bzc.got{opacity:.5;filter:grayscale(.6)}.bzc.lk:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,#00000066 0 6px,#00000033 6px 12px);pointer-events:none}
+.bzc.rdy{border-color:var(--bz-cy);animation:bzrdy 1.6s ease-in-out infinite;cursor:pointer}@keyframes bzrdy{50%{box-shadow:0 0 18px #22d3eeaa,inset 0 0 14px #22d3ee33}}
+.bzst{position:absolute;right:5px;top:5px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3}.bzst .i{width:13px;height:13px}
+.bzst.ck{background:var(--bz-gr);color:#052e16}.bzst.lk{background:#000a;border:1px solid var(--bz-ln2);color:#d4d4e0}.bzst.go{background:var(--bz-cy);color:#04222a}
+.bzc .bpb2{gap:2px;min-width:0}.bzc .bpb2 img{width:36px;height:36px}.bzc .bpb2>.i{width:30px;height:30px}.bzc .bpb2 b{font:900 14px Nunito,sans-serif}.bzc .bpb2 small{font-size:10px;color:var(--bz-mu);max-width:74px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bzc.big .bpb2.sp img{width:70px;height:66px;animation:bzflo 3.2s ease-in-out infinite;filter:drop-shadow(0 6px 5px #000c)}.bzc .bpb2.sp b{color:var(--bz-go);font-size:15px}
+@keyframes bzflo{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.bzlrq{position:relative;display:block;width:60px;height:48px}.bzlrq img{position:absolute;top:4px;width:34px!important;height:32px!important;filter:brightness(0) drop-shadow(0 0 3px #a78bfa) drop-shadow(0 0 6px #7c3aed)}.bzlrq img:nth-child(1){left:-4px}.bzlrq img:nth-child(2){left:13px;top:0;z-index:1}.bzlrq img:nth-child(3){left:30px}
+.bzlrq b{position:absolute;left:50%;top:50%;transform:translate(-50%,-45%);z-index:2;font:900 24px Nunito,sans-serif;color:#fff;text-shadow:0 0 8px #8b5cf6,0 2px 0 #000}
+.bzcap{width:100%;order:9;text-align:center;font:900 10px Nunito,sans-serif;letter-spacing:.08em;color:var(--bz-cy)}
+.bznav{position:absolute;top:50%;z-index:5;width:44px;height:64px;margin-top:-32px;border-radius:14px;border:2px solid var(--bz-ln2);background:#000c;color:#fff;font:900 22px Nunito,sans-serif;cursor:pointer}.bznav.l{left:112px}.bznav.r{right:8px}
+.bzfeat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bzfc{position:relative;display:flex;align-items:center;gap:16px;border:2px solid var(--bz-ln);border-radius:20px;padding:12px 18px;background:linear-gradient(135deg,#171722,#0b0b11);overflow:hidden;min-height:150px}
+.bzfc.p{border-color:#7a5a12;background:linear-gradient(135deg,#251c08,#0b0b11)}
+.bzfc .spr{position:relative;width:120px;height:110px;flex:none;display:flex;align-items:center;justify-content:center}
+.bzfc .spr:before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,#8b5cf666,transparent 68%);animation:bzau 3s ease-in-out infinite}.bzfc.p .spr:before{background:radial-gradient(circle,#f5c24255,transparent 68%)}
+@keyframes bzau{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.08)}}
+.bzfc .spr img{position:relative;z-index:1;max-width:116px;max-height:106px;image-rendering:pixelated;animation:bzflo 3.2s ease-in-out infinite;filter:drop-shadow(0 8px 6px #000c)}.bzfc .spr .q{position:relative;z-index:1;font:900 64px Nunito,sans-serif;color:#fff;text-shadow:0 0 18px #8b5cf6,0 4px 0 #000}
+.bzfc .spr .bzlrq{width:90px;height:72px}.bzfc .spr .bzlrq img{position:absolute;animation:none;max-width:none;max-height:none;width:50px!important;height:48px!important;top:12px}.bzfc .spr .bzlrq img:nth-child(1){left:-6px}.bzfc .spr .bzlrq img:nth-child(2){left:20px;top:2px}.bzfc .spr .bzlrq img:nth-child(3){left:46px}.bzfc .spr .bzlrq b{font-size:34px}
+.bzfc h3{margin:6px 0 3px;font:900 21px Nunito,sans-serif}.bzfc p{margin:0;color:var(--bz-mu);font-weight:800;font-size:13px;line-height:1.35}
+.bztag{display:inline-block;padding:2px 9px;border-radius:999px;font:900 10px Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--bz-go);color:#2a1700}.bztag.gy{background:#2c2c3a;color:var(--bz-mu);border:1px solid var(--bz-ln)}
+.bzpw{margin-top:7px;display:inline-block;padding:3px 10px;border:2px solid var(--bz-ln2);border-radius:10px;font-weight:900;font-size:13px;background:#0b0b11}.bzpw b{color:var(--bz-cy)}
+.bzmini{display:flex;align-items:center;gap:12px;border:2px solid var(--bz-ln);border-radius:16px;padding:10px 16px;background:var(--bz-p1)}.bzmini small{color:var(--bz-mu);font-weight:800;font-size:12px;white-space:nowrap}
+.bzbar{position:relative;flex:1;height:34px;margin:0 26px 0 6px}.bzbar .ln{position:absolute;left:0;right:0;top:15px;height:6px;border-radius:3px;background:#23232f}.bzbar .ln i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:3px}
+.bzbar .tk{position:absolute;top:8px;width:2px;height:20px;background:#3b3b4b}
+.bzbar .ms{position:absolute;top:0;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;border:2px solid var(--bz-go);background:#1a1408;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;padding:0;color:var(--bz-vi2);font:900 15px Nunito,sans-serif}
+.bzbar .ms img{width:26px;height:26px;object-fit:contain;image-rendering:pixelated}.bzbar .ms.lrb{border-color:var(--bz-vi);background:#150f2b}
+.bzbar .you{position:absolute;top:-6px;transform:translateX(-50%);padding:1px 7px;border-radius:8px;background:#fff;color:#000;font:900 11px Nunito,sans-serif}
+@media(max-width:900px){.bzfeat{grid-template-columns:1fr}.bzcta{margin-left:0}.bznav{display:none}.bzmini{display:none}}
+@media(prefers-reduced-motion:reduce){.bz *{animation:none!important}}
+`;
+{const st=document.createElement("style");st.textContent=BZ_CSS;document.head.appendChild(st)}
+const bzPos=(sc,l)=>Math.max(0,(l-1)*BPCW+BPCW/2-sc.clientWidth/2);
+function bzCell(tr,l){const B=BPS(),lv=bpLvl(),got=(tr=="f"?B.f:B.p)[l],lock=tr=="p"&&!B.pm,rdy=!got&&!lock&&l<=lv,rw=bpRw(tr,l),big=l%25==0||rw.some(r=>r[0]=="lr"||r[0]=="spx");
+ const cap="";
+ return `<div class="bzc ${tr}${big?" big":""}${got?" got":""}${lock?" lk":""}${rdy?" rdy":""}"${rdy?` data-bp="clm" data-tr="${tr}" data-l="${l}"`:""}>${rw.map(bpBg).join("")}${cap}${got?`<i class="bzst ck">${ico("check")}</i>`:lock?`<i class="bzst lk">${ico("lock")}</i>`:rdy?`<i class="bzst go">${ico("gift")}</i>`:""}</div>`}
+function bzLeft(){const t=bpcParts();return t.done?LS("Saison terminée","Season over"):t.d>0?t.d+" "+LS(t.d>1?"jours":"jour",t.d>1?"days":"day")+" "+t.h+" h":t.h+" h "+String(t.m).padStart(2,"0")+" min"}
+function bzPrem(B){return B.pm?`<span class="bzpm">${ico("crown")} ${LS("Premium actif","Premium active")}</span>`:`<div class="bzprem"><small>${LS("DÉBLOQUER PREMIUM","UNLOCK PREMIUM")}</small><button class="bzb go" data-a="tab" data-t="cas">${ico("ticket")} ${LS("Casino","Casino")}</button><button class="bzb go" data-a="tab" data-t="inv">${ico("ticket")} ${LS("Bannière Halloween","Halloween banner")}</button></div>`}
+function bzFeat(){const own=id=>G.sp&&G.sp[id]||G.col[id]&&G.col[id].n>0,ob=id=>own(id)?`<span class="bzpw"><b>${LS("Obtenu","Owned")}</b></span>`:"";
+ const lr=[150,250,487].map(i=>sp(i,0,1)).join("");
+ return `<div class="bzfeat"><div class="bzfc p"><div class="spr">${sp(90007,0)}</div><div><span class="bztag">${LS("Premium · Palier 50","Premium · Level 50")}</span><h3>${SPM[90007].n}</h3><p>${tchips(SPM[90007].t)}</p><span class="bzpw">${LS("Puissance","Power")} <b>×1,4</b> Steelix Cristallin</span> ${ob(90007)}</div></div>
+ <div class="bzfc p"><div class="spr">${sp(90008,0)}</div><div><span class="bztag">${LS("Premium · Palier 100","Premium · Level 100")}</span><h3>${SPM[90008].n}</h3><p>${tchips(SPM[90008].t)} · ${LS("Méga X et Y","Mega X and Y")}</p><span class="bzpw">${LS("Puissance","Power")} <b>×2</b> Steelix Cristallin</span> ${ob(90008)}</div></div>
+ <div class="bzfc"><div class="spr"><span class="bzlrq">${lr}<b>?</b></span></div><div><span class="bztag gy">${LS("Gratuit · Paliers 25, 50 et 100","Free · Levels 25, 50 and 100")}</span><h3>${LS("Pokémon LR chromatique muté","Mutated shiny LR Pokémon")}</h3><p>${LS("Un Pokémon LR au hasard, chromatique et muté, à chaque palier.","A random LR Pokémon, shiny and mutated, at each level.")}</p></div></div></div>`}
+function bzMini(lv){const ms=[[25,"lr"],[50,90007],[75,"lr"],[100,90008]];let m="";for(let l=10;l<=100;l+=10)m+=`<i class="tk" style="left:${l}%"></i>`;
+ ms.forEach(([l,i])=>{m+=`<button class="ms${i=="lr"?" lrb":""}" style="left:${l}%" data-bp="jump" data-l="${l}">${i=="lr"?"?":sp(i,0,1)}</button>`});
+ return `<div class="bzmini"><small>${LS("Aperçu du pass","Pass overview")}</small><div class="bzbar"><div class="ln"><i style="width:${lv}%"></i></div>${m}${lv>0?`<span class="you" style="left:${lv}%">${lv}</span>`:""}</div><small>${LS("Niveau 100 : ","Level 100: ")}${SPM[90008].n}</small></div>`}
+vBp=function(){setTimeout(bpScroll,0);const B=BPS(),lv=bpLvl(),xp=B.xp%BPXP,mx=lv>=BPMAX,av=bpAvail();
+ const head=`<div class="bzhd"><div class="bzbr"><div class="bzlogo"><span class="bzpbl"></span></div><div><h1>${LS("PASS DE COMBAT","BATTLE PASS")}</h1><small>${LS("SAISON 2 · BLACK","SEASON 2 · BLACK")}</small></div></div>
+  <div class="bzlv"><div class="bzring" style="--p:${mx?100:xp/BPXP*100}"><b>${lv}</b></div><div style="flex:1"><small>${LS("Niveau "+lv+" sur "+BPMAX,"Level "+lv+" of "+BPMAX)}</small><div class="bzxp"><i id="bpxb" style="width:${mx?100:xp/BPXP*100}%"></i></div><div class="nx" id="bpxt">${mx?LS("Niveau maximum","Max level"):xp+" / "+BPXP+" XP · "+LS("prochain : palier ","next: level ")+(lv+1)}</div></div></div>
+  <div class="bzcta"><div class="bztimer">${LS("Fin du pass dans","Pass ends in")}<b id="bzT">${bzLeft()}</b></div>${bzPrem(B)}</div></div>`;
+ const tabs=`<div class="bztabs"><button class="bzb${BPT=="r"?" on":""}" data-bp="tab" data-t="r">${ico("gift")} ${LS("Récompenses","Rewards")}</button><button class="bzb${BPT=="q"?" on":""}" data-bp="tab" data-t="q">${ico("quest")} ${LS("Quêtes du pass","Pass quests")}</button><span class="bzsp"></span>${mx?"":`<button class="bzb" data-bp="lvl">${ico("arrowup")} ${LS("Acheter un niveau","Buy a level")} · ${BPLVP} ${ico("gem")}</button>`}<button class="bzb" data-a="tab" data-t="gem">${ico("gem")} <b>${fmt(G.gem||0)}</b></button>${av?`<button class="bzb vi" data-bp="all">${ico("gift")} ${LS("Tout récupérer ("+av+")","Claim all ("+av+")")}</button>`:""}</div>`;
+ let body;
+ if(BPT=="q")body=bpQuests();
+ else{let cols="";for(let l=1;l<=BPMAX;l++)cols+=`<div class="bzcol${l<lv?" done":l==lv?" cur":""}${l%25==0?" key":""}" data-l="${l}">${bzCell("p",l)}<div class="bznd"><span>${l}</span></div>${bzCell("f",l)}</div>`;
+  body=`<div class="bztrack"><div class="bzlab"><div class="lp">${ico("crown")}PREMIUM</div><div class="lm">${LS("PALIER","LEVEL")}</div><div class="lf">${ico("gift")}${LS("GRATUIT","FREE")}</div></div><button class="bznav l" data-bp="nav" data-d="-1">‹</button><button class="bznav r" data-bp="nav" data-d="1">›</button><div class="bzscr" id="bpsc"><div class="bzrow">${cols}</div></div></div>${bzFeat()}${bzMini(lv)}`}
+ return `<div class="bz">${head}${tabs}<div id="bpbd">${body}</div></div>`};
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-bp=nav],[data-bp=jump]");if(!t)return;e.stopPropagation();const sc=$("bpsc");if(!sc)return;
+ if(t.dataset.bp=="nav")sc.scrollBy({left:sc.clientWidth*.7*(+t.dataset.d),behavior:"smooth"});else sc.scrollTo({left:bzPos(sc,+t.dataset.l),behavior:"smooth"})},true);
+setInterval(()=>{const e=$("bzT");if(e&&tab=="bp")e.textContent=bzLeft()},1000);
+
 setInterval(bpcUi,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)bpcUi()});window.addEventListener('pageshow',bpcUi);
 
 /* Daycare auto repeats the last batch using the native claim and start actions. */
