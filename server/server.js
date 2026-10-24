@@ -119,6 +119,22 @@ setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 const DC_ID=process.env.DISCORD_ID||'1561441130355237014',DC_SECRET=process.env.DISCORD_SECRET||'',DC_RED='https://api.pokeidledex.com/api/oauth/discord',SITE=process.env.SITE_URL||'https://pokeidledex.com';
 const pendO=new Map();setInterval(()=>{const n=Date.now();pendO.forEach((v,k)=>{if(n-v.ts>6e5)pendO.delete(k)})},6e4);
 const hreq=(url,opt,body)=>new Promise((ok,ko)=>{const r=require('https').request(url,opt,s=>{let x='';s.on('data',c=>x+=c);s.on('end',()=>{try{ok(JSON.parse(x))}catch(e){ko(new Error('json'))}})});r.on('error',ko);r.setTimeout(8000,()=>r.destroy(new Error('timeout')));if(body)r.write(body);r.end()});
+/* Parrainage Discord : lit le salon #parrainage (bot) ; un joueur dont le compte Discord est lie et qui y poste le code d'un parrain double la recompense de ce parrain */
+const REF_TOK=process.env.DISCORD_BOT_TOKEN||'',REF_CH=process.env.DISCORD_REF_CHANNEL||'',REF_ON=!!(REF_TOK&&/^\d{5,25}$/.test(REF_CH));
+const REFN=x=>String(x||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+db.refdc=db.refdc||{};db.meta.refLast=db.meta.refLast||'';
+async function refPoll(){if(!REF_ON)return;
+ for(let n=0;n<5;n++){
+  const url='https://discord.com/api/v10/channels/'+REF_CH+'/messages?limit=100'+(db.meta.refLast?'&after='+db.meta.refLast:'');
+  const L=await hreq(url,{method:'GET',headers:{Authorization:'Bot '+REF_TOK,'User-Agent':'PokeIdleDex (pokeidledex.com, 1)'}});
+  if(!Array.isArray(L)||!L.length)return;
+  L.sort((x,y)=>(BigInt(x.id)<BigInt(y.id)?-1:1));
+  for(const m of L){db.meta.refLast=m.id;if(!m.author||m.author.bot)continue;const t=REFN(m.content);
+   const o=db.refdc[m.author.id]=db.refdc[m.author.id]||{};
+   for(const w of String(m.content||'').toUpperCase().split(/[^A-Z0-9-]+/)){const c=REFN(w);if(/^[A-HJ-NP-Z2-9]{8}$/.test(c))o[c]=Date.now()}
+   const j=t.match(/[A-HJ-NP-Z2-9]{8}/g);if(j)for(const c of j)o[c]=o[c]||Date.now()}
+  dirty=1;if(L.length<100)return}}
+if(REF_ON){const run=()=>refPoll().catch(e=>console.error('refpoll',e.message));setTimeout(run,3000);setInterval(run,45000)}
 const GG_ID=process.env.GOOGLE_ID||'637104354464-n2esf9qoa4mh514f70v65qintii1lr3g.apps.googleusercontent.com',usedG=new Set();setInterval(()=>usedG.clear(),36e5);
 /* fin de connexion Discord/Google : retrouve, lie ou cree le compte (champ f = 'dc' ou 'gg') */
 function ssoFinish(res,d,tok,p,f){
@@ -209,6 +225,12 @@ http.createServer((req,res)=>{
    const now=Date.now(),on=new Set();for(const[k,v]of PRES){if(v.u&&now-v.t<=25000)on.add(v.u)}
    const out={};(Array.isArray(d.ids)?d.ids:[]).slice(0,500).forEach(id=>{id=String(id);if(!ID.test(id))return;const l=db.lb[id];const t=Math.max(LAST.get(id)||0,(l&&l.t)||0);out[id]={t,o:on.has(id)?1:0}});
    send(res,200,{ok:1,m:out})});return}
+ if(u.pathname=='/api/ref/dc'&&req.method=='GET'){
+  if(limited(ip+'rd',60)){send(res,429,{e:'rate'});return}
+  const uid=String(u.searchParams.get('u')||''),c=REFN(u.searchParams.get('c'));
+  if(!REF_ON||!ID.test(uid)||c.length!=8){send(res,200,{on:REF_ON?1:0,v:0});return}
+  let dc='';for(const k in db.acc){const a=db.acc[k];if(a.uid==uid&&a.dc){dc=String(a.dc);break}}
+  const m=dc&&db.refdc[dc];send(res,200,{on:1,v:m&&m[c]?1:0});return}
  if(u.pathname=='/api/online'&&req.method=='GET'){
   if(limited(ip+'o',150)){send(res,429,{e:'rate'});return}
   const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();const lst=!!u.searchParams.get('l');
