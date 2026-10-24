@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-evo-20261024h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-evo-20261024h"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-pnu-20261024i"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-pnu-20261024i"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14225,6 +14225,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-24",t:["Prochaine mise à jour","Next update"],e:[["new","Compte à rebours de la prochaine mise à jour","Un nouveau rectangle sous TikTok (et dans le Menu) affiche le temps restant avant la prochaine grosse mise à jour, prévue lundi à minuit. Clique dessus pour voir le compte à rebours… et un indice.","Countdown to the next update","A new box under TikTok (and in the Menu) shows the time left before the next big update, due Monday at midnight. Click it to see the countdown… and a hint."]]},
  {d:"2026-10-24",t:["Évolutions","Evolutions"],e:[["fix","Toutes les évolutions sont maintenant possibles","Évoli ne passe plus automatiquement en Mentali au niveau 30 : tu choisis toi-même son évolution (Noctali, Phyllali, Givrali, Nymphali…) dans sa fiche. Même chose pour les autres Pokémon à plusieurs évolutions (Débugant, Axoloto, Chenipotte…).","Every evolution is now possible","Eevee no longer turns into Espeon automatically at level 30: you pick its evolution (Umbreon, Leafeon, Glaceon, Sylveon…) from its card. Same for other Pokémon with several evolutions (Tyrogue, Wooper, Wurmple…)."],["new","10 nouveaux objets d'évolution en boutique","Pomme Acidulée, Pomme Sucrée, Pomme Sirupeuse, Théière Fêlée, Tasse Banale, Augurite Noire, Bloc de Tourbe, Armure Fortune, Armure Maudite et Alliage Métallique : ils permettent d'évoluer Verpom, Insécateur, Charbambin, Polthégeist, Théffroyable, Pondralugon et d'autres, jusque-là bloqués.","10 new evolution items in the shop","Tart Apple, Sweet Apple, Syrupy Apple, Cracked Pot, Unremarkable Teacup, Black Augurite, Peat Block, Auspicious Armor, Malicious Armor and Metal Alloy: they let Applin, Scyther, Charcadet, Sinistea, Poltchageist, Duraludon and others evolve, which was impossible before."]]},
  {d:"2026-10-24",t:["Sauvegarde protégée","Save protection"],e:[["fix","Plus de perte de progression avec une vieille page ouverte","Une page restée ouverte (autre onglet ou autre appareil) avec une ancienne partie ne peut plus écraser une partie plus avancée, ni en local ni en ligne. Si une partie plus avancée existe, la page se recharge pour la récupérer.","No more lost progress with an old page open","A page left open (another tab or device) with an old game can no longer overwrite a more advanced game, locally or online. If a more advanced game exists, the page reloads to pick it up."]]},
  {d:"2026-10-24",t:["Palier Boss monde","World boss tier"],e:[["fix","Un Pokémon capturé au boss monde garde le palier Boss monde","Un Pokémon obtenu au boss monde garde maintenant toujours le palier Boss monde (et non le palier LR ou un autre), même s’il est ensuite rencontré ailleurs.","World boss tier kept","A Pokémon obtained from the world boss now always keeps the World boss tier (not the LR or another tier), even if it is met elsewhere afterwards."]]},
@@ -14727,6 +14728,74 @@ function pidTikTokLinks(){const mk=(id,cls,html)=>{const a=document.createElemen
  const u=$("utl");if(u&&!$("pid-tiktok-menu"))u.appendChild(mk("pid-tiktok-menu","qkb",`<span class="qki" style="--c1:#111;--c2:#000">${PID_TT_ICON}</span><span class="qkt"><b>TikTok</b><small></small></span>`));ttkRefresh()}
 pidTikTokLinks();setInterval(pidTikTokLinks,3000);setInterval(ttkRefresh,20000);
 
+/* ===== Prochaine mise à jour : rectangle sous TikTok + fenêtre avec compte à rebours (disparaît tout seul à l'échéance) ===== */
+const PNU_END=Date.UTC(2026,9,26,23,0,0); /* lundi 26 octobre 2026, minuit (Paris) */
+{const st=document.createElement("style");st.id="pnu-styles";st.textContent=`
+#elite-pnu{position:fixed;left:10px;top:636px;width:72px;min-height:112px;z-index:44;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px 8px;border:2px solid #f0abfc;border-radius:15px;color:#fff;text-align:center;cursor:pointer;overflow:hidden;font:900 11px Nunito,sans-serif;background:linear-gradient(160deg,#6d28d9,#a21caf 55%,#db2777);box-shadow:0 0 14px #c026d3aa,inset 0 0 12px #ffffff22;animation:pnuGlow 2.4s ease-in-out infinite}
+#elite-pnu:before{content:"";position:absolute;inset:-40% -60%;background:linear-gradient(105deg,transparent 40%,#ffffff55 50%,transparent 60%);transform:translateX(-80%);animation:pnuShine 3.2s ease-in-out infinite;pointer-events:none}
+#elite-pnu .pb{position:relative;width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;background:linear-gradient(180deg,#fb7185 0 46%,#fff 46% 54%,#f8fafc 54%);box-shadow:0 0 10px #fff8;animation:pnuSpin 3s linear infinite;flex:none}
+#elite-pnu .pb:after{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#fff;border:2.5px solid #fff;box-shadow:0 0 0 2px #1e1b4b}
+#elite-pnu b{font-size:11.5px;line-height:1.12;text-shadow:0 1px 3px #0008}
+#elite-pnu small{font-size:9.5px;line-height:1.15;font-weight:800;color:#fde7ff}
+#elite-pnu em{font-style:normal;font-size:10px;font-weight:900;padding:2px 6px;border-radius:999px;background:#fff;color:#86198f;box-shadow:0 2px 0 #f0abfc;white-space:nowrap}
+#elite-pnu:hover,#elite-pnu:focus-visible{outline:2px solid #f0abfc;outline-offset:3px}
+body.pnu-on #elite-suggest{top:max(756px,calc(100vh - 68px))}
+@media(max-height:830px){#elite-pnu{min-height:0;padding:8px 4px}#elite-pnu b,#elite-pnu small{display:none}body.pnu-on #elite-suggest{top:718px}}
+@media(min-width:761px) and (max-width:1100px){#elite-pnu{left:8px;width:60px;top:628px}}
+@media(max-width:760px){#elite-pnu{display:none}}
+@keyframes pnuGlow{50%{box-shadow:0 0 24px #e879f9,inset 0 0 14px #ffffff33}}
+@keyframes pnuShine{0%,30%{transform:translateX(-80%)}70%,100%{transform:translateX(80%)}}
+@keyframes pnuSpin{to{transform:rotate(360deg)}}
+#pnu{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:14px;background:#05030fcc;backdrop-filter:blur(6px);animation:pnuIn .25s ease-out}
+@keyframes pnuIn{from{opacity:0}}
+#pnu .box{position:relative;width:min(900px,100%);max-height:96vh;overflow:auto;border-radius:26px;padding:22px 26px;text-align:center;color:#fff;font-family:Nunito,system-ui,sans-serif;background:radial-gradient(circle at 50% 0,#5b21b6 0,#2e1065 45%,#14082e 100%);box-shadow:0 0 0 3px #e879f9,0 0 40px #a855f7aa,0 30px 80px #000a}
+#pnu .box:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,#f0abfc33,transparent 40%),radial-gradient(circle at 85% 20%,#22d3ee33,transparent 38%);pointer-events:none}
+#pnu .x{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:12px;border:2px solid #fff6;background:#0006;color:#fff;font:900 18px Nunito,sans-serif;cursor:pointer;z-index:3}
+#pnu .pill{display:inline-block;padding:4px 14px;border-radius:999px;background:linear-gradient(90deg,#f472b6,#a855f7);font-weight:900;font-size:12px;letter-spacing:.14em;box-shadow:0 3px 0 #701a75}
+#pnu h2{margin:10px 0 2px;font:900 34px Nunito,sans-serif;text-shadow:0 3px 0 #4c1d95,0 0 22px #e879f9}
+#pnu .sub{color:#e9d5ff;font-weight:800;font-size:14px;margin-bottom:14px}
+#pnu .cd{display:flex;gap:12px;justify-content:center;position:relative}
+#pnu .cd div{text-align:center}
+#pnu .cd b{display:block;min-width:92px;padding:12px 6px 8px;font-size:46px;font-weight:900;border-radius:18px;border:3px solid #f0abfc;background:linear-gradient(180deg,#7c3aed,#4c1d95);box-shadow:0 5px 0 #2e1065,0 0 18px #c026d366;text-shadow:0 2px 0 #2e1065}
+#pnu .cd b.tk{animation:pnuTick .4s ease-out}
+#pnu .cd span{display:block;margin-top:7px;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#f5d0fe}
+@keyframes pnuTick{0%{transform:translateY(-6px) scale(1.12)}100%{transform:none}}
+#pnu .art{position:relative;margin-top:18px;border-radius:20px;overflow:hidden;border:3px solid #22d3ee;box-shadow:0 0 22px #22d3ee88;background:#222a3d;aspect-ratio:1520/820;max-height:42vh;width:100%}
+#pnu .art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 62%}
+#pnu .art:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,#ffffff44 50%,transparent 60%);animation:pnuSweep 3.4s ease-in-out infinite}
+#pnu .art .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 10px;background:linear-gradient(180deg,transparent,#14082ee6);font-size:15px;font-weight:800;letter-spacing:.04em;z-index:1}
+@keyframes pnuSweep{0%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
+#pnu .star{position:absolute;width:14px;height:14px;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:pnuTw 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes pnuTw{0%,100%{opacity:.15;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(45deg)}}
+@media(max-width:640px){#pnu .box{padding:18px 12px}#pnu h2{font-size:24px}#pnu .cd{gap:6px}#pnu .cd b{min-width:0;width:calc((100vw - 90px)/4);font-size:30px;padding:10px 2px 6px}#pnu .cd span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#elite-pnu,#elite-pnu *,#elite-pnu:before,#pnu *,#pnu .art:after{animation:none!important}}
+`;document.head.appendChild(st)}
+const pnuLeft=()=>Math.max(0,PNU_END-Date.now());
+const pnuP=n=>String(n).padStart(2,"0");
+function pnuParts(){const s=Math.floor(pnuLeft()/1e3);return[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60]}
+function pnuTick(){const o=$("pnu");if(pnuLeft()<=0){if(o)o.remove();pnuLinks();return}
+ const p=pnuParts();if(o)o.querySelectorAll(".cd b").forEach((b,i)=>{const t=pnuP(p[i]);if(b.textContent!==t){b.textContent=t;b.classList.remove("tk");void b.offsetWidth;b.classList.add("tk")}});
+ const e=document.querySelector("#elite-pnu em");if(e)e.textContent=p[0]+LS(" j "," d ")+pnuP(p[1])+" h"}
+function pnuClose(){const o=$("pnu");if(o)o.remove();document.removeEventListener("keydown",pnuKey)}
+function pnuKey(e){if(e.key=="Escape")pnuClose()}
+function pnuOpen(){if(pnuLeft()<=0||$("pnu"))return;const o=document.createElement("div");o.id="pnu";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");
+ const L=[LS("Jours","Days"),LS("Heures","Hours"),LS("Minutes","Minutes"),LS("Secondes","Seconds")];
+ o.innerHTML=`<div class="box"><button class="x" type="button" aria-label="${LS("Fermer","Close")}">X</button>
+ <span class="star" style="left:6%;top:12%"></span><span class="star" style="right:8%;top:9%;animation-delay:.7s"></span><span class="star" style="left:10%;top:44%;animation-delay:1.3s"></span><span class="star" style="right:9%;top:40%;animation-delay:.3s"></span>
+ <span class="pill">${LS("BIENTÔT","COMING SOON")}</span><h2>${LS("Une grosse mise à jour arrive !","A big update is coming!")}</h2>
+ <div class="sub">${LS("Une nouvelle menace psychique approche… Prépare ton équipe, dresseur.","A new psychic threat is approaching… Get your team ready, trainer.")}</div>
+ <div class="cd">${L.map(x=>`<div><b>00</b><span>${x}</span></div>`).join("")}</div>
+ <div class="art"><img src="img/prochaine-maj.webp" alt="" loading="lazy"><div class="cap">${LS("Qui se cache dans l'ombre ?","Who is hiding in the shadows?")}</div></div></div>`;
+ o.addEventListener("click",e=>{if(e.target===o||e.target.closest(".x"))pnuClose()});document.addEventListener("keydown",pnuKey);document.body.appendChild(o);pnuTick();try{sfx("big")}catch(e){}}
+function pnuLinks(){const on=pnuLeft()>0;document.body.classList.toggle("pnu-on",on);
+ if(!on){const a=$("elite-pnu");if(a)a.remove();const m=$("pid-pnu-menu");if(m)m.remove();return}
+ if(!$("elite-pnu")){const a=document.createElement("div");a.id="elite-pnu";a.setAttribute("role","button");a.tabIndex=0;a.setAttribute("aria-label",LS("Prochaine mise à jour : compte à rebours","Next update: countdown"));
+  a.innerHTML=`<span class="pb"></span><b>${LS("Prochaine mise à jour","Next update")}</b><small>${LS("jusqu'à lundi minuit","until Monday midnight")}</small><em></em>`;
+  a.addEventListener("click",pnuOpen);a.addEventListener("keydown",e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();pnuOpen()}});document.body.appendChild(a)}
+ const u=$("utl");if(u&&!$("pid-pnu-menu")){const a=document.createElement("button");a.id="pid-pnu-menu";a.type="button";a.className="qkb";a.innerHTML=`<span class="qki" style="--c1:#a21caf;--c2:#6d28d9"><span class="pb" style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #fff;background:linear-gradient(180deg,#fb7185 0 46%,#fff 46%)"></span></span><span class="qkt"><b>${LS("Prochaine mise à jour","Next update")}</b><small>${LS("Compte à rebours jusqu'à lundi minuit","Countdown until Monday midnight")}</small></span>`;a.addEventListener("click",pnuOpen);u.appendChild(a)}
+ pnuTick()}
+pnuLinks();setInterval(pnuLinks,3000);setInterval(pnuTick,1000);
+
 /* ===== Suggestions et bugs : bouton en bas à gauche ; les messages arrivent dans le courrier du propriétaire (#7458921) ===== */
 const SUG_PID="#7458921",SUG_ICON='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10h7M8.5 13.5h4.5"/></svg>';
 {const st=document.createElement("style");st.id="pid-suggest-styles";st.textContent=`
@@ -14959,4 +15028,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-evo-20261024h"><script src="dungeon-immersive.js?v=pid-evo-20261024h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-evo-20261024h"><script src="collection-scenes.js?v=pid-evo-20261024h"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-pnu-20261024i"><script src="dungeon-immersive.js?v=pid-pnu-20261024i"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-pnu-20261024i"><script src="collection-scenes.js?v=pid-pnu-20261024i"></script></body></html>
