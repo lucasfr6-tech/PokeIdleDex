@@ -100,7 +100,7 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  if(!isFinite(+G.bf)||n(G.bf)<0||n(G.bf)>2500||n(G.cl)>2500||n(G.fl)>2500)r.push('etage impossible '+n(G.bf)+'/'+n(G.cl)+'/'+n(G.fl));
  /* valeurs impossibles dans les Pokemon : signe d'une modification de la partie */
  let bad=0;for(const i of ids){const c=col[i];if(!c||typeof c!='object')continue;
-  if(n(c.mi)>10||n(c.mi)<0||n(c.zi)>6||n(c.zi)<0||n(c.l)>500||n(c.n)<0)bad++;
+  if(n(c.mi)>11||n(c.mi)<0||n(c.zi)>7||n(c.zi)<0||n(c.l)>500||n(c.n)<0)bad++;
   else if(Array.isArray(c.iv)&&c.iv.some(v=>n(v)>31||n(v)<0))bad++;
   else if(Array.isArray(c.ev)&&(c.ev.some(v=>n(v)>252||n(v)<0)||c.ev.reduce((a,v)=>a+n(v),0)>510))bad++}
  if(bad>0)r.push('pokemon impossibles : '+bad+' (iv/ev/mutation/taille/niveau hors limites)');
@@ -162,7 +162,7 @@ function actBossState(k){
 function actBossChanged(k,before){if(!k||!before||before.dead||db.activity.boss[k])return;const now=actBossState(k);if(!now.dead)return;db.activity.boss[k]=Date.now();const keys=Object.keys(db.activity.boss);if(keys.length>50)keys.sort((a,b)=>db.activity.boss[b]-db.activity.boss[a]).slice(40).forEach(k=>delete db.activity.boss[k]);actAdd({kind:'worldboss',uid:'server',n:'Communauté',cycle:String(k).slice(0,64)},'boss:'+k)}
 function actAccept(uid,ev){
  if(!ev||!['shiny','mutation','size'].includes(ev.kind)||!/^[a-z0-9_-]{8,80}$/i.test(String(ev.k||'')))return false;
- const id=+ev.id,mi=+ev.mi,zi=+ev.zi;if(!Number.isInteger(id)||!((id>=1&&id<=1025)||(id>=90001&&id<=90099))||!Number.isInteger(mi)||mi<0||mi>10||!Number.isInteger(zi)||zi<0||zi>6)return false;
+ const id=+ev.id,mi=+ev.mi,zi=+ev.zi;if(!Number.isInteger(id)||!((id>=1&&id<=1025)||(id>=90001&&id<=90099))||!Number.isInteger(mi)||mi<0||mi>11||!Number.isInteger(zi)||zi<0||zi>7)return false;
  if(ev.kind==='shiny'&&!ev.sh||ev.kind==='mutation'&&!ACT_RARE.has(mi)||ev.kind==='size'&&zi<4)return false;
  const p=db.lb[uid].d,mf=+ev.mf||0,hfv=['','normal','heat','wash','frost','fan','mow','altered','origin'].includes(ev.hfv)?ev.hfv:'';
  return actAdd({kind:ev.kind,uid,n:actName(p),tt:/^[a-z0-9_-]{1,32}$/i.test(String(p.tt||''))?p.tt:'t0',p:id,sh:ev.sh?1:0,mi,zi,hf:ev.hf?1:0,hfv,mf:Number.isInteger(mf)&&mf>=10001&&mf<=11000?mf:0},uid+':'+ev.k)}
