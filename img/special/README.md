@@ -27,3 +27,5 @@ Sprites supplied by the owner in `pokeIdleDex Game.zip`, copied unchanged. Origi
 
 In-game exclusive species: 90007 (Lugia Ombre, Battle Pass season 2 level 50, Premium) and 90008 (Mewtwo Black, level 100, Premium).
 - mewtwo-black-mega-x/y(.png, -shiny.png): Mewtwo Black Mega X/Y (recolored from Mega Mewtwo sprites; black palette)
+
+- `booster-equilibre.png` : image du booster Équilibre (boutique de cartes, ouverture animée).
