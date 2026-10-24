@@ -97,11 +97,22 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  if(sh>n(G.mut)+40||mu>n(G.mut)+40)r.push('chromatiques/mutes possedes '+sh+'/'+mu+' pour '+n(G.mut)+' mutations captees');
  if(n(G.caps)>n(G.ko)*3+500)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
  if(G.tw&&(!Number.isFinite(+G.tw.b)||n(G.tw.b)>700))r.push('tour etage '+n(G.tw.b));
+ if(!isFinite(+G.bf)||n(G.bf)<0||n(G.bf)>2500||n(G.cl)>2500||n(G.fl)>2500)r.push('etage impossible '+n(G.bf)+'/'+n(G.cl)+'/'+n(G.fl));
+ /* valeurs impossibles dans les Pokemon : signe d'une modification de la partie */
+ let bad=0;for(const i of ids){const c=col[i];if(!c||typeof c!='object')continue;
+  if(n(c.mi)>10||n(c.mi)<0||n(c.zi)>6||n(c.zi)<0||n(c.l)>500||n(c.n)<0)bad++;
+  else if(Array.isArray(c.iv)&&c.iv.some(v=>n(v)>31||n(v)<0))bad++;
+  else if(Array.isArray(c.ev)&&(c.ev.some(v=>n(v)>252||n(v)<0)||c.ev.reduce((a,v)=>a+n(v),0)>510))bad++}
+ if(bad>0)r.push('pokemon impossibles : '+bad+' (iv/ev/mutation/taille/niveau hors limites)');
+ /* objets en quantite absurde */
+ const inv=G.inv&&typeof G.inv=='object'?G.inv:{};let big=0;for(const k in inv){if(!isFinite(+inv[k])||n(inv[k])>1e12||n(inv[k])<0)big++}
+ if(big>0)r.push('objets en quantite impossible : '+big);
+ if(!isFinite(+G.gem)||n(G.gem)<0||n(G.gem)>1e9)r.push('gemmes '+G.gem);
  return r};
 // Clear only obsolete Tower-limit flags, retaining every other moderation reason.
 for(const uid of Object.keys(db.flag)){const f=db.flag[uid];if(!f||!Array.isArray(f.s))continue;const next=f.s.filter(x=>{const m=/^tour etage (\d+)$/.exec(x);return !m||+m[1]>700});if(next.length!==f.s.length)setFlag(uid,'s',next)}
 const ckT=new Map();
-const lbSus=d=>{const r=[],n=x=>+x||0;if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
+const lbSus=d=>{const r=[],n=x=>+x||0;if(!isFinite(+d.bf)||n(d.bf)<0||n(d.bf)>2500)r.push('classement : etage impossible '+d.bf);if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
 setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 /* connexion Discord (OAuth2) : le secret reste dans l'environnement du serveur (DISCORD_SECRET), jamais dans le jeu */
