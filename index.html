@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-thanks-20261024b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-thanks-20261024b"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-wbtier-20261024c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-wbtier-20261024c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4643,7 +4643,7 @@ function pwInfer(id,c){if(id>9e4)return id===90005?"t7":"sp";const S=pwSets();le
   else if(S&&S.fz[id]!=null)k="f"+S.fz[id];
   else k=["wN","wSR","wSSR","wUR"][Math.min(3,Math.max(0,pr(id)|0))]}catch(e){k="wN"}
  if(c.mf)k=pwBest(k,"mg");return k}
-function pwTier(id){const c=G.col[id];if(!c)return"wN";const key=(c.src||"")+"|"+(c.hf?1:0)+"|"+(c.mf||0)+"|"+(PWS?1:0)+"|"+(pwZP()?1:0);const m=PWC.get(id);if(m&&m[0]===key)return m[1];
+function pwTier(id){const c=G.col[id];if(!c)return"wN";if(c.wbf>0&&c.src!=="wb"&&id<9e4&&!c.hf){c.src="wb";c.srq=1}const key=(c.src||"")+"|"+(c.hf?1:0)+"|"+(c.mf||0)+"|"+(PWS?1:0)+"|"+(pwZP()?1:0);const m=PWC.get(id);if(m&&m[0]===key)return m[1];
  let k=(c.src&&PWTV[c.src]&&!(c.hf||id>9e4))?(c.mf?pwBest(c.src,"mg"):c.src):pwInfer(id,c);
  /* palier figé dès que les zones définitives sont connues : il ne peut plus changer tout seul en cours de partie */
  if(!c.src&&!c.hf&&id<9e4&&!pwZP()&&PWS&&DB[id]&&(DB[id].ch==null||EVC[DB[id].ch])){c.src=c.mf?pwInfer(id,Object.assign({},c,{mf:0})):k}
@@ -14210,6 +14210,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-24",t:["Palier Boss monde","World boss tier"],e:[["fix","Un Pokémon capturé au boss monde garde le palier Boss monde","Un Pokémon obtenu au boss monde garde maintenant toujours le palier Boss monde (et non le palier LR ou un autre), même s’il est ensuite rencontré ailleurs.","World boss tier kept","A Pokémon obtained from the world boss now always keeps the World boss tier (not the LR or another tier), even if it is met elsewhere afterwards."]]},
  {d:"2026-10-24",t:["Merci à vous","Thank you"],e:[["new","Message de remerciement et cadeau","Les joueurs ayant au moins 45 minutes de jeu reçoivent un message de remerciement à leur prochaine connexion, avec un cadeau : 10 Master Balls, 10 Patchs Talent, 10 Capsules d’Or, 10 de chaque objet de combat et un Pokémon chromatique aléatoire.","Thank-you message and gift","Players with at least 45 minutes of play get a thank-you message on their next visit, with a gift: 10 Master Balls, 10 Ability Patches, 10 Gold Bottle Caps, 10 of each battle item and a random shiny Pokémon."]]},
  {d:"2026-10-24",t:["Boss monde","World boss"],e:[["fix","Le bonus du boss monde est conservé à l’évolution","Un Pokémon obtenu au boss monde qui évolue vers un Pokémon que tu possèdes déjà garde maintenant son niveau de boss (jusqu’à +67 % de puissance). Avant, ce bonus était perdu.","World boss bonus kept on evolution","A Pokémon from the world boss that evolves into one you already own now keeps its boss tier (up to +67% power). Before, that bonus was lost."]]},
  {d:"2026-10-23",t:["Steelix Cristallin","Crystal Steelix"],e:[["fix","Steelix Cristallin garde le meilleur","Quand tu captures un Steelix normal, le Steelix Cristallin récupère aussi sa meilleure taille, son Alpha et son statut chromatique en plus de la mutation. Laboratoire et entraînement vérifiés.","Crystal Steelix keeps the best","When you catch a regular Steelix, Crystal Steelix now also takes its best size, Alpha and shiny status on top of the mutation. Laboratory and training checked."]]},
@@ -14941,4 +14942,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-thanks-20261024b"><script src="dungeon-immersive.js?v=pid-thanks-20261024b"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-thanks-20261024b"><script src="collection-scenes.js?v=pid-thanks-20261024b"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-wbtier-20261024c"><script src="dungeon-immersive.js?v=pid-wbtier-20261024c"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-wbtier-20261024c"><script src="collection-scenes.js?v=pid-wbtier-20261024c"></script></body></html>
