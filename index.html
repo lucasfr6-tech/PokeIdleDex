@@ -14010,6 +14010,73 @@ document.addEventListener("click",e=>{const m=e.target.closest&&e.target.closest
  else if(a=="start")return dgStart();else if(a=="quit"){const r=DG().run;if(r&&confirmQuit())dgEnd(false,LS("Tentative abandonnée. Fragments non sécurisés perdus : "+r.frag+".","Attempt abandoned. Unsecured shards lost: "+r.frag+"."));return}
  else if(a=="path")return dgChoose(v);else if(a=="cap")return dgCapture();else if(a=="capx")return dgCapClose();else if(a=="rel")return dgRelPick(v);else if(a=="shop")return dgShop(v);else if(a=="alt")return dgAltar(v=="1");else if(a=="evt")return dgEvt(v=="1");
  show();scrollTo(0,y)});
+/* ===================== DONJONS : cristaux dans les coffres, paliers, quête de Pass, boutique d'Écho ===================== */
+const DGLV=[50,100,150,200,300,400],dgLvF=lv=>1+.35*Math.max(0,DGLV.indexOf(+lv));
+const dgTcN=["Éclat","Prisme","Astral"];
+/* 1. Coffres : des cristaux de trait, de meilleure qualité en profondeur (Astral à partir de la salle 30) */
+function dgChestBonus(r,e){const room=r.room|0,ix=Math.max(0,DGLV.indexOf(+r.lv)),f=1+.25*ix,R=Math.random;
+ const a=Math.max(1,Math.round((1+Math.floor(room/12))*f)),pc=Math.min(.9,(.12+room*.014)*(1+.15*ix)),xc=room>=30?Math.min(.5,(room-28)*.02*(1+.15*ix)):0;
+ const p=R()<pc?1+(room>=40?1:0)+(ix>=3?1:0):0,x=R()<xc?1:0;
+ try{trxGive(a,p,x,LS("coffre","chest"))}catch(er){}
+ const L=[a+" "+dgTcN[0]];if(p)L.push(p+" "+dgTcN[1]);if(x)L.push(x+" "+dgTcN[2]);dgLog(r,LS("Cristaux de trait : ","Trait crystals: ")+L.join(" · "))}
+/* 2. Paliers : une récompense la première fois qu'on bat le gardien d'une salle multiple de 10, plus grosse tous les 50 */
+function dgMsRw(room,lv){const m=room/10,f=dgLvF(lv),R={g:Math.round((2+m)*f),it:{"rare-candy":Math.round((3+m)*f)},tc:[Math.round((2+m/2)*f),0,0]};
+ if(m%2==0){R.it["max-revive"]=Math.round(1+m/4*f);R.it["dream-ball"]=Math.round((3+m/2)*f)}
+ if(m%3==0)R.tc[1]=1+(m>=6?1:0);
+ if(m%4==0)R.it["bottle-cap"]=1+Math.floor(m/8);
+ if(m%5==0){R.g*=4;R.it["gold-bottle-cap"]=1+Math.floor(m/10);R.it["ability-patch"]=1+Math.floor(m/20);R.it["master-ball"]=Math.max(1,Math.floor(m/5));R.it["ability-capsule"]=2;R.tc[1]+=3;R.tc[2]=1+Math.floor(m/10);R.big=1}
+ return R}
+const dgMsKey=(lv,room)=>lv+"_"+room;
+const dgMsDone=(lv,room)=>!!(DG().mc&&DG().mc[dgMsKey(lv,room)]);
+function dgRwTxt(R){const L=[];if(R.g)L.push(R.g+" "+LS("gemmes","gems"));for(const k in R.it)if(IT[k])L.push(IT[k].n+" ×"+R.it[k]);R.tc.forEach((n,i)=>{if(n)L.push(n+" "+dgTcN[i])});return L}
+function dgMsGive(room,lv){const d=DG();d.mc=d.mc||{};const k=dgMsKey(lv,room);if(d.mc[k])return false;d.mc[k]=1;const R=dgMsRw(room,lv);G.gem=(G.gem||0)+R.g;(window.capBuy||(f=>f()))(()=>{for(const it in R.it)G.inv[it]=(G.inv[it]||0)+R.it[it]});try{trxGive(R.tc[0],R.tc[1],R.tc[2])}catch(e){}
+ const r=d.run,tx=LS("Palier salle "+room+" : ","Room "+room+" milestone: ")+dgRwTxt(R).join(" · ");if(r)dgLog(r,tx);try{toast(tx);sfx("big")}catch(e){}save();return true}
+{const f=dgAfter;dgAfter=function(R){let boss=0,room=0,lv=0;try{const r=DG().run;if(r){const e=r.ents.find(x=>x.t=="foe");boss=!!(e&&e.bos);room=r.room;lv=r.lv}}catch(e){}const o=f.apply(this,arguments);try{if(boss&&R&&R.over=="win"&&room%10==0)dgMsGive(room,lv)}catch(e){}return o}}
+/* 3. Quête de Pass journalière : atteindre la salle X en donjon (XP de Pass et cristaux) */
+BQD.push({id:"dg",k:"dgd",ic:"dng",f:["Atteindre la salle {n} en donjon (+ cristaux)","Reach room {n} in a dungeon (+ crystals)"],t:{d:()=>Math.max(5,Math.min(40,Math.round((DG().best||0)*.5+4)))},ok:()=>!lockOf("dng")});
+{const f=bqGen;bqGen=function(p){const o=f.apply(this,arguments);try{if(p=="d"&&!o.ids.includes("dg")){const q=BQD.find(x=>x.id=="dg");if(q&&(!q.ok||q.ok())){const old=o.ids[o.ids.length-1];delete o.tg[old];o.ids[o.ids.length-1]="dg";const v=q.t.d;o.tg.dg=qnice(typeof v=="function"?v():v)}}}catch(e){}return o}}
+{const f=dgExit;dgExit=function(){const o=f.apply(this,arguments);try{const d=DG(),r=d.run;if(r){const k=qKey("d");if(!d.db||d.db.k!==k)d.db={k,v:0};if(r.room>d.db.v){qadd("dgd",r.room-d.db.v);d.db.v=r.room}}}catch(e){}return o}}
+{const f=bpCredit;bpCredit=function(p){let hit=0;try{const I=BPS()[p];if(I&&I.cl&&!I.cl.dg&&bqList(p).some(s=>s.id=="dg"&&s.done&&!s.cl))hit=1}catch(e){}const o=f.apply(this,arguments);if(hit){try{bpAddXp(150);trxGive(4,1,0,LS("quête donjon","dungeon quest"))}catch(e){}}return o}}
+/* 4. Boutique d'Écho : les fragments deviennent une vraie monnaie (stock limité par jour ou par semaine) */
+const dgBoost=n=>BOOST.findIndex(b=>b.n==n);
+function dgCard(q){const L=CBY[q],id=L[Math.random()*L.length|0];G.cards[id]=(G.cards[id]||0)+1;try{checkAch()}catch(e){}toast(LS("Carte obtenue : ","Card obtained: ")+nm(id))}
+function dgFreeBooster(k){const B=BOOST[k];if(!B)return;const m0=G.m,n0=BNP;BNP=1;G.m=Math.max(G.m,B.p);try{openBooster(k)}finally{G.m=m0;BNP=n0}}
+const DGSHOP=[
+ {k:"cA",n:["Cristaux Éclat ×5","Shard crystals ×5"],c:20,l:10,ic:"c0",g:()=>trxGive(5,0,0)},
+ {k:"cP",n:["Cristal Prisme ×1","Prism crystal ×1"],c:45,l:8,ic:"c1",g:()=>trxGive(0,1,0)},
+ {k:"cX",n:["Cristal Astral ×1","Astral crystal ×1"],c:180,l:3,ic:"c2",g:()=>trxGive(0,0,1)},
+ {k:"ca",n:["Super Bonbon ×5","Rare Candy ×5"],c:30,l:10,g:()=>{G.inv["rare-candy"]=(G.inv["rare-candy"]||0)+5}},
+ {k:"rv",n:["Rappel Max ×3","Max Revive ×3"],c:36,l:5,g:()=>{G.inv["max-revive"]=(G.inv["max-revive"]||0)+3}},
+ {k:"db",n:["Rêve Ball ×5","Dream Ball ×5"],c:60,l:5,g:()=>{G.inv["dream-ball"]=(G.inv["dream-ball"]||0)+5}},
+ {k:"bc",n:["Capsule d'Argent ×1","Silver Cap ×1"],c:90,l:3,g:()=>{G.inv["bottle-cap"]=(G.inv["bottle-cap"]||0)+1}},
+ {k:"ac",n:["Pilule Talent ×1","Ability Pill ×1"],c:110,l:3,g:()=>{G.inv["ability-capsule"]=(G.inv["ability-capsule"]||0)+1}},
+ {k:"gb",n:["Capsule d'Or ×1","Gold Cap ×1"],c:420,l:1,g:()=>{G.inv["gold-bottle-cap"]=(G.inv["gold-bottle-cap"]||0)+1}},
+ {k:"ap",n:["Patch Talent ×1","Ability Patch ×1"],c:380,l:1,g:()=>{G.inv["ability-patch"]=(G.inv["ability-patch"]||0)+1}},
+ {k:"mb",n:["Master Ball ×1","Master Ball ×1"],c:500,l:1,g:()=>{G.inv["master-ball"]=(G.inv["master-ball"]||0)+1}},
+ {k:"gm",n:["Gemmes ×10","Gems ×10"],c:200,l:3,g:()=>{G.gem=(G.gem||0)+10}},
+ {k:"b4",n:["Booster Prisme","Prism booster"],c:120,l:5,g:()=>dgFreeBooster(4)},
+ {k:"bq",n:["Booster Équilibre","Balance booster"],c:700,l:2,ok:()=>dgBoost("Équilibre")>=0,g:()=>dgFreeBooster(dgBoost("Équilibre"))},
+ {k:"cd",n:["Carte épique aléatoire","Random epic card"],c:300,l:2,g:()=>dgCard(4)},
+ {k:"tp",n:["Ticket Premium (Pass de combat)","Premium ticket (Battle Pass)"],c:4000,l:1,w:1,g:()=>{G.inv["bp-ticket"]=(G.inv["bp-ticket"]||0)+1}}];
+function dgShopN(it){const d=DG();d.sh=d.sh||{};const dk=qKey("d"),wk=qKey("w");if(d.sh.d!==dk){d.sh.d=dk;d.sh.n={}}if(d.sh.w!==wk){d.sh.w=wk;d.sh.nw={}}return (it.w?d.sh.nw:d.sh.n)[it.k]||0}
+function dgShopBuy(k){const it=DGSHOP.find(x=>x.k==k);if(!it||(it.ok&&!it.ok()))return;const used=dgShopN(it);if(used>=it.l)return toast(LS("Stock épuisé pour "+(it.w?"cette semaine.":"aujourd'hui."),"Out of stock for "+(it.w?"this week.":"today.")));if(ECH()<it.c)return toast(LS("Il te manque "+(it.c-ECH())+" fragments d'Écho.","You are missing "+(it.c-ECH())+" Echo shards."));
+ G.ech=ECH()-it.c;const d=DG();(it.w?d.sh.nw:d.sh.n)[it.k]=used+1;try{(window.capBuy||(f=>f()))(()=>it.g())}catch(e){G.ech=ECH()+it.c;(it.w?d.sh.nw:d.sh.n)[it.k]=used;return}try{sfx("coin")}catch(e){}if(!/^b|^cd$/.test(it.k))toast(LS("Acheté : ","Bought: ")+LS(it.n[0],it.n[1]));save();show()}
+function dgxNav(s){return `<div class="dgx-nav">${[["run",LS("Expédition","Expedition"),"dng"],["shop",LS("Boutique d'Écho","Echo shop"),"bag"],["ms",LS("Paliers","Milestones"),"gift"]].map(x=>`<button class="${s==x[0]?"on":""}" data-dgx="sec" data-v="${x[0]}">${ico(x[2])} ${x[1]}</button>`).join("")}</div>`}
+function dgxShop(){const w=ECH();return `<section class="dgx-box"><h3>${LS("Boutique d'Écho","Echo shop")}</h3><p>${LS("Dépense tes fragments d'Écho sécurisés contre des cristaux de trait, des objets rares, des boosters et des cartes. Les stocks se renouvellent chaque jour (chaque semaine pour le Ticket Premium).","Spend your secured Echo shards on trait crystals, rare items, boosters and cards. Stock refreshes daily (weekly for the Premium ticket).")}</p><div class="dgx-wal">${ico("echo")}<b>${fmt(w)}</b> ${LS("fragments","shards")}</div>
+ <div class="dgx-grid">${DGSHOP.filter(it=>!it.ok||it.ok()).map(it=>{const left=it.l-dgShopN(it),ok=left>0&&w>=it.c;return `<button class="dgx-it${ok?"":" off"}" data-dgx="buy" data-v="${it.k}" ${ok?"":"disabled"}><span class="dgx-ic">${it.ic?bpTcI(+it.ic[1]):ico("bag")}</span><b>${LS(it.n[0],it.n[1])}</b><span class="dgx-pr">${ico("echo")} ${fmt(it.c)}</span><small>${left>0?LS("Reste ","Left ")+left+" / "+it.l:LS("Épuisé","Sold out")}</small></button>`}).join("")}</div></section>`}
+function dgxMs(){const lv=+DGUI.lv||50,d=DG();let first=10;while(dgMsDone(lv,first)&&first<2000)first+=10;const rooms=[];for(let r=first;rooms.length<8;r+=10)rooms.push(r);
+ return `<section class="dgx-box"><h3>${LS("Paliers du donjon","Dungeon milestones")}</h3><p>${LS("Bats le gardien d'une salle multiple de 10 pour la première fois et gagne une récompense garantie, plus grosse tous les 50. Chaque niveau de difficulté a ses propres paliers.","Beat the guardian of a room that is a multiple of 10 for the first time to earn a guaranteed reward, bigger every 50. Each difficulty level has its own milestones.")}</p>
+ <div class="dgx-lvs">${DGLV.map(l=>`<button class="${lv==l?"on":""}" data-dgx="lv" data-v="${l}">${LS("Niv. ","Lv. ")}${l}</button>`).join("")}</div>
+ <div class="dgx-ms">${rooms.map(r=>{const R=dgMsRw(r,lv),done=dgMsDone(lv,r);return `<div class="dgx-m${R.big?" big":""}${done?" done":""}"><b>${LS("Salle ","Room ")}${r}</b><div>${dgRwTxt(R).map(t=>`<span>${esc(t)}</span>`).join("")}</div><small>${done?LS("Obtenu","Claimed"):(d.best>=r?LS("Atteinte, bats le gardien","Reached, beat the guardian"):LS("À débloquer","Locked"))}</small></div>`}).join("")}</div></section>`}
+{const v0=vDng;vDng=function(){let h=v0.apply(this,arguments);try{const d=DG();if(d.run||lockOf("dng"))return h;const s=DGUI.sec||"run",i=h.indexOf("</header>");if(i<0)return h;const hd=h.slice(0,i+9),nav=dgxNav(s);if(s=="shop")return hd+nav+dgxShop()+"</div>";if(s=="ms")return hd+nav+dgxMs()+"</div>";return hd+nav+h.slice(i+9)}catch(e){return h}};window.vDng=vDng}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-dgx]");if(!b||tab!="dng")return;e.preventDefault();const a=b.dataset.dgx,v=b.dataset.v,y=scrollY;if(a=="sec")DGUI.sec=v;else if(a=="lv")DGUI.lv=+v;else if(a=="buy"){dgShopBuy(v);return}show();scrollTo(0,y)});
+{const st=document.createElement("style");st.id="pid-dgx";st.textContent=`.dgx-nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.dgx-nav button{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid #3b3566;background:#1e1b33;color:#e8ecff;font-weight:800;cursor:pointer}.dgx-nav button .i{width:18px;height:18px}.dgx-nav button.on{border-color:#a78bfa;background:#4c1d95}
+.dgx-box{border:1px solid #3b3566;background:#171430;border-radius:16px;padding:18px;margin-bottom:16px}.dgx-box h3{margin:0 0 6px;font:800 22px "Baloo 2",Nunito,sans-serif}.dgx-box>p{color:#a9b8d4;font-size:13px;margin:0 0 12px}
+.dgx-wal{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:#0d0a22;border:1px solid #3b3566;margin-bottom:14px;font-weight:800}.dgx-wal .i{width:18px;height:18px;color:#c4b5fd}
+.dgx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}.dgx-it{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:14px 10px;border-radius:14px;border:2px solid #3b3566;background:#1e1b33;color:#fff;cursor:pointer}.dgx-it:hover:not(:disabled){border-color:#a78bfa}.dgx-it.off{opacity:.5;cursor:not-allowed}.dgx-ic .i{width:30px;height:30px}.dgx-it b{font-size:13px}.dgx-pr{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;background:#4c1d95;font-weight:900;font-size:12px}.dgx-pr .i{width:14px;height:14px}.dgx-it small{color:#a9b8d4;font-size:11px}
+.dgx-lvs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.dgx-lvs button{padding:7px 12px;border-radius:10px;border:1px solid #3b3566;background:#1e1b33;color:#fff;font-weight:800;cursor:pointer}.dgx-lvs button.on{border-color:#a78bfa;background:#4c1d95}
+.dgx-ms{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}.dgx-m{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;border:1px solid #3b3566;background:#1e1b33}.dgx-m.big{border-color:#fbbf24;background:linear-gradient(150deg,#3a2a0a,#1e1b33)}.dgx-m.done{opacity:.55}.dgx-m div{display:flex;flex-wrap:wrap;gap:5px}.dgx-m div span{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:#ffffff14}.dgx-m small{color:#a9b8d4;font-size:11px;font-weight:800}`;document.head.appendChild(st)}
+
 let DGQ=0;function confirmQuit(){const n=Date.now();if(n-DGQ<3000)return true;DGQ=n;toast(LS("Clique encore sur « Abandonner » pour confirmer.","Click “Abandon” again to confirm."));return false}
 document.addEventListener("keydown",e=>{if(tab!="dng"||!DG().run||RB2)return;const t=e.target;if(t&&/INPUT|TEXTAREA|SELECT/.test(t.tagName))return;const k=e.key.toLowerCase(),M={z:[0,-1],w:[0,-1],arrowup:[0,-1],s:[0,1],arrowdown:[0,1],q:[-1,0],a:[-1,0],arrowleft:[-1,0],d:[1,0],arrowright:[1,0]}[k];if(M){e.preventDefault();dgMove(M[0],M[1])}});
 /* une tentative prend fin au prestige ; les fragments sécurisés et la recherche sont conservés */
@@ -14408,7 +14475,7 @@ function trxCapBonus(){if(TRXCAPK===TK)return TRXCAPV;TRXCAPK=TK;let m=0;try{for
 {const f=capPct;capPct=function(e,bl){const r=f.apply(this,arguments);if(r>=1||!trxCapBonus())return r;return Math.min(.95,r*(1+trxCapBonus()/100))}}
 /* source des cristaux */
 function trxGive(a,p,x,why){const t=TRXO();t.cr[0]+=a;t.cr[1]+=p;t.cr[2]+=x;const L=[];if(a)L.push(a+" "+LS("Éclat","Shard"));if(p)L.push(p+" Prisme");if(x)L.push(x+" Astral");if(L.length){try{toast(LS("Cristaux de trait : +","Trait crystals: +")+L.join(" · ")+(why?" ("+why+")":""))}catch(e){}save()}}
-{const f=dgEnd;dgEnd=function(win,msg){let r0=null;try{const r=DG().run;if(r)r0=r.room-(win?0:1)}catch(e){}const o=f.apply(this,arguments);try{if(r0>0)trxGive(r0,Math.floor(r0/8)+(win?1:0),Math.floor(r0/40),LS("donjon","dungeon"))}catch(e){}return o}}
+{const f=dgEnd;dgEnd=function(win,msg){let r0=null;try{const r=DG().run;if(r)r0=r.room-(win?0:1)}catch(e){}const o=f.apply(this,arguments);try{if(r0>0)trxGive(Math.floor(r0/5),0,0,LS("donjon","dungeon"))}catch(e){}return o}}
 {const f=rdFinish;rdFinish=function(R){const r=f.apply(this,arguments);try{if(R&&R.kind!="dng"&&R.over=="win"){const t=R.tier|0;trxGive(2+3*t,t>=2?t-1:0,t>=4?t-3:0,"raid")}}catch(e){}return r}}
 setInterval(()=>{try{const t=TRXO(),b=twS().b|0;if(!t.tw)t.tw=b;if(b>t.tw){let a=0,p=0,x=0;for(let f=t.tw+1;f<=b;f++){a++;if(f%25==0)p++;if(f%100==0)x++}t.tw=b;trxGive(a,p,x,LS("étages","floors"))}}catch(e){}},3000);
 /* bonus appliqués au Pokémon (dégâts, pièces, expérience) */
