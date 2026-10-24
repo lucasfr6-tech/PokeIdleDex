@@ -1,0 +1,90 @@
+/* Material scenes, pedestals and signatures for exclusive Pokémon. */
+[data-cosx]{background:none!important;animation:none!important}
+.cos-stage,.cos-sw{background:#111522!important}
+.cs-scene{position:relative;isolation:isolate;overflow:hidden!important;background:#202436!important}
+.cs-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+.cs-scene>*:not(.cs-canvas):not(.cs-sign){position:relative;z-index:2}
+.cs-scene>.cs-sign{position:absolute!important;left:12px;bottom:8px;z-index:4;max-width:calc(100% - 24px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:none;font:italic 700 13px Georgia,serif;letter-spacing:.02em;color:#ffe8bd;text-shadow:0 1px 2px #16111e}
+.cs-sign.cs-metal,.cs-sign.cs-plate{font-style:normal;background:#a77951;color:#251c22;border:2px ridge #ebbb81;padding:3px 8px;text-shadow:0 1px #e9c99b;box-shadow:2px 2px 0 #191725}
+.cs-sign.cs-wax{font-style:normal;font-variant:small-caps;padding-left:32px;color:#f9dbc8}
+.cs-sign.cs-wax:before{content:'✦';position:absolute;left:0;top:0;width:25px;height:25px;line-height:20px;text-align:center;border-radius:50%;background:#923d4d;border:3px ridge #c06d70;color:#f6d4c3}
+.cs-sign.cs-stone{font-style:normal;color:#2a2734;background:#b6afa9;border:2px solid #766d75;padding:2px 8px;text-shadow:0 1px #eee0d4}
+.cs-sign.cs-scroll{font-style:normal;background:#e1cba7;color:#34263a;padding:3px 12px;clip-path:polygon(0 0,100% 0,97% 50%,100% 100%,0 100%,3% 50%);text-shadow:none}
+.cs-sign.cs-leaf{color:#deedbc;border-bottom:2px solid #8db790}
+.cs-sign.cs-crystal{font-style:normal;color:#dcf8ff;border-bottom:2px solid #b4e9f7;letter-spacing:.12em}
+.cs-sign.cs-velvet{background:#5a354c;color:#f4d4ae;border:1px solid #b18a78;padding:3px 10px}
+.cs-sign.cs-shell{background:#e3d0c0;color:#4d3346;border:1px solid #9e8399;border-radius:2px 10px 2px 10px;padding:3px 10px;text-shadow:none}
+.cs-sign.cs-glass{background:#b6aacf7a;border:1px solid #d8cbe5;padding:3px 10px;color:#fcf0ff}
+.cs-sign.cs-engraved{border-bottom:1px solid #cfb998}
+/* Existing circular cosmetic effects and old generic signatures are hidden. */
+.cs-scene .signature-decor,.cs-scene .signature-label,.cs-scene .cos-sig,.cs-profile .pqgl,.cs-profile .pqsh{display:none!important}
+.cs-atlas{min-height:172px!important;padding-bottom:26px!important;border-color:#a9888c!important}
+.cs-atlas>.spw,.cs-atlas>.atlas-info{z-index:2!important;position:relative}
+.cs-atlas .spw{min-height:125px!important;align-self:center}
+.cs-atlas .cs-sign{font-size:13px;bottom:7px;left:15px}
+.cs-profile{border-radius:14px;border:1px solid #bd9d91;height:260px!important;align-items:center!important;box-shadow:inset 0 0 0 2px #cfbbae33}
+.cs-profile .sp{max-height:210px!important;max-width:190px!important;object-fit:contain!important;align-self:center!important;z-index:2!important;filter:drop-shadow(0 12px 3px #1b1222aa)}
+.cs-profile .cs-sign{bottom:9px;left:12px}
+.cs-ranking{background-image:none!important;min-height:270px!important;padding-bottom:31px!important}
+.cs-ranking>.cs-canvas{z-index:-1}
+.cs-ranking>*:not(.cs-canvas):not(.cs-sign){z-index:2;position:relative}
+.cs-ranking .rkb-podium-sprite{height:134px!important;min-height:134px!important;overflow:visible!important}
+.cs-ranking .rkb-podium-sprite .hv{width:125px!important;height:125px!important}
+.cs-ranking .rkb-podium-sprite .hvi{max-width:125px!important;max-height:125px!important;object-fit:contain!important}
+.cs-ranking.rkb-large{min-height:125px!important;padding-bottom:28px!important}
+.cs-ranking.rkb-large .cs-sign{font-size:11px;bottom:5px;left:12px}
+.cs-ranking.rkb-large .rkb-s{overflow:visible!important}
+.cs-ranking:before{display:none!important}
+.ph-entry-button.cs-ranking{background:#222637!important;color:#fff!important;min-height:300px!important;padding-bottom:36px!important;border:1px solid #b99b83!important;border-radius:14px!important}
+.ph-entry-button.cs-ranking .ph-art{overflow:visible!important}
+.ph-entry-button.cs-ranking .ph-art img{object-fit:contain!important}
+.ph-entry-button.cs-ranking .ph-person>b,.ph-entry-button.cs-ranking .ph-score strong{color:#fff3d8!important;text-shadow:0 2px 5px #12121c}
+.ph-entry-button.cs-ranking .ph-person .ph-subtitle,.cs-ranking .rkb-podium-owner,.cs-ranking .rkb-t small{color:#17202a!important;background:#f8f3e8e8;border:1px solid #fff9;border-radius:6px;padding:2px 7px;text-shadow:none!important;font-weight:900!important;width:max-content;max-width:100%;box-shadow:0 1px 5px #10152255}
+.ph-champion .ph-entry-button.cs-ranking .ph-art{width:130px!important;height:120px!important}
+.ph-champion .ph-entry-button.cs-ranking .ph-art img{max-width:130px!important;max-height:120px!important}
+.ph-best.ph-champion .ph-entry-button.cs-ranking .ph-art .ph-mon,.ph-best.ph-champion .ph-entry-button.cs-ranking .ph-art .ranking-animated{width:130px!important;height:118px!important;max-width:130px!important;max-height:118px!important;object-fit:contain!important}
+.ph-entry-button.cs-ranking.ph-row{min-height:120px!important}
+.ph-row .ph-entry-button.cs-ranking{min-height:120px!important;padding-bottom:30px!important}
+.ph-row .ph-entry-button.cs-ranking .cs-sign{font-size:11px!important;bottom:6px}
+.cs-page{max-width:1300px;margin:auto;padding:16px!important;gap:18px!important}
+.cs-page .cos-hd p{max-width:900px!important}
+.cs-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.cs-tabs button{background:#22283c;color:#e8e9f7;border:1px solid #5d6381;border-radius:10px;padding:11px 17px;font:800 13px Nunito,sans-serif;cursor:pointer}
+.cs-tabs button.on{background:#684867;color:#fff;border-color:#e0aaaf}
+.cs-legacy-back{margin:12px}.cs-legacy-back button{padding:9px 15px;border-radius:9px;border:1px solid #e0aaaf;background:#47354e;color:#fff;cursor:pointer}
+.cs-feature-wrap{display:grid;grid-template-columns:minmax(320px,1.4fr) minmax(220px,.6fr);gap:20px;align-items:center;padding:14px;border:1px solid #715b6b;border-radius:18px;background:#171727}
+.cs-feature-wrap>div:last-child b{font-size:22px;color:#f3e7d4}
+.cs-feature-wrap p{margin:5px 0;color:#dfd6e4}
+.cs-feature-wrap small{color:#bdb2c5}
+.cs-feature{height:295px;border-radius:12px;border:1px solid #bb9691;display:grid;place-items:center}
+.cs-feature .sp,.cs-feature img:not(.cs-canvas){height:190px!important;width:190px!important;max-height:190px!important;max-width:190px!important;object-fit:contain!important;image-rendering:pixelated}
+.cs-feature .cs-caption{position:absolute!important;top:12px;left:14px;font:800 12px Nunito,sans-serif;letter-spacing:.08em;text-shadow:0 1px 4px #10121a}
+.cs-empty{padding:20px;text-align:center}
+.cs-pokemon-list{display:flex;gap:8px;overflow-x:auto;padding:0 0 6px}
+.cs-pokemon-list button{display:flex;gap:7px;align-items:center;flex:none;min-width:165px;max-width:225px;padding:7px 10px;border:1px solid #525979;border-radius:10px;background:#1b2032;color:#e7eafa;font:800 12px Nunito,sans-serif;cursor:pointer;text-align:left}
+.cs-pokemon-list button.on{border-color:#f0c09e;background:#573d4d}
+.cs-pokemon-list .sp,.cs-pokemon-list img{width:43px!important;height:43px!important;object-fit:contain!important}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:18px}
+.cs-option{min-width:0;border:1px solid #575268;border-radius:16px;overflow:hidden;background:#181a29;padding-bottom:12px}
+.cs-option-scene{height:205px;display:flex;justify-content:center;align-items:center}
+.cs-option-scene>.sp,.cs-option-scene img:not(.cs-canvas){width:130px!important;height:145px!important;max-width:130px!important;max-height:145px!important;object-fit:contain!important}
+.cs-option-scene .cs-sign{font-size:12px;left:9px;bottom:6px}
+.cs-option-foot{padding:10px 13px;display:flex;flex-direction:column;gap:3px}
+.cs-option-foot b{font-size:15px;color:#fff0da}
+.cs-option-foot small{color:#c6c4d5;font-size:12px}
+.cs-option>button{margin:0 13px;min-height:38px;border:1px solid #d9b99c;background:#49405d;color:#fff0da;border-radius:8px;font:800 13px Nunito,sans-serif;padding:7px 13px;cursor:pointer}
+.cs-option>button:disabled{opacity:.55;cursor:default}
+@media(max-width:750px){.cs-feature-wrap{grid-template-columns:1fr}.cs-feature{height:260px}.cs-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.cs-ranking.rkb-podium-card{min-height:215px!important;padding:8px 4px 29px!important}.cs-ranking .rkb-podium-sprite{height:90px!important;min-height:90px!important}.cs-ranking .rkb-podium-sprite .hv,.cs-ranking .rkb-podium-sprite .hvi{max-width:85px!important;max-height:85px!important}.cs-ranking .cs-sign{font-size:9px!important}.ph-champion .ph-entry-button.cs-ranking .ph-art{width:78px!important;height:85px!important}.ph-champion .ph-entry-button.cs-ranking .ph-art img{max-width:78px!important;max-height:85px!important}.ph-champion .ph-entry-button.cs-ranking{min-height:310px!important;padding-bottom:29px!important}.cs-atlas{min-height:145px!important}}
+@media(prefers-reduced-motion:reduce){.cs-profile .sp{animation:none!important}}
+
+/* Artwork exclusif : image du Pokémon, légèrement floutée, qui épouse la forme du cadre (liste, fiche, classement). */
+.cs-scene>.cs-art{position:absolute!important;inset:-7px;z-index:-1!important;pointer-events:none;background-image:linear-gradient(90deg,#080a12d9 0%,#080a12ab 52%,#080a1266 100%),linear-gradient(180deg,#0a0c1400 45%,#0a0c14b3),var(--art);background-size:cover,cover,cover;background-position:center,center,center;background-repeat:no-repeat;filter:blur(1.6px) saturate(1.05)}
+.cs-ranking>.cs-art{inset:-6px}
+
+/* Lisibilité du texte par-dessus les illustrations */
+.cs-profile>.cs-art,.cs-feature>.cs-art,.cs-option-scene>.cs-art{background-image:linear-gradient(#080a1266,#080a1266),linear-gradient(180deg,#0a0c1400 45%,#0a0c14b3),var(--art)}
+.cs-ranking>.cs-art{background-image:linear-gradient(#080a1288,#080a1288),linear-gradient(180deg,#0a0c1400 40%,#0a0c14c0),var(--art)}
+.cs-scene .atlas-info,.cs-scene .atlas-info *,.cs-ranking *:not(.cs-sign):not(.cs-art),.cs-profile *:not(.cs-sign):not(.cs-art){text-shadow:0 1px 2px #000,0 0 6px #000c}
+.cs-scene .atlas-info small{color:#f1f2fc!important;opacity:1!important}
+.cs-scene .vb,.cs-scene .atlas-info [class*="tag"],.cs-scene .atlas-info [class*="chip"]{box-shadow:inset 0 0 0 99px #0a0c14a6}
+.cs-scene .atlas-info b,.cs-scene .atlas-info strong{color:#fff}

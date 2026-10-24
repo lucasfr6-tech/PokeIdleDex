@@ -1,0 +1,2132 @@
+{
+  "90001": {
+    "id": 90001,
+    "base": 448,
+    "slug": "lucario",
+    "name": "Lucario Senkou",
+    "folder": "senkou",
+    "file": "lucario",
+    "forms": {
+      "448": {
+        "normal": {
+          "still": "img/variants/90001-448.png",
+          "motion": "img/variants/90001-448.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90001-448-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90001-448-shiny.png",
+          "motion": "img/variants/90001-448-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90001-448-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10059": {
+        "normal": {
+          "still": "img/variants/90001-10059.png",
+          "motion": "img/variants/90001-10059.webp",
+          "frames": 60,
+          "duration": 1800,
+          "source": "native-animation",
+          "hd": "img/variants/90001-10059-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90001-10059-shiny.png",
+          "motion": "img/variants/90001-10059-shiny.webp",
+          "frames": 60,
+          "duration": 1800,
+          "source": "native-animation",
+          "hd": "img/variants/90001-10059-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10310": {
+        "normal": {
+          "still": "img/variants/90001-10310.png",
+          "motion": "img/variants/90001-10310.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/90001-10310-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90001-10310-shiny.png",
+          "motion": "img/variants/90001-10310-shiny.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/90001-10310-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90002": {
+    "id": 90002,
+    "base": 94,
+    "slug": "gengar",
+    "name": "Ectoplasma Cristal",
+    "folder": "crystal",
+    "file": "gengar",
+    "forms": {
+      "94": {
+        "normal": {
+          "still": "img/variants/90002-94.png",
+          "motion": "img/variants/90002-94.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/90002-94-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90002-94-shiny.png",
+          "motion": "img/variants/90002-94-shiny.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/90002-94-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10038": {
+        "normal": {
+          "still": "img/variants/90002-10038.png",
+          "motion": "img/variants/90002-10038.webp",
+          "frames": 119,
+          "duration": 3570,
+          "source": "native-animation",
+          "hd": "img/variants/90002-10038-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90002-10038-shiny.png",
+          "motion": "img/variants/90002-10038-shiny.webp",
+          "frames": 119,
+          "duration": 3570,
+          "source": "native-animation",
+          "hd": "img/variants/90002-10038-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10202": {
+        "normal": {
+          "still": "img/variants/90002-10202.png",
+          "motion": "img/variants/90002-10202.webp",
+          "frames": 120,
+          "duration": 3600,
+          "source": "native-animation",
+          "hd": "img/variants/90002-10202-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90002-10202-shiny.png",
+          "motion": "img/variants/90002-10202-shiny.webp",
+          "frames": 120,
+          "duration": 3600,
+          "source": "native-animation",
+          "hd": "img/variants/90002-10202-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90003": {
+    "id": 90003,
+    "base": 149,
+    "slug": "dragonite",
+    "name": "Dracolosse Chocolat Blanc",
+    "folder": "easter2015",
+    "file": "dragonite-white",
+    "forms": {
+      "149": {
+        "normal": {
+          "still": "img/variants/90003-149.png",
+          "motion": "img/variants/90003-149.webp",
+          "frames": 44,
+          "duration": 1320,
+          "source": "native-animation",
+          "hd": "img/variants/90003-149-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90003-149-shiny.png",
+          "motion": "img/variants/90003-149-shiny.webp",
+          "frames": 44,
+          "duration": 1320,
+          "source": "native-animation",
+          "hd": "img/variants/90003-149-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10281": {
+        "normal": {
+          "still": "img/variants/90003-10281.png",
+          "motion": "img/variants/90003-10281.webp",
+          "frames": 90,
+          "duration": 2700,
+          "source": "native-animation",
+          "hd": "img/variants/90003-10281-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90003-10281-shiny.png",
+          "motion": "img/variants/90003-10281-shiny.webp",
+          "frames": 90,
+          "duration": 2700,
+          "source": "native-animation",
+          "hd": "img/variants/90003-10281-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90004": {
+    "id": 90004,
+    "base": 25,
+    "slug": "pikachu",
+    "name": "Pikachu Fire",
+    "folder": "fire",
+    "file": "pikachum",
+    "forms": {
+      "25": {
+        "normal": {
+          "still": "img/variants/90004-25.png",
+          "motion": "img/variants/90004-25.webp",
+          "frames": 33,
+          "duration": 1320,
+          "source": "native-animation",
+          "hd": "img/variants/90004-25-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90004-25-shiny.png",
+          "motion": "img/variants/90004-25-shiny.webp",
+          "frames": 33,
+          "duration": 1320,
+          "source": "native-animation",
+          "hd": "img/variants/90004-25-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10199": {
+        "normal": {
+          "still": "img/variants/90004-10199.png",
+          "motion": "img/variants/90004-10199.webp",
+          "frames": 100,
+          "duration": 3000,
+          "source": "native-animation",
+          "hd": "img/variants/90004-10199-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90004-10199-shiny.png",
+          "motion": "img/variants/90004-10199-shiny.webp",
+          "frames": 100,
+          "duration": 3000,
+          "source": "native-animation",
+          "hd": "img/variants/90004-10199-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90011": {
+    "id": 90011,
+    "base": 359,
+    "slug": "absol",
+    "name": "Absol Patch",
+    "folder": "patch",
+    "file": "absol",
+    "forms": {
+      "359": {
+        "normal": {
+          "still": "img/variants/90011-359.png",
+          "motion": "img/variants/90011-359.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90011-359-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90011-359-shiny.png",
+          "motion": "img/variants/90011-359-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90011-359-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10057": {
+        "normal": {
+          "still": "img/variants/90011-10057.png",
+          "motion": "img/variants/90011-10057.webp",
+          "frames": 52,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/90011-10057-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90011-10057-shiny.png",
+          "motion": "img/variants/90011-10057-shiny.webp",
+          "frames": 52,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/90011-10057-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10307": {
+        "normal": {
+          "still": "img/variants/90011-10307.png",
+          "motion": "img/variants/90011-10307.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/90011-10307-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90011-10307-shiny.png",
+          "motion": "img/variants/90011-10307-shiny.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/90011-10307-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90012": {
+    "id": 90012,
+    "base": 386,
+    "slug": "deoxys",
+    "name": "Deoxys Ghastly",
+    "folder": "ghastly",
+    "file": "deoxys-normal",
+    "forms": {
+      "386": {
+        "normal": {
+          "still": "img/variants/90012-386.png",
+          "motion": "img/variants/90012-386.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/90012-386-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90012-386-shiny.png",
+          "motion": "img/variants/90012-386-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/90012-386-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90013": {
+    "id": 90013,
+    "base": 6,
+    "slug": "charizard",
+    "name": "Dracaufeu Ghastly",
+    "folder": "ghastly",
+    "file": "charizard",
+    "forms": {
+      "6": {
+        "normal": {
+          "still": "img/variants/90013-6.png",
+          "motion": "img/variants/90013-6.webp",
+          "frames": 47,
+          "duration": 1880,
+          "source": "native-animation",
+          "hd": "img/variants/90013-6-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90013-6-shiny.png",
+          "motion": "img/variants/90013-6-shiny.webp",
+          "frames": 47,
+          "duration": 1880,
+          "source": "native-animation",
+          "hd": "img/variants/90013-6-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10034": {
+        "normal": {
+          "still": "img/variants/90013-10034.png",
+          "motion": "img/variants/90013-10034.webp",
+          "frames": 64,
+          "duration": 3200,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10034-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90013-10034-shiny.png",
+          "motion": "img/variants/90013-10034-shiny.webp",
+          "frames": 64,
+          "duration": 3200,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10034-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10035": {
+        "normal": {
+          "still": "img/variants/90013-10035.png",
+          "motion": "img/variants/90013-10035.webp",
+          "frames": 95,
+          "duration": 3800,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10035-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90013-10035-shiny.png",
+          "motion": "img/variants/90013-10035-shiny.webp",
+          "frames": 95,
+          "duration": 3800,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10035-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10196": {
+        "normal": {
+          "still": "img/variants/90013-10196.png",
+          "motion": "img/variants/90013-10196.webp",
+          "frames": 144,
+          "duration": 4320,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10196-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90013-10196-shiny.png",
+          "motion": "img/variants/90013-10196-shiny.webp",
+          "frames": 144,
+          "duration": 4320,
+          "source": "native-animation",
+          "hd": "img/variants/90013-10196-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90014": {
+    "id": 90014,
+    "base": 130,
+    "slug": "gyarados",
+    "name": "Léviator Ghastly",
+    "folder": "ghastly",
+    "file": "gyaradosm",
+    "forms": {
+      "130": {
+        "normal": {
+          "still": "img/variants/90014-130.png",
+          "motion": "img/variants/90014-130.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90014-130-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90014-130-shiny.png",
+          "motion": "img/variants/90014-130-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/90014-130-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10041": {
+        "normal": {
+          "still": "img/variants/90014-10041.png",
+          "motion": "img/variants/90014-10041.webp",
+          "frames": 70,
+          "duration": 2100,
+          "source": "native-animation",
+          "hd": "img/variants/90014-10041-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90014-10041-shiny.png",
+          "motion": "img/variants/90014-10041-shiny.webp",
+          "frames": 70,
+          "duration": 2100,
+          "source": "native-animation",
+          "hd": "img/variants/90014-10041-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90015": {
+    "id": 90015,
+    "base": 643,
+    "slug": "reshiram",
+    "name": "Reshiram Ghastly",
+    "folder": "ghastly",
+    "file": "reshiram",
+    "forms": {
+      "643": {
+        "normal": {
+          "still": "img/variants/90015-643.png",
+          "motion": "img/variants/90015-643.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/90015-643-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90015-643-shiny.png",
+          "motion": "img/variants/90015-643-shiny.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/90015-643-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "90005": {
+    "id": 90005,
+    "base": 208,
+    "name": "Steelix Cristallin",
+    "halloween": false,
+    "forms": {
+      "208": {
+        "normal": {
+          "still": "img/variants/90005-208.png",
+          "motion": "img/variants/90005-208.webp",
+          "frames": 80,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/90005-208-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90005-208-shiny.png",
+          "motion": "img/variants/90005-208-shiny.webp",
+          "frames": 80,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/90005-208-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10072": {
+        "normal": {
+          "still": "img/variants/90005-10072.png",
+          "motion": "img/variants/90005-10072.webp",
+          "frames": 80,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/90005-10072-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/90005-10072-shiny.png",
+          "motion": "img/variants/90005-10072-shiny.webp",
+          "frames": 80,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/90005-10072-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "41": {
+    "id": 41,
+    "base": 41,
+    "name": "Nosferapti Halloween",
+    "halloween": true,
+    "forms": {
+      "41": {
+        "normal": {
+          "still": "img/variants/41-41.png",
+          "motion": "img/variants/41-41.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/41-41-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/41-41-shiny.png",
+          "motion": "img/variants/41-41-shiny.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/41-41-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "42": {
+    "id": 42,
+    "base": 42,
+    "name": "Nosferalto Halloween",
+    "halloween": true,
+    "forms": {
+      "42": {
+        "normal": {
+          "still": "img/variants/42-42.png",
+          "motion": "img/variants/42-42.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/42-42-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/42-42-shiny.png",
+          "motion": "img/variants/42-42-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/42-42-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "169": {
+    "id": 169,
+    "base": 169,
+    "name": "Nostenfer Halloween",
+    "halloween": true,
+    "forms": {
+      "169": {
+        "normal": {
+          "still": "img/variants/169-169.png",
+          "motion": "img/variants/169-169.webp",
+          "frames": 27,
+          "duration": 1080,
+          "source": "native-animation",
+          "hd": "img/variants/169-169-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/169-169-shiny.png",
+          "motion": "img/variants/169-169-shiny.webp",
+          "frames": 27,
+          "duration": 1080,
+          "source": "native-animation",
+          "hd": "img/variants/169-169-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "172": {
+    "id": 172,
+    "base": 172,
+    "name": "Pichu Halloween",
+    "halloween": true,
+    "forms": {
+      "172": {
+        "normal": {
+          "still": "img/variants/172-172.png",
+          "motion": "img/variants/172-172.webp",
+          "frames": 47,
+          "duration": 1410,
+          "source": "native-animation",
+          "hd": "img/variants/172-172-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/172-172-shiny.png",
+          "motion": "img/variants/172-172-shiny.webp",
+          "frames": 47,
+          "duration": 1410,
+          "source": "native-animation",
+          "hd": "img/variants/172-172-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "200": {
+    "id": 200,
+    "base": 200,
+    "name": "FeuforÃªve Halloween",
+    "halloween": true,
+    "forms": {
+      "200": {
+        "normal": {
+          "still": "img/variants/200-200.png",
+          "motion": "img/variants/200-200.webp",
+          "frames": 50,
+          "duration": 2000,
+          "source": "native-animation",
+          "hd": "img/variants/200-200-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/200-200-shiny.png",
+          "motion": "img/variants/200-200-shiny.webp",
+          "frames": 50,
+          "duration": 2000,
+          "source": "native-animation",
+          "hd": "img/variants/200-200-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "292": {
+    "id": 292,
+    "base": 292,
+    "name": "Munja Halloween",
+    "halloween": true,
+    "forms": {
+      "292": {
+        "normal": {
+          "still": "img/variants/292-292.png",
+          "motion": "img/variants/292-292.webp",
+          "frames": 50,
+          "duration": 1500,
+          "source": "native-animation",
+          "hd": "img/variants/292-292-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/292-292-shiny.png",
+          "motion": "img/variants/292-292-shiny.webp",
+          "frames": 50,
+          "duration": 1500,
+          "source": "native-animation",
+          "hd": "img/variants/292-292-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "300": {
+    "id": 300,
+    "base": 300,
+    "name": "Skitty Halloween",
+    "halloween": true,
+    "forms": {
+      "300": {
+        "normal": {
+          "still": "img/variants/300-300.png",
+          "motion": "img/variants/300-300.webp",
+          "frames": 35,
+          "duration": 1400,
+          "source": "native-animation",
+          "hd": "img/variants/300-300-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/300-300-shiny.png",
+          "motion": "img/variants/300-300-shiny.webp",
+          "frames": 35,
+          "duration": 1400,
+          "source": "native-animation",
+          "hd": "img/variants/300-300-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "301": {
+    "id": 301,
+    "base": 301,
+    "name": "Delcatty Halloween",
+    "halloween": true,
+    "forms": {
+      "301": {
+        "normal": {
+          "still": "img/variants/301-301.png",
+          "motion": "img/variants/301-301.webp",
+          "frames": 60,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/301-301-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/301-301-shiny.png",
+          "motion": "img/variants/301-301-shiny.webp",
+          "frames": 60,
+          "duration": 2400,
+          "source": "native-animation",
+          "hd": "img/variants/301-301-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "302": {
+    "id": 302,
+    "base": 302,
+    "name": "TÃ©nÃ©fix Halloween",
+    "halloween": true,
+    "forms": {
+      "302": {
+        "normal": {
+          "still": "img/variants/302-302.png",
+          "motion": "img/variants/302-302.webp",
+          "frames": 43,
+          "duration": 1290,
+          "source": "native-animation",
+          "hd": "img/variants/302-302-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/302-302-shiny.png",
+          "motion": "img/variants/302-302-shiny.webp",
+          "frames": 43,
+          "duration": 1290,
+          "source": "native-animation",
+          "hd": "img/variants/302-302-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10066": {
+        "normal": {
+          "still": "img/variants/302-10066.png",
+          "motion": "img/variants/302-10066.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/302-10066-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/302-10066-shiny.png",
+          "motion": "img/variants/302-10066-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/302-10066-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "353": {
+    "id": 353,
+    "base": 353,
+    "name": "Polichombr Halloween",
+    "halloween": true,
+    "forms": {
+      "353": {
+        "normal": {
+          "still": "img/variants/353-353.png",
+          "motion": "img/variants/353-353.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/353-353-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/353-353-shiny.png",
+          "motion": "img/variants/353-353-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/353-353-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "354": {
+    "id": 354,
+    "base": 354,
+    "name": "Branette Halloween",
+    "halloween": true,
+    "forms": {
+      "354": {
+        "normal": {
+          "still": "img/variants/354-354.png",
+          "motion": "img/variants/354-354.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/354-354-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/354-354-shiny.png",
+          "motion": "img/variants/354-354-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/354-354-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10056": {
+        "normal": {
+          "still": "img/variants/354-10056.png",
+          "motion": "img/variants/354-10056.webp",
+          "frames": 71,
+          "duration": 2840,
+          "source": "native-animation",
+          "hd": "img/variants/354-10056-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/354-10056-shiny.png",
+          "motion": "img/variants/354-10056-shiny.webp",
+          "frames": 71,
+          "duration": 2840,
+          "source": "native-animation",
+          "hd": "img/variants/354-10056-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "355": {
+    "id": 355,
+    "base": 355,
+    "name": "SkelÃ©nox Halloween",
+    "halloween": true,
+    "forms": {
+      "355": {
+        "normal": {
+          "still": "img/variants/355-355.png",
+          "motion": "img/variants/355-355.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/355-355-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/355-355-shiny.png",
+          "motion": "img/variants/355-355-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/355-355-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "356": {
+    "id": 356,
+    "base": 356,
+    "name": "TÃ©raclope Halloween",
+    "halloween": true,
+    "forms": {
+      "356": {
+        "normal": {
+          "still": "img/variants/356-356.png",
+          "motion": "img/variants/356-356.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/356-356-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/356-356-shiny.png",
+          "motion": "img/variants/356-356-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/356-356-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "425": {
+    "id": 425,
+    "base": 425,
+    "name": "Baudrive Halloween",
+    "halloween": true,
+    "forms": {
+      "425": {
+        "normal": {
+          "still": "img/variants/425-425.png",
+          "motion": "img/variants/425-425.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/425-425-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/425-425-shiny.png",
+          "motion": "img/variants/425-425-shiny.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/425-425-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "426": {
+    "id": 426,
+    "base": 426,
+    "name": "Grodrive Halloween",
+    "halloween": true,
+    "forms": {
+      "426": {
+        "normal": {
+          "still": "img/variants/426-426.png",
+          "motion": "img/variants/426-426.webp",
+          "frames": 79,
+          "duration": 2370,
+          "source": "native-animation",
+          "hd": "img/variants/426-426-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/426-426-shiny.png",
+          "motion": "img/variants/426-426-shiny.webp",
+          "frames": 79,
+          "duration": 2370,
+          "source": "native-animation",
+          "hd": "img/variants/426-426-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "429": {
+    "id": 429,
+    "base": 429,
+    "name": "MagirÃªve Halloween",
+    "halloween": true,
+    "forms": {
+      "429": {
+        "normal": {
+          "still": "img/variants/429-429.png",
+          "motion": "img/variants/429-429.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/429-429-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/429-429-shiny.png",
+          "motion": "img/variants/429-429-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/429-429-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "442": {
+    "id": 442,
+    "base": 442,
+    "name": "Spiritomb Halloween",
+    "halloween": true,
+    "forms": {
+      "442": {
+        "normal": {
+          "still": "img/variants/442-442.png",
+          "motion": "img/variants/442-442.webp",
+          "frames": 124,
+          "duration": 3720,
+          "source": "native-animation",
+          "hd": "img/variants/442-442-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/442-442-shiny.png",
+          "motion": "img/variants/442-442-shiny.webp",
+          "frames": 124,
+          "duration": 3720,
+          "source": "native-animation",
+          "hd": "img/variants/442-442-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "477": {
+    "id": 477,
+    "base": 477,
+    "name": "Noctunoir Halloween",
+    "halloween": true,
+    "forms": {
+      "477": {
+        "normal": {
+          "still": "img/variants/477-477.png",
+          "motion": "img/variants/477-477.webp",
+          "frames": 74,
+          "duration": 2220,
+          "source": "native-animation",
+          "hd": "img/variants/477-477-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/477-477-shiny.png",
+          "motion": "img/variants/477-477-shiny.webp",
+          "frames": 74,
+          "duration": 2220,
+          "source": "native-animation",
+          "hd": "img/variants/477-477-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "478": {
+    "id": 478,
+    "base": 478,
+    "name": "Momartik Halloween",
+    "halloween": true,
+    "forms": {
+      "478": {
+        "normal": {
+          "still": "img/variants/478-478.png",
+          "motion": "img/variants/478-478.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/478-478-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/478-478-shiny.png",
+          "motion": "img/variants/478-478-shiny.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/478-478-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10285": {
+        "normal": {
+          "still": "img/variants/478-10285.png",
+          "motion": "img/variants/478-10285.webp",
+          "frames": 100,
+          "duration": 3000,
+          "source": "native-animation",
+          "hd": "img/variants/478-10285-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/478-10285-shiny.png",
+          "motion": "img/variants/478-10285-shiny.webp",
+          "frames": 100,
+          "duration": 3000,
+          "source": "native-animation",
+          "hd": "img/variants/478-10285-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "479": {
+    "id": 479,
+    "base": 479,
+    "name": "Motisma Halloween",
+    "halloween": true,
+    "forms": {
+      "479": {
+        "normal": {
+          "still": "img/variants/479-479.png",
+          "motion": "img/variants/479-479.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-479-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-479-shiny.png",
+          "motion": "img/variants/479-479-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-479-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10008": {
+        "normal": {
+          "still": "img/variants/479-10008.png",
+          "motion": "img/variants/479-10008.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10008-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-10008-shiny.png",
+          "motion": "img/variants/479-10008-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10008-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10009": {
+        "normal": {
+          "still": "img/variants/479-10009.png",
+          "motion": "img/variants/479-10009.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10009-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-10009-shiny.png",
+          "motion": "img/variants/479-10009-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10009-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10010": {
+        "normal": {
+          "still": "img/variants/479-10010.png",
+          "motion": "img/variants/479-10010.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10010-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-10010-shiny.png",
+          "motion": "img/variants/479-10010-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10010-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10011": {
+        "normal": {
+          "still": "img/variants/479-10011.png",
+          "motion": "img/variants/479-10011.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10011-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-10011-shiny.png",
+          "motion": "img/variants/479-10011-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10011-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10012": {
+        "normal": {
+          "still": "img/variants/479-10012.png",
+          "motion": "img/variants/479-10012.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10012-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/479-10012-shiny.png",
+          "motion": "img/variants/479-10012-shiny.webp",
+          "frames": 59,
+          "duration": 1770,
+          "source": "native-animation",
+          "hd": "img/variants/479-10012-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "487": {
+    "id": 487,
+    "base": 487,
+    "name": "Giratina Halloween",
+    "halloween": true,
+    "forms": {
+      "487": {
+        "normal": {
+          "still": "img/variants/487-487.png",
+          "motion": "img/variants/487-487.webp",
+          "frames": 79,
+          "duration": 2370,
+          "source": "native-animation",
+          "hd": "img/variants/487-487-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/487-487-shiny.png",
+          "motion": "img/variants/487-487-shiny.webp",
+          "frames": 79,
+          "duration": 2370,
+          "source": "native-animation",
+          "hd": "img/variants/487-487-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10007": {
+        "normal": {
+          "still": "img/variants/487-10007.png",
+          "motion": "img/variants/487-10007.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/487-10007-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/487-10007-shiny.png",
+          "motion": "img/variants/487-10007-shiny.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/487-10007-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "491": {
+    "id": 491,
+    "base": 491,
+    "name": "Darkrai Halloween",
+    "halloween": true,
+    "forms": {
+      "491": {
+        "normal": {
+          "still": "img/variants/491-491.png",
+          "motion": "img/variants/491-491.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/491-491-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/491-491-shiny.png",
+          "motion": "img/variants/491-491-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/491-491-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10312": {
+        "normal": {
+          "still": "img/variants/491-10312.png",
+          "motion": "img/variants/491-10312.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/491-10312-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/491-10312-shiny.png",
+          "motion": "img/variants/491-10312-shiny.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/491-10312-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "562": {
+    "id": 562,
+    "base": 562,
+    "name": "Tutafeh Halloween",
+    "halloween": true,
+    "forms": {
+      "562": {
+        "normal": {
+          "still": "img/variants/562-562.png",
+          "motion": "img/variants/562-562.webp",
+          "frames": 89,
+          "duration": 2670,
+          "source": "native-animation",
+          "hd": "img/variants/562-562-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/562-562-shiny.png",
+          "motion": "img/variants/562-562-shiny.webp",
+          "frames": 89,
+          "duration": 2670,
+          "source": "native-animation",
+          "hd": "img/variants/562-562-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "563": {
+    "id": 563,
+    "base": 563,
+    "name": "Tutankafer Halloween",
+    "halloween": true,
+    "forms": {
+      "563": {
+        "normal": {
+          "still": "img/variants/563-563.png",
+          "motion": "img/variants/563-563.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/563-563-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/563-563-shiny.png",
+          "motion": "img/variants/563-563-shiny.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/563-563-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "595": {
+    "id": 595,
+    "base": 595,
+    "name": "Statitik Halloween",
+    "halloween": true,
+    "forms": {
+      "595": {
+        "normal": {
+          "still": "img/variants/595-595.png",
+          "motion": "img/variants/595-595.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/595-595-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/595-595-shiny.png",
+          "motion": "img/variants/595-595-shiny.webp",
+          "frames": 39,
+          "duration": 1560,
+          "source": "native-animation",
+          "hd": "img/variants/595-595-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "596": {
+    "id": 596,
+    "base": 596,
+    "name": "Mygavolt Halloween",
+    "halloween": true,
+    "forms": {
+      "596": {
+        "normal": {
+          "still": "img/variants/596-596.png",
+          "motion": "img/variants/596-596.webp",
+          "frames": 47,
+          "duration": 1880,
+          "source": "native-animation",
+          "hd": "img/variants/596-596-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/596-596-shiny.png",
+          "motion": "img/variants/596-596-shiny.webp",
+          "frames": 47,
+          "duration": 1880,
+          "source": "native-animation",
+          "hd": "img/variants/596-596-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "607": {
+    "id": 607,
+    "base": 607,
+    "name": "FunÃ©cire Halloween",
+    "halloween": true,
+    "forms": {
+      "607": {
+        "normal": {
+          "still": "img/variants/607-607.png",
+          "motion": "img/variants/607-607.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/607-607-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/607-607-shiny.png",
+          "motion": "img/variants/607-607-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/607-607-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "608": {
+    "id": 608,
+    "base": 608,
+    "name": "MÃ©lancolux Halloween",
+    "halloween": true,
+    "forms": {
+      "608": {
+        "normal": {
+          "still": "img/variants/608-608.png",
+          "motion": "img/variants/608-608.webp",
+          "frames": 71,
+          "duration": 2130,
+          "source": "native-animation",
+          "hd": "img/variants/608-608-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/608-608-shiny.png",
+          "motion": "img/variants/608-608-shiny.webp",
+          "frames": 71,
+          "duration": 2130,
+          "source": "native-animation",
+          "hd": "img/variants/608-608-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "609": {
+    "id": 609,
+    "base": 609,
+    "name": "Lugulabre Halloween",
+    "halloween": true,
+    "forms": {
+      "609": {
+        "normal": {
+          "still": "img/variants/609-609.png",
+          "motion": "img/variants/609-609.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/609-609-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/609-609-shiny.png",
+          "motion": "img/variants/609-609-shiny.webp",
+          "frames": 69,
+          "duration": 2070,
+          "source": "native-animation",
+          "hd": "img/variants/609-609-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      },
+      "10291": {
+        "normal": {
+          "still": "img/variants/609-10291.png",
+          "motion": "img/variants/609-10291.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/609-10291-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/609-10291-shiny.png",
+          "motion": "img/variants/609-10291-shiny.webp",
+          "frames": 16,
+          "duration": 1280,
+          "source": "artwork-mesh-animation",
+          "hd": "img/variants/609-10291-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  },
+  "622": {
+    "id": 622,
+    "base": 622,
+    "name": "Gringolem Halloween",
+    "halloween": true,
+    "forms": {
+      "622": {
+        "normal": {
+          "still": "img/variants/622-622.png",
+          "motion": "img/variants/622-622.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/622-622-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        },
+        "shiny": {
+          "still": "img/variants/622-622-shiny.png",
+          "motion": "img/variants/622-622-shiny.webp",
+          "frames": 59,
+          "duration": 2360,
+          "source": "native-animation",
+          "hd": "img/variants/622-622-shiny-hd.webp",
+          "hdSource": "shaded-artwork-2.5d",
+          "hdSize": [
+            640,
+            640
+          ]
+        }
+      }
+    }
+  }
+}
