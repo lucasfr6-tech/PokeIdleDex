@@ -4309,8 +4309,8 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-evo-20261024g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
-</script><script src="shim.js?v=pid-evo-20261024g"></script><script>
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-evo-20261024h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+</script><script src="shim.js?v=pid-evo-20261024h"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11054,12 +11054,12 @@ setTimeout(pthxCheck,7000);setInterval(pthxCheck,8000);
 })();
 /* --- codes privés (hachés) : cadeaux du propriétaire, une seule utilisation par joueur ; appelés par la saisie de code du Courrier --- */
 (function(){
-const OH="48f8fedf4a03ff546ffd5cddbe8916947823c490916ee93ab347ee8b66fde40b",CH="b5d8c1b6eec22069c712e0e7114c654d76228c7f778ad10a36a8e1f15b48b102",PH="1425df0cc3282e45e9d796e46c3a20efb88174c655c4badce8289ea2b1f4cd9b";
+const OH="48f8fedf4a03ff546ffd5cddbe8916947823c490916ee93ab347ee8b66fde40b",CH="b5d8c1b6eec22069c712e0e7114c654d76228c7f778ad10a36a8e1f15b48b102",PH="1425df0cc3282e45e9d796e46c3a20efb88174c655c4badce8289ea2b1f4cd9b",TH="7e34f279bf67b13995b86c2a0224e2d93fbbb8a60f738997329238c0c2680fc2";
 const szi=n=>SZ.findIndex(x=>x[0]===n);
 function best(id,al,sh,mi,zn){spGrant(id);const c=G.col[id];if(al)c.al=1;if(sh)c.sh=1;if(muUpgrade(c.mi||0,mi))c.mi=mi;const z=szi(zn);if(z>=0&&(!(c.zi>=3)||SZ[z][4]<SZ[c.zi][4]))c.zi=z;rq(id);c.h=mhp(id)}
 window.pidTsRedeem=async function(code){
  if(!code||!/^TS-/.test(code))return null;
- const h=await pidH(code);if(h!==OH&&h!==CH&&h!==PH)return null;
+ const h=await pidH(code);if(h!==OH&&h!==CH&&h!==PH&&h!==TH)return null;
  G.codes=G.codes||{};const k="h"+h.slice(0,10);
  if(G.codes[k])return LS("Code déjà utilisé.","Code already used.");
  if(h===OH){G.codes[k]=1;
@@ -11070,6 +11070,15 @@ window.pidTsRedeem=async function(code){
   G.sp=G.sp||{};for(const id of [90003,90001,90002,90006])if(!G.sp[id])spGrant(id);
   recomp();save();return LS("Code accepté : cartes ×2, pass de combat terminé, exclusifs et 15 Master Balls.","Code accepted: cards ×2, battle pass complete, exclusives and 15 Master Balls.")}
  if(h===CH){G.codes[k]=1;G.m+=4e14;try{recomp()}catch(x){}save();return LS("Code accepté : +400 T de pièces !","Code accepted: +400 T coins!")}
+ if(h===TH){const MIL=[2,3,4,5,6,8,9,10],ids=[];while(ids.length<2){const i=1+Math.floor(Math.random()*1025);if(!ids.includes(i))ids.push(i)}
+  try{await preload(ids)}catch(x){}
+  if(ids.some(i=>!DB[i]))return LS("Impossible pour le moment, réessaie.","Not possible right now, try again.");
+  G.codes[k]=1;const out=[];
+  ids.forEach(id=>{const mi=MIL[Math.floor(Math.random()*MIL.length)],zi=2+Math.floor(Math.random()*(SZ.length-2));
+   const c=G.col[id]||(G.col[id]={n:0,l:Math.max(1,tgtL()),x:0,h:-1});c.n++;c.l=Math.max(c.l,tgtL());ens(id);c.sh=1;if(muUpgrade(c.mi||0,mi))c.mi=mi;if(!(c.zi>=zi))c.zi=zi;G.dx[id]=1;IDC=null;rq(id);c.h=mhp(id);G.mut=(G.mut||0)+1;out.push(dn(id))});
+  G.m+=1e13;G.inv=G.inv||{};G.inv["master-ball"]=(G.inv["master-ball"]||0)+10;
+  try{recomp()}catch(x){}save();try{sfx("shiny")}catch(x){}
+  return LS("Code accepté : 10 Master Balls, +10 T de pièces, ","Code accepted: 10 Master Balls, +10 T coins, ")+out.join(" et ")+" (chromatiques mutés) !"}
  const lr=ALL.filter(x=>isLR(x));if(!lr.length)return LS("Impossible pour le moment, réessaie.","Not possible right now, try again.");
  const MIL=[2,3,4,5,6,8,9,10],mi=MIL[Math.floor(Math.random()*MIL.length)],zi=2+Math.floor(Math.random()*(SZ.length-2)),id=lr[Math.floor(Math.random()*lr.length)];
  await preload([id]);G.codes[k]=1;
@@ -14950,4 +14959,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-evo-20261024g"><script src="dungeon-immersive.js?v=pid-evo-20261024g"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-evo-20261024g"><script src="collection-scenes.js?v=pid-evo-20261024g"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-evo-20261024h"><script src="dungeon-immersive.js?v=pid-evo-20261024h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-evo-20261024h"><script src="collection-scenes.js?v=pid-evo-20261024h"></script></body></html>
