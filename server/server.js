@@ -100,7 +100,11 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  if(!isFinite(+G.bf)||n(G.bf)<0||n(G.bf)>4100||n(G.cl)>4100||n(G.fl)>4100)r.push('etage impossible '+n(G.bf)+'/'+n(G.cl)+'/'+n(G.fl));
  /* valeurs impossibles dans les Pokemon : signe d'une modification de la partie */
  let bad=0;for(const i of ids){const c=col[i];if(!c||typeof c!='object')continue;
+<<<<<<< HEAD
   if(n(c.mi)>11||n(c.mi)<0||n(c.zi)>7||n(c.zi)<0||n(c.l)>500||n(c.n)<0)bad++;
+=======
+  if(n(c.mi)>10||n(c.mi)<0||n(c.zi)>6||n(c.zi)<0||n(c.l)>5000||n(c.n)<0)bad++;
+>>>>>>> f0fef45 (Anti-triche : niveau maximal plausible releve (les hauts etages donnent des niveaux > 500))
   else if(Array.isArray(c.iv)&&c.iv.some(v=>n(v)>31||n(v)<0))bad++;
   else if(Array.isArray(c.ev)&&(c.ev.some(v=>n(v)>252||n(v)<0)||c.ev.reduce((a,v)=>a+n(v),0)>1000))bad++}
  if(bad>0)r.push('pokemon impossibles : '+bad+' (iv/ev/mutation/taille/niveau hors limites)');
