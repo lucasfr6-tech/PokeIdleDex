@@ -39,3 +39,4 @@ Sprites supplied by the owner in `pokeIdleDex Game.zip`. Original archive paths:
 
 The PNG artwork is copied unchanged. In-game exclusive species: 90009, Tower floor 1000.
 - `roitiflam-plante-mega.png` / `roitiflam-plante-mega-shiny.png`: Mega Roitiflam Plante, recolored (green flames / pink shiny) from the official Mega Emboar artwork (PokeAPI sprites `10286.png`), 256 px. Used with the Mega Pearl form 10286.
+- `ronflex-neiges.png` / `ronflex-neiges-shiny.png`: Snow Snorlax (`poke/snow/snorlax.png`, `snorlaxs.png`), unchanged. `ronflex-neiges-dynamax.png` / `-dynamax-shiny.png`: Dynamax version, enlarged and recolored to keep the snow palette. In-game exclusive species: 90016, last challenge of the Energy tab.
