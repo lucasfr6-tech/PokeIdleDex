@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026j"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026h"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026j"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8010,7 +8010,7 @@ function eqTot(){const e=E_(),T=[0,0,0,0,0,0];for(const s in e.e){const o=EQM[e.
 function eqEff(){const T=eqTot(),K=[.6,.35,.5,.5],d=i=>{const S=T[i+2]/100;return K[i]*(1-Math.exp(-S/K[i]))};return{dmg:T[0]/100,coin:T[1]/100,luck:d(0),spd:d(1),cap:d(2),xp:d(3),T}}
 {const rc0=recomp;recomp=function(){rc0.apply(this,arguments);try{const b=eqEff();GM[0]*=1+b.dmg;GM[1]*=1+b.coin}catch(e){}}}
 {const bf0=biFlags;biFlags=function(){bf0();try{const b=eqEff();BIF.m+=b.luck;BIF.d*=1+b.spd;BIF.k*=1+b.cap;BIF.x*=1+b.xp}catch(e){}}}
-const ePrice=()=>10000000;
+const ePrice=()=>100000000;
 const ERT=[51.9,29,14,4.2,.8,.1],EPS=45,EPU=150,EPL=1000;
 function ePull(n){const e=E_(),out=[];
  for(let j=0;j<n;j++){let r=0,x=Math.random()*100;for(let q=0;q<6;q++){if(x<ERT[q]){r=q;break}x-=ERT[q];r=q}
@@ -14848,6 +14848,9 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["imp","Dresseur : invocations ×10","Le prix des invocations d’équipement du dresseur est multiplié par 10 (100 M ₽ l’invocation). Le remboursement des doublons suit le même prix.","Trainer: summons ×10","The price of trainer equipment summons is multiplied by 10 (100M ₽ per summon). Duplicate refunds follow the same price."],
+  ["fix","Pass Premium : Ticket Premium du casino","Le Ticket Premium du Pass Black existait au casino, mais il était presque introuvable (0,04 % au ticket Or, 0,2 % au Platine). Il tombe maintenant à 0,5 % au ticket Or et 2 % au ticket Platine.","Premium Pass: casino Premium Ticket","The Black Pass Premium Ticket was in the casino but almost impossible to find (0.04% on Gold, 0.2% on Platinum). It now drops at 0.5% on the Gold ticket and 2% on the Platinum ticket."],
+  ["imp","Compte à rebours retiré","La mise à jour 2.5.0 est là : le compte à rebours « prochaine mise à jour » disparaît.","Countdown removed","Update 2.5.0 is out: the “next update” countdown is gone."],
   ["imp","Wiki mis à jour","Le wiki couvre la 2.5.0 : nouvelles pages Traits et cristaux et Donjons, étoiles rouges d’ascension, Pass Black, quêtes définitives, parrainage, évolution manuelle et les six exclusifs.","Wiki updated","The wiki covers 2.5.0: new Traits and crystals and Dungeons pages, ascension red stars, Black Pass, permanent quests, referral, manual evolution and the six exclusives."],
   ["new","Pokémon de la zone : onglet Chromatique","Dans « Pokémon de la zone », un nouvel onglet Chromatique montre les chromatiques de ta zone actuelle : ceux qui te manquent sont en premier, ceux que tu as déjà sont grisés. Tu peux toujours cibler un Pokémon depuis cet onglet.","Zone Pokémon: Shiny tab","In “Zone Pokémon”, a new Shiny tab shows the shinies of your current zone: the ones you are missing come first, the ones you already have are greyed out. You can still target a Pokémon from this tab."],
   ["fix","Casino : capsules bien reçues","Le casino pouvait annoncer des Capsules d’Or (ou d’Argent) sans les ajouter à ton sac, à cause de la règle qui divise les gains de capsules par 5. Maintenant le lot affiché est celui que tu reçois, et il est 5 fois plus rare (le tableau des probabilités est mis à jour).","Casino: caps are received","The casino could announce Gold (or Silver) Caps without adding them to your bag, because of the rule that divides cap gains by 5. Now the prize shown is the one you get, and it is 5 times rarer (the odds table is updated)."],
@@ -15399,7 +15402,7 @@ function pidTikTokLinks(){const mk=(id,cls,html)=>{const a=document.createElemen
 pidTikTokLinks();setInterval(pidTikTokLinks,3000);setInterval(ttkRefresh,20000);
 
 /* ===== Prochaine mise à jour : rectangle sous TikTok + fenêtre avec compte à rebours (disparaît tout seul à l'échéance) ===== */
-const PNU_END=Date.UTC(2026,9,25,23,1,0); /* lundi 26 octobre 2026, 00 h 01 (Paris) */
+const PNU_END=Date.UTC(2026,9,25,20,0,0); /* mise à jour 2.5.0 publiée le dimanche 25 octobre au soir : le compte à rebours est terminé */
 {const st=document.createElement("style");st.id="pnu-styles";st.textContent=`
 #elite-pnu{position:fixed;left:10px;top:636px;width:72px;min-height:112px;z-index:44;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px 8px;border:2px solid #f0abfc;border-radius:15px;color:#fff;text-align:center;cursor:pointer;overflow:hidden;font:900 11px Nunito,sans-serif;background:linear-gradient(160deg,#6d28d9,#a21caf 55%,#db2777);box-shadow:0 0 14px #c026d3aa,inset 0 0 12px #ffffff22;animation:pnuGlow 2.4s ease-in-out infinite}
 #elite-pnu:before{content:"";position:absolute;inset:-40% -60%;background:linear-gradient(105deg,transparent 40%,#ffffff55 50%,transparent 60%);transform:translateX(-80%);animation:pnuShine 3.2s ease-in-out infinite;pointer-events:none}
@@ -15950,6 +15953,8 @@ function ascRestore(){const am=G.am;if(!am)return;for(const k in am){const c=G.c
 (function(){for(const k of Object.keys(CP)){const t=CP[k],n=t.find(x=>x[1]=="n");for(const e of t){if(e[1]=="i"&&(e[2]=="bottle-cap"||e[2]=="gold-bottle-cap")&&!e.cf){const d=e[0]*.8;e[0]-=d;e.cf=1;if(n)n[0]+=d}}}})();
 {const o=casRoll;casRoll=function(){const a=arguments,t=this;return window.capBuy?window.capBuy(()=>o.apply(t,a)):o.apply(t,a)}}
 
+/* ===== Ticket Premium du casino : chances rendues réalistes (Or 0,5 %, Platine 2 %) ===== */
+(function(){const T={o:50,p:200};for(const k of Object.keys(T)){const t=CP[k],e=t&&t.find(x=>x[1]=="i"&&x[2]=="bp-ticket"),n=t&&t.find(x=>x[1]=="n");if(!e)continue;const d=T[k]-e[0];if(d>0&&n&&n[0]>d){n[0]-=d;e[0]+=d}}})();
 /* ===== Pokémon de la zone : onglets Normal / Chromatique (chromatiques manquants de la zone) ===== */
 let ZSH=0;
 {const st=document.createElement("style");st.textContent=`.zsht{display:flex;gap:8px;margin:10px 0 6px}.zsht button{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 12px;border-radius:12px;border:2px solid #475569;background:#1e293b;color:#e2e8f0;font:800 14px Nunito,sans-serif;cursor:pointer}.zsht button.on{border-color:#fbbf24;background:linear-gradient(#92400e,#b45309);color:#fff}.zsht button svg{width:16px;height:16px}.zcd.zmiss{box-shadow:0 0 0 2px #fbbf24 inset}.zcd.zmiss em{color:#fbbf24;font-weight:900}.zcd.zhv{opacity:.55}.zcd.zhv em{color:#86efac}`;document.head.appendChild(st)}
@@ -16084,4 +16089,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026h"><script src="dungeon-immersive.js?v=pid-v250-20261026h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026h"><script src="collection-scenes.js?v=pid-v250-20261026h"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026j"><script src="dungeon-immersive.js?v=pid-v250-20261026j"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026j"><script src="collection-scenes.js?v=pid-v250-20261026j"></script></body></html>
