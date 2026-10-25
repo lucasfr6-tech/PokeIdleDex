@@ -15292,7 +15292,7 @@ function pidTikTokLinks(){const mk=(id,cls,html)=>{const a=document.createElemen
 pidTikTokLinks();setInterval(pidTikTokLinks,3000);setInterval(ttkRefresh,20000);
 
 /* ===== Prochaine mise à jour : rectangle sous TikTok + fenêtre avec compte à rebours (disparaît tout seul à l'échéance) ===== */
-const PNU_END=Date.UTC(2026,9,26,23,0,0); /* lundi 26 octobre 2026, minuit (Paris) */
+const PNU_END=Date.UTC(2026,9,25,23,1,0); /* lundi 26 octobre 2026, 00 h 01 (Paris) */
 {const st=document.createElement("style");st.id="pnu-styles";st.textContent=`
 #elite-pnu{position:fixed;left:10px;top:636px;width:72px;min-height:112px;z-index:44;display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px 8px;border:2px solid #f0abfc;border-radius:15px;color:#fff;text-align:center;cursor:pointer;overflow:hidden;font:900 11px Nunito,sans-serif;background:linear-gradient(160deg,#6d28d9,#a21caf 55%,#db2777);box-shadow:0 0 14px #c026d3aa,inset 0 0 12px #ffffff22;animation:pnuGlow 2.4s ease-in-out infinite}
 #elite-pnu:before{content:"";position:absolute;inset:-40% -60%;background:linear-gradient(105deg,transparent 40%,#ffffff55 50%,transparent 60%);transform:translateX(-80%);animation:pnuShine 3.2s ease-in-out infinite;pointer-events:none}
