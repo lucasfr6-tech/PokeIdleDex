@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026z"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026z"></script><script>
+</script><script src="shim.js?v=pid-v250-20261027a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14559,7 +14559,7 @@ function trxGive(a,p,x,why){const t=TRXO();t.cr[0]+=a;t.cr[1]+=p;t.cr[2]+=x;cons
 /* v2.5.0 : cristaux de trait en combat. Étages : 1 % Éclat, 0,5 % Prisme, 0,2 % Astral par Pokémon battu. Tour : 0,5 % / 0,25 % / 0,1 % par victoire. */
 function trxDropRoll(k,why){const r=Math.random();if(r<.002*k)trxGive(0,0,1,why);else if(r<.007*k)trxGive(0,1,0,why);else if(r<.017*k)trxGive(1,0,0,why)}
 {const w0=win;win=function(){const r=w0.apply(this,arguments);try{trxDropRoll(.5,LS("combat","fight"))}catch(e){}return r}}
-{const a0=twApply;twApply=function(res,f){const r=a0.apply(this,arguments);try{if(res=="win"){f=f|0;const q=Math.random(),w=LS("Tour","Tower");if(f%200==0&&q<.002)trxGive(0,0,1,w);else if(f%50==0&&q<.01)trxGive(0,1,0,w);else if(f%2==0&&q<.03)trxGive(1,0,0,w);qadd("twin",1)}}catch(e){}return r}}
+{const a0=twApply;twApply=function(res,f){const r=a0.apply(this,arguments);try{if(res=="win"){f=f|0;const q=Math.random(),w=LS("Tour","Tower");if(f%200==0&&q<.001)trxGive(0,0,1,w);else if(f%50==0&&q<.005)trxGive(0,1,0,w);else if(f%2==0&&q<.01)trxGive(1,0,0,w);qadd("twin",1)}}catch(e){}return r}}
 {const d0=trxDraw;trxDraw=function(){const t=d0.apply(this,arguments);try{qadd("trroll",1)}catch(e){}return t}}
 {const g0=trxGive;trxGive=function(a,p,x){try{qadd("trcr",(a|0)+(p|0)+(x|0))}catch(e){}return g0.apply(this,arguments)}}
 {const f=dgEnd;dgEnd=function(win,msg){let r0=null;try{const r=DG().run;if(r)r0=r.room-(win?0:1)}catch(e){}const o=f.apply(this,arguments);try{if(r0>0)trxGive(Math.floor(r0/5),0,0,LS("donjon","dungeon"))}catch(e){}return o}}
@@ -16134,4 +16134,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026z"><script src="dungeon-immersive.js?v=pid-v250-20261026z"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026z"><script src="collection-scenes.js?v=pid-v250-20261026z"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027a"><script src="dungeon-immersive.js?v=pid-v250-20261027a"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027a"><script src="collection-scenes.js?v=pid-v250-20261027a"></script></body></html>
