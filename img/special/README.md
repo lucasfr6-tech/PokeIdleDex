@@ -38,3 +38,4 @@ Sprites supplied by the owner in `pokeIdleDex Game.zip`. Original archive paths:
 - `poke/grass/emboars.png` → `roitiflam-plante-shiny.png`
 
 The PNG artwork is copied unchanged. In-game exclusive species: 90009, Tower floor 1000.
+- `roitiflam-plante-mega.png` / `roitiflam-plante-mega-shiny.png`: Mega Roitiflam Plante, recolored (green flames / pink shiny) from the official Mega Emboar artwork (PokeAPI sprites `10286.png`), 256 px. Used with the Mega Pearl form 10286.
