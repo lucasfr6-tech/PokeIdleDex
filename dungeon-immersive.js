@@ -1,9 +1,9 @@
 /* Immersive dungeon: one grid for terrain, sprite feet and encounters. */
 (()=>{'use strict';
-const names={50:'Découverte',100:'Aventure',150:'Vétéran',200:'Expert',300:'Cauchemar',400:'Légende'};
-Object.assign(DGL,{150:{L:150,hp:45000,am:.5,cr:.09,tier:4,src:'r4'},200:{L:200,hp:100000,am:.65,cr:.11,tier:4,src:'r4'},300:{L:300,hp:250000,am:.8,cr:.13,tier:5,src:'r5'},400:{L:400,hp:600000,am:1,cr:.15,tier:5,src:'r5'}});
+const names={50:'Découverte',100:'Aventure',150:'Vétéran',200:'Expert',300:'Cauchemar',400:'Légende',500:'Mythique',600:'Abyssal'};
+Object.assign(DGL,{150:{L:150,hp:45000,am:.5,cr:.09,tier:4,src:'r4'},200:{L:200,hp:100000,am:.65,cr:.11,tier:4,src:'r4'},300:{L:300,hp:250000,am:.8,cr:.13,tier:5,src:'r5'},400:{L:400,hp:600000,am:1,cr:.15,tier:5,src:'r5'},500:{L:500,hp:1e6,am:1.25,cr:.17,tier:5,src:'r5'},600:{L:600,hp:2e6,am:1.5,cr:.19,tier:5,src:'r5'}});
 // Combat HP and coin rewards intentionally have separate scales.
-for(const [l,hp,reward] of [[50,1e7,3000],[100,1e8,15000],[150,1e9,45000],[200,1e11,100000],[300,1e12,250000],[400,1e13,600000]])Object.assign(DGL[l],{hp,reward});
+for(const [l,hp,reward] of [[50,1e7,3000],[100,1e8,15000],[150,1e9,45000],[200,1e11,100000],[300,1e12,250000],[400,1e13,600000],[500,1e15,1.5e6],[600,5e16,4e6]])Object.assign(DGL[l],{hp,reward});
 window.dgHealth=(r,m=1)=>Math.floor(Math.min(1e100,DGL[r.lv].hp*Math.pow(1.25,Math.min(900,Math.max(0,r.room-1)))*m));
 /* Composition des rencontres par niveau : N / SR / SSR / UR (hors LR) et LR (légendaires et fabuleux) */
 const DGBK=['N','SR','SSR','UR','LR'];
@@ -13,7 +13,9 @@ const DGCOMP={
  150:{eb:1,add:{SR:4,SSR:12,UR:6},boss:{UR:10}},
  200:{add:{SSR:6,UR:24,LR:2},boss:{UR:8,LR:2}},
  300:{add:{UR:24,LR:8},boss:{UR:6,LR:8}},
- 400:{add:{UR:8,LR:40},boss:{LR:40}}};
+ 400:{add:{UR:8,LR:40},boss:{LR:40}},
+ 500:{add:{UR:4,LR:70},boss:{LR:70}},
+ 600:{add:{LR:120},boss:{LR:120}}};
 let dgBk=null;
 window.dgBucket=id=>isLR(id)?'LR':DGBK[Math.max(0,Math.min(3,pr(id)|0))];
 function dgBuckets(){if(dgBk&&dgBk.n===ALL.length)return dgBk;const o={n:ALL.length};DGBK.forEach(k=>o[k]=[]);ALL.filter(i=>i<10000&&DB[i]).forEach(i=>o[dgBucket(i)].push(i));return dgBk=o}
@@ -23,7 +25,7 @@ window.dgPool=(r,boss=false)=>{const E=DGE[r.env],C=DGCOMP[+r.lv]||DGCOMP[50],sp
  for(const k of DGBK)if(spec[k])dgDraw(r.env,k,spec[k]).forEach(i=>out.add(i));
  if(!out.size)E.pool.forEach(i=>out.add(i));return [...out]};
 window.dgEntryDay=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-const DGPRICE={50:5e7,100:4e8,150:3.5e9,200:3e10,300:2.5e11,400:2e12};
+const DGPRICE={50:5e7,100:4e8,150:3.5e9,200:3e10,300:2.5e11,400:2e12,500:1.6e13,600:1.3e14};
 window.dgEntryPrice=(l)=>DGPRICE[+(l||DGUI.lv)]||DGPRICE[50];
 /* Index des Pokémon rencontrables : environnement + niveau choisis, regroupés par rareté */
 function dgIdxData(env,lv){const r={env,lv},M=new Map();dgPool(r,false).forEach(i=>M.set(i,{id:i,n:1,b:0}));dgPool(r,true).forEach(i=>{const o=M.get(i)||{id:i,n:0,b:0};o.b=1;M.set(i,o)});return [...M.values()]}

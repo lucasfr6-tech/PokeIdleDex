@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026a"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14087,7 +14087,7 @@ document.addEventListener("click",e=>{const m=e.target.closest&&e.target.closest
  else if(a=="path")return dgChoose(v);else if(a=="cap")return dgCapture();else if(a=="capx")return dgCapClose();else if(a=="rel")return dgRelPick(v);else if(a=="shop")return dgShop(v);else if(a=="alt")return dgAltar(v=="1");else if(a=="evt")return dgEvt(v=="1");
  show();scrollTo(0,y)});
 /* ===================== DONJONS : cristaux dans les coffres, paliers, quête de Pass, boutique d'Écho ===================== */
-const DGLV=[50,100,150,200,300,400],dgLvF=lv=>1+.35*Math.max(0,DGLV.indexOf(+lv));
+const DGLV=[50,100,150,200,300,400,500,600],dgLvF=lv=>1+.35*Math.max(0,DGLV.indexOf(+lv));
 const dgTcN=["Éclat","Prisme","Astral"];
 /* 1. Coffres : des cristaux de trait, de meilleure qualité en profondeur (Astral à partir de la salle 30) */
 function dgChestBonus(r,e){const room=r.room|0,ix=Math.max(0,DGLV.indexOf(+r.lv)),f=1+.25*ix,R=Math.random;
@@ -14846,6 +14846,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["new","Donjons : niveaux 500 et 600","Deux nouveaux niveaux de donjon : Mythique (500, PV de départ 1 QA) et Abyssal (600, PV de départ 50 QA), avec des gardiens légendaires, de plus gros coffres et un prix d’entrée plus élevé.","Dungeons: levels 500 and 600","Two new dungeon levels: Mythic (500, starting HP 1 QA) and Abyssal (600, starting HP 50 QA), with legendary guardians, bigger chests and a higher entry price."],
   ["fix","EV au-dessus du maximum","Quelques Pokémon (surtout des exclusifs) avaient plus de 510 EV au total à cause d’un ancien bug. Ils sont ramenés automatiquement à 252 par stat et 510 au total, et ne peuvent plus dépasser.","EVs above the maximum","A few Pokémon (mostly exclusives) had more than 510 total EVs because of an old bug. They are now automatically brought back to 252 per stat and 510 in total, and can no longer exceed it."],
   ["new","Aperçu d’ascension","Avant d’ascensionner, une fenêtre « avant / après » montre les étoiles, les dégâts, les pièces, le niveau, le coût et ce qu’il te restera, avec un bouton Confirmer.","Ascension preview","Before ascending, a before/after window shows stars, damage, coins, level, cost and the coins you will have left, with a Confirm button."],
   ["new","Succès et titres d’ascension","5 nouveaux succès : première étoile rouge, triple rouge, exclusif à 3 étoiles rouges, équipe ascensionnée et 20 étoiles rouges. Chacun débloque un titre.","Ascension achievements and titles","5 new achievements: first red star, triple red, exclusive at 3 red stars, ascended team and 20 red stars. Each unlocks a title."],
@@ -16013,4 +16014,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026a"><script src="dungeon-immersive.js?v=pid-v250-20261026a"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026a"><script src="collection-scenes.js?v=pid-v250-20261026a"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026b"><script src="dungeon-immersive.js?v=pid-v250-20261026b"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026b"><script src="collection-scenes.js?v=pid-v250-20261026b"></script></body></html>
