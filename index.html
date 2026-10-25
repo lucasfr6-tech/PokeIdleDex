@@ -4559,7 +4559,7 @@ const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPFIX=.14,HPK=.025,BOSS_PV=1.2;
-const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
+const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);if(f>2100)I-=(r1-.0022)*(f-2100);return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*SKM("e")*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,12)),0)/100*(1+.1*PL("pn"));
@@ -7331,6 +7331,8 @@ const SLN=()=>SLT[Math.min(PL("pw"),SLT.length-1)];
 const pIds=()=>ids().filter(i=>!prestigeAutoKeep(i,G.col[i]));
 PU.unshift(["pw","Emplacements","Pokémon conservés à chaque prestige (les Pokémon spéciaux sont toujours gardés)",l=>SLT[Math.min(l,SLT.length-1)]+" Pokémon",10,50,1.5]);
 (function(){const set=(k,c)=>{const u=PU.find(x=>x[0]==k);if(u)u[5]=c};set("pcs",50);set("psh",100);set("pm",10);set("pz",10)})();
+/* v2.5.0 : niveau max +10 sur les améliorations de prestige (sauf celles à effet plafonné) */
+(function(){const NO={pcs:1,pn2:1,po:1,pnd:1};for(const u of PU)if(!NO[u[0]])u[4]+=10})();
 PUI.pw=["team","#3b82f6"];
 /* ============ v48 : PASS DE COMBAT, GEMMES, BOUTIQUE ============ */
 IP.gem='<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21 9 9m3 12 3-12"/>';
@@ -14475,6 +14477,10 @@ function trxCapBonus(){if(TRXCAPK===TK)return TRXCAPV;TRXCAPK=TK;let m=0;try{for
 {const f=capPct;capPct=function(e,bl){const r=f.apply(this,arguments);if(r>=1||!trxCapBonus())return r;return Math.min(.95,r*(1+trxCapBonus()/100))}}
 /* source des cristaux */
 function trxGive(a,p,x,why){const t=TRXO();t.cr[0]+=a;t.cr[1]+=p;t.cr[2]+=x;const L=[];if(a)L.push(a+" "+LS("Éclat","Shard"));if(p)L.push(p+" Prisme");if(x)L.push(x+" Astral");if(L.length){try{toast(LS("Cristaux de trait : +","Trait crystals: +")+L.join(" · ")+(why?" ("+why+")":""))}catch(e){}save()}}
+/* v2.5.0 : cristaux de trait en combat. Étages : 1 % Éclat, 0,5 % Prisme, 0,2 % Astral par Pokémon battu. Tour : 0,5 % / 0,25 % / 0,1 % par victoire. */
+function trxDropRoll(k,why){const r=Math.random();if(r<.002*k)trxGive(0,0,1,why);else if(r<.007*k)trxGive(0,1,0,why);else if(r<.017*k)trxGive(1,0,0,why)}
+{const w0=win;win=function(){const r=w0.apply(this,arguments);try{trxDropRoll(1,LS("combat","fight"))}catch(e){}return r}}
+{const a0=twApply;twApply=function(res){const r=a0.apply(this,arguments);try{if(res=="win")trxDropRoll(.5,LS("Tour","Tower"))}catch(e){}return r}}
 {const f=dgEnd;dgEnd=function(win,msg){let r0=null;try{const r=DG().run;if(r)r0=r.room-(win?0:1)}catch(e){}const o=f.apply(this,arguments);try{if(r0>0)trxGive(Math.floor(r0/5),0,0,LS("donjon","dungeon"))}catch(e){}return o}}
 {const f=rdFinish;rdFinish=function(R){const r=f.apply(this,arguments);try{if(R&&R.kind!="dng"&&R.over=="win"){const t=R.tier|0;trxGive(2+3*t,t>=2?t-1:0,t>=4?t-3:0,"raid")}}catch(e){}return r}}
 setInterval(()=>{try{const t=TRXO(),b=twS().b|0;if(!t.tw)t.tw=b;if(b>t.tw){let a=0,p=0,x=0;for(let f=t.tw+1;f<=b;f++){a++;if(f%25==0)p++;if(f%100==0)x++}t.tw=b;trxGive(a,p,x,LS("étages","floors"))}}catch(e){}},3000);
@@ -14764,6 +14770,9 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["new","Cristaux de trait en combat","Chaque Pokémon battu dans les étages peut laisser un cristal de trait : Éclat (1 %), Prisme (0,5 %) ou Astral (0,2 %). Dans la Tour, chaque victoire a aussi une chance d’en donner.","Trait crystals in battle","Every Pokémon defeated on the floors can drop a trait crystal: Shard (1%), Prism (0.5%) or Astral (0.2%). In the Tower, every win also has a chance to give one."],
+  ["imp","Prestige : niveaux max relevés","Toutes les améliorations de prestige montent de 10 niveaux (Puissance, Fortune, Cadence, etc.).","Prestige: higher max levels","Every prestige upgrade gets 10 more levels (Power, Fortune, Attack speed, etc.)."],
+  ["imp","Étages jusqu’à 4000","Les étages au-delà de 2100 deviennent atteignables : la difficulté monte moins vite, mais il faudra des équipes à 5 étoiles, toutes mutations au maximum.","Floors up to 4000","Floors beyond 2100 are now reachable: difficulty rises more slowly, but you will need 5-star teams with every mutation maxed."],
   ["new","Onglet Énergie","Dix défis d’un seul type (Feu, Eau, Plante…) contre six adversaires qui s’adaptent à ton équipe. Niveau 100 minimum, combat à la façon des raids avec changement de Pokémon et 2 potions maximum. À toi de trouver les bonnes étoiles, mutations et tailles. Chaque palier donne des pièces, des cristaux de traits et parfois des Méga-Perles.","Energy tab","Ten single-type challenges (Fire, Water, Grass…) against six opponents that adapt to your team. Level 100 minimum, raid-style battles with switching and at most 2 potions. Find the right stars, mutations and sizes yourself. Each tier gives coins, trait crystals and sometimes Mega Pearls."],
   ["new","Ronflex des Neiges","Le nouvel exclusif, récompense du dernier défi de l’Énergie. Aussi fort que Roitiflam Plante, avec une forme Dynamax qui garde ses couleurs.","Snow Snorlax","The new exclusive, reward of the last Energy challenge. As strong as Grass Emboar, with a Dynamax form that keeps its colours."],
   ["new","Tower : 1000 étages et Roitiflam Plante","300 nouveaux étages, des titres et des récompenses. Au sommet, le gardien Roitiflam Plante rejoint ta collection, avec une Méga-Évolution (Méga-Perle donnée à l’étage 1000).","Tower: 1000 floors and Grass Emboar","300 new floors, titles and rewards. At the summit, the guardian Grass Emboar joins your collection, with a Mega Evolution (Mega Pearl given at floor 1000)."],
