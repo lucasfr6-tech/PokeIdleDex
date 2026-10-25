@@ -13384,7 +13384,7 @@ document.addEventListener("click",e=>{const row=e.target.closest&&e.target.close
 /* attaque des ennemis : ~10 000 à l'étage 1 → ~1 M (100) → ~64 M (200) → ~3 G (300) (3 Pokémon contre jusqu'à 6) ; boss ×1,5, gardien ×2 */
 /* étages 701-1000 : puissance requise (en unités du classement des exclusifs, 1 unité = 2,55e14) croissante ; les stats brutes des ennemis ne montent plus après le 700.
    Équipe moyenne pour passer : ~2,2 (700) · ~4 (800) · ~7 (900 : Lugia Ombre à fond minimum) · ~10,5 (1000 : Steelix + Lugia Ombre + Mewtwo Black à fond) */
-const TWHI=[[700,2.2],[800,4],[900,6.3],[1000,9.75]],TWK={fin:1.34};
+const TWHI=[[700,3.1],[800,5.6],[900,8.4],[1000,9.75]],TWK={fin:1.34};
 const twFoeHi=n=>{let i=0;while(i<TWHI.length-2&&n>TWHI[i+1][0])i++;const a=TWHI[i],b=TWHI[i+1],k=Math.max(0,Math.min(1,(n-a[0])/(b[0]-a[0])));return 2.55e14*Math.exp(Math.log(a[1])+(Math.log(b[1])-Math.log(a[1]))*k)/.75*(n>=1000?TWK.fin:1)};
 const twFoePd=(f,boss)=>{const n=Math.max(1,Math.min(TWN,f)),summit=Math.max(0,Math.min(1,(n-300)/400)),v=n>700?twFoeHi(n):n<=300?1e4*Math.pow(1e6,(n-1)/299)*(n<=100?1:1-.7*Math.min(1,(n-100)/200)):3e9*Math.pow(100,(n-300)/125)*Math.pow(.1,summit);return Math.round(v*(boss==2?2:boss?1.5:1))};
 {const m0=twMine;twMine=function(id,o){const u=m0.apply(this,arguments);try{const c=G.col[id];u.pd=Math.max(1,base(id));u.mi=c.mi|0;u.zi=c.zi|0;u.sh=c.sh?1:0;u.al=c.al?1:0}catch(e){}return u}}
