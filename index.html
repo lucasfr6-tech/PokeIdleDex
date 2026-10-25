@@ -15334,56 +15334,80 @@ function pnuLinks(){const on=pnuLeft()>0;document.body.classList.toggle("pnu-on"
  pnuTick()}
 pnuLinks();setInterval(pnuLinks,3000);setInterval(pnuTick,1000);
 
-/* ===== Veille 96 h : jauge cumulée (page ouverte, même en arrière-plan), 4 paliers et un Pokémon très fort au bout ===== */
-const VLT=96*3600,VLP=[
- [24,[["master-ball",5],["gold-bottle-cap",10],["rare-candy",30],["dream-ball",30]]],
- [48,[["master-ball",8],["gold-bottle-cap",15],["rare-candy",60],["max-revive",30]]],
- [72,[["master-ball",12],["gold-bottle-cap",20],["ability-patch",3],["dream-ball",60]]],
- [96,[["master-ball",20],["gold-bottle-cap",30],["ability-patch",6],["rare-candy",100]]]];
-const VLFIN={sp:0}; /* id de l'exclusif donné au bout des 96 h ; 0 = Pokémon LR chromatique muté aléatoire */
-const vlS=()=>{const v=G.vl=G.vl&&typeof G.vl=="object"?G.vl:{on:0,s:0,c:[]};if(!Array.isArray(v.c))v.c=[];v.s=Math.max(0,Math.min(VLT,+v.s||0));return v};
+/* ===== La Grande Expédition : 8 camps, ~4 jours pour une très bonne équipe, bien plus pour un joueur débutant ===== */
+const VLCH=12*3600,VLT=8*VLCH,VLMINF=50,VLMINL=80;
+const VLP=[
+ ["Glacier Éternel","Eternal Glacier","ice",[["master-ball",3],["gold-bottle-cap",6],["rare-candy",20],["dream-ball",20]]],
+ ["Canyon Aride","Arid Canyon","ground",[["master-ball",3],["gold-bottle-cap",6],["rare-candy",25],["max-revive",20]]],
+ ["Mer Déchaînée","Raging Sea","water",[["master-ball",4],["gold-bottle-cap",8],["rare-candy",30],["dream-ball",30]]],
+ ["Forêt Hantée","Haunted Forest","ghost",[["master-ball",4],["gold-bottle-cap",8],["ability-patch",2],["max-revive",30]]],
+ ["Nid des Dragons","Dragons' Nest","dragon",[["master-ball",5],["gold-bottle-cap",10],["rare-candy",40],["dream-ball",40]]],
+ ["Citadelle d'Acier","Steel Citadel","steel",[["master-ball",5],["gold-bottle-cap",10],["ability-patch",3],["max-revive",40]]],
+ ["Marais Obscur","Dark Marsh","dark",[["master-ball",6],["gold-bottle-cap",12],["rare-candy",50],["dream-ball",50]]],
+ ["Sommet Féerique","Fairy Summit","fairy",[["master-ball",15],["gold-bottle-cap",25],["ability-patch",6],["rare-candy",100]]]];
+const VLFIN={sp:0}; /* id de l'exclusif donné au sommet ; 0 = Pokémon LR chromatique muté aléatoire */
+const vlS=()=>{const v=G.vl=G.vl&&typeof G.vl=="object"?G.vl:{on:0,s:0,c:[],sq:[]};if(!Array.isArray(v.c))v.c=[];if(!Array.isArray(v.sq))v.sq=[];v.s=Math.max(0,Math.min(VLT,+v.s||0));return v};
+const vlTower=()=>{try{const t=twS();return Math.max(t.b|0,t.bs|0)}catch(e){return 0}};
+const vlSq=()=>vlS().sq.filter((i,k,a)=>G.col[i]&&a.indexOf(i)===k).slice(0,3);
+function vlInfo(){const v=vlS(),tb=vlTower(),sq=vlSq(),Ls=sq.map(i=>G.col[i].l|0),ok={t:tb>=VLMINF,sq:sq.length==3,lv:sq.length==3&&Ls.every(l=>l>=VLMINL)};
+ const base=.45+.55*Math.max(0,Math.min(1,(tb-VLMINF)/550)),avgL=Ls.length?Ls.reduce((x,y)=>x+y,0)/Ls.length:0,lf=Math.max(.95,Math.min(1,.95+.05*(avgL-VLMINL)/20));
+ const cov=h=>{if(!sq.length)return .8;let n=0;sq.forEach(i=>{if(tp(i).some(t=>eff(t,[h])>=2))n++});return [.85,1,1.15,1.3][Math.min(3,n)]};
+ const camp=Math.min(VLP.length-1,Math.floor(v.s/VLCH)),rate=h=>Math.min(1.15,base*lf*cov(h));
+ let left=0;for(let c=camp;c<VLP.length;c++){const rem=c==camp?(c+1)*VLCH-v.s:VLCH;left+=rem/Math.max(.05,rate(VLP[c][2]))}
+ return{tb,sq,ok,go:ok.t&&ok.sq&&ok.lv,base,lf,cov:cov(VLP[camp][2]),camp,rate:rate(VLP[camp][2]),eta:left,avgL}}
 let vlP=performance.now(),vlD=Date.now(),vlN=0,vlSeen=0;
 function vlTick(){const nP=performance.now(),nD=Date.now(),d=Math.max(0,Math.min((nP-vlP)/1e3,(nD-vlD)/1e3,90));vlP=nP;vlD=nD;
  const v=vlS();if(!v.on||v.s>=VLT){vlRender();return}
- v.s=Math.min(VLT,v.s+d);vlN++;
- const k=VLP.findIndex((x,i)=>v.s>=x[0]*3600&&!v.c.includes(i)),r=VLP.filter((x,i)=>v.s>=x[0]*3600&&!v.c.includes(i)).length;
- if(r>vlSeen){vlSeen=r;try{toast(LS("Veille : un palier est prêt à être récupéré !","Idle mode: a milestone is ready to claim!"));sfx("big")}catch(e){}}
- if(v.s>=VLT){v.on=0;try{toast(LS("Veille terminée : récupère ta récompense finale !","Idle mode complete: claim your final reward!"))}catch(e){}}
+ const I0=vlInfo();if(!I0.go){vlRender();return}
+ v.s=Math.min(VLT,v.s+d*I0.rate);vlN++;
+ const r=VLP.filter((x,i)=>v.s>=(i+1)*VLCH&&!v.c.includes(i)).length;
+ if(r>vlSeen){vlSeen=r;try{toast(LS("Grande Expédition : un camp est atteint, récupère ta récompense !","Great Expedition: a camp is reached, claim your reward!"));sfx("big")}catch(e){}}
+ if(v.s>=VLT){v.on=0;try{toast(LS("Tu as atteint le Sommet Féerique !","You reached the Fairy Summit!"))}catch(e){}}
  if(vlN%12==0||v.s>=VLT)try{save()}catch(e){}
  vlRender()}
 setInterval(vlTick,5000);
-const vlFmt=s=>{s=Math.max(0,Math.floor(s));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+LS(" j ", " d "):"")+String(h).padStart(2,"0")+" h "+String(m).padStart(2,"0")+" min"};
-function vlClaim(i){const v=vlS(),x=VLP[i];if(!x||v.c.includes(i)||v.s<x[0]*3600)return;v.c.push(i);
- window.capBuy(()=>{x[1].forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n})});
- const txt=x[1].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ");
+const vlFmt=s=>{s=Math.max(0,Math.floor(s));const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+LS(" j "," d "):"")+String(h).padStart(2,"0")+" h "+String(m).padStart(2,"0")+" min"};
+function vlClaim(i){const v=vlS(),x=VLP[i];if(!x||v.c.includes(i)||v.s<(i+1)*VLCH)return;v.c.push(i);
+ window.capBuy(()=>{x[3].forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n})});
+ const txt=x[3].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ");
  const fin=()=>{try{recomp()}catch(e){}try{save()}catch(e){}try{sfx("big")}catch(e){}vlSeen=Math.max(0,vlSeen-1);vlRender()};
- if(i==VLP.length-1){const done=nm=>{v.done=1;toast(LS("Veille terminée ! "+txt+" et "+nm+" reçu !","Idle mode complete! "+txt+" and "+nm+" received!"));fin()};
+ if(i==VLP.length-1){const done=nm=>{v.done=1;toast(LS("Sommet atteint ! "+txt+" et "+nm+" reçu !","Summit reached! "+txt+" and "+nm+" received!"));fin()};
   if(VLFIN.sp&&DB[VLFIN.sp]){try{spGrant(VLFIN.sp)}catch(e){}done(I(VLFIN.sp).n)}
   else bpLeg().then(r=>{let n="LR";try{n=I(r[1]).n}catch(e){}done(n+" ("+LS("chromatique muté","shiny mutated")+")")}).catch(()=>done("?"))}
- else{toast(LS("Palier "+(i+1)+" : "+txt,"Milestone "+(i+1)+": "+txt));fin()}}
-{const st=document.createElement("style");st.id="pid-vl";st.textContent=`#vlm{position:fixed;inset:0;z-index:100045;background:#000b;display:grid;place-items:center;padding:14px}#vlm .vlvc{position:relative;width:min(640px,100%);max-height:94vh;overflow:auto;background:linear-gradient(160deg,#0f172a,#1e1b4b);border:1px solid #6366f1;border-radius:20px;padding:22px;color:#f1f5f9;box-shadow:0 0 30px #4f46e544}
-#vlm small.k{font-size:11px;font-weight:900;letter-spacing:.14em;color:#a5b4fc}#vlm h2{margin:4px 0 8px;font:800 26px "Baloo 2",Nunito,sans-serif}#vlm p{color:#c3cde6;font-size:13px;line-height:1.5;margin:0 0 12px}
+ else{toast(LS(x[0]+" franchi : "+txt,x[1]+" cleared: "+txt));fin()}}
+{const st=document.createElement("style");st.id="pid-vl";st.textContent=`#vlm{position:fixed;inset:0;z-index:100045;background:#000b;display:grid;place-items:center;padding:14px}#vlm .vlvc{position:relative;width:min(700px,100%);max-height:94vh;overflow:auto;background:linear-gradient(160deg,#0f172a,#1e1b4b);border:1px solid #6366f1;border-radius:20px;padding:22px;color:#f1f5f9;box-shadow:0 0 30px #4f46e544}
+#vlm small.k{font-size:11px;font-weight:900;letter-spacing:.14em;color:#a5b4fc}#vlm h2{margin:4px 0 8px;font:800 26px "Baloo 2",Nunito,sans-serif}#vlm p{color:#c3cde6;font-size:13px;line-height:1.5;margin:0 0 12px}#vlm p b{color:#fff}
 #vlm .x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:10px;background:#1e1b33;border:1px solid #33305a;color:#fff;font-size:20px;cursor:pointer}
 #vlm .vlvb{height:26px;border-radius:99px;background:#0b0a1f;border:2px solid #4f46e5;overflow:hidden;position:relative;margin:12px 0 6px}#vlm .vlvb i{display:block;height:100%;background:linear-gradient(90deg,#2dd4bf,#a78bfa,#fde047);transition:width .6s}
-#vlm .vlvt{display:flex;justify-content:space-between;font-weight:800;font-size:13px;color:#e0e7ff}
-#vlm .vlvg{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}#vlm .vlvg button{flex:1;min-width:150px;padding:12px;border-radius:14px;border:2px solid #818cf8;background:linear-gradient(135deg,#4338ca,#7c3aed);color:#fff;font:900 15px Nunito,sans-serif;cursor:pointer}#vlm .vlvg button.off{background:#334155;border-color:#64748b}
-#vlm .vlvm{display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px 12px;border-radius:14px;background:#0b0a1f;border:1px solid #33305a}#vlm .vlvm.ok{border-color:#4ade80}#vlm .vlvm.dn{opacity:.55}#vlm .vlvm b{font-size:14px;min-width:70px}#vlm .vlvm span{flex:1;font-size:12px;color:#b6c2e0}
+#vlm .vlvt{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:800;font-size:13px;color:#e0e7ff}
+#vlm .vlreq{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}#vlm .vlreq span{padding:6px 10px;border-radius:99px;font-size:12px;font-weight:800;background:#3b1d1d;border:1px solid #ef4444;color:#fecaca}#vlm .vlreq span.ok{background:#12301f;border-color:#4ade80;color:#bbf7d0}
+#vlm .vlsq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}#vlm .vlsq select{width:100%;min-width:0;padding:9px 8px;border-radius:10px;border:1px solid #2a3678;background:#0a0f26;color:#fff;font:700 12px Nunito,sans-serif}
+#vlm .vlsp{padding:10px 12px;border-radius:14px;background:#0b0a1f;border:1px solid #33305a;font-size:12px;color:#b6c2e0;line-height:1.6;margin:8px 0}#vlm .vlsp b{color:#fff}
+#vlm .vlvg{display:flex;gap:10px;margin:14px 0}#vlm .vlvg button{flex:1;padding:12px;border-radius:14px;border:2px solid #818cf8;background:linear-gradient(135deg,#4338ca,#7c3aed);color:#fff;font:900 15px Nunito,sans-serif;cursor:pointer}#vlm .vlvg button.off{background:#334155;border-color:#64748b}#vlm .vlvg button:disabled{opacity:.45;cursor:default}
+#vlm .vlvm{display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px 12px;border-radius:14px;background:#0b0a1f;border:1px solid #33305a}#vlm .vlvm.cur{border-color:#a78bfa;box-shadow:0 0 12px #7c3aed66}#vlm .vlvm.ok{border-color:#4ade80}#vlm .vlvm.dn{opacity:.55}#vlm .vlvm b{font-size:13px;min-width:120px}#vlm .vlvm span{flex:1;font-size:11.5px;color:#b6c2e0}
 #vlm .vlvm button{padding:8px 14px;border-radius:10px;border:0;background:#fde047;color:#422006;font:900 13px Nunito,sans-serif;cursor:pointer}#vlm .vlvm button:disabled{background:#334155;color:#94a3b8;cursor:default}
-#vlm .vlvf{border-color:#fde047;background:linear-gradient(135deg,#422006aa,#0b0a1f)}`;document.head.appendChild(st)}
-function vlRender(){const m=$("vlm");if(!m)return;const v=vlS(),pc=v.s/VLT*100;
- m.innerHTML=`<div class="vlvc"><button class="x" data-vl="x" aria-label="x">×</button><small class="k">${LS("MODE VEILLE · 4 JOURS","IDLE MODE · 4 DAYS")}</small><h2>${LS("Veille de 96 heures","96-hour idle mode")}</h2>
- <p>${LS("Lance la veille et laisse le jeu ouvert : la jauge se remplit toute seule, <b>même si la page est en arrière-plan</b>. Elle se met en pause quand la page est fermée et reprend là où elle s'était arrêtée. Un palier te donne des récompenses chaque jour, et au bout des 96 heures, un <b>Pokémon vraiment très fort</b>.","Start the idle mode and leave the game open: the gauge fills by itself, <b>even if the page is in the background</b>. It pauses when the page is closed and resumes where it stopped. A milestone gives rewards each day, and after 96 hours, a <b>truly powerful Pokémon</b>.")}</p>
- <div class="vlvb"><i style="width:${pc}%"></i></div><div class="vlvt"><span>${vlFmt(v.s)} / 96 h</span><span>${v.s>=VLT?LS("Terminé","Complete"):LS("Reste ","Left ")+vlFmt(VLT-v.s)}</span></div>
- <div class="vlvg">${v.s>=VLT?"":`<button data-vl="tg" class="${v.on?"off":""}">${v.on?LS("Mettre en pause","Pause"):(v.s>0?LS("Reprendre la veille","Resume"):LS("Lancer la veille","Start the idle mode"))}</button>`}</div>
- ${VLP.map((x,i)=>{const ok=v.s>=x[0]*3600,dn=v.c.includes(i),fin=i==VLP.length-1,t=x[1].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ")+(fin?" + "+(VLFIN.sp&&DB[VLFIN.sp]?I(VLFIN.sp).n:LS("1 Pokémon très fort","1 very strong Pokémon")):"");
-  return `<div class="vlvm${fin?" vlvf":""}${ok&&!dn?" ok":""}${dn?" dn":""}"><b>${x[0]} h</b><span>${esc(t)}</span><button data-vl="cl" data-i="${i}" ${ok&&!dn?"":"disabled"}>${dn?LS("Récupéré","Claimed"):LS("Récupérer","Claim")}</button></div>`}).join("")}</div>`}
+#vlm .vlvf{border-color:#fde047;background:linear-gradient(135deg,#422006aa,#0b0a1f)}@media(max-width:560px){#vlm .vlsq{grid-template-columns:1fr}#vlm .vlvm{flex-wrap:wrap}}`;document.head.appendChild(st)}
+function vlOpts(cur,other){const L=ids().filter(i=>G.col[i]&&(G.col[i].l|0)>=VLMINL&&!other.includes(i)).sort((x,y)=>atPd(y)-atPd(x)).slice(0,250);if(cur&&G.col[cur]&&!L.includes(cur))L.unshift(cur);
+ return `<option value="">${LS("Choisir un Pokémon","Pick a Pokémon")}</option>`+L.map(i=>`<option value="${i}" ${i==cur?"selected":""}>${esc(dn(i))} · ${LS("Niv.","Lv.")} ${G.col[i].l|0}</option>`).join("")}
+function vlRender(){const m=$("vlm");if(!m)return;if(m.contains(document.activeElement)&&document.activeElement.tagName=="SELECT")return;const v=vlS(),f=vlInfo(),pc=v.s/VLT*100,sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
+ const rq=(ok,t)=>`<span class="${ok?"ok":""}">${ok?"✓":"✗"} ${t}</span>`;
+ m.innerHTML=`<div class="vlvc"><button class="x" data-vl="x" aria-label="x">×</button><small class="k">${LS("MODE LONGUE DURÉE","LONG-TERM MODE")}</small><h2>${LS("La Grande Expédition","The Great Expedition")}</h2>
+ <p>${LS("Envoie une équipe de <b>3 Pokémon</b> traverser <b>8 camps</b> jusqu'au Sommet Féerique, où t'attend un <b>Pokémon vraiment très fort</b>. La progression avance tant que le jeu est ouvert (même en arrière-plan). Plus ta progression dans la Tower est haute, plus l'expédition va vite : avec une très bonne équipe, compte environ <b>4 jours</b> ; un joueur qui débute mettra <b>plus d'une semaine</b>. Chaque camp a un danger : des Pokémon qui lui sont super efficaces te font gagner du temps.","Send a team of <b>3 Pokémon</b> across <b>8 camps</b> to the Fairy Summit, where a <b>truly powerful Pokémon</b> awaits. Progress runs while the game is open (even in the background). The higher your Tower progress, the faster the expedition: with a very good team, expect about <b>4 days</b>; a beginner will need <b>over a week</b>. Each camp has a hazard: Pokémon super effective against it save you time.")}</p>
+ <div class="vlreq">${rq(f.ok.t,LS("Tour : étage "+VLMINF+" atteint (actuel "+f.tb+")","Tower: floor "+VLMINF+" reached (now "+f.tb+")"))}${rq(f.ok.sq,LS("Équipe de 3 Pokémon","Team of 3 Pokémon"))}${rq(f.ok.lv,LS("Niveau "+VLMINL+" minimum chacun","Level "+VLMINL+" minimum each"))}</div>
+ <div class="vlsq">${sq.map((c,k)=>`<select data-vls="${k}">${vlOpts(c,sq.filter((x,j)=>j!=k))}</select>`).join("")}</div>
+ <div class="vlsp">${LS("Vitesse actuelle","Current speed")} <b>×${f.rate.toFixed(2)}</b> · ${LS("Tour","Tower")} ×${f.base.toFixed(2)} · ${LS("couverture du camp","camp coverage")} ×${f.cov.toFixed(2)} · ${LS("niveau","level")} ×${f.lf.toFixed(2)}<br>${LS("Temps restant estimé","Estimated time left")} <b>${v.s>=VLT?"0":vlFmt(f.eta)}</b></div>
+ <div class="vlvb"><i style="width:${pc}%"></i></div><div class="vlvt"><span>${LS("Camp","Camp")} ${f.camp+1} / 8</span><span>${Math.floor(pc)} %</span></div>
+ <div class="vlvg">${v.s>=VLT?"":`<button data-vl="tg" class="${v.on?"off":""}" ${f.go||v.on?"":"disabled"}>${v.on?LS("Mettre en pause","Pause"):(v.s>0?LS("Reprendre l'expédition","Resume"):LS("Partir en expédition","Start the expedition"))}</button>`}</div>
+ ${VLP.map((x,i)=>{const ok=v.s>=(i+1)*VLCH,dn2=v.c.includes(i),fin=i==VLP.length-1,t=x[3].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ")+(fin?" + "+(VLFIN.sp&&DB[VLFIN.sp]?I(VLFIN.sp).n:LS("1 Pokémon très fort","1 very strong Pokémon")):"");
+  return `<div class="vlvm${fin?" vlvf":""}${i==f.camp&&!ok?" cur":""}${ok&&!dn2?" ok":""}${dn2?" dn":""}"><b>${i+1}. ${LS(x[0],x[1])}</b><span>${tchips([x[2]])}<br>${esc(t)}</span><button data-vl="cl" data-i="${i}" ${ok&&!dn2?"":"disabled"}>${dn2?LS("Récupéré","Claimed"):LS("Récupérer","Claim")}</button></div>`}).join("")}</div>`}
 function vlOpen(){let m=$("vlm");if(!m){m=document.createElement("div");m.id="vlm";document.body.appendChild(m);
   m.addEventListener("click",e=>{const b=e.target.closest("[data-vl]");if(e.target===m||(b&&b.dataset.vl=="x")){m.remove();return}if(!b)return;const v=vlS();
-   if(b.dataset.vl=="tg"){v.on=v.on?0:1;vlP=performance.now();vlD=Date.now();try{save()}catch(er){}vlRender()}
-   else if(b.dataset.vl=="cl")vlClaim(+b.dataset.i)})}
+   if(b.dataset.vl=="tg"){if(!v.on&&!vlInfo().go){toast(LS("Conditions non remplies.","Requirements not met."));return}v.on=v.on?0:1;vlP=performance.now();vlD=Date.now();try{save()}catch(er){}vlRender()}
+   else if(b.dataset.vl=="cl")vlClaim(+b.dataset.i)});
+  m.addEventListener("change",e=>{const x=e.target.closest("[data-vls]");if(!x)return;const v=vlS(),k=+x.dataset.vls,a=v.sq.slice(0,3);while(a.length<3)a.push(0);a[k]=+x.value||0;v.sq=a.filter((i,j)=>i&&a.indexOf(i)===j);try{save()}catch(er){}x.blur();vlRender()})}
  vlRender()}
 function vlLinks(){const u=$("utl");if(!u||$("pid-vl-menu"))return;const a=document.createElement("button");a.id="pid-vl-menu";a.type="button";a.className="qkb";
- a.innerHTML=`<span class="qki" style="--c1:#4338ca;--c2:#7c3aed">${ico("trophy")}</span><span class="qkt"><b>${LS("Veille de 96 h","96 h idle mode")}</b><small>${LS("Reste connecté 4 jours pour un Pokémon très fort","Stay on for 4 days for a very strong Pokémon")}</small></span>`;
+ a.innerHTML=`<span class="qki" style="--c1:#4338ca;--c2:#7c3aed">${ico("trophy")}</span><span class="qkt"><b>${LS("La Grande Expédition","The Great Expedition")}</b><small>${LS("8 camps, 4 jours ou plus, un Pokémon très fort","8 camps, 4 days or more, a very strong Pokémon")}</small></span>`;
  a.addEventListener("click",vlOpen);u.appendChild(a)}
 vlLinks();setInterval(vlLinks,3000);
 
