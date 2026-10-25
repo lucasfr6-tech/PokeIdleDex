@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026c"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15680,13 +15680,14 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  ${wsx("Des adversaires qui s'adaptent",`<p>Un ou deux adversaires sur six sont choisis pour <b>contrer</b> les types de ton équipe, les autres sont simplement très forts. Ils choisissent aussi leur ordre d'entrée et leurs attaques selon le Pokémon que tu as en jeu. Sous la liste, des Pokémon <b>conseillés</b> te montrent ce qui touche le mieux l'équipe d'en face.</p>`)}
  ${wsx("Récompenses",`<p>Chaque défi se récompense <b>une seule fois</b>, à la première réussite : pièces, cristaux de traits, objets et Méga-Perles. L'important, c'est le palier atteint.</p>${tbl(["Défi","Récompense"],ENR.map((r,i)=>[i+1,enRwHtml(i)]))}`)}
  ${wn("tip","Conseil","Les défis demandent des Pokémon de plus en plus poussés : étoiles, mutations, tailles, chromatique et Alpha comptent. Change d'équipe, d'ordre et de Pokémon en jeu pour trouver ce qui passe.")}`;
- wkBody.vl=()=>`<p class="lead">La <b>Grande Expédition</b> est un mode de long terme : une équipe de <b>3 Pokémon</b> part à l'aventure et progresse <b>pendant que tu joues</b>. Il y a <b>8 camps</b>, chacun représentant 12 h de progression, soit 96 h au rythme maximal. Chaque camp atteint donne une récompense à récupérer, et le sommet donne l'exclusif <b>Arcanin Jovial</b> (puissance ×14).</p>
+ wkBody.vl=()=>`<p class="lead">La <b>Grande Expédition</b> est un mode de long terme : une équipe de <b>3 Pokémon</b> part à l'aventure et progresse <b>pendant que tu joues</b>. Il y a <b>8 camps</b>, chacun représentant 12 h de progression, soit 96 h au rythme maximal. Chaque camp atteint donne une récompense à récupérer, et le sommet donne l'exclusif <b>Arcanin Jovial</b> (puissance ×18,6).</p>
  ${wf([["Camps",8],["Équipe","3 Pokémon"],["Niveau minimum",VLMINL],["Tower minimum","Étage "+VLMINF]])}
  ${wsx("La vitesse",`<p>La progression est plus rapide si tu as monté la <b>Tower</b>, si tes Pokémon ont un niveau élevé et si les types de ton équipe sont efficaces contre le type du camp. Un joueur qui débute mettra beaucoup plus de temps qu'un joueur avec une équipe très forte.</p>`)}
  ${wsx("Les 8 camps",tbl(["Camp","Type"],VLP.map((c,i)=>[(i+1)+" · "+c[0],TFR[c[2]]])))}
  ${wn("tip","Conseil","Garde le jeu ouvert : la jauge ne se remplit qu'en jouant. Choisis des Pokémon qui touchent en super efficace le type du camp en cours.")}`;
  wkBody.excl=()=>`<p class="lead">Les <b>Pokémon exclusifs</b> ne s'obtiennent qu'à un endroit précis (un seul, l'Exclusif de l'étage 4000, apparaît dans les étages). Chacun a un <b>multiplicateur de puissance</b> propre, appliqué à ses dégâts, et une origine précise.</p>
  ${wsx("Du plus fort au plus faible",tbl(["Rang","Pokémon","Origine","Multiplicateur"],XRKL.map((x,i)=>{const o=XRKO[x[2]],s=SPM[x[0]];return [i+1,s?s.n:nm(x[0]),LS(o[0],o[1]),"×"+x[1].toFixed(2)]})))}
+ ${wn("tip","Méga-Évolution et Dynamax","Ces multiplicateurs sont ceux de la forme de base. La Méga-Évolution et le Dynamax multiplient encore la puissance par 2,2. Arcanin Jovial (×18,61) n'a aucune forme spéciale : il égale Steelix Cristallin (×8,46) en Méga-Évolution (8,46 × 2,2 = 18,61) et la forme de base de Roitiflam Plante et de Ronflex des Neiges.")}
  ${wsx("Rareté Exclusif",`<p>Au-dessus de LR. <b>Lugulabre Zodiaque</b> apparaît à partir de l'étage 4000 avec <b>0,08 %</b> de chance par combat. Ce taux ne change ni avec la Chance de l'équipement, ni avec le ciblage de zone (on ne peut pas le toucher pour doubler sa chance), et le mode x2 ne l'augmente pas par seconde. Sa chance de capture de base est de 10 %. <b>La Master Ball ne fonctionne pas</b> : elle compte comme une Poké Ball ; utilise une Hyper Ball ou mieux.</p>`)}
  <div class="wnwb"><button class="go" onclick="exrOpen()">${ico("crown")} Ouvrir le classement illustré</button></div>
  ${wn("info","Bon à savoir","Les autres bonus (niveau, doublons, étoiles, mutation, taille, chromatique, Alpha) s'ajoutent ensuite au multiplicateur.")}`;
@@ -15927,18 +15928,18 @@ function ascRestore(){const am=G.am;if(!am)return;for(const k in am){const c=G.c
   const i=R.findIndex(r=>r.grp==LS("Bonus temporaires","Temporary boosts"));R.splice(i<0?R.length:i,0,...rows)}catch(x){}return R}}
 }
 
-/* ===== Arcanin Jovial : exclusif du sommet de la Grande Expédition (puissance x14 par rapport au socle Absol Patch) ===== */
-const VLPW=14.0;
+/* ===== Arcanin Jovial : exclusif du sommet de la Grande Expédition (puissance x18,61 = Steelix Cristallin en Méga) ===== */
+const VLPW=18.61;
 PWTV.vl=PWTV.t7*VLPW/8.46;PWTV0.vl=PWTV0.t7*Math.pow(VLPW/8.46,.6);PWREF.vl=690;PWNM.vl=["Grande Expédition · Arcanin Jovial","Great Expedition · Jolly Arcanine"];
 const ARJV={id:90018,base:59,n:"Arcanin Jovial",t:["fire","fairy"],s:[90,110,80,100,80,95],ab:["Intimidation","Torche"],ha:"Justicier",hue:0,hue2:0,sat:1,au:"#fb923c",au2:"#fde68a",cas:0,
- fr:"Un Arcanin à la robe rouge rayée de noir, toujours de bonne humeur : sa joie embrase l'air autour de lui. Récompense du sommet de la Grande Expédition. À bonus identiques, sa puissance de base est environ 14 fois celle d'Absol Patch.",
- en:"An Arcanine with a red coat striped in black, always cheerful: its joy sets the air ablaze. Reward for the summit of the Great Expedition. With equal bonuses, its base power is about 14 times Patch Absol's."};
+ fr:"Un Arcanin à la robe rouge rayée de noir, toujours de bonne humeur : sa joie embrase l'air autour de lui. Récompense du sommet de la Grande Expédition. À bonus identiques, sa puissance (×18,6) égale celle de Steelix Cristallin en Méga-Évolution, mais sans Méga ni Dynamax.",
+ en:"An Arcanine with a red coat striped in black, always cheerful: its joy sets the air ablaze. Reward for the summit of the Great Expedition. With equal bonuses, its power (×18.6) equals Crystal Steelix in Mega Evolution, but without Mega or Dynamax."};
 SPS.push(ARJV);SPM[90018]=ARJV;
 DB[90018]={n:ARJV.n,t:ARJV.t,b:695,lg:0,ba:0,ch:90018,s:ARJV.s,ab:ARJV.ab,ha:ARJV.ha};EVC[90018]=[];
 RSPM[90018]=["Boutefeu","Pouvoir Lunaire","Vive-Attaque","Lance-Flammes"];
 SPU.set("90018","img/special/arcanin-jovial.png");SPU.set("90018s","img/special/arcanin-jovial-shiny.png");
 {const o=pwInfer;pwInfer=function(id,c){return +id===90018?"vl":o.apply(this,arguments)}}
-SPRANK[90018]={r:12.5,m:VLPW,src:"vl"};XRKO.vl=["Grande Expédition","Great Expedition","#a78bfa"];XRKL.splice(XRKL.findIndex(x=>x[0]==90007),0,[90018,VLPW,"vl"]);XRKM[90018]=VLPW;
+SPRANK[90018]={r:13.5,m:VLPW,src:"vl"};XRKO.vl=["Grande Expédition","Great Expedition","#a78bfa"];XRKL.splice(XRKL.findIndex(x=>x[0]==90008),0,[90018,VLPW,"vl"]);XRKM[90018]=VLPW;
 {const o=spSrc;spSrc=function(k){return k=="vl"?[LS("Grande Expédition","Great Expedition"),"#a78bfa","★"]:o.apply(this,arguments)}}
 {const o=starFloorFarmable;starFloorFarmable=function(id){return +id===90018?false:o.apply(this,arguments)}}
 {const o=srcWhere;srcWhere=function(id){return +id===90018?["au sommet de la Grande Expédition (8e camp)","at the summit of the Great Expedition (8th camp)"]:o.apply(this,arguments)}}
@@ -16032,4 +16033,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026c"><script src="dungeon-immersive.js?v=pid-v250-20261026c"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026c"><script src="collection-scenes.js?v=pid-v250-20261026c"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026d"><script src="dungeon-immersive.js?v=pid-v250-20261026d"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026d"><script src="collection-scenes.js?v=pid-v250-20261026d"></script></body></html>
