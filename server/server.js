@@ -102,7 +102,7 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
  let bad=0;for(const i of ids){const c=col[i];if(!c||typeof c!='object')continue;
   if(n(c.mi)>10||n(c.mi)<0||n(c.zi)>6||n(c.zi)<0||n(c.l)>5000||n(c.n)<0)bad++;
   else if(Array.isArray(c.iv)&&c.iv.some(v=>n(v)>31||n(v)<0))bad++;
-  else if(Array.isArray(c.ev)&&(c.ev.some(v=>n(v)>252||n(v)<0)||c.ev.reduce((a,v)=>a+n(v),0)>510))bad++}
+  else if(Array.isArray(c.ev)&&(c.ev.some(v=>n(v)>252||n(v)<0)||c.ev.reduce((a,v)=>a+n(v),0)>1000))bad++}
  if(bad>0)r.push('pokemon impossibles : '+bad+' (iv/ev/mutation/taille/niveau hors limites)');
  /* objets en quantite absurde */
  const inv=G.inv&&typeof G.inv=='object'?G.inv:{};let big=0;for(const k in inv){if(!isFinite(+inv[k])||n(inv[k])>1e12||n(inv[k])<0)big++}
