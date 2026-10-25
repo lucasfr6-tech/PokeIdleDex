@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026j"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026k"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026j"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026k"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14711,6 +14711,16 @@ async function trxRoll(opts){opts=opts||{};const S=TRXS_,T0=TRXO();if(S.busy&&!o
 function trxChoose(P,t){return new Promise(res=>{if(!P.t){P.t=t;trxSetCard($tx("nw"),null,"");res();return}const vs=$tx("vs");if(!vs){P.t=t;res();return}
  vs.innerHTML=`<button class="btn go" id="kn">${LS("Garder le nouveau","Keep the new one")}</button><button class="btn" id="ko">${LS("Garder l'actuel","Keep the current one")}</button>`;
  const done=k=>{if(k)P.t=t;const v=$tx("vs");if(v)v.innerHTML="VS";trxSetCard($tx("nw"),null,"");trxRenderStage();trxRenderGrid();res()};$tx("kn").onclick=()=>done(1);$tx("ko").onclick=()=>done(0)})}
+/* v2.5.0 : le choix « Garder le nouveau / l'actuel » ne se valide plus tout seul et survit à un rechargement de la page */
+let TRXPK=false;
+function trxChoose(P,t){const T0=TRXO();return new Promise(res=>{if(!P.t){P.t=t;trxSetCard($tx("nw"),null,"");res();return}
+ T0.pd={id:P.id,t:t.id};try{save()}catch(e){}TRXPK=true;
+ const done=k=>{clearInterval(iv);TRXPK=false;if(k)P.t=t;delete T0.pd;try{recomp()}catch(e){}try{save()}catch(e){}const v=$tx("vs");if(v)v.innerHTML="VS";try{trxSetCard($tx("nw"),null,"")}catch(e){}try{trxRenderStage();trxRenderGrid()}catch(e){}res()};
+ const mk=()=>{const vs=$tx("vs");if(!vs)return;if(!$tx("kn")){vs.innerHTML=`<button class="btn go" id="kn">${LS("Garder le nouveau","Keep the new one")}</button><button class="btn" id="ko">${LS("Garder l'actuel","Keep the current one")}</button>`;$tx("kn").onclick=()=>done(1);$tx("ko").onclick=()=>done(0);try{trxSetCard($tx("nw"),t,"NOUVEAU","new")}catch(e){}}};
+ const iv=setInterval(mk,400);mk()})}
+setInterval(()=>{try{const T0=TRXO();if(!T0.pd||TRXPK||!$tx("vs"))return;const c=G.col[T0.pd.id],t=TRXT[T0.pd.t];if(!c||!t){delete T0.pd;return}
+ TRXS_.sel=T0.pd.id;TRXPK=true;const P=trxCur();if(!P){TRXPK=false;return}try{trxRenderStage()}catch(e){}
+ trxChoose(P,t);TRXPK=true}catch(e){TRXPK=false}},1500);
 async function trxAuto(){const S=TRXS_;if(S.auto){S.auto=false;return}if(S.busy)return;S.auto=true;trxAutoBtn();let n=0;const e=()=>$tx("ast");
  while(S.auto&&TRXO().cr[S.cry]>0&&(!S.lim||n<S.lim)){n++;const t=await trxRoll({auto:1,keep:S.keep,fast:S.fast});if(!t)break;S.ast=LS("Tirage ","Roll ")+n+" · "+LS("dernier : ","last: ")+trxN(t)+" ("+trxRn(t.r)+")";if(e())e().textContent=S.ast;
   if(t.r>=S.amin||S.want.has(t.id)){S.ast=LS("Arrêté après "+n+" tirage(s) : "+trxN(t)+" obtenu.","Stopped after "+n+" roll(s): "+trxN(t)+" obtained.");break}await trxSleep(S.fast&&t.r<4?120:900)}
@@ -14848,6 +14858,9 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["fix","Énergie : choisir un Pokémon","Dans la fenêtre « Choisis ton équipe », cliquer sur un Pokémon ne le sélectionnait pas. C’est corrigé, et le bouton Valider/OK de la fenêtre de résultat fonctionne aussi.","Energy: picking a Pokémon","In the “Choose your team” window, clicking a Pokémon did not select it. Fixed, and the OK button of the result window works too."],
+  ["fix","Grande Expédition : choisir un Pokémon","Les trois emplacements ouvrent maintenant une vraie liste avec recherche, tes Pokémon et leur niveau (niveau 80 minimum). Un petit onglet « Grande Expédition » apparaît aussi en haut de la page Expéditions.","Great Expedition: picking Pokémon","The three slots now open a real list with search, your Pokémon and their level (level 80 minimum). A small “Great Expedition” tab also appears at the top of the Expeditions page."],
+  ["fix","Traits : le nouveau trait ne se valide plus tout seul","Le choix « Garder le nouveau / Garder l’actuel » ne peut plus se valider sans toi, et il revient si tu recharges la page ou changes d’onglet pendant un tirage : tu ne perds plus un trait Mythique par accident.","Traits: new trait no longer auto-accepted","The “Keep the new / Keep the current” choice can no longer resolve on its own, and it comes back if you reload or switch tabs during a roll: you no longer lose a Mythic trait by accident."],
   ["imp","Dresseur : invocations ×10","Le prix des invocations d’équipement du dresseur est multiplié par 10 (100 M ₽ l’invocation). Le remboursement des doublons suit le même prix.","Trainer: summons ×10","The price of trainer equipment summons is multiplied by 10 (100M ₽ per summon). Duplicate refunds follow the same price."],
   ["fix","Pass Premium : Ticket Premium du casino","Le Ticket Premium du Pass Black existait au casino, mais il était presque introuvable (0,04 % au ticket Or, 0,2 % au Platine). Il tombe maintenant à 0,5 % au ticket Or et 2 % au ticket Platine.","Premium Pass: casino Premium Ticket","The Black Pass Premium Ticket was in the casino but almost impossible to find (0.04% on Gold, 0.2% on Platinum). It now drops at 0.5% on the Gold ticket and 2% on the Platinum ticket."],
   ["imp","Compte à rebours retiré","La mise à jour 2.5.0 est là : le compte à rebours « prochaine mise à jour » disparaît.","Countdown removed","Update 2.5.0 is out: the “next update” countdown is gone."],
@@ -15524,12 +15537,12 @@ function vlClaim(i){const v=vlS(),x=VLP[i];if(!x||v.c.includes(i)||v.s<(i+1)*VLC
 #vlm .vlvf{border-color:#fde047;background:linear-gradient(135deg,#422006aa,#0b0a1f)}@media(max-width:560px){#vlm .vlsq{grid-template-columns:1fr}#vlm .vlvm{flex-wrap:wrap}}`;document.head.appendChild(st)}
 function vlOpts(cur,other){const L=ids().filter(i=>G.col[i]&&(G.col[i].l|0)>=VLMINL&&!other.includes(i)).sort((x,y)=>atPd(y)-atPd(x)).slice(0,250);if(cur&&G.col[cur]&&!L.includes(cur))L.unshift(cur);
  return `<option value="">${LS("Choisir un Pokémon","Pick a Pokémon")}</option>`+L.map(i=>`<option value="${i}" ${i==cur?"selected":""}>${esc(dn(i))} · ${LS("Niv.","Lv.")} ${G.col[i].l|0}</option>`).join("")}
-function vlRender(){const m=$("vlm");if(!m)return;if(m.contains(document.activeElement)&&document.activeElement.tagName=="SELECT")return;const v=vlS(),f=vlInfo(),pc=v.s/VLT*100,sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
+function vlRender(){const m=$("vlm");if(!m)return;if($("vlpk"))return;const v=vlS(),f=vlInfo(),pc=v.s/VLT*100,sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
  const rq=(ok,t)=>`<span class="${ok?"ok":""}">${ok?"✓":"✗"} ${t}</span>`;
  m.innerHTML=`<div class="vlvc"><button class="x" data-vl="x" aria-label="x">×</button><small class="k">${LS("MODE LONGUE DURÉE","LONG-TERM MODE")}</small><h2>${LS("La Grande Expédition","The Great Expedition")}</h2>
  <p>${LS("Envoie une équipe de <b>3 Pokémon</b> traverser <b>8 camps</b> jusqu'au Sommet Féerique, où t'attend un <b>Pokémon vraiment très fort</b>. La progression avance tant que le jeu est ouvert (même en arrière-plan). Plus ta progression dans la Tower est haute, plus l'expédition va vite : avec une très bonne équipe, compte environ <b>4 jours</b> ; un joueur qui débute mettra <b>plus d'une semaine</b>. Chaque camp a un danger : des Pokémon qui lui sont super efficaces te font gagner du temps.","Send a team of <b>3 Pokémon</b> across <b>8 camps</b> to the Fairy Summit, where a <b>truly powerful Pokémon</b> awaits. Progress runs while the game is open (even in the background). The higher your Tower progress, the faster the expedition: with a very good team, expect about <b>4 days</b>; a beginner will need <b>over a week</b>. Each camp has a hazard: Pokémon super effective against it save you time.")}</p>
  <div class="vlreq">${rq(f.ok.t,LS("Tour : étage "+VLMINF+" atteint (actuel "+f.tb+")","Tower: floor "+VLMINF+" reached (now "+f.tb+")"))}${rq(f.ok.sq,LS("Équipe de 3 Pokémon","Team of 3 Pokémon"))}${rq(f.ok.lv,LS("Niveau "+VLMINL+" minimum chacun","Level "+VLMINL+" minimum each"))}</div>
- <div class="vlsq">${sq.map((c,k)=>`<select data-vls="${k}">${vlOpts(c,sq.filter((x,j)=>j!=k))}</select>`).join("")}</div>
+ <div class="vlsq">${sq.map((c,k)=>`<button type="button" class="vlpb${c?" on":""}" data-vlp="${k}">${c&&G.col[c]?`<img src="${rdArtOf(c)}" alt="" onerror="this.style.visibility='hidden'"><span><b>${esc(dn(c))}</b><small>${LS("Niv.","Lv.")} ${G.col[c].l|0}</small></span>`:`<span><b>${LS("Choisir un Pokémon","Pick a Pokémon")}</b></span>`}</button>`).join("")}</div>
  <div class="vlsp">${LS("Vitesse actuelle","Current speed")} <b>×${f.rate.toFixed(2)}</b> · ${LS("Tour","Tower")} ×${f.base.toFixed(2)} · ${LS("couverture du camp","camp coverage")} ×${f.cov.toFixed(2)} · ${LS("niveau","level")} ×${f.lf.toFixed(2)}<br>${LS("Temps restant estimé","Estimated time left")} <b>${v.s>=VLT?"0":vlFmt(f.eta)}</b></div>
  <div class="vlvb"><i style="width:${pc}%"></i></div><div class="vlvt"><span>${LS("Camp","Camp")} ${f.camp+1} / 8</span><span>${Math.floor(pc)} %</span></div>
  <div class="vlvg">${v.s>=VLT?"":`<button data-vl="tg" class="${v.on?"off":""}" ${f.go||v.on?"":"disabled"}>${v.on?LS("Mettre en pause","Pause"):(v.s>0?LS("Reprendre l'expédition","Resume"):LS("Partir en expédition","Start the expedition"))}</button>`}</div>
@@ -15545,6 +15558,31 @@ function vlLinks(){const u=$("utl");if(!u||$("pid-vl-menu"))return;const a=docum
  a.innerHTML=`<span class="qki" style="--c1:#4338ca;--c2:#7c3aed">${ico("trophy")}</span><span class="qkt"><b>${LS("La Grande Expédition","The Great Expedition")}</b><small>${LS("8 camps, 4 jours ou plus, un Pokémon très fort","8 camps, 4 days or more, a very strong Pokémon")}</small></span>`;
  a.addEventListener("click",vlOpen);u.appendChild(a)}
 vlLinks();setInterval(vlLinks,3000);
+/* --- Grande Expédition : liste de choix des Pokémon (remplace les menus déroulants) + petit onglet dans Expéditions --- */
+{const st=document.createElement("style");st.id="pid-vl2";st.textContent=`#vlm .vlsq{grid-template-columns:repeat(3,minmax(0,1fr))}#vlm .vlpb{display:flex;align-items:center;gap:8px;min-height:58px;padding:8px 10px;border-radius:12px;border:2px dashed #4f46e5;background:#0a0f26;color:#c7d2fe;font:800 13px Nunito,sans-serif;cursor:pointer;text-align:left}#vlm .vlpb.on{border-style:solid;border-color:#a78bfa;color:#fff}#vlm .vlpb img{width:40px;height:40px;object-fit:contain;image-rendering:pixelated}#vlm .vlpb span{display:flex;flex-direction:column;min-width:0}#vlm .vlpb b{font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#vlm .vlpb small{font-size:11px;color:#a5b4fc}
+#vlpk{position:fixed;inset:0;z-index:100060;background:#000c;display:grid;place-items:center;padding:14px}#vlpk .vlp-box{width:min(640px,100%);max-height:88vh;display:flex;flex-direction:column;gap:10px;background:#12102a;border:2px solid #6366f1;border-radius:20px;padding:18px;color:#f1f5f9}#vlpk h3{margin:0;font:800 20px Nunito,sans-serif}#vlpk input{padding:10px 12px;border-radius:10px;border:1px solid #334155;background:#0a0f26;color:#fff;font:700 14px Nunito,sans-serif}
+#vlpk .vlp-lst{overflow:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#vlpk .vlp-row{display:flex;align-items:center;gap:8px;padding:8px;border-radius:12px;border:1px solid #33305a;background:#0b0a1f;color:#fff;cursor:pointer;text-align:left;font:700 13px Nunito,sans-serif}#vlpk .vlp-row img{width:44px;height:44px;object-fit:contain;image-rendering:pixelated}#vlpk .vlp-row span{display:flex;flex-direction:column;min-width:0}#vlpk .vlp-row small{color:#a5b4fc;font-size:11px}#vlpk .vlp-row.no{opacity:.45;cursor:not-allowed}#vlpk .vlp-row.no small{color:#fca5a5}
+#vlpk .vlp-bt{display:flex;gap:8px;justify-content:flex-end}#vlpk .vlp-bt button{padding:10px 16px;border-radius:12px;border:1px solid #475569;background:#1e293b;color:#fff;font:800 13px Nunito,sans-serif;cursor:pointer}
+.vlxt{display:flex;gap:8px;margin:0 0 14px}.vlxt button{padding:9px 18px;border-radius:12px;border:2px solid #475569;background:#1e293b;color:#cbd5e1;font:800 14px Nunito,sans-serif;cursor:pointer}.vlxt button.on{border-color:#fbbf24;background:linear-gradient(#92400e,#b45309);color:#fff}.vlxt button.vlg{border-color:#818cf8;background:linear-gradient(135deg,#4338ca,#7c3aed);color:#fff}
+@media(max-width:560px){#vlm .vlsq{grid-template-columns:1fr}#vlpk .vlp-lst{grid-template-columns:1fr}}`;document.head.appendChild(st)}
+let VLPK=-1,VLPQ="";
+function vlPkHtml(){const v=vlS(),sq=v.sq.slice(0,3),cur=sq[VLPK]||0,other=sq.filter((x,j)=>j!=VLPK),q=VLPQ.trim().toLowerCase();
+ const L=ids().filter(i=>G.col[i]&&!other.includes(i)&&(!q||dn(i).toLowerCase().includes(q))).sort((x,y)=>atPd(y)-atPd(x)).slice(0,300);
+ return `<div class="vlp-box"><h3>${LS("Choisis un Pokémon","Pick a Pokémon")} <small style="font-weight:700;color:#a5b4fc">${LS("niveau "+VLMINL+" minimum","level "+VLMINL+" minimum")}</small></h3><input id="vlpq" placeholder="${LS("Rechercher…","Search…")}" value="${esc(VLPQ)}" autocomplete="off"><div class="vlp-lst">${L.length?L.map(i=>{const lv=G.col[i].l|0,ok=lv>=VLMINL;return `<button type="button" class="vlp-row${ok?"":" no"}${i==cur?" cur":""}" data-vlk="${i}"><img src="${rdArtOf(i)}" alt="" onerror="this.style.visibility='hidden'"><span><b>${esc(dn(i))}</b><small>${ok?LS("Niv.","Lv.")+" "+lv:LS("Niv. "+lv+" · "+VLMINL+" requis","Lv. "+lv+" · "+VLMINL+" needed")}</small></span></button>`}).join(""):`<p>${LS("Aucun Pokémon trouvé.","No Pokémon found.")}</p>`}</div><div class="vlp-bt">${cur?`<button type="button" data-vlk="0">${LS("Retirer","Remove")}</button>`:""}<button type="button" data-vlk="x">${LS("Fermer","Close")}</button></div></div>`}
+function vlPkOpen(k){VLPK=k;VLPQ="";let o=$("vlpk");if(!o){o=document.createElement("div");o.id="vlpk";document.body.appendChild(o)}o.innerHTML=vlPkHtml()}
+function vlPkClose(){const o=$("vlpk");if(o)o.remove();VLPK=-1}
+document.addEventListener("click",e=>{const t=e.target;if(!t.closest)return;
+ const o=$("vlpk");if(o&&t===o){vlPkClose();return}
+ const b=t.closest("[data-vlp]");if(b&&$("vlm")&&$("vlm").contains(b)){e.stopPropagation();vlPkOpen(+b.dataset.vlp);return}
+ const r=t.closest("[data-vlk]");if(r&&o&&o.contains(r)){e.stopPropagation();const a=r.dataset.vlk;if(a=="x"){vlPkClose();return}
+  const id=+a,v=vlS(),sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
+  if(id&&(G.col[id].l|0)<VLMINL){toast(LS("Niveau "+VLMINL+" minimum pour la Grande Expédition.","Level "+VLMINL+" minimum for the Great Expedition."));return}
+  sq[VLPK]=id;v.sq=sq.filter((x,j)=>x&&sq.indexOf(x)===j);try{save()}catch(er){}vlPkClose();vlRender();return}
+ const x=t.closest("[data-vlx]");if(x){e.stopPropagation();vlOpen();return}},true);
+document.addEventListener("input",e=>{if(e.target&&e.target.id=="vlpq"){VLPQ=e.target.value;const o=$("vlpk"),p=e.target.selectionStart;if(o){o.innerHTML=vlPkHtml();const i=$("vlpq");if(i){i.focus();try{i.setSelectionRange(p,p)}catch(er){}}}}});
+/* petit onglet « Grande Expédition » au-dessus de la page Expéditions */
+{const v0=vExp;vExp=function(){const h=v0.apply(this,arguments);return `<div class="vlxt"><button type="button" class="on">${LS("Expéditions","Expeditions")}</button><button type="button" class="vlg" data-vlx="1">${LS("Grande Expédition","Great Expedition")}</button></div>`+h}}
+
 
 /* ===== Onglet Énergie : 10 défis d'un seul type, 6 adversaires qui s'adaptent ===== */
 IP.enr='<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>';
@@ -15668,13 +15706,13 @@ function vEnr(){if(lockOf("enr"))return `<div class="box"><h2>${lockTxt(-1)}</h2
 function enPickHtml(){const k=ENU.k,tm=enTeam(k),L=enEl(k);return `<div class="enr-mb" data-en="close"><div class="enr-md" onclick="event.stopPropagation()"><h3>${LS("Choisis ton équipe","Choose your team")} <small>${tm.length} / ${ENC[k].c}</small></h3><div class="enr-pg">${L.length?L.map(id=>{const c=G.col[id],on=tm.includes(id),st=starsOf(id,c.n)|0;return `<button class="enr-pc${on?" on":""}" data-en="tog" data-id="${id}"><img src="${rdArtOf(id)}" alt="" onerror="this.style.visibility='hidden'"><b>${esc(dn(id))}</b><small>${LS("Niv.","Lv.")} ${c.l} · ${st}★</small></button>`}).join(""):`<p>${LS("Tu n'as aucun Pokémon de niveau 100 pour ce défi.","You have no level 100 Pokémon for this challenge.")}</p>`}</div><button class="enr-go" data-en="close">${LS("Valider","Done")}</button></div></div>`}
 function enResHtml(r){return `<div class="enr-mb" data-en="rclose"><div class="enr-md" onclick="event.stopPropagation()" style="text-align:center"><h3>${r.win?LS("Défi réussi !","Challenge cleared!"):r.flee?LS("Tu as fui","You fled"):LS("Défi échoué","Challenge failed")}</h3>${r.win?(r.first?`<p>${LS("Récompense :","Reward:")} ${enRwHtml(r.k)}</p>${r.got.length?`<p><small>${r.got.map(esc).join(", ")}</small></p>`:""}`:`<p>${LS("Déjà réussi : pas de nouvelle récompense.","Already cleared: no new reward.")}</p>`):`<p>${LS("Ajuste ton équipe (étoiles, mutations, taille, ordre) et retente.","Adjust your team (stars, mutations, size, order) and try again.")}</p>`}<button class="enr-go" data-en="rclose">OK</button></div></div>`}
 window.vEnr=vEnr;
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-en]");if(!b||tab!="enr")return;e.preventDefault();const a=b.dataset.en,y=scrollY,k=ENU.k,S=enS();
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-en]");if(!b||tab!="enr")return;if(b.classList.contains("enr-mb")&&e.target.closest(".enr-md"))return;e.preventDefault();const a=b.dataset.en,y=scrollY,k=ENU.k,S=enS();
  if(a=="goto"){ENU.k=+b.dataset.i}else if(a=="prev"){ENU.k=Math.max(0,k-1)}else if(a=="next"){ENU.k=Math.min(9,k+1)}
  else if(a=="pick"){if(!enOpen(k))return;ENU.pk=+b.dataset.i}else if(a=="close"){ENU.pk=null}else if(a=="rclose"){}
  else if(a=="tog"){const id=+b.dataset.id,t=enTeam(k).slice(),i=t.indexOf(id);if(i>=0)t.splice(i,1);else if(t.length<ENC[k].c)t.push(id);else{toast(LS("Équipe complète : retire un Pokémon d'abord.","Team full: remove a Pokémon first."));return}S.tm[k]=t;save()}
  else if(a=="add"){if(!enOpen(k))return;const t=enTeam(k).slice(),id=+b.dataset.id;if(t.length<ENC[k].c&&!t.includes(id)){t.push(id);S.tm[k]=t;save()}}
  else if(a=="go"){if(!enOpen(k))return;enStart(k);return}
- show();scrollTo(0,y)});
+ show();scrollTo(0,y)},true);
 
 /* ===== Wiki : Énergie, Grande Expédition, exclusifs ===== */
 {WKG[3][3].push("enr","vl");WKG[2][3].push("excl");WKO.push("enr","vl","excl");
@@ -16089,4 +16127,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026j"><script src="dungeon-immersive.js?v=pid-v250-20261026j"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026j"><script src="collection-scenes.js?v=pid-v250-20261026j"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026k"><script src="dungeon-immersive.js?v=pid-v250-20261026k"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026k"><script src="collection-scenes.js?v=pid-v250-20261026k"></script></body></html>
