@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026h"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026g"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026h"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14848,6 +14848,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["imp","Wiki mis à jour","Le wiki couvre la 2.5.0 : nouvelles pages Traits et cristaux et Donjons, étoiles rouges d’ascension, Pass Black, quêtes définitives, parrainage, évolution manuelle et les six exclusifs.","Wiki updated","The wiki covers 2.5.0: new Traits and crystals and Dungeons pages, ascension red stars, Black Pass, permanent quests, referral, manual evolution and the six exclusives."],
   ["new","Pokémon de la zone : onglet Chromatique","Dans « Pokémon de la zone », un nouvel onglet Chromatique montre les chromatiques de ta zone actuelle : ceux qui te manquent sont en premier, ceux que tu as déjà sont grisés. Tu peux toujours cibler un Pokémon depuis cet onglet.","Zone Pokémon: Shiny tab","In “Zone Pokémon”, a new Shiny tab shows the shinies of your current zone: the ones you are missing come first, the ones you already have are greyed out. You can still target a Pokémon from this tab."],
   ["fix","Casino : capsules bien reçues","Le casino pouvait annoncer des Capsules d’Or (ou d’Argent) sans les ajouter à ton sac, à cause de la règle qui divise les gains de capsules par 5. Maintenant le lot affiché est celui que tu reçois, et il est 5 fois plus rare (le tableau des probabilités est mis à jour).","Casino: caps are received","The casino could announce Gold (or Silver) Caps without adding them to your bag, because of the rule that divides cap gains by 5. Now the prize shown is the one you get, and it is 5 times rarer (the odds table is updated)."],
   ["new","Évolution manuelle","Nouvelle option dans les Paramètres : « Évolution manuelle ». Cochée, plus aucun Pokémon n’évolue tout seul : tu choisis l’évolution depuis sa fiche (niveau, pierre, échange…).","Manual evolution","New option in Settings: “Manual evolution”. When checked, no Pokémon evolves on its own: you choose the evolution from its sheet (level, stone, trade…)."],
@@ -15697,6 +15698,32 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  <div class="wnwb"><button class="go" onclick="exrOpen()">${ico("crown")} Ouvrir le classement illustré</button></div>
  ${wn("info","Bon à savoir","Les autres bonus (niveau, doublons, étoiles, mutation, taille, chromatique, Alpha) s'ajoutent ensuite au multiplicateur.")}`;
 }
+/* ===== Wiki 2.5.0 : ascension, traits, donjons, Pass Black, quêtes, parrainage, évolution manuelle ===== */
+{WKG[2][3].push("trt");WKG[3][3].push("dgn");WKO.push("trt","dgn");
+ WKM.trt=["Traits et cristaux","La forge de cristal : 8 raretés, 21 traits et où trouver des cristaux","gem"];
+ WKM.dgn=["Donjons","Donjons des Échos : salles, gardiens, coffres, boutique d'Écho et niveaux 50 à 600","map"];
+ ["trt","dgn"].forEach(k=>WSEC.push([k,WKM[k][0],WKM[k][0],WKM[k][2]]));
+ ["trt","dgn","asc","bp","qst"].forEach(k=>WKNEW.add(k));
+ const add=(k,f)=>{const p=wkBody[k];wkBody[k]=()=>(p?p():"")+f()};
+ add("asc",()=>wsx("Ascension : les étoiles rouges",`<p>Un Pokémon à <b>5 étoiles</b> peut être <b>ascensionné</b> depuis sa fiche. Il repart au <b>niveau 1, 0 étoile et 0 doublon</b>, mais garde ses IV, EV, objets, mutation, taille, Alpha et chromatique. En échange, il gagne une <b>étoile rouge</b> permanente.</p>${tbl(["Étoile rouge","Dégâts et pièces"],[["1re","×1,3"],["2e","×1,7"],["3e (maximum)","×2"]])}
+ <p>L'étoile rouge agit aussi sur l'attaque en <b>raids, Énergie et donjons</b>. L'ascension coûte des pièces selon la rareté (×1 pour la 1re, ×3 pour la 2e, ×9 pour la 3e) ; les exclusifs coûtent 5 T, 15 T puis 45 T. Une fenêtre <b>avant / après</b> montre le résultat avant de confirmer.</p>
+ ${wn("tip","Étoiles rouges et prestige","Les étoiles rouges sont <b>conservées au prestige</b>, même pour un Pokémon que tu recaptures ensuite. Elles apparaissent dans le détail des multiplicateurs (clique sur tes dégâts ou tes pièces). Cinq succès avec titre sont liés à l'ascension.")}`));
+ add("bp",()=>wsx("Saison 2 : le Pass Black",`<p>La saison 2 est le <b>Pass Black</b> : 100 paliers avec une nouvelle interface, « Le Chemin ». Elle apporte la mutation <b>Néant</b> et la taille <b>Infini</b>, et ses récompenses finales sont <b>Lugia Ombre</b> (palier 50, Premium) et <b>Mewtwo Black</b> (palier 100, Premium).</p>`));
+ add("qst",()=>wsx("Quêtes définitives étendues",`<p>Il y a maintenant <b>22 séries</b> de quêtes définitives, avec jusqu'à <b>8 paliers</b> pour les plus longues (l'étage record va jusqu'à 4000). Nouvelles séries : tirages de traits (jusqu'à 5000), cristaux de trait, ascensions, étoiles, exclusifs, étage et victoires de la Tower, défis de l'Énergie.</p>`));
+ add("pres",()=>wsx("Niveaux maximum relevés",`<p>Toutes les améliorations de prestige ont <b>10 niveaux maximum de plus</b>. Les étoiles rouges et les chromatiques définitifs sont conservés.</p>`));
+ add("soc",()=>wsx("Parrainage",`<p>Le bouton <b>Amis et parrainage</b> (encadré Pokémon List) affiche ton code. Quand un nouveau joueur l'utilise à l'inscription (ou via ton lien), crée un compte et joue 20 minutes, il devient ton ami et tu reçois des Master Balls, des Capsules d'Or, un Pokémon LR chromatique muté et un bonus permanent de dégâts, pièces et vitesse d'attaque, jusqu'à 10 amis.</p>`));
+ add("forms",()=>wsx("Évolution manuelle",`<p>Dans <b>Paramètres</b>, l'option « Évolution manuelle » empêche tout Pokémon d'évoluer tout seul. Tu choisis alors l'évolution depuis sa fiche : niveau, pierre, échange… Ce réglage est propre à chaque appareil.</p>`));
+ add("excl",()=>wsx("Les six exclusifs de la 2.5.0",`<p><b>Roitiflam Plante</b> (sommet de la Tower 1000), <b>Ronflex des Neiges</b> (dernier défi de l'Énergie, Dynamax), <b>Lugulabre Zodiaque</b> (à partir de l'étage 4000), <b>Arcanin Jovial</b> (sommet de la Grande Expédition), <b>Mewtwo Black</b> et <b>Lugia Ombre</b> (Pass Black).</p>`));
+ wkBody.trt=()=>`<p class="lead">Les <b>traits</b> sont des bonus qui s'ajoutent à tes Pokémon. On les obtient en dépensant des <b>cristaux de trait</b> dans l'onglet <b>Traits</b> : la forge de cristal.</p>
+ ${wf([["Raretés",8],["Traits",21],["Tirage","Automatique possible"]])}
+ ${wsx("Où trouver des cristaux",`<p>Chaque Pokémon battu dans les étages peut laisser un cristal : <b>Éclat</b> (1 %), <b>Prisme</b> (0,5 %) ou <b>Astral</b> (0,2 %). Les victoires de la Tower donnent aussi une chance d'en trouver. Les cristaux se gagnent aussi dans les raids, le Pass de combat, les coffres des donjons et la boutique d'Écho.</p>`)}
+ ${wn("tip","Au prestige","Seuls les Pokémon ordinaires que tu choisis de garder conservent leurs traits.")}`;
+ wkBody.dgn=()=>`<p class="lead">Les <b>Donjons des Échos</b> sont un onglet de Jouer, disponible dès l'étage 60. Tu avances case par case dans une grande carte, en évitant rochers et pièges. Un contact avec un adversaire lance un vrai combat de raid en manuel.</p>
+ ${wf([["Niveaux","50 à 600"],["Environnements",3],["Entrée","1 T, prix doublé à chaque tentative du jour"]])}
+ ${wsx("Niveaux de difficulté",`<p>Huit niveaux : 50, 100, 150, 200, 300, 400 et les deux nouveaux, <b>Mythique (500)</b> avec 1 QA de PV de départ et <b>Abyssal (600)</b> avec 50 QA. Plus le niveau est haut, plus les gardiens sont légendaires et les coffres gros.</p>`)}
+ ${wsx("Salles et gardiens",`<p>Les PV adverses montent de 6,5 % par salle, les élites sont ×1,6 et un gardien ×3 arrive toutes les 10 salles. Après une salle, tu choisis un chemin : rencontre, élite, trésor, événement, bivouac, marchand, autel ou passage piégé. Une seule tentative de capture par gardien, puis une relique parmi trois.</p>`)}
+ ${wsx("Coffres, paliers et boutique",`<p>Les coffres donnent des cristaux et des objets, les paliers de salles débloquent des récompenses et la <b>boutique d'Écho</b> échange tes fragments d'Écho sécurisés contre des cristaux de trait et des objets rares. Les étoiles rouges comptent dans l'attaque.</p>`)}`;
+}
 /* ===== Suggestions et bugs : bouton en bas à gauche ; les messages arrivent dans le courrier du propriétaire (#7458921) ===== */
 const SUG_PID="#7458921",SUG_ICON='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10h7M8.5 13.5h4.5"/></svg>';
 {const st=document.createElement("style");st.id="pid-suggest-styles";st.textContent=`
@@ -16057,4 +16084,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026g"><script src="dungeon-immersive.js?v=pid-v250-20261026g"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026g"><script src="collection-scenes.js?v=pid-v250-20261026g"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026h"><script src="dungeon-immersive.js?v=pid-v250-20261026h"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026h"><script src="collection-scenes.js?v=pid-v250-20261026h"></script></body></html>
