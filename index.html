@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026o"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026q"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026o"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026q"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -6088,7 +6088,7 @@ function qList(p){if(!G.q||!G.q[p]||!G.q.p)v21mig();const I=G.q[p];return I.ids.
 const qName=(d,tg)=>LS(d.f[0],d.f[1]).replace("{n}",fmt(tg));
 function qRew(d,p){const r=[["m",Math.max(QP[p].min,Math.floor(qcps()/3*QP[p].secs))]],a=d.it&&d.it[{d:1,w:2,m:3}[p]];if(a)r.push(["i",d.it[0],a]);return r}
 function qBRew(p){const B=QBN[p];return [["m",Math.max(QP[p].min*3,Math.floor(qcps()/3*B.s))]].concat(B.i.map(x=>["i",x[0],x[1]]))}
-function qGive(rw){const out=[];rw.forEach(r=>{if(r[0]=="m"){G.m+=kxI("rew",r[1]);out.push(["m",r[1]])}else if(r[0]=="i"){G.inv[r[1]]=(G.inv[r[1]]||0)+r[2];out.push(["i",r[1],r[2]])}else if(r[0]=="st"){for(let j=0;j<r[1];j++){const s=STONES[Math.random()*10|0][0];G.inv[s]=(G.inv[s]||0)+1;const e=out.find(o=>o[1]==s);if(e)e[2]++;else out.push(["i",s,1])}}});return out}
+function qGive(rw){const out=[];rw.forEach(r=>{if(r[0]=="m"){G.m+=kxI("rew",r[1]);out.push(["m",r[1]])}else if(r[0]=="i"){G.inv[r[1]]=(G.inv[r[1]]||0)+r[2];out.push(["i",r[1],r[2]])}else if(r[0]=="mx"){G.m+=r[1];out.push(["m",r[1]])}else if(r[0]=="st"){for(let j=0;j<r[1];j++){const s=STONES[Math.random()*10|0][0];G.inv[s]=(G.inv[s]||0)+1;const e=out.find(o=>o[1]==s);if(e)e[2]++;else out.push(["i",s,1])}}});return out}
 function qMerge(L){const o=[];L.forEach(r=>{const e=r[0]=="m"?o.find(x=>x[0]=="m"):o.find(x=>x[1]==r[1]);if(e){if(r[0]=="m")e[1]+=r[1];else e[2]+=r[2]}else o.push(r.slice())});return o}
 function qTick(){G.q=G.q||{p:{}};let ch=0;
  for(const p of ["d","w","m"]){const I=G.q[p];if(I&&I.k===qKey(p))continue;
@@ -11005,6 +11005,7 @@ const GIFT_CODES={
  "MB11-X7K4Q9":{t:"Cadeau",txt:"11 Master Ball pour toi, merci de jouer à PokeIdleDex !",rw:[["i","master-ball",11]]},
  "BIENVENUE":{t:"Cadeau de bienvenue",txt:"Merci de jouer à PokeIdleDex !",rw:[["g",30],["i","master-ball",2]]},
  "STARTER2":{t:"2 starters chromatiques",txt:"Deux starters chromatiques aléatoires pour toi !",sh2:2},
+"2.5.0":{t:"Version 2.5.0",txt:"Merci de jouer à PokeIdleDex ! Voici ton gros cadeau de la version 2.5.0.",rw:[["lr"],["lr"],["lr"],["i","master-ball",10],["mx",5e12],["i","ability-patch",10],["i","gold-bottle-cap",10],["i","dynamax-band",1],["spx",90011]],pearls:3,fullCaps:1,minLv:30},
 "2.0.0":{t:"Version 2.0.0",txt:"Merci de jouer à PokeIdleDex ! Voici ton cadeau de la version 2.0.0.",rw:[["i","master-ball",10],["leg"]],minLv:25},
  /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",30],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
@@ -11043,7 +11044,7 @@ function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Dat
    const T=Object.assign({},GIFT_CODES,window.PID_CODES||{}),g=T[c]||(/^TS4PACK-/.test(c)?GIFT_PRIVATE_CODES[await pidH(c)]:null);G.codes=G.codes||{};
    if(!c)ST.msg="";else if(!g)ST.msg=LS("Code inconnu.","Unknown code.");else if(G.codes[c])ST.msg=LS("Code déjà utilisé.","Code already used.");else if(tlv().l<(g.minLv||10)){ST.msg=LS("Niveau de dresseur "+(g.minLv||10)+" requis pour ce code.","Trainer level "+(g.minLv||10)+" required for this code.");}
    else if(g.pk){if(ST.claiming)return;ST.claiming=1;try{const names=await giftMonsGrant(g.pk,c);ST.msg=LS("Code accepté : ","Code accepted: ")+names.join(", ")+" !"}catch(x){ST.msg=LS("Impossible de récupérer les Pokémon. Réessaie : ton code reste disponible.","Could not claim Pokémon. Try again: your code is still available.")}finally{ST.claiming=0}}
-   else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),g.rw||[],g.txt||"",g.fullCaps);ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
+   else{G.codes[c]=1;if(g.sh2){ST.msg=LS("Code accepté : ","Code accepted: ")+shGrant(g.sh2)+" !"}else{mailAdd(g.t||LS("Cadeau","Gift"),LS("Code cadeau","Gift code"),(g.rw||[]).concat(Array.from({length:g.pearls||0},()=>["i",rdPearlKey(),1])),g.txt||"",g.fullCaps);ST.msg=LS("Code accepté : le cadeau est dans ton courrier.","Code accepted: your gift is in the mail.")}}
    render();mailDot()}
  });
  document.addEventListener("keydown",e=>{if(e.key=="Escape")mailClose();if(e.key=="Enter"&&e.target&&e.target.id=="mlin"){const b=document.querySelector('[data-ml="code"]');if(b)b.click()}});
@@ -16132,4 +16133,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026o"><script src="dungeon-immersive.js?v=pid-v250-20261026o"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026o"><script src="collection-scenes.js?v=pid-v250-20261026o"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026q"><script src="dungeon-immersive.js?v=pid-v250-20261026q"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026q"><script src="collection-scenes.js?v=pid-v250-20261026q"></script></body></html>
