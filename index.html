@@ -15808,7 +15808,7 @@ function ascCard(id){const c=G.col[id];if(!c)return"";const a=Math.min(ASCMAX,c.
  <small class="asn">${LS("Remet le Pokémon à zéro (niveau 1, 0 étoile, 0 doublon). Il garde ses IV, EV, objets, mutation, taille, Alpha et chromatique.","Resets the Pokémon (level 1, 0 stars, 0 duplicates). It keeps its IVs, EVs, items, mutation, size, Alpha and shiny.")}</small>
  <button class="asc2b" data-asc="${id}" ${can&&G.m>=cost?"":"disabled"}>${lab}</button></div>`}
 {const o=starCard;starCard=function(id){return o.apply(this,arguments).replace("</div></div>\n","</div></div>\n")+ascCard(id)}}
-function ascPrev(id){const c=G.col[id];if(!c||!ascCan(c))return;const a=c.asc|0,cost=ascCost(id),f=x=>"×"+String(x).replace(".",SG.lang=="en"?".":","),r=ASCM[a+1]/ASCM[a];let d0=0;try{d0=dmg(id)}catch(e){}
+function ascPrev(id){const c=G.col[id];if(!c||!ascCan(c))return;const a=c.asc|0,cost=ascCost(id),f=x=>"×"+String(x).replace(".",SG.lang=="en"?".":","),r=ASCM[a+1]/ASCM[a];let d0=0;try{d0=base(id)}catch(e){}
  let m=document.getElementById("ascpv");if(!m){m=document.createElement("div");m.id="ascpv";document.body.appendChild(m)}
  const row=(l,x,y)=>`<tr><td>${l}</td><td>${x}</td><td class="ap">${y}</td></tr>`;
  m.innerHTML=`<div class="apb"></div><div class="apc"><h3>${LS("Ascension de ","Ascension of ")}${esc(dn(id))}</h3>
