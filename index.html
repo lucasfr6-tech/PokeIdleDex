@@ -4310,7 +4310,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026q"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261026r"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4324,7 +4324,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261026q"></script><script>
+</script><script src="shim.js?v=pid-v250-20261026r"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8937,7 +8937,7 @@ const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 /* Tour : courbe continue et progressive (avant : saut à l'étage 100 et défense multipliée deux fois) */
-const twSc=f=>{f=Math.min(f,700);const a=f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5);return{a,h:a*1.13,d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
+const twSc=f=>{const x=f>700?6*Math.pow((f-700)/300,1.5):0;f=Math.min(f,700);const a=(f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5))+x;return{a,h:a*1.13,d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -8955,7 +8955,7 @@ const twLvl=(f,boss)=>Math.max(1,Math.min(100,Math.round(6+.94*f+(boss==2?5:boss
 const twIvBase=f=>f>100?Math.min(31,Math.round(24+.07*(f-100))):Math.round(2+.22*f);
 function twFoe(e,f){const u=pvMake(e.id),s=twSc(f),b=e.boss==2?1.3:e.boss?1.2:1,k=e.boss?1.08:1,L=twLvl(f,e.boss),R=rng(f*7919+e.id*31+(e.boss||0)),iv=Array.from({length:6},()=>Math.max(0,Math.min(31,Math.round(twIvBase(f)+(R()-.5)*10)))),S=pvNoMf(e.id,()=>ST(e.id));
  const st=i=>Math.floor((2*S[i]+iv[i])*L/100),hp=st(0)+L+10;
- const summit=Math.max(0,Math.min(1,(f-300)/400));
+ const summit=0;
  u.lv=L;u.iv=iv;u.max=u.hp=Math.max(20,Math.round(hp*s.h*b*(1-.5*summit)));u.atk=Math.round((st(1)+5)*s.a*k);u.spa=Math.round((st(3)+5)*s.a*k);u.def=Math.round((st(2)+5)*s.d*k);u.spd=Math.round((st(4)+5)*s.d*k);u.spe=Math.max(10,Math.round((st(5)+5)*s.p));u.boss=e.boss;u.it=null;return u}
 /* mes Pokémon : leur vrai niveau, leurs vrais IV et EV (même calcul que dans le reste du jeu) */
 function twMine(id,o){o=o||{};ens(id);const c=G.col[id],t=tp(id).slice(),mv=pvSetMoves(id,o.mv),it=pvItOk(o.it)?o.it:null,S=ST(id),hp=calc(id,0);
@@ -14859,7 +14859,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[["imp","Énergie remise à zéro","Les 10 défis d'Énergie sont remis à zéro pour tout le monde : avec la nouvelle difficulté, tout le monde peut les refaire et retenter la récompense finale.","Energy reset","The 10 Energy challenges are reset for everyone: with the new difficulty, everyone can play them again and go for the final reward."],["imp","Énergie : encore plus dur","Les adversaires frappent désormais fort, proportionnellement à la force de ton équipe, et un défi est limité à 40 tours (au lieu de 420).","Energy: even harder","Opponents now hit hard, scaled to your team strength, and a challenge is capped at 40 rounds (instead of 420)."],
+ {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[["imp","Tour : le sommet bien plus dur","Au-delà de l'étage 700, les adversaires continuent de monter en puissance jusqu'à l'étage 1000, et le gardien du sommet n'est plus affaibli.","Tower: a much harder summit","Above floor 700, opponents keep growing in strength up to floor 1000, and the summit guardian is no longer weakened."],["imp","Énergie remise à zéro","Les 10 défis d'Énergie sont remis à zéro pour tout le monde : avec la nouvelle difficulté, tout le monde peut les refaire et retenter la récompense finale.","Energy reset","The 10 Energy challenges are reset for everyone: with the new difficulty, everyone can play them again and go for the final reward."],["imp","Énergie : encore plus dur","Les adversaires frappent désormais fort, proportionnellement à la force de ton équipe, et un défi est limité à 40 tours (au lieu de 420).","Energy: even harder","Opponents now hit hard, scaled to your team strength, and a challenge is capped at 40 rounds (instead of 420)."],
   ["imp","Énergie : défis beaucoup plus durs","Les adversaires de l’Énergie ont énormément plus de PV et frappent plus fort, du défi 1 au défi 10. Il faut maintenant des équipes très poussées (étoiles, étoiles rouges, traits, niveaux) pour avancer, et le dernier défi est réservé aux meilleures équipes.","Energy: much harder challenges","Energy opponents now have far more HP and hit much harder, from challenge 1 to 10. You now need very developed teams (stars, red stars, traits, levels) to progress, and the last challenge is reserved for the best teams."],
   ["fix","Énergie : choisir un Pokémon","Dans la fenêtre « Choisis ton équipe », cliquer sur un Pokémon ne le sélectionnait pas. C’est corrigé, et le bouton Valider/OK de la fenêtre de résultat fonctionne aussi.","Energy: picking a Pokémon","In the “Choose your team” window, clicking a Pokémon did not select it. Fixed, and the OK button of the result window works too."],
   ["fix","Grande Expédition : choisir un Pokémon","Les trois emplacements ouvrent maintenant une vraie liste avec recherche, tes Pokémon et leur niveau (niveau 80 minimum). Un petit onglet « Grande Expédition » apparaît aussi en haut de la page Expéditions.","Great Expedition: picking Pokémon","The three slots now open a real list with search, your Pokémon and their level (level 80 minimum). A small “Great Expedition” tab also appears at the top of the Expeditions page."],
@@ -16133,4 +16133,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026q"><script src="dungeon-immersive.js?v=pid-v250-20261026q"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026q"><script src="collection-scenes.js?v=pid-v250-20261026q"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261026r"><script src="dungeon-immersive.js?v=pid-v250-20261026r"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261026r"><script src="collection-scenes.js?v=pid-v250-20261026r"></script></body></html>
