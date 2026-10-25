@@ -6029,21 +6029,29 @@ const QL=[
 const QBN={d:{s:1800,i:[["ultra-ball",5]]},w:{s:10800,i:[["ultra-ball",15],["bottle-cap",1]]},m:{s:57600,i:[["dream-ball",10],["gold-bottle-cap",1],["master-ball",1]]}};
 /* quêtes définitives : 5 paliers, chacun donne un petit bonus définitif (b : d dégâts +0,5 %, c pièces +0,5 %, k capture +1 %) */
 const PQ=[
-{id:"ko",k:"ko",ic:"sword",b:"d",f:["Pokémon vaincus","Pokémon defeated"],T:[100,1000,10000,50000,250000]},
-{id:"bo",k:"boss",ic:"skull",b:"d",f:["Boss vaincus","Bosses defeated"],T:[5,50,250,1000,5000]},
+{id:"ko",k:"ko",ic:"sword",b:"d",f:["Pokémon vaincus","Pokémon defeated"],T:[100,1000,10000,50000,250000,1e6,5e6,2e7]},
+{id:"bo",k:"boss",ic:"skull",b:"d",f:["Boss vaincus","Bosses defeated"],T:[5,50,250,1000,5000,2e4,1e5,5e5]},
 {id:"ac",k:"ach",ic:"trophy",b:"d",f:["Succès débloqués","Achievements unlocked"],T:[5,15,30,50,80]},
-{id:"pr",k:"st",ic:"spark",b:"d",f:["Prestiges effectués","Prestiges done"],T:[1,3,10,25,50]},
-{id:"ex",k:"exp",ic:"compass",b:"d",f:["Expéditions terminées","Expeditions completed"],T:[1,10,50,200,1000]},
-{id:"cl",k:"cl",ic:"arrowup",b:"c",f:["Étage record","Record floor"],T:[10,30,60,100,200]},
-{id:"dx",k:"dx",ic:"book",b:"c",f:["Espèces découvertes","Species discovered"],T:[25,100,300,600,1000]},
-{id:"gn",k:"gain",ic:"coin",b:"c",f:["Pièces gagnées","Coins earned"],T:[1e5,1e7,1e9,1e11,1e13]},
+{id:"pr",k:"st",ic:"spark",b:"d",f:["Prestiges effectués","Prestiges done"],T:[1,3,10,25,50,100,200,400]},
+{id:"ex",k:"exp",ic:"compass",b:"d",f:["Expéditions terminées","Expeditions completed"],T:[1,10,50,200,1000,3000,10000,30000]},
+{id:"cl",k:"cl",ic:"arrowup",b:"c",f:["Étage record","Record floor"],T:[10,30,60,100,200,500,1000,1500,2000,2500,3000,3500,4000]},
+{id:"dx",k:"dx",ic:"book",b:"c",f:["Espèces découvertes","Species discovered"],T:[25,100,300,600,1000,1025]},
+{id:"gn",k:"gain",ic:"coin",b:"c",f:["Pièces gagnées","Coins earned"],T:[1e5,1e7,1e9,1e11,1e13,1e15,1e17,1e19]},
 {id:"cd",k:"cards",ic:"cards",b:"c",f:["Cartes différentes","Different cards"],T:[20,100,300,600,1000]},
-{id:"cs",k:"cas",ic:"dice",b:"c",f:["Tickets de casino joués","Casino tickets played"],T:[1,25,150,600,3000]},
-{id:"cp",k:"caps",ic:"target",b:"k",f:["Pokémon capturés","Pokémon caught"],T:[10,100,500,2000,10000]},
-{id:"mu",k:"mut",ic:"spark",b:"k",f:["Mutations capturées","Mutations caught"],T:[3,20,100,500,2000]},
-{id:"sh",k:"shiny",ic:"star",b:"k",f:["Chromatiques possédés","Shinies owned"],T:[1,5,20,50,100]},
-{id:"th",k:"thr",ic:"target",b:"k",f:["Balls lancées","Balls thrown"],T:[50,500,5000,25000,100000]}];
-const PV={ko:()=>G.ko,boss:()=>G.boss,ach:()=>Object.keys(G.ach).length,st:()=>G.st||0,cl:()=>bfl(),dx:()=>dxn(),gain:()=>G.gain,cards:()=>Object.keys(G.cards).length,caps:()=>G.caps,mut:()=>G.mut,shiny:()=>shinies()};
+{id:"cs",k:"cas",ic:"dice",b:"c",f:["Tickets de casino joués","Casino tickets played"],T:[1,25,150,600,3000,10000,30000,100000]},
+{id:"cp",k:"caps",ic:"target",b:"k",f:["Pokémon capturés","Pokémon caught"],T:[10,100,500,2000,10000,5e4,2.5e5,1e6]},
+{id:"mu",k:"mut",ic:"spark",b:"k",f:["Mutations capturées","Mutations caught"],T:[3,20,100,500,2000,1e4,5e4,2.5e5]},
+{id:"sh",k:"shiny",ic:"star",b:"k",f:["Chromatiques possédés","Shinies owned"],T:[1,5,20,50,100,250,500,1000]},
+{id:"th",k:"thr",ic:"target",b:"k",f:["Balls lancées","Balls thrown"],T:[50,500,5000,25000,100000,5e5,2.5e6,1e7]},
+{id:"tr",k:"trroll",ic:"spark",b:"d",f:["Tirages de traits","Trait rolls"],T:[10,100,500,1000,2500,5000]},
+{id:"tcr",k:"trcr",ic:"gift",b:"c",f:["Cristaux de trait gagnés","Trait crystals earned"],T:[10,100,500,2000,10000,50000]},
+{id:"asc",k:"ascn",ic:"arrowup",b:"d",f:["Ascensions effectuées","Ascensions done"],T:[1,5,10,25,50,100]},
+{id:"stt",k:"stot",ic:"star",b:"d",f:["Étoiles obtenues","Stars earned"],T:[10,50,150,300,600,1000]},
+{id:"exc",k:"excn",ic:"crown",b:"k",f:["Exclusifs possédés","Exclusives owned"],T:[1,3,5,8,12,17]},
+{id:"twf",k:"twb",ic:"arrowup",b:"c",f:["Étage de la Tower","Tower floor"],T:[10,50,100,250,500,750,1000]},
+{id:"twv",k:"twin",ic:"sword",b:"d",f:["Victoires dans la Tower","Tower wins"],T:[10,100,500,2500,10000,50000]},
+{id:"enc",k:"encn",ic:"bolt",b:"c",f:["Défis de l'Énergie réussis","Energy challenges cleared"],T:[1,3,5,7,10]}];
+const PV={ko:()=>G.ko,boss:()=>G.boss,ach:()=>Object.keys(G.ach).length,st:()=>G.st||0,cl:()=>bfl(),dx:()=>dxn(),gain:()=>G.gain,cards:()=>Object.keys(G.cards).length,caps:()=>G.caps,mut:()=>G.mut,shiny:()=>shinies(),ascn:()=>Object.values(G.col).reduce((a,c)=>a+((c&&c.asc)|0),0),stot:()=>(typeof STOT!="undefined"?STOT:0),excn:()=>Object.keys(G.col).filter(i=>+i>9e4).length,twb:()=>(G.tw&&G.tw.b)|0,encn:()=>((G.en&&G.en.c)||[]).filter(Boolean).length};
 const pv=k=>PV[k]?PV[k]():((G.qc||{})[k]||0);
 const PBN={d:["Dégâts","Damage",.5],c:["Pièces","Coins",.5],k:["Capture","Catch",1]};
 function qbCalc(){const p=(G.q&&G.q.p)||{};let d=0,c=0,k=0;PQ.forEach(l=>{const n=p[l.id]||0;if(l.b=="d")d+=n*.005;else if(l.b=="c")c+=n*.005;else k+=n*.01});QB={d:1+d,c:1+c,k:1+k}}
@@ -6075,7 +6083,7 @@ function qTick(){G.q=G.q||{p:{}};let ch=0;
  if(ch)QND=null}
 function qClaimN(){let n=0;for(const p of ["d","w","m"]){const L=qList(p);L.forEach(s=>{if(s.done&&!s.cl)n++});if(L.every(s=>s.done)&&!G.q[p].bn)n++}PQ.forEach(l=>{if(qPN(l)>0)n++});return n}
 function qPCount(p){let n=0;const L=qList(p);L.forEach(s=>{if(s.done&&!s.cl)n++});if(L.every(s=>s.done)&&!G.q[p].bn)n++;return n}
-function qPN(l){const t=(G.q.p[l.id]||0);let n=0;for(let j=t;j<5&&pv(l.k)>=l.T[j];j++)n++;return n}
+function qPN(l){const t=(G.q.p[l.id]||0);let n=0;for(let j=t;j<l.T.length&&pv(l.k)>=l.T[j];j++)n++;return n}
 function qNotify(){const L=[];for(const p of ["d","w","m"])qList(p).forEach(s=>{if(s.done)L.push([p+"|"+s.id,s])});
  if(!QND){QND=new Set(L.map(x=>x[0]));return}
  L.forEach(([k,s])=>{if(!QND.has(k)){QND.add(k);toast(LS("Quête terminée : ","Quest complete: ")+qName(s.d,s.tg));sfx("big")}})}
@@ -6112,15 +6120,15 @@ function qPer(p){const L=qList(p),I=G.q[p],dn=L.filter(s=>s.done).length,all=dn=
  <div class="qgrid">${L.map(s=>{const pct=Math.floor(s.pr/s.tg*100);return `<div class="qc${s.cl?" cl":s.done?" rd":""}" style="--c1:${P.c1};--c2:${P.c2}"><div class="qci">${ico(s.d.ic)}</div><div class="qcb"><b>${qName(s.d,s.tg)}</b><div class="qbar"><i id="qb${s.id}" style="width:${pct}%"></i><span id="qt${s.id}">${fmt(s.pr)} / ${fmt(s.tg)}</span></div><div class="qrw">${qRew(s.d,p).map(rwChip).join("")}</div></div><div class="qca">${s.cl?`<span class="qdn">${ico("check")}</span>`:s.done?`<button class="go" data-a="qcl" data-t="${p}|${s.id}">${LS("Récupérer","Claim")}</button>`:`<small>${pct} %</small>`}</div></div>`}).join("")}</div>
  <div class="qchest${I.bn?" cl":all?" rd":""}" style="--c1:${P.c1};--c2:${P.c2}"><div class="qchi">${ico("chest")}</div><div class="qcb"><b>${LS("Coffre "+(p=="d"?"du jour":p=="w"?"de la semaine":"du mois"),"Chest")}</b><small>${LS("Termine toutes les quêtes de la période pour l'ouvrir.","Complete every quest of the period to open it.")}</small><div class="qrw">${qBRew(p).map(rwChip).join("")}</div></div><div class="qca">${I.bn?`<span class="qdn">${ico("check")}</span>`:all?`<button class="go" data-a="qbn" data-t="${p}">${LS("Ouvrir","Open")}</button>`:`<small>${dn} / ${L.length}</small>`}</div></div>`}
 function qPerm(){const tot=PQ.reduce((a,l)=>a+(G.q.p[l.id]||0),0),rd=PQ.reduce((a,l)=>a+qPN(l),0);
- return `<div class="qph" style="--c1:#fbbf24;--c2:#b45309"><div><b>${LS("Quêtes définitives","Permanent quests")}</b><small>${LS("Chaque palier récupéré donne un petit bonus qui reste pour toujours, même après un Prestige.","Each claimed tier gives a small boost that stays forever, even after a Prestige.")}</small></div><div class="qpr"><div class="qbar big"><i style="width:${tot/70*100}%"></i><span>${tot} / 70</span></div></div>${rd?`<button class="go" data-a="qall" data-t="p">${ico("gift")} ${LS("Tout récupérer","Claim all")} (${rd})</button>`:""}</div>
- <div class="qgrid qpg">${PQ.map(l=>{const n=G.q.p[l.id]||0,v=pv(l.k),nx=l.T[Math.min(n,4)],pct=n>=5?100:Math.min(100,Math.floor(v/nx*100)),rdy=qPN(l),B=PBN[l.b];
-  return `<div class="qc qp${rdy?" rd":""}${n>=5?" cl":""}" style="--c1:#fbbf24;--c2:#b45309"><div class="qci">${ico(l.ic)}</div><div class="qcb"><b>${LS(l.f[0],l.f[1])}</b><div class="qpips">${[0,1,2,3,4].map(j=>`<i class="${j<n?"on":""}"></i>`).join("")}</div><div class="qbar"><i id="qpb${l.id}" style="width:${pct}%"></i><span id="qpt${l.id}">${n>=5?LS("Terminé","Done"):fmt(Math.min(v,nx))+" / "+fmt(nx)}</span></div><div class="qrw"><span class="qr g">${LS(B[0],B[1])} +${String(B[2]).replace(".",SG.lang=="en"?".":",")} % <small>${LS("par palier","per tier")}</small></span></div></div><div class="qca">${rdy?`<button class="go" data-a="qpl" data-t="${l.id}">${LS("Récupérer","Claim")}${rdy>1?" ×"+rdy:""}</button>`:n>=5?`<span class="qdn">${ico("check")}</span>`:`<small>${pct} %</small>`}</div></div>`}).join("")}</div>`}
+ return `<div class="qph" style="--c1:#fbbf24;--c2:#b45309"><div><b>${LS("Quêtes définitives","Permanent quests")}</b><small>${LS("Chaque palier récupéré donne un petit bonus qui reste pour toujours, même après un Prestige.","Each claimed tier gives a small boost that stays forever, even after a Prestige.")}</small></div><div class="qpr"><div class="qbar big"><i style="width:${tot/PQ.reduce((a,l)=>a+l.T.length,0)*100}%"></i><span>${tot} / ${PQ.reduce((a,l)=>a+l.T.length,0)}</span></div></div>${rd?`<button class="go" data-a="qall" data-t="p">${ico("gift")} ${LS("Tout récupérer","Claim all")} (${rd})</button>`:""}</div>
+ <div class="qgrid qpg">${PQ.map(l=>{const n=G.q.p[l.id]||0,v=pv(l.k),nx=l.T[Math.min(n,l.T.length-1)],pct=n>=l.T.length?100:Math.min(100,Math.floor(v/nx*100)),rdy=qPN(l),B=PBN[l.b];
+  return `<div class="qc qp${rdy?" rd":""}${n>=l.T.length?" cl":""}" style="--c1:#fbbf24;--c2:#b45309"><div class="qci">${ico(l.ic)}</div><div class="qcb"><b>${LS(l.f[0],l.f[1])}</b><div class="qpips">${l.T.map((_,j)=>`<i class="${j<n?"on":""}"></i>`).join("")}</div><div class="qbar"><i id="qpb${l.id}" style="width:${pct}%"></i><span id="qpt${l.id}">${n>=l.T.length?LS("Terminé","Done"):fmt(Math.min(v,nx))+" / "+fmt(nx)}</span></div><div class="qrw"><span class="qr g">${LS(B[0],B[1])} +${String(B[2]).replace(".",SG.lang=="en"?".":",")} % <small>${LS("par palier","per tier")}</small></span></div></div><div class="qca">${rdy?`<button class="go" data-a="qpl" data-t="${l.id}">${LS("Récupérer","Claim")}${rdy>1?" ×"+rdy:""}</button>`:n>=l.T.length?`<span class="qdn">${ico("check")}</span>`:`<small>${pct} %</small>`}</div></div>`}).join("")}</div>`}
 function vQst(){qTick();QSIG=qsig();const tb=["d","w","m","p"];
  return `<div class="box qhero"><div class="qhi">${ico("quest")}</div><div class="qhb"><h2>${LS("Quêtes","Quests")}</h2><small>${LS("Relève des défis chaque jour, chaque semaine, chaque mois, et débloque des bonus définitifs.","Take on daily, weekly and monthly challenges, and unlock permanent boosts.")}</small></div><div class="qbon">${qBonChips()}</div></div>
  <div class="qtabs">${tb.map(p=>{const n=p=="p"?PQ.reduce((a,l)=>a+qPN(l),0):qPCount(p);return `<button data-a="qtab" data-t="${p}" class="${QT==p?"on":""}" style="--c1:${QP[p].c1};--c2:${QP[p].c2}"><i>${ico(QP[p].ic)}</i><span>${LS(QP[p].n[0],QP[p].n[1])}</span>${n?`<em>${n}</em>`:""}</button>`}).join("")}</div>
  <div id="qbd">${QT=="p"?qPerm():qPer(QT)}</div>`}
 function qstUi(){if(tab!="qst"||!$("qbd"))return;const s=qsig();if(s!==QSIG){QSIG=s;const y=scrollY;$("view").innerHTML=vQst();return}
- if(QT=="p"){PQ.forEach(l=>{const n=G.q.p[l.id]||0;if(n>=5)return;const v=pv(l.k),nx=l.T[n],b=$("qpb"+l.id),t=$("qpt"+l.id);if(b){b.style.width=Math.min(100,Math.floor(v/nx*100))+"%";t.textContent=fmt(Math.min(v,nx))+" / "+fmt(nx)}});return}
+ if(QT=="p"){PQ.forEach(l=>{const n=G.q.p[l.id]||0;if(n>=l.T.length)return;const v=pv(l.k),nx=l.T[n],b=$("qpb"+l.id),t=$("qpt"+l.id);if(b){b.style.width=Math.min(100,Math.floor(v/nx*100))+"%";t.textContent=fmt(Math.min(v,nx))+" / "+fmt(nx)}});return}
  qList(QT).forEach(x=>{const b=$("qb"+x.id),t=$("qt"+x.id);if(b){b.style.width=Math.floor(x.pr/x.tg*100)+"%";t.textContent=fmt(x.pr)+" / "+fmt(x.tg)}});const c=$("qcd");if(c)c.textContent=qHms(qEnd(QT)-Date.now())}
 /* ---------- CONNEXION : 7 jours, le cycle recommence ---------- */
 const LGR=[
@@ -10181,7 +10189,7 @@ const LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AA
  const F={ko:[3,4],cp:[3,4],gn:[3,4],th:[3,4],bo:[3,4],cs:[3,4],cd:[3,4],ex:[2.5,3],fl:[2,2.5],mu:[2,2.5],ev:[2.5,3],pn:[2,2.5],nd:[2,2.5],sp:[3,4]};
  QL.forEach(q=>{const f=F[q.id]||[3,4];["w","m"].forEach((p,j)=>{const v=q.t[p];if(v===undefined)return;const k=f[j];
   q.t[p]=typeof v=="function"?(o=>()=>Math.round(o()*k))(v):Math.max(v+1,Math.round(v*k))})});
- const T={ko:[500,5000,50000,250000,1000000],bo:[20,200,1000,4000,15000],pr:[3,10,30,75,150],ex:[5,40,150,600,2500],cl:[20,60,120,200,400],dx:[50,200,500,800,1000],gn:[1e6,1e8,1e10,1e12,1e14],cd:[40,200,500,800,1000],cs:[10,100,500,2000,8000],cp:[50,400,2000,8000,30000],mu:[10,60,300,1200,4000],sh:[2,10,40,100,250],th:[250,2500,20000,100000,400000]};
+ const T={ko:[500,5000,50000,250000,1e6,4e6,15e6,5e7],bo:[20,200,1000,4000,15000,5e4,15e4,4e5],pr:[3,10,30,75,150,300,500,800],ex:[5,40,150,600,2500,8000,25000,80000],cl:[20,60,120,200,400,800,1500,2200,3000,3500,4000],dx:[50,200,500,800,1000,1025],gn:[1e6,1e8,1e10,1e12,1e14,1e16,1e18,1e20],cd:[40,200,500,800,1000],cs:[10,100,500,2000,8000,3e4,1e5,3e5],cp:[50,400,2000,8000,30000,1e5,4e5,1.5e6],mu:[10,60,300,1200,4000,15000,6e4,25e4],sh:[2,10,40,100,250,500,800,1200],th:[250,2500,20000,100000,400000,1.5e6,6e6,2.5e7]};
  PQ.forEach(q=>{if(T[q.id])q.T=T[q.id]});
  /* objectifs hebdo / mensuels : tous bâtis sur le même nombre d'heures de jeu équivalentes (36 h / 300 h), avec une cadence réaliste par activité, pour que tous les objectifs soient aussi durs les uns que les autres */
  const HW=36,HM=300,RT={ko:1800,bo:45,th:900,cp:450,mu:12};
@@ -14480,7 +14488,9 @@ function trxGive(a,p,x,why){const t=TRXO();t.cr[0]+=a;t.cr[1]+=p;t.cr[2]+=x;cons
 /* v2.5.0 : cristaux de trait en combat. Étages : 1 % Éclat, 0,5 % Prisme, 0,2 % Astral par Pokémon battu. Tour : 0,5 % / 0,25 % / 0,1 % par victoire. */
 function trxDropRoll(k,why){const r=Math.random();if(r<.002*k)trxGive(0,0,1,why);else if(r<.007*k)trxGive(0,1,0,why);else if(r<.017*k)trxGive(1,0,0,why)}
 {const w0=win;win=function(){const r=w0.apply(this,arguments);try{trxDropRoll(1,LS("combat","fight"))}catch(e){}return r}}
-{const a0=twApply;twApply=function(res){const r=a0.apply(this,arguments);try{if(res=="win")trxDropRoll(.5,LS("Tour","Tower"))}catch(e){}return r}}
+{const a0=twApply;twApply=function(res){const r=a0.apply(this,arguments);try{if(res=="win"){trxDropRoll(.5,LS("Tour","Tower"));qadd("twin",1)}}catch(e){}return r}}
+{const d0=trxDraw;trxDraw=function(){const t=d0.apply(this,arguments);try{qadd("trroll",1)}catch(e){}return t}}
+{const g0=trxGive;trxGive=function(a,p,x){try{qadd("trcr",(a|0)+(p|0)+(x|0))}catch(e){}return g0.apply(this,arguments)}}
 {const f=dgEnd;dgEnd=function(win,msg){let r0=null;try{const r=DG().run;if(r)r0=r.room-(win?0:1)}catch(e){}const o=f.apply(this,arguments);try{if(r0>0)trxGive(Math.floor(r0/5),0,0,LS("donjon","dungeon"))}catch(e){}return o}}
 {const f=rdFinish;rdFinish=function(R){const r=f.apply(this,arguments);try{if(R&&R.kind!="dng"&&R.over=="win"){const t=R.tier|0;trxGive(2+3*t,t>=2?t-1:0,t>=4?t-3:0,"raid")}}catch(e){}return r}}
 setInterval(()=>{try{const t=TRXO(),b=twS().b|0;if(!t.tw)t.tw=b;if(b>t.tw){let a=0,p=0,x=0;for(let f=t.tw+1;f<=b;f++){a++;if(f%25==0)p++;if(f%100==0)x++}t.tw=b;trxGive(a,p,x,LS("étages","floors"))}}catch(e){}},3000);
@@ -14770,6 +14780,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[
+  ["new","Quêtes définitives","Les quêtes définitives gagnent de nouveaux paliers (jusqu’à 8, l’étage record monte jusqu’à 4000) et 8 nouvelles quêtes : tirages de traits (jusqu’à 5000), cristaux de trait, ascensions, étoiles, exclusifs, étage et victoires de la Tower, défis de l’Énergie.","Permanent quests","Permanent quests get more tiers (up to 8, record floor goes up to 4000) and 8 new quests: trait rolls (up to 5000), trait crystals, ascensions, stars, exclusives, Tower floor and wins, Energy challenges."],
   ["new","Lugulabre Zodiaque, rareté Exclusif","Un nouvel exclusif apparaît à partir de l’étage 4000, avec 0,08 % de chance par combat. Il a sa Méga-Évolution aux couleurs Zodiaque. Nouvelle rareté « Exclusif » : pas de bonus de Chance, et la Master Ball ne fonctionne pas.","Zodiac Chandelure, Exclusive rarity","A new exclusive appears from floor 4000, with a 0.08% chance per fight. Its Mega Evolution keeps the Zodiac colors. New “Exclusive” rarity: no Luck bonus, and the Master Ball does not work."],
   ["new","Ascension","Un Pokémon 5 étoiles peut être ascensionné depuis sa fiche : il repart au niveau 1, à 0 étoile et 0 doublon, mais garde ses IV, EV, objets, mutation, taille, Alpha et chromatique. Il gagne une étoile rouge permanente : dégâts et pièces ×1,3, puis ×1,7, puis ×2 (3 ascensions maximum). L’étoile rouge augmente aussi l’attaque en raids, Énergie et donjons. L’ascension coûte des pièces selon la rareté ; l’étoile rouge reste après un prestige. Le dernier défi de l’Énergie, la Tour 1000 et les étages très hauts sont plus difficiles : l’ascension devient utile.","Ascension","A 5-star Pokémon can be ascended from its sheet: it goes back to level 1, 0 stars and 0 duplicates, but keeps its IVs, EVs, items, mutation, size, Alpha and shiny. It gains a permanent red star: damage and coins ×1.3, then ×1.7, then ×2 (3 ascensions maximum). The red star also raises attack in raids, Energy and dungeons. Ascending costs coins depending on rarity; the red star stays after a prestige. The last Energy challenge, Tower 1000 and very high floors are harder: ascension becomes useful."],
   ["new","Cristaux de trait en combat","Chaque Pokémon battu dans les étages peut laisser un cristal de trait : Éclat (1 %), Prisme (0,5 %) ou Astral (0,2 %). Dans la Tour, chaque victoire a aussi une chance d’en donner.","Trait crystals in battle","Every Pokémon defeated on the floors can drop a trait crystal: Shard (1%), Prism (0.5%) or Astral (0.2%). In the Tower, every win also has a chance to give one."],
