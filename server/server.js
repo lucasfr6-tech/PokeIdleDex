@@ -342,6 +342,7 @@ http.createServer((req,res)=>{
   req.on('end',()=>{let d={};try{d=JSON.parse(b||'{}')}catch(e){}
    const uid=String(d.uid||'');
    if(op=='flags'){send(res,200,{ok:1,flags:Object.keys(db.flag).map(id=>Object.assign({uid:id,n:(db.lb[id]&&db.lb[id].d&&db.lb[id].d.n)||''},db.flag[id]))});return}
+   if(op=='twcap'){const m=Math.max(1,+d.floor||700);let n=0;for(const id in db.twr){const x=db.twr[id];if(x&&x.d&&(+x.d.b||0)>m){x.d.b=m;n++}}dirty=1;send(res,200,{ok:1,n,floor:m});return}
    if(!ID.test(uid)){send(res,400,{e:'id'});return}
    if(op=='purge'){let n=0;['lb','pvp','twr','wb','glm'].forEach(c=>{if(db[c][uid]){delete db[c][uid];n++}});
     const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};f.m=1;f.t=Date.now();dirty=1;send(res,200,{ok:1,supprimes:n});return}
