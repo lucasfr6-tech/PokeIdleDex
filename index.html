@@ -3135,7 +3135,7 @@ radial-gradient(circle at 18% 28%,var(--mc,#fde047) 0 2px,transparent 3px),radia
 .dxst button.hwc2{border-color:#ff751888;background:linear-gradient(100deg,#ff751833,#12060a)}
 .dxst button.hwc2.on{background:linear-gradient(100deg,#ff7518,#c2410c 45%,#2a0c06);color:#fff1de}
 /* Wiki + Paramètres, en bas à droite */
-#utl{position:fixed;right:12px;bottom:92px;z-index:60;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px;border-radius:16px;background:rgba(7,11,34,.88);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.45)}#utl .utb{width:58px;padding:6px 3px}
+#utl{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;gap:8px;padding:7px;border-radius:18px;background:rgba(7,11,34,.82);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.45)}@media(min-width:761px){#utl{display:none!important}}
 #utl .utb{display:flex;flex-direction:column;align-items:center;gap:3px;width:68px;padding:7px 4px 6px;border-radius:13px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,color-mix(in srgb,var(--c1) 38%,#0b1030),color-mix(in srgb,var(--c2) 70%,#0b1030));color:#eaf0ff;cursor:pointer;transition:transform .15s}
 #utl .utb:hover{transform:translateY(-2px)}
 #utl .utb span{display:grid;place-items:center}#utl .utb svg{width:22px;height:22px}
@@ -4323,7 +4323,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zn"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zo"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4337,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261027zn"></script><script>
+</script><script src="shim.js?v=pid-v250-20261027zo"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -16307,4 +16307,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zn"><script src="dungeon-immersive.js?v=pid-v250-20261027zn"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zn"><script src="collection-scenes.js?v=pid-v250-20261027zn"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zo"><script src="dungeon-immersive.js?v=pid-v250-20261027zo"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zo"><script src="collection-scenes.js?v=pid-v250-20261027zo"></script></body></html>
