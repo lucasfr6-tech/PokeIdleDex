@@ -11692,7 +11692,7 @@ window.pidPrivateRedeem=async function(code){
  try{ttRefresh(true);save();lbPush(true);show();sfx("big")}catch(e){try{save()}catch(x){}}
  return hash===PID_LEGE_HASH?LS("Code accepté : 10 Master Balls et "+dn(lg0)+" légendaire chromatique muté ajoutés !","Code accepted: 10 Master Balls and a shiny mutated legendary "+dn(lg0)+" added!"):hash===PID_PASS_HASH?(pm0?LS("Code accepté : tu avais déjà le Pass Premium, +300 gemmes ajoutées.","Code accepted: you already had the Premium Pass, +300 gems added."):LS("Code accepté : Pass de combat Premium débloqué !","Code accepted: Premium Battle Pass unlocked!")):hash===PID_FIRE_HASH?LS("Code accepté : Pikachu Fire Dynamax chromatique, Prismatique, Colossal et Alpha reçu, IV et EV au maximum ! Les meilleurs attributs déjà acquis sont conservés.","Code accepted: shiny, Prismatic, Colossal, Alpha Pikachu Fire Dynamax received with max IVs and EVs! Better existing traits are kept."):hash===PID_REWARD_HASH?LS("Code accepté : 30 Master Balls et 2 T de pièces ajoutés.","Code accepted: 30 Master Balls and 2 T coins added."):LS("Code accepté : titre Donateur débloqué et équipé.","Code accepted: Supporter title unlocked and equipped.");
 };
-/* Compensation du 27 octobre : code communiqué par courrier, jamais dans le journal. */
+/* Compensation du 27 octobre : code communiqué par courrier, jamais dans le journal. Une utilisation par sauvegarde. */
 {const previousRedeem=window.pidPrivateRedeem;let redeemBusy=false;
 window.pidPrivateRedeem=async function(code){
  if(!code||!code.startsWith("MERCI-"))return previousRedeem(code);
