@@ -4320,7 +4320,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027za"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zb"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4334,7 +4334,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261027za"></script><script>
+</script><script src="shim.js?v=pid-v250-20261027zb"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4595,7 +4595,7 @@ const bs=id=>{const m=mfo(id);return m?(id>9e4&&SPM[id]?I(id).b+(SPM[id].hw?96:M
 const dn=id=>{const m=mfo(id),c=G.col[id];return (m?(id>9e4&&SPM[id]?m.n+" "+SPM[id].n.split(" ").slice(1).join(" "):m.n):I(id).n)+(c&&c.dy?" Dynamax":"")};
 const NMX=330;/* doublons max par Pokémon */
 /* doublons pris en compte pour les dégâts : après un rebirth, un Pokémon garde les dégâts des doublons de ses étoiles conservées (5 étoiles = 330 doublons) */
-function nEff(c,id){const n=Math.max((c&&c.n)||1,(c&&c.starCopyFloor)||0),k=(c&&c.ks)|0;if(!k)return n;try{const T=starT(id);return Math.max(n,T[Math.min(T.length,k)-1]||1)}catch(e){return n}}
+function nEff(c,id){const n=Math.max((c&&c.n)||1,(c&&c.starCopyFloor)||0);try{const s=starsOf(+id,n);if(s>=STMX)return NMX;const T=starT(+id),a=s>0?T[s-1]:0,b=s<STMX?T[s]:(a||1),prog=b>a?Math.min(1,Math.max(0,(n-a)/(b-a))):0,u=(s+prog)/STMX;return Math.max(1,Math.round(1+(NMX-1)*u))}catch(e){return n}}
 const capM=n=>1+.3*Math.pow(Math.max(0,Math.min(n,NMX)-1),.8);
 const STC={};function ST(id){const m=mfo(id);if(m)return m.a;const d=I(id);if(d.s&&d.s.length==6)return d.s;const k=id+"|"+d.b;if(STC[k])return STC[k];const h=id*2654435761>>>0,w=[0,1,2,3,4,5].map(i=>.7+((h>>>(i*4))&15)/20),t=w.reduce((a,b)=>a+b,0);return STC[k]=w.map(x=>Math.max(10,Math.round(x/t*d.b)))}
 const ABN={normal:["Attention","Cran"],fire:["Brasier","Torche"],water:["Torrent","Absorb Eau"],electric:["Statik","Paratonnerre"],grass:["Engrais","Chlorophylle"],ice:["Corps Gel","Isograisse"],fighting:["Intimidation","Impassible"],poison:["Puanteur","Point Poison"],ground:["Force Sable","Voile Sable"],flying:["Regard Vif","Pied Véloce"],psychic:["Synchro","Attention"],bug:["Essaim","Œil Composé"],rock:["Fermeté","Tête de Roc"],ghost:["Lévitation","Corps Maudit"],dragon:["Mue","Intimidation"],dark:["Intimidation","Prignon"],steel:["Fermeté","Esprit Vital"],fairy:["Joli Sourire","Envelocape"]};
@@ -14944,6 +14944,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-10-27",t:["Version 2.5.0","Version 2.5.0"],e:[[
+  ["fix","Bonus de doublons indexé sur les étoiles","Un Pokémon 5★ profite désormais du bonus de doublons maximal, quel que soit le nombre de captures nécessaires (45, 150 ou 1500). Les légendaires et exclusifs ne sont plus pénalisés face aux Pokémon classiques.","Duplicate bonus tied to stars","A 5★ Pokémon now gets the full duplicate bonus regardless of how many catches it took (45, 150 or 1500). Legendaries and exclusives are no longer weaker than regular Pokémon."],
   ["imp","Anglais : traduction complétée","Descriptions des balles spéciales, succès, Donjons des Échos, Tour, garderie et des centaines de noms d’attaques sont maintenant traduits en anglais. Si tu vois encore du français en mode anglais, dis-le-nous !","English: more translated","Special ball descriptions, achievements, Echo Dungeons, Tower, daycare and hundreds of move names are now translated. If you still see French in English mode, tell us!"],"new","Classement du meilleur Pokémon : trait","Le trait du meilleur Pokémon (avec la couleur de sa rareté) s’affiche aussi à côté du pseudo.","Best Pokémon ranking: trait","The best Pokémon’s trait (in its rarity colour) is also shown next to the name."],
   ["new","Classement du meilleur Pokémon : étoiles rouges","À côté du pseudo, tu vois les étoiles rouges (1, 2 ou 3) du meilleur Pokémon du joueur, comme dans la Pokémon List.","Best Pokémon ranking: red stars","Next to the name you see the red stars (1, 2 or 3) of the player’s best Pokémon, like in the Pokémon List."],
   ["new","Pokémon List : tri par étoiles rouges","Un nouveau bouton étoile rouge à côté du tri : il met en haut les Pokémon avec le plus d’étoiles rouges, et un second clic inverse l’ordre. Une option « Étoiles rouges » est aussi dans la liste de tri.","Pokémon List: red star sort","A new red star button next to the sort: it puts the Pokémon with the most red stars first, and clicking again reverses the order. A “Red stars” option is also in the sort list."],
@@ -16276,4 +16277,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027za"><script src="dungeon-immersive.js?v=pid-v250-20261027za"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027za"><script src="collection-scenes.js?v=pid-v250-20261027za"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zb"><script src="dungeon-immersive.js?v=pid-v250-20261027zb"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zb"><script src="collection-scenes.js?v=pid-v250-20261027zb"></script></body></html>
