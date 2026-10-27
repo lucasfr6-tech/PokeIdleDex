@@ -4323,7 +4323,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zj"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zk"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4337,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261027zj"></script><script>
+</script><script src="shim.js?v=pid-v250-20261027zk"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4585,7 +4585,7 @@ const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPFIX=.14,HPK=.025,BOSS_PV=1.2;
-const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);if(f>2100)I-=(r1-.00014)*(f-2100);if(f>3700)I+=.0009*(f-3700);return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
+const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(f-120);if(f>2000)I-=(r1-.00014)*(f-2000);return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*SKM("e")*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,12)),0)/100*(1+.1*PL("pn"));
@@ -16295,4 +16295,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zj"><script src="dungeon-immersive.js?v=pid-v250-20261027zj"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zj"><script src="collection-scenes.js?v=pid-v250-20261027zj"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zk"><script src="dungeon-immersive.js?v=pid-v250-20261027zk"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zk"><script src="collection-scenes.js?v=pid-v250-20261027zk"></script></body></html>
