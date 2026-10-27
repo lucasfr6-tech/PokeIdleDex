@@ -4323,7 +4323,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zi"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v250-20261027zj"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4337,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v250-20261027zi"></script><script>
+</script><script src="shim.js?v=pid-v250-20261027zj"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13355,7 +13355,7 @@ for(const k of ["pen","trn"]){const p=wkBody[k];if(p)wkBody[k]=()=>p()+wn("info"
 /* --- sprite Halloween partout où l'on affiche un Pokémon possédé --- */
 {const s0=sp;sp=function(id,sh,raw){try{if(!raw){const c=G.col[id];if(c&&c.hf&&HFI[id]&&!c.mf&&!c.dy)return hfImg(id,sh,c.hfv)}}catch(e){}return s0.apply(this,arguments)}}
 /* --- évolution : la forme Halloween suit l'évolution si elle existe, sinon l'évolution est bloquée --- */
-{const c0=canEvo;canEvo=function(e){try{const c=G.col[e[0]];if(c&&c.hf&&!HFI[e[1]])return false}catch(x){}return c0.apply(this,arguments)}}
+{const c0=canEvo;canEvo=function(e){try{const c=G.col[e[0]];if(c&&c.hf)return false}catch(x){}return c0.apply(this,arguments)}}
 {const d0=doEvolve;doEvolve=function(from,to){const c=G.col[from],hf=c&&c.hf,v=c&&c.hfv;const r=d0.apply(this,arguments);try{const t=G.col[to];if(hf&&t&&HFI[to]){const w=t.hf,mi=w?t.hmi||0:0,zi=w?t.hzi||0:0;t.hmi=c.hmi&&penBetterMu({mi},c.hmi)?c.hmi:mi;t.hzi=c.hzi>=3&&penBetterSz({zi},c.hzi)?c.hzi:zi;t.hal=(c.hal||(w&&t.hal))?1:0;t.hsh=(c.hsh||(w&&t.hsh))?1:0;t.hf=1;t.hw=1;t.spc=1;if(v&&HFV[to]&&HFV[to].includes(v))t.hfv=v;hfLock(t);rq(to);recomp();save()}}catch(e){}return r}}
 /* --- prestige : les formes Halloween sont gardées --- */
 {const p0=prestige;prestige=function(sel){const keep={};try{for(const k in G.col){const c=G.col[k];if(c&&c.hf)keep[k]={v:c.hfv,mi:c.hmi|0,zi:c.hzi|0,al:c.hal|0,sh:c.hsh|0}}}catch(e){}sel=(sel||[]).slice();Object.keys(keep).forEach(k=>{if(sel.indexOf(+k)<0)sel.push(+k)});
@@ -16295,4 +16295,4 @@ function a3Redirect(im){if(im?.tagName!=='IMG'||im.dataset.variant)return;const 
 const a3Watch=new MutationObserver(changes=>{for(const c of changes){if(c.type==='attributes')a3Redirect(c.target);else for(const n of c.addedNodes){if(n.nodeType!==1)continue;a3Redirect(n);n.querySelectorAll?.('img').forEach(a3Redirect)}}});
 a3Watch.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});document.querySelectorAll('img').forEach(a3Redirect);
 
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zi"><script src="dungeon-immersive.js?v=pid-v250-20261027zi"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zi"><script src="collection-scenes.js?v=pid-v250-20261027zi"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zj"><script src="dungeon-immersive.js?v=pid-v250-20261027zj"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zj"><script src="collection-scenes.js?v=pid-v250-20261027zj"></script></body></html>
