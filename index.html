@@ -4325,7 +4325,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-floor-hp27-2000-20261028"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-rankings-500-20261028"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4339,7 +4339,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-floor-hp27-2000-20261028"></script><script>
+</script><script src="shim.js?v=pid-rankings-500-20261028"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13495,7 +13495,7 @@ async function rkbFetch(force){if(RKB.busy||(!force&&Date.now()-RKB.t<8000))retu
  try{const q=await LB.db.collection("lb").orderBy("bpv","desc").limit(500).get();RKB.rows=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(x=>x&&x.n&&typeof x.bpv=="number"&&Array.isArray(x.bp))}catch(e){}
  RKB.t=Date.now();RKB.busy=0;if(tab=="rks"&&RKX.v=="bp"&&!document.hidden){const el=$("rkbl");if(el){const h=rkbList();if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}}}
 function rkbRows(){bpScan();const me=Object.assign({id:(LB&&LB.uid)||"me",me:1},lbDoc());let R=RKB.rows.filter(x=>x.id!=me.id);try{if(typeof pidCensor=="function")R=R.map(x=>Object.assign({},x,{n:pidCensor(x.n)}))}catch(e){}
- if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,100)}
+  if(me.bpv>0&&me.bp)R.push(me);return R.sort((a,b)=>(b.bpv||0)-(a.bpv||0)).slice(0,500)}
 function rkbList(){const R=rkbRows();if(!R.length)return `<small class="rkm-hint">${LS("Aucun record pour le moment.","No record yet.")}</small>`;
  const card=(r,i)=>{const b=r.bp,c=TC[((b[7]||["normal"])[0])]||"#888",h=vb({sh:b[1],mi:b[2],zi:b[3],al:b[4]});
  return `<div class="rkb-podium-card pid-rank-bg rkb-place-${i+1}${r.me?" me":""}" role="button" tabindex="0" data-bpr="${i}" data-bpu="${r.me?"me":esc(String(r.id||""))}" style="--tc:${c};${pidRankBanner(r)}"><div class="rkb-podium-head"><span class="rkb-medal">${i===0?ico("crown"):ico("trophy")} ${i+1}</span><span class="rkb-podium-owner">${esc(r.n||"?")}${r.me?` (${LS("toi","you")})`:""}</span></div><div class="rkb-podium-sprite">${aSpr(b[0],b[1])}</div><div class="rkb-podium-name">${esc(b[5]||"?")}</div><div class="rkb-podium-tags">${h||""}</div><div class="rkb-podium-dps"><strong>${fmt(r.bpv)}</strong><span>DPS</span></div><small class="rkb-open">${ico("eye")} ${LS("Voir la fiche","View details")}</small></div>`};
@@ -14985,6 +14985,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-28",t:["Classements vérifiés","Rankings checked"],e:[["fix","Meilleurs Pokémon : classement complet","Le classement charge jusqu’à 500 fiches et permet de parcourir toutes les entrées reçues, au lieu de couper la liste après 100 Pokémon.","Best Pokémon: full ranking","The ranking loads up to 500 entries and lets you browse all received results instead of cutting the list off after 100 Pokémon."]] },
  {d:"2026-10-27",t:["Correction urgente du chargement","Urgent loading fix"],e:[["fix","Interfaces et onglets rétablis","Une erreur dans le journal empêchait une partie du jeu de se charger. Les interfaces et les modules sont rétablis sans réinitialiser les sauvegardes.","Interfaces and tabs restored","An update log error prevented part of the game from loading. Interfaces and modules are restored without resetting saves."],["fix","Quêtes : fenêtre adaptée au téléphone","La fenêtre de récompense des quêtes s’adapte maintenant aux petits écrans : les cartes restent dans le cadre et la barre de défilement horizontale disparaît.","Quests: mobile reward window","The quest reward window now fits small screens: cards stay inside the panel and the horizontal scrollbar is removed."],["imp","Étages 2000+ : PV augmentés ×2,7","À partir de l’étage 2000, les PV des adversaires et des boss sont multipliés par 2,7. Les étages avant 2000 conservent leurs PV actuels. Les niveaux restent plafonnés à 100.","Floors 2000+: HP increased ×2.7","From floor 2000, enemy and boss HP is multiplied by 2.7. Floors before 2000 keep their current HP. Levels remain capped at 100."]]},
  {d:"2026-10-27",t:["Interface et équilibrage","Interface and balance"],e:[
   ["fix","Boutons du bas réorganisés","La « Prochaine mise à jour » revient en haut à gauche, et les raccourcis du bas (Wiki, Paramètres, Nouveautés…) sont empilés verticalement pour ne plus recouvrir le combat.","Bottom buttons reorganized","\"Next update\" is back at the top-left, and the bottom shortcuts (Wiki, Settings, News…) are stacked vertically so they no longer cover the battle."],
