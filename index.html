@@ -876,9 +876,11 @@ html[data-theme=day] .toast{color:#fff}
 @media(max-width:1100px){.lgg{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:600px){.lgg{grid-template-columns:repeat(2,1fr)}.qgrid{grid-template-columns:1fr}.qkb{padding-right:10px}.qkt b{font-size:14px}.qki{width:34px;height:34px}}
 /* fenêtre de récompenses */
+@media(max-width:480px){#rvm .rvc{padding:16px 12px 14px;gap:8px;border-radius:18px}#rvm .rvc h3{font-size:21px;line-height:1.2;overflow-wrap:anywhere}#rvm .rvc>small{max-width:100%;overflow-wrap:anywhere}#rvm .rvl{display:grid;width:100%;max-width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}#rvm .rvi{box-sizing:border-box;min-width:0;width:100%;padding:8px 5px;overflow-wrap:anywhere}#rvm .rvi b,#rvm .rvi small{max-width:100%;overflow-wrap:anywhere}#rvm .rvc>.go{max-width:100%}}
+
 #rvm,#spm,#bqm{display:none}#rvm.on,#spm.on,#bqm.on{display:grid;place-items:center;position:fixed;inset:0;z-index:70;background:rgba(3,6,24,.78);animation:fin .2s}
 @keyframes fin{from{opacity:0}}
-.rvc{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 30px 22px;min-width:min(92vw,360px);max-width:92vw;border-radius:26px;background:linear-gradient(180deg,#1b2670,#0a0f38);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 80px #000c;animation:rvp .45s cubic-bezier(.3,1.5,.5,1);overflow:hidden;text-align:center}
+.rvc{box-sizing:border-box;width:min(560px,calc(100vw - 24px));min-width:0;max-width:calc(100vw - 24px);position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 30px 22px;min-width:min(92vw,360px);max-width:92vw;border-radius:26px;background:linear-gradient(180deg,#1b2670,#0a0f38);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 80px #000c;animation:rvp .45s cubic-bezier(.3,1.5,.5,1);overflow:hidden;text-align:center}
 @keyframes rvp{from{transform:scale(.6);opacity:0}}
 .rvc h3{margin:0;font:800 26px "Baloo 2",Nunito,system-ui,sans-serif;color:var(--y)}.rvc small{color:var(--mu)}
 .rvr{position:absolute;left:50%;top:-40%;width:160%;aspect-ratio:1;translate:-50% 0;background:repeating-conic-gradient(rgba(255,230,140,.12) 0 8deg,transparent 8deg 22deg);animation:spin 18s linear infinite;pointer-events:none}
@@ -4323,7 +4325,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-xprest500-202610280342"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-quest-mobile-20261028"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4339,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-xprest500-202610280342"></script><script>
+</script><script src="shim.js?v=pid-quest-mobile-20261028"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14983,7 +14985,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-27",t:["Correction urgente du chargement","Urgent loading fix"],e:[["fix","Interfaces et onglets rétablis","Une erreur dans le journal empêchait une partie du jeu de se charger. Les interfaces et les modules sont rétablis sans réinitialiser les sauvegardes.","Interfaces and tabs restored","An update log error prevented part of the game from loading. Interfaces and modules are restored without resetting saves."]]},
+ {d:"2026-10-27",t:["Correction urgente du chargement","Urgent loading fix"],e:[["fix","Interfaces et onglets rétablis","Une erreur dans le journal empêchait une partie du jeu de se charger. Les interfaces et les modules sont rétablis sans réinitialiser les sauvegardes.","Interfaces and tabs restored","An update log error prevented part of the game from loading. Interfaces and modules are restored without resetting saves.",["fix","Quêtes : fenêtre adaptée au téléphone","La fenêtre de récompense des quêtes s’adapte maintenant aux petits écrans : les cartes restent dans le cadre et la barre de défilement horizontale disparaît.","Quests: mobile reward window","The quest reward window now fits small screens: cards stay inside the panel and the horizontal scrollbar is removed."]]]},
  {d:"2026-10-27",t:["Interface et équilibrage","Interface and balance"],e:[
   ["fix","Boutons du bas réorganisés","La « Prochaine mise à jour » revient en haut à gauche, et les raccourcis du bas (Wiki, Paramètres, Nouveautés…) sont empilés verticalement pour ne plus recouvrir le combat.","Bottom buttons reorganized","\"Next update\" is back at the top-left, and the bottom shortcuts (Wiki, Settings, News…) are stacked vertically so they no longer cover the battle."],
   ["new","Onglet Puissance dans la fiche","Chaque Pokémon a maintenant un onglet « Puissance » : le classement des 17 exclusifs sur 1000, du plus fort (Lugulabre Zodiaque) au plus faible, avec leurs sprites et leurs origines.","Power tab in the sheet","Each Pokémon now has a \"Power\" tab: the ranking of all 17 exclusives out of 1000, from the strongest (Zodiac Chandelure) to the weakest, with their sprites and origins."],
