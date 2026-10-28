@@ -4323,7 +4323,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-xtrait-202610280034"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-xc250-202610280244"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4337,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-xtrait-202610280034"></script><script>
+</script><script src="shim.js?v=pid-xc250-202610280244"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4798,7 +4798,7 @@ function win(){const L=E.L,b=E.boss,g=Math.min(2e8,Math.floor(.18*.3*12*([1,1.8,
  if(bl){G.inv[bl]--;{const pc=capPct(E,bl);qadd("thr",1);if(Math.random()<pc)catchIt(E,bl,pc);else missFx(E,bl,pc)}}
  if(b&&Math.random()<.004+.0004*PL("pb")){G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;pop("Master Ball obtenue","cap",50)}
  if(++G.k>=10){G.k=0;if(G.fl>G.cl)G.cl=G.fl;if(G.cl>(G.bf||0))G.bf=G.cl;pmChk();if(G.auto)G.fl++}E=null}
-function xcN(){try{return x4Me()&&G.kx&&G.kx.xc?20:1}catch(e){return 1}}
+function xcN(){try{return x4Me()&&G.kx&&G.kx.xc?250:1}catch(e){return 1}}
  function catchIt(e,bl,pc){const n=xcN(),nw=!G.col[e.id],c=G.col[e.id]||(G.col[e.id]={n:0,l:Math.max(1,e.L-3),x:0,h:-1});c.n+=n;if(nw){ens(e.id);if(abl(e.id)[1]&&Math.random()<.06*(1+.2*PL("pt"))*SKM("t"))c.ha=1;rq(e.id);if(n>1)train(e.id,n-1)}else train(e.id,n);G.dx[e.id]=1;if(e.mi==7)c.sh=1;else if(muUpgrade(c.mi,e.mi))c.mi=e.mi;{const zi=SZ.indexOf(e.sz);if(zi>=3)c.zi=Math.max(c.zi||0,zi)}if(e.mi>0)G.mut++;if(e.boss)c.al=1;vProp(e.id);rq(e.id);G.caps+=n;c.h=mhp(e.id);IDC=null;chain(e.id);pop(c.n==n?"Nouveau !":"Capturé ×"+c.n,"cap",70);capFx(e,bl,c.n==n,pc);sfx(e.mi==7?"shiny":"cap");if(c.n==n&&tab=="adv")setTimeout(ui,0)}
 function flee(){sfx("flee");pop("Trop tard ! Il s'enfuit","dmg",45);toast("Le Pokémon s'est enfui : il fallait le battre en 30 secondes");if(E.boss)G.k=Math.min(G.k,5);E=null}
 function capFx(e,bl,nw,pc){try{capFx0(e,bl,nw,pc)}catch(x){}}
@@ -10408,7 +10408,7 @@ function kxzHtml(){const cz=zoneOf(G.fl),z=KXZV==null?cz:KXZV,pool=zonePool(z)||
  <div class="kxzh"><button class="kxzn" data-kx="zz" data-v="-1" ${z<=0?"disabled":""} aria-label="-">${ico("chevl")}</button><div><b>Zone ${z+1}${z==cz?` <em>${LS("zone actuelle","current zone")}</em>`:""}</b><small>${LS("étages","floors")} ${zs(z)} – ${ze(z)} · ${L.length?LS(L.length+" espèce"+(L.length>1?"s":"")+" ciblée"+(L.length>1?"s":""),L.length+" targeted species"):LS("toutes les espèces","all species")}</small></div><button class="kxzn r" data-kx="zz" data-v="1" ${z>=mx?"disabled":""} aria-label="+">${ico("chevl")}</button></div>
  <p class="kxnt">${LS("Touche les Pokémon que tu veux capturer dans cette zone : ces espèces reçoivent toujours une ball. Les autres ne sont capturées que si elles sont chromatiques, mutées, de taille hors norme ou Alpha ; sinon elles sont mises K.O. Sans sélection, la stratégie ci-dessus s'applique.","Tap the Pokémon you want to catch in this zone: these species always get a Ball. The others are only caught if they are shiny, mutated, odd-sized or Alpha; otherwise they are KO'd. With no selection, the strategy above applies.")}</p>
  <div class="kxzg">${cells}</div>${L.length?`<button class="kxzx" data-kx="zclr">${LS("Tout désélectionner (capturer selon la stratégie)","Clear selection (catch by strategy)")}</button>`:""}`}
-{const h0=kxHtml;kxHtml=function(){const h=h0.apply(this,arguments);let xc="";try{if(x4Me())xc=kxSw("xc",KX().xc,LS("Extra capture","Extra capture")+` <em class="kxown">${LS("réservé à toi","only you")}</em>`,LS("Chaque capture réussie donne 20 exemplaires du Pokémon au lieu de 1.","Each successful catch gives 20 copies of the Pokémon instead of 1."))}catch(e){}const k=h.indexOf('<h4>',h.indexOf('class="kxg5"'));return k>0?h.slice(0,k)+xc+kxzHtml()+h.slice(k):h+xc+kxzHtml()}}
+{const h0=kxHtml;kxHtml=function(){const h=h0.apply(this,arguments);let xc="";try{if(x4Me())xc=kxSw("xc",KX().xc,LS("Extra capture","Extra capture")+` <em class="kxown">${LS("réservé à toi","only you")}</em>`,LS("Chaque capture réussie donne 250 exemplaires du Pokémon au lieu de 1.","Each successful catch gives 250 copies of the Pokémon instead of 1."))}catch(e){}const k=h.indexOf('<h4>',h.indexOf('class="kxg5"'));return k>0?h.slice(0,k)+xc+kxzHtml()+h.slice(k):h+xc+kxzHtml()}}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest('[data-kx="zsp"],[data-kx="zz"],[data-kx="zclr"]');if(!b)return;ev.stopPropagation();ev.preventDefault();
  const cz=zoneOf(G.fl),z=KXZV==null?cz:KXZV,a=b.dataset.kx;G.kxz=G.kxz||{};
  if(a=="zz"){KXZV=Math.max(0,z+(+b.dataset.v));}
