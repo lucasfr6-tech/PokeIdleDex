@@ -17,6 +17,7 @@ User=pid
 WorkingDirectory=/opt/pid
 Environment=PORT=3000
 Environment=DATA_FILE=/opt/pid/data.json
+Environment=ADMIN_UIDS=${ADMIN_UIDS:-}
 Environment=ALLOWED_ORIGIN=https://pokeidledex.com
 Environment=STATIC_DIR=/opt/pid/none
 ExecStart=/usr/bin/node /opt/pid/server.js

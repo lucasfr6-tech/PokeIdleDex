@@ -1,9 +1,10 @@
 // Idle Dex - mini serveur (aucune dépendance). Sert le jeu ET le classement/amis/chat/boss monde.
-// Lancer : node server.js   (variables : PORT, DATA_FILE, ALLOWED_ORIGIN, STATIC_DIR)
+// Lancer : node server.js   (variables : PORT, DATA_FILE, ALLOWED_ORIGIN, STATIC_DIR, ADMIN_UIDS)
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
 const PORT=+process.env.PORT||3000,DATA=process.env.DATA_FILE||path.join(__dirname,'data.json');
 const ORIGIN=process.env.ALLOWED_ORIGIN||'*',STATIC=process.env.STATIC_DIR||path.join(__dirname,'..');
-const COLS={lb:1,fr:1,chat:1,wb:1,pvp:1,twr:1,gld:1,glm:1,adm:1},ADMIN_KEY=process.env.ADMIN_KEY||'',MAXSAVE=4000000,MAXDOC=16384,MAXDOCS=50000,ID=/^[A-Za-z0-9_-]{6,64}$/;
+const ID=/^[A-Za-z0-9_-]{6,64}$/;
+const COLS={lb:1,fr:1,chat:1,wb:1,pvp:1,twr:1,gld:1,glm:1,adm:1},ADMIN_KEY=process.env.ADMIN_KEY||'',ADMIN_UIDS=new Set((process.env.ADMIN_UIDS||'').split(',').map(x=>x.trim()).filter(x=>ID.test(x))),ADM_SESS=new Map(),MAXSAVE=4000000,MAXDOC=16384,MAXDOCS=50000;
 /*CENSOR_BEGIN*/
 function pidCensor(t){
  if(typeof t!="string"||!t)return t;
@@ -156,7 +157,7 @@ const LAST=new Map();
 const SEEN_PID='#1397371';
 const SUG_PID='#7458921',sugLast=new Map(),sugDay=new Map();
 const pidOfS=u=>{let h=2166136261;for(const c of String(u)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return '#'+(1000000+h%9000000)};
-const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token','Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
+const send=(res,code,obj,extra)=>{const b=JSON.stringify(obj);res.writeHead(code,Object.assign({'Content-Type':'application/json; charset=utf-8','Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Headers':'Content-Type,X-Token,X-Admin-Session','Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS','Cache-Control':'no-store'},extra));res.end(b)};
 const MIME={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.json':'application/json','.svg':'image/svg+xml','.txt':'text/plain'};
 const CK=new Set(['n','x','nm','name','desc','tag','motd','bio','t0']);
 const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.slice(0,2000)):v.slice(0,2000);if(Array.isArray(v))return v.slice(0,500).map(e=>clean(e,k));if(v&&typeof v=='object'){const o={};for(const k of Object.keys(v).slice(0,200)){if(k=='__proto__'||k=='constructor'||k=='prototype')continue;o[k]=(k=='ai'&&typeof v[k]=='string'&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]*$/.test(v[k]))?v[k].slice(0,9000):clean(v[k],k)}return o}return v};
@@ -334,8 +335,32 @@ http.createServer((req,res)=>{
    send(res,404,{e:'act'})});
   return}
 
+  /* Panel admin : sessions courtes, liees au compte Garrys configure par ADMIN_UIDS.
+     Aucun secret serveur ne quitte le VPS et les commandes ciblent toujours ce compte. */
+  if(u.pathname.startsWith('/api/adm/')&&req.method=='POST'&&['session','poll','command'].includes(u.pathname.slice(9))){
+   const op=u.pathname.slice(9);if(limited(ip+'adm-'+op,op=='poll'?120:30)){send(res,429,{e:'rate'});return}
+   let b='';req.on('data',c=>{b+=c;if(b.length>20000)req.destroy()});
+   req.on('end',()=>{let d;try{d=JSON.parse(b||'{}')}catch(e){send(res,400,{e:'json'});return}if(!d||typeof d!=='object'||Array.isArray(d)){send(res,400,{e:'obj'});return}
+    if(op=='session'||op=='poll'){
+     const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid||!ADMIN_UIDS.has(uid)){send(res,403,{e:'admin'});return}
+     if(op=='session'){const token=crypto.randomBytes(32).toString('hex'),exp=Date.now()+30*60*1000;ADM_SESS.set(token,{uid,exp});if(ADM_SESS.size>1000)for(const [k,v] of ADM_SESS)if(v.exp<Date.now())ADM_SESS.delete(k);send(res,200,{ok:1,token,exp});return}
+     const q=db.adm[uid],c=q&&q.d&&Array.isArray(q.d.c)?q.d.c:[];send(res,200,{ok:1,c});return
+    }
+    const st=ADM_SESS.get(String(req.headers['x-admin-session']||''));if(!st||st.exp<Date.now()||!ADMIN_UIDS.has(st.uid)){send(res,403,{e:'session'});return}
+    let c={op:String(d.op||'')};const num=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
+    if(c.op=='coin'||c.op=='gem'){if(!num(d.n,-1e300,1e300)||d.n===0){send(res,400,{e:'amount'});return}c.n=d.n}
+    else if(c.op=='item'){if(typeof d.k!='string'||! /^[a-zA-Z0-9_-]{1,40}$/.test(d.k)||!num(d.n,-1e9,1e9)||d.n===0){send(res,400,{e:'item'});return}c.k=d.k;c.n=d.n}
+    else if(c.op=='mon'||c.op=='allMon'){if(c.op=='mon'&&(!Number.isInteger(d.id)||!((d.id>=1&&d.id<=1025)||(d.id>=90001&&d.id<=99999)))||c.op=='allMon'&&(!Array.isArray(d.ids)||d.ids.length<1||d.ids.length>1500||d.ids.some(id=>!Number.isInteger(id)||!((id>=1&&id<=1025)||(id>=90001&&id<=99999))))||!Number.isInteger(d.count)||d.count<1||d.count>1000||!Number.isInteger(d.level)||d.level<1||d.level>1000||!Number.isInteger(d.stars)||d.stars<0||d.stars>5||!Number.isInteger(d.asc)||d.asc<0||d.asc>3||!Number.isInteger(d.mi)||d.mi<0||d.mi>8||!Number.isInteger(d.zi)||d.zi<0||d.zi>7){send(res,400,{e:'pokemon'});return}Object.assign(c,{id:d.id,ids:c.op=='allMon'?[...new Set(d.ids)]:undefined,count:d.count,level:d.level,stars:d.stars,asc:d.asc,mi:d.mi,zi:d.zi,sh:d.sh?1:0,al:d.al?1:0,hf:d.hf?1:0,fullIv:d.fullIv?1:0,fullEv:d.fullEv?1:0,replaceTraits:1})}
+    else if(c.op=='floor'){if(!Number.isInteger(d.n)||d.n<1||d.n>100000){send(res,400,{e:'floor'});return}c.n=d.n}
+    else if(c.op=='prestige'){if(!Number.isInteger(d.n)||d.n<0||d.n>1000000){send(res,400,{e:'prestige'});return}c.n=d.n}
+    else if(c.op=='prestigePoints'){if(!num(d.n,0,1e300)){send(res,400,{e:'points'});return}c.n=d.n}
+    else if(c.op=='removePokemon'){if(!Number.isInteger(d.id)||d.id<1||d.id>99999){send(res,400,{e:'pokemon'});return}c.id=d.id}
+    else{send(res,400,{e:'op'});return}
+    c.i=crypto.randomBytes(12).toString('hex');c.t=Date.now();const cur=db.adm[st.uid],q=cur&&cur.d&&Array.isArray(cur.d.c)?cur.d.c.slice(-39):[];q.push(c);db.adm[st.uid]={h:sha('admin-panel'),d:{c:q},t:Date.now()};dirty=1;send(res,200,{ok:1,id:c.i})
+   });return
+  }
 
- if(u.pathname.startsWith('/api/adm/')&&req.method=='POST'){
+  if(u.pathname.startsWith('/api/adm/')&&req.method=='POST'){
   const op=u.pathname.slice(9);
   if(!ADMIN_KEY||ADMIN_KEY.length<12||req.headers['x-admin']!==ADMIN_KEY){send(res,403,{e:'admin'});return}
   let b='';req.on('data',c=>{b+=c;if(b.length>5000)req.destroy()});
@@ -384,7 +409,7 @@ http.createServer((req,res)=>{
    L=L.slice(0,Math.min(+u.searchParams.get('lim')||200,500));
    send(res,200,{docs:L});return}
   if(m[1]=='d'&&m[3]&&ID.test(m[3])){
-   if(req.method=='GET'){const x=col[m[3]];send(res,200,x?{exists:true,id:m[3],d:x.d}:{exists:false,id:m[3]});return}
+    if(req.method=='GET'){if(m[2]=='adm'&&req.headers['x-admin']!==ADMIN_KEY&&mkAuth(m[3],req.headers['x-token'])!==m[3]){send(res,403,{e:'admin'});return}const x=col[m[3]];send(res,200,x?{exists:true,id:m[3],d:x.d}:{exists:false,id:m[3]});return}
    if(req.method=='PUT'){
     if(limited(ip+'w',40)){send(res,429,{e:'rate'});return}
     const tok=req.headers['x-token'];if(!tok||tok.length<16||tok.length>100){send(res,401,{e:'token'});return}

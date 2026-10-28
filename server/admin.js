@@ -28,7 +28,7 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  else if(op=='title')c.id=a[0];
  else if(op!='reset'){console.log('Commande inconnue');return}
  c.i=Date.now().toString(36)+Math.random().toString(36).slice(2,5);c.t=Date.now();
- const cur=await rq('GET','/api/d/adm/'+uid);const L=((cur.d&&cur.d.c)||[]).slice(-40);L.push(c);
+ const cur=await rq('GET','/api/d/adm/'+uid,null,{'X-Admin':KEY});const L=((cur.d&&cur.d.c)||[]).slice(-40);L.push(c);
  const r=await rq('PUT','/api/d/adm/'+uid,{c:L},{'X-Token':KEY,'X-Admin':KEY});
  console.log(r.ok?'Ordre enregistre : sera applique a la prochaine connexion du joueur (ou sous 1 minute).':'Erreur '+JSON.stringify(r));
 })();
