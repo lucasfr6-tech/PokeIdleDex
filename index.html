@@ -4323,7 +4323,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-xc250-202610280244"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-geauto-202610280255"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4337,7 +4337,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-xc250-202610280244"></script><script>
+</script><script src="shim.js?v=pid-geauto-202610280255"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14322,6 +14322,13 @@ const ptmH=()=>Math.floor((G.ptm||0)/36e5*10)/10;
 {const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{d.ph=ptmH()}catch(e){}return d}}
 /* pension : un Pokémon déjà au maximum (meilleure mutation, meilleure taille, Alpha et chromatique) n'est pas pris par « Prendre les 10 plus forts » */
 function penMaxed(i){const c=G.col[i];return !!c&&(c.mi|0)>=MU.length-1&&(c.zi|0)>=SZ.length-1&&!!c.al&&!!c.sh}
+/* ===================== Auto invocation d'équipement (réservé au créateur 4BWSKL9Q) ===================== */
+let EAUTO=null;
+function eSilent(n){const p=ePrice()*(n===30?27:n===10?9:1);if(G.m<p)return 0;G.m-=p;const R=ePull(n),e=E_();let ref=0;R.forEach(x=>{if(x.ref)ref+=x.ref});if(ref)G.m+=kxI("ref",ref);R.forEach(x=>{const o=x.o;if(x.nw&&!(e.e[o.sl]&&e.o[e.e[o.sl]]))e.e[o.sl]=o.id});EAUTO.c+=R.length;EAUTO.best=Math.max(EAUTO.best,...R.map(x=>x.o.r));try{dqAdd("gear",1)}catch(x){}return R.length}
+function eAutoStop(){const a=EAUTO;EAUTO=null;if(!a)return;try{checkAch()}catch(e){}try{recomp()}catch(e){}save();try{toast(LS("Auto invocation terminée : "+fmt(a.c)+" équipements invoqués.","Auto summon finished: "+fmt(a.c)+" gear summoned."))}catch(e){}try{if(tab=="gear")show()}catch(e){}}
+setInterval(()=>{try{if(!EAUTO)return;if(!x4Me()){EAUTO=null;return}const p=ePrice();let k=0;while(k<15){const n=G.m>=p*27?30:G.m>=p*9?10:G.m>=p?1:0;if(!n)break;eSilent(n);k++}if(G.m<p){eAutoStop();return}try{recomp()}catch(e){}save();const b=document.querySelector("[data-geauto] small");if(b)b.textContent=fmt(EAUTO.c)+" "+LS("invoqués","summoned")}catch(e){}},500);
+setInterval(()=>{try{if(tab!="gear"||!x4Me())return;const g=document.querySelector('[data-gp="30"]');if(!g)return;const par=g.parentElement;let b=par.querySelector("[data-geauto]");const on=!!EAUTO,lab=`Auto ${on?"ON":"OFF"}<small>${on?fmt(EAUTO.c)+" "+LS("invoqués","summoned"):LS("jusqu'à ne plus avoir de pièces","until out of coins")}</small>`;if(!b){b=document.createElement("button");b.dataset.geauto="1";par.appendChild(b)}b.className="go"+(on?" gold":"");if(b.dataset.on!==String(on)){b.dataset.on=String(on);b.innerHTML=lab}}catch(e){}},600);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-geauto]");if(!b)return;e.preventDefault();e.stopPropagation();if(!x4Me())return;if(EAUTO){eAutoStop();return}if(G.m<ePrice()){toast(LS("Pas assez de pièces.","Not enough coins."));return}EAUTO={c:0,best:0};const o=document.getElementById("eo");if(o)o.remove();toast(LS("Auto invocation d'équipement lancée","Auto gear summon started"))},true);
 function exrHtml(){const mx=XRKL[0][1];return `<div class="exr-c"><button class="exr-x" data-exr="x">${ico("x")}</button><small>${LS("WIKI / PUISSANCE ET RARETÉ","WIKI / POWER AND RARITY")}</small><h2>${LS("Classement des exclusifs","Exclusive ranking")}</h2>
  <p>${LS("Du plus fort au plus faible. Chaque exclusif a le palier Spécial (×1 250) multiplié par son coefficient : Absol Patch ×1 250, Pikachu Fire 1 250 × 2,95… Les autres bonus (niveau, doublons, étoiles, mutation…) s'ajoutent ensuite. Chaque Pokémon porte son origine.","From strongest to weakest. Each exclusive has the Special tier (×1,250) multiplied by its coefficient: Patch Absol ×1,250, Zenith Pikachu 1,250 × 2.95… Other bonuses (level, duplicates, stars, mutation…) then apply. Each Pokémon shows its origin.")}</p>
  <div class="exr-leg">${Object.values(XRKO).map(o=>`<span><i style="background:${o[2]}"></i>${LS(o[0],o[1])}</span>`).join("")}</div>
