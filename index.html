@@ -4325,7 +4325,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-garrys-admin-20261028"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-garrys-admin-20261028a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4339,7 +4339,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-garrys-admin-20261028"></script><script>
+</script><script src="shim.js?v=pid-garrys-admin-20261028a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14988,7 +14988,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-28",t:["Classements vérifiés","Rankings checked"],e:[["fix","Meilleurs Pokémon : classement complet","Le classement charge jusqu’à 500 fiches et permet de parcourir toutes les entrées reçues, au lieu de couper la liste après 100 Pokémon.","Best Pokémon: full ranking","The ranking loads up to 500 entries and lets you browse all received results instead of cutting the list off after 100 Pokémon."]] },
+ {d:"2026-10-28",t:["Console Garrys : accès fiabilisé","Garrys console: access made reliable"],e:[["fix","Admin : vérification après connexion","Le bouton Admin se vérifie après le chargement complet du compte, même si la connexion met du temps.","Admin: check after sign-in","The Admin button is checked after the account finishes loading, even when sign-in takes longer."],["fix","Meilleurs Pokémon : classement complet","Le classement charge jusqu’à 500 fiches et permet de parcourir toutes les entrées reçues, au lieu de couper la liste après 100 Pokémon.","Best Pokémon: full ranking","The ranking loads up to 500 entries and lets you browse all received results instead of cutting the list off after 100 Pokémon."]] },
  {d:"2026-10-27",t:["Correction urgente du chargement","Urgent loading fix"],e:[["fix","Interfaces et onglets rétablis","Une erreur dans le journal empêchait une partie du jeu de se charger. Les interfaces et les modules sont rétablis sans réinitialiser les sauvegardes.","Interfaces and tabs restored","An update log error prevented part of the game from loading. Interfaces and modules are restored without resetting saves."],["fix","Quêtes : fenêtre adaptée au téléphone","La fenêtre de récompense des quêtes s’adapte maintenant aux petits écrans : les cartes restent dans le cadre et la barre de défilement horizontale disparaît.","Quests: mobile reward window","The quest reward window now fits small screens: cards stay inside the panel and the horizontal scrollbar is removed."],["imp","Étages 2000+ : PV augmentés ×2,7","À partir de l’étage 2000, les PV des adversaires et des boss sont multipliés par 2,7. Les étages avant 2000 conservent leurs PV actuels. Les niveaux restent plafonnés à 100.","Floors 2000+: HP increased ×2.7","From floor 2000, enemy and boss HP is multiplied by 2.7. Floors before 2000 keep their current HP. Levels remain capped at 100."]]},
  {d:"2026-10-27",t:["Interface et équilibrage","Interface and balance"],e:[
   ["fix","Boutons du bas réorganisés","La « Prochaine mise à jour » revient en haut à gauche, et les raccourcis du bas (Wiki, Paramètres, Nouveautés…) sont empilés verticalement pour ne plus recouvrir le combat.","Bottom buttons reorganized","\"Next update\" is back at the top-left, and the bottom shortcuts (Wiki, Settings, News…) are stacked vertically so they no longer cover the battle."],
@@ -16372,7 +16372,16 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  else if(a==="points"){const n=Number(val("adm-points"));if(!Number.isFinite(n)||n<0)return;await send("prestigePoints",{n})}
  });
  document.addEventListener("input",e=>{if(e.target.id==="adm-pokemon-id"){const id=+e.target.value||0,p=document.getElementById("adm-preview");if(p)p.textContent=id>0?I(id).n:""}});
- setTimeout(()=>ensure(),7000);
+ /* The account provider can finish initializing after the main game UI. Keep
+    checking only for account readiness, then request the private session once. */
+ let bootTries=0,bootUid="";
+ function boot(){
+  if(!LB||!LB.ok||!LB.uid){if(++bootTries<180)setTimeout(boot,1000);return}
+  if(bootUid!==LB.uid){bootUid=LB.uid;A.checked="";A.authorized=false;A.token="";A.uid=""}
+  if(A.checked===LB.uid||A.authorized)return;
+  ensure();
+ }
+ setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
 </script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v250-20261027zo"><script src="dungeon-immersive.js?v=pid-v250-20261027zo"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v250-20261027zo"><script src="collection-scenes.js?v=pid-v250-20261027zo"></script></body></html>
