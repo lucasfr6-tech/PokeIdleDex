@@ -4325,7 +4325,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-cas-auto-20261029a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-exc-rule-20261029b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4339,7 +4339,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-cas-auto-20261029a"></script><script>
+</script><script src="shim.js?v=pid-exc-rule-20261029b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10305,7 +10305,7 @@ const KXP={
 const KXK=[["r0","N","N"],["r1","SR","SR"],["r2","SSR","SSR"],["r3","UR","UR"],["sp","Mutation ou taille hors norme","Mutation or odd size"],["boss","Boss Alpha","Alpha boss"]];
 const KX=()=>{const c=G.kx||(G.kx={mode:"smart",prof:"bal",rb:1,res:0,lot:10,ms:1,sh:1,sp:0,nb:0});if(!KXP[c.prof])c.prof="bal";return c};
 const kxOdd=e=>e.mi>0||[0,4,5,6].indexOf(SZ.indexOf(e.sz))>=0;
-const kxCls=e=>kxOdd(e)?"sp":e.boss?"boss":e.r==6?"r6":"r"+Math.min(3,e.r);
+const kxCls=e=>kxOdd(e)?"sp":e.boss?"boss":e.r==6?"r6":e.r==7?"r7":"r"+Math.min(3,e.r);
 const kxRule=k=>G.rules&&k in G.rules?G.rules[k]:"auto";
 const kxP0=()=>Math.max(1,shopP(IT["poke-ball"]));
 function kxWant(e){const c=KX(),nw=!G.col[e.id],sh=e.mi==7,sp=kxOdd(e);
@@ -10336,7 +10336,7 @@ function kxFix(r){const c=KX(),it=IT[r];if(!it||!it.m)return null;if((G.inv[r]||
  return null}
 /* rachat proactif : on remplit le stock avant la rencontre, pas pendant */
 let KXT=0;
-function kxClsWanted(){const c=KX(),all=["r0","r1","r2","r3","r6","sp","boss"];return c.mode=="all"||c.mode=="smart"||c.mode=="coll"?all:c.mode=="elite"?["r2","r3","r6","sp","boss"]:(c.sh?["sp"]:[])}
+function kxClsWanted(){const c=KX(),all=["r0","r1","r2","r3","r6","r7","sp","boss"];return c.mode=="all"||c.mode=="smart"||c.mode=="coll"?all:c.mode=="elite"?["r2","r3","r6","r7","sp","boss"]:(c.sh?["sp"]:[])}
 function kxRestock(force){const c=KX();if(!c.rb)return 0;const n0=c.nb||0;
  kxClsWanted().forEach(k=>{const r=kxRule(k);if(r==="auto")kxAuto(kxSynth(k),k,true);else if(r)kxFix(r)});
  return (c.nb||0)-n0}
@@ -15006,6 +15006,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-10-29",t:["Règle de capture Exclusif","Exclusive capture rule"],e:[["new","Règle de capture « Exclusif »","Dans les règles de capture, une nouvelle ligne « Exclusif » sous LR permet de choisir la ball utilisée sur les exclusifs comme Lugulabre Zodiaque. En Automatique, le jeu lance ta meilleure ball. La Master Ball ne fonctionne pas sur eux.","“Exclusive” capture rule","In capture rules, a new “Exclusive” row under LR lets you choose the Ball used on exclusives like Zodiac Chandelure. On Automatic, your best Ball is thrown. The Master Ball does not work on them."]]},
  {d:"2026-10-28",t:["Menu et classements stabilisés","Menu and rankings stabilized"],e:[["fix","Exclusifs jamais vendus quand la boîte est pleine","Un exclusif capturé pour la première fois (comme Lugulabre Zodiaque) était vendu automatiquement si ta boîte était pleine. Il est maintenant toujours gardé.","Exclusives never sold when the box is full","A first-time exclusive catch (like Zodiac Chandelure) was auto-sold when your box was full. It is now always kept."],["new","Historique de Lugulabre Zodiaque","Les règles de capture montrent ses 8 dernières apparitions et ce qui s’est passé : capturé, échappé de la ball (avec la ball et la chance), ignoré, sans ball, ou enfui (avec ses PV restants).","Zodiac Chandelure history","Capture rules show its last 8 appearances and what happened: caught, broke free (with Ball and chance), skipped, no Ball, or fled (with HP left)."],["new","Compteur d’apparitions de Lugulabre Zodiaque","Les règles de capture des zones à partir de l’étage 4000 indiquent combien de fois Lugulabre Zodiaque est apparu (compté à partir de cette mise à jour).","Zodiac Chandelure appearance counter","Capture rules for zones from floor 4000 show how many times Zodiac Chandelure has appeared (counted from this update)."],["fix","Lugulabre Zodiaque dans les règles de capture","Lugulabre Zodiaque apparaît maintenant dans les espèces ciblées des règles de capture, pour les zones qui atteignent l’étage 4000. Tu peux le cibler comme les autres espèces.","Zodiac Chandelure in capture rules","Zodiac Chandelure now appears in the targeted species of the capture rules, for zones reaching floor 4000. You can target it like the other species."],["imp","Étages 2000+ un peu plus durs","À partir de l’étage 2000, les adversaires et les boss ont environ 20 % de PV en plus. Les étages avant 2000 ne changent pas.","Floors 2000+ slightly harder","From floor 2000, enemies and bosses have about 20% more HP. Floors before 2000 are unchanged."],["fix","Lugulabre Zodiaque visible dans la zone","Lugulabre Zodiaque apparaît maintenant dans « Pokémon de la zone » pour les zones qui atteignent l’étage 4000, avec son taux (0,08 % par combat). Une alerte s’affiche quand il apparaît.","Zodiac Chandelure shown in the zone","Zodiac Chandelure now appears in “Zone Pokémon” for zones reaching floor 4000, with its rate (0.08% per fight). An alert shows when it appears."],["imp","Tower : étages 700 à 1000 un peu plus faciles","Les adversaires des étages 700 à 1000 de la Tower sont environ 10 % moins forts.","Tower: floors 700 to 1000 slightly easier","Opponents on Tower floors 700 to 1000 are about 10% weaker."],["imp","Énergie : défis un peu plus faciles","Les adversaires des 10 défis de l’Énergie ont environ 40 % de PV en moins et font environ 25 % de dégâts en moins.","Energy: slightly easier challenges","Opponents in the 10 Energy challenges have about 40% less HP and deal about 25% less damage."],["imp","Menu : raccourcis liés au compte","Les raccourcis personnels apparaissent dès que les données du compte sont chargées.","Menu: account shortcuts","Personal shortcuts appear as soon as account data has loaded."],["fix","Meilleurs Pokémon : classement complet","Le classement charge jusqu’à 500 fiches et permet de parcourir toutes les entrées reçues, au lieu de couper la liste après 100 Pokémon.","Best Pokémon: full ranking","The ranking loads up to 500 entries and lets you browse all received results instead of cutting the list off after 100 Pokémon."]] },
  {d:"2026-10-27",t:["Correction urgente du chargement","Urgent loading fix"],e:[["fix","Interfaces et onglets rétablis","Une erreur dans le journal empêchait une partie du jeu de se charger. Les interfaces et les modules sont rétablis sans réinitialiser les sauvegardes.","Interfaces and tabs restored","An update log error prevented part of the game from loading. Interfaces and modules are restored without resetting saves."],["fix","Quêtes : fenêtre adaptée au téléphone","La fenêtre de récompense des quêtes s’adapte maintenant aux petits écrans : les cartes restent dans le cadre et la barre de défilement horizontale disparaît.","Quests: mobile reward window","The quest reward window now fits small screens: cards stay inside the panel and the horizontal scrollbar is removed."],["imp","Étages 2000+ : PV augmentés ×2,7","À partir de l’étage 2000, les PV des adversaires et des boss sont multipliés par 2,7. Les étages avant 2000 conservent leurs PV actuels. Les niveaux restent plafonnés à 100.","Floors 2000+: HP increased ×2.7","From floor 2000, enemy and boss HP is multiplied by 2.7. Floors before 2000 keep their current HP. Levels remain capped at 100."]]},
  {d:"2026-10-27",t:["Interface et équilibrage","Interface and balance"],e:[
@@ -16302,7 +16303,13 @@ const ZD_FLOOR=4000,ZD_RATE=.0008;
 {const o=pickId22;pickId22=function(){if((G.fl|0)>=ZD_FLOOR&&Math.random()<ZD_RATE/Math.max(1,x2M()))return 90017;return o.apply(this,arguments)}}
 /* Capture : la Master Ball ne marche pas sur un Exclusif (elle compte comme une Poké Ball) et n'est jamais utilisée */
 {const o=capPct;capPct=function(e,bl){return e&&e.r===EXR&&bl==="master-ball"?o.call(this,e,"poke-ball"):o.apply(this,arguments)}}
-{const o=pickBall;pickBall=function(e){if(!(e&&e.r===EXR))return o.apply(this,arguments);const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.inv[k]>0&&k!=="master-ball").sort((a,b)=>IT[b].m-IT[a].m);return own[0]||null}}
+{const o=pickBall;pickBall=function(e){if(!(e&&e.r===EXR))return o.apply(this,arguments);if(!kxWant(e)){e.skip=1;return null}
+ const best=()=>{const own=Object.keys(G.inv).filter(k=>IT[k]&&IT[k].m&&G.inv[k]>0&&k!=="master-ball").sort((a,b)=>IT[b].m-IT[a].m);return own[0]||null};
+ const r=kxRule("r7");if(r===""){e.skip=1;return null}if(r&&r!=="auto"&&r!=="master-ball"){const f=kxFix(r);if(f&&f!=="master-ball")return f}return best()}}
+/* règle de capture « Exclusif » (sous LR) : ball choisie, Automatique = meilleure ball possédée ; la Master Ball ne fonctionne pas */
+KXK.splice(Math.max(0,KXK.findIndex(x=>x[0]=="r6"))+1,0,["r7","Exclusif","Exclusive"]);
+Object.values(KXP).forEach(p=>{if(p.c)p.c.r7=p.c.r6;if(p.t)p.t.r7=p.t.r6});try{RULES0.r7=RULES0.r6||"ultra-ball"}catch(x){}
+{const g0=kxGrid;kxGrid=function(k,r,L){if(k==="r7"&&Array.isArray(L))L=L.filter(b=>b!=="master-ball");return g0.call(this,k,r,L)}}
 /* Lugulabre Zodiaque dans les règles de capture (espèces ciblées) des zones qui atteignent l'étage 4000 */
 pidLate(()=>{const k0=kxzHtml;kxzHtml=function(){const h=k0.apply(this,arguments);try{if(typeof h!="string"||(typeof hwOn=="function"&&hwOn()))return h;const z=(typeof KXZV=="undefined"||KXZV==null)?zoneOf(G.fl):KXZV;if(ze(z)<ZD_FLOOR)return h;
  const id=90017,on=kxzSel(z).includes(id),seen=!!G.dx[id],n=seen?esc(nm(id)):"???";
