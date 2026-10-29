@@ -16631,6 +16631,29 @@ function cpClose(){const o=$("cpk");if(o)o.remove();document.removeEventListener
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cpk-open]");if(b){e.stopPropagation();cpOpen()}},true);
 {const o=prcB;prcB=function(){return o.apply(this,arguments)+`<div class="phxb" style="border-color:#22d3ee;box-shadow:0 0 24px #22d3ee55;background:linear-gradient(100deg,#0e7490,#0b1530 62%,#2a1250)"><img src="img/items/escape-rope.png" alt="" style="width:72px;height:72px"><div><h3>${LS("Checkpoint d'étage","Floor checkpoint")}</h3><p>${LS("Repars de l'étage "+(PL("pcp")?PL("pcp")*50:1)+" après chaque prestige (jusqu'à 1500).","Restart from floor "+(PL("pcp")?PL("pcp")*50:1)+" after each prestige (up to 1500).")}</p></div><button data-cpk-open="1">${LS("Ouvrir","Open")}</button></div>`}}
 
+/* ===== Onglet Cartes : boosters en affiches hautes avec un Pokémon par booster (maquette C), boosts agrandis, barre Album ===== */
+const PCX_PK=[25,448,6,150,384,493,150,384,493];
+{const st=document.createElement("style");st.id="pcx-styles";st.textContent=`
+.cbs{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px!important;width:100%}
+.cbs .cbc{display:flex!important;flex-direction:column;align-items:flex-start!important;justify-content:center;gap:2px!important;border-radius:16px!important;border:2px solid var(--bc)!important;padding:10px 14px!important;font-size:20px!important;font-weight:900!important;background:linear-gradient(180deg,#ffffff14,#0006)!important;box-shadow:0 0 16px color-mix(in srgb,var(--bc) 35%,transparent);color:var(--bc)}
+.cbs .cbc svg{width:18px;height:18px}.cbs small{grid-column:1/-1;color:#a5b4fc;font-weight:800}
+.bxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}
+.pcx-c{position:relative;overflow:hidden;border:3px solid var(--c);border-radius:20px;background:linear-gradient(180deg,var(--b),#080a18);padding:12px 10px;text-align:center;box-shadow:0 0 22px color-mix(in srgb,var(--c) 35%,transparent);display:flex;flex-direction:column}
+.pcx-c.lk{filter:grayscale(.6) brightness(.8)}
+.pcx-t{height:200px;border-radius:14px;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--c) 70%,#0000),#0000 70%),repeating-linear-gradient(135deg,#ffffff10 0 8px,#0000 8px 16px);border:2px solid #ffffff44;display:grid;place-items:center}
+.pcx-t img{width:170px;height:170px;filter:drop-shadow(0 6px 0 #0008)}
+.pcx-c h3{margin:10px 0 2px;font-size:20px}.pcx-c small{display:block;color:#cbd5e1;font-weight:700;font-size:11px;min-height:28px}
+.pcx-o{display:flex;height:14px;border-radius:7px;overflow:hidden;border:2px solid #fff6;background:#0008;margin-top:6px}.pcx-o i{display:block;height:100%}
+.pcx-h{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:8px 0}.pcx-h span{font-size:11px;font-weight:900;padding:2px 7px;border-radius:8px;border:2px solid;background:#0008}
+.pcx-p{font-size:22px;font-weight:900;color:#fde68a;margin:auto 0 6px}.pcx-c .go{width:100%}
+.pcx-alb{border:2px solid #fff3;border-radius:16px;background:#ffffff0d;padding:12px 16px;margin-top:12px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.pcx-alb .bar{flex:1;min-width:140px;height:16px;border-radius:8px;background:#0008;border:2px solid #fff4;overflow:hidden}.pcx-alb .bar i{display:block;height:100%;background:linear-gradient(90deg,#22d3ee,#a78bfa)}`;document.head.appendChild(st)}
+{const g=vGacha;vGacha=function(){const s=g();if(CS.tab=="coll")return s;const i=s.indexOf('<div class="boosters">');if(i<0)return s;
+ const have=Object.keys(G.cards).length,tot=1025+MYT.length+SEC.length,dup=Object.values(G.cards).reduce((a,n)=>a+Math.max(0,n-1),0);
+ const cards=BOOST.map((B,k)=>{const lk=bfl()<BFL[k],id=PCX_PK[k]||PCX_PK[k%PCX_PK.length],pr=B.r.map((p,j)=>p>0?[RN[j],p,RC[j]]:null).filter(Boolean);
+  return `<div class="pcx-c${lk?" lk":""}" style="--c:${B.c};--b:${B.b}"><div class="pcx-t"><img src="${ART+id}.png" alt="" onerror="this.style.visibility='hidden'"></div><h3>Booster ${B.n}</h3><small>${B.cnt} ${LS("cartes · dernière carte au moins","cards · last card at least")} ${RN[B.min].toLowerCase()}</small><div class="pcx-o">${pr.map(x=>`<i style="width:${Math.max(x[1],1.2)}%;background:${x[2]}"></i>`).join("")}</div><div class="pcx-h">${pr.map(x=>`<span style="color:${x[2]};border-color:${x[2]}">${x[1]} %</span>`).join("")}</div><div class="pcx-p">${fmt(B.p)} ₽</div>${bLock(k,B)}</div>`}).join("");
+ return s.slice(0,i)+`<div class="bxgrid">${cards}</div><div class="pcx-alb"><b>${LS("Album","Album")}</b><div class="bar"><i style="width:${Math.min(100,have/tot*100)}%"></i></div><b>${have} / ${tot}</b><span style="color:#a5b4fc;font-weight:800">${LS("Cartes en double : ","Duplicate cards: ")}${fmt(dup)}</span></div>`}}
+
 /* Fit the full result to the visible viewport, including when many Balls are owned. */
 let RD_VICTORY_FIT_FRAME=0,RD_VICTORY_FIT_WATCH=null;
 function rdVictoryFit(){const root=document.querySelector('#rdRes.raid-victory');if(!root)return;root.style.zoom='1';const r=root.getBoundingClientRect(),v=window.visualViewport,availableH=Math.min(innerHeight,v?.height||innerHeight)-20,availableW=Math.min(innerWidth,v?.width||innerWidth)-16;const scale=Math.min(1,availableH/Math.max(1,r.height),availableW/Math.max(1,r.width));root.style.zoom=String(Math.max(.1,scale));root.scrollTop=0}
