@@ -16129,7 +16129,7 @@ function exclusiveRelink(from,to){
  if(PNM?.sel)PNM.sel=unique(PNM.sel);
  for(const p of [EXM,RTB])if(p){if(p.sel)p.sel=unique(p.sel);if(p.team)p.team=unique(p.team)}
 }
-function exclusiveMergeOrdinary(from,to){const c=G.col[from],t=G.col[to];if(!c||!t||c.hf||from===to)return false;ens(from);ens(to);const keep=exclusiveKeepTraits(to);
+function exclusiveMergeOrdinary(from,to){const c=G.col[from],t=G.col[to];if(!c||!t||(c.hf&&+to!==90017)||from===to)return false;ens(from);ens(to);const keep=exclusiveKeepTraits(to);
  const a=careState(c),b=careState(t);b.v+=a.v;b.t+=a.t;
  t.n=(t.n||0)+(c.n||0);t.l=Math.max(t.l||1,c.l||1);t.x=Math.max(t.x||0,c.x||0);for(const k of ['st','ks','ai','starCopyFloor'])if(c[k])t[k]=Math.max(t[k]||0,c[k]);
  for(let i=0;i<6;i++)t.iv[i]=Math.max(t.iv[i]||0,c.iv[i]||0);
@@ -16137,10 +16137,10 @@ function exclusiveMergeOrdinary(from,to){const c=G.col[from],t=G.col[to];if(!c||
  if(c.ha)t.ha=1;if(c.it&&IT[c.it]){G.inv=G.inv||{};G.inv[c.it]=(G.inv[c.it]||0)+1}
  delete G.col[from];G.dx[from]=1;G.dx[to]=1;exclusiveRelink(from,to);IDC=null;PWC.delete(from);PWC.delete(to);exclusiveRestoreTraits(to,keep,c.mi,c);return true
 }
-function exclusiveNormalize(){if(EX_DUP_BUSY||!G?.col)return false;EX_DUP_BUSY=true;let changed=false;try{for(const s of SPS)if(G.col[s.id]&&(G.col[s.id].n||0)>0&&G.col[s.base]&&!G.col[s.base].hf)changed=exclusiveMergeOrdinary(s.base,s.id)||changed;const steelix=G.col[90005];if(steelix&&steelix.n>0)for(const id of [95,208]){const source=G.col[id];if(source&&!source.hf){if(muUpgrade(steelix.mi,source.mi)){steelix.mi=source.mi;rq(90005);changed=true}if(exclusiveBestTraits(steelix,source)){rq(90005);changed=true}}}}finally{EX_DUP_BUSY=false}return changed}
+function exclusiveNormalize(){if(EX_DUP_BUSY||!G?.col)return false;EX_DUP_BUSY=true;let changed=false;try{for(const s of SPS)if(G.col[s.id]&&(G.col[s.id].n||0)>0&&G.col[s.base]&&(!G.col[s.base].hf||s.id===90017))changed=exclusiveMergeOrdinary(s.base,s.id)||changed;const steelix=G.col[90005];if(steelix&&steelix.n>0)for(const id of [95,208]){const source=G.col[id];if(source&&!source.hf){if(muUpgrade(steelix.mi,source.mi)){steelix.mi=source.mi;rq(90005);changed=true}if(exclusiveBestTraits(steelix,source)){rq(90005);changed=true}}}}finally{EX_DUP_BUSY=false}return changed}
 {const old=recomp;recomp=function(){exclusiveNormalize();return old.apply(this,arguments)}}
 {const old=spGrant;spGrant=function(id){const r=old.apply(this,arguments);exclusiveNormalize();return r}}
-{const old=catchIt;catchIt=function(e,ball,chance){const to=e&&exclusiveCopyTarget(e.id);if(!to){const r=old.apply(this,arguments);if(e&&+e.id===95)exclusiveNormalize();return r}const from=+e.id,keep=exclusiveKeepTraits(to);try{return old.call(this,{...e,id:to},ball,chance)}finally{G.dx[from]=1;exclusiveRestoreTraits(to,keep);exclusiveNormalize()}}}
+{const old=catchIt;catchIt=function(e,ball,chance){const to=e&&exclusiveCopyTarget(e.id);if(!to){const r=old.apply(this,arguments);if(e&&(+e.id===95||+e.id===90017))exclusiveNormalize();return r}const from=+e.id,keep=exclusiveKeepTraits(to);try{return old.call(this,{...e,id:to},ball,chance)}finally{G.dx[from]=1;exclusiveRestoreTraits(to,keep);exclusiveNormalize()}}}
 {const old=exGet;exGet=function(id,level){const to=exclusiveCopyTarget(id);if(!to)return old.apply(this,arguments);const keep=exclusiveKeepTraits(to);try{return old.call(this,to,level)}finally{G.dx[id]=1;exclusiveRestoreTraits(to,keep);exclusiveNormalize()}}}
 {const old=fzGrant;fzGrant=function(c,lost){const to=c&&!lost&&exclusiveCopyTarget(c.sp);if(!to)return old.apply(this,arguments);const keep=exclusiveKeepTraits(to);try{return old.call(this,{...c,sp:to},lost)}finally{G.dx[c.sp]=1;exclusiveRestoreTraits(to,keep);exclusiveNormalize()}}}
 {const old=rdCapGrant;rdCapGrant=function(){const to=RCX.boss&&exclusiveCopyTarget(RCX.boss.sp),r=old.apply(this,arguments);return to&&r?{...r,name:dn(to)}:r}}
