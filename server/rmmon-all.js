@@ -14,7 +14,7 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  let ok=0;
  for(const x of L){
   const c={op:'rmmon',id,i:Date.now().toString(36)+Math.random().toString(36).slice(2,5),t:Date.now()};
-  const cur=await rq('GET','/api/d/adm/'+x.uid),Q=((cur.d&&cur.d.c)||[]).slice(-40);Q.push(c);
+  const cur=await rq('GET','/api/d/adm/'+x.uid,null,{'X-Admin':KEY}),Q=((cur.d&&cur.d.c)||[]).slice(-40);Q.push(c);
   const r=await rq('PUT','/api/d/adm/'+x.uid,{c:Q},{'X-Token':KEY,'X-Admin':KEY});
   if(r.ok)ok++;else console.log('Erreur',x.n,JSON.stringify(r))}
  console.log(ok+'/'+L.length+' ordres enregistres (appliques a la prochaine connexion, ou sous 1 minute).');
