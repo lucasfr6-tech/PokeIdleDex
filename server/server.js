@@ -91,15 +91,15 @@ const setFlag=(uid,key,arr)=>{if(!uid)return;const f=db.flag[uid]=db.flag[uid]||
 const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='object')return[];
  const r=[],n=x=>+x||0,col=G.col&&typeof G.col=='object'?G.col:{};
  const m=n(G.m),gain=n(G.gain);
- if(!isFinite(m)||m<0||m>gain*5+5e9)r.push('pieces '+m.toExponential(2)+' pour '+gain.toExponential(2)+' gagnes');
+ if(!isFinite(m)||m<0||m>gain*100+5e9)r.push('pieces '+m.toExponential(2)+' pour '+gain.toExponential(2)+' gagnes');
  const k=Math.floor(n(G.bf)/8),pts=k*k+4*k,pt=Math.max(n(G.pp),n(G.pt));
- if(pt>3*Math.max(1,n(G.st))*Math.max(pts,5)+50)r.push('prestige '+pt+' points pour '+n(G.st)+' prestige(s), etage max '+n(G.bf));
+ if(pt>300*Math.max(1,n(G.st))*Math.max(pts,5)+50)r.push('prestige '+pt+' points pour '+n(G.st)+' prestige(s), etage max '+n(G.bf));
  const ids=Object.keys(col),sh=ids.filter(i=>col[i]&&col[i].sh).length,mu=ids.filter(i=>col[i]&&col[i].mi>0).length;
  if(n(G.mut)>n(G.caps)*.5+5)r.push('mutations '+n(G.mut)+' pour '+n(G.caps)+' captures');
  if(sh>n(G.mut)+40||mu>n(G.mut)+40)r.push('chromatiques/mutes possedes '+sh+'/'+mu+' pour '+n(G.mut)+' mutations captees');
- if(n(G.caps)>n(G.ko)*3+500)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
+ if(n(G.caps)>n(G.ko)*20+5000)r.push('captures '+n(G.caps)+' pour '+n(G.ko)+' ko');
  if(G.tw&&(!Number.isFinite(+G.tw.b)||n(G.tw.b)>1000))r.push('tour etage '+n(G.tw.b));
- if(!isFinite(+G.bf)||n(G.bf)<0||n(G.bf)>4100||n(G.cl)>4100||n(G.fl)>4100)r.push('etage impossible '+n(G.bf)+'/'+n(G.cl)+'/'+n(G.fl));
+ if(!isFinite(+G.bf)||n(G.bf)<0||n(G.bf)>100000||n(G.cl)>100000||n(G.fl)>100000)r.push('etage impossible '+n(G.bf)+'/'+n(G.cl)+'/'+n(G.fl));
  /* valeurs impossibles dans les Pokemon : signe d'une modification de la partie */
  let bad=0;for(const i of ids){const c=col[i];if(!c||typeof c!='object')continue;
   if(n(c.mi)>11||n(c.mi)<0||n(c.zi)>7||n(c.zi)<0||n(c.l)>5000||n(c.n)<0)bad++;
@@ -114,7 +114,7 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
 // Clear only obsolete Tower-limit flags, retaining every other moderation reason.
 for(const uid of Object.keys(db.flag)){const f=db.flag[uid];if(!f||!Array.isArray(f.s))continue;const next=f.s.filter(x=>{const m=/^tour etage (\d+)$/.exec(x);return !m||+m[1]>1000});if(next.length!==f.s.length)setFlag(uid,'s',next)}
 const ckT=new Map();
-const lbSus=d=>{const r=[],n=x=>+x||0;if(!isFinite(+d.bf)||n(d.bf)<0||n(d.bf)>4100)r.push('classement : etage impossible '+d.bf);if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
+const lbSus=d=>{const r=[],n=x=>+x||0;if(!isFinite(+d.bf)||n(d.bf)<0||n(d.bf)>100000)r.push('classement : etage impossible '+d.bf);if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
 setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 /* connexion Discord (OAuth2) : le secret reste dans l'environnement du serveur (DISCORD_SECRET), jamais dans le jeu */
