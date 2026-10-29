@@ -4325,7 +4325,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4339,7 +4339,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v300-20261030d"></script><script>
+</script><script src="shim.js?v=pid-v300-20261030e"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -13161,18 +13161,20 @@ const JOBS=[
  ["jardinier","Jardinier","Gardener","Le potager","The garden","#4ade80",[
   [357,"sitrus","Baie Sitrus","Sitrus berry","heart","soigne 30 % de l’équipe","heals 30% of the team",0,"i"],
   [192,"seed","Graines de soleil","Sun seeds","coin","+30 % pièces","+30% coins",45,"b"],
-  [123,"mow","Récolte fauchée","Swift harvest","bolt","production des métiers ×2","job production ×2",30,"b"]]],
+  [900,"mow","Récolte fauchée","Swift harvest","bolt","production des métiers ×2","job production ×2",30,"b"]]],
  ["mineur","Mineur","Miner","La carrière","The quarry","#fb923c",[
-  [95,"dust","Poussière d’étoile","Stardust","star","180 s de revenu en pièces","180 s of coin income",0,"i"],
+  [208,"dust","Poussière d’étoile","Stardust","star","180 s de revenu en pièces","180 s of coin income",0,"i"],
   [530,"stone","Pierre","Stone","spark","1 pierre d’évolution au hasard","1 random evolution stone",0,"i"],
   [212,"nugget","Pépite","Nugget","coin","600 s de revenu en pièces","600 s of coin income",0,"i"]]],
  ["pecheur","Pêcheur","Fisher","Le lac","The lake","#38bdf8",[
   [131,"pearl","Trésor du lac","Lake treasure","gift","1 objet rare (Super Bonbon, Rappel Max, Protéine)","1 rare item (Rare Candy, Max Revive, Protein)",0,"i"],
-  [118,"scale","Écaille cœur","Heart scale","target","+20 % chance de capture","+20% catch chance",60,"b"],
-  [320,"wave","Eau fraîche","Fresh water","flask","+30 % dégâts de type Eau","+30% Water damage",30,"b"]]]];
+  [119,"scale","Écaille cœur","Heart scale","target","+20 % chance de capture","+20% catch chance",60,"b"],
+  [321,"wave","Eau fraîche","Fresh water","flask","+30 % dégâts de type Eau","+30% Water damage",30,"b"]]]];
 const JSTAT=JOBS.flatMap(j=>j[6].map(p=>({id:p[0],k:p[1],fr:p[2],en:p[3],ic:p[4],efr:p[5],een:p[6],du:p[7],ty:p[8],job:j[0],col:j[5]})));
 const JMAX=5,JBASE=45;/* minutes ÷ somme des qualités : 3 normaux = 15 min, 3 au maximum = 5 min */
-const JS=()=>{const j=G.job||(G.job={on:{},t:{},s:{},b:{},auto:1,last:Date.now()});j.on=j.on||{};j.t=j.t||{};j.s=j.s||{};j.b=j.b||{};return j};
+const JS=()=>{const j=G.job||(G.job={on:{},t:{},s:{},b:{},auto:1,last:Date.now()});j.on=j.on||{};j.t=j.t||{};j.s=j.s||{};j.b=j.b||{};/* 3.0 : le Métier n'accepte plus que des formes finales (migration des anciens postes) */
+ if(!j.fin){j.fin=1;[[123,900],[95,208],[118,119],[320,321]].forEach(([o,n])=>{if(j.on[o]!=null){if(G.col&&G.col[n])j.on[n]=j.on[o];delete j.on[o]}if(j.t[o]!=null){j.t[n]=j.t[o];delete j.t[o]}if(j.s[o]!=null){j.s[n]=(j.s[n]||0)+j.s[o];delete j.s[o]}})}
+ return j};
 function jobQ(id){const c=G.col[id];if(!c)return 0;const lv=Math.max(0,Math.min(1,((c.l||1)-50)/100))*.6,mu=c.mi&&MU[c.mi]?Math.max(0,Math.min(1,MU[c.mi][1]-1))*.6:0,sz=Math.max(0,Math.min(5,c.zi==null?2:c.zi)-2)/3*.4,as=Math.min(3,c.asc|0)/3*.4;return 1+lv+mu+sz+as}
 /* Prestige : les Pokémon placés au travail (onglet Métier) sont gardés, avec leur nombre d'exemplaires (3 max utiles) */
 {const pj=prestige;prestige=function(sel){const keep={};try{const J=JS();Object.keys(J.on).forEach(k=>{const c=G.col[k];if(J.on[k]&&c)keep[k]=Math.min(3,c.n||1)})}catch(e){}const st=G.st;const r=pj.apply(this,arguments);try{if(G.st>st){Object.keys(keep).forEach(k=>{const c=G.col[k];if(c)c.n=Math.max(c.n||1,keep[k])});save()}}catch(e){}return r}}
@@ -15156,6 +15158,7 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 const UPD=[
  {d:"2026-10-30",t:["Méga-Perles : vraies pierres","Mega Pearls: real stones"],e:[
   ["imp","Métier : Pokémon gardés au prestige","Les Pokémon placés au travail dans l’onglet Métier ne sont plus supprimés par le prestige : ils restent, comme les exclusifs.","Jobs: Pokémon kept on prestige","Pokémon assigned to a job in the Jobs tab are no longer removed by prestige: they stay, like exclusives."],
+  ["imp","Métier : formes finales uniquement","Les Pokémon du Métier sont maintenant tous des formes finales, pour qu’ils n’évoluent plus avant d’être placés : Steelix à la place d’Onix, Hachécateur à la place d’Insécateur, Poissoroy à la place de Poissirène et Wailord à la place de Wailmer.","Jobs: final forms only","Jobs now only use final evolutions so they no longer evolve before being placed: Steelix, Kleavor, Seaking and Wailord replace Onix, Scyther, Goldeen and Wailmer."],
   ["imp","Vrais sprites de pierres","Les Méga-Perles utilisent maintenant les vrais sprites des pierres de Méga-Évolution des jeux (Gardevoirite, Dracaufeunite, etc.) au lieu d’une boule colorée. Seules les Méga-Perles de Rayquaza et de Brutapode gardent leur ancien visuel, faute de pierre officielle.","Real stone sprites","Mega Pearls now use the real Mega Stone sprites from the games instead of a coloured ball. Only the Rayquaza and Scolipede pearls keep their old look, as they have no official stone."],
   ["fix","Sprites manquants des nouveaux exclusifs","Kyogre Sol, Ténéfix Minuit et Altaria Phénix avaient un sprite manquant dans le classement des exclusifs et d’autres listes. Ils s’affichent maintenant partout, y compris en chromatique et en Méga.","Missing sprites for new exclusives","Earth Kyogre, Midnight Sableye and Phoenix Altaria had a missing sprite in the exclusive ranking and other lists. They now show everywhere, including shiny and Mega forms."],
   ["fix","Classements : joueurs réaffichés","Des joueurs légitimes avaient été masqués des classements par erreur à cause de limites trop basses. Les limites tiennent maintenant compte des étages et des gains de la 3.0.0.","Rankings: players restored","Some legitimate players had been hidden from the rankings by mistake because of limits that were too low. The limits now account for 3.0.0 floors and income."]
@@ -16930,4 +16933,4 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030d"><script src="dungeon-immersive.js?v=pid-v300-20261030d"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030d"><script src="collection-scenes.js?v=pid-v300-20261030d"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030e"><script src="dungeon-immersive.js?v=pid-v300-20261030e"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030e"><script src="collection-scenes.js?v=pid-v300-20261030e"></script></body></html>
