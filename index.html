@@ -4582,7 +4582,7 @@ const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
 let IDC=null;const ids=()=>IDC||(IDC=Object.keys(G.col).map(Number));
 const HPFIX=.14,HPK=.025,BOSS_PV=1.2;
-const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(Math.min(f,2000)-120);if(f>2000){const e=Math.min(f,5000)-2000;I+=.0045*e+Math.floor(e/10)*Math.log(1.025);if(f>5000)I+=.03*(f-5000)}return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
+const hpF0=f=>Math.floor(HPK*Math.min(1,.2+.0889*(f-1))*(560*Math.pow(1.16,f-1)+200*f));const hpLateBoost=f=>f<1171?1:Math.min(3,2*Math.pow(1.01,(f-1171)/20));const hpF=f=>{if(f<=95)return hpF0(f);const r0=Math.log(1.16),r1=Math.log(1.0125),d=Math.min(f,120)-95;let I=r0*d-(r0-r1)*d*d/50;if(f>120)I+=r1*(Math.min(f,2000)-120);if(f>2000){const e=Math.min(f,5000)-2000;I+=.0003*e+Math.floor(e/10)*Math.log(1.0055);if(f>5000)I+=.03*(f-5000)}return Math.floor(hpF0(95)*Math.exp(I)*hpLateBoost(f))};
 const need=l=>Math.floor(30+Math.pow(l,2.6)*1.2),sm=()=>1;
 const PL=k=>(G.pl&&G.pl[k])||0,uf=()=>Math.max(G.cl,G.bf||0,G.fl||0),shopP=i=>Math.ceil(i.p*6*kxPm(i)*(1-.02*PL("pe"))*SKM("e")*kxEco());
 let cb=k=>1+Object.entries(G.cards).reduce((s,[id,n])=>s+CB[crd(+id)][k]*(1+.25*Math.min(n-1,12)),0)/100*(1+.1*PL("pn"));
