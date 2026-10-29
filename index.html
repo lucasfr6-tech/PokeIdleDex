@@ -16683,6 +16683,45 @@ const TQZC=["#9ca3af","#4ade80","#a16207","#84cc16","#fbbf24","#67e8f9","#f97316
 @media(max-width:900px){.tso-summit{grid-template-columns:1fr!important;text-align:center}.tq-trk{grid-template-columns:repeat(5,1fr)}}`;document.head.appendChild(st)}
 {const o=twViewTour;twViewTour=function(){let h=o.apply(this,arguments);try{const f=twS().f,zi=twZi(f),trk=`<div class="tq-trk">${TQZC.map((c,i)=>{let n="";try{n=TWZ[i].n}catch(e){}return `<div class="${i==zi?"on":""}" style="--c:${c}">${esc(n||"Zone "+(i+1))}<small>${LS("étages ","floors ")}${i*10+1}-${(i+1)*10}</small></div>`}).join("")}</div>`;h=h.replace('<div class="tso-notice">',trk+'<div class="tso-notice">')}catch(e){}return h}}
 
+/* ===== Zone de combat : refonte colorée et plus lisible (version B) ===== */
+{const st=document.createElement("style");st.id="tcb-styles";st.textContent=`
+#combat-head.compact-head{border:3px solid #f59e0b!important;border-radius:22px!important;background:linear-gradient(100deg,#f59e0b33,#0b1030 55%,#080a18)!important;box-shadow:0 0 26px #f59e0b44}
+#combat-head .tcb-fr{display:flex;align-items:center;gap:8px}
+#combat-head .tcb-nb{width:42px;height:42px;border-radius:12px;border:2px solid #fde68a;background:linear-gradient(180deg,#f59e0b,#b45309);color:#fff;font:900 22px Nunito,sans-serif;cursor:pointer;box-shadow:0 4px 0 #0007;display:grid;place-items:center;padding:0}
+#combat-head .tcb-nb:active{transform:translateY(2px);box-shadow:0 2px 0 #0007}
+#combat-head #hf[data-flp]{cursor:pointer;border-radius:14px;padding:0 10px;background:#0006;border:2px solid #fde68a55;font-size:52px!important}
+#combat-head #hf[data-flp]:hover{border-color:#fde68a}
+#combat-head .tcb-pick{display:block;color:#fed7aa;font:900 10px Nunito,sans-serif;letter-spacing:.1em;margin-top:2px}
+#combat-head .ch-rules{border:2px solid #22d3ee!important;background:linear-gradient(180deg,#22d3ee55,#0b1030)!important;color:#fff!important;font-size:14px!important;box-shadow:0 0 16px #22d3ee55}
+#combat-head .stats{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px}
+#combat-head .stats>*{border:2px solid var(--tc,#38bdf8)!important;border-radius:14px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--tc,#38bdf8) 25%,#0000),#0008)!important;box-shadow:0 0 14px color-mix(in srgb,var(--tc,#38bdf8) 30%,transparent)}
+#combat-head .stats>*:nth-child(1){--tc:#fbbf24}#combat-head .stats>*:nth-child(2){--tc:#4ade80}#combat-head .stats>*:nth-child(3){--tc:#a78bfa}
+#combat-head .stats b{font-size:21px!important;color:var(--tc)!important}#combat-head .stats small,#combat-head .stats span{font-size:11px!important}
+#combat-head .ch-stock .stk,#combat-head .ch-stock button{border-radius:12px!important}
+#ar{border:3px solid #7c3aed!important;border-radius:24px!important;box-shadow:0 0 34px #7c3aed66;overflow:hidden}
+#hud{border:3px solid #fff3!important;border-radius:16px!important;background:#0a0a1ccc!important}
+#ahud{border:3px solid #fff3!important;border-radius:16px!important;background:#0a0a1ccc!important}
+.adv-dashboard .box{border:3px solid var(--bc,#38bdf8)!important;border-radius:20px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--bc,#38bdf8) 20%,#0b1030),#080a18)!important}
+.adv-dashboard .progress-panel{--bc:#4ade80}.adv-dashboard .activity-panel{--bc:#a78bfa}
+.layout>.plist>.box:first-child{border:3px solid #38bdf8!important;border-radius:22px!important;background:linear-gradient(180deg,#38bdf822,#080a18)!important}
+.layout>.plist .bib{border:3px solid #f472b6!important;border-radius:22px!important;background:linear-gradient(180deg,#f472b625,#080a18)!important;box-shadow:0 0 20px #f472b644}
+.layout>.plist .bib h2,.layout>.plist .bib b{color:#fbcfe8}
+.wxr .wcd{border:2px solid #38bdf8!important;border-radius:16px!important;background:linear-gradient(90deg,#38bdf825,#0b1030)!important}
+/* menu de gauche : plus grand et plus clair */
+.pid-elite #elite-wiki,.pid-elite #elite-support,.pid-elite #elite-discord,.pid-elite #elite-tiktok,.pid-elite #elite-suggest,.pid-elite #elite-du,.pid-elite #hubb{width:84px!important;font-size:13px!important;border-width:2px!important}
+.pid-elite #elite-wiki{border-color:#4ade80!important;box-shadow:0 0 14px #4ade8055!important}.pid-elite #elite-support{border-color:#f43f5e!important}.pid-elite #elite-discord{border-color:#5865f2!important}.pid-elite #elite-suggest{border-color:#a78bfa!important}
+.pid-elite .elite-shortcut{border-width:2px!important;border-color:var(--elite-color)!important}.pid-elite .elite-shortcut b{font-size:12px!important;letter-spacing:-.3px;white-space:nowrap}.pid-elite .elite-shortcut small{font-size:11px!important}
+`;document.head.appendChild(st)}
+function tcbTune(){try{
+ const w=document.querySelector("#elite-wiki b,#elite-wiki span:last-child");if(w&&/^Wiki$/i.test(w.textContent.trim()))w.textContent=LS("Guide","Guide");
+ const u=document.querySelector('[data-elite-shortcut="updates"]');if(u){const b=u.querySelector("b"),sm=u.querySelector("small");if(b&&b.textContent!==LS("Nouveautés","What's new")){b.textContent=LS("Nouveautés","What's new");if(sm)sm.textContent=LS("Version 3.0.0","Version 3.0.0")}}
+ const h=document.getElementById("hf");if(h&&!h.dataset.tcb){h.dataset.tcb="1";h.setAttribute("data-flp","1");h.setAttribute("role","button");h.setAttribute("tabindex","0");h.title=LS("Choisir un étage","Pick a floor");
+  const mk=(i,t,l)=>{const b=document.createElement("button");b.type="button";b.className="tcb-nb";b.dataset.a="fl";b.dataset.i=i;b.title=t;b.textContent=l;return b};
+  const row=document.createElement("div");row.className="tcb-fr";h.parentNode.insertBefore(row,h);row.appendChild(mk(-1,LS("Étage précédent","Previous floor"),"‹"));row.appendChild(h);row.appendChild(mk(1,LS("Étage suivant","Next floor"),"›"));
+  const p=document.createElement("span");p.className="tcb-pick";p.textContent=LS("Clique sur le chiffre pour choisir un étage","Click the number to pick a floor");row.parentNode.appendChild(p)}
+}catch(e){}}
+setInterval(tcbTune,600);
+
 /* Fit the full result to the visible viewport, including when many Balls are owned. */
 let RD_VICTORY_FIT_FRAME=0,RD_VICTORY_FIT_WATCH=null;
 function rdVictoryFit(){const root=document.querySelector('#rdRes.raid-victory');if(!root)return;root.style.zoom='1';const r=root.getBoundingClientRect(),v=window.visualViewport,availableH=Math.min(innerHeight,v?.height||innerHeight)-20,availableW=Math.min(innerWidth,v?.width||innerWidth)-16;const scale=Math.min(1,availableH/Math.max(1,r.height),availableW/Math.max(1,r.width));root.style.zoom=String(Math.max(.1,scale));root.scrollTop=0}
