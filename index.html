@@ -7935,7 +7935,7 @@ function offGain(s,g){
  const LT2=LT.filter(x=>IT[x[0]]),tw=LT2.reduce((a,x)=>a+x[1],0),nr=Math.min(40,6+Math.floor(s/600)),got={};
  for(let i=0;i<nr;i++){let r=Math.random()*tw,x=LT2[0];for(const y of LT2){r-=y[1];if(r<=0){x=y;break}}const q=(x[2]+(Math.random()*(x[3]-x[2]+1)|0))*(x[3]>1?mult:1);got[x[0]]=(got[x[0]]||0)+q}
  for(const k in got)G.inv[k]=(G.inv[k]||0)+got[k];
- const np=Math.min(12,Math.max(1,Math.floor(s/2000))),mons=[];
+ const np=Math.min(72,Math.max(1,Math.floor(s/400))),mons=[];
  for(let i=0;i<np;i++){try{const id=pickId22(),sh=Math.random()<.01,e={id,L:Math.max(1,typeof tgtL=="function"?tgtL():5),mi:sh?7:0,sz:SZ[2],boss:0,lrFloorZone:zoneOf(G.fl)};catchIt(e,0,0);mons.push([id,sh])}catch(x){}}
  IDC=null;OFFPOP={s,g,got,mons};setTimeout(offShow,500);return "";
 }
@@ -11776,8 +11776,9 @@ glChal=function(c){const g=glS(),cl=g.cl[c.id],pc=Math.min(100,Math.floor(c.got/
 {let CD=0;try{const f=eSummon;eSummon=function(n){const t=Date.now();if(t<CD){try{toast(LS("Doucement, laisse l'invocation précédente se terminer.","Easy, let the previous summon finish."))}catch(e){}return}CD=t+(+n>=10?1800:650);/* juste le temps que toutes les cartes apparaissent */return f.apply(this,arguments)}}catch(e){}}
 /* --- quêtes : pièces de récompense fixes (ne dépendent plus du revenu) --- */
 {const QF={d:15000,w:120000,m:900000};
- qRew=function(d,p){const r=[["m",QF[p]||15000]],a=d.it&&d.it[{d:1,w:2,m:3}[p]];if(a)r.push(["i",d.it[0],a]);return r};
- qBRew=function(p){const B=QBN[p];return [["m",(QF[p]||15000)*3]].concat(B.i.map(x=>["i",x[0],x[1]]))}}
+ const QI=()=>Math.max(+G.ir||0,(typeof passiveRate=="function"?passiveRate():0)||0),QM={d:10,w:20,m:100},QC=p=>Math.max(QF[p]||15000,Math.floor(QI()*(QM[p]||10)));
+ qRew=function(d,p){const r=[["m",QC(p)]],a=d.it&&d.it[{d:1,w:2,m:3}[p]];if(a)r.push(["i",d.it[0],a]);return r};
+ qBRew=function(p){const B=QBN[p];return [["m",QC(p)*3]].concat(B.i.map(x=>["i",x[0],x[1]]))}}
 /* --- bouton Discord sous Boutique / Pass / Quêtes / Connexion --- */
 (function(){
  const url=()=>window.PID_DISCORD||(typeof BUG_URL!="undefined"?BUG_URL:"");
