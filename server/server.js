@@ -81,6 +81,7 @@ const mkAuth=(uid,tok)=>{uid=String(uid||'');tok=String(tok||'');if(!ID.test(uid
 
 /* ---- anti-triche : detection de valeurs impossibles (les joueurs suspects sont masques des classements) ---- */
 db.flag=db.flag||{};
+let DUC=null;
 const hidden=id=>{const f=db.flag[id];return !!f&&!!(f.m||(f.s&&f.s.length)||(f.l&&f.l.length))};
 const setFlag=(uid,key,arr)=>{if(!uid)return;const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};
  const had=hidden(uid);f[key]=arr;if(arr.length)f.t=Date.now();
@@ -231,6 +232,14 @@ http.createServer((req,res)=>{
   if(!REF_ON||!ID.test(uid)||c.length!=8){send(res,200,{on:REF_ON?1:0,v:0});return}
   let dc='';for(const k in db.acc){const a=db.acc[k];if(a.uid==uid&&a.dc){dc=String(a.dc);break}}
   const m=dc&&db.refdc[dc];send(res,200,{on:1,v:m&&m[c]?1:0});return}
+ /* Duel Terre contre Océan : total des heures de jeu par camp (docs « lb » publiés par les joueurs : dc = camp 1 Terre / 2 Océan, dh = heures, dv = événement) */
+ if(u.pathname=='/api/duel'&&req.method=='GET'){
+  if(limited(ip+'u',120)){send(res,429,{e:'rate'});return}
+  const v=String(u.searchParams.get('v')||'du30').slice(0,16),now=Date.now();
+  if(!DUC||DUC.v!==v||now-DUC.t>30000){let a=0,b=0,na=0,nb=0;
+   for(const id of Object.keys(db.lb)){const d=db.lb[id]&&db.lb[id].d;if(!d||d.dv!==v||hidden(id))continue;const h=Math.min(72,Math.max(0,+d.dh||0));if(d.dc===1){a+=h;na++}else if(d.dc===2){b+=h;nb++}}
+   DUC={v,t:now,a:Math.round(a*100)/100,b:Math.round(b*100)/100,na,nb}}
+  send(res,200,{a:DUC.a,b:DUC.b,na:DUC.na,nb:DUC.nb});return}
  if(u.pathname=='/api/online'&&req.method=='GET'){
   if(limited(ip+'o',150)){send(res,429,{e:'rate'});return}
   const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();const lst=!!u.searchParams.get('l');
