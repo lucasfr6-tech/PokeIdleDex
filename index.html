@@ -10267,7 +10267,7 @@ function bonusCard(id){
  const f=x=>"×"+(Math.round(x*100)/100).toString().replace(".",","),L=[];
  const add=(t,n,v,col)=>L.push(`<div class="bnr"><i style="background:${col||"#64748b"}"></i><span>${t}${n?` <b>${n}</b>`:""}</span><em>${v}</em></div>`);
  try{
-  if(PWNEW){if(pr(id)===6)add(LS("Rareté","Rarity"),"LR","","#22d3ee");const k=pwTier(id);if(typeof XRKM!="undefined"&&XRKM[+id])add(LS("Palier","Tier"),PWNM.sp?LS(PWNM.sp[0],PWNM.sp[1]):"Spécial",f(PWTV.sp/PWTV.wN),"#fbbf24");else add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24");if(typeof XRKM!="undefined"&&XRKM[+id])add(LS("Classement des exclusifs","Exclusive ranking"),"#"+xrkRank(id)+" / 11",f(XRKM[+id]),"#f472b6");else if(id>9e4&&SPM[id]?.hw)add(LS("Bonus Halloween","Halloween bonus"),"",f(2*(SPM[id].hm||1)),"#fb923c")}
+  if(PWNEW){if(pr(id)===6)add(LS("Rareté","Rarity"),"LR","","#22d3ee");const k=pwTier(id);if(typeof XRKM!="undefined"&&XRKM[+id])add(LS("Palier","Tier"),PWNM.sp?LS(PWNM.sp[0],PWNM.sp[1]):"Spécial",f(PWTV.sp/PWTV.wN),"#fbbf24");else add(LS("Palier","Tier"),pwLabel(id),f(PWTV[k]/PWTV.wN),"#fbbf24");if(typeof XRKM!="undefined"&&XRKM[+id])add(LS("Classement des exclusifs","Exclusive ranking"),"#"+xrkRank(id)+" / "+XRKL.length,f(XRKM[+id]),"#f472b6");else if(id>9e4&&SPM[id]?.hw)add(LS("Bonus Halloween","Halloween bonus"),"",f(2*(SPM[id].hm||1)),"#fb923c")}
   else{if(c.spc||id>9e4)add("Forme spéciale","",f(legM(id)*(id>9e4?6.4:1)),"#e879f9");
   else if(LEG.has(id))add("Légendaire","",f(legM(id)),"#f59e0b");
   if(typeof pr=="function"&&!c.spc&&id<9e4&&pr(id)==3)add("Rareté UR","",f(2.5),"#f97316");}
@@ -16587,6 +16587,14 @@ function prlKey(e){if(e.key=="Escape")prlClose()}
 function prlClose(){const o=$("prl");if(o)o.remove();document.removeEventListener("keydown",prlKey)}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-prl-open]");if(b){e.stopPropagation();prlOpen()}},true);
 {const o=prcB;prcB=function(){return o.apply(this,arguments)+`<div class="phxb" style="border-color:#38bdf8;box-shadow:0 0 24px #38bdf855;background:linear-gradient(100deg,#0c2a5a,#2a1230 55%,#5a0f12)"><div style="display:flex;gap:6px"><img src="img/items/altarianite.png" alt="" style="width:64px;height:64px"><img src="img/items/blue-orb.png" alt="" style="width:64px;height:64px"><img src="img/items/red-orb.png" alt="" style="width:64px;height:64px"></div><div><h3>${LS("Les Perles","The Pearls")}</h3><p>${LS("Méga-Perle d'Altaria, Perles Primales de Kyogre et de Groudon : "+fmt(PHX_PEARL)+" points chacune.","Altaria Mega Pearl, Kyogre and Groudon Primal Pearls: "+fmt(PHX_PEARL)+" points each.")}</p></div><button data-prl-open="1">${LS("Voir les affiches","See the posters")}</button></div>`}}
+
+/* classement des exclusifs trié du plus fort au plus faible (avec les nouveaux 3.0) + wiki */
+XRKL.sort((a,b)=>b[1]-a[1]);
+{const o=wkBody.excl;wkBody.excl=()=>o()+wsx("Nouveaux exclusifs 3.0",`<p>Quatre exclusifs arrivent avec la version 3.0.0. Leurs multiplicateurs sont dans le classement ci-dessus.</p>`+tbl(["Pokémon","Comment l'obtenir","Multiplicateur"],[
+ ["Groudon Pinkan","Duel Terre contre Océan (30 octobre au 3 novembre) : si la Terre gagne, un boss à vaincre en 15 s de dégâts équivalents, 3 essais par jour, 20 % de chance de capture pour ton camp et 10 % pour l'autre, 5 % chromatique","×"+(DUF*8.46).toFixed(2)],
+ ["Kyogre Sol","Même événement : si l'Océan gagne","×"+(DUF*8.46).toFixed(2)],
+ ["Ténéfix Minuit","Produis des Pépites avec le Mineur (onglet Métier) : il apparaît après environ 2 jours de farm","×"+(TNF*8.46).toFixed(2)],
+ ["Altaria Phénix","Boutique Prestige : "+fmt(PHX_PRICE)+" points. Sa puissance vaut 70 % de celle de ton meilleur Pokémon (80 % en Méga-Évolution)","≈ ×"+(PHX_K*DUF*8.46).toFixed(2)]])+wn("info","Perles en Prestige","La Méga-Perle d'Altaria et les Perles Primales de Kyogre et de Groudon s'achètent uniquement en Prestige, "+fmt(PHX_PEARL)+" points chacune, une fois le Pokémon correspondant obtenu. Elles ne tombent ni en raid, ni en expédition, ni en boutique.")+wn("tip","Exclusifs 3.0 et Primo/Méga","Les formes Primo de Groudon Pinkan et Kyogre Sol, la Méga-Évolution de Ténéfix Minuit et celle d'Altaria Phénix gardent leurs couleurs."))}
 
 /* Fit the full result to the visible viewport, including when many Balls are owned. */
 let RD_VICTORY_FIT_FRAME=0,RD_VICTORY_FIT_WATCH=null;
