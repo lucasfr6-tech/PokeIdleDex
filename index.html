@@ -7753,7 +7753,7 @@ const sellSafe=i=>{const c=G.col[i];return sellOk(i)&&!c.sh&&!c.mi&&!c.al&&!(c.z
 function sellDo(i){if(!sellOk(i))return 0;const c=G.col[i],v=sellVal(i);if(c.it)G.inv[c.it]=(G.inv[c.it]||0)+1;G.m+=kxI("sell",v);delete G.col[i];IDC=null;return v}
 function autoSell(id,L){G.dx[id]=1;G.caps++;const v=60*Math.max(1,L||1)+100;G.m+=kxI("sell",v);toast(LS("Boîte pleine : "+dn(id)+" vendu automatiquement (+"+fmt(v)+" ₽).","Box full: "+dn(id)+" sold automatically (+"+fmt(v)+")."))}
 const catchIt0=catchIt;
-catchIt=function(e,bl,pc){if(!G.col[e.id]&&boxFull()&&!(e.mi>0||e.boss||SZ.indexOf(e.sz)>=3)){autoSell(e.id,e.L);return}return catchIt0(e,bl,pc)};
+catchIt=function(e,bl,pc){if(!G.col[e.id]&&+e.id<9e4&&!e.hwm&&boxFull()&&!(e.mi>0||e.boss||SZ.indexOf(e.sz)>=3)){autoSell(e.id,e.L);return}return catchIt0(e,bl,pc)};
 const exGet0=exGet;
 exGet=function(id,lv){if(!G.col[id]&&boxFull()){autoSell(id,lv);return}return exGet0(id,lv)};
 PU.splice(1,0,["bx","Stockage","Place pour les Pokémon dans Mes Pokémon (+10 par niveau)",l=>"+"+10*l+" places",15,30,1.4]);
