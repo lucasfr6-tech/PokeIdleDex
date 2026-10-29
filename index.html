@@ -1596,7 +1596,7 @@ button[data-slall].cf{background:#ef4444;border-color:#ef4444;color:#fff}
 .vb .i{width:12px;height:12px;margin-right:3px;vertical-align:-2px}
 .bgs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.bgs button{font-size:12px;padding:5px 9px}.bgs .bgsa{border-color:#f59e0b}.bgs button.cf{background:#ef4444;border-color:#ef4444;color:#fff}
 .offm{position:fixed;inset:0;z-index:9999;background:rgba(2,6,23,.78);display:flex;align-items:center;justify-content:center;padding:16px}
-.offc{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:18px;width:min(420px,100%);max-height:88vh;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.offc .go{position:sticky;bottom:0;flex:none}.offc{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:18px;width:min(460px,100%);max-height:88vh;overflow:auto;display:flex;flex-direction:column;gap:8px}
 .offc h2{margin:0;font-size:20px}.offc h3{margin:6px 0 0;font-size:13px;color:#94a3b8}.offc small{color:#94a3b8}
 .ofr{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#1e293b;border-radius:8px;font-size:13px}
 .ofr span{display:flex;align-items:center;gap:6px}.ofr.big{font-size:15px;color:#fde047}
@@ -7921,13 +7921,21 @@ setTimeout(()=>{try{dyFix()}catch(e){}},300);
 ["hp-up","protein","iron","calcium","zinc","carbos"].forEach(k=>{if(IT[k]&&IT[k].p)IT[k].p*=6});
 Object.keys(IT).forEach(k=>{if((/^mp/.test(k)&&IT[k].mf||k=="dynamax-band")&&IT[k].p)IT[k].p*=20});
 /* gains hors ligne */
+/* revenu réel en jeu (pièces/seconde, moyenne glissante) : base du gain hors ligne */
+{let lg=null,lt=0;setInterval(()=>{try{if(!G||document.hidden){lg=null;return}const now=Date.now(),v=+G.gain||0;if(lg!==null&&now-lt<3500&&v>=lg){const r=(v-lg)/((now-lt)/1000);G.ir=G.ir?G.ir*.98+r*.02:r}lg=v;lt=now}catch(e){}},1000)}
 function offGain(s,g){
  if(s<300)return `Pendant ton absence (${Math.floor(s/60)} min) : +${fmt(g)} ₽`;
- const LT=[["poke-ball",40,5,15],["great-ball",26,3,8],["ultra-ball",14,2,5],["hyper-potion",14,1,3],["max-potion",7,1,2],["revive",8,1,2],["max-revive",3,1,1],["protein",3,1,1],["iron",3,1,1],["calcium",3,1,1],["zinc",3,1,1],["carbos",3,1,1],["hp-up",3,1,1],["rare-candy",2,1,1],["bottle-cap",1,1,1],["dream-ball",2,1,2]].filter(x=>IT[x[0]]);
- const tw=LT.reduce((a,x)=>a+x[1],0),nr=Math.min(10,2+Math.floor(s/2400)),got={};
- for(let i=0;i<nr;i++){let r=Math.random()*tw,x=LT[0];for(const y of LT){r-=y[1];if(r<=0){x=y;break}}const q=x[2]+(Math.random()*(x[3]-x[2]+1)|0);got[x[0]]=(got[x[0]]||0)+q}
+ const h=s/3600,mult=1+Math.floor(s/9000),
+ ST=["fire-stone","water-stone","thunder-stone","leaf-stone","moon-stone","sun-stone","ice-stone","dusk-stone","dawn-stone","shiny-stone"].map(k=>[k,2,1,1]),
+ LT=[["poke-ball",34,8,20],["great-ball",24,5,12],["ultra-ball",14,3,8],["timer-ball",5,2,5],["repeat-ball",5,2,5],["net-ball",5,2,5],["dive-ball",4,2,5],["nest-ball",4,2,5],["quick-ball",4,2,5],["dusk-ball",4,2,5],["luxury-ball",3,1,3],["dream-ball",3,1,3],
+  ["potion",18,4,10],["super-potion",16,3,8],["hyper-potion",14,2,6],["max-potion",8,1,4],["full-restore",4,1,2],["revive",9,2,5],["max-revive",4,1,3],["moomoo-milk",5,1,3],
+  ["oran-berry",9,3,8],["sitrus-berry",8,2,6],["protein",4,1,2],["iron",4,1,2],["calcium",4,1,2],["zinc",4,1,2],["carbos",4,1,2],["hp-up",4,1,2],
+  ["rare-candy",5,1,3],["exp-candy-xs",9,3,8],["exp-candy-s",7,2,5],["exp-candy-m",4,1,3],["bottle-cap",3,1,2],["amulet-coin",1,1,1],["lucky-egg",1,1,1],["bi-coin",3,1,2],["bi-atk",3,1,2],["bi-xp",3,1,2]].concat(ST);
+ if(h>=2)LT.push(["exp-candy-l",3,1,2],["gold-bottle-cap",1,1,1],["bi-find",2,1,1],["bi-cap",2,1,2]);if(h>=5)LT.push(["exp-candy-xl",2,1,1],["bi-mut",2,1,1],["ability-capsule",1,1,1]);
+ const LT2=LT.filter(x=>IT[x[0]]),tw=LT2.reduce((a,x)=>a+x[1],0),nr=Math.min(40,6+Math.floor(s/600)),got={};
+ for(let i=0;i<nr;i++){let r=Math.random()*tw,x=LT2[0];for(const y of LT2){r-=y[1];if(r<=0){x=y;break}}const q=(x[2]+(Math.random()*(x[3]-x[2]+1)|0))*(x[3]>1?mult:1);got[x[0]]=(got[x[0]]||0)+q}
  for(const k in got)G.inv[k]=(G.inv[k]||0)+got[k];
- const np=Math.min(8,Math.max(1,Math.floor(s/2700))),mons=[];
+ const np=Math.min(12,Math.max(1,Math.floor(s/2000))),mons=[];
  for(let i=0;i<np;i++){try{const id=pickId22(),sh=Math.random()<.01,e={id,L:Math.max(1,typeof tgtL=="function"?tgtL():5),mi:sh?7:0,sz:SZ[2],boss:0,lrFloorZone:zoneOf(G.fl)};catchIt(e,0,0);mons.push([id,sh])}catch(x){}}
  IDC=null;OFFPOP={s,g,got,mons};setTimeout(offShow,500);return "";
 }
@@ -13260,7 +13268,7 @@ setTimeout(afFetch,1200);
 z22init();applySt();navRender();skyBuild();
 
 G.dx=G.dx||{};G.ex=G.ex||[];ids().forEach(i=>G.dx[i]=1);G.mg=G.mg||{};G.pl=G.pl||{};if(!G.mig){G.mig=1;}G.bf=Math.max(G.bf||0,G.cl);fixHp();v19mig();v20mig();v21mig();v22mig();v23mig();socMount();
-if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=passiveBaseRate()*s*Math.min(1,.5+.05*PL("po"));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
+if(G.last){const s=Math.min((Date.now()-G.last)/1000,28800);if(s>120){const g=Math.max(passiveBaseRate()*s*Math.min(1,.5+.05*PL("po")),(+G.ir||0)*s*Math.min(.5,1/3+.0167*PL("po")));G.m+=kxI("off",g);G.gain+=g;OFFMSG=offGain(s,g)}}
 setWx(["sun","rain","calm","fog","calm","wind"][Math.random()*6|0]);EV.nx=120+(Math.random()*120|0);topInit();dailyCheck();recomp();show();lbInit();trSwitch();if(OFFMSG)toast(OFFMSG);bulk().then(()=>{z22fin();fixHp();info(19)});let TKL=Date.now();function pidTick(){const n=Date.now();let k=Math.floor((n-TKL)/950);if(k<1)k=1;if(k>300)k=300;TKL=n;for(let i=0;i<k;i++)tick()}
 setInterval(pidTick,1000);
 </script><script>
