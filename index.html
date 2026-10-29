@@ -7743,21 +7743,21 @@ sdRows=function(k){const R=sdRows0(k),d=k=="d",m=gpMul(d?"dmg":"coin");
  return R};
 /* limite de Pokémon */
 const BOXB=150;
-const boxCap=()=>(BOXB+10*PL("bx")+10*(G.bxc|0))*(gpOn("box")?2:1);
+const boxCap=()=>1e9;
 const boxIds=()=>pIds().filter(i=>!G.col[i].spc);
 const boxN=()=>boxIds().length;
-const boxFull=()=>boxN()>=boxCap();
+const boxFull=()=>false;
 const sellVal=i=>{const c=G.col[i];return Math.floor(coinRaw(i)*150*(1+.1*Math.min(20,(c.n||1)-1))*(1+pr(i)*.5))+100};
 const sellOk=i=>{const c=G.col[i];return !!c&&!c.spc&&!c.mf&&!c.dy&&!G.fav.includes(i)&&G.av!=i&&i<9e4};
 const sellSafe=i=>{const c=G.col[i];return sellOk(i)&&!c.sh&&!c.mi&&!c.al&&!(c.zi>=3)};
 function sellDo(i){if(!sellOk(i))return 0;const c=G.col[i],v=sellVal(i);if(c.it)G.inv[c.it]=(G.inv[c.it]||0)+1;G.m+=kxI("sell",v);delete G.col[i];IDC=null;return v}
 function autoSell(id,L){G.dx[id]=1;G.caps++;const v=60*Math.max(1,L||1)+100;G.m+=kxI("sell",v);toast(LS("Boîte pleine : "+dn(id)+" vendu automatiquement (+"+fmt(v)+" ₽).","Box full: "+dn(id)+" sold automatically (+"+fmt(v)+")."))}
 const catchIt0=catchIt;
-catchIt=function(e,bl,pc){if(!G.col[e.id]&&+e.id<9e4&&!e.hwm&&boxFull()&&!(e.mi>0||e.boss||SZ.indexOf(e.sz)>=3)){autoSell(e.id,e.L);return}return catchIt0(e,bl,pc)};
+catchIt=function(e,bl,pc){return catchIt0(e,bl,pc)};
 const exGet0=exGet;
-exGet=function(id,lv){if(!G.col[id]&&boxFull()){autoSell(id,lv);return}return exGet0(id,lv)};
-PU.splice(1,0,["bx","Stockage","Place pour les Pokémon dans Mes Pokémon (+10 par niveau)",l=>"+"+10*l+" places",15,30,1.4]);
-PUI.bx=["pack","#0ea5e9"];
+exGet=function(id,lv){return exGet0(id,lv)};
+/* systeme de boite supprime : plus de limite */
+
 /* boutique : Game Pass */
 const vGem0=vGem;
 vGem=function(){const s=vGem0(),own=GPS.filter(x=>gpOn(x.k)).length,all=own==GPS.length;
@@ -7781,7 +7781,7 @@ function slPanel(){const n=boxN(),cap=boxCap(),full=n>=cap,L=slSel(),tot=L.reduc
  <button data-sm="quick">${LS("Ajouter","Add")} (${slList().filter(i=>!SELS.has(i)).length})</button><button data-sm="clr" ${L.length?"":"disabled"}>${LS("Vider","Clear")}</button>
  <button data-sm="sell" class="${L.length?"go":""}" ${L.length?"":"disabled"}>${LS("Vendre","Sell")} ${L.length}</button><button data-sm="off">${LS("Terminer","Done")}</button>
  <small>${LS("Clique sur les cartes pour les cocher. La sélection rapide ajoute tout jusqu'à la rareté choisie (sans favoris, chromatiques, mutés, Alpha, grandes tailles).","Click cards to tick them. Quick select adds everything up to the chosen rarity (no favorites, shinies, mutated, Alpha, large sizes).")}</small>`;
- return `<div class="slb${full?" full":""}"><div class="slh"><b>${ico("pack")} ${LS("Boîte","Box")} <span class="${full?"bad":""}">${n} / ${cap}</span></b><small>${full?LS("Boîte pleine : les nouvelles espèces ordinaires sont vendues automatiquement.","Box full: new ordinary species are sold automatically."):LS("Les Pokémon spéciaux ne comptent pas. Améliore la place avec le prestige.","Special Pokémon don't count. Increase space with prestige.")}</small><div class="slbar"><i style="width:${Math.min(100,n/cap*100)}%"></i></div></div>
+ return `<div class="slb"><div class="slh"><b>${ico("pack")} ${LS("Mes Pokémon","My Pokémon")} <span>${n}</span></b><small>${LS("Aucune limite de place : tu peux tous les garder.","No storage limit: you can keep them all.")}</small></div>
  <div class="slc">${ctl}</div></div>`}
 const vMine0=vMine,mcard0=mcard;
 vMine=function(){const s=vMine0(),k='<div class="tools">',i=s.indexOf(k);return i<0?s:s.slice(0,i)+`<div id="slbox">${slPanel()}</div>`+s.slice(i)};
@@ -7854,8 +7854,7 @@ async function ivSummon(n){if(IVBUSY)return;const S=IV();if(S.rs!==ivSlot()){S.r
  let nNew=0,nSold=0,gain=0;
  L.forEach(x=>{const id=x.id,ex=G.col[id];x.nw=false;x.sold=0;x.sh=false;if(id>=90000&&ex){x.mi=0;x.zi=0;x.al=0;x.shn=0}if(id>=90000&&ex){x.mi=0;x.zi=0;x.al=0;x.shn=0}
   if(ex){ex.n+=x.k;try{train(id,x.k)}catch(e){}}
-  else if(x.t!="D"&&!x.mi&&!x.zi&&boxFull()){x.sold=x.k;const v=(60*Math.max(1,tgtL())+100)*x.k;G.m+=kxI("sell",v);gain+=v;nSold+=x.k;G.dx[id]=1}
-  else{x.nw=true;nNew++;const c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}G.dx[id]=1;rq(id);c.h=mhp(id)}
+    else{x.nw=true;nNew++;const c=G.col[id]={n:x.k,l:Math.max(1,tgtL()),x:0,h:-1};IDC=null;ens(id);try{if(abl(id)[1]&&Math.random()<.06)c.ha=1}catch(e){}G.dx[id]=1;rq(id);c.h=mhp(id)}
   if(G.col[id]&&x.mi){G.col[id].mi=Math.max(G.col[id].mi||0,x.mi);G.mut=(G.mut||0)+x.mc}
   if(G.col[id]&&x.zi)G.col[id].zi=Math.max(G.col[id].zi||0,x.zi);
   if(G.col[id]&&x.al)G.col[id].al=1;if(G.col[id]&&x.shn){G.col[id].sh=1;x.sh=true}});
@@ -13061,7 +13060,7 @@ function vBann(){const pp=G.pp||0;
 /* Prestige Centre: UI state is separate from the saved progression. */
 let PRC={view:'overview',group:'all',q:'',page:0,pq:''};
 const prcF=n=>Number(n||0).toLocaleString(SG.lang==='en'?'en-US':'fr-FR'),prcNorm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-const PRCG={capacity:['pw','bx','pn2','pn3','pnd'],combat:['pd','ps','ph','pb'],capture:['pk','pm','pcs','psh','pz','pt'],progress:['pc','px','pg','po','pn','pe','ppp']};
+const PRCG={capacity:['pw','pn2','pn3','pnd'],combat:['pd','ps','ph','pb'],capture:['pk','pm','pcs','psh','pz','pt'],progress:['pc','px','pg','po','pn','pe','ppp']};
 const PRCN={pnd:'Faster rest',pw:'Team slots',bx:'Storage',pd:'Power',ps:'Attack rate',pc:'Fortune',px:'Training',ph:'Endurance',pk:'Hunter',pm:'Mutations',pcs:'Shiny Charm',psh:'Shiny rate',pz:'Colossi',pb:'Boss hunter',pt:'Hidden abilities',pg:'Genetics',po:'Trainer memory',pn:'Collector',pe:'Economy',pn2:'Second daycare',ppp:'Prestige harvest'};
 const PRCD={pnd:'Reduce both daycare batches by 1 minute per level, from 25 to 8 minutes. Applies to batches already in progress.',pw:'Choose more ordinary Pokémon to keep after prestige. Exclusives do not use these slots.',bx:'Increase collection capacity by 10 per level.',pd:'Increase damage for the entire team.',ps:'Attack faster to increase damage per second.',pc:'Increase coins earned from combat and passive income.',px:'Increase the target Pokémon level for the current floor.',ph:'Increase team health.',pk:'Improve capture chance.',pm:'Improve mutation appearance chance.',pcs:'Triple shiny appearance chance.',psh:'Improve shiny appearance chance.',pz:'Improve large and colossal size appearance chance.',pb:'Improve boss coins and Master Ball loot.',pt:'Improve hidden ability chance.',pg:'Gain more EVs from duplicate captures.',po:'Increase offline income, up to 100%.',pn:'Increase Pokémon card bonuses.',pe:'Reduce shop prices.',pn2:'Unlock a second batch of 10 Pokémon in the Daycare.',ppp:'Increase prestige points earned from floor milestones.'};
 const prcProtected=()=>ids().filter(i=>prestigeAutoKeep(i,G.col[i]));
@@ -13211,11 +13210,6 @@ glClaimBoss=async function(){const S=glState(),B=S.boss,g=glS();if(!B)return;con
  mailAdd(LS("Boss de guilde vaincu","Guild boss defeated"),LS("Guilde","Guild"),rw,LS(n+" boss vaincu"+(n>1?"s":"")+" : récompenses.",n+" boss"+(n>1?"es":"")+" defeated: rewards."));
  toast(LS("Récompenses envoyées dans ton courrier.","Rewards sent to your mail."));save();GLX.st=null;if(typeof glRefresh=="function")glRefresh(1)};
 
-/* ===== agrandir la boite avec des pieces : +10 places par achat, 55 achats max (150 + 550 = 700 avec les pieces, + 300 avec le prestige = 1000) ===== */
-const BXMAX=55,bxCost=n=>Math.round(1e6*Math.pow(1.15,n));
-{const f=slPanel;slPanel=function(){let h=f.apply(this,arguments);try{const n=G.bxc|0,mx=n>=BXMAX,c=bxCost(n),ok=G.m>=c;
- h+=`<div class="slbx"><div><b>${ico("pack")} ${LS("Agrandir la boîte","Expand the box")}</b><small>${LS("+10 places par achat","+10 slots per purchase")} · ${n} / ${BXMAX} ${LS("achats","purchases")}${mx?" · "+LS("maximum atteint (le reste vient des points de prestige)","maximum reached (the rest comes from prestige points)"):""}</small></div>${mx?"":`<button class="${ok?"go":""}" data-bxb="1" ${ok?"":"disabled"}>${ico("coin")} +10 · ${fmt(c)} ₽</button>`}</div>`}catch(e){}return h}}
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-bxb]");if(!b||b.disabled)return;ev.stopPropagation();const n=G.bxc|0;if(n>=BXMAX)return;const c=bxCost(n);if(G.m<c)return;G.m-=c;G.bxc=n+1;try{IDC=null}catch(e){}save();sfx("coin");toast(LS("Boîte agrandie : +10 places ("+boxCap()+" au total)","Box expanded: +10 slots ("+boxCap()+" total)"));try{slRef()}catch(e){}show()},true);
 
 /* Fil partagé : événements réels, envoyés avec l'identité authentifiée du classement. */
 const AF={rows:[],pending:[],filter:"all",status:"loading",busy:false,sending:false,lastSend:0,snapshot:new Map(),source:null,sig:""};
