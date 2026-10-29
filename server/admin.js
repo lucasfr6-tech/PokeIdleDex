@@ -11,9 +11,11 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  if(!who||!op){console.log('Usage: ADMIN_KEY=... node admin.js "#1234567" coin 100000');return}
  let uid=who;
  if(who[0]=='#'){const L=(await rq('GET','/api/c/lb?lim=500')).docs||[];const f=L.filter(x=>pidOf(x.id)==who);
-  if(!f.length){console.log('Aucun joueur pour',who);return}
+  if(!f.length){const fl=((await rq('POST','/api/adm/flags',{},{'X-Admin':KEY})).flags)||[];const g=fl.filter(x=>pidOf(x.uid)==who);if(g.length==1){uid=g[0].uid;console.log('Joueur masque :',g[0].n||'?','(uid',uid+')');
+   if(op=='purge'||op=='unflag'){const r=await rq('POST','/api/adm/'+op,{uid},{'X-Admin':KEY});console.log(r.ok?'Joueur de nouveau visible.':'Erreur '+JSON.stringify(r));return}}}
+  if(uid==who&&!f.length){console.log('Aucun joueur pour',who);return}
   if(f.length>1){console.log('Plusieurs joueurs pour',who,':',f.map(x=>x.id+' ('+(x.d&&x.d.n)+')').join(', '));return}
-  uid=f[0].id;console.log('Joueur :',f[0].d&&f[0].d.n,'(uid',uid+')')}
+  if(f.length){uid=f[0].id;console.log('Joueur :',f[0].d&&f[0].d.n,'(uid',uid+')')}}
  if(op=='purge'||op=='unflag'){
   const r=await rq('POST','/api/adm/'+op,{uid},{'X-Admin':KEY});
   console.log(r.ok?(op=='purge'?'Joueur retire des classements ('+r.supprimes+' fiche(s) supprimee(s)) et masque tant que tu ne fais pas unflag.':'Joueur de nouveau visible.'):'Erreur '+JSON.stringify(r));return}
