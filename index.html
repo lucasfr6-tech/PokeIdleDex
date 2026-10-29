@@ -16707,12 +16707,26 @@ const TQZC=["#9ca3af","#4ade80","#a16207","#84cc16","#fbbf24","#67e8f9","#f97316
 .layout>.plist .bib{border:3px solid #f472b6!important;border-radius:22px!important;background:linear-gradient(180deg,#f472b625,#080a18)!important;box-shadow:0 0 20px #f472b644}
 .layout>.plist .bib h2,.layout>.plist .bib b{color:#fbcfe8}
 .wxr .wcd{border:2px solid #38bdf8!important;border-radius:16px!important;background:linear-gradient(90deg,#38bdf825,#0b1030)!important}
+#combat-head .ch-top{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center}
+#combat-head .ch-where{display:flex!important;align-items:center;gap:18px;flex-wrap:nowrap}
+#combat-head .ch-info{flex:1;min-width:0}
+#combat-head .ch-zone{font:900 18px Nunito,sans-serif!important;color:#fff}
+#combat-head .ch-track{height:14px!important;border-radius:99px!important;border:2px solid #fde68a66}
+#combat-head .ch-divider{display:none!important}
+#combat-head .ch-bottom{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:12px;align-items:stretch;margin-top:10px}
+#combat-head .ch-actions{display:flex!important;gap:10px;align-items:center}
+.tcb-ico{width:46px!important;height:46px!important;image-rendering:pixelated;object-fit:contain;display:block;margin:0 auto 2px;filter:drop-shadow(0 3px 0 #0008)}
+.pid-elite .elite-shortcut .elite-symbol{width:auto!important}
 /* menu de gauche : plus grand et plus clair */
 .pid-elite #elite-wiki,.pid-elite #elite-support,.pid-elite #elite-discord,.pid-elite #elite-tiktok,.pid-elite #elite-suggest,.pid-elite #elite-du,.pid-elite #hubb{width:84px!important;font-size:13px!important;border-width:2px!important}
 .pid-elite #elite-wiki{border-color:#4ade80!important;box-shadow:0 0 14px #4ade8055!important}.pid-elite #elite-support{border-color:#f43f5e!important}.pid-elite #elite-discord{border-color:#5865f2!important}.pid-elite #elite-suggest{border-color:#a78bfa!important}
 .pid-elite .elite-shortcut{border-width:2px!important;border-color:var(--elite-color)!important}.pid-elite .elite-shortcut b{font-size:12px!important;letter-spacing:-.3px;white-space:nowrap}.pid-elite .elite-shortcut small{font-size:11px!important}
 `;document.head.appendChild(st)}
 function tcbTune(){try{
+ const SPR={"elite-wiki":"town-map","hubb":"poke-ball","elite-support":"heart-scale","elite-suggest":"dowsing-machine"},SPK={chat:"poke-flute",friends:"vs-seeker",halloween:"silph-scope",updates:"rare-candy"};
+ const sw=(el,n)=>{if(!el||el.querySelector(".tcb-ico"))return;const im=document.createElement("img");im.className="tcb-ico";im.alt="";im.src="img/items/"+n+".png";const sv=el.querySelector("svg");if(sv)sv.replaceWith(im);else el.insertBefore(im,el.firstChild)};
+ for(const k in SPR)sw(document.getElementById(k),SPR[k]);
+ for(const k in SPK){const e=document.querySelector('[data-elite-shortcut="'+k+'"] .elite-symbol');if(e&&!e.querySelector(".tcb-ico")){const sv=e.querySelector("svg"),im=document.createElement("img");im.className="tcb-ico";im.alt="";im.src="img/items/"+SPK[k]+".png";im.style.cssText="width:34px!important;height:34px!important";if(sv)sv.replaceWith(im);else e.prepend(im)}}
  const w=document.querySelector("#elite-wiki b,#elite-wiki span:last-child");if(w&&/^Wiki$/i.test(w.textContent.trim()))w.textContent=LS("Guide","Guide");
  const u=document.querySelector('[data-elite-shortcut="updates"]');if(u){const b=u.querySelector("b"),sm=u.querySelector("small");if(b&&b.textContent!==LS("Nouveautés","What's new")){b.textContent=LS("Nouveautés","What's new");if(sm)sm.textContent=LS("Version 3.0.0","Version 3.0.0")}}
  const h=document.getElementById("hf");if(h&&!h.dataset.tcb){h.dataset.tcb="1";h.setAttribute("data-flp","1");h.setAttribute("role","button");h.setAttribute("tabindex","0");h.title=LS("Choisir un étage","Pick a floor");
