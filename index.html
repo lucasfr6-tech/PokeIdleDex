@@ -2373,7 +2373,7 @@ body.twon #sky{opacity:0!important}
 .twfs{display:grid;gap:8px;padding:18px 20px;border-radius:18px;border:1px dashed #243a86;background:#05081f99}
 .twfs b{font:900 15px "Baloo 2",Nunito,system-ui,sans-serif;color:#cbd5e1}.twfs small{color:#8fa8e0;font:700 13px Nunito,system-ui,sans-serif}
 .twfs.on{border-style:solid;border-color:#34d399;background:linear-gradient(90deg,#064e3b55,#05081f99)}.twfs.on b{color:#6ee7b7}
-.twpg{height:8px;border-radius:99px;background:#03051a;overflow:hidden}.twpg i{display:block;height:100%;background:linear-gradient(90deg,#34d399,#fde047);transition:width .5s linear}
+.twpg{height:8px;border-radius:99px;background:#03051a;overflow:hidden}.twpg i{display:block;height:100%;background:linear-gradient(90deg,#379c82,#bba94a);transition:width .5s linear}
 /* ennemis et équipe */
 .twfg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px}
 .twfc{position:relative;display:grid;justify-items:center;gap:8px;padding:20px 10px 16px;border-radius:20px;background:#070b2a;border:1px solid #243a86;color:#fff}
@@ -4353,7 +4353,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030zl"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030zn"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4367,7 +4367,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v300-20261030zl"></script><script>
+</script><script src="shim.js?v=pid-v300-20261030zn"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -16991,7 +16991,7 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030zl"><script src="dungeon-immersive.js?v=pid-v300-20261030zl"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030zl"><script src="collection-scenes.js?v=pid-v300-20261030zl"></script><style id="pid-pvcb">
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030zn"><script src="dungeon-immersive.js?v=pid-v300-20261030zn"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030zn"><script src="collection-scenes.js?v=pid-v300-20261030zn"></script><style id="pid-pvcb">
 /* Aperçu privé du nouvel onglet Combat : visible seulement avec le compte du propriétaire et l'interrupteur des Paramètres (classe html.pvcb) */
 html.pvcb #nav .cc .cci{background:none!important;box-shadow:none!important;width:52px;height:44px;overflow:visible;opacity:1;position:relative}
 html.pvcb #nav .cc .cci svg{display:none!important}
@@ -17008,9 +17008,9 @@ html.pvcb #top .tc:not(.pchip)>i{background:none!important;box-shadow:none!impor
 html.pvcb #top .tc:not(.pchip)>i svg{display:none!important}
 html.pvcb #top .tc:not(.pchip)>i::before{content:"";display:block;width:54px;height:54px;background:var(--spr) center/contain no-repeat;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #0007)}
 html.pvcb #ti0{--spr:url(img/items/amulet-coin.png)}html.pvcb #ti1{--spr:url(img/pokemon/6.png)}html.pvcb #ti2{--spr:url(img/items/poke-ball.png)}
-html.pvcb #top .tc:has(>#ti0){background:linear-gradient(135deg,#7a5300,#2a1c00 80%)!important;border:3px solid #ffd23f!important}
-html.pvcb #top .tc:has(>#ti1){background:linear-gradient(135deg,#8a1f3d,#2a0a18 80%)!important;border:3px solid #fb7185!important}
-html.pvcb #top .tc:has(>#ti2){background:linear-gradient(135deg,#17508f,#081a33 80%)!important;border:3px solid #60a5fa!important}
+html.pvcb #top .tc:has(>#ti0){background:linear-gradient(135deg,#523b0e,#1e1507 80%)!important;border:3px solid #b99a4e!important}
+html.pvcb #top .tc:has(>#ti1){background:linear-gradient(135deg,#5a2539,#1f0f17 80%)!important;border:3px solid #b56a7b!important}
+html.pvcb #top .tc:has(>#ti2){background:linear-gradient(135deg,#1f416b,#0b1829 80%)!important;border:3px solid #6a92c4!important}
 html.pvcb .elite-shortcut{border:3px solid color-mix(in srgb,var(--elite-color) 70%,#fff 10%)!important;border-radius:16px!important;background:linear-gradient(160deg,color-mix(in srgb,var(--elite-color) 38%,#0a1030),#0a1030 85%)!important;box-shadow:0 4px 0 #050818}
 html.pvcb .elite-shortcut b{font-size:11.5px!important;color:#fff!important;white-space:nowrap}
 html.pvcb .elite-shortcut .elite-symbol{background:none!important;border:0!important;box-shadow:none!important;width:44px!important;height:44px!important;position:relative}
@@ -17027,8 +17027,8 @@ html.pvcb .progress-head{--spr:url(img/pokemon/448.png)}html.pvcb .activity-head
 html.pvcb .progress-boss svg{display:none!important}
 html.pvcb .progress-boss::before{content:"";width:48px;height:48px;flex:none;background:url(img/pokemon/149.png) center/contain no-repeat;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #0007)}
 html.pvcb .progress-head h3,html.pvcb .activity-head h3{font-size:24px!important;color:#fff!important;text-shadow:0 2px 0 #0007}
-html.pvcb .progress-panel{background:linear-gradient(160deg,#124a6b,#0b1f3a 70%)!important;border-color:#5eead4!important}
-html.pvcb .activity-panel{background:linear-gradient(160deg,#4a2a8a,#170f3d 70%)!important;border:3px solid #c4b5fd!important;border-radius:18px!important}
+html.pvcb .progress-panel{background:linear-gradient(160deg,#17405a,#0d1e33 70%)!important;border-color:#5fa79d!important}
+html.pvcb .activity-panel{background:linear-gradient(160deg,#322a66,#16123a 70%)!important;border:3px solid #8e84c2!important;border-radius:18px!important}
 html.pvcb .plist .pr:hover{transform:translateY(-2px);border-color:#ffd23f!important}
 html.pvcb .atlas-name b{font-size:20px!important;color:#fff!important;text-shadow:0 2px 0 #0008}
 html.pvcb .atlas-stats small{color:#cbd5ff!important}
@@ -17069,18 +17069,18 @@ html.pvcb .plist .pr .atlas-stats>span{display:block!important;line-height:1.1}
 @media(max-width:760px){html.pvcb .plist .pr{grid-template-columns:minmax(0,1fr) 108px!important;min-height:140px}html.pvcb .plist .pr .spw{width:108px!important;height:104px!important}html.pvcb .plist .pr .spw img{max-width:100px!important;max-height:96px!important}html.pvcb .plist .pr .atlas-stats b,html.pvcb .plist .pr .atlas-stats .x{font-size:15px!important}html.pvcb #elite-wiki,html.pvcb #hubb{width:auto!important}}
 html.pvcb .plist .pr .atlas-stats b,html.pvcb .plist .pr .atlas-stats .x{color:#fff!important;font-size:19px!important;text-shadow:0 2px 0 #0006}
 html.pvcb .plist .pr .atlas-power b{color:#fff!important}
-html.pvcb .progress-panel .cp-fl{background:linear-gradient(160deg,#1d4ed8aa,#0b1f4acc)!important;border:2px solid #93c5fd88!important;border-radius:16px!important}
-html.pvcb .progress-panel .cp-zn{background:linear-gradient(160deg,#0f766eaa,#052e2bcc)!important;border:2px solid #5eead488!important;border-radius:16px!important}
-html.pvcb .progress-panel .cp-sw{background:linear-gradient(160deg,#15803daa,#052e16cc)!important;border:2px solid #86efac88!important;border-radius:16px!important}
-html.pvcb .progress-boss{background:linear-gradient(160deg,#9a3412cc,#431407cc)!important;border:3px solid #fdba74!important;border-radius:16px!important}
+html.pvcb .progress-panel .cp-fl{background:linear-gradient(160deg,#2a4a90aa,#0b1f4acc)!important;border:2px solid #7f9fcc66!important;border-radius:16px!important}
+html.pvcb .progress-panel .cp-zn{background:linear-gradient(160deg,#1f6a63aa,#052e2bcc)!important;border:2px solid #5fa79d66!important;border-radius:16px!important}
+html.pvcb .progress-panel .cp-sw{background:linear-gradient(160deg,#256a43aa,#052e16cc)!important;border:2px solid #7bb58f66!important;border-radius:16px!important}
+html.pvcb .progress-boss{background:linear-gradient(160deg,#6e3418cc,#33160acc)!important;border:3px solid #c28f64!important;border-radius:16px!important}
 html.pvcb .progress-boss b{font-size:26px!important;color:#fff!important}
 html.pvcb #view .layout .main{display:flex;flex-direction:column;gap:14px}
 html.pvcb #ar{order:-3;height:clamp(300px,44vw,480px)!important;border:3px solid #9bd1ff!important;border-radius:20px!important;box-shadow:0 0 0 3px #1b2a6b,0 10px 0 #0b1238,0 18px 40px #0009,inset 0 0 60px #0005!important}
 html.pvcb #ew img,html.pvcb #aw img{filter:drop-shadow(0 6px 0 #0008) saturate(1.15)}
-html.pvcb #combat-head{order:-2;border:3px solid #ffd23f!important;border-radius:20px!important;background:linear-gradient(135deg,#2a2f86 0,#4a2a8f 55%,#8b2f7a 100%)!important;box-shadow:0 6px 0 #1b1250,0 14px 30px #0008!important;padding:14px!important;display:grid;gap:12px}
+html.pvcb #combat-head{order:-2;border:3px solid #b99a4e!important;border-radius:20px!important;background:linear-gradient(135deg,#1a2040 0,#262250 55%,#35243f 100%)!important;box-shadow:0 6px 0 #1b1250,0 14px 30px #0008!important;padding:14px!important;display:grid;gap:12px}
 html.pvcb #combat-head .ch-top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center}
 html.pvcb #combat-head .ch-where{display:flex;align-items:center;gap:14px;min-width:0}
-html.pvcb #combat-head .ch-floor{background:linear-gradient(180deg,#ffe066,#ff9f1c);color:#3a1a00;border:3px solid #fff7;border-radius:16px;padding:6px 16px;text-align:center;box-shadow:0 4px 0 #8a4b00}
+html.pvcb #combat-head .ch-floor{background:linear-gradient(180deg,#d8b758,#a9792a);color:#2e1a00;border:3px solid #fff4;border-radius:16px;padding:6px 16px;text-align:center;box-shadow:0 4px 0 #8a4b00}
 html.pvcb #combat-head .ch-floor small{color:#5a2c00!important;font-weight:900}
 html.pvcb #combat-head .ch-floor b{color:#3a1a00!important;font-size:46px;line-height:1}
 html.pvcb #combat-head .ch-track{height:14px!important;border-radius:9px;background:#0007!important;border:2px solid #fff4}
@@ -17088,17 +17088,17 @@ html.pvcb #combat-head .ch-track *{background:linear-gradient(90deg,#34d399,#fde
 html.pvcb #combat-head .ch-zone{font-weight:800;color:#fff}
 html.pvcb #combat-head .ch-actions{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 html.pvcb #combat-head .ch-actions .rpbtn{min-height:52px;border-radius:14px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #0006}
-html.pvcb #combat-head .hwsw{grid-column:1/-1;background:linear-gradient(180deg,#ff9f1c,#e8590c)!important;border:3px solid #ffe3a3!important;color:#fff!important}
-html.pvcb #combat-head .ch-rules{background:linear-gradient(180deg,#2dd4bf,#0f766e)!important;border:3px solid #a7f3d0!important;color:#fff!important;width:100%}
-html.pvcb #combat-head .ch-collection{background:linear-gradient(180deg,#60a5fa,#2563eb);border:3px solid #bfdbfe;border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;min-height:52px;font-weight:900;box-shadow:0 4px 0 #0006}
+html.pvcb #combat-head .hwsw{grid-column:1/-1;background:linear-gradient(180deg,#b9722c,#7d4316)!important;border:3px solid #d9b98c!important;color:#fff!important}
+html.pvcb #combat-head .ch-rules{background:linear-gradient(180deg,#2c8178,#194a47)!important;border:3px solid #86b9b1!important;color:#fff!important;width:100%}
+html.pvcb #combat-head .ch-collection{background:linear-gradient(180deg,#4468a8,#2b4380);border:3px solid #96aed4;border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;min-height:52px;font-weight:900;box-shadow:0 4px 0 #0006}
 html.pvcb #combat-head .ch-divider{display:none}
 html.pvcb #combat-head .ch-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:12px;align-items:center}
 html.pvcb #combat-head .ch-stock{background:#0005;border:2px solid #fff3;border-radius:14px;padding:8px 10px}
 html.pvcb #combat-head .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 html.pvcb #combat-head .stats>div{border-radius:14px;padding:8px 10px;border:2px solid #fff4;box-shadow:0 3px 0 #0005}
-html.pvcb #combat-head .stats>div:nth-child(1){background:linear-gradient(180deg,#facc15aa,#a16207aa)}
-html.pvcb #combat-head .stats>div:nth-child(2){background:linear-gradient(180deg,#fb7185aa,#9f1239aa)}
-html.pvcb #combat-head .stats>div:nth-child(3){background:linear-gradient(180deg,#4ade80aa,#166534aa)}
+html.pvcb #combat-head .stats>div:nth-child(1){background:linear-gradient(180deg,#a8873acc,#5e4412cc)}
+html.pvcb #combat-head .stats>div:nth-child(2){background:linear-gradient(180deg,#a2495fcc,#5e1d34cc)}
+html.pvcb #combat-head .stats>div:nth-child(3){background:linear-gradient(180deg,#438a62cc,#204a34cc)}
 html.pvcb #combat-head .stats b{color:#fff!important;font-size:19px;text-shadow:0 2px 0 #0006}html.pvcb #combat-head .stats small,html.pvcb #combat-head .ch-stock small{color:#fff!important;opacity:.92}
 html.pvcb .adv-dashboard .box,html.pvcb .adv-dashboard .progress-panel{border:3px solid #7dd3fc55!important;border-radius:18px!important;background:linear-gradient(160deg,#16215a,#0d1438)!important}
 @media(max-width:760px){
@@ -17179,6 +17179,7 @@ html.pla #plist .pr .atlas-stats>span:nth-child(n+2) small{display:none!importan
 html.pla #plist .pr .atlas-stats>span:nth-child(2) b::before{content:"Niv. ";font-size:11px;opacity:.8}
 html.pla #plist .pr .atlas-stats>span:nth-child(n+2) b,html.pla #plist .pr .atlas-stats>span:nth-child(n+2) .x{font-size:12px!important;color:#cbd5ff!important}
 html.pla #plist .pr .atlas-traits:has(>:nth-child(3))::after{cursor:pointer;min-width:28px!important;height:28px!important;border-radius:14px!important;font-size:19px!important}html.pla #plist .pr.pl-open .atlas-traits{flex-wrap:wrap!important;overflow:visible!important;justify-content:center;max-width:100%}html.pla #plist .pr.pl-open .atlas-traits>.vb:nth-child(n+3){display:inline-flex!important}html.pla #plist .pr.pl-open .atlas-traits::after{content:"–"!important}
+@media(min-width:761px) and (max-width:1450px){html.pla #plist .pr{grid-template-columns:104px minmax(0,1fr) auto!important}html.pla #plist .pr .spw{width:104px!important}html.pla #plist .pr .atlas-traits{flex-wrap:wrap!important;justify-content:center}}
 /* B : cartes en 2 colonnes, gros sprite et gros DPS */
 html.pvcb.pvl2 #plist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 html.pvcb.pvl2 #plist .pr{display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:26px 8px 10px!important;gap:4px;border-left-width:3px!important}
