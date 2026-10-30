@@ -4353,7 +4353,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030t"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030u"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4367,7 +4367,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v300-20261030t"></script><script>
+</script><script src="shim.js?v=pid-v300-20261030u"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -11171,7 +11171,7 @@ const GIFT_CODES={
 "2.0.0":{t:"Version 2.0.0",txt:"Merci de jouer à PokeIdleDex ! Voici ton cadeau de la version 2.0.0.",rw:[["i","master-ball",10],["leg"]],minLv:25},
  /* "MONCODE":{t:"Titre du message",txt:"Texte",rw:[["g",30],["i","master-ball",1]]}  — ajoute ici tes codes cadeaux (une seule utilisation par joueur) */
 };
-const GIFT_PRIVATE_CODES={"a092de26c54c6eb15ba288df3461bb2e44f194795fe38af9d0679b116dd559a4":{pk:[{id:384,mf:10079,al:1,src:"r4"},{id:716,al:1,src:"r3"},{id:500,sh:1},{id:930,sh:1},{id:6,dy:1,al:1,zi:4}]}};
+const GIFT_PRIVATE_CODES={"9ec7079d62bc917a63069875c87c72cc057526306bc8d57cd10e139b0059b569":{t:"Cadeau de donateur",txt:"Merci pour ton soutien à PokeIdleDex ! Voici l'exclusif Absol Patch et 10 Master Balls.",rw:[["spx",90011],["i","master-ball",10]],minLv:1},"a092de26c54c6eb15ba288df3461bb2e44f194795fe38af9d0679b116dd559a4":{pk:[{id:384,mf:10079,al:1,src:"r4"},{id:716,al:1,src:"r3"},{id:500,sh:1},{id:930,sh:1},{id:6,dy:1,al:1,zi:4}]}};
 function mailBox(){G.mail=G.mail||[];return G.mail}
 function mailUnread(){return mailBox().filter(m=>!m.c).length}
 function mailAdd(title,from,rw,txt,fullCaps){const L=mailBox();L.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:title,f:from||"",x:txt||"",d:Date.now(),rw:rw||[],fullCaps:fullCaps?1:0,c:rw&&rw.length?0:1,r:0});if(L.length>80)L.length=80;try{save()}catch(e){}try{mailDot()}catch(e){}}
@@ -16991,7 +16991,7 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030t"><script src="dungeon-immersive.js?v=pid-v300-20261030t"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030t"><script src="collection-scenes.js?v=pid-v300-20261030t"></script><style id="pid-pvcb">
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030u"><script src="dungeon-immersive.js?v=pid-v300-20261030u"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030u"><script src="collection-scenes.js?v=pid-v300-20261030u"></script><style id="pid-pvcb">
 /* Aperçu privé du nouvel onglet Combat : visible seulement avec le compte du propriétaire et l'interrupteur des Paramètres (classe html.pvcb) */
 html.pvcb #nav .cc .cci{background:none!important;box-shadow:none!important;width:48px;height:42px;overflow:visible;opacity:1}
 html.pvcb #nav .cc .cci img{width:60px;height:60px;margin:-10px 0 0 -6px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #0007);transition:transform .2s}
