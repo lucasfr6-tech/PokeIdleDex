@@ -4353,7 +4353,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030zd"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030zf"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4367,7 +4367,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v300-20261030zd"></script><script>
+</script><script src="shim.js?v=pid-v300-20261030zf"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -5426,7 +5426,7 @@ function vSetg(){
  prefCard(LS("Style des Pokémon","Pokémon style"),LS("Choisis le rendu de la Pokémon List. Les couleurs de mutation sont conservées dans les deux modes.","Choose the Pokémon List rendering. Mutation colours are preserved in both modes."),prefChoices("plMode",LS("Style des Pokémon","Pokémon style"),[["3d",LS("3D animée","Animated 3D"),LS("Mouvements du Pokémon","Pokémon movements")],["2d",LS("2D fixe","Static 2D"),LS("Sprites pixel art classiques","Classic pixel art sprites")]],SG.plMode||"3d")+`<p class="pref-note">${LS("Les formes personnalisées gardent leur illustration lorsqu'aucun sprite animé n'existe.","Custom forms keep their illustration when no animated sprite exists.")}</p>`+prefToggle("plFloat",LS("Flottement dans la liste","List floating effect"),LS("Un léger mouvement vertical autour des sprites animés.","A gentle vertical motion around animated sprites."),"wind"))+
  prefCard(LS("Apparence","Appearance"),LS("Une interface adaptée à ton écran.","An interface suited to your screen."),prefChoices("theme",LS("Thème","Theme"),[["night",LS("Nuit","Night")],["day",LS("Jour","Day")]],SG.theme)+(matchMedia("(max-width:760px)").matches?`<p class="pref-note">${prefIcon("monitor")} ${LS("Sur téléphone, les dimensions s’adaptent automatiquement à ton écran.","On phones, the interface automatically fits your screen.")}</p>`:sld("ui",LS("Taille de l'interface","Interface size"),"monitor",80,120," %"))+prefToggle("cmp",LS("Affichage compact","Compact display"),LS("Réduit l'espace utilisé par certains panneaux.","Reduces the space used by some panels."),"team")+`<button class="pref-action" data-a="fs">${prefIcon("monitor")} ${fsOn()?LS("Quitter le plein écran","Exit full screen"):LS("Passer en plein écran","Enter full screen")}</button>`)+
  prefCard(LS("Hauteur de la Pokémon List","Pokémon List height"),LS("Le défilement vertical reste intégré à la liste, sans barre horizontale.","Vertical scrolling stays inside the list, with no horizontal scrollbar."),prefChoices("plh",LS("Hauteur de la liste","List height"),sizes,SG.plh||0))+
- prefCard(LS("Langue","Language"),LS("Les menus et les descriptions du jeu.","Game menus and descriptions."),prefChoices("lang",LS("Langue","Language"),[["fr","Français","FR"],["en","English","EN"]],SG.lang))+(owner?prefCard(LS("Aperçu (réservé à toi)","Preview (only you)"),"",prefToggle("pvcb",LS("Aperçu : nouvel onglet Combat","Preview: new Combat tab"),LS("Nouvelle mise en page du Combat et menu du bas avec des sprites. Visible seulement par toi, les autres joueurs gardent l'ancien.","New Combat layout and sprite bottom menu. Only visible to you, other players keep the old one."),"sword")):"");
+ prefCard(LS("Langue","Language"),LS("Les menus et les descriptions du jeu.","Game menus and descriptions."),prefChoices("lang",LS("Langue","Language"),[["fr","Français","FR"],["en","English","EN"]],SG.lang))+(owner?prefCard(LS("Aperçu (réservé à toi)","Preview (only you)"),"",prefToggle("pvcb",LS("Aperçu : nouvel onglet Combat","Preview: new Combat tab"),LS("Nouvelle mise en page du Combat et menu du bas avec des sprites. Visible seulement par toi, les autres joueurs gardent l'ancien.","New Combat layout and sprite bottom menu. Only visible to you, other players keep the old one."),"sword"))+prefChoices("pvl",LS("Style de la Pokémon List","Pokémon List style"),[["0",LS("Actuel","Current")],["1","A · "+LS("Compacte","Compact")],["2","B · "+LS("Cartes","Cards")],["3","C · DPS"],["4","D · "+LS("Grille","Grid")]],String(SG.pvl||"0")):"");
  const effects=prefCard(LS("Fluidité","Smoothness"),LS("Les mouvements des Pokémon restent actifs en mode 3D ; ces options règlent les effets de l'interface.","Pokémon movements stay active in 3D mode; these options control interface effects."),prefToggle("perf",LS("Mode performance","Performance mode"),LS("Allège les effets visuels pour un jeu plus fluide.","Reduces visual effects for smoother gameplay."),"bolt")+prefToggle("anim",LS("Animations de l'interface","Interface animations"),LS("Transitions et mouvements des éléments de l'interface.","Transitions and movement of interface elements."),"spark"))+
  prefCard(LS("Décor et rencontres","Scenery and encounters"),"",prefToggle("fly",LS("Pokémon dans le ciel","Pokémon in the sky"),LS("Affiche les Pokémon qui traversent le décor.","Shows Pokémon flying across the scenery."),"wind")+prefToggle("stars",LS("Étoiles filantes","Shooting stars"),"","star")+prefToggle("alert",LS("Alertes de rencontres rares","Rare encounter alerts"),LS("Met en avant les rencontres exceptionnelles.","Highlights exceptional encounters."),"crown"))+
  prefCard(LS("Évolutions","Evolutions"),LS("Par défaut, un Pokémon évolue tout seul dès qu’il atteint son niveau.","By default, a Pokémon evolves on its own as soon as it reaches its level."),prefToggle("evm",LS("Évolution manuelle","Manual evolution"),LS("Coché : plus aucune évolution automatique. Tu choisis toi-même l’évolution (niveau, pierre, échange…) depuis la fiche du Pokémon.","Checked: no more automatic evolution. You choose the evolution yourself (level, stone, trade…) from the Pokémon’s sheet."),"arrowup"))+
@@ -16991,7 +16991,7 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030zd"><script src="dungeon-immersive.js?v=pid-v300-20261030zd"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030zd"><script src="collection-scenes.js?v=pid-v300-20261030zd"></script><style id="pid-pvcb">
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030zf"><script src="dungeon-immersive.js?v=pid-v300-20261030ze"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030ze"><script src="collection-scenes.js?v=pid-v300-20261030ze"></script><style id="pid-pvcb">
 /* Aperçu privé du nouvel onglet Combat : visible seulement avec le compte du propriétaire et l'interrupteur des Paramètres (classe html.pvcb) */
 html.pvcb #nav .cc .cci{background:none!important;box-shadow:none!important;width:52px;height:44px;overflow:visible;opacity:1;position:relative}
 html.pvcb #nav .cc .cci svg{display:none!important}
@@ -17114,10 +17114,69 @@ html.pvcb .adv-dashboard .box,html.pvcb .adv-dashboard .progress-panel{border:3p
  html.pvcb #combat-head .ch-actions .rpbtn{min-height:56px}
  html.pvcb #combat-head .stats>div{padding:6px 7px}html.pvcb #combat-head .stats b{font-size:15px}
 }
+
+/* ===== Pokémon List : 4 styles à comparer (réglage « Style de la Pokémon List ») ===== */
+html.pvcb:is(.pvl1,.pvl2,.pvl3,.pvl4) #plist .pr{min-height:0!important}html.pvcb:is(.pvl2,.pvl4) #plist{grid-auto-rows:max-content!important;align-content:start!important}html.pvcb:is(.pvl2,.pvl4) #plist .pr{height:auto!important;max-height:none!important;aspect-ratio:auto!important;align-content:start}html.pvcb:is(.pvl2,.pvl4) #plist .pr .atlas-info{flex:0 0 auto!important;min-height:0!important}
+html.pvcb:is(.pvl1,.pvl2,.pvl3,.pvl4) #plist .pr::before{position:absolute!important;left:8px!important;top:5px!important;bottom:auto!important;width:auto!important;writing-mode:horizontal-tb!important;transform:none!important;border:0!important;padding:0!important;color:#c7d2ff!important;font-size:10px!important;letter-spacing:.06em!important;z-index:5;background:#0008;border-radius:6px;padding:1px 6px!important}
+html.pvcb:is(.pvl1,.pvl2,.pvl3,.pvl4) #plist .pr .atlas-traits>.vb:nth-child(n+3){display:none!important}
+html.pvcb:is(.pvl1,.pvl2,.pvl3,.pvl4) #plist .pr .atlas-traits:has(>:nth-child(3))::after{content:"+";display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:11px;background:#ffd23f;color:#3a1a00;font-weight:900;font-size:15px}
+html.pvcb:is(.pvl1,.pvl2,.pvl3,.pvl4) #plist .pr .atlas-traits{display:flex;flex-wrap:nowrap;gap:5px;align-items:center;overflow:hidden}
+/* A : compacte, une ligne par Pokémon */
+html.pvcb.pvl1 #plist .pr{grid-template-columns:70px minmax(0,1fr) auto!important;grid-template-areas:"s n t" "s tr t";padding:10px 12px 10px 8px!important;gap:2px 10px;border-left-width:6px!important;border-radius:14px!important}
+html.pvcb.pvl1 #plist .pr .atlas-info{display:contents!important}
+html.pvcb.pvl1 #plist .pr .spw{grid-area:s!important;width:70px!important;height:70px!important}
+html.pvcb.pvl1 #plist .pr .spw::before{display:none}html.pvcb.pvl1 #plist .pr .spw::after{inset:0}
+html.pvcb.pvl1 #plist .pr .spw img{max-width:66px!important;max-height:66px!important}
+html.pvcb.pvl1 #plist .pr .atlas-name{grid-area:n;align-self:end;min-width:0}html.pvcb.pvl1 #plist .pr .atlas-name b{font-size:17px!important;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.pvcb.pvl1 #plist .pr .atlas-traits{grid-area:tr;align-self:start}
+html.pvcb.pvl1 #plist .pr .atlas-stats{grid-area:t;display:grid!important;grid-template-columns:auto!important;justify-items:end;gap:1px!important}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span{background:none!important;border:0!important;padding:0!important;text-align:right!important}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(1) b{font-size:24px!important;color:#ffd23f!important}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(1) small{font-size:9px!important}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(n+2) small{display:none!important}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(2) b::before{content:"Niv. ";font-size:11px;opacity:.8}
+html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(n+2) b,html.pvcb.pvl1 #plist .pr .atlas-stats>span:nth-child(n+2) .x{font-size:12px!important;color:#cbd5ff!important}
+/* B : cartes en 2 colonnes, gros sprite et gros DPS */
+html.pvcb.pvl2 #plist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html.pvcb.pvl2 #plist .pr{display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:26px 8px 10px!important;gap:4px;border-left-width:3px!important}
+html.pvcb.pvl2 #plist .pr .spw{width:100%!important;height:128px!important}
+html.pvcb.pvl2 #plist .pr .atlas-info{display:flex!important;flex-direction:column;align-items:center;gap:6px;width:100%}
+html.pvcb.pvl2 #plist .pr .atlas-name b{font-size:16px!important}
+html.pvcb.pvl2 #plist .pr .atlas-traits{justify-content:center}html.pvcb.pvl2 #plist .pr .atlas-traits>.vb:nth-child(n+2){display:none!important}
+html.pvcb.pvl2 #plist .pr .atlas-stats{width:100%;grid-template-columns:1fr 1fr!important}
+html.pvcb.pvl2 #plist .pr .atlas-stats>span:nth-child(1){grid-column:1/-1}
+html.pvcb.pvl2 #plist .pr .atlas-stats>span:nth-child(1) b{font-size:26px!important}
+/* C : le DPS en grand à gauche */
+html.pvcb.pvl3 #plist .pr{grid-template-columns:104px 84px minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"p s n n" "p s tr tr" "p s lv cp";gap:3px 8px;padding:10px 10px 10px 0!important;border-left-width:0!important;overflow:hidden}
+html.pvcb.pvl3 #plist .pr .atlas-info,html.pvcb.pvl3 #plist .pr .atlas-stats{display:contents!important}
+html.pvcb.pvl3 #plist .pr .atlas-power{grid-area:p;align-self:stretch;display:grid!important;place-content:center;text-align:center;margin:-10px 0 -10px 0;border-radius:0!important;border:0!important;border-right:3px solid #fff4!important;background:linear-gradient(180deg,#facc15,#b45309)!important}
+html.pvcb.pvl3 #plist .pr .atlas-power small{color:#3a1a00!important;font-size:11px!important;font-weight:900}
+html.pvcb.pvl3 #plist .pr .atlas-power b{font-size:25px!important;color:#2a1200!important;text-shadow:none!important}
+html.pvcb.pvl3 #plist .pr .spw{grid-area:s!important;width:84px!important;height:84px!important}html.pvcb.pvl3 #plist .pr .spw::before{display:none}
+html.pvcb.pvl3 #plist .pr .spw img{max-width:80px!important;max-height:80px!important}
+html.pvcb.pvl3 #plist .pr .atlas-name{grid-area:n;align-self:end}html.pvcb.pvl3 #plist .pr .atlas-name b{font-size:16px!important}
+html.pvcb.pvl3 #plist .pr .atlas-traits{grid-area:tr}
+html.pvcb.pvl3 #plist .pr .atlas-stats>span:nth-child(2){grid-area:lv}html.pvcb.pvl3 #plist .pr .atlas-stats>span:nth-child(3){grid-area:cp}
+html.pvcb.pvl3 #plist .pr::before{left:112px!important}
+/* D : grille de sprites, 3 par ligne */
+html.pvcb.pvl4 #plist{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+html.pvcb.pvl4 #plist .pr{display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:24px 4px 8px!important;gap:2px;border-left-width:3px!important;border-radius:14px!important}
+html.pvcb.pvl4 #plist .pr .spw{width:100%!important;height:96px!important}html.pvcb.pvl4 #plist .pr .spw::before{width:70px;height:16px}
+html.pvcb.pvl4 #plist .pr .spw img{max-width:90px!important;max-height:88px!important}
+html.pvcb.pvl4 #plist .pr .atlas-info{display:flex!important;flex-direction:column;align-items:center;gap:3px;width:100%}
+html.pvcb.pvl4 #plist .pr .atlas-name{max-width:100%}html.pvcb.pvl4 #plist .pr .atlas-name b{font-size:12px!important;display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.pvcb.pvl4 #plist .pr .atlas-traits,html.pvcb.pvl4 #plist .pr .signature-label{display:none!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats{display:block!important;width:100%}html.pvcb.pvl4 #plist .pr{position:relative!important}html.pvcb.pvl4 #plist .pr .atlas-info,html.pvcb.pvl4 #plist .pr .atlas-stats{position:static!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(1){display:block;padding:2px 4px!important}html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(1) small{display:none!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(1) b{font-size:15px!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(3){display:none!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(2){position:absolute!important;top:4px;right:6px;padding:1px 7px!important;border-radius:9px!important;background:#1d4ed8!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(2) small{display:none!important}
+html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(2) b::before{content:"Nv. ";font-size:9px}html.pvcb.pvl4 #plist .pr .atlas-stats>span:nth-child(2) b{font-size:12px!important}
 </style>
 <script>(function(){
  const ok=()=>{try{return !!(typeof x4Me==="function"&&x4Me()&&SG&&SG.pvcb)}catch(e){return false}};
- const ap=()=>{document.documentElement.classList.toggle("pvcb",ok())};
+ const ap=()=>{const h=document.documentElement,on=ok();h.classList.toggle("pvcb",on);for(let k=0;k<5;k++)h.classList.toggle("pvl"+k,on&&String(SG.pvl||"0")===String(k))};
  {const o=applySt;applySt=function(){const r=o.apply(this,arguments);try{ap()}catch(e){}return r}}
  
  setTimeout(ap,300);
