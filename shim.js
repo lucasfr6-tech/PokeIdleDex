@@ -6,9 +6,10 @@
  function rnd(n){var a=new Uint8Array(n),s="";(window.crypto||{getRandomValues:function(x){for(var i=0;i<x.length;i++)x[i]=Math.random()*256}}).getRandomValues(a);for(var i=0;i<n;i++)s+=("0"+a[i].toString(16)).slice(-2);return s}
  var uid=ls("pid_uid"),tok=ls("pid_tok");
  if(!uid||!tok){uid="u"+rnd(10);tok=rnd(24);ls("pid_uid",uid);ls("pid_tok",tok)}
- var up=null;
- function ping(){if(up!==null)return Promise.resolve(up);return fetch(API+"/api/health",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){up=!!(j&&j.ok);return up}).catch(function(){up=false;return false})}
- function jget(u){return fetch(API+u,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+ var up=null,upT=0;
+ function tf(u,o,ms){o=o||{};if(window.AbortController){var c=new AbortController(),t=setTimeout(function(){c.abort()},ms||15000);o.signal=c.signal;return fetch(u,o).then(function(r){clearTimeout(t);return r},function(e){clearTimeout(t);throw e})}return fetch(u,o)}
+ function ping(){if(up===true)return Promise.resolve(true);if(up===false&&Date.now()-upT<15000)return Promise.resolve(false);return tf(API+"/api/health",{cache:"no-store"},8000).then(function(r){return r.json()}).then(function(j){up=!!(j&&j.ok);upT=Date.now();return up}).catch(function(){up=false;upT=Date.now();return false})}
+ function jget(u){return tf(API+u,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
  function mkDoc(id,d){return{id:id,exists:!!d,data:function(){return d?JSON.parse(JSON.stringify(d)):undefined},metadata:{}}}
  function Q(col,f,ob,lim){
   var q={where:function(a,op,v){return Q(col,[a,v],ob,lim)},orderBy:function(a,dir){return Q(col,f,[a,dir||"asc"],lim)},limit:function(n){return Q(col,f,ob,n)},
@@ -19,7 +20,7 @@
  var db={collection:function(c){return Q(c,null,null,null)},
   doc:function(p){var a=p.split("/"),c=a[0],id=a[1];return{
    get:function(){return jget("/api/d/"+c+"/"+encodeURIComponent(id)).then(function(j){return mkDoc(id,j.exists?j.d:null)})},
-   set:function(d){return fetch(API+"/api/d/"+c+"/"+encodeURIComponent(id),{method:"PUT",headers:{"Content-Type":"application/json","X-Token":tok},body:JSON.stringify(Object.assign({},d,{ep:window.PID_EP||""}))}).then(function(r){if(!r.ok)throw new Error(r.status)})}}}};
+   set:function(d){var body=JSON.stringify(Object.assign({},d,{ep:window.PID_EP||""})),o={method:"PUT",headers:{"Content-Type":"application/json","X-Token":tok},body:body};if(document.hidden&&body.length<60000)o.keepalive=true;return tf(API+"/api/d/"+c+"/"+encodeURIComponent(id),o).then(function(r){if(!r.ok)throw new Error(r.status)})}}}};
  var user={id:function(){return Promise.resolve(uid)}};
  var dl={save:function(o){return new Promise(function(res,rej){try{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([o.data],{type:"text/plain"}));a.download=o.filename||"sauvegarde.txt";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);res()}catch(e){rej(e)}})}};
  window.claude={use:function(n){
