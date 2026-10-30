@@ -4,6 +4,6 @@ self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.a
 self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);
  if(r.method!=="GET"||u.pathname.startsWith("/api/"))return;
  if(u.origin===location.origin&&u.pathname.indexOf("/img/")>=0){e.respondWith(caches.open(V+"-img").then(ch=>ch.match(r).then(m=>m||fetch(r).then(x=>{if(x.ok)ch.put(r,x.clone());return x}))));return}
- if(u.origin===location.origin){e.respondWith(fetch(r,u.pathname.endsWith("/shim.js")?{cache:"reload"}:undefined).then(x=>{const c=x.clone();caches.open(V).then(ch=>ch.put(r,c));return x}).catch(()=>caches.match(r).then(m=>m||caches.match("./index.html"))))}
+ if(u.origin===location.origin){e.respondWith(fetch(r,/(\/|\.html|\/shim\.js|\/version\.json)$/.test(u.pathname)?{cache:"no-cache"}:undefined).then(x=>{const c=x.clone();caches.open(V).then(ch=>ch.put(r,c));return x}).catch(()=>caches.match(r).then(m=>m||caches.match("./index.html"))))}
  else if(/\/sprites\//.test(u.pathname)||/\.(png|gif)$/.test(u.pathname)){e.respondWith(caches.open(V+"-img").then(ch=>ch.match(r).then(m=>m||fetch(r).then(x=>{if(x.ok)ch.put(r,x.clone());return x}))))}
 });
