@@ -4353,7 +4353,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
 <div id="sky"></div>
 <div class="app"><nav id="nav"></nav><main><div id="qk"></div><div id="top"></div><div id="view"></div></main></div>
 <div id="md"></div><div id="toasts"></div>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030p"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v300-20261030q"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4367,7 +4367,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v300-20261030p"></script><script>
+</script><script src="shim.js?v=pid-v300-20261030q"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10927,11 +10927,13 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
 
 /* ---------- XP du Pass de combat : 3 victoires = 1 XP, 3 captures = 1 XP, capture UR = 3 XP ---------- */
 (function(){
- const BPK=2,BPC=2,BPUR=5;
+ const BPK=50,BPC=2,BPUR=5,BPKUR=2; /* 50 victoires = 1 XP ; un ennemi UR ou LR vaincu = 2 XP (XP réelle, sans le facteur BPXF) */
+ const bpReal=n=>{const B=BPS(),o=bpLvl();B.xp=Math.min(BPMAX*BPXP,B.xp+n);const nl=bpLvl();if(nl>o){toast(LS("Pass de combat : niveau ","Battle Pass: level ")+nl);sfx("big")}};
  const st=()=>{const B=BPS();if(B.k3==null){B.k3=0;B.c3=0;B.lk=G.ko||0;B.lc=G.caps||0}return B};
  const sync=()=>{const B=st();let dk=(G.ko||0)-B.lk,dc=(G.caps||0)-B.lc;B.lk=G.ko||0;B.lc=G.caps||0;
   if(dk<0)dk=0;if(dc<0)dc=0;B.k3+=dk;B.c3+=dc;let x=0;
-  while(B.k3>=BPK){B.k3-=BPK;x++}while(B.c3>=BPC){B.c3-=BPC;x++}if(x)bpAddXp(x)};
+  let kx=0;while(B.k3>=BPK){B.k3-=BPK;kx++}while(B.c3>=BPC){B.c3-=BPC;x++}if(x)bpAddXp(x);if(kx)bpReal(kx)};
+ {const w=win;win=function(){const e=E,r=w.apply(this,arguments);try{if(e&&(e.r>=3||isLR(e.id))){const B=st();B.lk=(B.lk||0)+1;bpReal(BPKUR)}}catch(x){}return r}}
  {const f=catchIt;catchIt=function(e){const r=f.apply(this,arguments);try{if(e&&(pr(e.id)==3||pr(e.id)==6))bpAddXp(BPUR);sync()}catch(x){}return r}}
  setInterval(()=>{try{sync()}catch(e){}},700);
 })();
@@ -15194,7 +15196,8 @@ try{LDK='';PSIG='';show();ui()}catch(e){}
 
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-10-30",t:["Méga-Perles : vraies pierres","Mega Pearls: real stones"],e:[["new","Écran de rechargement","Quand le jeu se met à jour, un bel écran avec une Poké Ball qui tourne s'affiche pendant le rechargement, au lieu de l'ancienne version.","Reloading screen","When the game updates, a nice screen with a spinning Poké Ball shows while it reloads, instead of the old version."],
+ {d:"2026-10-30",t:["Méga-Perles : vraies pierres","Mega Pearls: real stones"],e:[["imp","XP du Pass de combat : victoires","Tu gagnes maintenant 1 XP de Pass de combat tous les 50 ennemis vaincus. Un ennemi UR ou LR vaincu donne 2 XP.","Battle Pass XP: wins","You now earn 1 Battle Pass XP for every 50 enemies defeated. Defeating a UR or LR enemy gives 2 XP."],
+["new","Écran de rechargement","Quand le jeu se met à jour, un bel écran avec une Poké Ball qui tourne s'affiche pendant le rechargement, au lieu de l'ancienne version.","Reloading screen","When the game updates, a nice screen with a spinning Poké Ball shows while it reloads, instead of the old version."],
 ["fix","Plus d'ancienne version après une mise à jour","Après une mise à jour, la page se recharge maintenant toujours avec la dernière version du jeu.","No more old version after an update","After an update, the page now always reloads with the latest version of the game."],
 
   ["imp","Métier : Pokémon gardés au prestige","Les Pokémon placés au travail dans l’onglet Métier ne sont plus supprimés par le prestige : ils restent, comme les exclusifs.","Jobs: Pokémon kept on prestige","Pokémon assigned to a job in the Jobs tab are no longer removed by prestige: they stay, like exclusives."],
@@ -16987,4 +16990,4 @@ window.PID_ADMIN=window.PID_ADMIN||{token:"",uid:"",authorized:false,busy:false,
  setTimeout(boot,1500);
 })();
 (function(){const s=document.createElement("style");s.textContent='.adm-panel{max-width:1120px;margin:0 auto;padding:24px;color:#e8ecff}.adm-panel header{padding:20px 22px;background:linear-gradient(120deg,#1e2a52,#121a37);border:1px solid #33446f;border-radius:18px;margin-bottom:16px}.adm-panel header small{color:#62d7ff;letter-spacing:.18em;font-weight:800}.adm-panel h1{margin:5px 0;font-size:30px}.adm-panel header p,.adm-note{color:#aebce0}.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.adm-grid article{padding:18px;background:#111a32;border:1px solid #2b3b62;border-radius:16px;display:flex;flex-direction:column;gap:10px}.adm-grid h2{margin:0 0 4px;color:#f0d58b}.adm-grid label{display:flex;flex-direction:column;gap:5px;color:#b8c9f4;font-size:12px}.adm-grid input,.adm-grid select{min-width:0;background:#0b1228;color:#eef3ff;border:1px solid #35456c;border-radius:8px;padding:9px}.adm-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.adm-checks{display:flex;flex-wrap:wrap;gap:9px}.adm-checks label{display:flex;align-items:center;flex-direction:row;background:#172343;padding:8px;border-radius:8px}.adm-grid button,.adm-panel>button{background:#1c2a4d;border:1px solid #405985;border-radius:9px;padding:10px;color:#f3f6ff;cursor:pointer;font-weight:700}.adm-grid button:hover,.adm-panel>button:hover{filter:brightness(1.2)}.adm-grid .adm-primary{background:linear-gradient(110deg,#1687bc,#6553d9);border:0}.adm-buttons{display:flex;gap:8px}.adm-buttons>*{flex:1}.adm-note{padding:12px;border-left:3px solid #55c4e8;background:#10182d;border-radius:8px}@media(max-width:720px){.adm-grid{grid-template-columns:1fr}.adm-panel{padding:12px}.adm-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(s)})();
-</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030p"><script src="dungeon-immersive.js?v=pid-v300-20261030p"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030p"><script src="collection-scenes.js?v=pid-v300-20261030p"></script></body></html>
+</script><link rel="stylesheet" href="dungeon-immersive.css?v=pid-v300-20261030q"><script src="dungeon-immersive.js?v=pid-v300-20261030q"></script><link rel="stylesheet" href="collection-scenes.css?v=pid-v300-20261030q"><script src="collection-scenes.js?v=pid-v300-20261030q"></script></body></html>
