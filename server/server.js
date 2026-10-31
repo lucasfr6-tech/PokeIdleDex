@@ -52,6 +52,9 @@ if(db.meta.rankReset!==RANK_RESET){ // remise a zero unique : etages (lb.bf), JC
  db.pvp={};db.twr={};
  for(const k in db.glm){if(db.glm[k]&&typeof db.glm[k]=='object')db.glm[k].gx=0}
  db.meta.rankReset=RANK_RESET;resetChat=1}
+if(db.meta.floorReset!==1){ // remise a zero unique des SEULS etages du classement (apres la hausse de difficulte) : chaque joueur remonte a son etage actuel a sa prochaine connexion
+ for(const k in db.lb){if(db.lb[k]&&typeof db.lb[k]=='object')db.lb[k].bf=0;if(db.lb[k]&&db.lb[k].d&&typeof db.lb[k].d=='object')db.lb[k].d.bf=0}
+ db.meta.floorReset=1}
 /* remise a zero generale (nouvelle epoque EP) : copie de securite puis tout est efface, sauf les identifiants de compte (pseudo, mot de passe, Google/Discord)
    et les bannis. Les jeux a jour envoient ep=EP ; les anciennes versions encore ouvertes sont refusees pour ne rien recreer. */
 const EP='r3',FULL_RESET=2;
