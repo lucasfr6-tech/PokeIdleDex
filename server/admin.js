@@ -1,5 +1,5 @@
 // Outil d'administration PokeIdleDex. A lancer SUR LE SERVEUR : ADMIN_KEY=... node admin.js <#ID|uid> <commande> [args]
-// Commandes : purge | unflag | (sans joueur) flags | coin N | gem N | item NOM N | mon ID [shiny] | rmmon ID | snaps | restore NUMERO | set CHAMP VALEUR | reset | msg TEXTE | title ID | starter N
+// Commandes : purge | unflag | (sans joueur) flags | coin N | gem N | item NOM N | mon ID [shiny] [level=N] [stars=N] [asc=N] [mi=N] [zi=N] [al] [fullIv] | rmmon ID | snaps | restore NUMERO | set CHAMP VALEUR | reset | msg TEXTE | title ID | starter N
 const http=require('http');
 const KEY=process.env.ADMIN_KEY||'',PORT=process.env.PORT||3000;
 if(KEY.length<12){console.log('ADMIN_KEY manquante (12 caracteres min).');process.exit(1)}
@@ -24,7 +24,7 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  let c={op};
  if(op=='coin'||op=='gem')c.n=+a[0];
  else if(op=='item'){c.k=a[0];c.n=+a[1]||1}
- else if(op=='mon'){c.id=+a[0];c.sh=a.includes('shiny')?1:0}
+ else if(op=='mon'){c.id=+a[0];c.sh=a.includes('shiny')?1:0;for(const t of a.slice(1)){const m=/^(asc|mi|zi|level|stars|count)=(\d+)$/.exec(t);if(m)c[m[1]]=+m[2];else if(['al','hf','fullIv','fullEv'].includes(t))c[t]=1}}
  else if(op=='rmmon')c.id=+a[0];
  else if(op=='starter')c.n=+a[0]||1;
  else if(op=='set'){c.k=a[0];c.v=isNaN(+a[1])?a.slice(1).join(' '):+a[1]}
