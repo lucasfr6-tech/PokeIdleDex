@@ -1,5 +1,5 @@
 // Outil d'administration PokeIdleDex. A lancer SUR LE SERVEUR : ADMIN_KEY=... node admin.js <#ID|uid> <commande> [args]
-// Commandes : purge | unflag | (sans joueur) flags | coin N | gem N | item NOM N | mon ID [shiny] | rmmon ID | set CHAMP VALEUR | reset | msg TEXTE | title ID | starter N
+// Commandes : purge | unflag | (sans joueur) flags | coin N | gem N | item NOM N | mon ID [shiny] | rmmon ID | snaps | restore NUMERO | set CHAMP VALEUR | reset | msg TEXTE | title ID | starter N
 const http=require('http');
 const KEY=process.env.ADMIN_KEY||'',PORT=process.env.PORT||3000;
 if(KEY.length<12){console.log('ADMIN_KEY manquante (12 caracteres min).');process.exit(1)}
@@ -19,6 +19,8 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  if(op=='purge'||op=='unflag'){
   const r=await rq('POST','/api/adm/'+op,{uid},{'X-Admin':KEY});
   console.log(r.ok?(op=='purge'?'Joueur retire des classements ('+r.supprimes+' fiche(s) supprimee(s)) et masque tant que tu ne fais pas unflag.':'Joueur de nouveau visible.'):'Erreur '+JSON.stringify(r));return}
+ if(op=='snaps'){const r=await rq('POST','/api/adm/snaps',{uid},{'X-Admin':KEY});(r.s||[]).forEach(x=>console.log('copie',x.slot,x.t?new Date(x.t).toLocaleString('fr-FR',{timeZone:'Europe/Paris'}):'(vide)',x.p?'prestiges '+x.p[0]+' captures '+x.p[1]+' ko '+x.p[2]:''));console.log('Pour remettre une copie : node admin.js "'+who+'" restore NUMERO (le joueur doit fermer le jeu avant)');return}
+ if(op=='restore'){const r=await rq('POST','/api/adm/restoresnap',{uid,slot:+a[0]},{'X-Admin':KEY});console.log(r.ok?'Copie remise en ligne. Au prochain chargement, le joueur la recupere.':'Erreur '+JSON.stringify(r));return}
  let c={op};
  if(op=='coin'||op=='gem')c.n=+a[0];
  else if(op=='item'){c.k=a[0];c.n=+a[1]||1}
