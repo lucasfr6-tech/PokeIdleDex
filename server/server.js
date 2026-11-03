@@ -388,6 +388,7 @@ http.createServer((req,res)=>{
   req.on('end',()=>{let d={};try{d=JSON.parse(b||'{}')}catch(e){}
    const uid=String(d.uid||'');
    if(op=='flags'){send(res,200,{ok:1,flags:Object.keys(db.flag).map(id=>Object.assign({uid:id,n:(db.lb[id]&&db.lb[id].d&&db.lb[id].d.n)||''},db.flag[id]))});return}
+   if(op=='glreset'){let n=0;for(const id in db.glm){const x=db.glm[id]&&db.glm[id].d;if(!x||!x.g)continue;x.gx=0;x.x2=0;x.dn2={t:0,k:'',v:0};x.bk2=null;if(x.mod){x.mod.bl={};x.mod.sp=0}n++}dirty=1;send(res,200,{ok:1,membres:n});return}
    if(op=='twcap'){const m=Math.max(1,+d.floor||700);let n=0;for(const id in db.twr){const x=db.twr[id];if(x&&x.d&&(+x.d.b||0)>m){x.d.b=m;n++}}dirty=1;send(res,200,{ok:1,n,floor:m});return}
    if(!ID.test(uid)){send(res,400,{e:'id'});return}
    if(op=='purge'){let n=0;['lb','pvp','twr','wb','glm'].forEach(c=>{if(db[c][uid]){delete db[c][uid];n++}});

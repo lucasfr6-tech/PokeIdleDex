@@ -7,6 +7,7 @@ const pidOf=u=>{let h=2166136261;for(const c of String(u)){h^=c.charCodeAt(0);h=
 const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const r=http.request({host:'127.0.0.1',port:PORT,path:p,method:m,headers:Object.assign({'Content-Type':'application/json'},h||{})},s=>{let x='';s.on('data',c=>x+=c);s.on('end',()=>{try{ok(JSON.parse(x))}catch(e){ok({raw:x})}})});r.on('error',ko);if(d)r.write(d);r.end()});
 (async()=>{
  const [,,who,op,...a]=process.argv;
+ if(who=='glreset'){const r=await rq('POST','/api/adm/glreset',{},{'X-Admin':KEY});console.log(r.ok?'Guildes remises a zero ('+r.membres+' membres touches).':'Erreur '+JSON.stringify(r));return}
  if(who=='flags'){const r=await rq('POST','/api/adm/flags',{},{'X-Admin':KEY});(r.flags||[]).forEach(f=>console.log(pidOf(f.uid),f.n||'?',f.m?'[bloque]':'','\n   ',(f.s||[]).concat(f.l||[]).join('\n    ')));if(!(r.flags||[]).length)console.log('Aucun joueur signale.');return}
  if(!who||!op){console.log('Usage: ADMIN_KEY=... node admin.js "#1234567" coin 100000');return}
  let uid=who;
@@ -19,6 +20,7 @@ const rq=(m,p,b,h)=>new Promise((ok,ko)=>{const d=b?JSON.stringify(b):null;const
  if(op=='purge'||op=='unflag'){
   const r=await rq('POST','/api/adm/'+op,{uid},{'X-Admin':KEY});
   console.log(r.ok?(op=='purge'?'Joueur retire des classements ('+r.supprimes+' fiche(s) supprimee(s)) et masque tant que tu ne fais pas unflag.':'Joueur de nouveau visible.'):'Erreur '+JSON.stringify(r));return}
+ if(op=='glreset'){const r=await rq('POST','/api/adm/glreset',{},{'X-Admin':KEY});console.log(r.ok?'Guildes remises a zero ('+r.membres+' membres touches).':'Erreur '+JSON.stringify(r));return}
  if(op=='snaps'){const r=await rq('POST','/api/adm/snaps',{uid},{'X-Admin':KEY});(r.s||[]).forEach(x=>console.log('copie',x.slot,x.t?new Date(x.t).toLocaleString('fr-FR',{timeZone:'Europe/Paris'}):'(vide)',x.p?'prestiges '+x.p[0]+' captures '+x.p[1]+' ko '+x.p[2]:''));console.log('Pour remettre une copie : node admin.js "'+who+'" restore NUMERO (le joueur doit fermer le jeu avant)');return}
  if(op=='restore'){const r=await rq('POST','/api/adm/restoresnap',{uid,slot:+a[0]},{'X-Admin':KEY});console.log(r.ok?'Copie remise en ligne. Au prochain chargement, le joueur la recupere.':'Erreur '+JSON.stringify(r));return}
  let c={op};
