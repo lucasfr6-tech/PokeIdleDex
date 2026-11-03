@@ -4529,7 +4529,8 @@ var PID_EP="r3",PID_WIPED=false;
  const tag='"ep":"'+PID_EP+'"';let stale=false;
  Object.keys(localStorage).forEach(k=>{if(k==="idle3"||k.indexOf("idle3:")===0){const v=localStorage.getItem(k)||"";if(v&&v.indexOf(tag)<0)stale=true}});
  if(localStorage.getItem("pid_ep")===PID_EP&&!stale)return;
- const keep={pid_uid:1,pid_tok:1,pid_acc:1,pid_dcl:1,pid_ggl:1,idle_set:1,dx3:1,evc:1,pid_skz2:1};
+ const keep={pid_uid:1,pid_tok:1,pid_acc:1,pid_dcl:1,pid_ggl:1,idle_set:1,dx3:1,evc:1,pid_skz2:1,pid_wipebak:1};
+ try{const k0=Object.keys(localStorage).find(k=>k==="idle3"||k.indexOf("idle3:")===0);if(k0)localStorage.setItem("pid_wipebak",localStorage.getItem(k0)||"")}catch(e){}
  let fid=null,had=false;
  Object.keys(localStorage).forEach(k=>{if(k==="idle3"||k.indexOf("idle3:")===0){had=true;if(!fid){try{const o=JSON.parse(localStorage.getItem(k)||"{}");if(o&&o.fd&&/^[A-Z0-9]{8}$/.test(o.fd.id||""))fid=o.fd.id}catch(e){}}}});
  Object.keys(localStorage).forEach(k=>{if(!keep[k])localStorage.removeItem(k)});
@@ -4608,10 +4609,13 @@ const SH={tab:"balls",q:""},DX={q:"",hide:false,shiny:false,gen:-1,cat:"mon"},CS
 let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";/* garde-fou d'avancement : une page restée ouverte avec une vieille partie (autre onglet / autre appareil) ne doit jamais écraser une partie plus avancée */
 const pidProg=o=>[(o&&o.st)|0,+(o&&o.caps)||0,+(o&&o.ko)||0];
 const pidProgCmp=(a,b)=>{for(let i=0;i<3;i++){if(a[i]!==b[i])return a[i]>b[i]?1:-1}return 0};
-function pidProgClr(){try{localStorage.removeItem("pid_prog:"+SK);localStorage.removeItem("pid_prog:idle3")}catch(e){}}
+function pidProgClr(){try{localStorage.removeItem("pid_prog:"+SK);localStorage.removeItem("pid_prog:idle3");localStorage.removeItem("pid_safe:"+SK);localStorage.removeItem("pid_safet:"+SK)}catch(e){}}
 const save=()=>{if(NOSAVE)return;try{if(typeof shdSync=="function")shdSync();pidWalletProtect(G);const sc=pidProg(G),pk="pid_prog:"+SK;let pv=null;try{pv=JSON.parse(localStorage.getItem(pk)||"null")}catch(e){}
  if(pv&&pidProgCmp(sc,pv)<0){const t=+sessionStorage.getItem("pid_stt")||0;if(Date.now()-t>30000){sessionStorage.setItem("pid_stt",String(Date.now()));NOSAVE=true;try{toast("Une partie plus avancée existe : rechargement...")}catch(e){}setTimeout(()=>location.reload(),400);return}}
- G.last=Date.now();localStorage.setItem(SK,JSON.stringify(G));localStorage.setItem(pk,JSON.stringify(sc))}catch(e){}};
+ G.last=Date.now();const js=JSON.stringify(G);localStorage.setItem(SK,js);localStorage.setItem(pk,JSON.stringify(sc));
+ try{const tk="pid_safet:"+SK;if(Date.now()-(+localStorage.getItem(tk)||0)>6e5){let sp=null;try{sp=pidProg(JSON.parse(localStorage.getItem("pid_safe:"+SK)||"null"))}catch(e){}if(!sp||pidProgCmp(sc,sp)>=0){localStorage.setItem("pid_safe:"+SK,js);localStorage.setItem(tk,String(Date.now()))}}}catch(e){}}catch(e){}};
+/* filet de sécurité : si la partie chargée est nettement en retard sur la copie de secours locale (sauvegarde corrompue, remplacée par une vieille version...), on remet la copie de secours une seule fois */
+(function(){try{const raw=localStorage.getItem("pid_safe:"+SK);if(!raw||sessionStorage.getItem("pid_safeR")||!pidEpOk(raw))return;const sp=pidProg(JSON.parse(raw)),sc=pidProg(G);if(pidProgCmp(sp,sc)>0&&(sp[0]>sc[0]||sp[1]>sc[1]*2+50)){sessionStorage.setItem("pid_safeR","1");NOSAVE=true;localStorage.setItem(SK,raw);if(SK!=="idle3")localStorage.setItem("idle3",raw);localStorage.setItem("pid_safe_used",String(Date.now()));location.reload()}}catch(e){}})();
 const $=id=>document.getElementById(id),fmt=n=>n>=1e36?n.toExponential(2).replace("e+","e"):n>=1e15?(()=>{const U=["QA","QI","SX","SP","OC","NO"];let i=0;while(n>=1e18&&i<U.length-1){n/=1e3;i++}return (n/1e15).toFixed(1).replace(".",SG.lang==="en"?".":",")+" "+U[i]})():n>=1e12?(n/1e12).toFixed(1)+"T":n>=1e9?(n/1e9).toFixed(1)+"G":n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e4?(n/1e3).toFixed(1)+"k":n>=100?Math.floor(n):Number.isInteger(n)?String(n):n.toFixed(1);
 const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(4,"0");
@@ -4878,7 +4882,7 @@ function prestigeAutoKeep(i,c){return +i>9e4||!!(c&&(c.spc||c.hw||c.hf))||!!(G.j
 function prestige(sel){const g=ppGain();if(g<1||!sel)return;try{shdSync()}catch(e){}sel=sel.slice();ids().forEach(i=>{if(prestigeAutoKeep(i,G.col[i])&&sel.indexOf(i)<0)sel.push(i)});const nc={};
  sel.forEach(i=>{const c=G.col[i];if(!c)return;nc[i]={n:1,l:1,x:0,h:-1,iv:c.iv,ev:(c.ev||[0,0,0,0,0,0]).slice(),ai:c.ai||0,ha:c.ha||0,sh:c.sh||0,mi:c.mi||0,zi:c.zi||0,spc:c.spc||0,al:c.al||0,tr:c.tr,it:(c.it&&IT[c.it]&&(IT[c.it].mf||IT[c.it].dy))?c.it:undefined}});
  const c0=Math.min(cpFloor(),G.cl|0);Object.assign(G,{col:nc,st:G.st+1,pt:(G.pt||0)+g,pp:(G.pp||0)+g,m:0,inv:{"poke-ball":30},fl:Math.max(1,c0),k:0,cl:Math.max(0,c0-1),pm:c0,auto:true,rv:0,ex:[]});IDC=null;fixHp();E=null;PS=null;toast("Prestige ! +"+g+" points de prestige");sfx("prest");lbPush(true)}
-function resetAll(){const n=G.name;G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
+function resetAll(){const n=G.name;pidProgClr();G=init();G.name=n;IDC=null;clearSTG();E=null;TSC=[0,0,-1];ids().forEach(i=>G.dx[i]=1);fixHp();v21mig();v22mig();v23mig();recomp();save()}
 function delAccount(){NOSAVE=true;pidProgClr();try{["idle3",SK,"dx3","dx2","evc","idle_acc","idle_accs"].forEach(k=>localStorage.removeItem(k))}catch(e){}try{location.reload()}catch(e){}}
 const PU=[["pd","Puissance","Dégâts de toute l'équipe",l=>"+"+l*10+" %",50,2,1.3],["ps","Cadence d'attaque","Coups plus rapides : dégâts par seconde",l=>"+"+l*6+" %",40,3,1.3],
 ["pc","Fortune","Pièces gagnées (combats et revenu passif)",l=>"+"+l*6+" %",50,2,1.3],["px","Entraînement","Niveau cible des Pokémon selon l'étage",l=>"+"+l*3+" %",30,2,1.28],
