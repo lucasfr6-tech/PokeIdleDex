@@ -68,6 +68,15 @@ if(db.meta.fullReset!==FULL_RESET){
 const epOk=d=>!!d&&d.ep===EP,svOk=sv=>typeof sv=='string'&&sv.includes('"ep":"'+EP+'"');
 const pwh=(pw,salt)=>crypto.scryptSync(String(pw),salt,32).toString('hex');
 const NAME=/^[\p{L}\p{N}_ -]{2,16}$/u;
+/* copies de secours : 4 versions par joueur (une toutes les 10 min au plus), dans <dossier des données>/snap */
+const SNAPDIR=path.join(path.dirname(DATA),'snap'),SNAPN=4,SNAPGAP=10*60*1000;
+const snapId=u=>String(u||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,64);
+const snapProg=t=>{try{const o=JSON.parse(t);return[(o.st|0),+o.caps||0,+o.ko||0]}catch(e){return null}};
+const snapList=u=>{const id=snapId(u),r=[];if(!id)return r;for(let i=0;i<SNAPN;i++){const f=path.join(SNAPDIR,id+'.'+i+'.json');try{const m=fs.statSync(f).mtimeMs;r.push({slot:i,f,t:m})}catch(e){r.push({slot:i,f,t:0})}}return r};
+const snapMaybe=(u,save)=>{try{const id=snapId(u);if(!id||typeof save!='string'||!save)return;const L=snapList(u),newest=L.reduce((a,b)=>b.t>a.t?b:a),n=Date.now();if(n-newest.t<SNAPGAP)return;
+ if(newest.t){const a=snapProg(save),b=snapProg(fs.readFileSync(newest.f,'utf8'));if(a&&b&&(a[0]<b[0]||a[1]<b[1]*.8)){if(n-(snapWarn.get(id)||0)>36e5){snapWarn.set(id,n);console.log('SNAP-RECUL',id,'prestiges',b[0],'->',a[0],'captures',b[1],'->',a[1],'(copie non remplacee)')}return}}
+ const old=L.reduce((a,b)=>b.t<a.t?b:a);fs.mkdirSync(SNAPDIR,{recursive:true});fs.writeFile(old.f,save,e=>{if(e)console.error('snap',e.message)})}catch(e){console.error('snap',e.message)}};
+const snapWarn=new Map();
 let dirty=resetChat;const flush=()=>{if(!dirty)return;dirty=0;try{fs.writeFileSync(DATA+'.tmp',JSON.stringify(db));fs.renameSync(DATA+'.tmp',DATA)}catch(e){console.error('save',e.message)}};
 setInterval(flush,5000);process.on('SIGTERM',()=>{flush();process.exit(0)});process.on('SIGINT',()=>{flush();process.exit(0)});
 /* guildes vides : supprimees automatiquement (aucun membre, doc inchange depuis 1 h) */
@@ -330,7 +339,7 @@ http.createServer((req,res)=>{
     if(!svOk(d.save)){send(res,409,{e:'ep'});return}
     /* synchro multi-appareils : si un autre appareil a sauvegardé depuis la dernière synchro de celui-ci, on refuse (l'appareil récupère alors la version en ligne) */
     if(typeof d.base=='number'&&!d.force&&(a.t||0)>d.base){send(res,409,{e:'stale',t:a.t});return}
-    a.save=d.save;a.t=Math.max(Date.now(),(a.t||0)+1);dirty=1;try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1,t:a.t});return}
+    a.save=d.save;a.t=Math.max(Date.now(),(a.t||0)+1);dirty=1;snapMaybe(a.uid,d.save);try{const nw=Date.now();if(a.uid&&nw-(ckT.get(a.uid)||0)>60000){ckT.set(a.uid,nw);setFlag(a.uid,'s',susp(d.save))}}catch(e){console.error('susp',e.message)}send(res,200,{ok:1,t:a.t});return}
    if(act=='oauth'){
     const p=pendO.get(String(d.state||''));if(!p){send(res,400,{e:'state'});return}pendO.delete(String(d.state));
     ssoFinish(res,d,tok,p,'dc');return}
@@ -384,6 +393,10 @@ http.createServer((req,res)=>{
    if(op=='purge'){let n=0;['lb','pvp','twr','wb','glm'].forEach(c=>{if(db[c][uid]){delete db[c][uid];n++}});
     const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};f.m=1;f.t=Date.now();dirty=1;send(res,200,{ok:1,supprimes:n});return}
    if(op=='unflag'){delete db.flag[uid];dirty=1;send(res,200,{ok:1});return}
+   if(op=='snaps'){const r=snapList(uid).map(x=>{let p=null;if(x.t){try{p=snapProg(fs.readFileSync(x.f,'utf8'))}catch(e){}}return{slot:x.slot,t:x.t,p}});send(res,200,{ok:1,s:r});return}
+   if(op=='restoresnap'){const sl=+d.slot,L=snapList(uid);if(!(sl>=0&&sl<SNAPN)||!L[sl].t){send(res,404,{e:'slot'});return}let sv='';try{sv=fs.readFileSync(L[sl].f,'utf8')}catch(e){send(res,500,{e:'read'});return}
+    let a=null;for(const k in db.acc){if(db.acc[k].uid===uid){a=db.acc[k];break}}if(!a||!svOk(sv)){send(res,404,{e:'acc'});return}
+    a.save=sv;a.t=Math.max(Date.now(),(a.t||0)+1);dirty=1;send(res,200,{ok:1,t:a.t});return}
    send(res,404,{e:'op'})});
   return}
 /* ---- Messages prives entre amis (visibles uniquement par les deux participants) ---- */
