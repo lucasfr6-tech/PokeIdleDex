@@ -149,6 +149,11 @@ async function refPoll(){if(!REF_ON)return;
    const j=t.match(/[A-HJ-NP-Z2-9]{8}/g);if(j)for(const c of j)o[c]=o[c]||Date.now()}
   dirty=1;if(L.length<100)return}}
 if(REF_ON){const run=()=>refPoll().catch(e=>console.error('refpoll',e.message));setTimeout(run,3000);setInterval(run,45000)}
+/* Titre Discord Boost : verifie (bot) si le compte Discord lie du joueur booste le serveur (DISCORD_GUILD = ID du serveur Discord, meme bot que le parrainage) */
+const VIP_GUILD=process.env.DISCORD_GUILD||'',VIP_ON=!!(REF_TOK&&/^\d{5,25}$/.test(VIP_GUILD)),vipCache=new Map();
+async function vipBoosting(dc){const c=vipCache.get(dc);if(c&&Date.now()-c.t<6e5)return c.v;
+ const m=await hreq('https://discord.com/api/v10/guilds/'+VIP_GUILD+'/members/'+dc,{method:'GET',headers:{Authorization:'Bot '+REF_TOK,'User-Agent':'PokeIdleDex (pokeidledex.com, 1)'}});
+ const v=m&&m.premium_since?1:0;if(m&&(m.user||m.code===10007))vipCache.set(dc,{v,t:Date.now()});return v}
 const GG_ID=process.env.GOOGLE_ID||'637104354464-n2esf9qoa4mh514f70v65qintii1lr3g.apps.googleusercontent.com',usedG=new Set();setInterval(()=>usedG.clear(),36e5);
 /* fin de connexion Discord/Google : retrouve, lie ou cree le compte (champ f = 'dc' ou 'gg') */
 function ssoFinish(res,d,tok,p,f){
@@ -239,6 +244,15 @@ http.createServer((req,res)=>{
    const now=Date.now(),on=new Set();for(const[k,v]of PRES){if(v.u&&now-v.t<=25000)on.add(v.u)}
    const out={};(Array.isArray(d.ids)?d.ids:[]).slice(0,500).forEach(id=>{id=String(id);if(!ID.test(id))return;const l=db.lb[id];const t=Math.max(LAST.get(id)||0,(l&&l.t)||0);out[id]={t,o:on.has(id)?1:0}});
    send(res,200,{ok:1,m:out})});return}
+ if(u.pathname=='/api/vip'&&req.method=='POST'){
+  if(limited(ip+'vp',60)){send(res,429,{e:'rate'});return}
+  let b='';req.on('data',c=>{b+=c;if(b.length>2000)req.destroy()});
+  req.on('end',()=>{let d;try{d=JSON.parse(b)}catch(e){send(res,400,{e:'json'});return}
+   const me=d&&typeof d=='object'?mkAuth(d.uid,req.headers['x-token']):null;if(!me){send(res,401,{e:'auth'});return}
+   let a=null;for(const k in db.acc){if(db.acc[k].uid==me){a=db.acc[k];break}}
+   const out=v=>send(res,200,{ok:1,vip:v?1:0,dc:a&&a.dc?1:0,on:VIP_ON?1:0});
+   if(!a||!a.dc||!VIP_ON){out(0);return}
+   vipBoosting(String(a.dc)).then(out).catch(()=>out(0))});return}
  if(u.pathname=='/api/ref/dc'&&req.method=='GET'){
   if(limited(ip+'rd',60)){send(res,429,{e:'rate'});return}
   const uid=String(u.searchParams.get('u')||''),c=REFN(u.searchParams.get('c'));
