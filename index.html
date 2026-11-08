@@ -7075,7 +7075,7 @@ async function rdAct(R,side,u){const boss=R.boss;if(R.over)return;
   if(u.rc>0&&R.kind!="wb"){u.rc--;rdLog(R,u.name+" récupère…");rdPop(R,"p",u,"Récupère","#94a3b8");await rdSleep(420);return}
   if(u.st=="par"&&Math.random()<.25){rdPop(R,"p",u,"Paralysé !","#facc15");rdLog(R,u.name+" est paralysé : il ne peut pas bouger");await rdSleep(520);return}
   let m=rdPlayerMove(u);if(R.kind=="wb"&&m.c=="u")m=u.moves.find(x=>x.c!="u")||m;
-  if(m.c=="u"){await rdFxMove(R,"p",u,m);if(m.e=="heal"){rdHeal(u,u.max*.45);rdPop(R,"p",u,"+PV","#4ade80")}else if(m.e=="boostA"){u.bA=4;rdPop(R,"p",u,"Attaque ↑","#fb923c")}else{u.bS=4;rdPop(R,"p",u,"Att. Spé ↑","#a78bfa")}rdLog(R,u.name+" utilise "+m.n);rdUpd(R);await rdSleep(560);return}
+  if(m.c=="u"){await rdFxMove(R,"p",u,m);if(m.e=="heal"){rdHeal(u,u.max*.45);rdPop(R,"p",u,"+PV","#4ade80")}else if(m.e=="boostA"){u.bA=4;rdPop(R,"p",u,"Attaque ↑","#fb923c")}else if(m.e=="prot"){u.prot=1;rdPop(R,"p",u,"Abri","#94a3b8")}else if(m.e=="rock"){try{R.boss.sr=1}catch(x){}rdPop(R,"p",u,"Piège de Roc","#a8a29e")}else{u.bS=4;rdPop(R,"p",u,"Att. Spé ↑","#a78bfa")}rdLog(R,u.name+" utilise "+m.n);rdUpd(R);await rdSleep(560);return}
   await rdFxMove(R,"p",u,m);
   if(R.kind!="wb"&&Math.random()*100>m.a){rdPop(R,"b",boss,"Raté !","#94a3b8");rdLog(R,u.name+" utilise "+m.n+" mais rate");await rdSleep(420);return}
   const r=rdDamage(u,boss,m,rdPow(R,u));let v=r.v;if(m.e=="cd")u.rc=1;
@@ -8737,7 +8737,7 @@ async function pvMove(B,s,j){const a=pvAct(B,s),d=pvAct(B,pvOth(s));if(!a||a.dea
  pvSay(B,(s=="m"?"":"L'adversaire : ")+a.name+" utilise "+m.n+" !");
  if(m.c=="u"){await pvUI("fx",B,s,m);
   if(m.e=="heal"){if(a.hu>=3||a.hp>=a.max){pvSay(B,"Mais cela échoue !");await pvUI("pop",B,s,"Échec","#94a3b8")}else{a.hu++;const h=pvHeal(a,a.max*.45);await pvUI("pop",B,s,"+"+h,"#4ade80")}}
-  else if(m.e=="boostA"){a.bA=4;await pvUI("pop",B,s,"Attaque +","#fb923c")}else{a.bS=4;await pvUI("pop",B,s,"Att. Spé +","#a78bfa")}
+  else if(m.e=="boostA"){a.bA=4;await pvUI("pop",B,s,"Attaque +","#fb923c")}else if(m.e=="prot"){a.prot=1;await pvUI("pop",B,s,"Abri","#94a3b8")}else if(m.e=="rock"){try{const o=pvAct(B,pvOth(s));if(o)o.sr=1}catch(x){}await pvUI("pop",B,s,"Piège de Roc","#a8a29e")}else{a.bS=4;await pvUI("pop",B,s,"Att. Spé +","#a78bfa")}
   pvUI("upd",B);await pvSleep(B,640);return}
  await pvUI("fx",B,s,m);
  if(Math.random()*100>m.a){pvSay(B,"L'attaque rate !");await pvUI("pop",B,pvOth(s),"Raté !","#94a3b8");await pvSleep(B,520);return}
@@ -11167,6 +11167,74 @@ Object.entries(HWBAKE).forEach(([k,v])=>{SPU.set(k,v[0]);HVF.set(v[0],v[1])});
   e.stopPropagation();e.preventDefault();const id=b.dataset.tms,c=G.col[id];if(!c)return;c.tms=+b.dataset.j;save();try{modal()}catch(x){show()}},true);
 })();
 
+/* ===== CT : 39 nouvelles CT et jusqu'à 4 CT par Pokémon (une par attaque) ===== */
+(function(){
+ /* attaques manquantes (Abri et Piège de Roc ont un effet à eux, en raid et en JCJ) */
+ "Demi-Tour|bug|70|p|100|;Change Éclair|electric|70|s|100|;Piège de Roc|rock|0|u|100|rock;Machination|dark|0|u|100|boostS;Abri|normal|0|u|100|prot;Ébullition|water|80|s|100|brn;Câlinerie|fairy|90|p|90|;Poing Glace|ice|75|p|100|;Vitesse Extrême|normal|80|p|100|pri;Bluff|normal|40|p|100|pri;Canon Graine|grass|75|p|100|;Lame-Feuille|grass|90|p|100|crit;Extrasenseur|psychic|80|s|100|"
+  .split(";").forEach(s=>{const a=s.split("|");if(!RMV[a[0]])RMV[a[0]]={n:a[0],t:a[1],p:+a[2],c:a[3],a:+a[4],e:a[5]||""}});
+ /* prix selon l'utilité : [attaque, prix en boutique (₽), étage requis] */
+ const S=[250e6,800],A=[120e6,500],B=[60e6,300],C=[25e6,150],D=[10e6,50];
+ const L=[["Vitesse Extrême",S],["Close Combat",S],["Machination",S],["Séisme",S],["Pouvoir Lunaire",S],["Telluriforce",S],["Dracochoc",S],
+  ["Lance-Flammes",A],["Laser Glace",A],["Surf",A],["Bombe Beurk",A],["Éco-Sphère",A],["Câlinerie",A],["Lame-Feuille",A],["Abri",A],["Piège de Roc",A],
+  ["Luminocanon",B],["Aurasphère",B],["Dracogriffe",B],["Cascade",B],["Ébullition",B],["Éclat Magique",B],["Direct Toxik",B],["Extrasenseur",B],["Psykoud'Boul",B],["Ball'Ombre",B],["Mâchouille",B],["Vibrobscur",B],
+  ["Demi-Tour",C],["Change Éclair",C],["Poing-Éclair",C],["Poing Feu",C],["Poing Glace",C],["Canon Graine",C],["Éboulement",C],["Lame d'Air",C],["Bluff",C],
+  ["Aéropique",D],["Pouvoir Antique",D]];
+ const NEW={};
+ L.forEach(([n,[pr,fl]])=>{const m=RMV[n];if(!m)return;TM.push([n,m.t,m.p]);const no=String(TM.length).padStart(2,"0"),k="tm"+no;
+  IT[k]={n:"CT"+no+" · "+n,p:pr/6,r:fl,c:"CT (capacités)",img:"tm-"+m.t,fm:n};NEW[k]=n});
+ window.CTNEW=NEW;
+ const ctMv=k=>{const i=IT[k];if(!i||!/^tm\d+$/.test(k))return null;const t=TM[+k.slice(2)-1];if(!t)return null;
+  if(i.fm&&RMV[i.fm])return Object.assign({},RMV[i.fm],{tm:1});
+  return null};
+ window.ctMv=ctMv;
+ /* migration : l'ancienne CT unique va dans sa case */
+ const cts=(c,mk)=>{if(!c)return null;if(!Array.isArray(c.cts)){if(!mk&&!c.mv)return null;c.cts=[null,null,null,null];if(c.mv){const s=c.tms>=0&&c.tms<=3?c.tms:3;c.cts[s]=c.mv}}return c.cts};
+ const sync=c=>{const L=(c.cts||[]).filter(Boolean);c.mv=L[0]||undefined;if(!c.mv)delete c.mv;const s=c.cts?c.cts.findIndex(Boolean):-1;if(s>=0)c.tms=s};
+ window.ctSlots=id=>cts(G.col[id]);
+ const v146=rdMoves;
+ rdMoves=function(id){const c=G.col[id];if(!c)return v146.apply(this,arguments);const T=cts(c);if(!T||!T.some(Boolean))return v146.apply(this,arguments);
+  const sv=c.mv;let b;try{delete c.mv;b=v146(id).slice(0,4)}finally{if(sv)c.mv=sv}
+  const tm=window.tmMoveOf;
+  T.forEach((k,j)=>{if(!k)return;let m=ctMv(k);if(!m&&tm){const s2=c.mv;c.mv=k;try{m=tm(id)}catch(e){}if(s2)c.mv=s2;else delete c.mv}if(m)b[j]=m});return b};
+ /* combat inactif : la meilleure couverture parmi toutes les CT apprises */
+ const multi=(fn,merge)=>function(id){const c=G.col[id],T=c&&Array.isArray(c.cts)?c.cts.filter(Boolean):[];if(T.length<2)return fn.apply(this,arguments);
+  const sv=c.mv,R=[];try{for(const k of T){c.mv=k;R.push(fn.apply(this,arguments))}}finally{c.mv=sv}return merge(R)};
+ dmg=multi(dmg,R=>Math.max(...R));
+ pkDps=multi(pkDps,R=>Math.max(...R));
+ /* poser / retirer une CT dans une case */
+ function put(id,j,k){const c=G.col[id];if(!c)return;const T=cts(c,1),old=T[j];if(old===k)return;
+  if(k&&!(G.inv[k]>0))return;if(old)G.inv[old]=(G.inv[old]||0)+1;if(k)G.inv[k]--;T[j]=k||null;sync(c);
+  try{for(const kk in RMC)if(kk.startsWith(id+"|"))delete RMC[kk]}catch(e){}save()}
+ function learn(id,k){const c=G.col[id];if(!c||!k||!(G.inv[k]>0))return;const T=cts(c,1);if(T.includes(k))return;
+  let j=[3,2,1,0].find(x=>!T[x]);if(j==null)j=3;put(id,j,k);toast(LS(IT[k].n.split(" · ")[1]+" apprise (case "+(j+1)+"). Tu peux choisir la case dans la fiche du Pokémon.",IT[k].n.split(" · ")[1]+" learned (slot "+(j+1)+"). Pick the slot in the Pokémon sheet."))}
+ window.ctLearn=learn;
+ window.addEventListener("change",e=>{const t=e.target;if(!t||!t.matches)return;
+  if(t.matches('select[data-a="tm"]')){e.stopImmediatePropagation();const id=+t.dataset.i;learn(id,t.value);try{modal()}catch(x){show()};return}
+  if(t.dataset&&t.dataset.ctp!=null){e.stopImmediatePropagation();learn(+t.dataset.ctp,t.value);try{rdtRender()}catch(x){};return}
+  if(t.dataset&&t.dataset.cts!=null){e.stopImmediatePropagation();const id=+t.dataset.cts,c=G.col[id],T=cts(c);if(!T)return;const j=+t.value,from=T.findIndex(Boolean);if(from>=0&&from!=j){[T[from],T[j]]=[T[j],T[from]];sync(c);save()}try{rdtRender()}catch(x){};return}
+  if(t.dataset&&t.dataset.ctslot!=null){e.stopImmediatePropagation();const [id,j]=t.dataset.ctslot.split(":").map(Number);put(id,j,t.value||null);try{modal()}catch(x){show()}}},true);
+ window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-tms]");if(b){e.stopImmediatePropagation();e.preventDefault()}},true);
+ /* fiche Pokémon : les 4 cases */
+ const pk0=pkItem;
+ pkItem=function(id){let h=pk0.apply(this,arguments);const i=h.indexOf('<div class="pqc tmsl">');if(i>=0)h=h.slice(0,i);return h+ctBlock(id)};
+ const pm0=pkMoves;pkMoves=function(id){return pm0.apply(this,arguments)+ctBlock(id)};
+ function ctBlock(id){const h="";
+  const c=G.col[id];if(!c)return h;const T=cts(c)||[null,null,null,null],own=Object.keys(G.inv).filter(k=>/^tm\d+$/.test(k)&&G.inv[k]>0).sort((a,b)=>IT[a].n.localeCompare(IT[b].n,"fr"));
+  if(!own.length&&!T.some(Boolean))return h;
+  const sv=c.cts;c.cts=[null,null,null,null];const sv2=c.mv;delete c.mv;let base;try{base=rdMoves(id).slice(0,4)}finally{c.cts=sv;if(sv2)c.mv=sv2}
+  const cur=rdMoves(id);
+  return h+`<div class="pqc tmsl ctm"><h3>${LS("Attaques et CT","Moves and TMs")}</h3><small>${LS("Chaque attaque peut être remplacée par une CT (4 CT au maximum). Retirer une CT la remet dans ton sac.","Each move can be replaced by a TM (up to 4 TMs). Removing a TM puts it back in your bag.")}</small><div class="ctg">${cur.map((m,j)=>{const k=T[j];return `<label class="ctc${k?" on":""}" style="--tc:${TC[m.t]}"><span class="ctn">${LS("Case","Slot")} ${j+1}</span><b>${esc(m.n)}</b><small>${TFR[m.t]||m.t} · ${m.c=="u"?LS("Soutien","Support"):m.p}${k?" · CT":""}</small><select data-ctslot="${id}:${j}"><option value="">${LS("Attaque d'origine : ","Original move: ")+esc(base[j].n)}</option>${k?`<option value="${k}" selected>${esc(IT[k].n)}</option>`:""}${own.filter(x=>x!=k).map(x=>`<option value="${x}">${esc(IT[x].n)} ×${G.inv[x]}</option>`).join("")}</select></label>`}).join("")}</div></div>`}
+ /* boutique : description des nouvelles CT */
+ const sd0=shopDesc;
+ shopDesc=function(k,i){const n=NEW[k];if(!n)return sd0.apply(this,arguments);const m=RMV[n],ef={pri:LS("frappe en premier","strikes first"),crit:LS("coups critiques fréquents","high critical rate"),brn:LS("peut brûler","may burn"),par:LS("peut paralyser","may paralyze"),psn:LS("peut empoisonner","may poison"),prot:LS("protège du prochain coup","blocks the next hit"),rock:LS("l'adversaire subit +20 % de dégâts","the foe takes +20% damage"),boostS:LS("Attaque Spéciale ×1,5","Special Attack ×1.5")}[m.e];
+  return `${TFR[m.t]||m.t} · ${m.c=="u"?LS("Soutien","Support"):(m.c=="p"?LS("Physique","Physical"):LS("Spéciale","Special"))+" · "+LS("puissance ","power ")+m.p}${ef?" · "+ef:""}`};
+ /* Abri et Piège de Roc en raid */
+ const rd0=rdDamage;
+ rdDamage=function(a,d,m,mult){const r=rd0.apply(this,arguments);try{if(d&&r&&r.v>0){if(d.prot){r.v=0;d.prot=0}else if(d.sr)r.v=Math.floor(r.v*1.2)}}catch(e){}return r};
+ const pv0=pvDmg;
+ pvDmg=function(a,d,m,est){const r=pv0.apply(this,arguments);try{if(d&&r&&r.v>0){if(d.prot){r.v=0;if(!est)d.prot=0}else if(d.sr)r.v=Math.floor(r.v*1.2)}}catch(e){}return r};
+ {const st=document.createElement("style");st.textContent=`.ctm .ctg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}@media(max-width:560px){.ctm .ctg{grid-template-columns:1fr}}.ctc{display:flex;flex-direction:column;gap:3px;padding:10px;border-radius:12px;border:2px solid color-mix(in srgb,var(--tc) 40%,transparent);background:color-mix(in srgb,var(--tc) 10%,#0b1026)}.ctc.on{border-color:var(--tc);box-shadow:0 0 12px color-mix(in srgb,var(--tc) 35%,transparent)}.ctc .ctn{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--tc)}.ctc b{font-size:15px}.ctc small{color:#a9b4d6}.ctc select{margin-top:4px;width:100%}`;document.head.appendChild(st)}
+})();
 /* ===== Pokédex : une méga / primo forme est cochée dès qu'on la possède (Méga-Perle dans le sac ou équipée) ===== */
 (function(){
  const sync=()=>{try{if(!G||!G.inv||!MGD)return;G.mg=G.mg||{};let ch=0;
@@ -15713,6 +15781,8 @@ const UPD=[
  {d:"2026-11-10",r:Date.UTC(2026,10,9,23,1,0),t:["Four Seasons, Xerneas Pipomiel et Ho-Oh Flamboyant","Four Seasons, Honey Xerneas and Blazing Ho-Oh"],e:[
   ["new","Événement Four Seasons (jusqu’au 26 novembre)","4 nouvelles bannières dans l’onglet Invocation : Printemps, Hiver, Été et Automne. Chacune contient Évoli, Chlorobule, Voltali, Pyroli, Mentali et Fragilady aux couleurs de sa saison. Plus la bannière est chère, plus ses formes sont fortes. Une forme épique est garantie en 80 invocations. Tu choisis la forme que porte ton Pokémon dans Pokédex › Spéciales › Four Seasons.","Four Seasons event (until November 26)","4 new banners in the Summon tab: Spring, Winter, Summer and Autumn. Each one holds Eevee, Petilil, Jolteon, Flareon, Espeon and Lilligant in its season’s colours. The pricier the banner, the stronger its forms. An epic form is guaranteed within 80 summons. Pick the form your Pokémon wears in Pokédex › Special › Four Seasons."],
   ["new","Boutique Four Seasons","Le raccourci Halloween en haut à gauche devient la boutique Four Seasons : Phyllali Printemps, Givrali Hiver, Aquali Été et Noctali Automne, en vente en gemmes. Ce sont les formes de saison les plus fortes, et on ne les trouve que là.","Four Seasons shop","The Halloween shortcut at the top left becomes the Four Seasons shop: Spring Leafeon, Winter Glaceon, Summer Vaporeon and Autumn Umbreon, sold for gems. They are the strongest seasonal forms, and only available there."],
+  ["new","39 nouvelles CT","La boutique de CT reçoit 39 nouvelles CT : Vitesse Extrême, Close Combat, Machination, Séisme, Pouvoir Lunaire, Lance-Flammes, Laser Glace, Abri, Piège de Roc, Câlinerie, Ball'Ombre et bien d’autres. Leur prix et l’étage requis dépendent de leur utilité. Abri bloque le prochain coup reçu, et Piège de Roc fait subir +20 % de dégâts à l’adversaire.","39 new TMs","The TM shop gets 39 new TMs: Extreme Speed, Close Combat, Nasty Plot, Earthquake, Moonblast, Flamethrower, Ice Beam, Protect, Stealth Rock, Play Rough, Shadow Ball and many more. Their price and required floor depend on how useful they are. Protect blocks the next hit, and Stealth Rock makes the foe take +20% damage."],
+  ["imp","Jusqu’à 4 CT par Pokémon","Chaque attaque d’un Pokémon peut maintenant être remplacée par une CT, donc jusqu’à 4 CT à la fois. Les cases se choisissent dans la fiche du Pokémon (onglets Capacités et Objet). Retirer une CT la remet dans le sac. La CT déjà apprise est gardée dans sa case.","Up to 4 TMs per Pokémon","Each of a Pokémon’s moves can now be replaced by a TM, so up to 4 TMs at once. Pick the slots in the Pokémon sheet (Moves and Item tabs). Removing a TM puts it back in the bag. The TM already learned stays in its slot."],
   ["new","Nouvel exclusif : Xerneas Pipomiel","Fée et Insecte. Il s’obtient en finissant 4 nouvelles quêtes spéciales dans l’onglet Quêtes, avec 2 Master Balls et 200 Super Bonbons.","New exclusive: Honey Xerneas","Fairy and Bug. Earn it by finishing 4 new special quests in the Quests tab, with 2 Master Balls and 200 Rare Candies."],
   ["new","Nouvel exclusif : Ho-Oh Flamboyant","Feu et Vol, un peu plus fort qu’Amphinobi Lagon. Il s’achète dans l’onglet Prestige pour 45 000 000 points.","New exclusive: Blazing Ho-Oh","Fire and Flying, a little stronger than Lagoon Greninja. Buy it in the Prestige tab for 45,000,000 points."]]},
  {d:"2026-11-08",t:["Correctif Pokédex","Pokédex fix"],e:[
