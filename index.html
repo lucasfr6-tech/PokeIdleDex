@@ -13097,6 +13097,72 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 setInterval(()=>{try{const g=G.sk=G.sk&&typeof G.sk=="object"?G.sk:{s:-1},n=SKNODES.filter(skOn).length;if(g.s<0){g.s=n;return}if(n>g.s){const d=n-g.s;g.s=n;toast(LS("Arbre de compétences : "+d+(d>1?" nouvelles cases débloquées !":" nouvelle case débloquée !"),"Skill tree: "+d+(d>1?" new nodes unlocked!":" new node unlocked!")));try{biFlags();recomp()}catch(x){}if(tab=="sk")show()}}catch(e){}},3000);
 /* « Moi » ouvre toujours Dresseur, jamais l'arbre plein écran */
 {const p=ncPick;ncPick=function(c){const r=p.apply(this,arguments);return r=="sk"?"gear":r}}
+/* ===== Arbre de compétences « Constellation » : paliers V, VI et ★★, 6 nouvelles statistiques ===== */
+Object.assign(SKE,{w:["Dégâts de raid","Raid damage","sword"],y:["Hors ligne","Offline","clock"],l:["Labo","Lab","bag"],u:["Contre les boss","Vs bosses","skull"],q:["Pension","Daycare","clock"],j:["Formes spéciales","Special forms","star"]});
+Object.assign(SKEL,{w:["Dégâts de l'équipe en raid","Team damage in raids"],y:["Gains pendant ton absence","Offline earnings"],l:["Réduction des prix du laboratoire","Lab price discount"],u:["Dégâts contre les boss d'étage","Damage against floor bosses"],q:["Durée d'un lot de pension réduite","Shorter daycare batches"],j:["Dégâts des exclusifs et formes spéciales","Damage of exclusives and special forms"]});
+const SKIT={d:"choice-band",c:"amulet-coin",x:"lucky-egg",k:"ultra-ball",m:"dna-splicers",z:"big-mushroom",s:"shiny-charm",b:"nugget",t:"ability-capsule",e:"heart-scale",p:"comet-shard",h:"sitrus-berry",w:"expert-belt",y:"soothe-bell",l:"pp-up",o:"odd-keystone",g:"black-belt",u:"macho-brace",q:"oval-charm",j:"star-piece"};
+const SKNEG=new Set(["e","l","q"]);
+const SKT2=[{v:3,ko:200000,r:7.8,a:0,l:"V"},{v:3.5,ko:320000,r:9.1,a:-12,l:"VI"},{v:3.5,ko:420000,r:9.1,a:12,l:"VI"},{v:6,ko:650000,r:10.5,a:0,l:"★★"}];
+const SKE2=["wdwd","ycyc","lxlx","ukuk","qmqz","jsjs"];
+const SKG=[[448,"Lucario"],[53,"Persian"],[65,"Alakazam"],[59,"Arcanin"],[151,"Mew"],[385,"Jirachi"],[142,"Ptéra"],[474,"Porygon-Z"],[68,"Mackogneur"]];
+SKB.forEach((b,bi)=>{const th=(-90+60*bi)*Math.PI/180;SKT2.forEach((t,i)=>{const j=7+i,an=th+t.a*Math.PI/180;
+ SKNODES.push({id:b.k+j,b:bi,j,x:+(Math.cos(an)*t.r).toFixed(3),y:+(Math.sin(an)*t.r).toFixed(3),ko:Math.round(t.ko*(1+.06*bi)),e:SKE2[bi][i],v:t.v,c:b.c,par:j==7?[b.k+"6"]:j==10?[b.k+"8",b.k+"9"]:[b.k+"7"],nw:1})})});
+SKTIER.push(...SKT2);
+SKC=null;
+const skV=k=>{try{return (skSum()[k]||0)/100}catch(e){return 0}};
+/* effets des nouvelles statistiques */
+{const o=rdUnit;rdUnit=function(){const u=o.apply(this,arguments);try{u.pw=(u.pw||1)*(1+skV("w"))}catch(e){}return u}}
+{const o=kxI;kxI=function(s,a){const r=o.apply(this,arguments);try{if(s==="off"&&typeof r==="number")return r*(1+skV("y"))}catch(e){}return r}}
+document.addEventListener("DOMContentLoaded",()=>{try{const o=labPrice;labPrice=function(){const r=o.apply(this,arguments);return Math.max(1,Math.round(r*(1-Math.min(.3,skV("l")))))}}catch(e){}});
+{const o=dmg;dmg=function(){const r=o.apply(this,arguments);try{if(E&&E.boss&&typeof r==="number")return r*(1+skV("u"))}catch(e){}return r}}
+{const o=penMinutes;penMinutes=function(){const r=o.apply(this,arguments);return Math.max(5,Math.round(r*(1-Math.min(.3,skV("q")))))}}
+{const o=rq;rq=function(id){const q=o.apply(this,arguments);try{const c=G.col[id],j=skV("j");if(c&&j&&(+id>9e4||c.spc)&&typeof q==="number"){c.q=q*(1+j);return c.q}}catch(e){}return q}}
+/* --- affichage « Constellation » --- */
+skZs.splice(0,3,46,70,104);
+const SKW2=27,skIco=k=>`<img class="sx-it" src="img/items/${SKIT[k]||"rare-candy"}.png" alt="" draggable="false">`;
+const skSign=k=>SKNEG.has(k)?"−":"+";
+skDet=function(n){if(!n)return `<div class="sx-dt"><b>${LS("Constellation complète !","Constellation complete!")}</b></div>`;
+ const on=skOn(n),ko=skKo(),q=on?1:Math.min(1,ko/n.ko),eff=n.e?LS(SKEL[n.e][0],SKEL[n.e][1])+" "+skSign(n.e)+skPct(String(n.v).replace(".",",")):LS("Le cœur de la constellation","The heart of the constellation");
+ return `<div class="sx-dt${on?" on":""}" style="--c:${n.c}"><span class="sx-dti">${n.e?skIco(n.e):`<img class="sx-it" src="img/pokemon/25.png" alt="">`}</span><div class="sx-dtx"><b>${esc(skNm(n))}${n.nw?` <i class="sx-new">${LS("NOUVEAU","NEW")}</i>`:""}</b><em>${eff}</em><small>${on?LS("Débloquée","Unlocked"):LS("Se débloque à ","Unlocks at ")+fmt(n.ko)+" K.O. · "+LS("encore ","")+fmt(n.ko-ko)}</small>${on?"":`<div class="sx-bar"><i style="width:${(q*100).toFixed(1)}%"></i></div>`}</div></div>`};
+skHtml=function(){const ko=skKo(),tot=SKNODES.length,got=SKNODES.filter(skOn).length,nx=skNext(),sm=skSum(),H=SKW2/2;
+ if(!SKSEL||!SKNODES.find(n=>n.id==SKSEL))SKSEL=nx?nx.id:"ctr";const sel=SKNODES.find(n=>n.id==SKSEL),by={};SKNODES.forEach(n=>by[n.id]=n);
+ let ln="";SKNODES.forEach(n=>n.par.forEach(p=>{const a=by[p];ln+=`<line x1="${a.x+H}" y1="${a.y+H}" x2="${n.x+H}" y2="${n.y+H}" class="${skOn(n)?"on":""}" style="--c:${n.c}"/>`}));
+ if(nx){const a=by[nx.par[0]];ln+=`<circle class="sx-comet" r=".1"><animateMotion dur="2.4s" repeatCount="indefinite" path="M${a.x+H} ${a.y+H} L${nx.x+H} ${nx.y+H}"/></circle>`}
+ const nodes=SKNODES.map((n,k)=>{const on=skOn(n),cl=on?"on":nx&&nx.id==n.id?"nx":"lk",big=n.j==6||n.j==10?" ap":n.b<0?" ce":"";
+  return `<button type="button" class="sx-n ${cl}${SKSEL==n.id?" sel":""}${big}" data-sk="n:${n.id}" style="--x:${n.x+H};--y:${n.y+H};--c:${n.c};--dl:${(k%7)*.35}s" aria-label="${esc(skNm(n))}">${n.e?skIco(n.e):`<img class="sx-it" src="img/pokemon/25.png" alt="">`}<span class="sx-lb"><b>${n.e?LS(SKE[n.e][0],SKE[n.e][1]):LS("Dresseur","Trainer")}</b>${n.e?skSign(n.e)+String(n.v).replace(".",",")+" %":""}</span></button>`}).join("");
+ const gu=SKB.map((b,bi)=>{const L=SKNODES.filter(n=>n.b==bi);if(!L.length||!SKG[bi])return "";const far=L.reduce((a,n)=>Math.hypot(n.x,n.y)>Math.hypot(a.x,a.y)?n:a,L[0]),an=Math.atan2(far.y,far.x),rr=Math.hypot(far.x,far.y)+1.5,x=Math.cos(an)*rr+H,y=Math.sin(an)*rr+H,g=L.filter(skOn).length;
+  return `<div class="sx-gd" style="--x:${x};--y:${y};--c:${b.c}"><img src="img/pokemon/${SKG[bi][0]}.png" alt="" draggable="false"><b>${LS(b.n[0],b.n[1])}</b><small>${g} / ${L.length}</small></div>`}).join("");
+ const chips=Object.keys(SKE).filter(k=>sm[k]>0).map(k=>`<span class="sx-ch${["w","y","l","u","q","j"].includes(k)?" nw":""}">${skIco(k)}<small>${LS(SKE[k][0],SKE[k][1])}</small><b>${skSign(k)}${skPct(String(Math.round(sm[k]*10)/10).replace(".",","))}</b></span>`).join("")||`<span class="sx-ch"><small>${LS("Aucun bonus pour l'instant","No bonus yet")}</small></span>`;
+ return `<header class="sx-hd"><button type="button" class="sx-bk" data-a="tab" data-t="gear">${ico("chevl")}<span>${LS("Retour","Back")}</span></button><div class="sx-tt"><h2>${LS("Constellation","Constellation")}</h2><small>${fmt(ko)} K.O. · ${got} / ${tot} ${LS("étoiles","stars")} · ${Math.floor(got/tot*100)} %</small></div><div class="sx-ctl"><button type="button" data-sk="z-" aria-label="Zoom -">${ico("minus")}</button><button type="button" data-sk="z+" aria-label="Zoom +">${ico("plus")}</button><button type="button" data-sk="ctr" title="${LS("Centrer","Center")}">${ico("target")}</button></div></header>
+ <div class="sx-bar big"><i style="width:${(got/tot*100).toFixed(1)}%"></i></div>
+ <div class="sx-map sx-sky" id="sxmap"><div class="sx-neb"></div><div class="sx-cv" style="width:calc(${SKW2}*var(--z)*1px);height:calc(${SKW2}*var(--z)*1px)"><svg class="sx-sv" viewBox="0 0 ${SKW2} ${SKW2}" preserveAspectRatio="none">${ln}</svg>${gu}${nodes}</div></div>
+ <footer class="sx-ft"><div class="sx-det" id="sxdet">${skDet(sel)}</div><div class="sx-chs">${chips}</div></footer>`};
+skCenter=function(){const m=$("sxmap");if(!m)return;const z=skZs[skZi()];m.scrollLeft=(SKW2/2)*z-m.clientWidth/2;m.scrollTop=(SKW2/2)*z-m.clientHeight/2};
+{const st=document.createElement("style");st.textContent=`
+#skfs{background:radial-gradient(ellipse at 50% 40%,#1c1a52 0,#0a0b26 55%,#03040e 100%)}
+.sx-sky{position:relative;background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff9,transparent),radial-gradient(1.5px 1.5px at 70% 30%,#fff,transparent),radial-gradient(1px 1px at 85% 80%,#fffa,transparent),radial-gradient(1px 1px at 55% 55%,#fff7,transparent),radial-gradient(1px 1px at 20% 90%,#fff8,transparent);background-size:240px 240px;background-attachment:local;animation:sxdrift 120s linear infinite}
+@keyframes sxdrift{to{background-position:240px 120px}}
+.sx-neb{position:sticky;left:0;top:0;width:100%;height:0;pointer-events:none}
+.sx-sky .sx-cv{background:radial-gradient(30% 25% at 30% 30%,#7c3aed26,transparent),radial-gradient(30% 25% at 70% 65%,#0ea5e926,transparent),radial-gradient(20% 20% at 60% 25%,#ec48991a,transparent)}
+.sx-sv line{stroke:#ffffff26;stroke-width:.05;stroke-dasharray:.12 .12}
+.sx-sv line.on{stroke:var(--c);stroke-width:.07;stroke-dasharray:none;filter:drop-shadow(0 0 .12px var(--c))}
+.sx-comet{fill:#fff;filter:drop-shadow(0 0 .2px #fff)}
+.sx-n{border-radius:50%!important;background:radial-gradient(circle,#1e293b,#0b1026)!important;border:2px solid #334155!important}
+.sx-n .sx-it{width:62%;height:62%;image-rendering:pixelated;filter:grayscale(1) brightness(.5);position:relative;z-index:1}
+.sx-n.on{background:radial-gradient(circle,color-mix(in srgb,var(--c) 70%,#fff),var(--c) 45%,color-mix(in srgb,var(--c) 30%,#000))!important;border-color:#fff!important;box-shadow:0 0 18px var(--c),0 0 40px color-mix(in srgb,var(--c) 50%,transparent);animation:sxtw 2.4s ease-in-out infinite;animation-delay:var(--dl)}
+.sx-n.on .sx-it{filter:drop-shadow(0 2px 0 #0007)}
+@keyframes sxtw{50%{box-shadow:0 0 8px var(--c),0 0 18px color-mix(in srgb,var(--c) 40%,transparent)}}
+.sx-n.nx{border-color:var(--c)!important;border-style:dashed!important}
+.sx-n.nx .sx-it{filter:grayscale(.3)}
+.sx-n.sel{outline:none!important}.sx-n.sel::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid #fff;animation:sxping 1.4s ease-out infinite}
+@keyframes sxping{from{opacity:1;transform:scale(.9)}to{opacity:0;transform:scale(1.4)}}
+.sx-gd{position:absolute;left:calc(var(--x)*var(--z)*1px);top:calc(var(--y)*var(--z)*1px);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;text-align:center}
+.sx-gd img{width:calc(var(--z)*1.4px);image-rendering:pixelated;filter:drop-shadow(0 6px 0 #0007) drop-shadow(0 0 14px color-mix(in srgb,var(--c) 60%,transparent));animation:sxbob 3s ease-in-out infinite}
+@keyframes sxbob{50%{transform:translateY(-8px)}}
+.sx-gd b{font:800 15px "Baloo 2",Nunito,sans-serif;color:var(--c);text-shadow:0 2px 0 #000}.sx-gd small{color:#cbd5e1;font-size:11px;font-weight:800}
+.sx-dti .sx-it,.sx-ch .sx-it{width:30px;height:30px;image-rendering:pixelated}.sx-ch .sx-it{width:22px;height:22px}
+.sx-ch.nw{border-color:#facc15!important;box-shadow:0 0 10px #facc1544}
+.sx-new{font-style:normal;font-size:10px;background:#facc15;color:#1b1233;border-radius:999px;padding:1px 7px;vertical-align:2px}`;document.head.appendChild(st)}
 /* ===== Wiki : pages Failles, Entraînement, Compétences + mises à jour ===== */
 {
  const add=(grp,keys)=>{const g=WKG.find(x=>x[0]==grp);keys.forEach(k=>{if(!g[3].includes(k))g[3].push(k)})};
@@ -15783,6 +15849,7 @@ const UPD=[
   ["new","Boutique Four Seasons","Le raccourci Halloween en haut à gauche devient la boutique Four Seasons : Phyllali Printemps, Givrali Hiver, Aquali Été et Noctali Automne, en vente en gemmes. Ce sont les formes de saison les plus fortes, et on ne les trouve que là.","Four Seasons shop","The Halloween shortcut at the top left becomes the Four Seasons shop: Spring Leafeon, Winter Glaceon, Summer Vaporeon and Autumn Umbreon, sold for gems. They are the strongest seasonal forms, and only available there."],
   ["new","39 nouvelles CT","La boutique de CT reçoit 39 nouvelles CT : Vitesse Extrême, Close Combat, Machination, Séisme, Pouvoir Lunaire, Lance-Flammes, Laser Glace, Abri, Piège de Roc, Câlinerie, Ball'Ombre et bien d’autres. Leur prix et l’étage requis dépendent de leur utilité. Abri bloque le prochain coup reçu, et Piège de Roc fait subir +20 % de dégâts à l’adversaire.","39 new TMs","The TM shop gets 39 new TMs: Extreme Speed, Close Combat, Nasty Plot, Earthquake, Moonblast, Flamethrower, Ice Beam, Protect, Stealth Rock, Play Rough, Shadow Ball and many more. Their price and required floor depend on how useful they are. Protect blocks the next hit, and Stealth Rock makes the foe take +20% damage."],
   ["imp","Jusqu’à 4 CT par Pokémon","Chaque attaque d’un Pokémon peut maintenant être remplacée par une CT, donc jusqu’à 4 CT à la fois. Les cases se choisissent dans la fiche du Pokémon (onglets Capacités et Objet). Retirer une CT la remet dans le sac. La CT déjà apprise est gardée dans sa case.","Up to 4 TMs per Pokémon","Each of a Pokémon’s moves can now be replaced by a TM, so up to 4 TMs at once. Pick the slots in the Pokémon sheet (Moves and Item tabs). Removing a TM puts it back in the bag. The TM already learned stays in its slot."],
+  ["new","Arbre de compétences : la Constellation","L’arbre devient une constellation : chaque case est une étoile qui s’allume, avec l’objet de sa statistique, une comète vers la prochaine case et un gardien au bout de chaque branche (Lucario, Persian, Alakazam, Arcanin, Mew, Jirachi…). Les 6 branches principales gagnent les paliers V, VI et ★★, jusqu’à 650 000 K.O., avec 6 nouvelles statistiques : dégâts en raid, gains hors ligne, prix du labo, dégâts contre les boss, pension plus rapide et dégâts des formes spéciales.","Skill tree: the Constellation","The tree becomes a constellation: each node is a star that lights up, with its stat’s item, a comet toward the next node and a guardian at the end of each branch (Lucario, Persian, Alakazam, Arcanine, Mew, Jirachi…). The 6 main branches get tiers V, VI and ★★, up to 650,000 KOs, with 6 new stats: raid damage, offline earnings, lab prices, damage against bosses, faster daycare and special form damage."],
   ["new","Nouvel exclusif : Xerneas Pipomiel","Fée et Insecte. Il s’obtient en finissant 4 nouvelles quêtes spéciales dans l’onglet Quêtes, avec 2 Master Balls et 200 Super Bonbons.","New exclusive: Honey Xerneas","Fairy and Bug. Earn it by finishing 4 new special quests in the Quests tab, with 2 Master Balls and 200 Rare Candies."],
   ["new","Nouvel exclusif : Ho-Oh Flamboyant et l’Autel de Renaissance","Feu et Vol, un peu plus fort qu’Amphinobi Lagon. Il renaît sur l’Autel de Renaissance (onglet Prestige) : les doublons de type Feu nourrissent la flamme. Ceux qui dépassent la limite de doublons y partent tout seuls au lieu d’être perdus, et tu peux brûler ceux qui dépassent le seuil des 5 étoiles. À 100 000 de flamme, Ho-Oh renaît.","New exclusive: Blazing Ho-Oh and the Altar of Rebirth","Fire and Flying, a little stronger than Lagoon Greninja. It is reborn on the Altar of Rebirth (Prestige tab): Fire-type duplicates feed the flame. Those over the duplicate limit go there on their own instead of being lost, and you can burn those beyond the 5-star threshold. At 100,000 flame, Ho-Oh is reborn."]]},
  {d:"2026-11-08",t:["Correctif Pokédex","Pokédex fix"],e:[
