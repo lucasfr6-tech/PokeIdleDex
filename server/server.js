@@ -182,6 +182,7 @@ const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.
 /* Fil d'activité public : taille bornée, identité du classement, horodatage serveur. */
 const ACT_EPOCH=EP+'.'+FULL_RESET;
 if(!db.activity||db.activity.epoch!==ACT_EPOCH)db.activity={epoch:ACT_EPOCH,events:[],seen:{},joins:Object.fromEntries(Object.keys(db.lb).map(k=>[k,1])),boss:{}};
+const JP_SEED=1e9,JP_MAX=1e13,JP_CUT=.05,JP_PRICE={b:5e6,s:2e7,o:6e7,p:1e8},JP_ODDS={b:1/60000,s:1/20000,o:1/8000,p:1/4000};
 const ACT_RARE=new Set([5,6,7,8,9,10]);
 const actName=d=>pidCensor(String(d.n||'Dresseur').replace(/[<>"&]/g,'').trim().slice(0,24))||'Dresseur';
 function actAdd(e,key){
@@ -292,6 +293,20 @@ http.createServer((req,res)=>{
   const c=g&&g.col&&g.col[id];if(!c){send(res,404,{e:'nomon'});return}
   const pick={};['l','mx','n','st','iv','ev','it','ha','ai','mv','src','mi','zi','sh','al','mf','dy','q'].forEach(k=>{if(c[k]!==undefined)pick[k]=c[k]});
   const r={ok:1,i:id,c:pick};BPDC.set(uid,{t:a.t,i:id,r});if(BPDC.size>2000)BPDC.clear();send(res,200,r);return}
+ /* Jackpot commun du casino : une part de chaque ticket remplit une cagnotte partagée ; le tirage se fait ici, pas dans le navigateur */
+ if(u.pathname=='/api/jp'){
+  if(!db.jp||typeof db.jp!='object')db.jp={v:JP_SEED,w:null,n:0};
+  if(req.method=='GET'){if(limited(ip+'jp',120)){send(res,429,{e:'rate'});return}send(res,200,{ok:1,v:Math.round(db.jp.v),w:db.jp.w,n:db.jp.n|0});return}
+  if(req.method=='POST'){
+   if(limited(ip+'jpw',40)){send(res,429,{e:'rate'});return}let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
+   req.on('end',()=>{let d;try{d=JSON.parse(body)}catch(e){send(res,400,{e:'json'});return}if(!d||!epOk(d)){send(res,409,{e:'ep'});return}
+    const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid||hidden(uid)){send(res,403,{e:'auth'});return}if(limited(uid+'jp',12)){send(res,429,{e:'rate'});return}
+    const k=String(d.k||''),n=+d.n;if(!JP_PRICE[k]||![1,10,25].includes(n)){send(res,400,{e:'bad'});return}
+    const J=db.jp;J.v=Math.min(JP_MAX,J.v+JP_PRICE[k]*n*JP_CUT);J.n=(J.n|0)+n;
+    const q=1-Math.pow(1-JP_ODDS[k],n);let win=0;
+    if(Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
+    dirty=1;send(res,200,{ok:1,v:Math.round(J.v),win,w:J.w})});return}
+  send(res,405,{e:'method'});return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
   if(u.pathname==='/api/guild/transfer'&&req.method==='POST'){
    if(limited(ip+'guild-transfer',20)){send(res,429,{e:'rate'});return}
