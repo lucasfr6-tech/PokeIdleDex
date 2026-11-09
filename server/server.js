@@ -182,7 +182,7 @@ const clean=(v,k)=>{if(typeof v=='string')return CK.has(k)&&k!='t0'?pidCensor(v.
 /* Fil d'activité public : taille bornée, identité du classement, horodatage serveur. */
 const ACT_EPOCH=EP+'.'+FULL_RESET;
 if(!db.activity||db.activity.epoch!==ACT_EPOCH)db.activity={epoch:ACT_EPOCH,events:[],seen:{},joins:Object.fromEntries(Object.keys(db.lb).map(k=>[k,1])),boss:{}};
-const JP_SEED=1e11,JP_CUT=.05,JP_PRICE={b:5e8,s:2e9,o:6e9,p:1e10},JP_ODDS={b:1/60000,s:1/20000,o:1/8000,p:1/4000};
+const JP_SEED=1e11,JP_CUT=.05,JP_PRICE={b:5e8,s:2e9,o:6e9,p:1e10,d:2e11},JP_ODDS={b:1/60000,s:1/20000,o:1/8000,p:1/4000,d:1/1500};
 const ACT_RARE=new Set([5,6,7,8,9,10]);
 const actName=d=>pidCensor(String(d.n||'Dresseur').replace(/[<>"&]/g,'').trim().slice(0,24))||'Dresseur';
 function actAdd(e,key){
@@ -300,11 +300,12 @@ http.createServer((req,res)=>{
   if(req.method=='POST'){
    if(limited(ip+'jpw',40)){send(res,429,{e:'rate'});return}let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
    req.on('end',()=>{let d;try{d=JSON.parse(body)}catch(e){send(res,400,{e:'json'});return}if(!d||!epOk(d)){send(res,409,{e:'ep'});return}
-    const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid||hidden(uid)){send(res,403,{e:'auth'});return}if(limited(uid+'jp',12)){send(res,429,{e:'rate'});return}
-    const k=String(d.k||''),n=+d.n;if(!JP_PRICE[k]||![1,10,25].includes(n)){send(res,400,{e:'bad'});return}
+    const uid=mkAuth(d.uid,req.headers['x-token']);if(!uid){send(res,403,{e:'auth'});return}if(limited(uid+'jp',30)){send(res,429,{e:'rate'});return}
+    /* un compte signalé par l'anti-triche remplit quand même la cagnotte, mais ne peut pas la gagner (sauf les admins) */const canWin=!hidden(uid)||ADMIN_UIDS.has(uid);
+    const k=String(d.k||''),n=+d.n;if(!JP_PRICE[k]||!Number.isInteger(n)||n<1||n>1000){send(res,400,{e:'bad'});return}
     const J=db.jp;J.v=J.v+JP_PRICE[k]*n*JP_CUT; /* pas de plafond : la cagnotte monte tant que personne ne gagne */J.n=(J.n|0)+n;
     const q=1-Math.pow(1-JP_ODDS[k],n);let win=0;
-    if(Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
+    if(canWin&&Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
     dirty=1;send(res,200,{ok:1,v:Math.round(J.v),win,w:J.w})});return}
   send(res,405,{e:'method'});return}
  if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
