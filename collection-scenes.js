@@ -6,14 +6,17 @@ const AB=[
  ['Aura de Lucario','Lucario aura'],['Dragon des mers','Sea dragon'],['Fureur des abysses','Fury of the deep'],['Désastre blanc','White calamity'],
  ['Foudre cosmique','Cosmic lightning'],['Brasier de Dracaufeu','Charizard blaze'],['Forêt des Pikachu','Pikachu forest'],['Arc-en-ciel chibi','Chibi rainbow'],
  ['Bataille d’eau','Splash party'],['Motif Mimiqui','Mimikyu pattern'],['Genèse d’Arceus','Arceus genesis'],['Rencontre au zénith','Zenith encounter'],
- ['Festin de Chochodile','Fuecoco feast'],['Écorcia au crépuscule','Ecruteak at dusk']
+ ['Festin de Chochodile','Fuecoco feast'],['Écorcia au crépuscule','Ecruteak at dusk'],
+ ['Team Rocket','Team Rocket']
 ].map((v,i)=>{const k='a'+String(i+1).padStart(2,'0');return {id:k,n:v,kind:'art',img:'img/banners/'+k+'.webp'}});
 B.push(...AB);
 /* Prix : de PMIN (bannière la moins chère) à PMAX (la plus chère), progression géométrique. */
 const PMIN=5e7,PMAX=1e12;
 /* Boutique : uniquement les 18 bannières illustrées. Les anciens décors dessinés restent dans B pour s'afficher chez ceux qui les ont déjà, mais ne sont plus en vente. */
 const SHOP=B.filter(b=>b.img);
-SHOP.forEach((b,i)=>{b.price=Math.round(PMIN*Math.pow(PMAX/PMIN,i/(SHOP.length-1)))});
+/* Les 18 premières gardent leurs prix ; les bannières ajoutées ensuite ont un prix fixé à la main (PFIX). */
+const PFIX={a19:1e12},PN=SHOP.filter(b=>!PFIX[b.id]).length;
+SHOP.forEach((b,i)=>{b.price=PFIX[b.id]||Math.round(PMIN*Math.pow(PMAX/PMIN,i/(PN-1)))});
 const S=[
  ['Grâce éternelle','Eternal grace','✧','engraved'],['Forgé dans l’orage','Forged in thunder','ϟ','metal'],
  ['Pacte de minuit','Midnight pact','☾','wax'],['Serment d’ivoire','Ivory vow','✦','engraved'],
