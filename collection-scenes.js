@@ -7,13 +7,16 @@ const AB=[
  ['Foudre cosmique','Cosmic lightning'],['Brasier de Dracaufeu','Charizard blaze'],['Forêt des Pikachu','Pikachu forest'],['Arc-en-ciel chibi','Chibi rainbow'],
  ['Bataille d’eau','Splash party'],['Motif Mimiqui','Mimikyu pattern'],['Genèse d’Arceus','Arceus genesis'],['Rencontre au zénith','Zenith encounter'],
  ['Festin de Chochodile','Fuecoco feast'],['Écorcia au crépuscule','Ecruteak at dusk'],
- ['Team Rocket','Team Rocket']
+ ['Team Rocket','Team Rocket'],
+ ['Lune de Mew','Mew\'s Moon'],['Amis de Kanto','Kanto Friends'],['Starters chibis','Chibi starters']
 ].map((v,i)=>{const k='a'+String(i+1).padStart(2,'0');return {id:k,n:v,kind:'art',img:'img/banners/'+k+'.webp'}});
 B.push(...AB);
+/* a20 à a22 : récompenses du Contre-la-montre (1er, 2e, 3e), pas en vente */
+B.forEach(b=>{if(['a20','a21','a22'].includes(b.id))b.rw=1});
 /* Prix : de PMIN (bannière la moins chère) à PMAX (la plus chère), progression géométrique. */
 const PMIN=5e7,PMAX=1e12;
 /* Boutique : uniquement les 18 bannières illustrées. Les anciens décors dessinés restent dans B pour s'afficher chez ceux qui les ont déjà, mais ne sont plus en vente. */
-const SHOP=B.filter(b=>b.img);
+const SHOP=B.filter(b=>b.img&&!b.rw);
 /* Les 18 premières gardent leurs prix ; les bannières ajoutées ensuite ont un prix fixé à la main (PFIX). */
 const PFIX={a19:1e12},PN=SHOP.filter(b=>!PFIX[b.id]).length;
 SHOP.forEach((b,i)=>{b.price=PFIX[b.id]||Math.round(PMIN*Math.pow(PMAX/PMIN,i/(PN-1)))});
@@ -84,7 +87,7 @@ const origScan=bpScan;bpScan=function(){origScan.apply(this,arguments);const b=G
 const origDoc=lbDoc;lbDoc=function(){const d=origDoc.apply(this,arguments);if(d.bp&&hasScene(d.bp[6])){d.bp[8]=bi(d.bp[6]).id;d.bp[9]=si(d.bp[6]).id}return d};
 const origRank=rkbList;rkbList=function(){let h=origRank.apply(this,arguments);const t=document.createElement('template');t.innerHTML=h;const rows=rkbRows();for(const el of t.content.querySelectorAll('[data-bpr]')){const r=rows[+el.dataset.bpr],b=r?.bp,id=b?.[6];if(!hasScene(id,b?.[8],b?.[9]))continue;const a=art(id,b[8],b[9]);el.classList.add('cs-scene','cs-ranking');el.dataset.csBanner=a.banner.id;el.appendChild(sigNode(a.signature))}return t.innerHTML};
 const origModal=bpModal;bpModal=function(r){origModal.apply(this,arguments);const b=r.bp,id=b?.[6],stage=document.querySelector('#bpdm .bpimg');if(!stage||!hasScene(id,b?.[8],b?.[9]))return;const a=art(id,b[8],b[9]);stage.classList.add('cs-scene','cs-profile');stage.dataset.csBanner=a.banner.id;stage.appendChild(sigNode(a.signature));paint(document.getElementById('bpdm'))};
-let tabCos='banners',cosSearch='';const oldView=vCos;vCos=function(){if(lockOf('cos'))return oldView();const id=cosSel(),active=!!(id&&G.col[id]),state=store(),list=tabCos==='banners'?SHOP:S,owned=tabCos==='banners'?state.bown:state.sown,eq=tabCos==='banners'?state.beq:state.seq,a=active?art(id):null;
+let tabCos='banners',cosSearch='';const oldView=vCos;vCos=function(){if(lockOf('cos'))return oldView();const id=cosSel(),active=!!(id&&G.col[id]),state=store(),list=tabCos==='banners'?SHOP.concat(B.filter(b=>b.rw&&state.bown[b.id])):S,owned=tabCos==='banners'?state.bown:state.sown,eq=tabCos==='banners'?state.beq:state.seq,a=active?art(id):null;
 const tabs=`<div class="cs-tabs"><button data-cs-tab="banners" class="${tabCos==='banners'?'on':''}">${LS('Bannières','Banners')} · ${SHOP.length}</button><button data-cs-tab="signatures" class="${tabCos==='signatures'?'on':''}">${LS('Signatures','Signatures')} · 20</button><button data-cs-tab="frames">${LS('Cadres de profil','Profile frames')}</button></div>`;
 if(tabCos==='frames'){COSV='fr';return `<div class="cs-legacy-back"><button data-cs-tab="banners">← ${LS('Bannières et signatures','Banners and signatures')}</button></div>`+oldView().replace(/<div class="cos-tabs">[\s\S]*?<\/div>/,'').replace(/<h1>Collections<\/h1>/,`<h1>${LS('Cadres de profil','Profile frames')}</h1>`)}
 const pk=ids().filter(i=>!cosSearch||norm(nm(i)).includes(norm(cosSearch))).sort((x,y)=>base(y)-base(x)).slice(0,150).map(i=>`<button data-cs-poke="${i}" class="${id===i?'on':''}">${sp(i,G.col[i].sh)}<span>${dn(i)}</span></button>`).join('');
