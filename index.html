@@ -12616,7 +12616,7 @@ BOOST.push({n:"Équilibre",p:1e10,r:[0,0,10,38,40,11.91,.09],min:4,cnt:8,a:"#7c3
 {const m=EXT.find(t=>t.mega);if(m)m.rq=40}
 /* ===== Numéro de version, tout petit, en haut à droite (au-dessus de Courrier) ===== */
 /* Barre des membres du Discord (compteur public de l'invitation, mis à jour toutes les minutes) */
-(function(){const CODE="AP3Y2YQav",GOAL=100,KEY="pid_dcn";let N=0;try{N=+localStorage.getItem(KEY)||0}catch(e){}
+(function(){const CODE="AP3Y2YQav",GOAL=130,KEY="pid_dcn";let N=0;try{N=+localStorage.getItem(KEY)||0}catch(e){}
  const st=document.createElement("style");st.textContent=`#dcb{display:none;position:relative;z-index:30;margin:2px auto 8px;width:min(520px,calc(100% - 16px));text-decoration:none;color:#fff;font-family:Nunito,system-ui,sans-serif}#dcb.on{display:block}
 #dcb .dcw{position:relative;height:26px;border-radius:13px;overflow:hidden;border:2px solid #5865f2;background:#0b1030;box-shadow:0 0 14px #5865f288}
 #dcb .dcf{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#5865f2,#38bdf8);transition:width .8s}
@@ -12625,7 +12625,7 @@ BOOST.push({n:"Équilibre",p:1e10,r:[0,0,10,38,40,11.91,.09],min:4,cnt:8,a:"#7c3
 @media(max-width:560px){#dcb .dct{font-size:11px}}`;document.head.appendChild(st);
  const el=document.createElement("a");el.id="dcb";el.href="https://discord.gg/"+CODE;el.target="_blank";el.rel="noopener";
  const draw=()=>{if(!N){el.classList.remove("on");return}const done=N>=GOAL,pc=Math.min(100,N/GOAL*100);
-  el.innerHTML=`<div class="dcw"><div class="dcf" style="width:${pc}%"></div><div class="dct"><span>${LS("Membres du Discord","Discord members")}</span><b>${N} / ${GOAL}</b></div></div><small>${done?LS("100 membres atteints, merci à tous !","100 members reached, thank you all!"):LS("Énorme code cadeau à "+GOAL+" membres !","Huge gift code at "+GOAL+" members!")}</small>`;el.classList.add("on")};
+  el.innerHTML=`<div class="dcw"><div class="dcf" style="width:${pc}%"></div><div class="dct"><span>${LS("Membres du Discord","Discord members")}</span><b>${N} / ${GOAL}</b></div></div><small>${done?LS(GOAL+" membres atteints, merci à tous !",GOAL+" members reached, thank you all!"):LS("100 membres atteints, merci ! Prochain objectif : "+GOAL+" membres","100 members reached, thanks! Next goal: "+GOAL+" members")}</small>`;el.classList.add("on")};
  const mount=()=>{const m=document.querySelector("main");if(!m||el.isConnected)return;m.insertBefore(el,m.firstChild);draw()};
  const pull=async()=>{try{const r=await fetch("https://discord.com/api/v10/invites/"+CODE+"?with_counts=true",{cache:"no-store"});if(!r.ok)return;const j=await r.json(),n=+j.approximate_member_count;if(n>0){N=n;try{localStorage.setItem(KEY,String(n))}catch(e){}draw()}}catch(e){}};
  if(document.readyState!="loading")mount();else document.addEventListener("DOMContentLoaded",mount);
@@ -15862,6 +15862,9 @@ const UPD=[
   ["new","Nouveau mode : Contre-la-montre","Dans Mode de jeu. Chaque semaine, tout le monde a la même équipe imposée de 6 Pokémon et les mêmes 100 étages. Choisis le bon Pokémon contre chaque adversaire (touches 1 à 6) : le plus rapide de la semaine gagne. La première course terminée de la semaine donne des Master Balls et des Super Bonbons, plus encore si tu vas vite. Classement de la semaine dans le mode.","New mode: Time trial","In Game modes. Every week, everyone gets the same imposed team of 6 Pokémon and the same 100 floors. Pick the right Pokémon against each foe (keys 1 to 6): the fastest of the week wins. The week’s first finished run gives Master Balls and Rare Candies, more if you are fast. Weekly ranking inside the mode."],
   ["new","Nouvel exclusif : Xerneas Pipomiel","Fée et Insecte. Il s’obtient en finissant 4 nouvelles quêtes spéciales dans l’onglet Quêtes, avec 2 Master Balls et 200 Super Bonbons.","New exclusive: Honey Xerneas","Fairy and Bug. Earn it by finishing 4 new special quests in the Quests tab, with 2 Master Balls and 200 Rare Candies."],
   ["new","Nouvel exclusif : Ho-Oh Flamboyant et l’Autel de Renaissance","Feu et Vol, un peu plus fort qu’Amphinobi Lagon. Il renaît sur l’Autel de Renaissance (onglet Prestige) : les doublons de type Feu nourrissent la flamme. Ceux qui dépassent la limite de doublons y partent tout seuls au lieu d’être perdus, et tu peux brûler ceux qui dépassent le seuil des 5 étoiles. À 100 000 de flamme, Ho-Oh renaît.","New exclusive: Blazing Ho-Oh and the Altar of Rebirth","Fire and Flying, a little stronger than Lagoon Greninja. It is reborn on the Altar of Rebirth (Prestige tab): Fire-type duplicates feed the flame. Those over the duplicate limit go there on their own instead of being lost, and you can burn those beyond the 5-star threshold. At 100,000 flame, Ho-Oh is reborn."]]},
+ {d:"2026-11-09",t:["Merci pour les 100 membres du Discord","Thank you for 100 Discord members"],e:[
+  ["new","Code cadeau MERCI100","Le Discord a dépassé les 100 membres, merci à tous ! Entre le code MERCI100 dans le Courrier : 15 Master Balls, 50 T de pièces, 500 gemmes, Reshiram Ghastly (exclusif d’Halloween), 15 de chaque objet de combat, et 300 cristaux Éclat, 200 Prisme et 100 Astral.","Gift code MERCI100","The Discord passed 100 members, thank you all! Enter the code MERCI100 in the Mail: 15 Master Balls, 50 T coins, 500 gems, Ghastly Reshiram (Halloween exclusive), 15 of each battle item, and 300 Shard, 200 Prism and 100 Astral crystals."],
+  ["imp","Barre du Discord : objectif 130 membres","La barre des membres du Discord vise maintenant 130 membres.","Discord bar: 130-member goal","The Discord member bar now aims for 130 members."]]},
  {d:"2026-11-08",t:["Correctif Pokédex","Pokédex fix"],e:[
   ["new","Giveaway sur le Discord","Une annonce s’affiche au lancement du jeu jusqu’au mardi 10 novembre à 13 h : un giveaway est en cours sur le Discord. Elle peut être masquée avec « Ne plus afficher cette annonce ».","Giveaway on Discord","An announcement shows when the game starts until Tuesday, November 10 at 1 pm (Paris): a giveaway is running on Discord. It can be hidden with “Don’t show this announcement again”."],
   ["fix","Pokédex : où trouver Oyacata","La fiche d’Oyacata indiquait encore « Raids et expéditions uniquement ». Elle indique maintenant « Apparaît dès l’étage 1991 », et le bouton mène à cet étage.","Pokédex: where to find Dondozo","Dondozo’s sheet still said “Raids and expeditions only”. It now says “Appears from floor 1991”, and the button leads there."]]},
@@ -18581,7 +18584,7 @@ function gawShow(){if(document.getElementById("gaw"))return;const url=(typeof PI
  o._t=setInterval(()=>{const b=document.getElementById("gawcd");if(b)b.textContent=gawLeft();if(Date.now()>=GAW_END)close()},20000);
  document.body.appendChild(o);try{sfx("big")}catch(e){}}
 {let tries=0;const t=setInterval(()=>{tries++;if(Date.now()>=GAW_END||gawOff()||tries>200){clearInterval(t);return}
- const busy=document.querySelector("#lnd,#tur.on,.pid-dialog-overlay,#pnu,#lgfx,#nwr.on,#wmr")||(typeof OPEN!="undefined"&&OPEN);if(busy||document.hidden)return;clearInterval(t);setTimeout(gawShow,600)},2000)}
+ const busy=document.querySelector("#lnd,#tur.on,.pid-dialog-overlay,#pnu,#lgfx,#nwr.on,#wmr,#dcm")||(typeof OPEN!="undefined"&&OPEN);if(busy||document.hidden)return;clearInterval(t);setTimeout(gawShow,600)},2000)}
 {const st=document.createElement("style");st.textContent=`
 #gaw{position:fixed;inset:0;z-index:100030;display:grid;place-items:center;padding:16px;background:#05031acc;backdrop-filter:blur(6px);animation:gawF .3s ease-out;font-family:Nunito,system-ui,sans-serif;color:#fff}
 @keyframes gawF{from{opacity:0}}
@@ -18608,6 +18611,54 @@ function gawShow(){if(document.getElementById("gaw"))return;const url=(typeof PI
 .gaw-no{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:#c7d2fe;cursor:pointer}.gaw-no input{width:18px;height:18px;accent-color:#7c83ff}
 @media(max-width:640px){.gaw-mid{padding:24px 18px 120px}.gaw-mon{width:76px;height:76px}.gaw-art{min-height:440px}}
 @media(prefers-reduced-motion:reduce){#gaw *{animation:none!important}}`;document.head.appendChild(st)}
+/* ===== Code cadeau MERCI100 : merci pour les 100 membres du Discord, et annonce au lancement ===== */
+{const rw=()=>[["i","master-ball",15],["mx",5e13],["g",500],["spx",90015],["tc",0,300],["tc",1,200],["tc",2,100]].concat(["bi-atk","bi-xp","bi-coin","bi-find","bi-mut","bi-cap"].map(k=>["i",k,15]));
+ GIFT_CODES["MERCI100"]={t:"Merci pour les 100 membres du Discord",txt:"Merci à tous pour les 100 membres du Discord ! Voici votre récompense : 15 Master Balls, 50 T de pièces, 500 gemmes, Reshiram Ghastly, 15 de chaque objet de combat et des cristaux de trait (300 Éclat, 200 Prisme, 100 Astral).",rw:rw(),fullCaps:1,minLv:1}}
+const DCM_CODE="MERCI100",DCM_END=Date.UTC(2026,10,30,22,59,0),DCM_KEY="pid_dcm100";
+function dcmOff(){try{if(localStorage.getItem(DCM_KEY)==="1")return true}catch(e){}return !!(typeof G!="undefined"&&G&&G.codes&&G.codes[DCM_CODE])}
+function dcmShow(){if(document.getElementById("dcm"))return;
+ const L=[["sp",90015,LS("Reshiram Ghastly","Ghastly Reshiram"),LS("exclusif d'Halloween","Halloween exclusive")],["it","master-ball","15",LS("Master Balls","Master Balls")],["ic","coin","50 T",LS("pièces","coins")],["ic","gem","500",LS("gemmes","gems")],["ic","sword","15",LS("de chaque objet de combat","of each battle item")],["ic","sparkle","300 · 200 · 100",LS("cristaux Éclat · Prisme · Astral","Shard · Prism · Astral crystals")]];
+ const o=document.createElement("div");o.id="dcm";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");
+ o.innerHTML=`<div class="dcm-c"><button class="dcm-x" type="button" aria-label="${LS("Fermer","Close")}">×</button>
+ <div class="dcm-hd"><i class="dcm-rays"></i>${Array.from({length:16},(_,i)=>`<s style="left:${(i*37)%96+2}%;top:${(i*53)%88+6}%;animation-delay:${(i*.23).toFixed(2)}s"></s>`).join("")}
+  <span class="dcm-tag">DISCORD</span><h2>${LS("Merci à tous !","Thank you all!")}</h2><p>${LS("Le Discord PokeIdleDex a dépassé les 100 membres. Voici votre récompense :","The PokeIdleDex Discord passed 100 members. Here is your reward:")}</p>
+  <button class="dcm-code" type="button" title="${LS("Copier","Copy")}"><small>${LS("CODE CADEAU","GIFT CODE")}</small><b>${DCM_CODE}</b><em>${LS("Toucher pour copier","Tap to copy")}</em></button></div>
+ <div class="dcm-rw">${L.map(x=>`<div class="dcm-i">${x[0]=="sp"?`<span class="dcm-sp">${sp(x[1],0)}</span>`:x[0]=="it"?`<span class="dcm-ic">${ic(x[1],IT[x[1]].img)}</span>`:`<span class="dcm-ic">${ico(x[1])}</span>`}<span><b>${x[2]}</b><small>${x[3]}</small></span></div>`).join("")}</div>
+ <div class="dcm-ft"><button class="dcm-go" type="button">${LS("Récupérer maintenant","Claim now")}</button>
+ <label class="dcm-no"><input type="checkbox" id="dcmno"> ${LS("Ne plus afficher cette annonce","Don't show this announcement again")}</label></div></div>`;
+ const keep=()=>{try{if(document.getElementById("dcmno")?.checked)localStorage.setItem(DCM_KEY,"1")}catch(e){}};
+ const close=()=>{keep();o.remove()};
+ o.addEventListener("click",async e=>{if(e.target===o||e.target.closest(".dcm-x")){close();return}
+  const c=e.target.closest(".dcm-code");if(c){try{await navigator.clipboard.writeText(DCM_CODE);c.querySelector("em").textContent=LS("Copié !","Copied!")}catch(x){const r=document.createRange();r.selectNodeContents(c.querySelector("b"));const s=getSelection();s.removeAllRanges();s.addRange(r)}return}
+  if(e.target.closest(".dcm-go")){try{localStorage.setItem(DCM_KEY,"1")}catch(x){}o.remove();try{if(window.mailOpen){mailOpen();const i=document.getElementById("mlin"),b=document.querySelector('[data-ml="code"]');if(i&&b){i.value=DCM_CODE;b.click()}}}catch(x){}}});
+ document.addEventListener("keydown",function k(e){if(e.key=="Escape"&&document.getElementById("dcm")){close();document.removeEventListener("keydown",k)}});
+ document.body.appendChild(o);try{sfx("big")}catch(e){}}
+{let tries=0;const t=setInterval(()=>{tries++;if(Date.now()>=DCM_END||dcmOff()||tries>300){clearInterval(t);return}
+ const busy=document.querySelector("#lnd,#tur.on,.pid-dialog-overlay,#pnu,#lgfx,#nwr.on,#wmr,#gaw,#mlr.on")||(typeof OPEN!="undefined"&&OPEN);if(busy||document.hidden)return;clearInterval(t);setTimeout(dcmShow,600)},2000)}
+{const st=document.createElement("style");st.textContent=`
+#dcm{position:fixed;inset:0;z-index:100030;display:grid;place-items:center;padding:16px;background:#05031acc;backdrop-filter:blur(6px);animation:gawF .3s ease-out;font-family:Nunito,system-ui,sans-serif;color:#fff}
+.dcm-c{position:relative;width:min(720px,100%);max-height:94vh;overflow:auto;border-radius:28px;border:4px solid #a5b4fc;background:#1e1b4b;box-shadow:0 0 0 4px #3730a3,0 0 70px #5865f2aa,0 30px 90px #000c;animation:gawP .5s cubic-bezier(.2,1.4,.4,1)}
+.dcm-x{position:absolute;right:14px;top:14px;z-index:5;width:40px;height:40px;border-radius:13px;border:3px solid #fff6;background:#0007;color:#fff;font:900 22px Nunito,sans-serif;cursor:pointer}
+.dcm-hd{position:relative;overflow:hidden;text-align:center;padding:30px 20px 24px;background:radial-gradient(circle at 50% 35%,#7c83ff,#5865f2 40%,#312e81 85%)}
+.dcm-hd>*:not(.dcm-rays):not(s){position:relative;z-index:2}
+.dcm-rays{position:absolute;left:50%;top:40%;width:1400px;height:1400px;margin:-700px;background:repeating-conic-gradient(#ffffff1f 0 6deg,transparent 6deg 18deg);animation:gawS 18s linear infinite}
+.dcm-hd s{position:absolute;width:8px;height:8px;border-radius:2px;background:#fde68a;opacity:.0;animation:dcmC 2.4s ease-in-out infinite}.dcm-hd s:nth-of-type(3n){background:#f9a8d4}.dcm-hd s:nth-of-type(3n+1){background:#a5f3fc}
+@keyframes dcmC{50%{opacity:1;transform:translateY(-12px) rotate(90deg)}}
+.dcm-tag{display:inline-block;font-weight:900;font-size:13px;letter-spacing:.2em;padding:5px 16px;border-radius:999px;background:#fff;color:#3730a3;box-shadow:0 4px 0 #0006}
+.dcm-hd h2{margin:10px 0 4px;font:800 clamp(40px,8vw,72px)/1 "Baloo 2",Nunito,sans-serif;background:linear-gradient(180deg,#fff,#fde68a 55%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 #312e81)}
+.dcm-hd p{margin:0 auto 14px;max-width:46ch;font-weight:800;font-size:16px;color:#e0e7ff;text-shadow:0 2px 0 #0007}
+.dcm-code{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:10px 26px;border-radius:18px;border:3px dashed #fde68a;background:#0b1030cc;color:#fff;cursor:pointer;font-family:inherit;animation:gawT 2.4s ease-in-out infinite}
+.dcm-code small{font-size:11px;letter-spacing:.2em;font-weight:900;color:#c7d2fe}.dcm-code b{font:800 34px/1.1 "Baloo 2",Nunito,sans-serif;letter-spacing:3px;color:#fde68a;user-select:all}.dcm-code em{font-style:normal;font-size:11px;font-weight:800;color:#a5b4fc}
+.dcm-rw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:16px}
+.dcm-i{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;border:2px solid #6366f155;background:#0b1030}.dcm-i:first-child{border-color:#ff7518;background:linear-gradient(120deg,#ff751833,#0b1030 70%)}
+.dcm-sp{display:grid;place-items:center;width:54px;height:54px;flex:none;filter:drop-shadow(0 0 8px #ff7518)}.dcm-sp img,.dcm-sp canvas{max-width:54px;max-height:54px}.dcm-ic img{width:30px;height:30px;image-rendering:pixelated}.dcm-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#5865f2;color:#fff;flex:none}.dcm-ic svg{width:24px;height:24px}
+.dcm-i b{display:block;font-weight:900;font-size:15px}.dcm-i small{display:block;font-size:11.5px;color:#c7d2fe;font-weight:800}
+.dcm-ft{display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 16px 18px}
+.dcm-go{padding:14px 28px;border-radius:18px;border:3px solid #fff;background:linear-gradient(180deg,#fde047,#f59e0b);color:#3b2410;font:900 18px Nunito,sans-serif;cursor:pointer;box-shadow:0 6px 0 #92400e}
+.dcm-no{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:#c7d2fe;cursor:pointer}.dcm-no input{width:18px;height:18px}
+@media(max-width:640px){.dcm-rw{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:340px){.dcm-rw{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#dcm *{animation:none!important}}`;document.head.appendChild(st)}
 /* code privé : récompense complète d'un ami validé, bonus permanent (+10 % dégâts, pièces, vitesse) compris */
 {const rw=()=>[["i","master-ball",5],["i","gold-bottle-cap",5],["leg"],["refb",1]].concat(Object.keys(IT).filter(k=>IT[k]&&IT[k].c=="Objets de combat").map(k=>["i",k,5]));
  GIFT_PRIVATE_CODES["408c6fc34bac60f69569dc22d5e23932a01d754c425720d3988b4f87e66c2ccd"]={t:"Parrainage",txt:"Récompense de parrainage d’un ami validé : 5 Master Balls, 5 Capsules d’Or, 5 de chaque objet de combat, un Pokémon LR chromatique muté et +10 % de dégâts, pièces et vitesse d’attaque (permanent).",rw:rw()}}
