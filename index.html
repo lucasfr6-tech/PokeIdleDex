@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261110l"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261110m"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261110l"></script><script>
+</script><script src="shim.js?v=pid-v400-20261110m"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -19374,7 +19374,14 @@ SAFE(()=>{GIFT_CODES["4.0.0"]={t:"Version 4.0.0",txt:"Merci de jouer à PokeIdle
 /* codes privés (non annoncés) : récompense de parrainage pour 2 amis validés, et Ho-Oh Flamboyant avec une animation */
 SAFE(()=>{const bi=Object.keys(IT).filter(k=>IT[k].c=="Objets de combat");
  GIFT_PRIVATE_CODES["7936aa96aa7cc1cfda7fe4ce80e148b4457cf2689487b925c958d4fb2c94e8bd"]={t:"Récompense de parrainage",txt:"Voici ta récompense de parrainage pour tes 2 amis validés : 10 Master Balls, 10 Capsules d’Or, 10 de chaque objet de combat et 2 Pokémon LR chromatiques mutés. Le bonus permanent de +10 % par ami est déjà actif.",rw:[["i","master-ball",10],["i","gold-bottle-cap",10],["lr"],["lr"]].concat(bi.map(k=>["i",k,10])),fullCaps:1,minLv:1};
- GIFT_PRIVATE_CODES["5257e32d247e77966da048792d0d17cdbedcdd5f220f6ac3aaf2cf570098e0b8"]={t:"Ho-Oh Flamboyant",sp:90028,minLv:1}});
+});
+/* code Ho-Oh : marche même si on l'a déjà (une copie en plus, donc des étoiles), avec l'animation */
+SAFE(()=>{const HH="5257e32d247e77966da048792d0d17cdbedcdd5f220f6ac3aaf2cf570098e0b8",prev=window.pidPrivateRedeem;
+ window.pidPrivateRedeem=async function(code){const raw=String(code||"").trim().toUpperCase();
+  if(/^TS4PACK-HOOH-/.test(raw)&&await pidH(raw)===HH){G.codes=G.codes||{};if(G.codes[raw])return LS("Code déjà utilisé.","Code already used.");
+   const had=!!G.col[90028];G.codes[raw]=1;G.hoan=1;spGrant(90028);try{recomp();starSync()}catch(e){}save();try{lbPush(true)}catch(e){}setTimeout(()=>{try{window.hoAnim&&hoAnim()}catch(e){}},150);
+   return LS("Code accepté : Ho-Oh Flamboyant"+(had?" (une copie de plus pour ses étoiles)":"")+" !","Code accepted: Flamboyant Ho-Oh"+(had?" (one more copy for its stars)":"")+"!")}
+  return prev?prev(code):null}});
 SAFE(()=>{const KEY="hoan";
  function hoAnim(){if(document.getElementById("hoan"))return;const o=document.createElement("div");o.id="hoan";
   o.innerHTML=`<div class="hoab"></div><div class="hoar"></div>${Array.from({length:26},(_,i)=>`<i style="--a:${i*13.8}deg;--d:${(i%6)*.09}s;--l:${160+(i*47)%170}px"></i>`).join("")}<div class="hoac"><small>${LS("POKÉMON EXCLUSIF","EXCLUSIVE POKÉMON")}</small><div class="hoas">${sp(90028,0)}</div><h2>Ho-Oh Flamboyant</h2><p>${LS("Il renaît de ses cendres et rejoint ta collection !","It rises from its ashes and joins your collection!")}</p><button type="button" data-hoan="x">${LS("Super !","Awesome!")}</button></div>`;
