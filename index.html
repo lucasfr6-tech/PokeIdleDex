@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261111f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261111g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261111f"></script><script>
+</script><script src="shim.js?v=pid-v400-20261111g"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -7237,7 +7237,8 @@ function rdRewards(R,win){const t=RT[R.tier],r=rdState(),dk=rdPer(),first=win&&r
 /* ---- capture ---- */
 const RCX={ball:"poke-ball",n:0,cap:0,boss:null,tier:0,busy:false,done:false,ok:0,wb:0};
 const rdBalls=()=>RCX.wb?BALLS.filter(b=>b[0]=="great-ball"&&G.inv[b[0]]>0):BALLS.filter(b=>G.inv[b[0]]>0).sort((a,b)=>(BM[b[0]]||1)-(BM[a[0]]||1));
-const rdCapP=ball=>RCX.wb?Math.min(.45,RCX.cap*(window.LUCK?LUCK():1)):ball=="master-ball"?(RCX.tier==6?.1:1):Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk"))*(window.LUCK?LUCK():1));
+/* raid Exclusif : Master Ball 10 %, les autres Balls toujours en dessous (×0,4, 9 % au plus) */
+const rdCapP=ball=>{if(RCX.wb)return Math.min(.45,RCX.cap*(window.LUCK?LUCK():1));if(ball=="master-ball")return RCX.tier==6?.1:1;const p=Math.min(.45,RCX.cap*(BM[ball]||1)*(1+.08*PL("pk"))*(window.LUCK?LUCK():1));return RCX.tier==6?Math.min(.09,p*.4):p};
 function rdCapTraits(){const b=RCX.boss;if(!b)return null;const old=RCX.captureTraits;if(old&&old.boss===b&&old.wb===RCX.wb&&old.tier===RCX.tier)return old;const t=RCX.tier,f=RCX.wb?8:1+t*1.2,mu=wp(MU,x=>x[0]===""?1:f),raw=b.sh?7:MU.indexOf(mu),sz=wp(SZ,x=>SZ.indexOf(x)>=3?(RCX.wb?6:1+t*1.5):1);return RCX.captureTraits={boss:b,tier:t,wb:RCX.wb,mi:raw===7?0:raw,sh:raw===7?1:0,zi:SZ.indexOf(sz),al:1}}
 function rdCapPreviewArt(){const b=RCX.boss,c=rdCapTraits(),asset=vsAsset(b.sp,{...c,mf:b.mf||0,dy:b.form==="dyn"?1:0});return asset?asset.motion:SPR+"pokemon/other/showdown/"+(c.sh?"shiny/":"")+(b.pid||b.sp)+".gif"}
 function rdCapPreviewFallback(){return rdPixF(RCX.boss.pid||RCX.boss.sp,rdCapTraits().sh)}
@@ -15891,6 +15892,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-11",t:["Corrections du 11 novembre","November 11 fixes"],e:[
+  ["fix","Raid Exclusif : chances des Balls","La Master Ball (10 %) est maintenant toujours la meilleure Ball du raid Exclusif : les autres Balls ont des chances réduites et restent en dessous.","Exclusive raid: Ball chances","The Master Ball (10%) is now always the best Ball in the Exclusive raid: other Balls have reduced chances and stay below it."],
   ["fix","Lugulabre Zodiaque et formes à l’évolution","Lugulabre Zodiaque a maintenant aussi le bouton de forme normale : tu peux garder un Lugulabre et des Mélancolux à part (sinon ils sont envoyés dans Lugulabre Zodiaque). Un Pokémon en forme normale qui évolue garde sa forme exclusive (Halloween ou Four Seasons) sur son évolution, au lieu de la perdre. Les boutons indiquent le nom de la forme.","Zodiac Chandelure and forms on evolution","Zodiac Chandelure now also has the normal form button: you can keep a separate Chandelure and Lampent (otherwise they are sent into Zodiac Chandelure). A Pokémon in normal form that evolves keeps its exclusive form (Halloween or Four Seasons) on its evolution instead of losing it. Buttons now show the form’s name."],
   ["imp","Forme normale pour tous les exclusifs","Le bouton « Forme du Pokémon » de la fiche marche aussi pour les exclusifs à part (Dracaufeu Ghastly, Groudon Pinkan…). En forme normale, tu gardes un Pokémon normal à part (niveau 1) pour chasser son chromatique et remplir le Pokédex, au lieu qu’il soit fondu dans l’exclusif. Le bouton est aussi sur la fiche du Pokémon normal pour revenir.","Normal form for all exclusives","The sheet’s “Pokémon form” button also works for standalone exclusives (Ghastly Charizard, Pinkan Groudon…). In normal form you keep a separate normal Pokémon (level 1) to hunt its shiny and fill the Pokédex, instead of it being merged into the exclusive. The button is also on the normal Pokémon’s sheet to switch back."],
   ["fix","Four Seasons : retour à la forme de saison","En forme normale, choisir une saison dans le menu Four Seasons repasse proprement en forme exclusive (comme le bouton de la fiche).","Four Seasons: back to seasonal form","In normal form, picking a season in the Four Seasons menu now switches back to the exclusive form properly (like the sheet button)."],
