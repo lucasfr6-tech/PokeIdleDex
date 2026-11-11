@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261111c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261111d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261111c"></script><script>
+</script><script src="shim.js?v=pid-v400-20261111d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -19416,11 +19416,15 @@ SAFE(()=>{TIT.push(["vip2","Discord Boost ×2","Discord Boost ×2",["#f5b8ff","#
  const HB="64d405d6a6a25888bdf3c6529ebef655de3174ebf99b186a5138f52f946a3dbf",prev=window.pidPrivateRedeem;
  window.pidPrivateRedeem=async function(code){const raw=String(code||"").trim().toUpperCase();
   if(/^TS4PACK-BOOST2-/.test(raw)&&await pidH(raw)===HB){G.codes=G.codes||{};if(G.codes[raw]||(G.vip|0)>=2)return LS("Code déjà utilisé.","Code already used.");
-   G.codes[raw]=1;G.vip=2;G.tt="vip2";try{spGrant(90018);spGrant(90018)}catch(e){}
+   G.codes[raw]=1;G.vip=2;G.tt="vip2";G.vip2rw=1;try{spGrant(90018);spGrant(90018)}catch(e){}
    try{const bi=Object.keys(IT).filter(k=>IT[k].c=="Objets de combat");mailAdd("Merci pour les deux boosts !","Discord Boost ×2",[["i","master-ball",20],["i","gold-bottle-cap",10],["lr"],["lr"]].concat(bi.map(k=>["i",k,10])),"Merci d’avoir boosté deux fois le Discord ! Voici ton cadeau : 20 Master Balls, 10 Capsules d’Or, 10 de chaque objet de combat et 2 Pokémon LR chromatiques mutés.",1)}catch(e){}
    try{recomp();ttRefresh(true);mailDot()}catch(e){}save();try{lbPush(true)}catch(e){}try{sfx("big")}catch(e){}
    return LS("Code accepté : titre Discord Boost ×2 (+20 % dégâts, pièces, chance et cadence), Arcanin Jovial ×2 et un cadeau dans ton courrier ! Merci pour les deux boosts.","Code accepted: Discord Boost ×2 title (+20% damage, coins, luck and attack speed), Jovial Arcanine ×2 and a gift in your mail! Thanks for both boosts.")}
-  return prev?prev(code):null}});
+  return prev?prev(code):null};
+ /* ceux qui ont utilisé le code dans sa première version (titre seul) reçoivent le reste : Arcanin Jovial ×2 et le cadeau */
+ setTimeout(()=>{try{if(G.vip2rw||!G.codes||!Object.keys(G.codes).some(k=>/^TS4PACK-BOOST2-/.test(k)))return;G.vip2rw=1;spGrant(90018);spGrant(90018);
+  const bi=Object.keys(IT).filter(k=>IT[k].c=="Objets de combat");mailAdd("Merci pour les deux boosts !","Discord Boost ×2",[["i","master-ball",20],["i","gold-bottle-cap",10],["lr"],["lr"]].concat(bi.map(k=>["i",k,10])),"Merci d’avoir boosté deux fois le Discord ! Voici le reste de ton cadeau : 20 Master Balls, 10 Capsules d’Or, 10 de chaque objet de combat et 2 Pokémon LR chromatiques mutés. Arcanin Jovial ×2 est déjà dans ta collection.",1);
+  try{recomp();mailDot()}catch(e){}save();try{lbPush(true)}catch(e){}try{toast(LS("Discord Boost ×2 : Arcanin Jovial ×2 ajouté et cadeau dans ton courrier !","Discord Boost ×2: Jovial Arcanine ×2 added and a gift in your mail!"));sfx("big")}catch(e){}}catch(e){}},4000)});
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
