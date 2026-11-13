@@ -12,8 +12,8 @@
  function jget(u){return tf(API+u,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
  function mkDoc(id,d){return{id:id,exists:!!d,data:function(){return d?JSON.parse(JSON.stringify(d)):undefined},metadata:{}}}
  function Q(col,f,ob,lim){
-  var q={where:function(a,op,v){return Q(col,[a,v],ob,lim)},orderBy:function(a,dir){return Q(col,f,[a,dir||"asc"],lim)},limit:function(n){return Q(col,f,ob,n)},
-   get:function(){var u="/api/c/"+col+"?lim="+(lim||200);if(f)u+="&f="+encodeURIComponent(f[0])+"&v="+encodeURIComponent(f[1]);if(ob)u+="&ob="+encodeURIComponent(ob[0])+"&dir="+ob[1];
+  var q={where:function(a,op,v){return Q(col,[a,v,op],ob,lim)},orderBy:function(a,dir){return Q(col,f,[a,dir||"asc"],lim)},limit:function(n){return Q(col,f,ob,n)},
+   get:function(){var u="/api/c/"+col+"?lim="+(lim||200);if(f){u+="&f="+encodeURIComponent(f[0])+"&v="+encodeURIComponent(f[1]);if(f[2]==="array-contains")u+="&op=ac"}if(ob)u+="&ob="+encodeURIComponent(ob[0])+"&dir="+ob[1];
     return jget(u).then(function(j){var L=j.docs.map(function(x){return mkDoc(x.id,x.d)});return{docs:L,size:L.length,empty:!L.length}})},
    onSnapshot:function(ok,err){var alive=true,t=null,run=function(){if(!alive)return;if(document.hidden){t=setTimeout(run,20000);return}q.get().then(function(s){if(alive)ok(s)}).catch(function(e){if(err&&alive)err(e)}).then(function(){if(alive)t=setTimeout(run,20000)})};run();return function(){alive=false;clearTimeout(t)}}};
   return q}

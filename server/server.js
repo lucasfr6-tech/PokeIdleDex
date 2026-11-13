@@ -459,10 +459,10 @@ http.createServer((req,res)=>{
    if(limited(ip,240)){send(res,429,{e:'rate'});return}
    const HID={lb:1,pvp:1,twr:1,wb:1,glm:1};let L=Object.keys(col).filter(id=>!(HID[m[2]]&&hidden(id))).map(id=>({id,d:col[id].d}));
    const f=u.searchParams.get('f'),v=u.searchParams.get('v');
-   if(f)L=L.filter(x=>String(x.d&&x.d[f])===v);
+   if(f){if(u.searchParams.get('op')=='ac')L=L.filter(x=>x.d&&Array.isArray(x.d[f])&&x.d[f].map(String).includes(v));else L=L.filter(x=>String(x.d&&x.d[f])===v)}
    const ob=u.searchParams.get('ob');
    if(ob){const dir=u.searchParams.get('dir')=='asc'?1:-1;L.sort((a,b)=>dir*((+a.d[ob]||0)-(+b.d[ob]||0)))}
-   L=L.slice(0,Math.min(+u.searchParams.get('lim')||200,500));
+   L=L.slice(0,Math.min(+u.searchParams.get('lim')||200,2000));
    send(res,200,{docs:L});return}
   if(m[1]=='d'&&m[3]&&ID.test(m[3])){
     if(req.method=='GET'){if(m[2]=='adm'&&req.headers['x-admin']!==ADMIN_KEY&&mkAuth(m[3],req.headers['x-token'])!==m[3]){send(res,403,{e:'admin'});return}const x=col[m[3]];send(res,200,x?{exists:true,id:m[3],d:x.d}:{exists:false,id:m[3]});return}
