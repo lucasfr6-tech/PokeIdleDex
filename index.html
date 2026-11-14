@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261114e"></script><script>
+</script><script src="shim.js?v=pid-v400-20261114f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -19579,6 +19579,16 @@ SAFE(()=>{
 .lkl{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}.lko{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;border-radius:12px;border:2px solid #ffffff22;background:#0b1026cc;color:#fff;cursor:pointer;min-width:0}
 .lko span{display:grid;place-items:center;width:64px;height:64px}.lko span img{max-width:64px!important;max-height:64px!important;width:auto!important;height:auto!important;object-fit:contain;image-rendering:pixelated;position:static!important}.lko small{font:800 10.5px Nunito,sans-serif;text-align:center;line-height:1.15;color:#cbd5e1}.lko.on{border-color:#38bdf8;box-shadow:0 0 12px #38bdf888}.lko.on small{color:#fff}`;document.head.appendChild(st);
  Object.assign(window,{lkOpts,lkOn})});
+/* code privé : rattrapage de parrainage (3 amis validés, récompense doublée par Discord = 6 récompenses) : objets manquants + bonus permanent porté à +60 % */
+SAFE(()=>{const HP="5579cf115d3ced911e1c8630ac72042942839609aa7148d5812c5b7ab3b39424",prev=window.pidPrivateRedeem;
+ window.pidPrivateRedeem=async function(code){const raw=String(code||"").trim().toUpperCase();
+  if(/^TS4PACK-PARRAIN6-/.test(raw)&&await pidH(raw)===HP){G.codes=G.codes||{};if(G.codes[raw])return LS("Code déjà utilisé.","Code already used.");G.codes[raw]=1;
+   G.fd=G.fd||{};G.fd.rw=Array.isArray(G.fd.rw)?G.fd.rw:[];let k=0;while(G.fd.rw.length<6){G.fd.rw.push("code-"+Date.now().toString(36)+"-"+(k++))}
+   const bi=Object.keys(IT).filter(k=>IT[k].c=="Objets de combat");
+   mailAdd("Récompenses de parrainage","Parrainage",[["i","master-ball",20],["i","gold-bottle-cap",20],["lr"],["lr"],["lr"],["lr"]].concat(bi.map(k=>["i",k,20])),"Voici les récompenses de parrainage qui te manquaient : 20 Master Balls, 20 Capsules d’Or, 20 de chaque objet de combat et 4 Pokémon LR chromatiques mutés. Ton bonus permanent de parrainage passe à +60 % (dégâts, pièces et vitesse d’attaque).",1);
+   try{biFlags();recomp();mailDot()}catch(e){}save();try{lbPush(true)}catch(e){}try{sfx("big")}catch(e){}
+   return LS("Code accepté : bonus de parrainage à +60 % et récompenses dans ton courrier !","Code accepted: referral bonus at +60% and rewards in your mail!")}
+  return prev?prev(code):null}});
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
