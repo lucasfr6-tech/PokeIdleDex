@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261114b"></script><script>
+</script><script src="shim.js?v=pid-v400-20261114c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15712,12 +15712,14 @@ async function trxSpin(res,fast){const dur=fast?700:[2300,2500,2700,3200,4300,56
 const trxPw=t=>Object.values(t.b).reduce((a,b)=>a+b,0);
 async function trxRoll(opts){opts=opts||{};const S=TRXS_,T0=TRXO();if(S.busy&&!opts.auto)return false;const P=trxCur();if(!P)return false;if(T0.cr[S.cry]<1){S.ast=LS("Plus de cristaux.","Out of crystals.");const e=$tx("ast");if(e)e.textContent=S.ast;return false}
  S.busy=true;T0.cr[S.cry]--;if(S.cry==0)T0.pity++;save();trxRenderCry();const rb=$tx("roll");if(rb)rb.disabled=true;
- const t=trxDraw();if(S.cry==0&&t.r>=6)T0.pity=0;const fast=opts.fast&&t.r<7;await trxSpin(t,fast);trxDim(0);
+ const t=trxDraw();if(S.cry==0&&t.r>=6)T0.pity=0;const fast=opts.fast&&t.r<7;let pre=null;
+ if(opts.auto){/* tirage auto : le résultat est appliqué et sauvegardé tout de suite, pour ne pas le perdre si la page se recharge pendant l'animation */const c0=P.t,b0=!c0||t.r>c0.r||(t.r==c0.r&&trxPw(t)>trxPw(c0)),wn=S.want&&S.want.has(t.id),wc=!!(c0&&S.want&&S.want.has(c0.id)),lw=!!(c0&&t.r<c0.r),pk=lw?false:(wn&&!wc?true:(!wn&&wc?false:b0));pre={kept:!!(pk||!opts.keep)};if(pre.kept)P.t=t;try{recomp()}catch(e){}save()}
+ await trxSpin(t,fast);trxDim(0);
  T0.hist.unshift({t:t.id,p:dn(P.id)});T0.hist.length=Math.min(T0.hist.length,30);try{if(t.r>=4)sfx(t.r>=6?"shiny":"prest")}catch(e){}
  trxRenderHist();trxRenderStage();trxSetCard($tx("nw"),t,"NOUVEAU","new");$tx("stage")&&$tx("stage").style.setProperty("--ac",trxCol(t.r));
  if(!fast)await trxFx(t);
  const cur=P.t,better=!cur||t.r>cur.r||(t.r==cur.r&&trxPw(t)>trxPw(cur));
- if(opts.auto){const wn=S.want&&S.want.has(t.id),wc=!!(cur&&S.want&&S.want.has(cur.id)),lower=!!(cur&&t.r<cur.r),pick=lower?false:(wn&&!wc?true:(!wn&&wc?false:better));S.kept=!!(pick||!opts.keep);if(S.kept)P.t=t}else{await trxChoose(P,t)}
+ if(opts.auto){S.kept=pre.kept}else{await trxChoose(P,t)}
  try{recomp()}catch(e){}save();S.busy=false;const rb2=$tx("roll");if(rb2)rb2.disabled=false;trxRenderStage();trxRenderGrid();trxRenderCry();return t}
 function trxChoose(P,t){return new Promise(res=>{if(!P.t){P.t=t;trxSetCard($tx("nw"),null,"");res();return}const vs=$tx("vs");if(!vs){P.t=t;res();return}
  vs.innerHTML=`<button class="btn go" id="kn">${LS("Garder le nouveau","Keep the new one")}</button><button class="btn" id="ko">${LS("Garder l'actuel","Keep the current one")}</button>`;
@@ -15899,6 +15901,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-14",t:["Corrections du 14 novembre","November 14 fixes"],e:[
+  ["fix","Traits : tirage auto sécurisé","En tirage auto, le résultat de chaque tirage est sauvegardé tout de suite : si la page se recharge pendant l’animation, le trait obtenu n’est plus perdu.","Traits: safer auto roll","In auto roll, each roll result is saved immediately: if the page reloads during the animation, the trait you got is no longer lost."],
   ["fix","Tower : classement au-delà de l’étage 1000","Les records de Tower au-delà de l’étage 1000 sont maintenant bien pris en compte dans le classement (jusqu’à l’étage 1300).","Tower: ranking beyond floor 1000","Tower records beyond floor 1000 are now counted in the ranking (up to floor 1300)."],
   ["fix","Mewtwo Black : attaques","Mewtwo Black (et sa Méga-Évolution) n’a plus une attaque Charge à la place de son attaque Ténèbres : il retrouve son vrai jeu d’attaques.","Black Mewtwo: moves","Black Mewtwo (and its Mega Evolution) no longer has Tackle instead of its Dark move: its real moveset is back."]]},
  {d:"2026-11-13",t:["Corrections du 13 novembre","November 13 fixes"],e:[
