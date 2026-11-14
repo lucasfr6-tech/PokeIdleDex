@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261113c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261113c"></script><script>
+</script><script src="shim.js?v=pid-v400-20261114a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14576,7 +14576,7 @@ const MWBL={id:90008,base:150,n:"Mewtwo Black",t:["psychic","dark"],s:[106,110,9
  en:"The darkest Mewtwo ever created: a pure shadow mind that bends space with a glance. With equal bonuses, its base power is twice Crystal Steelix’s."};
 SPS.push(MWBL);SPM[90008]=MWBL;
 DB[90008]={n:MWBL.n,t:MWBL.t,b:680,lg:0,ba:0,ch:90008,s:MWBL.s,ab:MWBL.ab,ha:MWBL.ha};EVC[90008]=[];
-RSPM[90008]=["Psyko","Obscurité","Aurasphère","Plénitude"];
+RSPM[90008]=["Psyko","Vibrobscur","Aurasphère","Plénitude"];
 SPU.set("90008","img/special/mewtwo-black.png");SPU.set("90008s","img/special/mewtwo-black-shiny.png");
 [["10043","x"],["10044","y"]].forEach(([f,k])=>{SPU.set("90008m"+f,"img/special/mewtwo-black-mega-"+k+".png");SPU.set("90008m"+f+"s","img/special/mewtwo-black-mega-"+k+"-shiny.png")});
 {const old=srcWhere;srcWhere=function(id){if(+id===90007)return["au palier 50 Premium du Pass de combat (saison 2)","at Premium level 50 of the Battle Pass (season 2)"];if(+id===90008)return["au palier 100 Premium du Pass de combat (saison 2)","at Premium level 100 of the Battle Pass (season 2)"];return old.apply(this,arguments)}}
@@ -15898,6 +15898,9 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-11-14",t:["Corrections du 14 novembre","November 14 fixes"],e:[
+  ["fix","Tower : classement au-delà de l’étage 1000","Les records de Tower au-delà de l’étage 1000 sont maintenant bien pris en compte dans le classement (jusqu’à l’étage 1300).","Tower: ranking beyond floor 1000","Tower records beyond floor 1000 are now counted in the ranking (up to floor 1300)."],
+  ["fix","Mewtwo Black : attaques","Mewtwo Black (et sa Méga-Évolution) n’a plus une attaque Charge à la place de son attaque Ténèbres : il retrouve son vrai jeu d’attaques.","Black Mewtwo: moves","Black Mewtwo (and its Mega Evolution) no longer has Tackle instead of its Dark move: its real moveset is back."]]},
  {d:"2026-11-13",t:["Corrections du 13 novembre","November 13 fixes"],e:[
   ["imp","Raid Exclusif : plus difficile","La Master Ball passe à 5 % de chance dans le raid Exclusif (au lieu de 10 %), les autres Balls restent en dessous, et le boss a 3 fois plus de PV (le combat dure jusqu’à 80 tours au lieu de 50).","Exclusive raid: harder","The Master Ball now has a 5% chance in the Exclusive raid (was 10%), other Balls stay below it, and the boss has 3 times more HP (fights last up to 80 rounds instead of 50)."],
   ["new","Giveaway sur le Discord","Un giveaway a lieu sur le Discord jusqu’au dimanche 15 novembre à 18 h. Rejoins le Discord depuis l’annonce : tu reçois aussi 5 boosts de chaque (une fois).","Giveaway on Discord","A giveaway runs on the Discord until Sunday, November 15 at 6 pm (Paris). Join the Discord from the announcement: you also get 5 of each boost (once)."],
