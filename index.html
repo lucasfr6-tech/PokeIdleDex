@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261115c"></script><script>
+</script><script src="shim.js?v=pid-v400-20261115d"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -19677,6 +19677,65 @@ window.m130Show=m130Show;
 {let tries=0;const t=setInterval(()=>{tries++;let seen=0;try{seen=sessionStorage.getItem(M130_KEY)==="1"}catch(e){}if(Date.now()>=M130_END||seen||(typeof G!="undefined"&&G&&m130Done())||tries>600){clearInterval(t);return}
  if(typeof G=="undefined"||!G||!G.col)return;
  const busy=document.querySelector("#lnd,#tur.on,.pid-dialog-overlay,#pnu,#lgfx,#nwr.on,#wmr,#gaw,#mlr.on,#dcm,#rvm.on")||(typeof OPEN!="undefined"&&OPEN);if(busy||document.hidden)return;clearInterval(t);setTimeout(m130Show,700)},2000)}
+/* ===== Maîtrise des Pokémon (aperçu réservé au créateur : Réglages > Réservé à toi) =====
+   1 point par victoire avec le Pokémon dans l'équipe (boss Alpha 5, boss Oméga 20), gardés au prestige (G.mst).
+   Rangs : Bronze 100 · Argent 1 000 · Or 5 000 · Platine 20 000 · Diamant 60 000 · Maître 150 000 · Grand Maître 400 000 · Légende 1 000 000.
+   Bonus du Pokémon : dégâts +5/+10/+20/+35/+50/+75/+100/+150 %, pièces +5 % (Or), +10 % (Diamant), +15 % (Grand Maître), +25 % (Légende).
+   Bonus de dresseur : +0,5 % de dégâts à toute l'équipe par Pokémon au rang Or ou plus (max +50 %). */
+const MST=[["Bronze","Bronze","#d97a3a",100,5,0],["Argent","Silver","#cbd5e1",1000,10,0],["Or","Gold","#fbbf24",5000,20,5],["Platine","Platinum","#5eead4",20000,35,5],["Diamant","Diamond","#60a5fa",60000,50,10],["Maître","Master","#e879f9",150000,75,10],["Grand Maître","Grand Master","#f43f5e",400000,100,15],["Légende","Legend","#fde68a",1e6,150,25]];
+const mstOn=()=>{try{return x4Me()&&!!SG.mst}catch(e){return false}};
+const mstPts=id=>{try{return Math.floor((G.mst&&G.mst[+id])||0)}catch(e){return 0}};
+const mstRk=id=>{const p=mstPts(id);let r=-1;for(let i=0;i<MST.length;i++)if(p>=MST[i][3])r=i;return r};
+let MSTT=null,MSTTK=0;
+function mstTeam(){if(MSTT!==null&&Date.now()-MSTTK<5000)return MSTT;let n=0;try{for(const k in (G.mst||{}))if(G.mst[k]>=MST[2][3])n++}catch(e){}MSTTK=Date.now();MSTT=Math.min(.5,.005*n);return MSTT}
+{const o=win;win=function(){try{if(E){const v=E.om?20:E.boss?5:1;G.mst=G.mst||{};for(const i of ids()){if(+i>0)G.mst[i]=(G.mst[i]||0)+v}}}catch(e){}return o.apply(this,arguments)}}
+{const o=dmg;dmg=function(id){const r=o.apply(this,arguments);try{if(mstOn()&&typeof r=="number"){const k=mstRk(id);return r*(1+(k>=0?MST[k][4]/100:0))*(1+mstTeam())}}catch(e){}return r}}
+{const o=coinNew;coinNew=function(id){const r=o.apply(this,arguments);try{if(mstOn()){const k=mstRk(id);if(k>=0&&MST[k][5])return r*(1+MST[k][5]/100)}}catch(e){}return r}}
+let MSTU=0;
+const mstHex=(c,p)=>{const n=parseInt(c.slice(1),16);const f=x=>Math.max(0,Math.min(255,Math.round(p<0?x*(1+p):x+(255-x)*p)));return "#"+[n>>16,n>>8&255,n&255].map(x=>f(x).toString(16).padStart(2,"0")).join("")};
+const mstStar=(n,R,r)=>Array.from({length:n*2},(_,i)=>{const a=(-90+180*i/n)*Math.PI/180,q=i%2?r:R;return (60+q*Math.cos(a)).toFixed(1)+","+(60+q*Math.sin(a)).toFixed(1)}).join(" ");
+/* insigne « médaille en orbite » : anneaux et satellites en plus à chaque rang ; Légende arc-en-ciel */
+function mstSvg(i,still){const c=MST[i][2],id="ms"+(MSTU++),L=i==7,f=L?`url(#${id}r)`:`url(#${id})`,rings=Math.min(3,1+Math.floor(i/3)),dots=i+1,a=still?' style="animation:none"':"";
+ let o="";for(let r=0;r<rings;r++){const rx=46-r*2,ry=14+r*6,rot=[-20,25,70][r];o+=`<g transform="rotate(${rot} 60 60)"><ellipse cx="60" cy="60" rx="${rx}" ry="${ry}" fill="none" stroke="${L?`url(#${id}r)`:mstHex(c,.3)}" stroke-width="2" opacity=".75"/><g class="msto" style="animation-duration:${6+r*2}s;animation-direction:${r%2?"reverse":"normal"}${still?";animation:none":""}"><circle cx="${60+rx}" cy="60" r="${i>=5?4.5:3.5}" fill="#fff" stroke="${c}" stroke-width="1.5"/></g></g>`}
+ const pips=Array.from({length:dots},(_,k)=>{const q=(-90+360*k/dots)*Math.PI/180;return `<circle cx="${(60+22*Math.cos(q)).toFixed(1)}" cy="${(60+22*Math.sin(q)).toFixed(1)}" r="2.6" fill="${mstHex(c,.85)}"/>`}).join("");
+ const tw=still?"":Array.from({length:i+1},(_,k)=>{const q=k*137.5*Math.PI/180,d=48+(k%3)*5,x=60+d*Math.cos(q),y=60+d*Math.sin(q);return `<path class="mstw" style="animation-delay:${(k*.37).toFixed(2)}s" d="M${x.toFixed(1)} ${(y-5).toFixed(1)}L${(x+1.4).toFixed(1)} ${(y-1.4).toFixed(1)}L${(x+5).toFixed(1)} ${y.toFixed(1)}L${(x+1.4).toFixed(1)} ${(y+1.4).toFixed(1)}L${x.toFixed(1)} ${(y+5).toFixed(1)}L${(x-1.4).toFixed(1)} ${(y+1.4).toFixed(1)}L${(x-5).toFixed(1)} ${y.toFixed(1)}L${(x-1.4).toFixed(1)} ${(y-1.4).toFixed(1)}Z" fill="${L?"#fff":mstHex(c,.6)}"/>`}).join("");
+ return `<svg class="msts" viewBox="0 0 120 120" aria-hidden="true"><defs><radialGradient id="${id}" cx=".35" cy=".3"><stop offset="0" stop-color="${mstHex(c,.7)}"/><stop offset=".6" stop-color="${c}"/><stop offset="1" stop-color="${mstHex(c,-.55)}"/></radialGradient><linearGradient id="${id}r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset=".2" stop-color="#fbbf24"/><stop offset=".4" stop-color="#4ade80"/><stop offset=".6" stop-color="#38bdf8"/><stop offset=".8" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient><clipPath id="${id}c"><circle cx="60" cy="60" r="30"/></clipPath><linearGradient id="${id}s"><stop offset="0" stop-color="#fff0"/><stop offset=".5" stop-color="#fffb"/><stop offset="1" stop-color="#fff0"/></linearGradient></defs>
+ <g class="${L&&!still?"mstrh":""}">${i>=4?`<circle cx="60" cy="60" r="44" fill="${c}" opacity=".14" class="${still?"":"mstp"}"/>`:""}${o}
+ <g class="${still?"":"mstf"}"><circle cx="60" cy="60" r="31" fill="${f}" stroke="#1a1030" stroke-width="4"/><circle cx="60" cy="60" r="25" fill="none" stroke="#ffffff55" stroke-width="2" stroke-dasharray="${i>=3?"4 3":"0"}"/>${pips}
+ <polygon points="${mstStar(i>=6?8:i>=3?6:5,13,6)}" fill="${mstHex(c,.85)}" stroke="#1a1030" stroke-width="2.5"/>
+ ${still?"":`<g clip-path="url(#${id}c)"><rect class="msts2" x="40" y="0" width="14" height="140" fill="url(#${id}s)"/></g>`}</g></g>${tw}</svg>`}
+Object.assign(window,{mstSvg,mstPts,mstRk,mstTeam,mstOn});
+/* fiche du Pokémon : encadré Maîtrise */
+{const o=bonusCard;bonusCard=function(id){let h=o.apply(this,arguments);try{if(!mstOn()||!G.col[id])return h;const p=mstPts(id),k=mstRk(id),nx=MST[k+1],cur=k>=0?MST[k]:null,lo=cur?cur[3]:0,pc=nx?Math.max(0,Math.min(100,(p-lo)/(nx[3]-lo)*100)):100,col=cur?cur[2]:"#6b7280";
+  h+=`<div class="pidmst${k==7?" leg":""}" style="--c:${col}"><div class="pidmst-h"><span class="pidmst-b">${k>=0?mstSvg(k):`<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="31" fill="#2a2440" stroke="#4b4470" stroke-width="4" stroke-dasharray="6 5"/></svg>`}</span><div class="pidmst-t"><small>${LS("MAÎTRISE","MASTERY")}</small><b>${k>=0?LS(cur[0],cur[1]):LS("Pas encore classé","Not ranked yet")}</b>
+  <span>${k>=0?`${LS("Dégâts de ce Pokémon","This Pokémon's damage")} <em>+${cur[4]} %</em>${cur[5]?` · ${LS("pièces","coins")} <em>+${cur[5]} %</em>`:""}`:LS("Gagne des combats avec ce Pokémon dans l'équipe.","Win fights with this Pokémon in your team.")}</span>
+  <div class="pidmst-bar"><i style="width:${pc.toFixed(1)}%"></i><span>${nx?`${fmt(p)} / ${fmt(nx[3])} · ${LS("prochain rang : ","next rank: ")}${LS(nx[0],nx[1])}`:LS("Rang maximum atteint","Max rank reached")}</span></div></div></div>
+  <div class="pidmst-l">${MST.map((t,i)=>`<div class="pidmst-r${i<=k?" ok":""}${i==k?" on":""}" style="--c:${t[2]}"><span>${mstSvg(i,i!=k)}</span><b>${LS(t[0],t[1])}</b><small>${fmt(t[3])}</small><em>+${t[4]} %</em></div>`).join("")}</div>
+  <small class="pidmst-n">${LS("1 point par victoire avec ce Pokémon dans l'équipe (boss Alpha : 5, boss Oméga : 20). Les points sont gardés au prestige. Bonus de dresseur : +0,5 % de dégâts à toute l'équipe par Pokémon au rang Or ou plus (actuellement +","1 point per win with this Pokémon in the team (Alpha boss: 5, Omega boss: 20). Points are kept through prestige. Trainer bonus: +0.5% damage to the whole team per Pokémon at Gold rank or higher (currently +")}${(mstTeam()*100).toFixed(1).replace(".0","").replace(".",LS(",","."))} %).</small></div>`}catch(e){}return h}}
+/* liste des Pokémon : petit insigne en haut à gauche */
+{const o=plSprite;plSprite=function(i,c){const h=o.apply(this,arguments);try{if(!mstOn())return h;const k=mstRk(i);if(k<0)return h;return h+`<i class="pidmst-i" title="${LS("Maîtrise ","Mastery ")+LS(MST[k][0],MST[k][1])}">${mstSvg(k,1)}</i>`}catch(e){return h}}}
+/* Réglages > Réservé à toi : interrupteur de l'aperçu */
+{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(!x4Me())return h;const k='<div class="pref-grid">',i=h.indexOf(k);if(i<0)return h;const on=!!SG.mst;
+ const card=`<article class="pref-card" style="border:2px solid #fbbf24"><header><h3>${LS("Réservé à toi","Only you")}</h3><p>${LS("Aperçus privés des nouveautés, avant leur sortie pour les joueurs.","Private previews of new features, before players get them.")}</p></header><div class="pref-body"><button type="button" class="pref-toggle${on?" on":""}" role="switch" aria-checked="${on}" data-mstp="1"><span class="pref-ic">${mstSvg(on?2:0,1)}</span><span class="pref-copy"><b>${LS("Maîtrise des Pokémon","Pokémon Mastery")}</b><small>${LS("Insignes Bronze à Légende et leurs bonus, visibles seulement par toi.","Bronze to Legend badges and their bonuses, only for you.")}</small></span><span class="pref-switch" aria-hidden="true"></span></button></div></article>`;
+ return h.slice(0,i+k.length)+card+h.slice(i+k.length)}catch(e){return h}}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mstp]");if(!b||!x4Me())return;e.stopPropagation();e.preventDefault();SG.mst=SG.mst?0:1;try{svs()}catch(x){}try{recomp()}catch(x){}try{toast(SG.mst?LS("Aperçu Maîtrise activé","Mastery preview on"):LS("Aperçu Maîtrise désactivé","Mastery preview off"))}catch(x){}try{show()}catch(x){}},true);
+{const st=document.createElement("style");st.textContent=`.msto{transform-box:view-box;transform-origin:60px 60px;animation:mstspin 7s linear infinite}@keyframes mstspin{to{transform:rotate(360deg)}}
+.mstw{transform-box:fill-box;transform-origin:center;animation:msttw 2.2s ease-in-out infinite}@keyframes msttw{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1)}}
+.mstf{animation:mstfl 3s ease-in-out infinite}@keyframes mstfl{50%{transform:translateY(-4px)}}.mstp{animation:mstpu 2s ease-in-out infinite}@keyframes mstpu{50%{opacity:.04}}
+.msts2{animation:mstsw 3.2s ease-in-out infinite}@keyframes mstsw{0%{transform:translateX(-140px) rotate(25deg)}60%,100%{transform:translateX(140px) rotate(25deg)}}.mstrh{animation:mstrh 5s linear infinite}@keyframes mstrh{to{filter:hue-rotate(360deg)}}
+.msts{width:100%;height:100%;overflow:visible}
+.pidmst{grid-column:1/-1;margin-top:10px;padding:12px;border-radius:16px;border:3px solid var(--c);background:repeating-linear-gradient(135deg,#ffffff07 0 14px,transparent 14px 28px),linear-gradient(170deg,color-mix(in srgb,var(--c) 26%,#14102a),#120d24 80%);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent);display:flex;flex-direction:column;gap:10px;color:#eef1ff}
+.pidmst-h{display:flex;gap:14px;align-items:center}.pidmst-b{flex:none;width:96px;height:96px;display:grid;place-items:center}.pidmst-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pidmst-t small{font-size:10px;letter-spacing:.2em;color:#c4b5fd;font-weight:900}.pidmst-t>b{font-size:24px;line-height:1;color:var(--c);font-weight:900;text-shadow:0 2px 0 #0008}
+.pidmst.leg .pidmst-t>b{background:linear-gradient(90deg,#f87171,#fbbf24,#4ade80,#38bdf8,#a78bfa,#f472b6,#f87171);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:msthue 4s linear infinite}@keyframes msthue{to{background-position:200% 0}}
+.pidmst-t>span{font-size:13px;color:#d6d3f0}.pidmst-t em{font-style:normal;color:var(--c);font-weight:900}
+.pidmst-bar{position:relative;height:20px;border-radius:10px;background:#0009;overflow:hidden;border:1.5px solid #ffffff22;margin-top:4px}.pidmst-bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 70%,#000),var(--c))}.pidmst-bar span{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-weight:900;text-shadow:0 1px 2px #000}
+.pidmst-l{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}.pidmst-r{--c:#888;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;border:2px solid #ffffff1a;background:#0006;opacity:.45;min-width:0;text-align:center}
+.pidmst-r.ok{opacity:1;border-color:color-mix(in srgb,var(--c) 60%,transparent)}.pidmst-r.on{border-color:var(--c);box-shadow:0 0 12px var(--c)}.pidmst-r span{display:block;width:56px;height:56px;max-width:100%}.pidmst-r b{font-size:11px;color:var(--c);line-height:1.1}.pidmst-r small{font-size:10px;color:#a9a6c9}.pidmst-r em{font-style:normal;font-size:10px;color:#fff;font-weight:900}
+.pidmst-n{font-size:11px;color:#a9a6c9}
+.pidmst-i{position:absolute;left:0;top:0;width:34px;height:34px;z-index:3;pointer-events:auto;filter:drop-shadow(0 1px 2px #000a)}
+@media(max-width:640px){.pidmst-l{grid-template-columns:repeat(4,minmax(0,1fr))}.pidmst-b{width:72px;height:72px}}
+@media(prefers-reduced-motion:reduce){.pidmst *,.msts *{animation:none!important}}`;document.head.appendChild(st)}
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
