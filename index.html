@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261115f"></script><script>
+</script><script src="shim.js?v=pid-v400-20261115g"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15902,6 +15902,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-16",t:["Métalosse Obsidienne et étages 7000+","Obsidian Metagross and floors 7000+"],e:[
+  ["new","L’Hyper Expédition et Mimiqui Arlequin","La suite de la Grande Expédition (à terminer d’abord) : 8 nouveaux camps, environ 7 jours avec une très bonne équipe (Tour étage 300, Pokémon niveau 100), de bien plus grosses récompenses, et au sommet Mimiqui Arlequin, un nouvel exclusif deux fois plus fort qu’Arcanin Jovial. Bouton dans Expéditions et dans le menu.","The Hyper Expedition and Harlequin Mimikyu","The sequel to the Great Expedition (finish it first): 8 new camps, about 7 days with a very good team (Tower floor 300, level 100 Pokémon), much bigger rewards, and at the summit Harlequin Mimikyu, a new exclusive twice as strong as Jolly Arcanine. Button in Expeditions and in the menu."],
   ["new","Maîtrise des Pokémon","Chaque victoire avec un Pokémon dans l’équipe lui donne des points de maîtrise (boss Alpha 5, boss Oméga 20), gardés au prestige. 8 rangs : Bronze (100), Argent (1 000), Or (5 000), Platine (20 000), Diamant (60 000), Maître (150 000), Grand Maître (400 000) et Légende (1 000 000). Dégâts du Pokémon de +5 % à +150 %, pièces en plus dès Or, et le titre « Légende de [Pokémon] ». Chaque Pokémon au rang Or ou plus donne aussi +0,5 % de dégâts à toute l’équipe (max +50 %). À voir dans la fiche du Pokémon, la liste et le classement Meilleur Pokémon.","Pokémon Mastery","Every win with a Pokémon in your team gives it mastery points (Alpha boss 5, Omega boss 20), kept through prestige. 8 ranks: Bronze (100), Silver (1,000), Gold (5,000), Platinum (20,000), Diamond (60,000), Master (150,000), Grand Master (400,000) and Legend (1,000,000). The Pokémon’s damage goes from +5% to +150%, coins from Gold, and the “[Pokémon] Legend” title. Each Pokémon at Gold or above also gives +0.5% damage to the whole team (max +50%). See it on the Pokémon sheet, the list and the Best Pokémon ranking."],
   ["new","Paliers chromatiques","Chaque chromatique capturé compte pour sa famille d’évolution : 5 chromatiques = +2 %, 25 = +5 %, 50 = +10 % de dégâts pour ce Pokémon (pas pour l’équipe). Chaque chromatique capturé ajoute aussi +10 % de chance que cette famille réapparaisse en chromatique (jusqu’à ×6). À voir dans la fiche du Pokémon.","Shiny milestones","Every shiny caught counts for its evolution family: 5 shinies = +2%, 25 = +5%, 50 = +10% damage for that Pokémon (not the team). Each shiny caught also adds +10% chance for that family to reappear shiny (up to ×6). See it on the Pokémon sheet."],
   ["new","Nouvelle relique : Chaîne Rouge des Origines","Une relique de rareté Originelle, au-dessus de la Plume du Créateur : +120 % dégâts, +50 % pièces, +30 % capture et +20 % chromatique au niveau 1.","New relic: Red Chain of Origins","A Primordial relic above the Creator’s Feather: +120% damage, +50% coins, +30% catch and +20% shiny at level 1."],
@@ -17438,6 +17439,103 @@ SPRANK[90018]={r:13.5,m:VLPW,src:"vl"};XRKO.vl=["Grande Expédition","Great Expe
 {const o=starFloorFarmable;starFloorFarmable=function(id){return +id===90018?false:o.apply(this,arguments)}}
 {const o=srcWhere;srcWhere=function(id){return +id===90018?["au sommet de la Grande Expédition (8e camp)","at the summit of the Great Expedition (8th camp)"]:o.apply(this,arguments)}}
 VLFIN.sp=90018;
+/* ===== Mimiqui Arlequin : exclusif du sommet de l'Hyper Expédition (puissance ×37,22 = 2 × Arcanin Jovial) ===== */
+const VHPW=VLPW*2,VH_ID=90031,VH_T=Date.UTC(2026,10,15,23,1,0),vhLive=()=>Date.now()>=VH_T;
+PWTV.vh=PWTV.t7*VHPW/8.46;PWTV0.vh=PWTV0.t7*Math.pow(VHPW/8.46,.6);PWREF.vh=690;PWNM.vh=["Hyper Expédition · Mimiqui Arlequin","Hyper Expedition · Harlequin Mimikyu"];
+const MQAR={id:VH_ID,base:778,n:"Mimiqui Arlequin",t:["ghost","fairy"],s:[55,110,90,60,115,106],ab:["Fantômasque","Fantômasque"],ha:"Fantômasque",hue:0,hue2:0,sat:1,au:"#f43f5e",au2:"#a78bfa",cas:0,
+ fr:"Le déguisement de Mimiqui est devenu un costume de carnaval rouge et violet : il fait rire tout le monde, sauf ses adversaires. Récompense du sommet de l'Hyper Expédition. À bonus identiques, sa puissance (×37,2) est le double de celle d'Arcanin Jovial.",
+ en:"Mimikyu's disguise turned into a red and purple carnival costume: it makes everyone laugh, except its opponents. Reward for the summit of the Hyper Expedition. With equal bonuses, its power (×37.2) is twice Jolly Arcanine's."};
+SPS.push(MQAR);SPM[VH_ID]=MQAR;
+DB[VH_ID]={n:MQAR.n,t:MQAR.t,b:700,lg:0,ba:0,ch:VH_ID,s:MQAR.s,ab:MQAR.ab,ha:MQAR.ha};EVC[VH_ID]=[];
+RSPM[VH_ID]=["Câlinerie","Ombre Portée","Danse-Lames","Éclat Magique"];
+SPU.set(""+VH_ID,"img/special/mimiqui-arlequin.png");SPU.set(VH_ID+"s","img/special/mimiqui-arlequin-shiny.png");
+{const o=pwInfer;pwInfer=function(id,c){return +id===VH_ID?"vh":o.apply(this,arguments)}}
+SPRANK[VH_ID]={r:19.5,m:VHPW,src:"vh"};XRKO.vh=["Hyper Expédition","Hyper Expedition","#f43f5e"];XRKL.unshift([VH_ID,VHPW,"vh"]);XRKM[VH_ID]=VHPW;
+{const o=spSrc;spSrc=function(k){return k=="vh"?[LS("Hyper Expédition","Hyper Expedition"),"#f43f5e","★"]:o.apply(this,arguments)}}
+{const o=starFloorFarmable;starFloorFarmable=function(id){return +id===VH_ID?false:o.apply(this,arguments)}}
+{const o=srcWhere;srcWhere=function(id){return +id===VH_ID?["au sommet de l'Hyper Expédition (8e camp)","at the summit of the Hyper Expedition (8th camp)"]:o.apply(this,arguments)}}
+try{SPHINT[VH_ID]=["Récompense du sommet de l'Hyper Expédition (après la Grande Expédition).","Reward for the summit of the Hyper Expedition (after the Great Expedition)."]}catch(e){}
+
+/* ===== L'Hyper Expédition : se débloque après la Grande Expédition ; 8 camps de 21 h (≈ 7 jours pour une très bonne équipe) ===== */
+const VHCH=21*3600,VHT=8*VHCH,VHMINF=300,VHMINL=100;
+const VHP=[
+ ["Volcan Rugissant","Roaring Volcano","fire",[["master-ball",6],["gold-bottle-cap",12],["rare-candy",60],["dream-ball",60]]],
+ ["Jungle Électrique","Electric Jungle","electric",[["master-ball",6],["gold-bottle-cap",12],["ability-patch",3],["max-revive",60]]],
+ ["Grottes Psychiques","Psychic Caves","psychic",[["master-ball",8],["gold-bottle-cap",15],["rare-candy",80],["dream-ball",80]]],
+ ["Toundra Hurlante","Howling Tundra","ice",[["master-ball",8],["gold-bottle-cap",15],["ability-patch",4],["max-revive",80]]],
+ ["Arène des Combattants","Fighters' Arena","fighting",[["master-ball",10],["gold-bottle-cap",18],["rare-candy",100],["dream-ball",100]]],
+ ["Marécage Toxique","Toxic Swamp","poison",[["master-ball",10],["gold-bottle-cap",18],["ability-patch",5],["max-revive",100]]],
+ ["Cimetière des Ombres","Shadow Graveyard","ghost",[["master-ball",12],["gold-bottle-cap",22],["rare-candy",150],["dream-ball",150]]],
+ ["Carnaval Féerique","Fairy Carnival","fairy",[["master-ball",30],["gold-bottle-cap",50],["ability-patch",10],["rare-candy",250]]]];
+const vhS=()=>{const v=G.vh=G.vh&&typeof G.vh=="object"?G.vh:{on:0,s:0,c:[],sq:[]};if(!Array.isArray(v.c))v.c=[];if(!Array.isArray(v.sq))v.sq=[];v.s=Math.max(0,Math.min(VHT,+v.s||0));return v};
+const vhUnl=()=>{try{return !!(G.vl&&G.vl.done)||!!(G.col[90018]&&(G.col[90018].n||0)>0)}catch(e){return false}};
+const vhSq=()=>vhS().sq.filter((i,k,a)=>G.col[i]&&a.indexOf(i)===k).slice(0,3);
+function vhInfo(){const v=vhS(),tb=vlTower(),sq=vhSq(),Ls=sq.map(i=>G.col[i].l|0),ok={u:vhUnl(),t:tb>=VHMINF,sq:sq.length==3,lv:sq.length==3&&Ls.every(l=>l>=VHMINL)};
+ const base=.45+.55*Math.max(0,Math.min(1,(tb-VHMINF)/1000)),avgL=Ls.length?Ls.reduce((x,y)=>x+y,0)/Ls.length:0,lf=Math.max(.95,Math.min(1,.95+.05*(avgL-VHMINL)/20));
+ const cov=h=>{if(!sq.length)return .8;let n=0;sq.forEach(i=>{if(tp(i).some(t=>eff(t,[h])>=2))n++});return [.85,1,1.15,1.3][Math.min(3,n)]};
+ const camp=Math.min(VHP.length-1,Math.floor(v.s/VHCH)),rate=h=>Math.min(1.15,base*lf*cov(h));
+ let left=0;for(let c=camp;c<VHP.length;c++){const rem=c==camp?(c+1)*VHCH-v.s:VHCH;left+=rem/Math.max(.05,rate(VHP[c][2]))}
+ return{tb,sq,ok,go:ok.u&&ok.t&&ok.sq&&ok.lv,base,lf,cov:cov(VHP[camp][2]),camp,rate:rate(VHP[camp][2]),eta:left}}
+let vhPp=performance.now(),vhD=Date.now(),vhN=0,vhSeen=0;
+function vhTick(){const nP=performance.now(),nD=Date.now(),d=Math.max(0,Math.min((nP-vhPp)/1e3,(nD-vhD)/1e3,90));vhPp=nP;vhD=nD;
+ if(!vhLive())return;const v=vhS();if(!v.on||v.s>=VHT){vhRender();return}
+ const I0=vhInfo();if(!I0.go){vhRender();return}
+ v.s=Math.min(VHT,v.s+d*I0.rate);vhN++;
+ const r=VHP.filter((x,i)=>v.s>=(i+1)*VHCH&&!v.c.includes(i)).length;
+ if(r>vhSeen){vhSeen=r;try{toast(LS("Hyper Expédition : un camp est atteint, récupère ta récompense !","Hyper Expedition: a camp is reached, claim your reward!"));sfx("big")}catch(e){}}
+ if(v.s>=VHT){v.on=0;try{toast(LS("Tu as atteint le Carnaval Féerique !","You reached the Fairy Carnival!"))}catch(e){}}
+ if(vhN%12==0||v.s>=VHT)try{save()}catch(e){}
+ vhRender()}
+setInterval(vhTick,5000);
+function vhClaim(i){const v=vhS(),x=VHP[i];if(!x||v.c.includes(i)||v.s<(i+1)*VHCH)return;v.c.push(i);
+ window.capBuy(()=>{x[3].forEach(([k,n])=>{G.inv[k]=(G.inv[k]||0)+n})});
+ const txt=x[3].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ");
+ const fin=()=>{try{recomp()}catch(e){}try{save()}catch(e){}try{sfx("big")}catch(e){}vhSeen=Math.max(0,vhSeen-1);vhRender()};
+ if(i==VHP.length-1){v.done=1;try{spGrant(VH_ID)}catch(e){}try{sfx("shiny")}catch(e){}toast(LS("Sommet atteint ! "+txt+" et Mimiqui Arlequin reçu !","Summit reached! "+txt+" and Harlequin Mimikyu received!"));fin()}
+ else{toast(LS(x[0]+" franchi : "+txt,x[1]+" cleared: "+txt));fin()}}
+/* même présentation que la Grande Expédition, aux couleurs d'Arlequin */
+{const a=document.getElementById("pid-vl"),b=document.getElementById("pid-vl2"),st=document.createElement("style");st.id="pid-vh";
+ st.textContent=((a?a.textContent:"")+"\n"+(b?b.textContent:"")).replace(/#vlm/g,"#vhm").replace(/#vlpk/g,"#vhpk").replace(/\.vlxt[^}]*}/g,"")+`
+#vhm .vlvc{background:linear-gradient(160deg,#1a0b1f,#2a0f2e 55%,#12061a);border-color:#f43f5e;box-shadow:0 0 30px #f43f5e44}#vhm small.k{color:#fda4af}#vhm .vlvb{border-color:#f43f5e}#vhm .vlvb i{background:linear-gradient(90deg,#a78bfa,#f43f5e,#fde68a)}
+#vhm .vlvg button{border-color:#fb7185;background:linear-gradient(135deg,#be123c,#7c3aed)}#vhm .vhhd{display:flex;gap:14px;align-items:center}#vhm .vhhd img{width:88px;height:88px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 12px #f43f5e99);animation:vhbob 2.4s ease-in-out infinite}@keyframes vhbob{50%{transform:translateY(-6px) rotate(-3deg)}}
+#vhpk .vlp-box{border-color:#f43f5e}.vlxt button.vhg{border-color:#fb7185;background:linear-gradient(135deg,#be123c,#7c3aed);color:#fff}.vlxt button.vhg.off{opacity:.6}`;document.head.appendChild(st)}
+function vhRender(){const m=$("vhm");if(!m)return;if($("vhpk"))return;const v=vhS(),f=vhInfo(),pc=v.s/VHT*100,sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
+ const rq=(ok,t)=>`<span class="${ok?"ok":""}">${ok?"✓":"✗"} ${t}</span>`;
+ m.innerHTML=`<div class="vlvc"><button class="x" data-vh="x" aria-label="x">×</button><div class="vhhd"><img src="img/special/mimiqui-arlequin.png" alt=""><div><small class="k">${LS("MODE TRÈS LONGUE DURÉE","VERY LONG-TERM MODE")}</small><h2>${LS("L'Hyper Expédition","The Hyper Expedition")}</h2></div></div>
+ <p>${LS("La suite de la Grande Expédition. Envoie une équipe de <b>3 Pokémon</b> traverser <b>8 camps</b> jusqu'au Carnaval Féerique, où t'attend <b>Mimiqui Arlequin</b>, deux fois plus fort qu'Arcanin Jovial. Avec une très bonne équipe, compte environ <b>7 jours</b>. Plus ta progression dans la Tower est haute, plus ça va vite, et les Pokémon super efficaces contre le danger du camp font gagner du temps.","The sequel to the Great Expedition. Send a team of <b>3 Pokémon</b> across <b>8 camps</b> to the Fairy Carnival, where <b>Harlequin Mimikyu</b> awaits, twice as strong as Jolly Arcanine. With a very good team, expect about <b>7 days</b>. The higher your Tower progress, the faster it goes, and Pokémon super effective against the camp hazard save time.")}</p>
+ <div class="vlreq">${rq(f.ok.u,LS("Grande Expédition terminée","Great Expedition completed"))}${rq(f.ok.t,LS("Tour : étage "+VHMINF+" atteint (actuel "+f.tb+")","Tower: floor "+VHMINF+" reached (now "+f.tb+")"))}${rq(f.ok.sq,LS("Équipe de 3 Pokémon","Team of 3 Pokémon"))}${rq(f.ok.lv,LS("Niveau "+VHMINL+" minimum chacun","Level "+VHMINL+" minimum each"))}</div>
+ <div class="vlsq">${sq.map((c,k)=>`<button type="button" class="vlpb${c?" on":""}" data-vhp="${k}">${c&&G.col[c]?`<img src="${rdArtOf(c)}" alt="" onerror="this.style.visibility='hidden'"><span><b>${esc(dn(c))}</b><small>${LS("Niv.","Lv.")} ${G.col[c].l|0}</small></span>`:`<span><b>${LS("Choisir un Pokémon","Pick a Pokémon")}</b></span>`}</button>`).join("")}</div>
+ <div class="vlsp">${LS("Vitesse actuelle","Current speed")} <b>×${f.rate.toFixed(2)}</b> · ${LS("Tour","Tower")} ×${f.base.toFixed(2)} · ${LS("couverture du camp","camp coverage")} ×${f.cov.toFixed(2)} · ${LS("niveau","level")} ×${f.lf.toFixed(2)}<br>${LS("Temps restant estimé","Estimated time left")} <b>${v.s>=VHT?"0":vlFmt(f.eta)}</b></div>
+ <div class="vlvb"><i style="width:${pc}%"></i></div><div class="vlvt"><span>${LS("Camp","Camp")} ${f.camp+1} / 8</span><span>${Math.floor(pc)} %</span></div>
+ <div class="vlvg">${v.s>=VHT?"":`<button data-vh="tg" class="${v.on?"off":""}" ${f.go||v.on?"":"disabled"}>${v.on?LS("Mettre en pause","Pause"):(v.s>0?LS("Reprendre l'expédition","Resume"):LS("Partir en expédition","Start the expedition"))}</button>`}</div>
+ ${VHP.map((x,i)=>{const ok=v.s>=(i+1)*VHCH,dn2=v.c.includes(i),fin=i==VHP.length-1,t=x[3].map(([k,n])=>n+" "+(IT[k]?IT[k].n:k)).join(", ")+(fin?" + Mimiqui Arlequin":"");
+  return `<div class="vlvm${fin?" vlvf":""}${i==f.camp&&!ok?" cur":""}${ok&&!dn2?" ok":""}${dn2?" dn":""}"><b>${i+1}. ${LS(x[0],x[1])}</b><span>${tchips([x[2]])}<br>${esc(t)}</span><button data-vh="cl" data-i="${i}" ${ok&&!dn2?"":"disabled"}>${dn2?LS("Récupéré","Claimed"):LS("Récupérer","Claim")}</button></div>`}).join("")}</div>`}
+function vhOpen(){if(!vhLive())return;let m=$("vhm");if(!m){m=document.createElement("div");m.id="vhm";document.body.appendChild(m);
+  m.addEventListener("click",e=>{const b=e.target.closest("[data-vh]");if(e.target===m||(b&&b.dataset.vh=="x")){m.remove();return}if(!b)return;const v=vhS();
+   if(b.dataset.vh=="tg"){if(!v.on&&!vhInfo().go){toast(LS("Conditions non remplies.","Requirements not met."));return}v.on=v.on?0:1;vhPp=performance.now();vhD=Date.now();try{save()}catch(er){}vhRender()}
+   else if(b.dataset.vh=="cl")vhClaim(+b.dataset.i)})}
+ vhRender()}
+let VHPK=-1,VHPQ="";
+function vhPkHtml(){const v=vhS(),sq=v.sq.slice(0,3),cur=sq[VHPK]||0,other=sq.filter((x,j)=>j!=VHPK),q=VHPQ.trim().toLowerCase();
+ const L=ids().filter(i=>G.col[i]&&!other.includes(i)&&(!q||dn(i).toLowerCase().includes(q))).sort((x,y)=>atPd(y)-atPd(x)).slice(0,300);
+ return `<div class="vlp-box"><h3>${LS("Choisis un Pokémon","Pick a Pokémon")} <small style="font-weight:700;color:#fda4af">${LS("niveau "+VHMINL+" minimum","level "+VHMINL+" minimum")}</small></h3><input id="vhpq" placeholder="${LS("Rechercher…","Search…")}" value="${esc(VHPQ)}" autocomplete="off"><div class="vlp-lst">${L.length?L.map(i=>{const lv=G.col[i].l|0,ok=lv>=VHMINL;return `<button type="button" class="vlp-row${ok?"":" no"}" data-vhk="${i}"><img src="${rdArtOf(i)}" alt="" onerror="this.style.visibility='hidden'"><span><b>${esc(dn(i))}</b><small>${ok?LS("Niv.","Lv.")+" "+lv:LS("Niv. "+lv+" · "+VHMINL+" requis","Lv. "+lv+" · "+VHMINL+" needed")}</small></span></button>`}).join(""):`<p>${LS("Aucun Pokémon trouvé.","No Pokémon found.")}</p>`}</div><div class="vlp-bt">${cur?`<button type="button" data-vhk="0">${LS("Retirer","Remove")}</button>`:""}<button type="button" data-vhk="x">${LS("Fermer","Close")}</button></div></div>`}
+function vhPkClose(){const o=$("vhpk");if(o)o.remove();VHPK=-1}
+document.addEventListener("click",e=>{const t=e.target;if(!t.closest)return;
+ const o=$("vhpk");if(o&&t===o){vhPkClose();vhRender();return}
+ const b=t.closest("[data-vhp]");if(b&&$("vhm")&&$("vhm").contains(b)){e.stopPropagation();VHPK=+b.dataset.vhp;VHPQ="";let p=$("vhpk");if(!p){p=document.createElement("div");p.id="vhpk";document.body.appendChild(p)}p.innerHTML=vhPkHtml();return}
+ const r=t.closest("[data-vhk]");if(r&&o&&o.contains(r)){e.stopPropagation();const a=r.dataset.vhk;if(a=="x"){vhPkClose();vhRender();return}
+  const id=+a,v=vhS(),sq=v.sq.slice(0,3);while(sq.length<3)sq.push(0);
+  if(id&&(G.col[id].l|0)<VHMINL){toast(LS("Niveau "+VHMINL+" minimum pour l'Hyper Expédition.","Level "+VHMINL+" minimum for the Hyper Expedition."));return}
+  sq[VHPK]=id;v.sq=sq.filter((x,j)=>x&&sq.indexOf(x)===j);try{save()}catch(er){}vhPkClose();vhRender();return}
+ const x=t.closest("[data-vhx]");if(x){e.stopPropagation();vhOpen();return}},true);
+document.addEventListener("input",e=>{if(e.target&&e.target.id=="vhpq"){VHPQ=e.target.value;const o=$("vhpk"),p=e.target.selectionStart;if(o){o.innerHTML=vhPkHtml();const i=$("vhpq");if(i){i.focus();try{i.setSelectionRange(p,p)}catch(er){}}}}});
+/* bouton « Hyper Expédition » à côté de « Grande Expédition » (page Expéditions) et dans le menu rapide */
+{const v0=vExp;vExp=function(){const h=v0.apply(this,arguments);if(!vhLive())return h;return h.replace('data-vlx="1">','data-vlx="1">').replace(/(<button type="button" class="vlg" data-vlx="1">[^<]*<\/button>)/,`$1<button type="button" class="vhg${vhUnl()?"":" off"}" data-vhx="1">${LS("Hyper Expédition","Hyper Expedition")}</button>`)}}
+function vhLinks(){if(!vhLive())return;const u=$("utl");if(!u||$("pid-vh-menu"))return;const a=document.createElement("button");a.id="pid-vh-menu";a.type="button";a.className="qkb";
+ a.innerHTML=`<span class="qki" style="--c1:#be123c;--c2:#7c3aed">${ico("trophy")}</span><span class="qkt"><b>${LS("L'Hyper Expédition","The Hyper Expedition")}</b><small>${LS("8 camps, environ 7 jours, Mimiqui Arlequin","8 camps, about 7 days, Harlequin Mimikyu")}</small></span>`;
+ a.addEventListener("click",vhOpen);u.appendChild(a)}
+setInterval(vhLinks,3000);
+Object.assign(window,{vhOpen,vhS,vhInfo,vhClaim});
 
 /* ===== Lugulabre Zodiaque : exclusif de l'étage 4000, rareté « Exclusif » (au-dessus de LR) ===== */
 const EXR=RN2.length;RN2.push("Exclusif");RC2.push("#fbbf24");RW2.push(0);CAPB.push(.10);
