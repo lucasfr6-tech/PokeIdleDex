@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261114g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261114g"></script><script>
+</script><script src="shim.js?v=pid-v400-20261115a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15901,6 +15901,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-14",t:["Corrections du 14 novembre","November 14 fixes"],e:[
+  ["fix","Escouades et Méga : perte de puissance","Une escouade (ou un Pokémon) qui tient une Méga-Perle pouvait perdre sa forme Méga et sa puissance en farm automatique. Le jeu vérifie et recalcule maintenant tout seul la forme et la puissance, plus besoin de retirer puis remettre la pierre.","Squads and Mega: power loss","A squad (or Pokémon) holding a Mega Pearl could lose its Mega form and power during auto farming. The game now checks and recalculates form and power on its own, no need to remove and re-equip the stone."],
   ["fix","Fiche : encadrés hors de la fenêtre","Les encadrés « Apparence », « Forme du Pokémon » et « Essences mutantes » s’affichaient parfois hors de la fenêtre, sur le bord droit de la fiche. Ils prennent maintenant toute la largeur, sous les statistiques.","Sheet: boxes outside the window","The “Look”, “Pokémon form” and “Mutant essences” boxes sometimes showed outside the window, on the sheet’s right edge. They now take the full width, below the stats."],
   ["new","Apparence au choix","Dans la fiche d’un Pokémon (Statistiques), choisis son apparence parmi toutes les formes que tu as obtenues : normale, chromatique, Halloween, saisons Four Seasons… C’est seulement visuel : les bonus ne changent pas. L’apparence s’affiche dans la liste, en combat, sur la fiche et dans les classements (Pokémon favoris).","Choose your look","In a Pokémon’s sheet (Stats), pick its look among all the forms you obtained: normal, shiny, Halloween, Four Seasons seasons… It is only visual: bonuses do not change. The look shows in the list, in battle, on the sheet and in rankings (favourite Pokémon)."],
   ["fix","Classement Tower : ta ligne","Ton record de Tower s’affiche toujours dans le classement, même au-delà de l’étage 1000.","Tower ranking: your row","Your Tower record always shows in the ranking, even beyond floor 1000."],
@@ -19590,6 +19591,13 @@ SAFE(()=>{const HP="5579cf115d3ced911e1c8630ac72042942839609aa7148d5812c5b7ab3b3
    try{biFlags();recomp();mailDot()}catch(e){}save();try{lbPush(true)}catch(e){}try{sfx("big")}catch(e){}
    return LS("Code accepté : bonus de parrainage à +60 % et récompenses dans ton courrier !","Code accepted: referral bonus at +60% and rewards in your mail!")}
   return prev?prev(code):null}});
+/* Méga-Perles et pierres Méga (escouades comprises) : la forme et la puissance sont revérifiées toutes les 30 s.
+   Si elles ont dérivé (perte de puissance signalée en farm auto), elles sont recalculées comme quand on retire et remet la pierre. */
+SAFE(()=>{const chk=()=>{let ch=0;try{for(const k in G.col){const c=G.col[k],it=c&&c.it&&IT[c.it];if(!it||!(it.mf||it.dy))continue;const id=+k,q0=c.q,m0=c.mf|0;
+  const want=it.mf&&MGM[it.mf]&&(MGM[it.mf].s==spc(id)||(window.sqMegaOK&&sqMegaOK(it.mf,id))||(SQM2&&SQM2[id]&&SQM2[id].mb==it.mf))?it.mf:0;
+  try{PWC.delete(id)}catch(e){}rq(id);if(want&&(c.mf|0)!==want){c.mf=want;rq(id)}if((c.mf|0)!==m0||Math.abs((c.q||0)-(q0||0))>1e-9)ch=1}}catch(e){}
+  if(ch){try{IDC=null;recomp()}catch(e){}try{save()}catch(e){}}};
+ setTimeout(chk,8000);setInterval(chk,30000)});
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
