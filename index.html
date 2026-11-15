@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261115f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261115e"></script><script>
+</script><script src="shim.js?v=pid-v400-20261115f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15902,6 +15902,8 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-16",t:["Métalosse Obsidienne et étages 7000+","Obsidian Metagross and floors 7000+"],e:[
+  ["new","Maîtrise des Pokémon","Chaque victoire avec un Pokémon dans l’équipe lui donne des points de maîtrise (boss Alpha 5, boss Oméga 20), gardés au prestige. 8 rangs : Bronze (100), Argent (1 000), Or (5 000), Platine (20 000), Diamant (60 000), Maître (150 000), Grand Maître (400 000) et Légende (1 000 000). Dégâts du Pokémon de +5 % à +150 %, pièces en plus dès Or, et le titre « Légende de [Pokémon] ». Chaque Pokémon au rang Or ou plus donne aussi +0,5 % de dégâts à toute l’équipe (max +50 %). À voir dans la fiche du Pokémon, la liste et le classement Meilleur Pokémon.","Pokémon Mastery","Every win with a Pokémon in your team gives it mastery points (Alpha boss 5, Omega boss 20), kept through prestige. 8 ranks: Bronze (100), Silver (1,000), Gold (5,000), Platinum (20,000), Diamond (60,000), Master (150,000), Grand Master (400,000) and Legend (1,000,000). The Pokémon’s damage goes from +5% to +150%, coins from Gold, and the “[Pokémon] Legend” title. Each Pokémon at Gold or above also gives +0.5% damage to the whole team (max +50%). See it on the Pokémon sheet, the list and the Best Pokémon ranking."],
+  ["new","Paliers chromatiques","Chaque chromatique capturé compte pour sa famille d’évolution : 5 chromatiques = +2 %, 25 = +5 %, 50 = +10 % de dégâts pour ce Pokémon (pas pour l’équipe). Chaque chromatique capturé ajoute aussi +10 % de chance que cette famille réapparaisse en chromatique (jusqu’à ×6). À voir dans la fiche du Pokémon.","Shiny milestones","Every shiny caught counts for its evolution family: 5 shinies = +2%, 25 = +5%, 50 = +10% damage for that Pokémon (not the team). Each shiny caught also adds +10% chance for that family to reappear shiny (up to ×6). See it on the Pokémon sheet."],
   ["new","Nouvelle relique : Chaîne Rouge des Origines","Une relique de rareté Originelle, au-dessus de la Plume du Créateur : +120 % dégâts, +50 % pièces, +30 % capture et +20 % chromatique au niveau 1.","New relic: Red Chain of Origins","A Primordial relic above the Creator’s Feather: +120% damage, +50% coins, +30% catch and +20% shiny at level 1."],
   ["imp","Reliques : niveau 6","Chaque relique peut maintenant monter au niveau 6 (+125 % de son bonus).","Relics: level 6","Every relic can now reach level 6 (+125% of its bonus)."],
   ["imp","Cartes : 5 exemplaires","Une carte compte maintenant jusqu’à 5 exemplaires (bonus ×5), pour toutes les cartes.","Cards: 5 copies","A card now counts up to 5 copies (×5 bonus), for every card."],
@@ -19683,7 +19685,8 @@ window.m130Show=m130Show;
    Bonus du Pokémon : dégâts +5/+10/+20/+35/+50/+75/+100/+150 %, pièces +5 % (Or), +10 % (Diamant), +15 % (Grand Maître), +25 % (Légende).
    Bonus de dresseur : +0,5 % de dégâts à toute l'équipe par Pokémon au rang Or ou plus (max +50 %). */
 const MST=[["Bronze","Bronze","#d97a3a",100,5,0],["Argent","Silver","#cbd5e1",1000,10,0],["Or","Gold","#fbbf24",5000,20,5],["Platine","Platinum","#5eead4",20000,35,5],["Diamant","Diamond","#60a5fa",60000,50,10],["Maître","Master","#e879f9",150000,75,10],["Grand Maître","Grand Master","#f43f5e",400000,100,15],["Légende","Legend","#fde68a",1e6,150,25]];
-const mstOn=()=>{try{return x4Me()&&!!SG.mst}catch(e){return false}};
+const MST_T=Date.UTC(2026,10,15,23,1,0),mstLive=()=>Date.now()>=MST_T; /* ouverture à tous : lundi 16 nov. 00 h 01 */
+const mstOn=()=>{try{return mstLive()||(x4Me()&&!!SG.mst)}catch(e){return false}};
 const mstPts=id=>{try{return Math.floor((G.mst&&G.mst[+id])||0)}catch(e){return 0}};
 const mstRk=id=>{const p=mstPts(id);let r=-1;for(let i=0;i<MST.length;i++)if(p>=MST[i][3])r=i;return r};
 let MSTT=null,MSTTK=0;
@@ -19705,6 +19708,12 @@ function mstSvg(i,still){const c=MST[i][2],id="ms"+(MSTU++),L=i==7,f=L?`url(#${i
  <polygon points="${mstStar(i>=6?8:i>=3?6:5,13,6)}" fill="${mstHex(c,.85)}" stroke="#1a1030" stroke-width="2.5"/>
  ${still?"":`<g clip-path="url(#${id}c)"><rect class="msts2" x="40" y="0" width="14" height="140" fill="url(#${id}s)"/></g>`}</g></g>${tw}</svg>`}
 Object.assign(window,{mstSvg,mstPts,mstRk,mstTeam,mstOn});
+/* titre « Légende de [Pokémon] » : débloqué dès qu'un Pokémon atteint le rang Légende (le nom suit ton Pokémon Légende le plus avancé) */
+const mstLegId=()=>{try{let b=0,bv=0;for(const k in (G.mst||{})){const v=G.mst[k];if(v>=MST[7][3]&&v>bv&&G.col[k]){bv=v;b=+k}}return b}catch(e){return 0}};
+{const T=["mleg","","",["#f87171","#a78bfa"],()=>mstOn()&&!!mstLegId(),"Un Pokémon au rang Légende de maîtrise","A Pokémon at Legend mastery rank",0];
+ Object.defineProperty(T,1,{get:()=>{const i=mstLegId();try{return "Légende de "+(i?dn(i):"…")}catch(e){return "Légende"}}});
+ Object.defineProperty(T,2,{get:()=>{const i=mstLegId();try{return (i?dn(i):"…")+" Legend"}catch(e){return "Legend"}}});
+ try{TIT.push(T)}catch(e){}}
 /* fiche du Pokémon : encadré Maîtrise */
 {const o=bonusCard;bonusCard=function(id){let h=o.apply(this,arguments);try{if(!mstOn()||!G.col[id])return h;const p=mstPts(id),k=mstRk(id),nx=MST[k+1],cur=k>=0?MST[k]:null,lo=cur?cur[3]:0,pc=nx?Math.max(0,Math.min(100,(p-lo)/(nx[3]-lo)*100)):100,col=cur?cur[2]:"#6b7280";
   h+=`<div class="pidmst${k==7?" leg":""}" style="--c:${col}"><div class="pidmst-h"><span class="pidmst-b">${k>=0?mstSvg(k):`<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="31" fill="#2a2440" stroke="#4b4470" stroke-width="4" stroke-dasharray="6 5"/></svg>`}</span><div class="pidmst-t"><small>${LS("MAÎTRISE","MASTERY")}</small><b>${k>=0?LS(cur[0],cur[1]):LS("Pas encore classé","Not ranked yet")}</b>
@@ -19715,7 +19724,7 @@ Object.assign(window,{mstSvg,mstPts,mstRk,mstTeam,mstOn});
 /* liste des Pokémon : petit insigne en haut à gauche */
 {const o=plSprite;plSprite=function(i,c){const h=o.apply(this,arguments);try{if(!mstOn())return h;const k=mstRk(i);if(k<0)return h;return h+`<i class="pidmst-i" title="${LS("Maîtrise ","Mastery ")+LS(MST[k][0],MST[k][1])}">${mstSvg(k,1)}</i>`}catch(e){return h}}}
 /* Réglages > Réservé à toi : interrupteur de l'aperçu */
-{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(!x4Me())return h;const k='<div class="pref-grid">',i=h.indexOf(k);if(i<0)return h;const on=!!SG.mst;
+{const v0=vSetg;vSetg=function(){const h=v0.apply(this,arguments);try{if(!x4Me()||mstLive())return h;const k='<div class="pref-grid">',i=h.indexOf(k);if(i<0)return h;const on=!!SG.mst;
  const card=`<article class="pref-card" style="border:2px solid #fbbf24"><header><h3>${LS("Réservé à toi","Only you")}</h3><p>${LS("Aperçus privés des nouveautés, avant leur sortie pour les joueurs.","Private previews of new features, before players get them.")}</p></header><div class="pref-body"><button type="button" class="pref-toggle${on?" on":""}" role="switch" aria-checked="${on}" data-mstp="1"><span class="pref-ic">${mstSvg(on?2:0,1)}</span><span class="pref-copy"><b>${LS("Maîtrise des Pokémon","Pokémon Mastery")}</b><small>${LS("Insignes Bronze à Légende et leurs bonus, visibles seulement par toi.","Bronze to Legend badges and their bonuses, only for you.")}</small></span><span class="pref-switch" aria-hidden="true"></span></button><button type="button" class="pref-toggle${SG.shs?" on":""}" role="switch" aria-checked="${!!SG.shs}" data-shsp="1"><span class="pref-ic">${mstSvg(7,1)}</span><span class="pref-copy"><b>${LS("Paliers chromatiques","Shiny milestones")}</b><small>${LS("5, 25 et 50 chromatiques par famille : dégâts du Pokémon et chance de réapparition chromatique, visibles seulement par toi.","5, 25 and 50 shinies per family: Pokémon damage and shiny reappearance chance, only for you.")}</small></span><span class="pref-switch" aria-hidden="true"></span></button></div></article>`;
  return h.slice(0,i+k.length)+card+h.slice(i+k.length)}catch(e){return h}}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-shsp]");if(!b||!x4Me())return;e.stopPropagation();e.preventDefault();SG.shs=SG.shs?0:1;try{svs()}catch(x){}try{toast(SG.shs?LS("Aperçu Paliers chromatiques activé","Shiny milestones preview on"):LS("Aperçu Paliers chromatiques désactivé","Shiny milestones preview off"))}catch(x){}try{show()}catch(x){}},true);
@@ -19741,7 +19750,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    Chaque chromatique capturé compte pour sa famille d'évolution (G.shc). Paliers : 5 → +2 %, 25 → +5 %, 50 → +10 % de dégâts, pour les Pokémon de cette famille seulement.
    Chaque chromatique capturé augmente aussi de 10 % la chance que cette famille réapparaisse en chromatique (jusqu'à ×6 à 50 captures). */
 const SHS=[[5,2],[25,5],[50,10]];
-const shsOn=()=>{try{return x4Me()&&!!SG.shs}catch(e){return false}};
+const shsOn=()=>{try{return mstLive()||(x4Me()&&!!SG.shs)}catch(e){return false}};
 const shsKey=id=>{id=+id;try{const d=DB[id];return d&&d.ch?+d.ch:id}catch(e){return id}};
 const shsN=id=>{try{return Math.floor((G.shc&&G.shc[shsKey(id)])||0)}catch(e){return 0}};
 const shsDmg=id=>{const n=shsN(id);let v=0;for(const s of SHS)if(n>=s[0])v=s[1];return v};
