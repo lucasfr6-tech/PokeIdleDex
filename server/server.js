@@ -126,7 +126,9 @@ const susp=sv=>{let G;try{G=JSON.parse(sv)}catch(e){return[]}if(!G||typeof G!='o
 // Clear only obsolete Tower-limit flags, retaining every other moderation reason.
 for(const uid of Object.keys(db.flag)){const f=db.flag[uid];if(!f||!Array.isArray(f.s))continue;const next=f.s.filter(x=>{const m=/^tour etage (\d+)$/.exec(x);return !m||+m[1]>1300});if(next.length!==f.s.length)setFlag(uid,'s',next)}
 const ckT=new Map();
-const lbSus=d=>{const r=[],n=x=>+x||0;if(!isFinite(+d.bf)||n(d.bf)<0||n(d.bf)>100000)r.push('classement : etage impossible '+d.bf);if(n(d.sh)>n(d.dx)+5)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1100)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
+const lbSus=d=>{const r=[],n=x=>+x||0;if(!isFinite(+d.bf)||n(d.bf)<0||n(d.bf)>100000)r.push('classement : etage impossible '+d.bf);/* exclusifs, formes Halloween / Four Seasons, escouades : un compte complet a plus de chromatiques que d'especes du Pokedex */if(n(d.sh)>n(d.dx)+400)r.push('classement : '+n(d.sh)+' chromatiques pour '+n(d.dx)+' especes');if(n(d.dx)>1600)r.push('classement : '+n(d.dx)+' especes');if(n(d.bf)>20000)r.push('classement : etage '+n(d.bf));if(n(d.caps)<0)r.push('classement : captures negatives');return r};
+/* au demarrage : les signalements du classement sont recalcules avec les regles actuelles (faux positifs retires) */
+for(const uid of Object.keys(db.flag)){const f=db.flag[uid];if(!f||!Array.isArray(f.l)||!f.l.length)continue;const d=db.lb[uid]&&db.lb[uid].d;setFlag(uid,'l',d?lbSus(d):[])}
 const gldClean=()=>{try{const used=new Set();for(const id in db.glm){const d=db.glm[id].d;if(d&&d.g)used.add(d.g)}let n=0;for(const id in db.gld){if(!used.has(id)&&Date.now()-(db.gld[id].t||0)>36e5){delete db.gld[id];n++}}if(n){dirty=1;console.log('guildes vides supprimees:',n)}}catch(e){console.error('gldClean',e.message)}};
 setInterval(gldClean,6e5);setTimeout(gldClean,15000);
 /* connexion Discord (OAuth2) : le secret reste dans l'environnement du serveur (DISCORD_SECRET), jamais dans le jeu */
@@ -308,7 +310,7 @@ http.createServer((req,res)=>{
     if(canWin&&Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
     dirty=1;send(res,200,{ok:1,v:Math.round(J.v),win,w:J.w})});return}
   send(res,405,{e:'method'});return}
- if(u.pathname=='/api/health'){let tw=0,tmax=0;for(const id in db.twr){const b=+(db.twr[id]&&db.twr[id].d&&db.twr[id].d.b)||0;if(b>tmax)tmax=b;if(b>1000&&hidden(id))tw++}send(res,200,{ok:1,v:'2026-11-16-tour1300',docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0),tourMax:tmax,tourCaches:tw});return}
+ if(u.pathname=='/api/health'){let tw=0,tmax=0;for(const id in db.twr){const b=+(db.twr[id]&&db.twr[id].d&&db.twr[id].d.b)||0;if(b>tmax)tmax=b;if(b>1000&&hidden(id))tw++}send(res,200,{ok:1,v:'2026-11-16c-tour-visible',docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0),tourMax:tmax,tourCaches:tw});return}
   if(u.pathname==='/api/guild/transfer'&&req.method==='POST'){
    if(limited(ip+'guild-transfer',20)){send(res,429,{e:'rate'});return}
    let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
@@ -457,7 +459,7 @@ http.createServer((req,res)=>{
   const col=db[m[2]];
   if(m[1]=='c'&&req.method=='GET'){
    if(limited(ip,240)){send(res,429,{e:'rate'});return}
-   const HID={lb:1,pvp:1,twr:1,wb:1,glm:1};let L=Object.keys(col).filter(id=>!(HID[m[2]]&&hidden(id))).map(id=>({id,d:col[id].d}));
+   const HID={lb:1,pvp:1,wb:1,glm:1}; /* la Tour n'est jamais masquee : tous les joueurs y apparaissent */let L=Object.keys(col).filter(id=>!(HID[m[2]]&&hidden(id))).map(id=>({id,d:col[id].d}));
    const f=u.searchParams.get('f'),v=u.searchParams.get('v');
    if(f){if(u.searchParams.get('op')=='ac')L=L.filter(x=>x.d&&Array.isArray(x.d[f])&&x.d[f].map(String).includes(v));else L=L.filter(x=>String(x.d&&x.d[f])===v)}
    const ob=u.searchParams.get('ob');
