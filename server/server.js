@@ -308,7 +308,7 @@ http.createServer((req,res)=>{
     if(canWin&&Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
     dirty=1;send(res,200,{ok:1,v:Math.round(J.v),win,w:J.w})});return}
   send(res,405,{e:'method'});return}
- if(u.pathname=='/api/health'){send(res,200,{ok:1,docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0)});return}
+ if(u.pathname=='/api/health'){let tw=0,tmax=0;for(const id in db.twr){const b=+(db.twr[id]&&db.twr[id].d&&db.twr[id].d.b)||0;if(b>tmax)tmax=b;if(b>1000&&hidden(id))tw++}send(res,200,{ok:1,v:'2026-11-16-tour1300',docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0),tourMax:tmax,tourCaches:tw});return}
   if(u.pathname==='/api/guild/transfer'&&req.method==='POST'){
    if(limited(ip+'guild-transfer',20)){send(res,429,{e:'rate'});return}
    let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
