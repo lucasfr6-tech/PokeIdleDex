@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261117a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261117b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261117a"></script><script>
+</script><script src="shim.js?v=pid-v400-20261117b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -18451,6 +18451,12 @@ async function cmWeekCheck(){try{const w=cmWeek()-1;if(w<0)return;G.cmrw=G.cmrw|
  /* pas trouvé alors qu'on a joué : on réessaie plus tard (jusqu'au jeudi) au lieu de marquer « sans place » */
  if(!rk&&mine>0&&Date.now()<CM0+(w+1)*CMW+3*864e5)return;
  G.cmrw[w]={r:rk||0};const x=CMRW.find(y=>y.r==rk);if(x)cmGrant(x,w);save()}catch(e){}}
+/* rattrapage : classement final de la semaine 1 (9 → 16 novembre), relevé sur le serveur le 17 novembre */
+/* Pouap : 47 s (temps donné par le créateur, effacé du serveur quand il a rejoué) */
+const CM0FIX={"u98878eba4f27a2f9dcb4":1,"uac91cb9e16bf89f7255a":2,"uec04770d98492ef01638":3,"u0fffa55a7afa68fb4764":4,"u31d939edf71d8fe686c2":5,"u9cf3d165f60da7529d9e":6,"ua810b69a88dda11eee13":7,"uf5abef7416e3588c7753":8,"u954565d8f3f380121dca":9,"u3362b3e1b3eb15359f30":10};
+function cmFix0(){try{if(!G||G.cmfix0)return;const on=typeof LB!="undefined"&&LB&&LB.ok&&LB.uid,me=on?LB.uid:TNLS("pid_uid");if(!me)return;G.cmrw=G.cmrw||{};const rk=CM0FIX[me]||CM0FIX[TNLS("pid_uid")];
+ if(!rk){if(on)G.cmfix0=1;return}if(G.cmrw[0]&&G.cmrw[0].r>0){G.cmfix0=1;return}const x=CMRW.find(y=>y.r==rk);G.cmrw[0]={r:rk};G.cmfix0=1;if(x)cmGrant(x,0);save()}catch(e){}}
+setTimeout(cmFix0,7000);setInterval(cmFix0,60000);
 setTimeout(cmWeekCheck,12000);setInterval(cmWeekCheck,10*60000);
 /* contours animés et titres brillants */
 {const st=document.createElement("style");st.textContent=`
