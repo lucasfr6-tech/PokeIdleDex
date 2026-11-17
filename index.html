@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261116e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261117a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261116e"></script><script>
+</script><script src="shim.js?v=pid-v400-20261117a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9238,7 +9238,7 @@ const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 /* Tour : courbe continue et progressive (avant : saut à l'étage 100 et défense multipliée deux fois) */
-const twSc=f=>{const F=f,x=F>1000?22+85*Math.pow((F-1000)/300,1.3):F>700?22*Math.pow((F-700)/300,1.5):0;f=Math.min(f,700);const a=(f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5))+x;return{a,h:a*1.13*(F>700?.75:1),d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
+const twSc=f=>{const F=f,x=F>1000?22+55*Math.pow((F-1000)/300,1.4):F>700?22*Math.pow((F-700)/300,1.5):0;f=Math.min(f,700);const a=(f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5))+x;return{a,h:a*1.13*(F>700?.75:1),d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -15901,6 +15901,10 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-11-17",t:["Corrections du 17 novembre","November 17 fixes"],e:[
+  ["fix","Exclusifs et règles de capture","Lugulabre Zodiaque, Métalosse Obsidienne et les autres exclusifs ne sont plus ignorés par les stratégies de capture (Élite, Malin…). Seule la ligne « Exclusif » réglée sur « Aucune » les laisse passer.","Exclusives and capture rules","Zodiac Chandelure, Obsidian Metagross and other exclusives are no longer skipped by capture strategies (Elite, Smart…). Only the “Exclusive” line set to “None” skips them."],
+  ["fix","Contre-la-montre : récompenses du classement","Les récompenses de fin de semaine du Contre-la-montre sont maintenant bien données, même si tu as déjà rejoué la nouvelle semaine.","Time trial: ranking rewards","End-of-week Time trial rewards are now properly given, even if you already played the new week."],
+  ["imp","Tower : étages 1000 à 1300 encore plus accessibles","Les adversaires après l’étage 1000 sont encore moins forts.","Tower: floors 1000 to 1300 even easier","Opponents past floor 1000 are weaker again."]]},
  {d:"2026-11-16",r:Date.UTC(2026,10,15,23,1,0),t:["Métalosse Obsidienne et étages 7000+","Obsidian Metagross and floors 7000+"],e:[
   ["imp","Tower : étages 1000 à 1300 plus accessibles","Les adversaires de la Tower après l’étage 1000 sont nettement moins forts (environ −25 % vers 1100, −30 % au sommet 1300).","Tower: floors 1000 to 1300 easier","Tower opponents past floor 1000 are noticeably weaker (about −25% around 1100, −30% at the 1300 summit)."],
   ["fix","Classement de la Tower au-delà de 1000","Les records au-dessus de l’étage 1000 s’affichent enfin dans le classement de la Tower.","Tower ranking above 1000","Records above floor 1000 now show in the Tower ranking."],
@@ -18249,7 +18253,7 @@ function cmTeam(){const w=cmWeek();if(CMT&&CMT.w===w)return CMT;const R=cmRng(w*
  const T=[],seen=new Set();for(const id of L){let t=["normal"];try{t=tp(id)}catch(e){}if(seen.has(t[0]))continue;seen.add(t[0]);T.push(id);if(T.length==6)break}
  const F=[],R2=cmRng(w*104729+3);for(let f=1;f<=100;f++)F.push(1+Math.floor(R2()*649));return CMT={w,T,F}}
 const cmHp=f=>f%10==0?90+f*.6:30+f*.15;
-const CMS=()=>{const c=G.cmr=G.cmr&&typeof G.cmr=="object"?G.cmr:{};if(c.w!==cmWeek()){c.w=cmWeek();c.b=0;c.n=0;c.rw=0;c.v=1}if(c.v!==1){c.v=1;c.b=0;c.n=0}return c};
+const CMS=()=>{const c=G.cmr=G.cmr&&typeof G.cmr=="object"?G.cmr:{};if(c.w!==cmWeek()){if(c.b>0&&c.w!=null){G.cmh=G.cmh||{};G.cmh[c.w]=c.b}c.w=cmWeek();c.b=0;c.n=0;c.rw=0;c.v=1}if(c.v!==1){c.v=1;c.b=0;c.n=0}return c};
 const CMX={on:0,f:1,hp:0,mx:0,t0:0,cd:{},raf:0,lb:null,lbt:0,res:null};
 const cmFmt=ms=>{const s=ms/1000,m=Math.floor(s/60);return (m?m+" min ":"")+(s%60).toFixed(2).replace(".",",")+" s"};
 const cmTy=id=>{try{return tp(id)}catch(e){return ["normal"]}};
@@ -18278,7 +18282,7 @@ function cmFinish(){const ms=performance.now()-CMX.t0;CMX.on=0;cancelAnimationFr
  const rw=[];if(!S.rw){S.rw=1;G.inv["master-ball"]=(G.inv["master-ball"]||0)+1;G.inv["rare-candy"]=(G.inv["rare-candy"]||0)+50;rw.push("1 Master Ball","50 Super Bonbons")}
  CMX.res={ms,best,rw};CMX.lbt=0;save();try{sfx("shiny")}catch(e){}try{lbPush&&lbPush()}catch(e){}show()}
 function cmQuit(){CMX.on=0;cancelAnimationFrame(CMX.raf);show()}
-{const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{const S=CMS();if(S.b>0){d.cmw=cmKey();d.cmt=S.b}}catch(e){}return d}}
+{const o=lbDoc;lbDoc=function(){const d=o.apply(this,arguments);try{const S=CMS();if(S.b>0){d.cmw=cmKey();d.cmt=S.b}const pw=cmWeek()-1,pb=G.cmh&&G.cmh[pw];if(pw>=0&&pb>0){d.cmpw="cm"+pw+(pw==0?"r":"");d.cmpt=pb}}catch(e){}return d}}
 async function cmLb(){if(Date.now()-CMX.lbt<30000)return;CMX.lbt=Date.now();const A=tnAPI();if(!A)return;try{const r=await fetch(A+"/api/c/lb?f=cmw&v="+cmKey()+"&ob=cmt&dir=asc&lim=30",{signal:AbortSignal.timeout(6000)});const j=await r.json();CMX.lb=(j.docs||[]).filter(x=>x.d&&x.d.cmt>0).sort((a,b)=>a.d.cmt-b.d.cmt).map(x=>({u:x.id,n:x.d.n||"?",t:x.d.cmt,d:x.d}));if(tab=="cm"&&!CMX.on)show()}catch(e){}}
 function vCm(){const T=cmTeam(),S=CMS(),me=TNLS("pid_uid");
  if(CMX.on){const d=T.F[CMX.f-1];return `<div class="cm cmrun"><div class="cmtop"><b id="cmtime">0,00 s</b><div class="cmbar"><i id="cmfb" style="width:${(CMX.f-1)}%"></i></div><button class="cmq" data-cm="quit">${LS("Abandonner","Give up")}</button></div>
@@ -18439,11 +18443,15 @@ function cmGrant(x,w){G.cmc=G.cmc||{t:{},f:{},b:{}};if(x.t)G.cmc.t[x.t]=1;if(x.f
  const rw=[["i","master-ball",x.mb],["i","rare-candy",x.rc],["i",x.ess,1],["tc",0,x.tc[0]],["tc",1,x.tc[1]],["tc",2,x.tc[2]]].concat(CMBI.map(k=>["i",k,x.bi]));
  mailAdd(LS("Contre-la-montre : "+x.r+(x.r==1?"er":"e")+" de la semaine "+(w+1)+" !","Time trial: #"+x.r+" of week "+(w+1)+"!"),LS("Contre-la-montre","Time trial"),rw,LS("Bravo ! Ta place au classement te rapporte : ","Well done! Your rank earns you: ")+cmRwList(x).join(", ")+".",1);
  try{ttRefresh()}catch(e){}save()}
-async function cmWeekCheck(){try{const w=cmWeek()-1;if(w<0)return;G.cmrw=G.cmrw||{};if(G.cmrw[w])return;const A=tnAPI(),me=TNLS("pid_uid");if(!A||!me)return;
- const r=await fetch(A+"/api/c/lb?f=cmw&v=cm"+w+(w==0?"r":"")+"&ob=cmt&dir=asc&lim=30",{signal:AbortSignal.timeout(8000)});if(!r.ok)return;const j=await r.json();
- const L=(j.docs||[]).filter(x=>x.d&&x.d.cmt>0).sort((a,b)=>a.d.cmt-b.d.cmt),rk=L.findIndex(x=>x.id==me)+1;G.cmrw[w]={r:rk||0};
- const x=CMRW.find(y=>y.r==rk);if(x)cmGrant(x,w);save()}catch(e){}}
-setTimeout(cmWeekCheck,12000);setInterval(cmWeekCheck,30*60000);
+async function cmWeekCheck(){try{const w=cmWeek()-1;if(w<0)return;G.cmrw=G.cmrw||{};if(G.cmrw[w])return;const A=tnAPI(),me=(typeof LB!="undefined"&&LB&&LB.uid)||TNLS("pid_uid");if(!A||!me)return;const key="cm"+w+(w==0?"r":"");
+ /* résultats de la semaine passée : joueurs qui n'ont pas encore rejoué (cmw) + ceux qui ont rejoué (cmpw, gardé dans leur fiche) */
+ const get=async(f,t)=>{const r=await fetch(A+"/api/c/lb?f="+f+"&v="+key+"&ob="+t+"&dir=asc&lim=60",{signal:AbortSignal.timeout(9000)});if(!r.ok)throw 0;const j=await r.json();return (j.docs||[]).map(x=>({id:x.id,t:x.d&&+x.d[t]})).filter(x=>x.t>0)};
+ const M={};for(const x of [...await get("cmw","cmt"),...await get("cmpw","cmpt")])if(!(M[x.id]<=x.t))M[x.id]=x.t;
+ const L=Object.keys(M).sort((a,b)=>M[a]-M[b]),rk=L.indexOf(me)+1,mine=G.cmh&&G.cmh[w];
+ /* pas trouvé alors qu'on a joué : on réessaie plus tard (jusqu'au jeudi) au lieu de marquer « sans place » */
+ if(!rk&&mine>0&&Date.now()<CM0+(w+1)*CMW+3*864e5)return;
+ G.cmrw[w]={r:rk||0};const x=CMRW.find(y=>y.r==rk);if(x)cmGrant(x,w);save()}catch(e){}}
+setTimeout(cmWeekCheck,12000);setInterval(cmWeekCheck,10*60000);
 /* contours animés et titres brillants */
 {const st=document.createElement("style");st.textContent=`
 @keyframes cmfp{0%,100%{box-shadow:0 0 0 2px #0008,0 0 10px var(--cg)}50%{box-shadow:0 0 0 2px #0008,0 0 26px var(--cg),0 0 46px color-mix(in srgb,var(--cg) 50%,transparent)}}
@@ -19900,6 +19908,9 @@ Object.assign(window,{shsN,shsDmg,shsMul,shsKey,shsOn,shsBaseP});
 /* Pokémon List : un Pokémon garde toujours ses couleurs, quelle que soit sa mutation (plus de filtre de couleur sur le sprite) */
 {const o=plTint;plTint=function(){return ""}}
 {const st=document.createElement("style");st.textContent=`.spw,.spw *{--pl-filter:none!important;--pl-opacity:1!important}`;document.head.appendChild(st)}
+/* règles de capture : un exclusif (Lugulabre Zodiaque, Métalosse Obsidienne…) n'est jamais ignoré par la stratégie (Élite, Malin…).
+   On ne le laisse passer que si la ligne « Exclusif » est réglée sur « Aucune », ou si « Uniquement les espèces choisies » exclut ce Pokémon. */
+{const o=kxWant;kxWant=function(e){try{if(e&&!e.hwm&&typeof EXR!="undefined"&&(e.r===EXR||(+e.id>9e4&&pr(+e.id)===EXR))){if(kxRule("r7")==="")return false;const L=kxzSel(zoneOf(G.fl));if(L.length&&KX().only&&!L.includes(+e.id))return false;return true}}catch(x){}return o.apply(this,arguments)}}
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
