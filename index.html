@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261119a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261119b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261119a"></script><script>
+</script><script src="shim.js?v=pid-v400-20261119b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -8189,7 +8189,7 @@ const ZT_K=2;
 const ztCur=()=>{const p=zpool();return G.zt&&p.includes(G.zt)?G.zt:0};
 pickId22=function(){const L=zpool(),t=ztCur();const w=L.map(i=>RWB(pr(i))*(i==t?ZT_K:1));let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let k=0;k<L.length;k++){r-=w[k];if(r<=0)return L[k]}return L[0]};
 /* zones : le Pokémon sauvage en combat doit toujours faire partie de la liste de la zone actuelle, sinon on en fait apparaître un autre */
-setInterval(()=>{try{if(E&&!busy&&!E.hwm&&!zpool().includes(+E.id))E=null}catch(e){}},1000);
+setInterval(()=>{try{if(E&&!busy&&!E.hwm&&!(+E.id>9e4)&&!zpool().includes(+E.id))E=null}catch(e){}},1000);
 zoneHtml=function(z){const zp=zonePool22(z).slice().sort((a,b)=>pr(b)-pr(a)||a-b),t=G.zt&&zp.includes(G.zt)?G.zt:0,W=i=>RWB(pr(i))*(i==t?ZT_K:1),tot=zp.reduce((s,x)=>s+W(x),0);
  return `<div class="mb" data-a="close"></div><div class="mc zmc"><button class="x" data-a="close">${ico("x")}</button><h2>Zone ${z+1}</h2><small>${LS("Étages "+zs(z)+" à "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" capturés","Floors "+zs(z)+" to "+ze(z)+" · "+zp.filter(i=>G.dx[i]).length+" / "+zp.length+" caught")}</small>
  <div class="zsum">${[3,2,1,0].map(r=>{const L=zp.filter(i=>pr(i)==r),p=L.reduce((s,x)=>s+W(x),0)/tot;return `<div class="zs r${r}">${rtag(r)}<b>${L.length}</b><small>${prc(p)}</small></div>`}).join("")}</div>
@@ -9238,7 +9238,7 @@ const TWG={25:145,50:150,75:384,100:493,125:483,150:484,175:487,200:150,225:800,
 /* courbe de puissance des ennemis (réglée par simulation) */
 const TWSC={a0:.9,a1:.38,p:1.05,h:1.18,d:.9,s:.72,s1:.0032};
 /* Tour : courbe continue et progressive (avant : saut à l'étage 100 et défense multipliée deux fois) */
-const twSc=f=>{const F=f,x=F>1000?22+55*Math.pow((F-1000)/300,1.4):F>700?22*Math.pow((F-700)/300,1.5):0;f=Math.min(f,700);const a=(f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5))+x;return{a,h:a*1.13*(F>700?.75:1),d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
+const twSc=f=>{const F=f,x=(F>1000?22+55*Math.pow((F-1000)/300,1.4):F>700?22*Math.pow((F-700)/300,1.5):0)*.75;f=Math.min(f,700);const a=(f<=100?.85+.3*Math.pow(f/100,1.1):1.15+.25*Math.pow((f-100)/200,1.5))+x;return{a,h:a*1.13*(F>700?.75:1),d:a*.88+.05,p:.72+.0025*Math.min(f,100)+.0012*Math.max(0,f-100)}};
 function twList(f){if(f>100)return twListS(f);const P=pvPool(),N=P.length,n=twCount(f),R=rng(f*977+13),Z=twZone(f),gd=TWG[f],big=f%5==0;
  const q=Math.pow((f-1)/99,.6),c=q*(N-1),lo=Math.max(0,Math.round(c-N*.13)),hi=Math.min(N-1,Math.round(c+N*.05)),cand=[];
  for(let i=lo;i<=hi;i++)cand.push(P[i][0]);
@@ -15901,7 +15901,9 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-11-19",t:["Correction du 19 novembre","November 19 fix"],e:[
+ {d:"2026-11-19",t:["Corrections du 19 novembre","November 19 fixes"],e:[
+  ["fix","Métalosse Obsidienne : capture","Métalosse Obsidienne disparaissait aussitôt apparu (il n’était jamais vraiment combattu ni capturé). Il reste maintenant en combat et peut être capturé.","Obsidian Metagross: capture","Obsidian Metagross vanished right after appearing (it was never really fought nor caught). It now stays in battle and can be caught."],
+  ["imp","Tower plus accessible après l’étage 700","Les adversaires de la Tower après l’étage 700 sont 25 % moins forts.","Tower easier past floor 700","Tower opponents past floor 700 are 25% weaker."],
   ["fix","Lien du Discord","Le lien d’invitation du Discord (boutons, barre des membres, courrier) est mis à jour : l’ancien avait expiré.","Discord link","The Discord invite link (buttons, member bar, mail) is updated: the old one had expired."]]},
  {d:"2026-11-17",t:["Corrections du 17 novembre","November 17 fixes"],e:[
   ["fix","Exclusifs et règles de capture","Lugulabre Zodiaque, Métalosse Obsidienne et les autres exclusifs ne sont plus ignorés par les stratégies de capture (Élite, Malin…). Seule la ligne « Exclusif » réglée sur « Aucune » les laisse passer.","Exclusives and capture rules","Zodiac Chandelure, Obsidian Metagross and other exclusives are no longer skipped by capture strategies (Elite, Smart…). Only the “Exclusive” line set to “None” skips them."],
@@ -19919,6 +19921,9 @@ Object.assign(window,{shsN,shsDmg,shsMul,shsKey,shsOn,shsBaseP});
 /* règles de capture : un exclusif (Lugulabre Zodiaque, Métalosse Obsidienne…) n'est jamais ignoré par la stratégie (Élite, Malin…).
    On ne le laisse passer que si la ligne « Exclusif » est réglée sur « Aucune », ou si « Uniquement les espèces choisies » exclut ce Pokémon. */
 {const o=kxWant;kxWant=function(e){try{if(e&&!e.hwm&&typeof EXR!="undefined"&&(e.r===EXR||(+e.id>9e4&&pr(+e.id)===EXR))){if(kxRule("r7")==="")return false;const L=kxzSel(zoneOf(G.fl));if(L.length&&KX().only&&!L.includes(+e.id))return false;return true}}catch(x){}return o.apply(this,arguments)}}
+/* code Xerneas : le trait « Cœur de l'Infini » de Xerneas Pipomiel ne peut plus être perdu (il est remis s'il a été remplacé) */
+setInterval(()=>{try{if(!G||!G.codes||!Object.keys(G.codes).some(k=>/^TS4PACK-XERNEAS-/.test(k)))return;const c=G.col[90027];if(!c)return;const t=TRXT.find(x=>x.n=="Cœur de l'Infini");if(!t)return;
+ if(c.tr!==t.id){c.tr=t.id;try{rq(90027);recomp()}catch(e){}save();try{toast(LS("Xerneas Pipomiel a retrouvé son trait « Cœur de l'Infini ».","Xerneas Pipomiel got back its “Heart of Infinity” trait."))}catch(e){}}}catch(e){}},15000);
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
