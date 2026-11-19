@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261119e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261120a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261119e"></script><script>
+</script><script src="shim.js?v=pid-v400-20261120a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -14531,6 +14531,27 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(a=="open"){try{$("fsm").classList.remove("on")}catch(x){}fsgOpen()}else if(a=="close")$("fsgm").classList.remove("on");else if(a=="buy"){const x=FSGI[+b.dataset.i],had=x&&fsOwn(x.id,x.s),g0=G.gem||0;fsgBuy(+b.dataset.i);if(x&&(G.gem||0)<g0)fsgCel(x)}
  else if(a=="go")fsgGo(+b.dataset.k);else if(a=="tab"){FSGW.tab=b.dataset.t;fsgSet(0)}else if(a=="sh"){FSGW.sh=+b.dataset.v;fsgSet(1)}},true);
 document.addEventListener("keydown",e=>{const o=$("fsgm");if(!o||!o.classList.contains("on"))return;if(e.key=="Escape")o.classList.remove("on");else if(e.key=="ArrowRight")fsgGo((FSGW.i+1)%4);else if(e.key=="ArrowLeft")fsgGo((FSGW.i+3)%4)});
+/* achats en gemmes Four Seasons : le Pokémon est donné avant de retirer les gemmes (remboursé si l'achat échoue),
+   et chaque achat est noté sur l'appareil : si une autre page ouverte (autre onglet) écrase la partie, l'achat est rendu tout seul */
+const FSBK=()=>"pid_fsbuy:"+(typeof SK!="undefined"?SK:"idle3");
+const fsbLoad=()=>{try{const a=JSON.parse(localStorage.getItem(FSBK())||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}};
+fsgBuy=function(id){const x=FSGI[id];if(!x||!FSON())return;const gem=G.gem||0;if(gem<x.p){toast(LS("Il te manque "+fmt(x.p-gem)+" gemmes","You are missing "+fmt(x.p-gem)+" gems"));try{sfx("err")}catch(e){}return}
+ try{fsGive(id,x.s,1)}catch(e){}
+ const c=G.col[id];if(!c||!c.fs||!fsOwn(id,x.s)){toast(LS("Achat annulé, réessaie (gemmes non retirées).","Purchase cancelled, try again (no gems spent)."));return}
+ if(c.fsv!=x.s){c.fsv=x.s;try{hfLock(c);rq(id)}catch(e){}}
+ G.gem=gem-x.p;(G.fsb=G.fsb||[]).push({i:id,s:x.s,t:Date.now()});try{const L=fsbLoad();L.push({i:id,s:x.s,t:Date.now()});localStorage.setItem(FSBK(),JSON.stringify(L.slice(-40)))}catch(e){}
+ IDC=null;try{recomp()}catch(e){}save();try{lbPush(true)}catch(e){}try{sfx("shiny")}catch(e){}toast(LS(fsName(id,x.s)+" rejoint ta collection !",fsName(id,x.s)+" joins your collection!"));fsgRender();try{ui()}catch(e){}};
+function fsbRepair(){try{if(typeof G=="undefined"||!G.col)return;const L=fsbLoad().concat(G.fsb||[]);let any=0;
+ for(const b of L){if(!b||!FSGI[b.i])continue;if(!fsOwn(b.i,b.s)||!G.col[b.i]){fsGive(b.i,b.s,1);any=1;try{toast(LS(fsName(b.i,b.s)+" récupéré : ton achat est bien dans ta collection.",fsName(b.i,b.s)+" restored: your purchase is in your collection."))}catch(e){}}}
+ if(any){IDC=null;try{recomp()}catch(e){}save();try{ui()}catch(e){}}}catch(e){}}
+setTimeout(fsbRepair,6000);setInterval(fsbRepair,30000);
+/* code privé : Aquali Été pour un achat perdu */
+try{(()=>{const HA="265735664c99ef8dace1eda90ac7533e260c3cbe2b76cb9d976349540d9d224a",prev=window.pidPrivateRedeem;
+ window.pidPrivateRedeem=async function(code){const raw=String(code||"").trim().toUpperCase();
+  if(/^TS4PACK-AQUALI-/.test(raw)&&await pidH(raw)===HA){G.codes=G.codes||{};if(G.codes[raw])return LS("Code déjà utilisé.","Code already used.");
+   G.codes[raw]=1;fsGive(134,"summer",1);const c=G.col[134];if(c){c.fsv="summer";try{hfLock(c);rq(134)}catch(e){}}IDC=null;try{recomp()}catch(e){}save();try{lbPush(true);sfx("shiny");show();ui()}catch(e){}
+   return LS("Code accepté : Aquali Été rejoint ta collection !","Code accepted: Summer Vaporeon joins your collection!")}
+  return prev?prev(code):null}})()}catch(e){}
 /* le raccourci « Halloween » en haut à gauche devient « Four Seasons » */
 function fsgSwap(){if(!FSLIVE())return;document.querySelectorAll('[data-hw="open"]').forEach(el=>{el.removeAttribute("data-hw");el.dataset.fsg="open";
  el.classList.add("fsgon");if(!el.classList.contains("elite-shortcut")){const sv=el.querySelector("svg,img");if(sv)sv.outerHTML=fsImg(197,0,"autumn","fsgsc")}
@@ -15902,6 +15923,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-19",t:["Corrections du 19 novembre","November 19 fixes"],e:[
+  ["fix","Boutique Four Seasons : achats protégés","Le Pokémon acheté est donné avant de retirer les gemmes. Si une autre page du jeu restée ouverte efface un achat, il est rendu automatiquement.","Four Seasons shop: safer purchases","The Pokémon is given before the gems are taken. If another open game page erases a purchase, it is given back automatically."],
   ["new","Aperçu de la prochaine mise à jour","Deux nouveaux exclusifs se cachent dans l'annonce (bouton « Prochaine mise à jour »), sortie dimanche 22 novembre à 00 h 01. Sauras-tu les reconnaître ?","Next update preview","Two new exclusives are hiding in the announcement (\"Next update\" button), out Sunday, November 22 at 00:01. Can you guess who they are?"],
   ["fix","Métalosse Obsidienne : capture","Métalosse Obsidienne disparaissait aussitôt apparu (il n’était jamais vraiment combattu ni capturé). Il reste maintenant en combat et peut être capturé.","Obsidian Metagross: capture","Obsidian Metagross vanished right after appearing (it was never really fought nor caught). It now stays in battle and can be caught."],
   ["imp","Tower plus accessible après l’étage 700","Les adversaires de la Tower après l’étage 700 sont 25 % moins forts.","Tower easier past floor 700","Tower opponents past floor 700 are 25% weaker."],
