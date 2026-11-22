@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261122a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261122b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261122a"></script><script>
+</script><script src="shim.js?v=pid-v400-20261122b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -4675,10 +4675,14 @@ var G_BOOTLAST=+G.last||0;G.ep=PID_EP;
 let E=null,busy=false,tab="adv",sv=0,lastE=null,PACK=[],OPEN=0,ZV=false,RP=false,OFFMSG=null,PK=null,PKQ='',PO=-1,BP=false,OP=null;
 const SH={tab:"balls",q:""},DX={q:"",hide:false,shiny:false,gen:-1,cat:"mon"},CS={tab:"boost",gen:0,rar:-1,q:"",hide:false,dup:0};
 let NOSAVE=false,CF=null,CFV="",SET=false,PS=null,PSQ="",EXM=null,EXQ="",EXSIG="";/* garde-fou d'avancement : une page restée ouverte avec une vieille partie (autre onglet / autre appareil) ne doit jamais écraser une partie plus avancée */
+/* anti-boucle de rechargement : si la page s'est rechargée 4 fois en 2 minutes, plus aucun rechargement automatique pendant cette visite */
+const pidRL=(()=>{let a=[];try{a=JSON.parse(sessionStorage.getItem("pid_rl")||"[]").filter(t=>Date.now()-t<120000);a.push(Date.now());sessionStorage.setItem("pid_rl",JSON.stringify(a))}catch(e){}return a.length})();
+const pidCanReload=()=>pidRL<4;
 const pidProg=o=>[(o&&o.st)|0,+(o&&o.caps)||0,+(o&&o.ko)||0];
 const pidProgCmp=(a,b)=>{for(let i=0;i<3;i++){if(a[i]!==b[i])return a[i]>b[i]?1:-1}return 0};
 function pidProgClr(){try{localStorage.removeItem("pid_prog:"+SK);localStorage.removeItem("pid_prog:idle3");localStorage.removeItem("pid_safe:"+SK);localStorage.removeItem("pid_safet:"+SK)}catch(e){}}
 const save=()=>{if(NOSAVE)return;try{if(typeof shdSync=="function")shdSync();pidWalletProtect(G);const sc=pidProg(G),pk="pid_prog:"+SK;let pv=null;try{pv=JSON.parse(localStorage.getItem(pk)||"null")}catch(e){}
+ if(pv&&pidProgCmp(sc,pv)<0&&!pidCanReload()){try{localStorage.removeItem(pk)}catch(e){}pv=null}
  if(pv&&pidProgCmp(sc,pv)<0){const t=+sessionStorage.getItem("pid_stt")||0;if(Date.now()-t>30000){sessionStorage.setItem("pid_stt",String(Date.now()));NOSAVE=true;try{toast("Une partie plus avancée existe : rechargement...")}catch(e){}setTimeout(()=>location.reload(),400);return}}
  G.last=Date.now();const js=JSON.stringify(G);localStorage.setItem(SK,js);localStorage.setItem(pk,JSON.stringify(sc));
  try{const tk="pid_safet:"+SK;if(Date.now()-(+localStorage.getItem(tk)||0)>6e5){let sp=null;try{sp=pidProg(JSON.parse(localStorage.getItem("pid_safe:"+SK)||"null"))}catch(e){}if(!sp||pidProgCmp(sc,sp)>=0){localStorage.setItem("pid_safe:"+SK,js);localStorage.setItem(tk,String(Date.now()))}}}catch(e){}}catch(e){}};
@@ -9426,6 +9430,7 @@ function twViewTour(){const t=twS(),f=t.f,Z=twZone(f),zi=twZi(f)+1,nm=twNextMs()
    ${twJmp(f,t)}
    <div class="twst"><span><b>${t.b}</b>Record</span><span><b>${rk?"#"+rk:"-"}</b>Classement</span><span><b>${fmt(t.w)}</b>Victoires</span></div>
    ${twMilesBar()}
+   ${(typeof twRfpDue=="function"&&twRfpDue())?`<div class="twmn" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px;border:2px solid #86efac;border-radius:14px;background:#0b2a17">${sp(90009,0)}<b>${LS("Tu as passé l’étage 1000 : Roitiflam Plante t’attend !","You passed floor 1000: Grass Emboar is waiting for you!")}</b><button class="pvgo big" data-tw="rfp">${LS("Réclamer","Claim")}</button></div>`:""}
    ${twSteelixDue()?`<div class="twmn" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px;border:2px solid #67e8f9;border-radius:14px;background:#0a1a4a"><b>${LS("Tu as passé l’étage 700 : Steelix Cristallin t’attend !","You passed floor 700: Crystal Steelix is waiting for you!")}</b><button class="pvgo big" data-tw="stx">${LS("Réclamer","Claim")}</button></div>`:""}
    <div class="twmn">${nm?`Prochaine récompense à l'étage <b>${nm}</b>${TWRW[nm].big?" · récompense majeure":""}`:"Toutes les récompenses ont été récupérées"}</div>
    <div class="twcta"><button class="pvgo big twgo" data-tw="go" ${ok?"":"disabled"}>${twIc("sword")} ${ok?"Combattre l'étage "+f:"Compose d'abord ton équipe"}</button>${ok?"":`<button class="pvgo big gr" data-tw="v:team">${twIc("team")} Choisir 3 Pokémon</button>`}</div>
@@ -9472,7 +9477,7 @@ function twRwCard(m){const r=TWRW[m],t=twS(),got=t.cl[m],cur=!got&&twNextMs()==m
   ${r.sp?`<div class="twrs"><span class="twrp">${sp(r.sp,0)}</span><div><b>${esc(SPM[r.sp].n)}</b><small>${LS("Pokémon exclusif · sans évolution","Exclusive Pokémon · no evolution")}</small></div></div>`:""}
   <div class="pvrw sm"><span class="pvcn">${twIc("coin")} ${fmt(Math.floor(15000*r.h))} ₽</span><span class="pvcn">${twIc("tower")} ${fmt(r.s)} Sceaux</span>${r.gem?`<span class="pvcn">${twIc("gem")} ${r.gem} gemmes</span>`:""}${r.ban?`<span class="pvcn">${twIc("star")} Bannière ${esc(BAN[r.ban]?BAN[r.ban].n:"")}</span>`:""}${twRwItems(r).map(([k,n])=>`<span class="pvit" title="${esc(IT[k].n)}"><img src="${ITM+k}.png" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><b>×${n}</b></span>`).join("")}</div></div>`}
 function twViewRw(){const L=[];for(let m=10;m<=TWN;m+=10)if(TWRW[m])L.push(m);
- return `<div class="twgr one"><div class="twbx twrsh tw1000reward"><div class="twrp2">${sp(90009,0)}</div><div><small>${LS("RÉCOMPENSE FINALE · ÉTAGE 1000","FINAL REWARD · FLOOR 1000")}</small><h3>Roitiflam Plante</h3><p>${LS("Le gardien du sommet, bien plus loin que le 700. À bonus identiques, sa puissance de base est 2,2 fois celle de Steelix Cristallin, un peu plus que Mewtwo Black. Il faut une équipe d’exclusifs à fond pour y arriver : Lugia Ombre 5 étoiles, IV, EV et mutation au maximum, dès l’étage 900.","The guardian of the very top, far beyond floor 700. With equal bonuses, its base power is 2.2 times Crystal Steelix’s, a little more than Black Mewtwo. You need a fully maxed team of exclusives: 5-star Shadow Lugia with maxed IVs, EVs and mutation just for floor 900.")}</p><div class="pvty">${tchips(["grass","fighting"])}</div><div class="pvtb" style="margin-top:16px"><span class="pvct${G.sp&&G.sp[90009]?" ok":""}">${G.sp&&G.sp[90009]?LS("Dans ta collection","In your collection"):LS("À gagner à l’étage 1000","Earn at floor 1000")}</span></div></div></div>
+ return `<div class="twgr one"><div class="twbx twrsh tw1000reward"><div class="twrp2">${sp(90009,0)}</div><div><small>${LS("RÉCOMPENSE FINALE · ÉTAGE 1000","FINAL REWARD · FLOOR 1000")}</small><h3>Roitiflam Plante</h3>${(typeof twRfpDue=="function"&&twRfpDue())?`<button class="pvgo big" data-tw="rfp" style="margin:6px 0">${LS("Réclamer Roitiflam Plante","Claim Grass Emboar")}</button>`:""}<p>${LS("Le gardien du sommet, bien plus loin que le 700. À bonus identiques, sa puissance de base est 2,2 fois celle de Steelix Cristallin, un peu plus que Mewtwo Black. Il faut une équipe d’exclusifs à fond pour y arriver : Lugia Ombre 5 étoiles, IV, EV et mutation au maximum, dès l’étage 900.","The guardian of the very top, far beyond floor 700. With equal bonuses, its base power is 2.2 times Crystal Steelix’s, a little more than Black Mewtwo. You need a fully maxed team of exclusives: 5-star Shadow Lugia with maxed IVs, EVs and mutation just for floor 900.")}</p><div class="pvty">${tchips(["grass","fighting"])}</div><div class="pvtb" style="margin-top:16px"><span class="pvct${G.sp&&G.sp[90009]?" ok":""}">${G.sp&&G.sp[90009]?LS("Dans ta collection","In your collection"):LS("À gagner à l’étage 1000","Earn at floor 1000")}</span></div></div></div>
   <div class="twbx twrsh tw700reward"><div class="twrp2">${sp(90005,0)}</div><div><small>${LS("PALIER MAJEUR · ÉTAGE 700","MAJOR MILESTONE · FLOOR 700")}</small><h3>Steelix Cristallin</h3><p>${LS("Un gardien en cristal, exclusif au sommet de la Tower. À bonus identiques, sa puissance de base est deux fois celle de Pikachu Fire, toujours disponible à l’étage 300.","A crystal guardian exclusive to the top of the Tower. With equal bonuses, its base power is twice Zenith Pikachu’s, still available at floor 300.")}</p><div class="pvty">${tchips(["steel","ice"])}</div><div class="pvtb" style="margin-top:16px"><span class="pvct${G.sp&&G.sp[90005]?" ok":""}">${G.sp&&G.sp[90005]?LS("Dans ta collection","In your collection"):LS("À gagner à l’étage 700","Earn at floor 700")}</span>${twSteelixDue()?`<button class="pvgo big" data-tw="stx" style="margin-left:10px">${LS("Réclamer Steelix Cristallin","Claim Crystal Steelix")}</button>`:""}</div></div></div>
   <div class="twbx"><h3>${twIc("gift")} Récompenses par palier</h3><small class="pvdim">Une récompense tous les 10 étages, à la première victoire. Récompenses majeures tous les 50 étages après le 300, puis Steelix Cristallin à l’étage 700 et Roitiflam Plante à l’étage 1000.</small><div class="twrg">${L.map(twRwCard).join("")}</div></div></div>`}
 
@@ -9570,7 +9575,7 @@ function twProf(id){const r=twRows().find(x=>String(x.id)==id);if(!r)return;cons
 /* ---------- clics ---------- */
 document.addEventListener("click",ev=>{const t0=ev.target.closest&&ev.target.closest("[data-tw]");if(!t0)return;ev.stopPropagation();const a=t0.dataset.tw,k=a.split(":")[0],v=a.slice(a.indexOf(":")+1),t=twS();
  if(k!="stopfm")twCancel();
- if(k=="stx"){twSteelixClaim();return}
+ if(k=="stx"){twSteelixClaim();return}if(k=="rfp"){twRfpClaim();return}
  if(k=="goto"){if(PB)return;tab="twr";TWX.v="tour";show();window.scrollTo(0,0);return}
  if(k=="v"){TWX.v=v;TWX.pg=1;show();window.scrollTo(0,0);return}
  if(k=="go"){twStart(t.f);return}
@@ -10571,7 +10576,9 @@ const KXK=[["r0","N","N"],["r1","SR","SR"],["r2","SSR","SSR"],["r3","UR","UR"],[
 const KX=()=>{const c=G.kx||(G.kx={mode:"smart",prof:"bal",rb:1,res:0,lot:10,ms:1,sh:1,sp:0,nb:0});if(!KXP[c.prof])c.prof="bal";return c};
 const kxOdd=e=>e.mi>0||[0,4,5,6].indexOf(SZ.indexOf(e.sz))>=0;
 const kxCls=e=>e.om?"om":kxOdd(e)?"sp":e.boss?"boss":e.r==6?"r6":e.r==7?"r7":"r"+Math.min(3,e.r);
-const kxRule=k=>G.rules&&k in G.rules?G.rules[k]:"auto";
+const kxRule=k=>{const R=G.rules;if(R&&k in R)return R[k];
+ /* légendaires (r6) et Oméga (om) n'ont pas leur propre ligne : ils suivent la règle UR et la règle Boss Alpha quand celles-ci sont sur « Ne pas lancer » */
+ if(R&&k=="r6"&&R.r3==="")return "";if(R&&k=="om"&&R.boss==="")return "";return "auto"};
 const kxP0=()=>Math.max(1,shopP(IT["poke-ball"]));
 function kxWant(e){const c=KX(),nw=!G.col[e.id],sh=e.mi==7,sp=kxOdd(e);
  if(sh&&c.sh)return true;if(e.boss&&(c.al??1))return true;if(e.om&&(c.omg??1))return true;if(e.om&&c.mode!="none")return true;
@@ -10609,6 +10616,7 @@ function pickBall(e){const c=KX();
  if(Date.now()>KXT){KXT=Date.now()+4000;try{kxRestock()}catch(x){}}
  if(!kxWant(e)){e.skip=1;return null}
  const k=kxCls(e),r=kxRule(k);
+ if(r===""){e.skip=1;return null} /* règle « Ne pas capturer » : aucun lancer, même avec une ancienne règle de ball */
  if(r==="auto"){const s=kxAuto(e,k,true);return s?s.b:null}
  if(r){const f=kxFix(r);if(f)return f}
  return pickBall0(e)}
@@ -11634,7 +11642,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  const B=window.PID_BUILD;if(!B||location.protocol.indexOf("http")!==0)return;
  let shown=0;
  const busy=()=>{try{return document.body.classList.contains("pvon2")||(document.getElementById("rdb")&&document.getElementById("rdb").className=="on")||(typeof PB!="undefined"&&PB&&!PB.over)}catch(e){return false}};
- const go=()=>{if(busy()){setTimeout(go,20000);return}try{save()}catch(e){}try{const d=document.getElementById("upd");if(d&&Date.now()-(+sessionStorage.getItem("pid_upd")||0)<18e4)d.remove()}catch(e){}
+ const go=()=>{if(busy()){setTimeout(go,20000);return}if(typeof pidCanReload=="function"&&!pidCanReload()){shown=0;try{const d=document.getElementById("upd");if(d)d.remove()}catch(e){}return}try{save()}catch(e){}try{const d=document.getElementById("upd");if(d&&Date.now()-(+sessionStorage.getItem("pid_upd")||0)<18e4)d.remove()}catch(e){}
   try{const t=+sessionStorage.getItem("pid_upd")||0;if(Date.now()-t<18e4){shown=0;return}sessionStorage.setItem("pid_upd",String(Date.now()))}catch(e){}try{window.pidSpShow&&window.pidSpShow()}catch(e){}setTimeout(()=>{try{const u=new URL(location.href);u.searchParams.set("_v",window.PID_NV||String(Date.now()));location.replace(u.href)}catch(e){location.reload()}},350)};
  const show1=()=>{if(shown)return;shown=1;const d=document.createElement("div");d.id="upd";
   d.innerHTML=`<span><b>${LS("Mise à jour disponible","Update available")}</b><small>${LS("Rechargement automatique dans quelques secondes. Ta progression est conservée.","Reloading automatically in a few seconds. Your progress is kept.")}</small></span>`;
@@ -11725,7 +11733,7 @@ function shGrant(n){const P=WMPOOL.slice(),fin=[];while(fin.length<n&&P.length){
  /* synchro multi-appareils : pid_st = horodatage serveur de la dernière version connue par cet appareil */
  let noLoad=false,pulling=false,pushing=false,sent="",bootLast=+window.G_BOOTLAST||0;
  function adopt(sv,t){
-  sv=pidWalletIncoming(sv);NOSAVE=true;pidProgClr();try{const cur=ls(SK);if(cur&&cur!==sv){ls("pid_bak",cur);ls("pid_bakt",String(Date.now()))}}catch(e){}ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
+  if(!pidCanReload())return;sv=pidWalletIncoming(sv);NOSAVE=true;pidProgClr();try{const cur=ls(SK);if(cur&&cur!==sv){ls("pid_bak",cur);ls("pid_bakt",String(Date.now()))}}catch(e){}ls(SK,sv);if(SK!=="idle3")ls("idle3",sv);ls("pid_st",String(t));ls("pid_sync",String(Date.now()));last=sv;
   try{toast(LS("Progression de ton autre appareil récupérée, chargement...","Progress from your other device loaded, reloading..."))}catch(e){}
   setTimeout(()=>location.reload(),700)}
  async function pull(){
@@ -15268,6 +15276,11 @@ Object.assign(TWRW[1000],{h:800,s:80000,big:1,gem:300,sp:90009,it:[["mp10286",1]
 function twSteelixDue(){const t=G.tw;return !!(t&&(t.b|0)>=700&&!(G.sp&&G.sp[90005])&&!(G.col&&G.col[90005]))}
 function twSteelixClaim(q){if(!twSteelixDue())return false;const t=twS();if(!t.cl[700])twGrant(700);if(!(G.sp&&G.sp[90005]))spGrant(90005);t.cl[700]=1;save();toast(LS("Steelix Cristallin ajouté à ta collection !","Crystal Steelix added to your collection!"));try{sfx("shiny")}catch(e){}try{show()}catch(e){}return true}
 setInterval(()=>{try{if(twSteelixDue())twSteelixClaim(1)}catch(e){}},4000);
+/* Roitiflam Plante : étage 1000 passé mais pas reçu → bouton Réclamer dans la Tower */
+function twRfpDue(){const t=G.tw;return !!(t&&(t.b|0)>=1000&&!(G.col&&G.col[90009]))}
+function twRfpClaim(){if(!twRfpDue())return false;const t=twS();if(!t.cl[1000])try{twGrant(1000)}catch(e){}if(!G.col[90009])spGrant(90009);t.cl[1000]=1;try{recomp();starSync()}catch(e){}save();try{lbPush(true)}catch(e){}
+ toast(LS("Roitiflam Plante ajouté à ta collection !","Grass Emboar added to your collection!"));try{sfx("shiny")}catch(e){}try{show()}catch(e){}return true}
+{let told=0;setInterval(()=>{try{if(!told&&twRfpDue()){told=1;toast(LS("Roitiflam Plante t’attend : va dans la Tower et clique sur « Réclamer » !","Grass Emboar is waiting: open the Tower and click “Claim”!"))}}catch(e){}},15000)}
 {const old=srcWhere;srcWhere=function(id){if(+id===90005)return["au sommet de la Tower (étage 700)","at the Tower summit (floor 700)"];if(+id===90009)return["au sommet de la Tower (étage 1000)","at the Tower summit (floor 1000)"];return old.apply(this,arguments)}}
 for(const key of ["rarity","pw"]){const old=wkBody[key];if(old)wkBody[key]=()=>old()+wsx(TT("Rareté LR et origine","LR rarity and origin"),`<p>${TT("<b>N → SR → SSR → UR → LR</b>. LR remplace Divin et inclut tous les légendaires et fabuleux, quelle que soit leur origine. La rareté et le palier d’obtention sont distincts : un LR obtenu en raid Impossible conserve le multiplicateur du raid Impossible. Les formes exclusives restent reconnaissables par leur carte.","<b>N → SR → SSR → UR → LR</b>. LR replaces Divine and includes every legendary and mythical Pokémon, regardless of origin. Rarity is separate from the acquisition tier: an LR from an Impossible raid keeps its Impossible raid multiplier. Exclusive forms keep their distinctive cards.")}</p>`)+wsx(TT("Tower 700","Tower 700"),`<p>${TT("Steelix Cristallin a un palier propre : <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10).toString().replace(".",",")+"</b> par rapport au palier N, soit <b>deux fois la puissance de base de Pikachu Fire</b> à niveau, doublons, étoiles et variantes identiques.","Crystal Steelix has its own tier: <b>×"+(Math.round(PWTV.t7/PWTV.wN*10)/10)+"</b> compared with the N tier, or <b>twice Zenith Pikachu’s base power</b> at equal level, duplicates, stars and variants.")}</p>`)}
 {const old=wkBody.inv;wkBody.inv=()=>old()+wn("info",TT("Rareté et source","Rarity and source"),TT("Le taux LR est de 2 % par invocation classique, hors garanties. Les garanties et compteurs déjà accumulés sont conservés. La rareté LR existe aussi pour les légendaires et fabuleux obtenus en raid ou ailleurs.","The classic LR chance is 1% per summon, before guarantees. Existing guarantees and pity counters are kept. Legendary and mythical Pokémon from raids and other sources also have LR rarity."))}
@@ -15735,7 +15748,7 @@ const trxPw=t=>Object.values(t.b).reduce((a,b)=>a+b,0);
 async function trxRoll(opts){opts=opts||{};const S=TRXS_,T0=TRXO();if(S.busy&&!opts.auto)return false;const P=trxCur();if(!P)return false;if(T0.cr[S.cry]<1){S.ast=LS("Plus de cristaux.","Out of crystals.");const e=$tx("ast");if(e)e.textContent=S.ast;return false}
  S.busy=true;T0.cr[S.cry]--;if(S.cry==0)T0.pity++;save();trxRenderCry();const rb=$tx("roll");if(rb)rb.disabled=true;
  const t=trxDraw();if(S.cry==0&&t.r>=6)T0.pity=0;const fast=opts.fast&&t.r<7;let pre=null;
- if(opts.auto){/* tirage auto : le résultat est appliqué et sauvegardé tout de suite, pour ne pas le perdre si la page se recharge pendant l'animation */const c0=P.t,b0=!c0||t.r>c0.r||(t.r==c0.r&&trxPw(t)>trxPw(c0)),wn=S.want&&S.want.has(t.id),wc=!!(c0&&S.want&&S.want.has(c0.id)),lw=!!(c0&&t.r<c0.r),pk=lw?false:(wn&&!wc?true:(!wn&&wc?false:b0));pre={kept:!!(pk||!opts.keep)};if(pre.kept)P.t=t;try{recomp()}catch(e){}save()}
+ if(opts.auto){/* tirage auto : le résultat est appliqué et sauvegardé tout de suite, pour ne pas le perdre si la page se recharge pendant l'animation */const c0=P.t,b0=!c0||t.r>c0.r||(t.r==c0.r&&trxPw(t)>trxPw(c0)),wn=S.want&&S.want.has(t.id),wc=!!(c0&&S.want&&S.want.has(c0.id)),lw=!!(c0&&t.r<c0.r),pk=(t.r>=8&&(!c0||c0.r<8))?true:lw?false:(wn&&!wc?true:(!wn&&wc?false:b0));pre={kept:!!(pk||!opts.keep)};if(pre.kept)P.t=t;try{recomp()}catch(e){}save()}
  await trxSpin(t,fast);trxDim(0);
  T0.hist.unshift({t:t.id,p:dn(P.id)});T0.hist.length=Math.min(T0.hist.length,30);try{if(t.r>=4)sfx(t.r>=6?"shiny":"prest")}catch(e){}
  trxRenderHist();trxRenderStage();trxSetCard($tx("nw"),t,"NOUVEAU","new");$tx("stage")&&$tx("stage").style.setProperty("--ac",trxCol(t.r));
@@ -15923,6 +15936,10 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 /*UPD_BEGIN*/
 const UPD=[
  {d:"2026-11-22",t:["Mise à jour reportée","Update postponed"],e:[
+  ["fix","Tower : Roitiflam Plante à réclamer","Si tu as passé l'étage 1000 de la Tower sans recevoir Roitiflam Plante, un bouton « Réclamer » apparaît dans la Tower.","Tower: claim Grass Emboar","If you passed Tower floor 1000 without getting Grass Emboar, a “Claim” button now appears in the Tower."],
+  ["fix","Traits : trait Infini en tirage auto","Un trait de rareté Infini obtenu en tirage automatique est maintenant toujours gardé, même si ton trait actuel est dans ta liste de traits voulus.","Traits: Infinite trait in auto roll","An Infinite-rarity trait from the auto roll is now always kept, even if your current trait is in your wish list."],
+  ["fix","Règles de capture respectées","Quand une règle est réglée sur « Ne pas lancer », plus aucune ball n'est lancée sur ces Pokémon.","Capture rules respected","When a rule is set to “Don’t throw”, no ball is thrown at those Pokémon anymore."],
+  ["fix","Plus de page bloquée en rechargement","Si la page se recharge plusieurs fois de suite, le jeu arrête les rechargements automatiques et se lance normalement.","No more reload loops","If the page reloads several times in a row, the game stops automatic reloads and starts normally."],
   ["imp","Mise à jour reportée à mardi 00 h 01","Désolé pour le retard ! On vous prépare une mise à jour encore meilleure, avec plus de contenu. Rendez-vous mardi 24 novembre à 00 h 01. Merci pour votre patience !","Update moved to Tuesday 00:01","Sorry for the delay! We are preparing an even better update, with more content. See you Tuesday, November 24 at 00:01. Thank you for your patience!"]]},
  {d:"2026-11-19",t:["Corrections du 19 novembre","November 19 fixes"],e:[
   ["fix","Boutique Four Seasons : achats protégés","Le Pokémon acheté est donné avant de retirer les gemmes. Si une autre page du jeu restée ouverte efface un achat, il est rendu automatiquement.","Four Seasons shop: safer purchases","The Pokémon is given before the gems are taken. If another open game page erases a purchase, it is given back automatically."],
@@ -18816,6 +18833,11 @@ const TQZC=["#9ca3af","#4ade80","#a16207","#84cc16","#fbbf24","#67e8f9","#f97316
 .twgo{background:linear-gradient(180deg,#fde047,#f59e0b)!important;color:#2a1a05!important;border:3px solid #fff!important;box-shadow:0 5px 0 #0007!important}
 @media(max-width:900px){.tso-summit{grid-template-columns:1fr!important;text-align:center}.tq-trk{grid-template-columns:repeat(5,1fr)}}`;document.head.appendChild(st)}
 {const o=twViewTour;twViewTour=function(){let h=o.apply(this,arguments);try{const f=twS().f,zi=twZi(f),trk=`<div class="tq-trk">${TQZC.map((c,i)=>{let n="";try{n=TWZ[i].n}catch(e){}return `<div class="${i==zi?"on":""}" style="--c:${c}">${esc(n||"Zone "+(i+1))}<small>${LS("étages ","floors ")}${i*10+1}-${(i+1)*10}</small></div>`}).join("")}</div>`;h=h.replace('<div class="tso-notice">',trk+'<div class="tso-notice">')}catch(e){}return h}}
+/* boutons « Réclamer » des récompenses de la Tower (Steelix Cristallin 700, Roitiflam Plante 1000) en haut de l'Ascension */
+{const o=twViewTour;twViewTour=function(){let h=o.apply(this,arguments);try{const box=(id,c,bg,txt,k)=>`<div class="twmn twclaim" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;border:2px solid ${c};border-radius:14px;background:${bg}"><span style="width:56px;height:56px;display:grid;place-items:center">${sp(id,0)}</span><b style="flex:1;min-width:180px">${txt}</b><button class="pvgo big" data-tw="${k}" style="flex:none;width:auto;min-width:150px;margin:0">${LS("Réclamer","Claim")}</button></div>`;
+ let x="";if(twRfpDue())x+=box(90009,"#86efac","#0b2a17",LS("Tu as passé l’étage 1000 : Roitiflam Plante t’attend !","You passed floor 1000: Grass Emboar is waiting for you!"),"rfp");
+ if(twSteelixDue())x+=box(90005,"#67e8f9","#0a1a4a",LS("Tu as passé l’étage 700 : Steelix Cristallin t’attend !","You passed floor 700: Crystal Steelix is waiting for you!"),"stx");
+ if(x)h=x+h}catch(e){}return h}}
 
 /* Fit the full result to the visible viewport, including when many Balls are owned. */
 let RD_VICTORY_FIT_FRAME=0,RD_VICTORY_FIT_WATCH=null;
@@ -19985,7 +20007,7 @@ Object.assign(window,{shsN,shsDmg,shsMul,shsKey,shsOn,shsBaseP});
 {const o=kxWant;kxWant=function(e){try{if(e&&!e.hwm&&typeof EXR!="undefined"&&(e.r===EXR||(+e.id>9e4&&pr(+e.id)===EXR))){if(kxRule("r7")==="")return false;const L=kxzSel(zoneOf(G.fl));if(L.length&&KX().only&&!L.includes(+e.id))return false;return true}}catch(x){}return o.apply(this,arguments)}}
 /* code Xerneas : le trait « Cœur de l'Infini » de Xerneas Pipomiel ne peut plus être perdu (il est remis s'il a été remplacé) */
 setInterval(()=>{try{if(!G||!G.codes||!Object.keys(G.codes).some(k=>/^TS4PACK-XERNEAS-/.test(k)))return;const c=G.col[90027];if(!c)return;const t=TRXT.find(x=>x.n=="Cœur de l'Infini");if(!t)return;
- if(c.tr!==t.id){c.tr=t.id;try{rq(90027);recomp()}catch(e){}save();try{toast(LS("Xerneas Pipomiel a retrouvé son trait « Cœur de l'Infini ».","Xerneas Pipomiel got back its “Heart of Infinity” trait."))}catch(e){}}}catch(e){}},15000);
+ const cu=trxOf(c);if(c.tr!==t.id&&!(cu&&cu.r>=8)){c.tr=t.id;try{rq(90027);recomp()}catch(e){}save();try{toast(LS("Xerneas Pipomiel a retrouvé son trait « Cœur de l'Infini ».","Xerneas Pipomiel got back its “Heart of Infinity” trait."))}catch(e){}}}catch(e){}},15000);
 const fsImgP=(id,s)=>{try{return fsPath(id,0,s)}catch(e){return "img/pokemon/"+id+".png"}};
 const PID_EXC40=[
  {n:"Xerneas Pipomiel",c:"#fbbf24",f:[["Forme normale","Normal","img/special/xerneas-pipomiel.png"],["Chromatique","Shiny","img/special/xerneas-pipomiel-shiny.png"]],w:["4 quêtes spéciales (onglet Quêtes Pokémon)","4 special quests (Pokémon quests tab)"]},
