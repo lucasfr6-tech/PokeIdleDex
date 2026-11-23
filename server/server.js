@@ -95,6 +95,7 @@ const mkAuth=(uid,tok)=>{uid=String(uid||'');tok=String(tok||'');if(!ID.test(uid
 /* ---- anti-triche : detection de valeurs impossibles (les joueurs suspects sont masques des classements) ---- */
 db.flag=db.flag||{};
 let DUC=null;
+let CSTC=null;
 const hidden=id=>{const f=db.flag[id];return !!f&&!!(f.m||(f.s&&f.s.length)||(f.l&&f.l.length))};
 const setFlag=(uid,key,arr)=>{if(!uid)return;const f=db.flag[uid]=db.flag[uid]||{m:0,s:[],l:[],t:0};
  const had=hidden(uid);f[key]=arr;if(arr.length)f.t=Date.now();
@@ -270,6 +271,12 @@ http.createServer((req,res)=>{
    for(const id of Object.keys(db.lb)){const d=db.lb[id]&&db.lb[id].d;if(!d||d.dv!==v||hidden(id))continue;const h=Math.min(72,Math.max(0,+d.dh||0));if(d.dc===1){a+=h;na++}else if(d.dc===2){b+=h;nb++}}
    DUC={v,t:now,a:Math.round(a*100)/100,b:Math.round(b*100)/100,na,nb}}
   send(res,200,{a:DUC.a,b:DUC.b,na:DUC.na,nb:DUC.nb});return}
+ /* Constellation commune (Lunala Aurore Boréale) : somme des K.O. faits par chaque joueur depuis la sortie (champ cs de son classement) */
+ if(u.pathname=='/api/cst'&&req.method=='GET'){
+  if(limited(ip+'cst',60)){send(res,429,{e:'rate'});return}
+  const now=Date.now();
+  if(!CSTC||now-CSTC.at>60000){let t=0,n=0;for(const id of Object.keys(db.lb)){const d=db.lb[id]&&db.lb[id].d;if(!d||hidden(id))continue;const c=Math.min(5e6,Math.max(0,+d.cs||0));if(c>0){t+=c;n++}}CSTC={at:now,t:Math.round(t),n}}
+  send(res,200,{ok:1,t:CSTC.t,n:CSTC.n});return}
  if(u.pathname=='/api/online'&&req.method=='GET'){
   if(limited(ip+'o',150)){send(res,429,{e:'rate'});return}
   const sid=String(u.searchParams.get('s')||'');const uid=String(u.searchParams.get('u')||'');const now=Date.now();const lst=!!u.searchParams.get('l');
@@ -310,7 +317,7 @@ http.createServer((req,res)=>{
     if(canWin&&Math.random()<q){win=Math.round(J.v);const nm=db.lb[uid]&&db.lb[uid].d?actName(db.lb[uid].d):'Dresseur';J.w={u:uid,n:nm,a:win,t:Date.now()};J.v=JP_SEED}
     dirty=1;send(res,200,{ok:1,v:Math.round(J.v),win,w:J.w})});return}
   send(res,405,{e:'method'});return}
- if(u.pathname=='/api/health'){let tw=0,tmax=0;for(const id in db.twr){const b=+(db.twr[id]&&db.twr[id].d&&db.twr[id].d.b)||0;if(b>tmax)tmax=b;if(b>1000&&hidden(id))tw++}send(res,200,{ok:1,v:'2026-11-16c-tour-visible',docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0),tourMax:tmax,tourCaches:tw});return}
+ if(u.pathname=='/api/health'){let tw=0,tmax=0;for(const id in db.twr){const b=+(db.twr[id]&&db.twr[id].d&&db.twr[id].d.b)||0;if(b>tmax)tmax=b;if(b>1000&&hidden(id))tw++}send(res,200,{ok:1,v:'2026-11-23-constellation',docs:Object.keys(COLS).reduce((a,c)=>a+Object.keys(db[c]).length,0),tourMax:tmax,tourCaches:tw});return}
   if(u.pathname==='/api/guild/transfer'&&req.method==='POST'){
    if(limited(ip+'guild-transfer',20)){send(res,429,{e:'rate'});return}
    let body='';req.on('data',c=>{body+=c;if(body.length>2000)req.destroy()});
