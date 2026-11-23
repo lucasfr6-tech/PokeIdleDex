@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123e"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261123e"></script><script>
+</script><script src="shim.js?v=pid-v400-20261123f"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15944,6 +15944,7 @@ const UPD=[
   ["new","Nouvel exclusif : Scarhino Émeraude","7 quêtes à faire dans l'ordre (Quêtes Pokémon › Avis de recherche). Sa puissance part de 600 / 5000 et monte jusqu'à 1100 : dans sa fiche, le bouton « Transformer tous les doublons Insecte et Combat » utilise les doublons de tes Pokémon Insecte ou Combat à 5 étoiles (ils gardent leurs étoiles et leur puissance).","New exclusive: Emerald Heracross","7 quests to do in order (Pokémon quests › Wanted). Its power starts at 600 / 5000 and climbs to 1100: in its sheet, the “Transform all Bug and Fighting duplicates” button uses duplicates of your 5-star Bug or Fighting Pokémon (they keep their stars and power)."],
   ["new","Méga-Perle Émeraude","Dans Prestige › Perles, pour 80 M de points. C'est la seule perle qui fait méga-évoluer Scarhino Émeraude.","Emerald Mega Pearl","In Prestige › Pearls, for 80 M points. It is the only pearl that mega-evolves Emerald Heracross."],
   ["new","Constellation commune : Lunala Aurore Boréale","Tout le serveur additionne ses K.O. : à 20 millions, chaque joueur qui en a fait au moins 70 000 depuis la sortie reçoit Lunala Aurore Boréale (1099 / 5000), avec sa forme Ultime.","Shared Constellation: Aurora Lunala","The whole server adds up its K.O.: at 20 million, every player who made at least 70,000 since the release receives Aurora Lunala (1099 / 5000), with its Ultimate form."],
+  ["new","Cadeau de sortie : un Booster Aurore Céleste","Chaque joueur reçoit un Booster Aurore Céleste offert à sa première connexion, à ouvrir avant le 1er décembre à minuit.","Release gift: an Aurora Celestial Booster","Every player gets a free Aurora Celestial Booster at their first login, to open before December 1 at midnight."],
   ["new","Booster Aurore Céleste et rareté Céleste","Nouveau booster (10 T ₽) et nouvelle rareté au-dessus de Secrète : Mimiqui Arlequin (dégâts ×2), Métalosse Obsidienne (pièces ×2, prestige +50 %), Ho-Oh Flamboyant (chromas et mutations +80 %, traits +40 %), Xerneas Pipomiel (XP ×2, capture +60 %). Et 3 nouvelles Secrètes : Arcanin Jovial, Roitiflam Plante, Steelix Cristallin.","Aurora Celestial booster and Celestial rarity","New booster (10 T coins) and a new rarity above Secret: Harlequin Mimikyu (damage ×2), Obsidian Metagross (coins ×2, prestige +50%), Blazing Ho-Oh (shinies and mutations +80%, traits +40%), Honey Xerneas (XP ×2, catch +60%). Plus 3 new Secrets: Jolly Arcanine, Grass Emboar, Crystal Steelix."]]},
  {d:"2026-11-23",t:["Équilibrage et corrections","Balance and fixes"],e:[
   ["imp","Arbre de compétences : jusqu'à 1 200 000 K.O.","Chaque branche reçoit 3 nouvelles cases (VII, VII et ★★★), jusqu'à 1 200 000 K.O., avec des bonus plus forts.","Skill tree: up to 1,200,000 K.O.","Each branch gets 3 new nodes (VII, VII and ★★★), up to 1,200,000 K.O., with stronger bonuses."],
@@ -20219,4 +20220,23 @@ function celCard(id,n,o){o=o||{};const own=n>0,show=own||o.show,s=CELI[id];
 .gc.r7 .gh,.gc.r7 .ktg{color:#fde68a!important}.gc.r7 .gart img{image-rendering:pixelated;filter:drop-shadow(0 0 10px #f0abfc)}.gc.r7 .gst{color:#fde68a;letter-spacing:-1px}
 @keyframes celSh{0%{transform:translateX(-160%) rotate(18deg)}60%,100%{transform:translateX(320%) rotate(18deg)}}@media(prefers-reduced-motion:reduce){.gc.r7::after{animation:none}}`;document.head.appendChild(st)}
 if(nxOn()){BOOST.push({n:"Aurore Céleste",p:1e13,r:[0,0,0,20,45,25,9.5,.5],min:4,cnt:8,a:"#a21caf",b:"#2e1065",c:"#fde68a",sp:CBY[7].slice()});BFL.push(100)}
+/* ---------- Cadeau de sortie « Aurore » : 1 booster Aurore Céleste offert, à recevoir avant le 1er décembre à minuit ---------- */
+const AUG_END=Date.UTC(2026,10,30,23,0,0),AUG_KEY="pid_aug";
+const augOn=()=>nxOn()&&Date.now()<AUG_END&&!(G&&G.aug);
+function augClaim(){if(!augOn())return;const k=BOOST.findIndex(b=>b.n=="Aurore Céleste");if(k<0)return;G.aug=1;const B=BOOST[k],n0=BNP;try{BNP=1;G.m+=B.p;openBooster(k)}finally{BNP=n0}save()}
+function augShow(){if(document.getElementById("dcm")||!augOn())return;
+ const o=document.createElement("div");o.id="dcm";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");
+ o.innerHTML=`<div class="dcm-c" style="border-color:#fde68a;box-shadow:0 0 50px #c084fcaa"><button class="dcm-x" type="button" aria-label="${LS("Fermer","Close")}">×</button>
+ <div class="dcm-hd" style="background:radial-gradient(circle at 50% 0,#a21caf,#4c1d95 50%,#1e1147)"><i class="dcm-rays"></i>${Array.from({length:16},(_,i)=>`<s style="left:${(i*37)%96+2}%;top:${(i*53)%88+6}%;animation-delay:${(i*.23).toFixed(2)}s"></s>`).join("")}
+  <span class="dcm-tag" style="background:#fde68a;color:#2e1065">${LS("CADEAU DE SORTIE","RELEASE GIFT")}</span><h2>${LS("L'Aurore se lève !","The Aurora rises!")}</h2><p>${LS("Pour fêter la mise à jour, voici un Booster Aurore Céleste offert, avec une chance d'avoir la nouvelle rareté Céleste. À recevoir avant le 1er décembre à minuit.","To celebrate the update, here is a free Aurora Celestial Booster, with a chance at the new Celestial rarity. Claim it before December 1 at midnight.")}</p></div>
+ <div class="dcm-rw" style="grid-template-columns:repeat(2,minmax(0,1fr))">${[90031,90030,90028,90027].map(i=>`<div class="dcm-i"><span class="dcm-sp">${sp(i,0)}</span><span><b>${esc(nm(i))}</b><small>${LS("carte Céleste","Celestial card")}</small></span></div>`).join("")}</div>
+ <div class="dcm-ft"><button class="dcm-go" type="button" style="background:linear-gradient(180deg,#fde68a,#c084fc);color:#2e1065">${LS("Ouvrir mon booster","Open my booster")}</button></div></div>`;
+ const close=()=>{try{sessionStorage.setItem(AUG_KEY,"1")}catch(e){}o.remove()};
+ o.addEventListener("click",e=>{if(e.target===o||e.target.closest(".dcm-x")){close();return}const b=e.target.closest(".dcm-go");if(b&&!b.disabled){b.disabled=true;o.remove();augClaim()}});
+ document.body.appendChild(o);try{sfx("big")}catch(e){}}
+window.augShow=augShow;window.augClaim=augClaim;
+{let tries=0;const t=setInterval(()=>{tries++;let seen=0;try{seen=sessionStorage.getItem(AUG_KEY)==="1"}catch(e){}if(seen||tries>900||Date.now()>=AUG_END||(typeof G!="undefined"&&G&&G.aug)){if(Date.now()>=AUG_END||(G&&G.aug))clearInterval(t);return}
+ if(typeof G=="undefined"||!G||!G.col||!augOn())return;
+ const busy=document.querySelector("#lnd,#tur.on,.pid-dialog-overlay,#pnu,#lgfx,#nwr.on,#wmr,#gaw,#mlr.on,#dcm,#rvm.on")||(typeof OPEN!="undefined"&&OPEN)||(typeof OP!="undefined"&&OP);if(busy||document.hidden)return;clearInterval(t);setTimeout(augShow,900)},2500)}
+
 }catch(e){console.warn("v4.0.0",e)}})()</script></body></html>
