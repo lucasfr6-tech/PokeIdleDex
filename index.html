@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123f"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123g"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261123f"></script><script>
+</script><script src="shim.js?v=pid-v400-20261123g"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15944,6 +15944,7 @@ const UPD=[
   ["new","Nouvel exclusif : Scarhino Émeraude","7 quêtes à faire dans l'ordre (Quêtes Pokémon › Avis de recherche). Sa puissance part de 600 / 5000 et monte jusqu'à 1100 : dans sa fiche, le bouton « Transformer tous les doublons Insecte et Combat » utilise les doublons de tes Pokémon Insecte ou Combat à 5 étoiles (ils gardent leurs étoiles et leur puissance).","New exclusive: Emerald Heracross","7 quests to do in order (Pokémon quests › Wanted). Its power starts at 600 / 5000 and climbs to 1100: in its sheet, the “Transform all Bug and Fighting duplicates” button uses duplicates of your 5-star Bug or Fighting Pokémon (they keep their stars and power)."],
   ["new","Méga-Perle Émeraude","Dans Prestige › Perles, pour 80 M de points. C'est la seule perle qui fait méga-évoluer Scarhino Émeraude.","Emerald Mega Pearl","In Prestige › Pearls, for 80 M points. It is the only pearl that mega-evolves Emerald Heracross."],
   ["new","Constellation commune : Lunala Aurore Boréale","Tout le serveur additionne ses K.O. : à 20 millions, chaque joueur qui en a fait au moins 70 000 depuis la sortie reçoit Lunala Aurore Boréale (1099 / 5000), avec sa forme Ultime.","Shared Constellation: Aurora Lunala","The whole server adds up its K.O.: at 20 million, every player who made at least 70,000 since the release receives Aurora Lunala (1099 / 5000), with its Ultimate form."],
+  ["new","Étoiles d'Or","Quand un Pokémon a atteint sa limite d'exemplaires, les doublons en plus ne sont plus perdus : ils remplissent ses Étoiles d'Or (5 étoiles, de 200 à 4 000 doublons chacune). Chaque Étoile d'Or donne +25 % de puissance. À voir dans la fiche du Pokémon.","Gold Stars","Once a Pokémon reaches its copy limit, extra duplicates are no longer lost: they fill its Gold Stars (5 stars, 200 to 4,000 duplicates each). Each Gold Star gives +25% power. See the Pokémon sheet."],
   ["new","Cadeau de sortie : un Booster Aurore Céleste","Chaque joueur reçoit un Booster Aurore Céleste offert à sa première connexion, à ouvrir avant le 1er décembre à minuit.","Release gift: an Aurora Celestial Booster","Every player gets a free Aurora Celestial Booster at their first login, to open before December 1 at midnight."],
   ["new","Booster Aurore Céleste et rareté Céleste","Nouveau booster (10 T ₽) et nouvelle rareté au-dessus de Secrète : Mimiqui Arlequin (dégâts ×2), Métalosse Obsidienne (pièces ×2, prestige +50 %), Ho-Oh Flamboyant (chromas et mutations +80 %, traits +40 %), Xerneas Pipomiel (XP ×2, capture +60 %). Et 3 nouvelles Secrètes : Arcanin Jovial, Roitiflam Plante, Steelix Cristallin.","Aurora Celestial booster and Celestial rarity","New booster (10 T coins) and a new rarity above Secret: Harlequin Mimikyu (damage ×2), Obsidian Metagross (coins ×2, prestige +50%), Blazing Ho-Oh (shinies and mutations +80%, traits +40%), Honey Xerneas (XP ×2, catch +60%). Plus 3 new Secrets: Jolly Arcanine, Grass Emboar, Crystal Steelix."]]},
  {d:"2026-11-23",t:["Équilibrage et corrections","Balance and fixes"],e:[
@@ -20151,6 +20152,29 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   <button class="dupg" data-dupg="1" ${mx||!av?"disabled":""}>${LS("Transformer tous les doublons Insecte et Combat","Transform all Bug and Fighting duplicates")}</button></div></div>`}
  if(+id===LU_ID){h+=`<div class="dupb" style="--c:#86efac;--c2:#0e7490"><h4>${LS("Forme Ultime","Ultimate form")}</h4><small>${LS("Puissance fixe : 1099 / 5000. La forme Ultime change seulement son apparence.","Fixed power: 1099 / 5000. The Ultimate form only changes its look.")}</small><div class="duprow"><span><b>${G.luf?LS("Forme Ultime","Ultimate form"):LS("Forme normale","Normal form")}</b></span><button class="dupg" data-luf="1">${G.luf?LS("Revenir à la forme normale","Back to normal form"):LS("Prendre la forme Ultime","Take the Ultimate form")}</button></div></div>`}
  }catch(e){}return h}}
+
+/* ---------- Étoiles d'Or (6 à 10) : les doublons au-delà de la limite d'exemplaires ne sont plus perdus ----------
+   Ils remplissent la jauge d'Étoiles d'Or du Pokémon : 200, 500, 1 000, 2 000 puis 4 000 doublons. Chaque Étoile d'Or : +25 % de puissance. */
+const GST=[200,500,1000,2000,4000],GST_B=.25;
+const gsOf=c=>{let x=(c&&c.gx)|0,s=0;for(const t of GST){if(x>=t){x-=t;s++}else break}return s};
+const gsProg=c=>{let x=(c&&c.gx)|0;for(const t of GST){if(x>=t)x-=t;else return[x,t]}return[0,0]};
+{const o=starSync;starSync=function(){try{if(nxOn()&&Date.now()>=NX_T||x4Me()){const hoA=G.hoa||{f:0,g:0};
+ for(const k in G.col){const c=G.col[k];if(!c)continue;let lim=0;try{lim=copyLimit(k)}catch(e){continue}const over=(c.n|0)-lim;if(over<=0)continue;
+  try{if(!hoA.g&&!G.col[90028]&&+k<=1025&&tp(+k).includes("fire"))continue}catch(e){}/* l'Autel de Ho-Oh garde la priorité sur les doublons Feu tant qu'il n'est pas fini */
+  const g0=gsOf(c);c.gx=(c.gx|0)+over;c.n=lim;const g1=gsOf(c);if(g1>g0){try{rq(+k);toast(LS(nm(+k)+" gagne une Étoile d'Or ! ("+g1+" / 5)",nm(+k)+" earns a Gold Star! ("+g1+" / 5)"));sfx("shiny")}catch(e){}}}}}catch(e){}return o.apply(this,arguments)}}
+{const o=baseNew;baseNew=function(id){const v=o.apply(this,arguments);try{const c=G.col[id];const g=c&&c.gx?gsOf(c):0;if(g&&typeof v=="number")return v*(1+GST_B*g)}catch(e){}return v}}
+{const st=document.createElement("style");st.textContent=`.gsb{margin-top:10px;padding:12px 14px;border-radius:14px;border:2px solid #fbbf24;background:linear-gradient(160deg,#2a1d04,#110c02);box-shadow:0 0 16px #f59e0b44}
+.gsb h4{margin:0 0 2px;font:800 15px "Baloo 2",Nunito,sans-serif;color:#fde68a}.gsb>small{display:block;color:#e7d7a8;font-size:11.5px;line-height:1.45;margin-bottom:8px}
+.gss{display:flex;gap:6px;margin:4px 0 8px}.gss i{width:30px;height:30px;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background:#3b2f14}.gss i.on{background:linear-gradient(160deg,#fff7c2,#fbbf24 45%,#b45309);filter:drop-shadow(0 0 6px #fbbf24);animation:gsP 2.4s ease-in-out infinite}
+.gss i.on:nth-child(2){animation-delay:.2s}.gss i.on:nth-child(3){animation-delay:.4s}.gss i.on:nth-child(4){animation-delay:.6s}.gss i.on:nth-child(5){animation-delay:.8s}
+@keyframes gsP{50%{transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){.gss i.on{animation:none}}
+.gsbar{position:relative;height:12px;border-radius:999px;background:#2a2108;border:1px solid #5b4712;overflow:hidden}.gsbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#b45309,#fde68a);box-shadow:0 0 8px #fbbf24}
+.gsr{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:12px;color:#fde68a;font-weight:800}`;document.head.appendChild(st)}
+{const o=bonusCard;bonusCard=function(id){let h=o.apply(this,arguments);try{if(!nxOn()||!G.col[id])return h;const c=G.col[id],g=gsOf(c),[x,t]=gsProg(c),lim=copyLimit(id);
+ h+=`<div class="gsb"><h4>${LS("Étoiles d'Or","Gold Stars")}</h4><small>${LS("Quand ce Pokémon a atteint "+lim+" exemplaires, les doublons capturés en plus ne sont plus perdus : ils remplissent ses Étoiles d'Or, tout seuls. Chaque Étoile d'Or donne +25 % de puissance.","Once this Pokémon reaches "+lim+" copies, extra duplicates are no longer lost: they fill its Gold Stars on their own. Each Gold Star gives +25% power.")}</small>
+ <div class="gss">${GST.map((_,i)=>`<i class="${i<g?"on":""}"></i>`).join("")}</div>
+ ${g<GST.length?`<div class="gsbar"><i style="width:${(x/t*100).toFixed(1)}%"></i></div>`:""}
+ <div class="gsr"><span>${g} / 5 · ${LS("puissance","power")} +${g*25} %</span><span>${g<GST.length?LS("Prochaine étoile : ","Next star: ")+fmt(x)+" / "+fmt(t)+LS(" doublons"," duplicates"):LS("Toutes les Étoiles d'Or !","All Gold Stars!")}</span></div></div>`}catch(e){}return h}}
 
 /* ---------- Quêtes de Scarhino Émeraude : 7 étapes à faire dans l'ordre (ne compte que ce qui est fait pendant l'étape) ---------- */
 const SCQ=[
