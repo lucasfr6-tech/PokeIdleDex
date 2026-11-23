@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123n"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123o"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261123n"></script><script>
+</script><script src="shim.js?v=pid-v400-20261123o"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -20337,7 +20337,7 @@ const FB_ON=()=>{try{return x4Me()&&!(G.fbOff)}catch(e){return false}};
 const FBS=()=>[["pw",LS("Puissance","Power"),"bolt"],["gs",LS("Étoiles d'Or","Gold Stars"),"star"],["mu",LS("Mutations et forme","Mutations and form"),"sparkle"],["s",LS("Statistiques","Stats"),"chart"],["t",LS("Entraînement","Training"),"arrowup"],["o",LS("Objets et bonbons","Items and candies"),"bag"],["m",LS("Attaques","Moves"),"sword"],["a",LS("Affinités","Matchups"),"target"]];
 function fbSplit(id){const B={pw:[],gs:[],mu:[],s:[],o:[]};try{const t=document.createElement("template");t.innerHTML=pkStats(id);const root=t.content.querySelector(".pid-pk-overview")||t.content;
  [...root.children].sort((x,y)=>(y.classList.contains("dupb")?1:0)-(x.classList.contains("dupb")?1:0)).forEach(e=>{const c=e.classList,h=e.outerHTML;if(c.contains("gsb"))B.gs.push(h);else if(c.contains("essb")||c.contains("xfb"))B.mu.push(h);else if(c.contains("pqgr")||c.contains("pqft")||c.contains("pqnt"))B.s.push(h);else if(c.contains("pqcn"))B.o.push(h);else B.pw.push(h)})}catch(e){}return B}
-{const o=pkModal;pkModal=function(){const h=o.apply(this,arguments);try{if(!FB_ON()||!h)return h;const id=OPEN;const L=FBS();let k=MT;if(!L.some(x=>x[0]==k))k=k=="p"?"pw":"pw";
+{const o=pkModal;pkModal=function(){const h=o.apply(this,arguments);try{if(h&&!FB_ON()){let me=0;try{me=x4Me()&&G.fbOff}catch(x){}return me?h.replace('<section class="pqb">',`<button type="button" class="fbon" data-fbon="1">${LS("Nouvelle fiche","New sheet")}</button><section class="pqb">`):h}if(!h)return h;const id=OPEN;const L=FBS();let k=MT;if(!L.some(x=>x[0]==k))k=k=="p"?"pw":"pw";
  const B=fbSplit(id);let body="";
  if(k=="pw")body=B.pw.join("")+(()=>{try{return pkPw(id)}catch(e){return""}})();
  else if(k=="gs")body=B.gs.join("")||`<small>${LS("Pas d'Étoiles d'Or pour ce Pokémon.","No Gold Stars for this Pokémon.")}</small>`;
@@ -20348,7 +20348,9 @@ function fbSplit(id){const B={pw:[],gs:[],mu:[],s:[],o:[]};try{const t=document.
  const nav=`<nav class="fbnav" aria-label="${LS("Sections de la fiche","Sheet sections")}">${L.map(x=>`<button type="button" class="${k==x[0]?"on":""}" data-mt="${x[0]}"><span>${ico(x[2])}</span>${x[1]}${x[0]=="gs"&&g?`<em>${g}</em>`:""}</button>`).join("")}<button type="button" class="fboff" data-fboff="1">${LS("Ancienne fiche","Old sheet")}</button></nav>`;
  const i=h.indexOf('<section class="pqb">');if(i<0)return h;const j=h.lastIndexOf('</section>');
  return h.slice(0,i)+`<section class="pqb fbb">${nav}<div class="pqbd fbbd">${body}</div></section>`+h.slice(j+10)}catch(e){return h}}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fboff]");if(!b)return;e.stopPropagation();G.fbOff=1;save();try{toast(LS("Ancienne fiche remise. Tu peux revenir à la nouvelle dans Réglages.","Old sheet back."));modal()}catch(x){}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fbon]");if(!b)return;e.stopPropagation();G.fbOff=0;save();try{modal()}catch(x){}},true);
+{const st=document.createElement("style");st.textContent=`.fbon{display:block;margin:0 auto 10px;min-height:38px;padding:0 18px;border-radius:12px;border:2px solid #a3e635;background:#14532d;color:#ecfccb;font:900 14px Nunito,sans-serif;cursor:pointer}`;document.head.appendChild(st)}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fboff]");if(!b)return;e.stopPropagation();G.fbOff=1;save();try{toast(LS("Ancienne fiche remise. Le bouton « Nouvelle fiche » en haut de la fiche la remet.","Old sheet back."));modal()}catch(x){}},true);
 {const st=document.createElement("style");st.textContent=`.pqm .pqb.fbb{display:flex!important;flex-direction:row!important;gap:14px;align-items:flex-start;overflow:auto;padding:16px!important}.pqm .pqb.fbb .fbbd{overflow:visible;max-height:none;padding:0}
 .fbnav{flex:none;width:200px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0}
 .fbnav button{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 12px;border-radius:14px;border:2px solid #2a3566;background:#0b1130;color:#a5b4e6;font:800 15px "Baloo 2",Nunito,sans-serif;text-align:left;cursor:pointer;transition:transform .12s,border-color .15s}
@@ -20374,15 +20376,17 @@ function mnbRender(){const el=document.getElementById("mnb");if(!el)return;const
   <div class="mnbft"><button type="button" class="mnbrc" data-mnbrc="1"><img src="img/items/master-ball.png" alt=""><span>${LS("À réclamer","To claim")}</span>${rc?`<em>${rc}</em>`:""}</button><div class="mnbx"></div><button type="button" class="mnboff" data-mnboff="1">${LS("Ancien menu","Old menu")}</button></div>`;
  if(el._h!==h){el._h=h;el.innerHTML=h;const x=el.querySelector(".mnbx");["elite-discord","elite-support","elite-tiktok","elite-lang","elite-suggest","elite-wiki"].forEach(id=>{const b=document.getElementById(id);if(b&&x)x.appendChild(b)})}}
 function mnbSync(){try{const on=MNB_ON();document.body.classList.toggle("mnb-on",on);let el=document.getElementById("mnb");
+ let bn=document.getElementById("mnbon");let me=0;try{me=x4Me()&&G.mnbOff&&innerWidth>860}catch(x){}if(me&&!bn){bn=document.createElement("button");bn.id="mnbon";bn.type="button";bn.textContent=LS("Nouveau menu","New menu");bn.onclick=()=>{G.mnbOff=0;save();mnbSync()};document.body.appendChild(bn)}else if(!me&&bn)bn.remove();
  if(!on){if(el){["elite-discord","elite-support","elite-tiktok","elite-lang","elite-suggest","elite-wiki"].forEach(id=>{const b=document.getElementById(id);if(b&&el.contains(b))document.body.appendChild(b)});el.remove()}return}
  if(!el){el=document.createElement("nav");el.id="mnb";el.setAttribute("aria-label",LS("Menu principal","Main menu"));document.body.appendChild(el)}mnbRender()}catch(e){}}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#mnb [data-mnbf],#mnb [data-mnbt],#mnb [data-mnbrc],#mnb [data-mnboff]");if(!t)return;e.stopPropagation();e.preventDefault();
  if(t.dataset.mnbf){const f=mnbFam().find(x=>x.k==t.dataset.mnbf);if(f&&f.t.length==1){tab=f.t[0];MNBX=f.k;try{show()}catch(x){}}else MNBX=MNBX===t.dataset.mnbf?null:t.dataset.mnbf;mnbRender();try{sfx("tap")}catch(x){}return}
  if(t.dataset.mnbt){const k=t.dataset.mnbt;let lk=0;try{lk=lockOf(k)}catch(x){}if(lk){try{toast(LS("Pas encore débloqué.","Not unlocked yet."))}catch(x){}return}tab=k;try{window.scrollTo(0,0);show()}catch(x){}mnbRender();return}
  if(t.dataset.mnbrc){try{rcOpen()}catch(x){}return}
- if(t.dataset.mnboff){G.mnbOff=1;save();mnbSync();try{toast(LS("Ancien menu remis.","Old menu back."))}catch(x){}}},true);
+ if(t.dataset.mnboff){G.mnbOff=1;save();mnbSync();try{toast(LS("Ancien menu remis. Le bouton « Nouveau menu » en bas à gauche le remet.","Old menu back."))}catch(x){}}},true);
 setInterval(mnbSync,1000);setTimeout(mnbSync,1500);
 {const st=document.createElement("style");st.textContent=`body.mnb-on main{margin-left:250px!important;max-width:calc(100% - 260px)}body.mnb-on #nav,body.mnb-on #dkh,body.mnb-on #hubb,body.mnb-on #rcb{display:none!important}
+#mnbon{position:fixed;left:8px;bottom:110px;z-index:47;min-height:40px;padding:0 14px;border-radius:12px;border:2px solid #a78bfa;background:#2e1065;color:#fff;font:900 13px Nunito,sans-serif;cursor:pointer;box-shadow:0 0 14px #a78bfa66}
 #mnb{position:fixed;left:0;top:0;bottom:0;width:240px;z-index:46;box-sizing:border-box;padding:14px 12px;background:linear-gradient(180deg,#0d1438,#070b1f);border-right:2px solid #2a3566;display:flex;flex-direction:column;gap:10px;font-family:Nunito,system-ui,sans-serif;color:#cbd5f5;box-shadow:6px 0 24px #0008}
 #mnb .mnbh{display:flex;align-items:baseline;gap:8px;padding:2px 6px 6px}#mnb .mnbh b{font:800 21px "Baloo 2",Nunito,sans-serif;color:#fff}#mnb .mnbh small{font-weight:800;color:#7f8db5}
 #mnb .mnbl{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:7px;padding-right:2px}
