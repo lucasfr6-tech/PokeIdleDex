@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v400-20261123c"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v400-20261123b"></script><script>
+</script><script src="shim.js?v=pid-v400-20261123c"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -15935,6 +15935,10 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-11-24",r:Date.UTC(2026,10,23,23,1,0),t:["Scarhino Émeraude et Lunala Aurore Boréale","Emerald Heracross and Aurora Lunala"],e:[
+  ["new","Nouvel exclusif : Scarhino Émeraude","Il apparaît à partir de l'étage 3000 (0,5 % par combat). Sa puissance part de 600 / 5000 et monte jusqu'à 1100 quand tu lui donnes des doublons de Pokémon Insecte ou Combat. Sa Méga-Évolution garde ses couleurs d'émeraude.","New exclusive: Emerald Heracross","It appears from floor 3000 (0.5% per fight). Its power starts at 600 / 5000 and climbs to 1100 when you give it duplicate Bug or Fighting Pokémon. Its Mega Evolution keeps its emerald colors."],
+  ["new","Nouvel exclusif : Lunala Aurore Boréale","Elle apparaît à partir de l'étage 5500 (0,3 % par combat). Sa puissance part de 600 / 5000 et monte jusqu'à 1100 avec les doublons de n'importe quel Pokémon. Au maximum, elle prend sa forme Ultime.","New exclusive: Aurora Lunala","It appears from floor 5500 (0.3% per fight). Its power starts at 600 / 5000 and climbs to 1100 with duplicates of any Pokémon. At the maximum, it takes its Ultimate form."],
+  ["new","Puissance évolutive","Dans la fiche de ces deux exclusifs, le bouton « Donner les doublons » utilise les doublons de tes Pokémon à 5 étoiles (ils gardent leurs étoiles et leur puissance). Plus le doublon est rare, plus il compte. 10 niveaux maximum par jour.","Evolving power","In these two exclusives' sheet, the “Give duplicates” button uses duplicates of your 5-star Pokémon (they keep their stars and power). Rarer duplicates count more. 10 levels max per day."]]},
  {d:"2026-11-23",t:["Équilibrage et corrections","Balance and fixes"],e:[
   ["fix","Étages bloqués","Si le combat des étages s'arrête (plus aucun Pokémon n'apparaît), il repart tout seul au bout de quelques secondes.","Stuck floors","If floor battles stop (no Pokémon appears anymore), they restart on their own after a few seconds."]]},
  {d:"2026-11-22",t:["Mise à jour reportée","Update postponed"],e:[
@@ -20051,4 +20055,89 @@ window.twConv=twConv;
   if(!other&&now-t0>90000&&!E){fix("restart");busy=false;CAPU=0;t0=now;try{spawn()}catch(e){}}
  }catch(e){}},5000)}
 
+
+/* ===== Mise à jour du 24 novembre (00 h 01, Paris) : Scarhino Émeraude et Lunala Aurore Boréale, exclusifs « évolutifs » =====
+   Leur puissance sur 5000 monte quand on leur donne des doublons : de 600 au départ jusqu'à 1100 au maximum (100 niveaux de +5).
+   Lunala accepte les doublons de toutes les espèces ; Scarhino seulement ceux des types Insecte et Combat (mais ils comptent triple).
+   On ne donne que les doublons des Pokémon déjà à 5 étoiles : leurs 5 étoiles et leur puissance restent acquises.
+   Avant la sortie, seul le compte du propriétaire les voit (aperçu). */
+const NX_T=Date.UTC(2026,10,23,23,1,0);
+const nxOn=()=>Date.now()>=NX_T||x4Me();
+const DUP_MAX=100,DUP_DAY=10,DUP_S0=600,DUP_STEP=5,DUP_RP=[1,2,4,8];
+const dupCost=l=>30+6*l;
+const dupScore=l=>DUP_S0+DUP_STEP*Math.max(0,Math.min(DUP_MAX,l|0));
+const dupM=s=>Math.pow(30,s/1000);
+const NX=[
+ {id:90033,key:"sc",base:214,n:"Scarhino Émeraude",t:["bug","fighting"],s:[80,125,75,40,95,85],ab:["Essaim","Cran"],ha:"Impudence",au:"#a3e635",au2:"#047857",img:"scarhino-emeraude",mg:10047,
+  fl:3000,rate:.005,types:["bug","fighting"],k:3,col:"#a3e635",
+  fr:"Un Scarhino dont la carapace brille comme une émeraude taillée. Il apparaît à partir de l'étage 3000. Sa puissance grandit quand tu lui donnes des doublons de Pokémon Insecte ou Combat, jusqu'à 1100 sur 5000. Sa Méga-Évolution double sa corne d'émeraude.",
+  en:"A Heracross whose shell shines like a cut emerald. It appears from floor 3000. Its power grows when you give it duplicate Bug or Fighting Pokémon, up to 1100 out of 5000. Its Mega Evolution doubles its emerald horn.",
+  mv:["Mégacorne","Close Combat","Lame de Roc","Danse-Lames"]},
+ {id:90032,key:"lu",base:792,n:"Lunala Aurore Boréale",t:["psychic","ghost"],s:[137,113,89,137,107,97],ab:["Spectro-Bouclier","Spectro-Bouclier"],ha:"Spectro-Bouclier",au:"#86efac",au2:"#0e7490",img:"lunala-aurore",
+  fl:5500,rate:.003,types:null,k:1,col:"#86efac",
+  fr:"Ses ailes déploient une aurore polaire. Elle apparaît à partir de l'étage 5500. Sa puissance grandit avec chaque doublon que tu lui donnes, jusqu'à 1100 sur 5000. Au maximum, elle prend sa forme Ultime.",
+  en:"Its wings unfold a polar aurora. It appears from floor 5500. Its power grows with every duplicate you give it, up to 1100 out of 5000. At the maximum, it takes its Ultimate form.",
+  mv:["Rayon Spectral","Psyko","Ball'Ombre","Lame Lunaire"]}];
+const NXI={};NX.forEach(x=>NXI[x.id]=x);
+const DUPS=id=>{const D=G.dup||(G.dup={});return D[id]||(D[id]={lv:0,pt:0,d:"",dl:0,tot:0})};
+function dupApply(x){try{const d=DUPS(x.id),s=dupScore(d.lv),m=dupM(s),k=m/8.46;
+ PWTV[x.key]=PWTV.t7*k;PWTV0[x.key]=PWTV0.t7*Math.pow(k,.6);PWREF[x.key]=700;XRKM[x.id]=m;if(SPRANK[x.id])SPRANK[x.id].m=m;const r=XRKL.find(y=>y[0]==x.id);if(r)r[1]=m;
+ if(x.key=="lu"){const u=d.lv>=DUP_MAX?"-ultime":"";SPU.set(""+x.id,"img/special/"+x.img+u+".png");SPU.set(x.id+"s","img/special/"+x.img+u+"-shiny.png")}
+ try{PWC.clear()}catch(e){}if(G.col[x.id])try{rq(x.id)}catch(e){}}catch(e){}}
+NX.forEach(x=>{
+ PWNM[x.key]=[(x.key=="sc"?"Étage 3000 · ":"Étage 5500 · ")+x.n,(x.key=="sc"?"Floor 3000 · Emerald Heracross":"Floor 5500 · Aurora Lunala")];
+ const S={id:x.id,base:x.base,n:x.n,t:x.t,s:x.s,ab:x.ab,ha:x.ha,hue:0,hue2:0,sat:1,au:x.au,au2:x.au2,cas:0,fr:x.fr,en:x.en};
+ SPS.push(S);SPM[x.id]=S;DB[x.id]={n:x.n,t:x.t,b:x.s.reduce((a,b)=>a+b,0),lg:x.key=="lu"?1:0,ba:0,ch:x.id,s:x.s,ab:x.ab,ha:x.ha};EVC[x.id]=[];RSPM[x.id]=x.mv;
+ SPU.set(""+x.id,"img/special/"+x.img+".png");SPU.set(x.id+"s","img/special/"+x.img+"-shiny.png");
+ if(x.mg){SPU.set(x.id+"m"+x.mg,"img/special/"+x.img+"-mega.png");SPU.set(x.id+"m"+x.mg+"s","img/special/"+x.img+"-mega-shiny.png")}
+ XRKO["n"+x.key]=[x.key=="sc"?"Étage 3000 · doublons":"Étage 5500 · doublons",x.key=="sc"?"Floor 3000 · duplicates":"Floor 5500 · duplicates",x.col];
+ SPRANK[x.id]={r:17,m:1,src:"n"+x.key};XRKL.push([x.id,1,"n"+x.key]);try{EX_STAR_SPECIAL[x.id]=3}catch(e){}
+});
+{const o=pwInfer;pwInfer=function(id,c){return NXI[+id]?NXI[+id].key:o.apply(this,arguments)}}
+{const o=pr;pr=function(id){return NXI[+id]?EXR:o.apply(this,arguments)}}
+{const o=spSrc;spSrc=function(k){return k=="nsc"?[LS("Étage 3000","Floor 3000"),"#a3e635","★"]:k=="nlu"?[LS("Étage 5500","Floor 5500"),"#86efac","★"]:o.apply(this,arguments)}}
+{const o=starFloorFarmable;starFloorFarmable=function(id){return NXI[+id]?true:o.apply(this,arguments)}}
+{const o=srcWhere;srcWhere=function(id){const x=NXI[+id];return x?[`à partir de l'étage ${x.fl} (${prc(x.rate)} par combat)`,`from floor ${x.fl} (${prc(x.rate)} per fight)`]:o.apply(this,arguments)}}
+NX.forEach(dupApply);XRKL.sort((a,b)=>b[1]-a[1]);
+if(!nxOn()){try{NX.forEach(x=>{const k=SPS.findIndex(s=>s.id==x.id);if(k>=0)SPS.splice(k,1);const r=XRKL.findIndex(y=>y[0]==x.id);if(r>=0)XRKL.splice(r,1);delete SPRANK[x.id]})}catch(e){}}
+{const w=NX_T-Date.now();if(w>0&&w<36e5*20&&!x4Me())setTimeout(()=>{try{save()}catch(e){}location.reload()},w+2000+Math.random()*25000)}
+/* apparition aux étages */
+{const o=pickId22;pickId22=function(){if(nxOn()&&!(typeof hwOn=="function"&&hwOn())){const f=G.fl|0;for(const x of NX)if(f>=x.fl&&Math.random()<x.rate/Math.max(1,x2M()))return x.id}return o.apply(this,arguments)}}
+{const s0=spawnFx;spawnFx=function(){const r=s0.apply(this,arguments);try{if(E&&NXI[+E.id]&&!E.hwm){alertFx(LS("EXCLUSIF !","EXCLUSIVE!"),NXI[+E.id].col,"shiny");toast(LS("✦ "+nm(E.id)+" est apparu ! ✦","✦ "+nm(E.id)+" appeared! ✦"))}}catch(e){}return r}}
+{const z0=zoneHtml;zoneHtml=function(z){const h=z0.apply(this,arguments);try{if(!nxOn()||typeof h!="string"||h.indexOf('<div class="zl2">')<0||(typeof hwOn=="function"&&hwOn())||(typeof ZSH!="undefined"&&ZSH))return h;let out=h;
+ for(const x of NX){if(ze(z)<x.fl)continue;const from=zs(z)<x.fl,pct=prc(x.rate);
+  const card=`<div class="zcd r${EXR}${G.dx[x.id]?' own':''}" style="border-color:${x.col};box-shadow:0 0 12px ${x.col}55"><span class="zr">${rtag(EXR,1)}</span>${sp(x.id,0,1)}<b>${esc(nm(x.id))}</b><em>${pct}</em><small>${from?LS("dès l'étage ","from floor ")+x.fl:LS("par combat","per fight")}</small></div>`;
+  out=out.replace('<div class="zl2">','<div class="zl2">'+card)}return out}catch(e){return h}}}
+/* doublons qu'on peut donner : ceux des Pokémon déjà à 5 étoiles (on en garde 1, les 5 étoiles et la puissance des copies restent acquises) */
+function dupEligible(x){const L=[];for(const k in G.col){const i=+k;if(!(i>0&&i<=1025))continue;const c=G.col[k];if(!c||c.fs||c.hf)continue;
+ if(x.types&&!tp(i).some(t=>x.types.includes(t)))continue;let s5=false;try{s5=starsOf(i,c.n||1)>=STMX}catch(e){}if(!s5)continue;const extra=(c.n|0)-1;if(extra<=0)continue;
+ let r=0;try{r=isLR(i)?4:Math.min(3,Math.max(0,pr(i)|0))}catch(e){}const v=(r==4?20:DUP_RP[r])*x.k;L.push({i,extra,v,c})}
+ return L.sort((a,b)=>a.v-b.v)}
+const dupAvail=x=>dupEligible(x).reduce((a,y)=>a+y.extra*y.v,0);
+const dupToday=()=>new Date().toLocaleDateString("fr-FR",{timeZone:"Europe/Paris"});
+function dupGive(id){const x=NXI[id];if(!x||!G.col[id])return;const d=DUPS(id);const day=dupToday();if(d.d!==day){d.d=day;d.dl=0}
+ if(d.lv>=DUP_MAX){toast(LS("Déjà au maximum !","Already at max!"));return}if(d.dl>=DUP_DAY){toast(LS("Limite du jour atteinte : reviens demain.","Daily limit reached: come back tomorrow."));return}
+ const L=dupEligible(x);let used=0,lv0=d.lv;
+ for(const y of L){while(y.extra>0&&d.lv<DUP_MAX&&d.dl<DUP_DAY){y.c.ks=Math.max(y.c.ks|0,STMX);d.pt+=y.v;y.extra--;y.c.n--;used++;d.tot++;while(d.lv<DUP_MAX&&d.dl<DUP_DAY&&d.pt>=dupCost(d.lv)){d.pt-=dupCost(d.lv);d.lv++;d.dl++}}if(d.lv>=DUP_MAX||d.dl>=DUP_DAY)break}
+ if(d.lv>=DUP_MAX)d.pt=0;
+ if(!used){toast(LS("Aucun doublon à donner pour le moment.","No duplicates to give right now."));return}
+ dupApply(x);IDC=null;try{starSync();recomp()}catch(e){}save();try{lbPush(true)}catch(e){}try{sfx(d.lv>lv0?"shiny":"tap")}catch(e){}
+ toast(LS(used+" doublons donnés · "+nm(id)+" : "+dupScore(d.lv)+" / 5000",used+" duplicates given · "+nm(id)+": "+dupScore(d.lv)+" / 5000"));
+ if(x.key=="lu"&&d.lv>=DUP_MAX&&lv0<DUP_MAX)setTimeout(()=>{try{alertFx(LS("FORME ULTIME !","ULTIMATE FORM!"),"#86efac","shiny")}catch(e){}},300);try{show()}catch(e){}}
+window.dupGive=dupGive;window.nxOn=nxOn;window.NXI=NXI;window.dupAvail=dupAvail;window.dupApply=dupApply;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-dupg]");if(!b)return;e.stopPropagation();e.preventDefault();dupGive(+b.dataset.dupg)},true);
+{const st=document.createElement("style");st.textContent=`.dupb{margin-top:10px;padding:12px 14px;border-radius:14px;border:2px solid var(--c);background:linear-gradient(160deg,#0b1a14,#07101f);box-shadow:0 0 16px color-mix(in srgb,var(--c) 30%,transparent)}
+.dupb h4{margin:0 0 2px;font:800 15px "Baloo 2",Nunito,sans-serif;color:#fff}.dupb>small{display:block;color:#b6c3e6;font-size:11.5px;line-height:1.45;margin-bottom:8px}
+.dupsc{display:flex;align-items:baseline;gap:6px;font-weight:900}.dupsc b{font-size:26px;color:var(--c)}.dupsc em{font-style:normal;color:#8ea0cc;font-size:12px}
+.dupbar{position:relative;height:14px;border-radius:999px;background:#111a36;border:1px solid #26325e;overflow:hidden;margin:6px 0 4px}.dupbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--c2),var(--c));box-shadow:0 0 10px var(--c)}
+.dupbar s{position:absolute;top:0;bottom:0;width:2px;background:#ffffff55}.duptk{display:flex;justify-content:space-between;font:800 10px Nunito,sans-serif;color:#7f8db5}
+.duprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:8px;font-size:12px;color:#dbe4ff}
+.dupg{border:0;border-radius:12px;padding:9px 16px;font:900 13px Nunito,sans-serif;color:#052e16;background:linear-gradient(180deg,var(--c),var(--c2));box-shadow:0 3px 0 #0007;cursor:pointer}.dupg[disabled]{filter:grayscale(1) brightness(.7);cursor:default}`;document.head.appendChild(st)}
+{const o=bonusCard;bonusCard=function(id){let h=o.apply(this,arguments);try{const x=NXI[+id];if(x&&G.col[id]&&nxOn()){const d=DUPS(id),day=dupToday(),dl=d.d===day?d.dl:0,s=dupScore(d.lv),av=dupAvail(x),mx=d.lv>=DUP_MAX;
+ const pct=((s-DUP_S0)/(1100-DUP_S0)*100).toFixed(1),cost=dupCost(d.lv);
+ h+=`<div class="dupb" style="--c:${x.col};--c2:${x.au2}"><h4>${LS("Puissance évolutive","Evolving power")}</h4><small>${x.types?LS("Donne-lui tes doublons de Pokémon <b>Insecte</b> ou <b>Combat</b> : chacun compte triple. ","Give it your duplicate <b>Bug</b> or <b>Fighting</b> Pokémon: each counts triple. "):LS("Donne-lui tes doublons de n'importe quel Pokémon. ","Give it duplicates of any Pokémon. ")}${LS("Seuls les doublons de tes Pokémon à 5 étoiles sont pris : ils gardent leurs 5 étoiles et leur puissance. Plus le doublon est rare, plus il compte (N 1, SR 2, SSR 4, UR 8, LR 20). "+DUP_DAY+" niveaux maximum par jour.","Only duplicates of your 5-star Pokémon are used: they keep their 5 stars and their power. Rarer duplicates count more (N 1, SR 2, SSR 4, UR 8, LR 20). "+DUP_DAY+" levels max per day.")}${x.key=="lu"?LS(" À 1100, Lunala prend sa <b>forme Ultime</b>."," At 1100, Lunala takes its <b>Ultimate form</b>."):""}</small>
+ <div class="dupsc"><b>${s}</b><em>/ 5000 · ${LS("niveau","level")} ${d.lv}/${DUP_MAX}</em></div>
+ <div class="dupbar"><i style="width:${pct}%"></i>${[700,800,900,1000].map(v=>`<s style="left:${(v-DUP_S0)/5}%"></s>`).join("")}</div><div class="duptk"><span>600</span><span>700</span><span>800</span><span>900</span><span>1000</span><span>1100</span></div>
+ <div class="duprow"><span>${mx?LS("Maximum atteint !","Max reached!"):LS("Prochain niveau : ","Next level: ")+(mx?"":`<b>${d.pt}/${cost}</b>`)} · ${LS("Aujourd'hui : ","Today: ")}<b>${dl}/${DUP_DAY}</b> · ${LS("Doublons disponibles : ","Available duplicates: ")}<b>${fmt(av)}</b> ${LS("points","points")}</span>
+ <button class="dupg" data-dupg="${id}" ${mx||dl>=DUP_DAY||!av?"disabled":""}>${LS("Donner les doublons","Give duplicates")}</button></div></div>`}}catch(e){}return h}}
 }catch(e){console.warn("v4.0.0",e)}})()</script></body></html>
