@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v450-20261123d"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v450-20261124a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v450-20261123d"></script><script>
+</script><script src="shim.js?v=pid-v450-20261124a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -20438,4 +20438,13 @@ try{if(typeof WKM!="undefined"&&typeof wkBody!="undefined"){
 
 /* classement : rechargé tout de suite en ouvrant l'onglet s'il date de plus de 25 s */
 try{const o=show;show=function(){const r=o.apply(this,arguments);try{if((tab=="lb"||tab=="rks")&&window.lbNow&&Date.now()-(LB.lt||0)>25000){LB.lt=Date.now();window.lbNow()}}catch(e){}return r}}catch(e){}
+
+/* code privé (giveaway Discord) : donne Scarhino Émeraude ; le code n'est pas annoncé */
+try{const HS="de810578a2089a16811e8413ec75ecacf8f5c48083d273bfa803fbe03298238c",prev=window.pidPrivateRedeem;
+ window.pidPrivateRedeem=async function(code){const raw=String(code||"").trim().toUpperCase();
+  if(/^TS4GIFT-SCARHINO-/.test(raw)&&await pidH(raw)===HS){G.codes=G.codes||{};if(G.codes[raw])return LS("Code déjà utilisé.","Code already used.");
+   const had=!!G.col[SC_ID];G.codes[raw]=1;spGrant(SC_ID);G.dx[SC_ID]=1;if(!had)try{dupApply(NXI[SC_ID])}catch(e){}try{recomp();starSync()}catch(e){}save();try{lbPush(true);sfx("shiny");show()}catch(e){}
+   setTimeout(()=>{try{alertFx(LS("SCARHINO ÉMERAUDE !","EMERALD HERACROSS!"),"#a3e635","shiny")}catch(e){}},200);
+   return LS("Code accepté : Scarhino Émeraude"+(had?" (une copie de plus pour ses étoiles)":"")+" rejoint ta collection !","Code accepted: Emerald Heracross"+(had?" (one more copy for its stars)":"")+" joins your collection!")}
+  return prev?prev(code):null}}catch(e){}
 }catch(e){console.warn("v4.0.0",e)}})()</script></body></html>
