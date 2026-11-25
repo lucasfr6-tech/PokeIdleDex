@@ -4398,7 +4398,7 @@ body.pid-elite{background:#111219!important}.pid-elite #sky{display:none!importa
 @media(prefers-reduced-motion:reduce){#pidsp *{animation-duration:0s!important}}
 </style><i class="st"></i><div class="lg">PokeIdleDex</div><div class="bx"><div class="ha"></div><img src="img/items/poke-ball.png" alt=""><div class="w" id="pidspw">Rechargement</div><div class="br"><i></i></div><div class="v" id="pidspv"></div></div><div class="tp" id="pidspt">Ta progression est sauvegardée, rien ne sera perdu.</div></div>
 <script>(function(){var el=document.getElementById("pidsp"),en=0,t0=Date.now(),done=0;try{if(/[?&]_v=/.test(location.search)){var u0=new URL(location.href);u0.searchParams.delete("_v");history.replaceState(null,"",u0.pathname+u0.search+u0.hash)}}catch(e){}try{en=JSON.parse(localStorage.getItem("idle_set")||"{}").lang=="en"}catch(e){}
-function txt(){document.getElementById("pidspw").textContent=en?"Reloading":"Rechargement";document.getElementById("pidspt").textContent=en?"Your progress is saved, nothing will be lost.":"Ta progression est sauvegardée, rien ne sera perdu.";document.getElementById("pidspv").textContent="Version 4.5.0"}
+function txt(){document.getElementById("pidspw").textContent=en?"Reloading":"Rechargement";document.getElementById("pidspt").textContent=en?"Your progress is saved, nothing will be lost.":"Ta progression est sauvegardée, rien ne sera perdu.";document.getElementById("pidspv").textContent="Version 4.6.0"}
 window.addEventListener("DOMContentLoaded",txt);txt();
 window.pidSpShow=function(){done=0;t0=Date.now();el.style.display="";void el.offsetWidth;el.classList.remove("off")};
 window.pidSpHide=function(){if(done)return;done=1;var w=Math.max(0,700-(Date.now()-t0));setTimeout(function(){el.classList.add("off");setTimeout(function(){if(done)el.style.display="none"},500)},w)};
@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v450-20261124a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v460-20261125a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v450-20261124a"></script><script>
+</script><script src="shim.js?v=pid-v460-20261125a"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -9789,13 +9789,13 @@ function glChals(M){const n=Date.now(),res=[];["d","w"].forEach(per=>{const key=
    res.push({id:per+key+k,per,k,tg,got:Math.min(got,tg*2),done:got>=tg,mine,rw,key})})});return res}
 /* ---------- synchronisation en ligne ---------- */
 let glPT=null;
-function glPush(now){if(glSrc()!="on"||!(G.gl&&(G.gl.id||G.gl._left)))return;clearTimeout(glPT);glPT=setTimeout(async()=>{try{const d=glMyDoc();if(G.gl._left){d.g="";G.gl._left=0}await LB.db.doc("glm/"+LB.uid).set(d);GLX.pf=0;GLX.pk=JSON.stringify([d.g,d.gx,d.bs,d.ct])}catch(e){GLX.pf=(GLX.pf||0)+1;if(GLX.pf<=6)setTimeout(()=>glPush(1),15000)}},now?400:5000)}
+function glPush(now){if(glSrc()!="on"||!(G.gl&&(G.gl.id||G.gl._left)))return;clearTimeout(glPT);glPT=setTimeout(async()=>{try{const d=glMyDoc();if(G.gl._left){d.g="";G.gl._left=0}await LB.db.doc("glm/"+LB.uid).set(d);GLX.pf=0;GLX.pk=JSON.stringify([d.g,d.gx,d.bs,d.ct,d.x2,d.dn2,d.gdx])}catch(e){GLX.pf=(GLX.pf||0)+1;if(GLX.pf<=6)setTimeout(()=>glPush(1),15000)}},now?400:5000)}
 /* sécurité : si un envoi a échoué ou n'a jamais eu lieu (hors ligne, serveur occupé), les dégâts de boss et les points de guilde sont renvoyés toutes les 30 s */
-setInterval(()=>{try{if(glSrc()!="on"||!G.gl||!G.gl.id)return;const d=glMyDoc(),k=JSON.stringify([d.g,d.gx,d.bs,d.ct]);if(k!==GLX.pk)glPush(1)}catch(e){}},30000);
+setInterval(()=>{try{if(glSrc()!="on"||!G.gl||!G.gl.id)return;const d=glMyDoc(),k=JSON.stringify([d.g,d.gx,d.bs,d.ct,d.x2,d.dn2,d.gdx]);if(k!==GLX.pk)glPush(1)}catch(e){}},30000);
 async function glFetch(force){if(glSrc()!="on"||GLX.busy)return;if(!force&&Date.now()-GLX.ts<(tab=="gld"?12000:60000))return;GLX.busy=1;
  try{/* membres de ma guilde lus à part (complets), plus la liste générale (les autres guildes) : avant, la lecture générale s'arrêtait à 200 joueurs */
-  const gid=G.gl&&G.gl.id,[a,b,a2]=await Promise.all([LB.db.collection("glm").limit(2000).get(),LB.db.collection("gld").limit(2000).get(),gid?LB.db.collection("glm").where("g","==",gid).limit(2000).get().catch(()=>({docs:[]})):Promise.resolve({docs:[]})]);
-  const mm=new Map();for(const d of a.docs.concat(a2.docs))mm.set(d.id,d);GLX.docs=[...mm.values()].map(d=>Object.assign({id:d.id},d.data())).filter(x=>x.g);GLX.gl=b.docs.map(d=>Object.assign({id:d.id},d.data()));GLX.ts=Date.now();GLX.st=null}catch(e){}
+  const gid=G.gl&&G.gl.id,[a,b,a2]=await Promise.all([LB.db.collection("glm").orderBy("t","desc").limit(2000).get(),LB.db.collection("gld").limit(2000).get(),gid?LB.db.collection("glm").where("g","==",gid).limit(2000).get().catch(()=>({docs:[]})):Promise.resolve({docs:[]})]);
+  const mm=new Map();for(const d of a.docs.concat(a2.docs))mm.set(d.id,d);GLX.all=[...mm.values()].map(d=>Object.assign({id:d.id},d.data()));GLX.docs=GLX.all.filter(x=>x.g);GLX.gl=b.docs.map(d=>Object.assign({id:d.id},d.data()));GLX.ts=Date.now();GLX.st=null}catch(e){}
  GLX.busy=0;glSync();if(typeof glRefresh=="function")glRefresh(1)}
 /* cartes reçues, échanges, simulation des membres */
 function glSync(){const g=glS();if(!g.id)return;const S=glState(),M=S.mine;if(!M)return;const me=S.me,now=Date.now();
@@ -9863,7 +9863,7 @@ function glModal(h){let o=$("glxm");if(!o){o=document.createElement("div");o.id=
 const glClose=()=>{glModal("");GLP.mode=""};
 /* ---------- sans guilde ---------- */
 function glBrowse(S){const q=norm(GLQ),L=S.L.filter(e=>!q||norm(e.gd.n+" "+e.gd.tag).includes(q)),cost=glCost(),ok=G.m>=cost;
- return `<div class="glx-split"><div class="glx-box glx-mk"><h3>${glIc("crown")}${LS("Créer ma guilde","Create my guild")}</h3><p>${LS("Réunis jusqu'à 20 dresseurs : bonus partagés, défis, boss de guilde et entraide.","Gather up to 20 trainers: shared bonuses, challenges, guild boss and mutual aid.")}</p>
+ return `<div class="glx-split"><div class="glx-box glx-mk"><h3>${glIc("crown")}${LS("Créer ma guilde","Create my guild")}</h3><p>${LS("Réunis jusqu'à 20 dresseurs : bonus partagés, défis, boss mondial et entraide.","Gather up to 20 trainers: shared bonuses, challenges, world boss and mutual aid.")}</p>
   <div class="glx-pr ${ok?"":"no"}">${ico("coin")}<b>${fmt(cost)}</b></div><button class="go glx-big" data-gl="new" ${ok?"":"disabled"}>${LS("Créer une guilde","Create a guild")}</button><small>${ok?"":LS("Il te manque des pièces.","Not enough coins.")}</small></div>
  <div class="glx-box"><h3>${glIc("search")}${LS("Rejoindre une guilde","Join a guild")}<span class="glx-sub">${S.src=="sim"?LS("Mode solo : membres simulés","Solo mode: simulated members"):LS("En ligne","Online")}</span></h3>
   <input class="glx-in" id="glq" data-gl="q" type="search" placeholder="${LS("Rechercher un nom ou un tag…","Search a name or tag…")}" value="${esc(GLQ)}" autocomplete="off">
@@ -10252,7 +10252,7 @@ const WKM={
  raid:["Raids","Boss plein écran, récompenses et boss mondial","skull"],
  twr:["Tower",TWN+" étages, Sceaux, Pikachu Fire, Steelix Cristallin et Roitiflam Plante","tower"],
  pvp:["JCJ : arène classée","6 contre 6, ligues, saisons et insignes","shield"],
- gld:["Guildes","Rejoindre ou créer une équipe, défis, boss hebdomadaire et entraide","frs"],
+ gld:["Guildes","Rejoindre ou créer une équipe, trésor, laboratoire, boss mondial et entraide","frs"],
  shop:["Boutique et Sac","Acheter, vendre et ranger tes objets","bag"],
  cards:["Cartes, succès, niveau","Les bonus permanents de collection et de progression","cards"],
  inv:["Invocations de Pokémon","Bannières, taux et garanties","gem"],
@@ -10408,12 +10408,18 @@ wkBody.pvp=()=>{
 wkBody.gld=()=>{
  const lv=GLT.map((t,i)=>{const p=glPerks(i+1);return [i+1,fN(t),"+"+Math.round((p.c-1)*100)+" %","+"+Math.round((p.d-1)*100)+" %","+"+Math.round((p.x-1)*100)+" %","+"+Math.round((p.k-1)*100)+" %"]});
  let cost="";try{cost=fN(glCost())+" ₽"}catch(e){cost="variable"}
- return `<p class="lead">Une guilde regroupe jusqu'à <b>${GLMAX} joueurs</b>. Ensemble, vous accomplissez des défis, battez un boss ensemble et vous entraidez. En échange, la guilde améliore ses bâtiments, qui donnent des bonus permanents à tous ses membres.</p>
+ return `<p class="lead">Une guilde regroupe jusqu'à <b>${GLMAX} joueurs</b>. Ensemble, vous accomplissez des défis, affrontez le boss mondial et vous entraidez. En échange, la guilde améliore ses bâtiments, qui donnent des bonus permanents à tous ses membres.</p>
  ${wf([["Débloquée à l'étage",LOCKS.gld],["Membres max",GLMAX],["Niveaux",GLT.length],["Après avoir quitté","6 h d'attente"]])}
  ${wsx("Rejoindre ou créer",`<ul class="wks2"><li><b>Rejoindre</b> : parcours les guildes ouvertes ou demande à entrer.</li><li><b>Créer</b> : le coût est fixe : ${cost}.</li><li><b>Quitter</b> : à tout moment, avec le bouton visible dans l'en-tête de la guilde. Tu dois ensuite attendre <b>6 heures</b> avant d'en rejoindre une autre.</li></ul>`)}
  ${wsx("Niveaux et bonus",`<p>Chaque défi rapporte de l'expérience de guilde. Plus la guilde monte, plus les bonus sont grands pour tous :</p>${tbl(["Niveau","XP de guilde","Pièces","Dégâts","Expérience","Capture"],lv)}`)}
  ${wsx("Défis",`<p>Des défis <b>quotidiens et hebdomadaires</b> comptent les actions de tous les membres : captures, combats gagnés, boss vaincus, mutations trouvées, étages de la Tower, victoires JCJ, cartes données.</p>`)}
- ${wsx("Boss hebdomadaire",`<p>Les boss de guilde se réinitialisent tous les 2 jours : 35 boss à la suite, de plus en plus durs, avec les PV partagés par toute la guilde. Tu peux l'attaquer <b>3 fois par jour</b> avec une fenêtre de combat qui utilise tes 3 meilleurs Pokémon, comme dans la Tower. Tes dégâts s'ajoutent à ceux de la guilde.</p>`)}
+ ${wsx("La semaine",`<p>Du <b>lundi au jeudi</b> : dons au trésor, recherche au Laboratoire et mini-boss. Du <b>vendredi au dimanche</b> : combat contre le boss mondial. Les jours suivent l'heure UTC.</p><p>Dans chaque activité, les <b>12 meilleurs</b> membres comptent à 100 %, les <b>8 suivants</b> à 30 %. Atteindre ton quota vaut 100 points ; au-delà, les points montent beaucoup moins vite.</p>`)}
+ ${wsx("Trésor",`<p>Donne au trésor des <b>heures de ta production</b> : 4 h maximum par jour, quota de <b>12 h</b> par semaine. Pendant 2 h après un don, tu gagnes 5 % de pièces en moins par heure donnée dans la journée (20 % maximum). Le chef dépense le trésor dans les bâtiments et le Ticket de guilde.</p>`)}
+ ${wsx("Laboratoire",`<p>Votez pour un projet : <b>Assaut</b> (+50 % de dégâts sur le boss), <b>Endurance</b> (6 attaques au lieu de 4) ou <b>Mobilisation</b> (de ×1 à ×2 au fil des attaques de la guilde). Remplissez-le avec vos captures : quota de <b>300</b> par membre, objectif de la guilde <b>240 × le nombre de membres</b>. Sans objectif atteint le vendredi, pas de bonus.</p>`)}
+ ${wsx("Mini-boss",`<p>Un par jour, du lundi au jeudi. Un coup par membre ; quand la moitié de la guilde a frappé, les captures comptent <b>double</b> pour le projet jusqu'à minuit (UTC).</p>`)}
+ ${wsx("Boss mondial",`<p>Toutes les guildes affrontent le même boss pendant 72 h, avec <b>4 attaques</b> de 20 secondes par membre. La guilde qui fait le plus de dégâts gagne, et le boss reste attaquable après sa défaite. La guilde qui porte le coup final fait +10 % de dégâts au combat suivant (non cumulable). Les récompenses arrivent au courrier à la fin du combat, que le boss soit vaincu ou non.</p>`)}
+ ${wsx("Saisons",`<p>Une saison dure <b>4 semaines</b>. Chaque semaine, le Trésor, le Laboratoire et le Boss sont notés sur 1 000 points par rapport à la meilleure guilde. Le total donne le classement, avec des récompenses et des trophées à la fin de la saison.</p>`)}
+ ${wsx("Ticket de guilde",`<p>Projet majeur payé par le trésor. Quand il est terminé, les membres présents depuis au moins <b>14 jours</b> et ayant participé pendant la saison reçoivent un ticket non échangeable (une fois par saison). Le Pokémon exclusif sera dévoilé bientôt.</p>`)}
  ${wsx("Entraide et chat",`<ul class="wks2"><li><b>Demande de carte</b> : une par jour. Les membres peuvent te donner des doublons, jusqu'à 10 dons par jour.</li><li><b>Échanges</b> de cartes entre membres.</li><li><b>Chat de guilde</b> : onglet « Guilde » à côté de Global et Amis dans le Chat.</li></ul>`)}
  ${wn("info","Dans le classement","Les guildes sont classées dans Social → Classements → Guildes.")}`};
 
@@ -12680,7 +12686,7 @@ BOOST.push({n:"Équilibre",p:1e10,r:[0,0,10,38,40,11.91,.09],min:4,cnt:8,a:"#7c3
  const pull=async()=>{try{const r=await fetch("https://discord.com/api/v10/invites/"+CODE+"?with_counts=true",{cache:"no-store"});if(!r.ok)return;const j=await r.json(),n=+j.approximate_member_count;if(n>0){N=n;try{localStorage.setItem(KEY,String(n))}catch(e){}draw()}}catch(e){}};
  if(document.readyState!="loading")mount();else document.addEventListener("DOMContentLoaded",mount);
  pull();setInterval(pull,60000);setInterval(mount,5000)})();
-(function(){const mk=()=>{if(document.getElementById("vtag"))return;const d=document.createElement("div");d.id="vtag";d.textContent="v4.5.0";d.title=LS("Version du jeu","Game version");document.body.appendChild(d)};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);setInterval(mk,3000)})();
+(function(){const mk=()=>{if(document.getElementById("vtag"))return;const d=document.createElement("div");d.id="vtag";d.textContent="v4.6.0";d.title=LS("Version du jeu","Game version");document.body.appendChild(d)};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);setInterval(mk,3000)})();
 /* ===== Chat « Amis » : messages privés entre amis (seuls les deux participants les voient) ===== */
 const DMX={w:null,cv:{},msgs:[],r:0,un:0,sig:"",busy:0,ld:0,lt:0};
 const dmOn=()=>{try{return tnOn()}catch(e){return false}};
@@ -15945,6 +15951,19 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
+ {d:"2026-11-25",t:["Version 4.6.0 : la grande refonte des guildes","Version 4.6.0: the big guild rework"],e:[
+  ["new","La semaine de guilde","Du lundi au jeudi : dons, laboratoire et mini-boss. Du vendredi au dimanche : le boss mondial. Les jours suivent l'heure UTC (le vendredi commence à 1 h à Paris en hiver).","The guild week","Monday to Thursday: donations, lab and mini-boss. Friday to Sunday: the world boss. Days follow UTC time."],
+  ["new","Trésor et quota","Donne au trésor des heures de ta production : 4 h par jour au maximum. Avec 12 h dans la semaine, tu as 100 points. Après un don, tu gagnes un peu moins de pièces pendant 2 h : −5 % par heure donnée dans la journée, 20 % au maximum.","Treasury and quota","Donate hours of your production to the treasury: 4 h a day at most. 12 h in a week gives you 100 points. After a donation you earn a bit less for 2 h: −5% coins per hour given that day, 20% at most."],
+  ["new","Les 12 + 8","Dans chaque activité, les 12 meilleurs membres comptent à 100 % et les 8 suivants à 30 %. Dépasser son quota rapporte encore, mais beaucoup moins.","12 + 8","In each activity, the top 12 members count 100% and the next 8 count 30%. Going past your quota still helps, but much less."],
+  ["new","Laboratoire","Votez pour une recherche (Assaut, Endurance ou Mobilisation) et remplissez-la avec vos captures avant vendredi. Quota : 300 captures par membre. Objectif de la guilde : 240 × le nombre de membres.","Lab","Vote for a research (Assault, Endurance or Mobilization) and fill it with your catches before Friday. Quota: 300 catches per member. Guild goal: 240 × members."],
+  ["new","Mini-boss du jour","Un coup par membre. Quand la moitié de la guilde a frappé, les captures comptent double jusqu'à minuit (UTC).","Daily mini-boss","One hit per member. Once half of the guild has hit it, catches count double until midnight (UTC)."],
+  ["new","Boss mondial","Toutes les guildes affrontent le même boss : 4 attaques de 20 secondes. La guilde qui fait le plus de dégâts gagne. Le coup final donne +10 % de dégâts au combat suivant. Les récompenses arrivent au courrier.","World boss","All guilds face the same boss: 4 attacks of 20 seconds. The guild with the most damage wins. The final blow gives +10% damage in the next battle. Rewards arrive by mail."],
+  ["new","Saisons et trophées","Une saison dure 4 semaines, avec un classement Trésor, Laboratoire et Boss, des récompenses et des trophées à garder.","Seasons and trophies","A season lasts 4 weeks, with Treasury, Lab and Boss rankings, rewards and trophies to keep."],
+  ["new","Ticket de guilde","Le chef peut financer un projet majeur avec le trésor. Les membres présents depuis 14 jours et ayant participé reçoivent un ticket. Le Pokémon exclusif sera dévoilé bientôt.","Guild ticket","The leader can fund a major project with the treasury. Members of 14 days who took part get a ticket. The exclusive Pokémon will be revealed soon."],
+  ["imp","Page de guilde toute neuve","Nouveau Quartier général sur toute la largeur de l'écran, avec les onglets Laboratoire et Boss mondial.","Brand new guild page","A new full-width headquarters, with the Lab and World boss tabs."],
+  ["imp","Rien n'est perdu","Trésor, bâtiments, niveau de guilde, bonus de la semaine et jours de flamme sont conservés. Les récompenses en attente de l'ancien boss arrivent dans ton courrier.","Nothing is lost","Treasury, buildings, guild level, weekly bonus and flame days are kept. Pending rewards from the old boss arrive in your mail."],
+  ["rem","Ancien boss de guilde","Le boss de guilde quotidien est remplacé par le boss mondial.","Old guild boss","The daily guild boss is replaced by the world boss."],
+  ["new","by Lauricus !","L'idée de cette refonte des guildes vient de Lauricus. Merci !","by Lauricus!","The idea for this guild rework comes from Lauricus. Thank you!"]]},
  {d:"2026-11-23",r:Date.UTC(2026,10,23,19,40,0),t:["Version 4.5.0 : Scarhino Émeraude, Lunala Aurore Boréale et cartes Céleste","Version 4.5.0: Emerald Heracross, Aurora Lunala and Celestial cards"],e:[["fix","Démarrage avec des cartes Céleste","Le jeu pouvait refuser de démarrer (« Cannot read properties of undefined ») quand on possédait une carte Céleste. C’est corrigé.","Startup with Celestial cards","The game could fail to start when you owned a Celestial card. Fixed."],["fix","Classements","Les classements se rechargent dès que tu ouvres l’onglet, et réessaient tout seuls si le serveur est lent.","Leaderboards","Leaderboards reload as soon as you open the tab, and retry on their own if the server is slow."],["imp","Numéro de version","L’écran de rechargement, le coin en haut à droite et les menus affichent maintenant la version 4.5.0.","Version number","The reload screen, the top-right corner and the menus now show version 4.5.0."],["imp","Wiki à jour","Nouvelle page « Mise à jour Aurore » dans le wiki : exclusifs, Constellation, cartes Céleste, Étoiles d’Or et nouvelles interfaces.","Wiki updated","New « Aurora update » wiki page: exclusives, Constellation, Celestial cards, Gold Stars and new interfaces."],["new","Nouveau menu","Sur ordinateur, un menu à gauche range tous les modes par famille. Le bouton « Ancien menu » remet l’ancien, et « Nouveau menu » le ramène.","New menu","On desktop, a left menu groups every mode by family. « Old menu » brings back the old one, « New menu » switches back."],["new","Nouvelle fiche Pokémon","La fiche est rangée en onglets : Puissance, Étoiles d’Or, Mutations, Statistiques, Entraînement, Objets, Attaques et Affinités.","New Pokémon sheet","The sheet now uses tabs: Power, Gold Stars, Mutations, Stats, Training, Items, Moves and Matchups."],["fix","Filtres des cartes Céleste","Les cartes Céleste respectent maintenant les filtres de la collection (possédées, doubles, masquer…).","Celestial card filters","Celestial cards now follow the collection filters (owned, duplicates, hide owned…)."],["fix","Total de l’album","Le total de l’album compte maintenant les 4 cartes Céleste.","Album total","The album total now counts the 4 Celestial cards."],
   ["new","Bouton « À réclamer »","Un seul bouton (à gauche) regroupe tout ce qui t'attend : quêtes, connexion, courrier, Quêtes Pokémon, Tower, cadeaux. Un clic et tu y vas.","“To claim” button","One button (on the left) gathers everything waiting for you: quests, login, mail, Pokémon quests, Tower, gifts. One click and you're there."],
   ["new","Pendant ton absence","Quand tu reviens après plus de 15 minutes, un écran résume ce que tes Pokémon ont gagné : pièces, K.O., captures, chromatiques, Étoiles d'Or, niveaux.","While you were away","When you come back after more than 15 minutes, a screen sums up what your Pokémon earned: coins, K.O., catches, shinies, Gold Stars, levels."],
@@ -16749,7 +16768,7 @@ function pidDiscordReminder(){if(document.hidden||$('pid-discord-reminder'))retu
 const PID_PAYPAL='https://paypal.me/cesmoibaba';
 const PID_HEART='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21C8 18 2 14 2 8.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 10 3.5C22 14 16 18 12 21Z"/></svg>';
 function pidSupportLinks(){if(!$('elite-support')){const a=document.createElement('a');a.id='elite-support';a.href=PID_PAYPAL;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',LS('Soutenir le jeu sur PayPal (nouvel onglet)','Support the game on PayPal (new tab)'));a.innerHTML=PID_HEART+'<b>'+LS('Soutenir','Support')+'<br>'+LS('le jeu','the game')+'</b>';document.body.appendChild(a)}const u=$('utl');if(u&&!$('pid-support-menu')){const a=document.createElement('a');a.id='pid-support-menu';a.className='qkb';a.href=PID_PAYPAL;a.target='_blank';a.rel='noopener noreferrer';a.innerHTML='<span class="qki" style="--c1:#f45b78;--c2:#8e183b">'+PID_HEART+'</span><span class="qkt"><b>'+LS('Soutenir le jeu','Support the game')+'</b><small>PayPal ↗</small></span>';u.appendChild(a)}}
-function pidCommunityLinks(){pidSupportLinks();if(!$('elite-discord')){const a=document.createElement('a');a.id='elite-discord';a.href=PID_DISCORD;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',LS('Rejoindre le Discord','Join Discord'));a.innerHTML=PID_DC_ICON+'<b>Discord</b><small>'+LS('Rejoindre','Join')+' ↗</small>';document.body.appendChild(a)}const u=$('utl');if(u&&!$('pid-release-menu')){const b=document.createElement('button');b.id='pid-release-menu';b.className='qkb';b.dataset.ud='open';b.innerHTML=`<span class="qki">${ico('star')}</span><span class="qkt"><b>Version 4.5.0</b><small>${LS('Les nouveautés','What’s new')}</small></span>`;u.appendChild(b)}}
+function pidCommunityLinks(){pidSupportLinks();if(!$('elite-discord')){const a=document.createElement('a');a.id='elite-discord';a.href=PID_DISCORD;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',LS('Rejoindre le Discord','Join Discord'));a.innerHTML=PID_DC_ICON+'<b>Discord</b><small>'+LS('Rejoindre','Join')+' ↗</small>';document.body.appendChild(a)}const u=$('utl');if(u&&!$('pid-release-menu')){const b=document.createElement('button');b.id='pid-release-menu';b.className='qkb';b.dataset.ud='open';b.innerHTML=`<span class="qki">${ico('star')}</span><span class="qkt"><b>Version 4.6.0</b><small>${LS('Les nouveautés','What’s new')}</small></span>`;u.appendChild(b)}}
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-pid]');if(!b)return;const k=b.dataset.pid;if(k==='release-open'||k==='release-close'){e.preventDefault();e.stopImmediatePropagation();$('hub')?.classList.remove('on');if(k==='release-open')pid111Open();else pidDialogClose('pid-release111')}},true);
 document.addEventListener('keydown',e=>{const o=$('pid-notifications')||$('pid-release111');if(!o)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();pidDialogClose(o.id)}else if(e.key==='Tab'){const items=[...o.querySelectorAll('button,input,a[href],[tabindex="0"]')].filter(x=>!x.disabled&&x.getClientRects().length),a=items[0],b=items.at(-1);if(e.shiftKey&&(document.activeElement===a||document.activeElement===o.querySelector('[role=dialog]'))){e.preventDefault();b?.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a?.focus()}}},true);
 pidCommunityLinks();setInterval(pidDiscordReminder,20*60*1000);setInterval(pidCommunityLinks,3000);
@@ -19093,7 +19112,7 @@ const RL=[
  {id:"sc",img:"shiny-charm",n:["Sceau Chromatique","Shiny Seal"],r:"m",p:25000,s:{s:30,m:25}},
  {id:"di",img:"rainbow-wing",n:["Plume du Créateur","Creator’s Feather"],r:"d",p:50000,s:{r:25}},
  {id:"ch",img:"red-chain",n:["Chaîne Rouge des Origines","Red Chain of Origins"],r:"o",p:150000,s:{d:120,c:50,k:30,s:20}}];
-const RL_WAYS=[["Boss Oméga vaincu","Omega boss defeated",6],["Boss Alpha vaincu","Alpha boss defeated",3],["Boss de guilde vaincu (récompenses récupérées)","Guild boss defeated (rewards claimed)",500],["Pokémon chromatique capturé","Shiny Pokémon caught",12],["Pokémon Alpha capturé","Alpha Pokémon caught",4],["Pokémon Oméga capturé","Omega Pokémon caught",6],["10 Pokémon sauvages vaincus","10 wild Pokémon defeated",1],["Invocation de la bannière normale","Normal banner summon",1]];
+const RL_WAYS=[["Boss Oméga vaincu","Omega boss defeated",6],["Boss Alpha vaincu","Alpha boss defeated",3],["Boss mondial de guilde vaincu (fin du combat)","Guild world boss defeated (end of battle)",2000],["Boss mondial de guilde encore vivant (fin du combat)","Guild world boss survived (end of battle)",800],["Pokémon chromatique capturé","Shiny Pokémon caught",12],["Pokémon Alpha capturé","Alpha Pokémon caught",4],["Pokémon Oméga capturé","Omega Pokémon caught",6],["10 Pokémon sauvages vaincus","10 wild Pokémon defeated",1],["Invocation de la bannière normale","Normal banner summon",1]];
 let RLF="all",RLV=0,RLC=null,RLANIM=0;
 const rlLv=id=>(G.rl&&G.rl[id])|0,rlMul=l=>1+.25*(Math.max(1,l)-1);
 const rlCost=x=>{const l=rlLv(x.id);return l==0?x.p:l>=RL_MAX?null:Math.round(x.p*1.5*Math.pow(RL_GR[x.r],l-1))};
@@ -20377,7 +20396,7 @@ const mnbName=t=>{try{if(t=="adv")return LS("Étages","Floors");const h=HUBM[t];
 const mnbIcon=t=>{try{const h=HUBM[t];const i=t=="adv"?6:h&&h[3];return i?`<img src="img/pokemon/${i}.png" alt="" loading="lazy">`:ico("spark")}catch(e){return""}};
 function mnbRender(){const el=document.getElementById("mnb");if(!el)return;const F=mnbFam(),cur=tab;if(!MNBX){const f=F.find(x=>x.t.includes(cur));MNBX=f?f.k:F[0]&&F[0].k}
  let rc=0;try{rc=typeof rcList=="function"?rcList().reduce((a,x)=>a+x.n,0):0}catch(e){}
- const h=`<div class="mnbh"><b>PokeIdleDex</b><small>v4.5.0</small></div><div class="mnbl">${F.map(f=>{const op=MNBX===f.k,act=f.t.includes(cur);
+ const h=`<div class="mnbh"><b>PokeIdleDex</b><small>v4.6.0</small></div><div class="mnbl">${F.map(f=>{const op=MNBX===f.k,act=f.t.includes(cur);
   return `<div class="mnbf${op?" op":""}${act?" act":""}" style="--c1:${f.c1};--c2:${f.c2}"><button type="button" class="mnbfh" data-mnbf="${f.k}"><span class="mnbi">${ico(f.ic)}</span><b>${f.n}</b>${f.t.length>1?`<i>${op?"▾":"▸"}</i>`:""}</button>
   ${op&&f.t.length>1?`<div class="mnbs">${f.t.map(t=>{let lk=0;try{lk=lockOf(t)}catch(e){}return `<button type="button" class="${t==cur?"on":""}${lk?" lk":""}" data-mnbt="${t}">${mnbIcon(t)}<span>${mnbName(t)}</span>${lk?`<em>${ico("lock")}</em>`:""}</button>`}).join("")}</div>`:""}</div>`}).join("")}</div>
   <div class="mnbft"><button type="button" class="mnbrc" data-mnbrc="1"><img src="img/items/master-ball.png" alt=""><span>${LS("À réclamer","To claim")}</span>${rc?`<em>${rc}</em>`:""}</button><div class="mnbx"></div><button type="button" class="mnboff" data-mnboff="1">${LS("Ancien menu","Old menu")}</button></div>`;
@@ -20447,4 +20466,419 @@ try{const HS="de810578a2089a16811e8413ec75ecacf8f5c48083d273bfa803fbe03298238c",
    setTimeout(()=>{try{alertFx(LS("SCARHINO ÉMERAUDE !","EMERALD HERACROSS!"),"#a3e635","shiny")}catch(e){}},200);
    return LS("Code accepté : Scarhino Émeraude"+(had?" (une copie de plus pour ses étoiles)":"")+" rejoint ta collection !","Code accepted: Emerald Heracross"+(had?" (one more copy for its stars)":"")+" joins your collection!")}
   return prev?prev(code):null}}catch(e){}
-}catch(e){console.warn("v4.0.0",e)}})()</script></body></html>
+}catch(e){console.warn("v4.0.0",e)}})()</script><style id="gdx-css">
+/* ===== Guildes : refonte (maquette A) ===== */
+.gdx,.gdx-two{--gi:#f2f9ff;--gs:#b9d4e8;--gl:#4d86ad;--gin:#0f2438;--gdp:#081624;--gy:#ffd23f;--gg:#7ef0a8}
+.gdx{display:flex;flex-direction:column;gap:20px;margin:18px 0;padding:20px;border-radius:26px;background:#0c1c2e radial-gradient(#1b3a58 2px,transparent 2px);background-size:26px 26px;color:var(--gi)}
+.gdx *{box-sizing:border-box;min-width:0}
+.gdx h2,.gdx h3,.gdx h4,.gdx p{margin:0;color:inherit}
+.gdx-px,.gdx-atk img{image-rendering:pixelated;object-fit:contain}
+.gdx-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.gdx-stat{display:flex;align-items:center;gap:14px;padding:12px 18px;background:#17304a;border:3px solid var(--gl);border-radius:18px;box-shadow:0 5px 0 var(--gdp)}
+.gdx-stat img{width:48px;height:48px;flex:none}
+.gdx-stat b{display:block;font:800 30px/1.05 'Baloo 2',sans-serif;color:var(--gy)}
+.gdx-stat:nth-child(2) b{color:var(--gg)}
+.gdx-stat small{display:block;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--gs)}
+.gdx-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.gdx-cols.gx-boss{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr)}
+.gdx-col{display:flex;flex-direction:column;gap:20px}
+.gdx-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.gdx-card{display:flex;flex-direction:column;gap:12px;padding:18px;background:#17304a;color:#f2f9ff;border:3px solid var(--gl);border-radius:22px;box-shadow:0 6px 0 var(--gdp)}
+.gdx-card.gx-gold{border-color:var(--gy)}.gdx-card.gx-good{border-color:var(--gg)}
+.gdx-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.gdx-h h3,.gdx-card h3{font:800 22px/1.15 'Baloo 2',sans-serif}
+.gdx-h p{font-size:13px;color:var(--gs);margin-top:2px}
+.gdx-big{font:800 32px/1 'Baloo 2',sans-serif;color:var(--gy);white-space:nowrap}
+.gdx-qline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;font-size:14px;font-weight:800}
+.gdx-qline span+span{color:var(--gs)}
+.gdx-note{font-size:13px;line-height:1.45;color:var(--gs)}
+.gdx-note.gx-good{color:var(--gg);font-weight:800}
+.gdx-bar{position:relative;display:block;height:12px;border-radius:9px;background:var(--gdp,#081624);border:2px solid #4d86ad;overflow:hidden;flex:none;width:100%}
+.gdx-bar i{display:block;height:100%;background:#5fd0ff;transition:width .35s}
+.gdx-bar.gx-ok i{background:#5ee08f}
+.gdx-card.gx-gold .gdx-bar.gx-big i{background:#ffd23f}.gdx-card.gx-gold .gdx-bar.gx-big.gx-ok i{background:#5ee08f}
+.gdx-bar.gx-big{height:26px;border-radius:13px}
+.gdx-bar.gx-hp i{background:linear-gradient(#ff8a7a,#e2453d)}
+.gdx-bar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 2px #000,0 0 4px #000;white-space:nowrap}
+.gdx button{font-family:inherit;cursor:pointer;transition:transform .1s}
+.gdx button:disabled{cursor:not-allowed;filter:saturate(.3) brightness(.85)}
+.gdx button:not(:disabled):hover{transform:translateY(-1px)}.gdx button:not(:disabled):active{transform:translateY(3px)}
+.gdx button:focus-visible,.gdx-atk button:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}
+.gdx-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;font:900 15px/1.2 Nunito,sans-serif;color:#2b1a00;background:#f4b53f;border:3px solid #fff3c4;border-radius:15px;box-shadow:0 5px 0 #8a5d09;text-align:center}
+.gdx-btn.gx-wide{width:100%}.gdx-btn.gx-huge{min-height:62px;font:800 22px/1.2 'Baloo 2',sans-serif}
+.gdx-btn.gx-alt{background:#2d5a80;color:#fff;border-color:#8fc4e8;box-shadow:0 5px 0 #081624}
+.gdx-btn.gx-up{width:100%;margin-top:auto;font-size:13px;background:#5ee08f;color:#062b14;border-color:#d6ffe5;box-shadow:0 4px 0 #1d7a44}
+.gdx-btn svg{width:18px;height:18px;flex:none}
+.gdx-btns{display:flex;gap:10px;flex-wrap:wrap}.gdx-btns .gdx-btn{flex:1 1 140px}
+.gdx-dons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gdx-don{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;color:#2b1a00;background:#f4b53f;border:3px solid #fff3c4;border-radius:16px;box-shadow:0 5px 0 #8a5d09;font-weight:900}
+.gdx-don b{font:800 24px/1.1 'Baloo 2',sans-serif}
+.gdx-don b,.gdx-don span{color:#2b1a00}.gdx-don span{font-size:13px;overflow-wrap:anywhere}.gdx .gdx-don small{display:block;font-size:11px;font-weight:800;color:#4a3200}
+.gdx-mal{padding:10px 12px;border-radius:12px;background:var(--gin,#0f2438);border:2px solid #4d86ad;font-size:13px;line-height:1.4;color:#b9d4e8}
+.gdx-mal.gx-on{border-color:#ff9d7a;color:#ffd0bf;font-weight:900}
+.gdx-teaser{display:flex;align-items:center;gap:14px}
+.gdx-teaser>div{flex:1}
+.gdx-teaser small{font-size:12px;letter-spacing:.07em;color:var(--gs)}
+.gdx-teaser p{font-size:14px;color:var(--gs);margin-top:4px}
+.gdx-teaser .gdx-bar{margin-top:6px}
+.gdx-teaser>img{flex:none}
+img.gdx-px.gx-lg{width:104px;height:104px}
+.gdx-px.gx-off{filter:grayscale(1) brightness(.7)}
+.gdx-vault{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;background:var(--gin);border:2px solid var(--gy);border-radius:16px}
+.gdx-vault img{width:44px;height:44px}.gdx-vault b{font:800 20px 'Baloo 2',sans-serif;color:var(--gy);white-space:nowrap}
+.gdx-blds{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.gdx-bld{display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--gin);border:3px solid #35688c;border-radius:16px}
+.gdx-bld.gx-lk{border-style:dashed;opacity:.75}.gdx-bld.gx-lk .gdx-bh img{filter:grayscale(1) brightness(.6)}
+.gdx-bh{display:flex;align-items:center;gap:10px}.gdx-bh img{width:60px;height:60px;flex:none}
+.gdx-bh b{display:block;font:800 16px/1.15 'Baloo 2',sans-serif;overflow-wrap:anywhere}.gdx-bh small{display:block;font-size:11px;color:#9ed8f5}
+.gdx-bld p{font-size:13px;color:var(--gg);font-weight:800}.gdx-bld.gx-lk p{color:var(--gs)}
+.gdx-bld p small{display:block;color:var(--gs);font-size:11px}
+.gdx-votes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gdx-vote{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;color:#f2f9ff;background:var(--gin);border:3px solid #35688c;border-radius:16px;box-shadow:0 4px 0 var(--gdp);text-align:center}
+.gdx-vote img{width:44px;height:44px}.gdx-vote b{font-size:14px;overflow-wrap:anywhere}.gdx-vote small{font-size:11px;color:var(--gs)}
+.gdx-vote.gx-lead{border-color:var(--gy)}.gdx-vote.gx-mine{background:#1f4d38;border-color:var(--gg)}
+.gdx-list{display:flex;flex-direction:column;gap:8px}
+.gdx-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--gin,#0f2438);border:2px solid #2c5879;border-radius:14px}
+.gdx-row.gx-me{border-color:#ffd23f;background:#2a3550}
+.gdx-rk{flex:none;width:26px;text-align:center;font:800 17px 'Baloo 2',sans-serif;color:#9ed8f5}
+.gdx-row.gx-g:nth-child(1) .gdx-rk{color:#ffd23f}
+.gdx-row .glx-av,.gdx-row .glx-em{flex:none}.gdx-row .glx-av{width:34px;height:34px}.gdx-row .glx-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.gdx-rmid{flex:1;display:flex;flex-direction:column;gap:4px}
+.gdx-rmid b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gdx-rmid small{font-size:11px;color:#b9d4e8}
+.gdx-rmid em{margin-left:6px;padding:1px 7px;border-radius:8px;background:#ffd23f;color:#2b1a00;font:900 10px Nunito,sans-serif;font-style:normal}
+.gdx-rv{flex:none;text-align:right}.gdx-rv b{display:block;font-size:14px;white-space:nowrap}.gdx-rv small{display:block;font-size:11px;color:#ffd23f}
+.gdx-bench{display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:3px dashed #35688c}
+.gdx-bench h4,.gdx-sub{font:800 15px 'Baloo 2',sans-serif;color:#9ed8f5}
+.gdx-bench .gdx-row{opacity:.82}
+.gdx-title{display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding:16px 20px;background:#17304a;border:3px solid var(--gl);border-radius:22px;box-shadow:0 6px 0 var(--gdp)}
+.gdx-title>img{flex:none}.gdx-title>div{flex:1 1 260px}.gdx-title>.gdx-count{flex:0 1 auto;margin-left:auto}
+.gdx-title small{font-size:12px;letter-spacing:.08em;color:#9ed8f5}
+.gdx-title h2{font:800 32px/1.1 'Baloo 2',sans-serif}
+.gdx-title p{font-size:14px;color:var(--gs)}
+.gdx-count{padding:10px 20px;background:var(--gin);border:2px solid var(--gl);border-radius:16px;text-align:center}
+.gdx-count b{display:block;font:800 28px/1.1 'Baloo 2',sans-serif;color:var(--gy);white-space:nowrap}
+.gdx-res{display:flex;flex-direction:column;gap:10px}
+.gdx-r{display:flex;align-items:center;gap:12px;width:100%;padding:12px;text-align:left;color:#f2f9ff;background:var(--gin);border:3px solid #35688c;border-radius:16px;box-shadow:0 4px 0 var(--gdp)}
+.gdx-r>img{width:56px;height:56px;flex:none}.gdx-r>div{flex:1;display:flex;flex-direction:column;gap:4px}
+.gdx-r b{display:flex;justify-content:space-between;gap:8px;font:800 18px 'Baloo 2',sans-serif}
+.gdx-r b em{font:900 12px Nunito,sans-serif;font-style:normal;color:var(--gy);white-space:nowrap}
+.gdx-r p{font-size:14px;font-weight:800}.gdx-r small{font-size:12px;color:var(--gs)}
+.gdx-r.gx-lead{border-color:var(--gy)}.gdx-r.gx-mine{background:#1f4d38;border-color:var(--gg)}
+.gdx .gdx-r:disabled{filter:saturate(.7)}
+.gdx-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:6px}
+.gdx-tabs button{padding:9px 2px;font-weight:900;font-size:12px;color:#f2f9ff;background:var(--gin);border:2px solid #35688c;border-radius:12px;overflow:hidden;text-overflow:ellipsis}
+.gdx-tabs button.gx-on{background:#f4b53f;color:#2b1a00;border-color:#fff3c4}
+.gdx-rws{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gdx-rw{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;background:#0f2438;border:2px solid #35688c;border-radius:16px;text-align:center}
+.gdx-rw>img{width:48px;height:48px}.gdx-rw>b{font:800 15px 'Baloo 2',sans-serif}
+.gdx-rw .qrw{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.gdx-tro{display:flex;flex-wrap:wrap;gap:10px}
+.gdx-tro span{display:flex;flex-direction:column;align-items:center;padding:8px 12px;background:var(--gin);border:2px solid var(--gy);border-radius:14px;text-align:center}
+.gdx-tro img{width:40px;height:40px}.gdx-tro small{font-size:11px;color:var(--gs)}
+.gdx-tk{display:flex;align-items:center;gap:14px}.gdx-tk>img{width:72px;height:72px;flex:none}
+.gdx-tk>div{flex:1;display:flex;flex-direction:column;gap:6px}.gdx-tk small{font-size:12px;color:var(--gs)}
+.gdx-check{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.gdx-check li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gs)}
+.gdx-check li.gx-y{color:var(--gg);font-weight:900}.gdx-check svg{width:18px;height:18px;flex:none}
+.gdx-card.gx-arena{align-items:center;text-align:center;border-color:#ff9d7a}
+.gdx-card.gx-arena>.gdx-bar,.gdx-card.gx-arena>.gdx-qline{align-self:stretch}
+.gdx-over{font-size:12px;letter-spacing:.1em;color:#ffc2ae}
+.gdx-card.gx-arena h2{font:800 40px/1 'Baloo 2',sans-serif}
+.gdx-sky{align-self:stretch;display:flex;align-items:center;justify-content:center;min-height:290px;border-radius:18px;border:3px solid #35688c;background:radial-gradient(ellipse at 50% 100%,#7a3f5e 0,#34285c 45%,#10213d 100%);overflow:hidden}
+.gdx-sky img{width:min(300px,90%);height:280px}.gdx-sky.gx-dead img{filter:grayscale(.85) brightness(.75)}
+.gdx-atkinfo{align-self:stretch;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gdx-atkinfo>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 6px;background:var(--gin);border:2px solid #35688c;border-radius:14px}
+.gdx-atkinfo small{font-size:11px;color:var(--gs)}.gdx-atkinfo b{font:800 22px 'Baloo 2',sans-serif;color:var(--gy)}
+.gdx-pips{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.gdx-pips i{width:16px;height:16px;border-radius:50%;background:var(--gdp);border:2px solid #4d86ad}.gdx-pips i.gx-on{background:#ffd23f;border-color:#fff3c4}
+.gdx-two{margin-top:0}
+.gdx>.gdx-two .gdx-card{height:100%}
+@keyframes gdxbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes gdxhop{0%,70%,100%{transform:translateY(0)}78%{transform:translateY(-12px)}86%{transform:translateY(0)}92%{transform:translateY(-4px)}}
+@keyframes gdxfloat{0%,100%{transform:translateY(6px) scale(1)}50%{transform:translateY(-10px) scale(1.03)}}
+.gdx-px.gx-bob{animation:gdxbob 2.4s ease-in-out infinite}.gdx-px.gx-hop{animation:gdxhop 3s ease-in-out infinite}.gdx-px.gx-float{animation:gdxfloat 3.4s ease-in-out infinite}
+/* combat de 20 secondes */
+.gdx-atk{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:14px;background:rgba(5,12,22,.9);overflow:auto}
+.gdx-atk *{box-sizing:border-box}
+.gdx-atkc{position:relative;display:flex;flex-direction:column;gap:10px;width:min(520px,100%);margin:auto;padding:18px;background:#17304a;color:#f2f9ff;border:4px solid #ff9d7a;border-radius:24px;box-shadow:0 8px 0 #081624;text-align:center;font-weight:800}
+.gdx-atkh{display:flex;justify-content:space-between;align-items:center;font:800 24px 'Baloo 2',sans-serif}.gdx-atkh span{color:#ffd23f}
+.gdx-atk .gdx-bar.gx-t i{background:#ffd23f;transition:width .2s linear}.gdx-atk .gdx-bar.gx-hp{height:26px;border-radius:13px}
+.gdx-hitzone{position:relative;display:flex;align-items:center;justify-content:center;height:min(300px,42vh);border:3px solid #35688c;border-radius:18px;background:radial-gradient(ellipse at 50% 100%,#7a3f5e 0,#34285c 45%,#10213d 100%);cursor:pointer;touch-action:manipulation;user-select:none;overflow:hidden;padding:0}
+.gdx-hitzone img{width:80%;height:90%;pointer-events:none}
+.gdx-hitzone.gx-h img{animation:gdxhit .18s}
+@keyframes gdxhit{30%{transform:translateX(-7px) scale(.96);filter:brightness(1.9)}70%{transform:translateX(5px)}}
+.gdx-hitzone em{position:absolute;top:42%;font:800 20px 'Baloo 2',sans-serif;font-style:normal;color:#fff;text-shadow:0 2px 3px #000,0 0 6px #e2453d;pointer-events:none;animation:gdxfly .8s ease-out forwards}
+@keyframes gdxfly{to{transform:translateY(-90px);opacity:0}}
+.gdx-atkd{font-size:18px}.gdx-atkd b{color:#ffd23f}
+.gdx-atkc>small{font-size:12px;color:#b9d4e8}
+.gdx-atkf{display:flex;flex-direction:column;align-items:center;gap:8px}.gdx-atkf:empty{display:none}
+.gdx-atkf>b{font:800 26px 'Baloo 2',sans-serif;color:#7ef0a8}.gdx-atkf>div{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.gdx-atk button.gdx-btn{min-height:44px;padding:8px 20px;font:900 15px Nunito,sans-serif;color:#2b1a00;background:#f4b53f;border:3px solid #fff3c4;border-radius:15px;box-shadow:0 5px 0 #8a5d09;cursor:pointer}
+.gdx-atk button.gdx-btn.gx-alt{background:#2d5a80;color:#fff;border-color:#8fc4e8;box-shadow:0 5px 0 #081624}
+@media(max-width:1250px){.gdx-cols,.gdx-cols.gx-boss{grid-template-columns:repeat(2,minmax(0,1fr))}.gdx-cols>.gdx-col:last-child{grid-column:1/-1}.gdx-cols.gx-boss>.gdx-col.gx-mid{order:-1;grid-column:1/-1}.gdx-cols.gx-boss>.gdx-col:last-child{grid-column:auto}}
+@media(max-width:820px){.gdx{padding:10px;gap:14px;border-radius:18px}.gdx-cols,.gdx-cols.gx-boss,.gdx-two{grid-template-columns:minmax(0,1fr)}.gdx-cols>.gdx-col,.gdx-cols.gx-boss>.gdx-col{grid-column:auto!important}.gdx-col{gap:14px}.gdx-card{padding:14px}.gdx-title>.gdx-count{margin-left:0;flex:1 1 100%}.gdx-title h2{font-size:26px}.gdx-card.gx-arena h2{font-size:32px}.gdx-sky{min-height:220px}.gdx-sky img{height:210px}}
+@media(max-width:430px){.gdx-votes,.gdx-atkinfo{gap:6px}.gdx-dons{gap:7px}.gdx-don b{font-size:20px}.gdx-don span{font-size:11px}.gdx-blds{grid-template-columns:repeat(2,minmax(0,1fr))}.gdx-bld{padding:8px}.gdx-bh{flex-direction:column;text-align:center;gap:4px}}
+@media(prefers-reduced-motion:reduce){.gdx-px,.gdx-hitzone.gx-h img,.gdx-hitzone em{animation:none!important}.gdx-bar i,.gdx button{transition:none}}
+</style><script>
+/* ===== Guildes : refonte (idée : Lauricus) — trésor et quotas, laboratoire et saisons, mini-boss, boss mondial, ticket ===== */
+try{(()=>{
+const T0=Date.UTC(2026,10,23),WK=6048e5,PREP=4*864e5,GRACE=9e5;
+const QH=12,QL=300,DAYH=4,ATK=4,ENDU=2,HPK=3.5,GOALPM=240,TKWAIT=14*864e5,TKMULT=280,SEC=20,NEED=.5;
+const MINI=[143,68,95,130,248,376,445,373,635,149];
+const WORLD=[384,249,250,150,483,484,487,643,644,646,716,717,791,792,800,888,889,890];
+const now=()=>Date.now();
+const cyc=t=>Math.max(0,Math.floor(((t==null?now():t)-T0)/WK));
+const cStart=c=>T0+c*WK,bStart=c=>cStart(c)+PREP,cEnd=c=>cStart(c+1);
+const isBoss=t=>{t=t==null?now():t;return t>=bStart(cyc(t))};
+const season=c=>Math.floor(c/4)+1,sFirst=s=>(s-1)*4,sEnd=s=>cStart(s*4);
+const day=()=>glDk(now());
+const pos=(v,max)=>{v=+v;return Number.isFinite(v)&&v>0?Math.min(v,max==null?Number.MAX_VALUE:max):0};
+const pts=(v,q)=>v>0?(v<q?100*v/q:100+5*Math.log2(v/q)):0;
+const WEI=i=>i<12?1:i<20?.3:0;
+const wsum=a=>a.slice().sort((x,y)=>y-x).reduce((s,p,i)=>s+p*WEI(i),0);
+const n1=v=>{const s=String(Math.round(v*10)/10);return SG.lang==="en"?s:s.replace(".",",")};
+const int=v=>fmt(Math.round(v));
+const worldSp=c=>WORLD[c%WORLD.length];
+const miniSp=()=>MINI[glH("mini"+day())%MINI.length];
+const wait=ms=>{ms=Math.max(0,ms);const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);return d?d+LS(" j "," d ")+h+" h":h?h+" h "+m+" min":m+" min"};
+
+/* ---------- état local (dans la sauvegarde) ---------- */
+function X(){const g=glS(),x=g.gdx||(g.gdx={});if(!Array.isArray(x.e))x.e=[];x.paid=x.paid||{};x.spaid=x.spaid||{};x.tro=x.tro||[];x.tk=x.tk||[];x.tkg=x.tkg||{};return x}
+const find=(c,gid)=>X().e.find(v=>v.c===c&&v.g===gid)||null;
+function ent(c,gid){const x=X();let e=find(c,gid);if(!e){e={c,g:gid,t:0,l:0,a:[],r:"",h:0,th:0};x.e.push(e);x.e.sort((a,b)=>a.c-b.c);while(x.e.length>8)x.e.shift()}if(!Array.isArray(e.a))e.a=[];return e}
+function pack(e){const o={c:e.c,g:e.g};if(e.t>0)o.t=Math.round(e.t*100)/100;if(e.l>0)o.l=Math.floor(e.l);if(e.a&&e.a.length)o.a=e.a.slice(0,6).map(a=>[a[0],Math.floor(a[1])]);if(e.r)o.r=e.r;if(e.h>0){o.h=Math.round(e.h);o.th=e.th}return o}
+/* le serveur refuse une fiche de plus de 16 Ko : celle d'un chef avec bannière est surveillée */
+{const o=glMyDoc;glMyDoc=function(){const d=o.apply(this,arguments);try{const x=X();d.gdx={e:x.e.map(pack),mi:x.mi||"",mg:x.mg||""};if(d.mod&&d.mod.brand)while(d.gdx.e.length>1&&JSON.stringify(d).length>15800)d.gdx.e.shift()}catch(e){}return d}}
+
+/* ---------- lecture des contributions de tout le monde ---------- */
+function rows(d){const a=d&&d.gdx&&d.gdx.e;if(!Array.isArray(a))return[];const seen={};return a.filter(e=>{if(!e||!Number.isInteger(e.c)||e.c<0||typeof e.g!="string"||!e.g)return false;const k=e.c+"|"+e.g;if(seen[k])return false;seen[k]=1;return true})}
+const rowOf=(m,c,gid)=>rows(m).find(e=>e.c===c&&e.g===gid)||null;
+const atks=e=>(Array.isArray(e&&e.a)?e.a:[]).slice(0,ATK+ENDU).filter(a=>Array.isArray(a)&&pos(a[0])>0).map(a=>[+a[0],pos(a[1])]);
+let CACHE={};
+const bust=()=>{CACHE={};GLX.st=null};
+function allDocs(){if(CACHE.docs&&now()-CACHE.t<1500)return CACHE.docs;const me=glMyDoc(),L=glSrc()=="on"?(GLX.all||GLX.docs||[]).filter(d=>d&&d.id!==me.id):[];L.push(me);CACHE={t:now(),docs:L,agg:{},st:{}};return L}
+function knownGuilds(){const s=new Set((GLX.gl||[]).map(x=>x.id)),g=glS();if(g.id)s.add(g.id);return s}
+function agg(c){const docs=allDocs();if(CACHE.agg[c])return CACHE.agg[c];const ok=glSrc()=="on"?knownGuilds():null,A={g:new Map(),hp:[]};
+ docs.forEach(d=>{rows(d).forEach(e=>{if(e.c!==c||ok&&!ok.has(e.g))return;let v=A.g.get(e.g);if(!v){v={t:[],l:[],ls:0,b:0,a:[]};A.g.set(e.g,v)}
+  const t=pos(e.t,28),l=pos(e.l,1e7);if(t)v.t.push(t);if(l){v.l.push(l);v.ls+=l}atks(e).forEach(a=>{v.b+=a[1];v.a.push(a)});
+  if(pos(e.h)>0&&atks(e).length)A.hp.push([pos(e.th)||9e12,pos(e.h),String(d.id)])})});
+ return CACHE.agg[c]=A}
+const median=a=>{const s=a.slice().sort((x,y)=>x-y),n=s.length;return n?(n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2):0};
+/* PV du boss mondial : médiane des 15 premières estimations (identique pour tous les joueurs) */
+const hpFrozen=A=>median(A.hp.slice().sort((a,b)=>a[0]-b[0]||a[2].localeCompare(b[2])).slice(0,15).map(x=>x[1]));
+function hpEst(){const t=now();let s=0;allDocs().forEach(d=>{if(d.g&&t-(+d.t||0)<5*864e5)s+=pos(d.ap)});return Math.max(1e7,Math.round(HPK*s))}
+/* résultat d'un combat : classement par dégâts, boss vaincu ou non, guilde du coup final */
+function result(c){const A=agg(c),hp=hpFrozen(A),list=[...A.g].map(([g,v])=>({g,b:v.b})).filter(x=>x.b>0).sort((a,b)=>b.b-a.b||a.g.localeCompare(b.g)),tot=list.reduce((s,x)=>s+x.b,0),dead=hp>0&&tot>=hp*(1-1e-9);
+ let fin=null;if(dead){const all=[];A.g.forEach((v,g)=>v.a.forEach(a=>all.push([a[0],a[1],g])));all.sort((x,y)=>x[0]-y[0]||x[2].localeCompare(y[2]));let s=0;for(const x of all){s+=x[1];if(s>=hp*(1-1e-9)){fin=x[2];break}}}
+ return{c,hp,tot,dead,list,fin}}
+/* classement d'une saison : chaque cycle est noté sur 1000 par activité (meilleure guilde = 1000) */
+function standings(s){const docs=allDocs();if(CACHE.st[s])return CACHE.st[s];const cur=cyc(),vc=Math.min(cur,sFirst(s)+3),M=new Map(),get=g=>{let v=M.get(g);if(!v){v={g,total:0,t:0,l:0,b:0}; M.set(g,v)}return v};
+ for(let c=sFirst(s);c<=vc;c++){const A=agg(c),R=[...A.g].map(([g,v])=>({g,t:wsum(v.t.map(h=>pts(h,QH))),l:wsum(v.l.map(n=>pts(n,QL))),b:v.b}));
+  const mt=Math.max(0,...R.map(r=>r.t)),ml=Math.max(0,...R.map(r=>r.l)),mb=Math.max(0,...R.map(r=>r.b));
+  R.forEach(r=>{const v=get(r.g),t=mt?1000*r.t/mt:0,l=ml?1000*r.l/ml:0,b=mb?1000*Math.sqrt(r.b/mb):0;v.total+=t+l+b;if(c===vc){v.t=t;v.l=l;v.b=b}})}
+ const g=glS();if(g.id&&!g.pend&&s===season(cur))get(g.id);
+ return CACHE.st[s]=[...M.values()].sort((a,b)=>b.total-a.total||a.g.localeCompare(b.g))}
+const guildOf=id=>{const e=(GLX.gl||[]).find(x=>x.id===id),g=glS();return e||(g.id===id?g.gd:null)||{id,n:LS("Guilde disparue","Disbanded guild"),tag:"?",em:{i:"shield",c:9}}};
+function guildName(id){try{const L=glState().L.find(x=>x.gd.id===id);if(L)return L.gd.n}catch(e){}return guildOf(id).n}
+function guildEm(id,sz){let em;try{const L=glState().L.find(x=>x.gd.id===id);em=L&&L.gd.em}catch(e){}return glEm(em||guildOf(id).em,sz||40)}
+
+/* ---------- ma guilde ---------- */
+function research(S){const M=S.mine,c=cyc(),gid=M.gd.id,votes={a:0,e:0,m:0};M.v.forEach(m=>{const e=rowOf(m,c,gid);if(e&&votes[e.r]!=null)votes[e.r]++});
+ let lead="a";["a","e","m"].forEach(k=>{if(votes[k]>votes[lead])lead=k});const A=agg(c).g.get(gid),caps=A?A.ls:0,goal=GOALPM*Math.max(1,M.v.length),done=caps>=goal;
+ return{votes,lead,caps,goal,done,act:done?lead:""}}
+const myAttacks=c=>X().e.filter(e=>e.c===c).reduce((s,e)=>s+(Array.isArray(e.a)?e.a.length:0),0);
+function atkInfo(S){const c=cyc(),R=research(S),max=ATK+(R.act==="e"?ENDU:0),used=myAttacks(c),A=agg(c).g.get(S.mine.gd.id),n=(A?A.a.length:0)+1;
+ const prev=c>0?result(c-1):null,fb=!!(prev&&prev.fin===S.mine.gd.id);let mult=1;if(R.act==="a")mult=1.5;else if(R.act==="m")mult=1+(Math.min(80,n)-1)/79;if(fb)mult*=1.1;
+ return{c,R,max,used,left:Math.max(0,max-used),n,fb,mult}}
+function mini(S){const M=S.mine,d=day(),gid=M.gd.id,hits=M.v.filter(m=>m.gdx&&m.gdx.mi===d&&m.gdx.mg===gid).length,need=Math.max(1,Math.ceil(M.v.length*NEED));
+ const x=X(),mine=x.mi===d&&x.mg===gid;return{sp:miniSp(),hits,need,done:hits>=need,mine,open:!isBoss()}}
+const inGuild=()=>{try{const S=glState();return S&&S.inG&&S.mine?S:null}catch(e){return null}};
+const loaded=()=>glSrc()=="on"&&!!(GLX.all&&GLX.ts);
+
+/* ---------- production, malus et dons ---------- */
+const malus=()=>{try{const m=G.gl&&G.gl.gdx&&G.gl.gdx.mal;return m&&Date.now()<m.u?Math.max(0,Math.min(.2,+m.p||0)):0}catch(e){return 0}};
+{const o=biFlags;biFlags=function(){o.apply(this,arguments);try{const m=malus();if(m>0)BIF.c*=1-m}catch(e){}}}
+function sample(){const x=X(),st=G.st|0;if(x.pst!==st){x.pst=st;x.ps=[]}const v=pos(G.ir)/(1-malus());if(v>0){x.ps=(x.ps||[]).concat([v]).slice(-30)}}
+/* production par seconde, sans le malus : le plus haut entre le passif et la médiane des revenus récents (les gros gains ponctuels ne comptent pas) */
+function prod(){let p=0;try{p=pos(passiveRate())}catch(e){}p/=(1-malus());const s=(X().ps||[]).slice().sort((a,b)=>a-b),m=s.length>=3?s[s.length>>1]:pos(G.ir)/(1-malus());return Math.max(p,m)}
+const share=M=>gvCap(M.lv)/DAYH;
+const costH=M=>Math.ceil(Math.max(prod()*3600,share(M)));
+const dayUsed=()=>{const d=X().day;return d&&d.d===day()?d.h:0};
+function donate(h){const S=inGuild();if(!S){toast(LS("Rejoins une guilde d'abord.","Join a guild first."));return}h=h|0;const x=X(),g=glS(),d=day();if(!x.day||x.day.d!==d)x.day={d,h:0};
+ if(h<1||h>DAYH-x.day.h){toast(LS("Tu as atteint la limite de 4 h par jour.","You reached the 4 h daily limit."));return}
+ const cost=costH(S.mine)*h,credit=Math.floor(share(S.mine)*h);if(!(G.m>=cost)){toast(LS("Pas assez de pièces.","Not enough coins."));try{sfx("err")}catch(e){}return}
+ G.m-=cost;g.dt=(g.dt||0)+credit;if(g.ddk!==d){g.ddk=d;g.dv=0}g.dv=(g.dv||0)+credit;ent(cyc(),g.id).t+=h;x.day.h+=h;g.x2=(g.x2||0)+10*h;x.mal={p:Math.min(.2,.05*x.day.h),u:now()+72e5};
+ gvActive();try{recomp()}catch(e){}bust();save();glPush(1);toast(LS("Don de "+h+" h : +"+fmt(credit)+" au trésor.","Donated "+h+" h: +"+fmt(credit)+" to the treasury."));try{sfx("coin")}catch(e){}glRefresh(1)}
+
+/* ---------- captures pour le laboratoire ---------- */
+function trackLab(){const g=glS(),x=X(),v=+G.caps||0;if(x.cap==null||!g.id||g.pend){x.cap=v;return}const d=v-x.cap;if(d<=0){x.cap=v;return}const S=inGuild();if(!S)return;x.cap=v;if(isBoss())return;
+ ent(cyc(),g.id).l+=Math.min(d,5000)*(mini(S).done?2:1);CACHE={}}
+{const o=glTrack;glTrack=function(){o.apply(this,arguments);try{trackLab()}catch(e){}}}
+function newMember(){const x=X();x.cap=+G.caps||0;x.mig=1;bust()}
+{const o=glJoin;glJoin=function(){const had=glS().id;const r=o.apply(this,arguments);try{if(!had&&glS().id){newMember();save()}}catch(e){}return r}}
+{const o=glCreate;glCreate=function(){const had=glS().id;const r=o.apply(this,arguments);try{if(!had&&glS().id){newMember();save()}}catch(e){}return r}}
+
+/* ---------- vote de recherche et mini-boss ---------- */
+function vote(k){const S=inGuild();if(!S||!["a","e","m"].includes(k))return;if(isBoss()){toast(LS("Le vote est fermé pendant le combat.","Voting is closed during the battle."));return}ent(cyc(),S.mine.gd.id).r=k;gvActive();bust();save();glPush(1);glRefresh(1)}
+function hitMini(){const S=inGuild();if(!S)return;const m=mini(S);if(!m.open||m.mine)return;const x=X(),g=glS();x.mi=day();x.mg=g.id;g.x2=(g.x2||0)+10;gvActive();bust();save();glPush(1);
+ const m2=mini(inGuild()||S);toast(m2.done?LS(nm(m.sp)+" est vaincu : chaque capture compte double aujourd'hui !",nm(m.sp)+" is defeated: every catch counts double today!"):LS("Touché ! Encore "+(m2.need-m2.hits)+" coup(s) de la guilde.","Hit! "+(m2.need-m2.hits)+" more hit(s) from the guild."));try{sfx("big")}catch(e){}glRefresh(1)}
+
+/* ---------- attaque du boss mondial (20 secondes) ---------- */
+let RUN=null;
+function attack(){if(RUN)return;let S=inGuild();if(!S)return;if(!isBoss()){toast(LS("Le combat mondial commence vendredi.","The world battle starts on Friday."));return}
+ if(glSrc()!="on"){toast(LS("Le combat mondial demande une connexion au serveur.","The world battle needs a server connection."));return}
+ if(!loaded()){toast(LS("Chargement du combat mondial… réessaie dans un instant.","Loading the world battle… try again in a moment."));glFetch(1);return}
+ if(!ids().length)return;bust();S=inGuild();if(!S)return;const I_=atkInfo(S);if(I_.left<=0){toast(LS("Tu as utilisé tous tes essais pour ce combat.","You used all your attempts for this battle."));return}
+ glPwC=[0,0];const pw=glPw(),gid=S.mine.gd.id,c=I_.c,e=ent(c,gid);if(!(e.h>0)){e.h=hpFrozen(agg(c))||hpEst();e.th=Math.floor(now()/1000)}
+ const rec=[Math.floor(now()/1000),0];e.a.push(rec);bust();save();glPush(1);
+ const sp0=worldSp(c),R=RUN={t0:now(),tot:0,hit:pw*.4*I_.mult,done:0,last:0,saved:now()};
+ const el=R.el=document.createElement("div");el.className="gdx-atk";el.innerHTML=`<div class="gdx-atkc"><div class="gdx-atkh"><b>${esc(nm(sp0))}</b><span><b id="gdxT">${SEC}</b> s</span></div><div class="gdx-bar gx-t"><i id="gdxTb" style="width:100%"></i></div><button type="button" class="gdx-hitzone" id="gdxB" aria-label="${LS("Frapper","Hit")}"><img src="${IMG+sp0+".png"}" alt=""></button><div class="gdx-bar gx-hp"><i id="gdxH"></i><span id="gdxHt"></span></div><div class="gdx-atkd">${LS("Tes dégâts","Your damage")} : <b id="gdxD">0</b></div><small>${LS("Tes Pokémon frappent seuls. Touche le boss pour frapper plus fort.","Your Pokémon attack on their own. Tap the boss to hit harder.")}${I_.mult>1?` · ${LS("multiplicateur","multiplier")} ×${n1(Math.round(I_.mult*100)/100)}`:""}</small><div class="gdx-atkf" id="gdxF"></div></div>`;
+ document.body.appendChild(el);
+ const q=s=>el.querySelector(s);
+ const upd=()=>{let hp=0,tot=0;try{const r=result(c);hp=r.hp;tot=r.tot}catch(x){}const left=Math.max(0,hp-tot);q("#gdxH").style.width=(hp?left/hp*100:100)+"%";q("#gdxHt").textContent=left>0?fmt(left)+" / "+fmt(hp):LS("Boss vaincu ! Les coups comptent toujours.","Boss defeated! Hits still count.");q("#gdxD").textContent=fmt(R.tot)};
+ const hit=manual=>{if(R.done)return;if(manual){if(now()-R.last<80)return;R.last=now()}const v=Math.max(1,Math.floor(R.hit*(.8+.4*Math.random())));R.tot+=v;rec[1]=R.tot;CACHE={};
+  const z=q("#gdxB");z.classList.remove("gx-h");void z.offsetWidth;z.classList.add("gx-h");const f=document.createElement("em");f.textContent="-"+fmt(v);f.style.left=(25+Math.random()*50)+"%";z.appendChild(f);setTimeout(()=>f.remove(),800);upd();if(now()-R.saved>6000){R.saved=now();save();glPush(1)}};
+ const end=()=>{if(R.done)return;R.done=1;clearInterval(R.iv);clearInterval(R.tm);const g=glS();g.x2=(g.x2||0)+20;gvActive();bust();save();glPush(1);
+  const S2=inGuild(),left=S2&&isBoss()&&cyc()===c?atkInfo(S2).left:0;q("#gdxT").textContent="0";q("#gdxTb").style.width="0%";upd();
+  q("#gdxF").innerHTML=`<b>${LS("Terminé !","Done!")}</b><span>${LS("Dégâts pour ta guilde : ","Damage for your guild: ")}${fmt(R.tot)}</span><div>${left>0?`<button class="gdx-btn" data-gdx="again">${LS("Réattaquer","Attack again")} (${left})</button>`:""}<button class="gdx-btn gx-alt" data-gdx="close">${LS("Fermer","Close")}</button></div>`;try{sfx("big")}catch(x){}};
+ el.addEventListener("pointerdown",ev=>{if(ev.target.closest("#gdxB")){ev.preventDefault();hit(1)}});
+ el.addEventListener("click",ev=>{if(ev.detail===0&&ev.target.closest("#gdxB"))hit(1)});
+ R.iv=setInterval(()=>hit(0),400);
+ R.tm=setInterval(()=>{const left=Math.max(0,SEC-(now()-R.t0)/1000);q("#gdxT").textContent=Math.ceil(left);q("#gdxTb").style.width=(left/SEC*100)+"%";if(left<=0)end()},200);
+ upd()}
+function closeAtk(){if(!RUN||!RUN.done)return;RUN.el.remove();RUN=null;glRefresh(1)}
+
+/* ---------- ticket Pokémon de guilde (payé par le trésor) ---------- */
+const tkState=M=>{const t=M.lead&&M.lead.mod&&M.lead.mod.tk;return t&&typeof t=="object"?t:null};
+function tkView(M){const s=season(cyc()),t=tkState(M),over=t&&t.done&&t.s<s,p=!t||over?0:pos(t.p),need=!t||over?Math.round(TKMULT*gvCap(M.lv)):pos(t.need)||Math.round(TKMULT*gvCap(M.lv));return{s,p,need,done:!!(t&&t.done&&!over),pct:need?Math.min(100,p/need*100):0}}
+function fund(frac){const S=inGuild();if(!S||!S.isLead){toast(LS("Seul le chef peut verser le trésor.","Only the leader can spend the treasury."));return}const M=S.mine,g=glS(),V=tkView(M);if(V.done){toast(LS("Projet déjà terminé pour cette saison.","Project already completed this season."));return}
+ const vault=gvVault(M),amt=Math.floor(Math.min(V.need-V.p,vault*Math.max(0,Math.min(1,frac))));if(!(amt>0)){toast(LS("Le trésor est vide.","The treasury is empty."));return}
+ const p=V.p+amt;g.mod=g.mod||{acc:[],kick:[]};g.mod.sp=(g.mod.sp||0)+amt;g.mod.tk={s:V.s,need:V.need,p,done:p>=V.need-.5?now():0};if(g.mod.tk.done)g.mod.ev=(g.mod.ev||[]).filter(e=>now()-e.t<6048e5).slice(-11).concat([{t:now(),tk:1}]);
+ bust();save();glPush(1);toast(g.mod.tk.done?LS("Projet terminé ! Les membres éligibles reçoivent leur ticket.","Project completed! Eligible members get their ticket."):LS("+"+fmt(amt)+" versés au projet.","+"+fmt(amt)+" added to the project."));glRefresh(1)}
+const partSeason=(s,gid)=>X().e.some(e=>season(e.c)===s&&e.g===gid&&(e.t>0||e.l>0||e.a&&e.a.length));
+function tkGrant(){const S=inGuild();if(!S||!loaded())return;const t=tkState(S.mine);if(!t||!t.done)return;const x=X(),g=glS(),key="s"+t.s;if(x.tkg[key]||!(g.jd>0&&g.jd<=t.done-TKWAIT)||!partSeason(t.s,g.id))return;
+ x.tkg[key]=1;x.tk.push({s:t.s,g:g.id,t:now()});mailAdd(LS("Ticket Pokémon de guilde","Guild Pokémon ticket"),LS("Guilde","Guild"),[],LS("Ta guilde a terminé son projet majeur : ton ticket est gardé dans la guilde (onglet Boss mondial). Le Pokémon exclusif sera dévoilé bientôt.","Your guild completed its major project: your ticket is kept in the guild (World boss tab). The exclusive Pokémon will be revealed soon."));save();toast(LS("Tu as obtenu un Ticket Pokémon de guilde !","You got a Guild Pokémon ticket!"))}
+
+function fundAsk(){const S=inGuild();if(!S||!S.isLead)return;const V=tkView(S.mine),amt=Math.floor(Math.min(V.need-V.p,gvVault(S.mine)));if(!(amt>0)){toast(LS("Le trésor est vide.","The treasury is empty."));return}
+ glModal(`<h2>${LS("Verser au projet ?","Add to the project?")}</h2><p class="glx-p">${LS(fmt(amt)+" ₽ du trésor iront au Ticket de guilde. Ils ne serviront plus aux bâtiments.",fmt(amt)+" ₽ from the treasury will go to the Guild ticket. They can no longer pay for buildings.")}</p><div class="glx-ft"><button data-gl="mc">${LS("Annuler","Cancel")}</button><button class="go" data-gdx="fundok">${LS("Verser","Add")}</button></div>`)}
+
+/* ---------- récompenses (envoyées au courrier) ---------- */
+const it=(k,n)=>["i",k,n],gm=n=>["g",n];
+const RW_WIN=[[gm(40),it("master-ball",3),it("gold-bottle-cap",3),it("ability-patch",2)],[gm(30),it("master-ball",2),it("gold-bottle-cap",2),it("ability-patch",1)],[gm(20),it("master-ball",1),it("gold-bottle-cap",2),it("ability-patch",1)],[gm(12),it("dream-ball",15),it("gold-bottle-cap",1)]];
+const RW_LOSE=[[gm(15),it("master-ball",1),it("gold-bottle-cap",1),it("dream-ball",10)],[gm(12),it("gold-bottle-cap",1),it("dream-ball",10)],[gm(10),it("dream-ball",10)],[gm(6),it("dream-ball",5)]];
+const RW_SEASON=[[gm(150),it("master-ball",5),it("gold-bottle-cap",5),it("ability-patch",3)],[gm(100),it("master-ball",3),it("gold-bottle-cap",3),it("ability-patch",2)],[gm(70),it("master-ball",2),it("gold-bottle-cap",2),it("ability-patch",1)],[gm(30),it("gold-bottle-cap",1),it("dream-ball",10)]];
+const RELIC={win:2000,lose:800};
+const tier=r=>r>=1&&r<=3?r-1:3;
+const copyRw=a=>a.map(r=>r.slice());
+const rankTxt=r=>r?LS(r+(r===1?"re":"e")+" place","rank #"+r):LS("participant","participant");
+function pendingSettle(){const x=X(),cur=cyc(),t=now(),C=[],Se=[];
+ x.e.forEach(e=>{if(e.c<cur&&e.c>=cur-5&&!x.paid["c"+e.c]&&e.a&&e.a.length&&t>cEnd(e.c)+GRACE&&!C.includes(e.c))C.push(e.c);const s=season(e.c);if(s<season(cur)&&s>=season(cur)-1&&!x.spaid["s"+s]&&t>sEnd(s)+GRACE&&(e.t>0||e.l>0||e.a&&e.a.length)&&!Se.includes(s))Se.push(s)});
+ return{C,S:Se}}
+function settle(){const P=pendingSettle();if(!P.C.length&&!P.S.length||glSrc()!="on")return;const x=X(),g=glS();
+ const need=Math.max(0,...P.C.map(c=>cEnd(c)+GRACE),...P.S.map(s=>sEnd(s)+GRACE));if(!(loaded()&&GLX.ts>need)){glFetch(1);return}
+ bust();
+ P.C.forEach(c=>{const mine=x.e.filter(e=>e.c===c&&e.a&&e.a.length).sort((a,b)=>b.a.reduce((s,v)=>s+v[1],0)-a.a.reduce((s,v)=>s+v[1],0))[0];x.paid["c"+c]=1;if(!mine||!mine.a.some(v=>v[1]>0))return;
+  const R=result(c),rank=R.list.findIndex(v=>v.g===mine.g)+1,rw=copyRw((R.dead?RW_WIN:RW_LOSE)[tier(rank)]);
+  mailAdd(R.dead?LS("Boss mondial vaincu","World boss defeated"):LS("Boss mondial : fin du combat","World boss: battle over"),LS("Guilde","Guild"),rw,LS(nm(worldSp(c))+" · ta guilde finit "+(rank?"à la "+rankTxt(rank):"parmi les participants")+(R.fin===mine.g?" et a porté le coup final (+10 % au prochain combat)":"")+".",nm(worldSp(c))+" · your guild finished "+rankTxt(rank)+(R.fin===mine.g?" and dealt the final blow (+10% next battle)":"")+"."));
+  try{rlGain(R.dead?RELIC.win:RELIC.lose)}catch(e){}if(g.id===mine.g)g.x2=(g.x2||0)+(R.dead?150:60);toast(LS("Récompenses du boss mondial dans ton courrier.","World boss rewards are in your mail."))});
+ P.S.forEach(s=>{x.spaid["s"+s]=1;const mine=x.e.filter(e=>season(e.c)===s&&(e.t>0||e.l>0||e.a&&e.a.length)).sort((a,b)=>b.c-a.c)[0];if(!mine)return;const st=standings(s),rank=st.findIndex(v=>v.g===mine.g)+1,name=guildName(mine.g);
+  mailAdd(LS("Fin de la saison de guilde "+s,"Guild season "+s+" over"),LS("Guilde","Guild"),copyRw(RW_SEASON[tier(rank)]),LS("["+name+"] termine "+(rank?"à la "+rankTxt(rank):"parmi les participants")+". La saison "+(s+1)+" commence.","["+name+"] finished "+rankTxt(rank)+". Season "+(s+1)+" begins."));
+  x.tro=x.tro.filter(v=>v.s!==s).concat([{s,r:rank,n:name}]).slice(-24);toast(LS("Récompenses de saison dans ton courrier.","Season rewards are in your mail."))});
+ bust();save();try{glPush(1)}catch(e){}}
+/* passage à la nouvelle version : les récompenses de l'ancien boss ne sont pas perdues */
+function migrate(){const x=X();if(x.mig)return;const S=inGuild();if(!S||!loaded()||!S.boss)return;const g=glS(),B=S.boss;let pend=[];try{pend=gvPend()}catch(e){}x.mig=1;
+ if(pend.length){try{glClaimBoss()}catch(e){}}
+ if(g.bd2&&g.bd2[B.k]>0)mailAdd(LS("Nouvelle version des guildes","New guild version"),LS("Guilde","Guild"),[gm(10),it("dream-ball",10)],LS("L'ancien boss de guilde laisse sa place au boss mondial. Merci d'avoir combattu : voici un cadeau pour tes dégâts sur le dernier boss.","The old guild boss gives way to the world boss. Thanks for fighting: here is a gift for your damage on the last boss."));save()}
+
+/* ---------- pastilles ---------- */
+function dot(){const S=inGuild();if(!S)return false;if(isBoss())return atkInfo(S).left>0&&ids().length>0;return !mini(S).mine}
+const labDot=()=>{const S=inGuild();if(!S||isBoss())return false;const e=find(cyc(),S.mine.gd.id);return !(e&&e.r)};
+gvReady=function(){const g=glS();if(!g.id||g.pend)return false;const S=inGuild();if(!S)return false;if(dot())return true;return glChals(S.mine).some(c=>c.done&&!g.cl[c.id]&&c.mine>0)};
+
+/* ---------- interface ---------- */
+const img=(src,cls,alt)=>`<img class="gdx-px ${cls||""}" src="${src}" alt="${alt?esc(alt):""}" onerror="this.style.visibility='hidden'">`;
+const poke=(id,cls)=>img(IMG+id+".png",cls,nm(id));
+const item=(k,cls)=>img(ITM+k+".png",cls);
+const bar=(p,cls,txt)=>`<div class="gdx-bar ${cls||""}"><i style="width:${Math.max(0,Math.min(100,p)).toFixed(1)}%"></i>${txt!=null?`<span>${txt}</span>`:""}</div>`;
+const card=(body,cls)=>`<section class="gdx-card ${cls||""}">${body}</section>`;
+const head=(t,sub,right)=>`<div class="gdx-h"><div><h3>${t}</h3>${sub?`<p>${sub}</p>`:""}</div>${right||""}</div>`;
+const stat=(v,l,ic)=>`<div class="gdx-stat">${ic||""}<div><b>${v}</b><small>${l}</small></div></div>`;
+const daysLeft=()=>Math.max(1,Math.ceil((cEnd(cyc())-now())/864e5));
+function ranked(S,key,q){const M=S.mine,c=cyc();return M.v.map(m=>{const e=rowOf(m,c,M.gd.id),v=pos(e&&e[key],key==="t"?28:1e7);return{m,v,p:pts(v,q)}}).sort((a,b)=>b.p-a.p||(a.m.id===S.me?-1:b.m.id===S.me?1:0)).map((r,i)=>(r.rank=i+1,r.w=WEI(i),r))}
+function memberList(S,R,q,unit){const line=r=>`<div class="gdx-row ${r.m.id===S.me?"gx-me":""}"><span class="gdx-rk">${r.rank}</span>${glAvT(r.m)}<div class="gdx-rmid"><b>${esc(r.m.n)}${r.m.id===S.me?`<em>${LS("MOI","ME")}</em>`:""}</b>${bar(r.v/q*100,r.v>=q?"gx-ok":"")}</div><span class="gdx-rv"><b>${unit(r.v)}</b><small>${n1(r.p*r.w)} pts</small></span></div>`;
+ const top=R.slice(0,12),bench=R.slice(12);return `<div class="gdx-list">${top.map(line).join("")}</div>${bench.length?`<div class="gdx-bench"><h4>${LS("Banc · compte à 30 %","Bench · counts at 30%")}</h4><div class="gdx-list">${bench.map(line).join("")}</div></div>`:""}`}
+const hrs=h=>n1(h)+" h";
+
+/* ----- Quartier général : trésor ----- */
+function vHome(S){gvActive();const M=S.mine,g=glS(),c=cyc(),R=ranked(S,"t",QH),total=R.reduce((s,r)=>s+r.p*r.w,0),done=R.filter(r=>r.v>=QH).length,me=R.find(r=>r.m.id===S.me)||{v:0,p:0,rank:R.length,w:0},used=dayUsed(),left=DAYH-used,cost=costH(M),sh=share(M),mal=malus(),x=X(),B=isBoss();
+ const quota=card(`${head(LS("Mon quota de la semaine","My weekly quota"),"",`<b class="gdx-big">${n1(me.p)} pts</b>`)}<div class="gdx-qline"><span>${hrs(me.v)} ${LS("données sur","given out of")} ${QH} h</span><span>${LS("Rang","Rank")} ${me.rank} · ${LS("compte à","counts at")} ${Math.round(me.w*100)} %</span></div>${bar(me.v/QH*100,"gx-big "+(me.v>=QH?"gx-ok":""))}<p class="gdx-note">${me.v>=QH?LS("Quota atteint : les heures en plus rapportent beaucoup moins.","Quota reached: extra hours earn much less."):LS("Encore "+n1(QH-me.v)+" h pour atteindre 100 points.",n1(QH-me.v)+" h left to reach 100 points.")}</p>`,"gx-gold");
+ const give=card(`${head(LS("Donner au trésor","Donate to the treasury"),LS("En heures de ta production · maximum 4 h par jour","In hours of your production · max 4 h per day"))}<div class="gdx-dons">${[1,2,4].map(h=>{const off=h>left,no=!off&&!(G.m>=cost*h);return `<button type="button" class="gdx-don" data-gdx="don:${h}" ${off||no?"disabled":""}><b>+${h} h</b><span>${fmt(cost*h)} ₽</span><small>${no?LS("Pas assez de pièces","Not enough coins"):"−"+Math.min(20,(used+h)*5)+" % "+LS("de pièces","coins")}</small></button>`}).join("")}</div><div class="gdx-qline"><span>${LS("Aujourd'hui","Today")} : ${used} h / ${DAYH} h</span><span>${LS("1 h = +","1 h = +")}${fmt(sh)} ${LS("au trésor","to the treasury")}</span></div>${bar(used/DAYH*100)}<div class="gdx-mal ${mal?"gx-on":""}">${mal?LS("Malus : −"+Math.round(mal*100)+" % de pièces pendant encore "+wait(x.mal.u-now()),"Penalty: −"+Math.round(mal*100)+"% coins for another "+wait(x.mal.u-now())):LS("Chaque don : −5 % de pièces par heure donnée dans la journée (20 % maximum), pendant 2 h.","Each donation: −5% coins per hour given today (20% max), for 2 h.")}</div>`);
+ const m=mini(S),I_=atkInfo(S),R2=result(c),sp0=B?worldSp(c):m.sp;
+ const goBoss=card(`<div class="gdx-teaser">${poke(sp0,"gx-hop gx-lg")}<div><small>${B?LS("BOSS MONDIAL EN COURS","WORLD BOSS LIVE"):LS("MINI-BOSS DU JOUR","DAILY MINI-BOSS")}</small><h3>${esc(nm(sp0))}</h3><p>${B?I_.left+" "+LS("essai(s) restant(s)","attempt(s) left")+(R2.dead?" · "+LS("vaincu","defeated"):""):m.done?LS("Vaincu : captures doublées aujourd'hui","Defeated: catches doubled today"):m.hits+" / "+m.need+" "+LS("coups de la guilde","guild hits")}</p></div></div><button type="button" class="gdx-btn gx-wide" data-gl="tab:boss">${B?LS("Aller au combat","Go to battle"):m.mine?LS("Voir le boss mondial","See the world boss"):LS("Frapper le mini-boss","Hit the mini-boss")}</button>`,"gx-boss");
+ const vault=gvVault(M);
+ const blds=card(`${head(LS("Bâtiments","Buildings"),LS("Payés avec le trésor · achat réservé au chef","Paid with the treasury · leader only"),`<div class="gdx-vault">${poke(113,"gx-bob")}<b>${fmt(vault)} ₽</b></div>`)}<div class="gdx-blds">${GV_B.map(b=>{const n=gvLv(b[0],M),lock=M.lv<b[3],price=gvPrice(b,n),max=n>=GV_MAXB,cap=!max&&n>=M.lv,ok=!lock&&!max&&!cap&&vault>=price;
+  return `<div class="gdx-bld ${lock?"gx-lk":""}"><div class="gdx-bh">${poke(b[6],ok?"gx-hop":"")}<div><b>${LS(b[1],b[2])}</b><small>${LS("NIVEAU","LEVEL")} ${n} / ${GV_MAXB}</small></div></div>${bar(n/GV_MAXB*100)}<p>${lock?LS("Se débloque au niveau "+b[3]+" de la guilde","Unlocks at guild level "+b[3]):"+"+gvPc(n*b[5])+" "+LS(b[7],b[8])}${!lock&&!max?`<small>${LS("Niveau suivant","Next level")} : +${gvPc((n+1)*b[5])} %</small>`:""}</p>${lock?`<button type="button" class="gdx-btn gx-up" disabled>${ico("lock")} ${LS("Verrouillé","Locked")}</button>`:max?`<button type="button" class="gdx-btn gx-up" disabled>${LS("Niveau maximum","Max level")}</button>`:cap?`<button type="button" class="gdx-btn gx-up" disabled>${LS("Monte d'abord la guilde","Level up the guild first")}</button>`:S.isLead?`<button type="button" class="gdx-btn gx-up" data-gv="buy:${b[0]}" ${ok?"":"disabled"}>${ok?LS("Améliorer","Upgrade")+" · "+fmt(price):LS("Manque ","Missing ")+fmt(price-vault)}</button>`:`<button type="button" class="gdx-btn gx-up" disabled>${LS("Chef","Leader")} · ${fmt(price)}</button>`}</div>`}).join("")}</div>`);
+ const v=gvVoteOf(M),my=g.vt&&g.vt.wk==glWk(now())?g.vt.k:"",VI={c:"amulet-coin",d:"rare-candy",k:"poke-ball"};
+ const votes=card(`${head(LS("Bonus de la semaine · vote","Weekly bonus · vote"),LS("Un vote par membre. L'option en tête profite à toute la guilde.","One vote per member. The leading option applies to the whole guild."))}<div class="gdx-votes">${GV_VOTES.map(([k,a,b])=>`<button type="button" class="gdx-vote ${my===k?"gx-mine":""} ${v.best===k?"gx-lead":""}" data-gv="vote:${k}">${item(VI[k],"gx-bob")}<b>${LS(a,b).replace(/ %/g,"\u00a0%")}</b><small>${v.n[k]} ${LS("vote(s)","vote(s)")}${my===k?" · "+LS("mon vote","my vote"):""}</small></button>`).join("")}</div>`);
+ const contrib=card(`${head(LS("Contributions","Contributions"),LS("Les 12 meilleurs comptent à 100 %, les 8 suivants à 30 %","Top 12 count 100%, next 8 count 30%"))}${memberList(S,R,QH,hrs)}`);
+ const ch=glChals(M).filter(k=>k.per==="w"),feed=glFeed(M);
+ return `<div class="gdx"><div class="gdx-stats">${stat(int(total),LS("SCORE DU TRÉSOR CETTE SEMAINE","TREASURY SCORE THIS WEEK"),item("amulet-coin"))}${stat(done+" / "+M.v.length,LS("QUOTAS ATTEINTS · ","QUOTAS REACHED · ")+daysLeft()+LS(" JOUR(S) RESTANT(S)"," DAY(S) LEFT"),item("rare-candy"))}${stat(LS("Saison ","Season ")+season(c),LS("CYCLE ","CYCLE ")+(c%4+1)+" / 4",item("relic-crown"))}</div>
+ <div class="gdx-cols"><div class="gdx-col">${quota}${give}${goBoss}</div><div class="gdx-col">${blds}${votes}</div><div class="gdx-col">${contrib}</div></div></div>
+ ${gvFlameBox(M)}<section class="glx-box gv-sec"><div class="gv-h"><h3>${LS("Défis de guilde","Guild challenges")}</h3><button class="gqh-link" data-gl="tab:chal">${LS("Tout voir →","View all →")}</button></div>${ch.map(gqhChallenge).join("")}<p class="gqh-hint">${LS("Une participation personnelle est nécessaire pour récupérer une récompense.","Personal participation is required to claim a reward.")}</p></section>
+ <section class="glx-box gv-sec"><div class="gv-h"><h3>${LS("La vie du clan","Guild life")}</h3></div><div class="glx-feed">${feed.map(e=>`<div class="glx-fe"><span>${glIc(e.i)}</span><p>${e.x}</p><small>${glAgo(e.t)}</small></div>`).join("")||`<p class="gqh-empty">${LS("Le journal se remplira avec l'activité de la guilde.","The feed fills with guild activity.")}</p>`}</div></section>`}
+
+/* ----- Laboratoire et saison ----- */
+const RES={a:["Assaut","Assault","x-attack","+50 % de dégâts sur le boss.","+50% damage on the boss.","Fiable, aucune organisation","Reliable, no planning"],e:["Endurance","Endurance","pp-max","2 attaques de plus par membre.","2 extra attacks per member.","6 attaques au lieu de 4","6 attacks instead of 4"],m:["Mobilisation","Mobilization","exp-share","De ×1 à ×2 au fil des attaques de la guilde.","From ×1 to ×2 over the guild's attacks.","Les plus forts frappent en dernier","Strongest members attack last"]};
+let RKT="total";
+function trophies(rw){return `<div class="gdx-rws">${[[LS("1re guilde","1st guild"),"relic-crown"],[LS("2e guilde","2nd guild"),"comet-shard"],[LS("3e guilde","3rd guild"),"star-piece"],[LS("Participants","Participants"),"bottle-cap"]].map(([n,k],i)=>`<div class="gdx-rw">${item(k,"gx-bob")}<b>${n}</b><div class="qrw">${rw[i].map(glRw).join("")}</div></div>`).join("")}</div>`}
+function vLab(S){const M=S.mine,c=cyc(),s=season(c),B=isBoss(),Rs=research(S),e=find(c,M.gd.id),my=e&&e.r||"",tv=Math.max(1,Rs.votes.a+Rs.votes.e+Rs.votes.m),R=ranked(S,"l",QL),me=R.find(r=>r.m.id===S.me)||{v:0,p:0,rank:R.length},raw=R.reduce((a,r)=>a+r.p*r.w,0),m=mini(S);
+ const votes=card(`${head(LS("Vote de recherche","Research vote"),B?LS("Vote fermé pendant le combat mondial.","Voting is closed during the world battle."):LS("Un vote par membre, modifiable jusqu'au combat.","One vote per member, can be changed until the battle."))}<div class="gdx-res">${["a","e","m"].map(k=>{const r=RES[k];return `<button type="button" class="gdx-r ${my===k?"gx-mine":""} ${Rs.lead===k?"gx-lead":""}" data-gdx="vote:${k}" ${B?"disabled":""}>${item(r[2],"gx-bob")}<div><b>${LS(r[0],r[1])}<em>${Rs.votes[k]} ${LS("vote(s)","vote(s)")}</em></b><p>${LS(r[3],r[4])}</p><small>${LS(r[5],r[6])}${my===k?" · "+LS("mon vote","my vote"):""}</small>${bar(Rs.votes[k]/tv*100)}</div></button>`}).join("")}</div>`);
+ const L=RES[Rs.lead],obj=card(`${head(LS("Objectif collectif","Group objective"),LS("Projet en tête : ","Leading project: ")+"<b>"+LS(L[0],L[1])+"</b>",`<b class="gdx-big">${Math.floor(Math.min(100,Rs.caps/Rs.goal*100))} %</b>`)}${bar(Rs.caps/Rs.goal*100,"gx-big "+(Rs.done?"gx-ok":""),int(Rs.caps)+" / "+int(Rs.goal)+" "+LS("captures","catches"))}<p class="gdx-note">${Rs.done?(B?LS("Projet terminé : le bonus "+L[0]+" est actif contre le boss.","Project completed: the "+L[1]+" bonus is active against the boss."):LS("Projet terminé : le bonus sera actif contre le boss.","Project completed: the bonus will be active against the boss.")):B?LS("Projet non terminé : aucun bonus pour ce combat.","Project not completed: no bonus this battle."):LS("Encore "+int(Rs.goal-Rs.caps)+" captures avant vendredi, sinon aucun bonus.",int(Rs.goal-Rs.caps)+" more catches before Friday, otherwise no bonus.")}</p>`,Rs.done?"gx-good":"");
+ const quota=card(`${head(LS("Mon quota","My quota"),"",`<b class="gdx-big">${n1(me.p)} pts</b>`)}<div class="gdx-qline"><span>${int(me.v)} / ${QL} ${LS("captures","catches")}</span><span>${LS("Rang","Rank")} ${me.rank}</span></div>${bar(me.v/QL*100,"gx-big "+(me.v>=QL?"gx-ok":""))}<p class="gdx-note">${B?LS("Le laboratoire rouvre lundi.","The lab reopens on Monday."):m.done?LS("Mini-boss vaincu : chaque capture compte double aujourd'hui.","Mini-boss defeated: every catch counts double today."):LS("Tes captures comptent toutes seules. Bats le mini-boss pour les doubler.","Your catches count automatically. Beat the mini-boss to double them.")}</p>`,"gx-gold");
+ const list=card(`${head(LS("Captures des membres","Member catches"),LS("12 meilleurs à 100 %, 8 suivants à 30 %","Top 12 at 100%, next 8 at 30%"),`<b class="gdx-big">${int(raw)} pts</b>`)}${memberList(S,R,QL,int)}`);
+ const st=standings(s),key=RKT,sorted=st.slice().sort((a,b)=>b[key]-a[key]||a.g.localeCompare(b.g)),top=Math.max(1,...sorted.map(v=>v[key])),mi=sorted.findIndex(v=>v.g===M.gd.id),shown=sorted.slice(0,10);if(mi>=10)shown.push(sorted[mi]);
+ const rank=card(`${head(LS("Classement de la saison "+s,"Season "+s+" ranking"),LS("Cycle "+(c%4+1)+" sur 4 · général = saison cumulée · autres onglets = cycle en cours · fin dans ","Cycle "+(c%4+1)+" of 4 · overall = season total · other tabs = current cycle · ends in ")+wait(sEnd(s)-now()))}<div class="gdx-tabs">${[["total",LS("Général","Overall")],["t",LS("Trésor","Treasury")],["l",LS("Laboratoire","Lab")],["b","Boss"]].map(([k,n])=>`<button type="button" class="${key===k?"gx-on":""}" data-gdx="rk:${k}" aria-pressed="${key===k}">${n}</button>`).join("")}</div><div class="gdx-list">${shown.map(v=>{const pos_=sorted.indexOf(v)+1;return `<div class="gdx-row gx-g ${v.g===M.gd.id?"gx-me":""}"><span class="gdx-rk">${pos_}</span>${guildEm(v.g,38)}<div class="gdx-rmid"><b>${esc(guildName(v.g))}</b>${bar(v[key]/top*100)}<small>${LS("Ce cycle · Trésor ","This cycle · Treasury ")}${int(v.t)} · ${LS("Labo ","Lab ")}${int(v.l)} · Boss ${int(v.b)}</small></div><span class="gdx-rv"><b>${int(v[key])}</b><small>pts</small></span></div>`}).join("")||`<p class="gdx-note">${LS("Le classement se remplit avec les dons, les captures et le combat.","The ranking fills with donations, catches and the battle.")}</p>`}</div><p class="gdx-note">${LS("Boss : note à la racine du ratio de dégâts, pour que les petites guildes restent dans la course.","Boss: scored on the square root of the damage ratio, so smaller guilds stay in the race.")}</p>`);
+ const tro=X().tro,rw=card(`${head(LS("Trophées de fin de saison","End of season trophies"),LS("Classement remis à zéro chaque saison · tes trophées sont gardés","Ranking resets every season · your trophies are kept"))}${trophies(RW_SEASON)}${tro.length?`<h4 class="gdx-sub">${LS("Mes trophées","My trophies")}</h4><div class="gdx-tro">${tro.slice().reverse().map(v=>`<span>${item(["relic-crown","comet-shard","star-piece","bottle-cap"][tier(v.r)])}<b>${LS("Saison ","Season ")+v.s}</b><small>${rankTxt(v.r)} · ${esc(v.n)}</small></span>`).join("")}</div>`:""}`);
+ return `<div class="gdx"><div class="gdx-title">${poke(137,"gx-bob gx-lg")}<div><small>${LS("QUARTIER GÉNÉRAL · LABORATOIRE","HEADQUARTERS · LAB")}</small><h2>${LS("Recherche de la guilde","Guild research")}</h2><p>${LS("Votez un projet, remplissez-le avec vos captures, visez la saison.","Vote for a project, fill it with your catches, aim for the season.")}</p></div><div class="gdx-count"><b>${B?LS("Combat","Battle"):wait(bStart(c)-now())}</b><small>${B?LS("MONDIAL EN COURS","IS LIVE"):LS("AVANT LE COMBAT MONDIAL","UNTIL THE WORLD BATTLE")}</small></div></div>
+ <div class="gdx-cols"><div class="gdx-col">${votes}${obj}${quota}</div><div class="gdx-col">${list}</div><div class="gdx-col">${rank}${rw}</div></div></div>`}
+
+/* ----- Boss mondial ----- */
+function vBoss(S){const M=S.mine,c=cyc(),B=isBoss(),I_=atkInfo(S),R=result(c),sp0=worldSp(c),m=mini(S),hp=B?(R.hp||hpEst()):0,remain=Math.max(0,hp-R.tot),dead=B&&R.dead,g=glS(),x=X();
+ const miniC=card(`${head(LS("Mini-boss du jour","Daily mini-boss"),LS("Revient chaque jour du lundi au jeudi","Back every day from Monday to Thursday"))}<div class="gdx-teaser">${poke(m.sp,(m.done||!m.open)?"gx-lg gx-off":"gx-hop gx-lg")}<div><h3>${esc(nm(m.sp))}</h3>${m.open?bar(Math.max(0,100-m.hits/m.need*100),"gx-hp gx-big",m.done?LS("Vaincu","Defeated"):(m.need-m.hits)+" "+LS("coup(s) restant(s)","hit(s) left")):""}<p>${!m.open?LS("Il revient lundi.","Back on Monday."):m.done?LS("Bonus actif : une capture compte double pour le projet.","Bonus active: each catch counts double for the project."):LS("Un coup par membre et par jour. Vaincu : les captures comptent double jusqu'à minuit (UTC).","One hit per member per day. Once defeated, catches count double until midnight (UTC).")}</p></div></div><button type="button" class="gdx-btn gx-wide" data-gdx="mini" ${m.open&&!m.mine?"":"disabled"}>${m.mine&&m.open?LS("Tu as frappé aujourd'hui","You hit today"):LS("Frapper ","Hit ")+esc(nm(m.sp))}</button>`);
+ const T=tkView(M),old=g.jd>0&&now()-g.jd>=TKWAIT,part=partSeason(T.s,M.gd.id),mine=x.tk.length;
+ const tick=card(`${head(LS("Projet majeur : Ticket de guilde","Major project: Guild ticket"),LS("Un Pokémon exclusif lié à la guilde (dévoilé bientôt)","An exclusive guild Pokémon (revealed soon)"))}<div class="gdx-tk">${item("eon-ticket","gx-hop")}<div>${bar(T.pct,"gx-big "+(T.done?"gx-ok":""),T.done?LS("Terminé","Completed"):Math.floor(T.pct)+" % "+LS("financé","funded"))}<small>${fmt(T.p)} / ${fmt(T.need)} ₽ · ${LS("plusieurs semaines de dons","several weeks of donations")}</small></div></div><ul class="gdx-check"><li class="${old?"gx-y":""}">${ico(old?"check":"clock")} ${LS("Dans la guilde depuis 14 jours","In the guild for 14 days")} : ${old?LS("oui","yes"):LS("pas encore","not yet")}</li><li class="${part?"gx-y":""}">${ico(part?"check":"clock")} ${LS("A participé cette saison","Took part this season")} : ${part?LS("oui","yes"):LS("pas encore","not yet")}</li></ul>${S.isLead?`<div class="gdx-btns"><button type="button" class="gdx-btn" data-gdx="fund:0.1" ${T.done||!(gvVault(M)>=1)?"disabled":""}>${LS("Verser 10 % du trésor","Add 10% of treasury")}</button><button type="button" class="gdx-btn gx-alt" data-gdx="fundask" ${T.done||!(gvVault(M)>=1)?"disabled":""}>${LS("Verser tout","Add all")}</button></div>`:`<p class="gdx-note">${LS("Le chef verse le trésor dans le projet.","The leader spends the treasury on the project.")}</p>`}<p class="gdx-note">${LS("Non échangeable · une fois par saison","Not tradable · once per season")}${mine?` · <b>${LS("Mes tickets","My tickets")} : ${mine}</b>`:""}</p>`);
+ const bonus=I_.R.act?LS(RES[I_.R.act][0],RES[I_.R.act][1]):"";
+ const arena=card(`<small class="gdx-over">${LS("BOSS MONDIAL · TOUTES LES GUILDES","WORLD BOSS · ALL GUILDS")}</small><h2>${esc(nm(sp0))}</h2><div class="gdx-sky ${dead?"gx-dead":""}">${poke(sp0,"gx-float")}</div>${B?bar(hp?remain/hp*100:100,"gx-hp gx-big",dead?LS("Vaincu · les attaques restent ouvertes","Defeated · attacks stay open"):fmt(remain)+" / "+fmt(hp)):""}<div class="gdx-qline"><span>${B?LS("Temps restant : ","Time left: ")+wait(cEnd(c)-now()):LS("Le combat commence dans ","Battle starts in ")+wait(bStart(c)-now())}</span><span>${bonus?LS("Recherche : ","Research: ")+bonus+(I_.R.act==="m"?" · "+LS("attaque n° ","attack #")+I_.n:""):B?LS("Aucune recherche terminée","No research completed"):""}</span></div>${B?`<div class="gdx-atkinfo"><div><small>${LS("MULTIPLICATEUR","MULTIPLIER")}</small><b>×${n1(Math.round(I_.mult*100)/100)}</b></div><div><small>${LS("UN ESSAI (SANS TOUCHER)","ONE ATTEMPT (NO TAPS)")}</small><b>≈ ${fmt(glPw()*20*I_.mult)}</b></div><div><small>${LS("ESSAIS","ATTEMPTS")}</small><b class="gdx-pips">${Array.from({length:I_.max},(_,i)=>`<i class="${i<I_.left?"gx-on":""}"></i>`).join("")}</b></div></div>`:""}<button type="button" class="gdx-btn gx-wide gx-huge" data-gdx="atk" ${B&&I_.left>0&&ids().length?"":"disabled"}>${!B?LS("Combat vendredi","Battle on Friday"):I_.left>0?LS("Attaquer ("+SEC+" s)","Attack ("+SEC+" s)"):LS("Plus d'essai pour ce combat","No attempts left")}</button>${I_.fb?`<p class="gdx-note gx-good">${LS("Coup final au dernier combat : +10 % de dégâts cette fois.","Final blow last battle: +10% damage this time.")}</p>`:""}`,"gx-arena");
+ const maxb=Math.max(1,...R.list.map(v=>v.b)),mr=R.list.findIndex(v=>v.g===M.gd.id),shown=R.list.slice(0,10);if(mr>=10)shown.push(R.list[mr]);
+ const myd=M.v.map(mm=>{const e=rowOf(mm,c,M.gd.id);return{m:mm,d:atks(e).reduce((s,a)=>s+a[1],0)}}).filter(v=>v.d>0).sort((a,b)=>b.d-a.d),mx=Math.max(1,...myd.map(v=>v.d));
+ let last="";if(c>0){const P=result(c-1);if(P.list.length){const r=P.list.findIndex(v=>v.g===M.gd.id)+1;last=`<p class="gdx-note">${LS("Dernier combat","Last battle")} (${esc(nm(worldSp(c-1)))}) : ${P.dead?LS("boss vaincu","boss defeated"):LS("boss non vaincu","boss survived")}${r?" · "+rankTxt(r):""}${P.fin?" · "+LS("coup final : ","final blow: ")+esc(guildName(P.fin)):""}</p>`}}
+ const dmg=card(`${head(LS("Dégâts par guilde","Damage by guild"),LS("Le plus de dégâts gagne. Coup final : +10 % au prochain boss, non cumulable.","Most damage wins. Final blow: +10% on the next boss, does not stack."))}<div class="gdx-list">${shown.map(v=>{const p=R.list.indexOf(v)+1;return `<div class="gdx-row gx-g ${v.g===M.gd.id?"gx-me":""}"><span class="gdx-rk">${p}</span>${guildEm(v.g,38)}<div class="gdx-rmid"><b>${esc(guildName(v.g))}${R.fin===v.g?`<em>${LS("COUP FINAL","FINAL BLOW")}</em>`:""}</b>${bar(v.b/maxb*100)}</div><span class="gdx-rv"><b>${fmt(v.b)}</b></span></div>`}).join("")||`<p class="gdx-note">${B?LS("Aucune attaque pour l'instant. Ouvre le combat !","No attack yet. Open the battle!"):LS("Les dégâts s'afficheront pendant le combat.","Damage will show during the battle.")}</p>`}</div>${myd.length?`<h4 class="gdx-sub">${LS("Ma guilde","My guild")}</h4><div class="gdx-list">${myd.map((v,i)=>[v,i+1]).filter(([v,p])=>p<=10||v.m.id===S.me).map(([v,p])=>`<div class="gdx-row ${v.m.id===S.me?"gx-me":""}"><span class="gdx-rk">${p}</span>${glAvT(v.m)}<div class="gdx-rmid"><b>${esc(v.m.n)}</b>${bar(v.d/mx*100)}</div><span class="gdx-rv"><b>${fmt(v.d)}</b></span></div>`).join("")}</div>`:""}${last}`);
+ const table=(t,sub,rw,on)=>card(`${head(t,sub)}${trophies(rw)}`,on?"gx-gold":"");
+ return `<div class="gdx"><div class="gdx-title">${poke(sp0,"gx-bob gx-lg")}<div><small>${LS("QUARTIER GÉNÉRAL · COMBAT MONDIAL","HEADQUARTERS · WORLD BATTLE")}</small><h2>${LS("Le boss de toutes les guildes","The boss of all guilds")}</h2><p>${LS("Mini-boss chaque jour, recherche au Laboratoire, puis combat mondial de 72 h.","Daily mini-boss, Lab research, then a 72 h world battle.")}</p></div><div class="gdx-count"><b>${wait((B?cEnd(c):bStart(c))-now())}</b><small>${B?LS("AVANT LA FIN DU COMBAT","UNTIL THE BATTLE ENDS"):LS("AVANT LE COMBAT","UNTIL THE BATTLE")}</small></div></div>
+ <div class="gdx-cols gx-boss"><div class="gdx-col">${miniC}${tick}</div><div class="gdx-col gx-mid">${arena}</div><div class="gdx-col">${dmg}</div></div>
+ <div class="gdx-two">${table(LS("Boss vaincu","Boss defeated"),LS("Récompenses de victoire (envoyées au courrier à la fin) · "+RELIC.win+" points de relique","Victory rewards (mailed when it ends) · "+RELIC.win+" relic points"),RW_WIN,B&&dead)}${table(LS("Boss encore vivant après 72\u00a0h","Boss alive after 72\u00a0h"),LS("Récompenses de consolation · "+RELIC.lose+" points de relique","Consolation rewards · "+RELIC.lose+" relic points"),RW_LOSE,B&&!dead)}</div></div>`}
+
+/* ---------- branchement dans la page Guilde ---------- */
+GLTAB.splice(0,GLTAB.length,["home","coin","Quartier général"],["lab","spark","Laboratoire"],["boss","crown","Boss mondial"],["chal","target","Défis"],["help","gift","Entraide"],["mem","team","Membres"],["chat","chat","Chat"]);
+const TABEN={home:"Headquarters",lab:"Lab",boss:"World boss",chal:"Challenges",help:"Help",mem:"Members",chat:"Chat"};
+glTabs=function(){const has=k=>{try{return k=="chal"?glChDot():k=="boss"?dot():k=="lab"?labDot():false}catch(e){return false}};return `<div class="glx-tabs">${GLTAB.map(([k,i,n])=>`<button class="${GLX.v==k?"glon":""}" data-gl="tab:${k}">${glIc(i)}<span>${LS(n,TABEN[k])}</span>${has(k)?"<em></em>":""}</button>`).join("")}</div>`};
+{const body=glBody;glBody=function(S){if(!S||!S.inG||!S.mine)return body.apply(this,arguments);const v=GLX.v;bust();S=glState();if(!S.inG||!S.mine)return body.call(this,S);let page;
+ try{page=v==="lab"?vLab(S):v==="boss"?vBoss(S):v==="chal"?glChalV(S):v==="help"?glHelpV(S):v==="mem"?glMemV(S):v==="chat"?glChatV(S):vHome(S)}catch(e){console.error("guilde",e);page=`<section class="glx-box"><p>${LS("Cette page n'a pas pu s'afficher. Réessaie dans un instant.","This page could not be displayed. Try again in a moment.")}</p></section>`}
+ return glTabs()+glHeader(S.mine)+page}}
+{const o=glFeed;glFeed=function(M){const E=o.apply(this,arguments).slice();try{const t=now(),c=cyc(),gid=M.gd.id;M.v.forEach(m=>{const e=rowOf(m,c,gid),a=atks(e);if(a.length){const last=a[a.length-1][0]*1000;if(t-last<864e5)E.push({t:last,i:"crown",x:LS("<b>"+esc(m.n)+"</b> a attaqué le boss mondial","<b>"+esc(m.n)+"</b> attacked the world boss")})}});
+ ((M.lead&&M.lead.mod&&M.lead.mod.ev)||[]).forEach(e=>{if(e&&e.tk&&t-e.t<6048e5)E.push({t:e.t,i:"gift",x:LS("Le <b>projet majeur</b> de la guilde est terminé !","The guild's <b>major project</b> is complete!")})})}catch(x){}E.sort((a,b)=>b.t-a.t);return E.slice(0,14)}}
+addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gdx]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();const [k,a]=b.dataset.gdx.split(":");
+ if(k==="don")donate(+a);else if(k==="vote")vote(a);else if(k==="mini")hitMini();else if(k==="atk")attack();else if(k==="fund")fund(+a);else if(k==="fundask")fundAsk();else if(k==="fundok"){glClose();fund(1)}else if(k==="rk"){RKT=a;glRefresh(1)}else if(k==="close")closeAtk();else if(k==="again"){closeAtk();attack()}},true);
+
+/* ---------- boucles ---------- */
+let MALON=malus()>0;
+setInterval(()=>{try{const on=malus()>0;if(on!==MALON){MALON=on;recomp();glRefresh(1)}}catch(e){}},3000);
+setInterval(()=>{try{sample()}catch(e){}},60000);
+const tick_=()=>{try{migrate()}catch(e){console.warn("guilde migration",e)}try{tkGrant()}catch(e){console.warn("guilde ticket",e)}try{settle()}catch(e){console.warn("guilde récompenses",e)}};
+setInterval(tick_,30000);setTimeout(tick_,12000);
+setTimeout(()=>{try{sample();trackLab();recomp();glRefresh(1)}catch(e){}},2000);
+
+window.GDX={dot,cyc,isBoss,season,pts,wsum,result,standings,agg,research,atkInfo,mini,donate,vote,hitMini,attack,fund,settle,migrate,tkGrant,prod,costH,share,malus,hpEst,X,bust,worldSp,trackLab,cStart,bStart,cEnd,sEnd,tkView};
+})()}catch(e){console.error("refonte guildes",e)}
+</script></body></html>
