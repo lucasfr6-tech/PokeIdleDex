@@ -4421,7 +4421,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   document.body.appendChild(d);var bx=document.getElementById("pidbootx");if(bx)bx.onclick=function(){d.remove()};document.getElementById("pidbootr").onclick=function(){try{var u=new URL(location.href);u.searchParams.set("_v",String(Date.now()));location.replace(u.href)}catch(e){location.reload()}};report()}
  window.addEventListener("load",function(){setTimeout(show,15000)});setTimeout(show,30000);
 }catch(e){}})();</script>
-<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v460-20261125a"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
+<script>(function(){var ok=!!(window.Promise&&window.fetch&&Object.assign&&window.CSS&&CSS.supports&&CSS.supports("display","grid")&&CSS.supports("--a","0"));if(!ok){window.PID_OLD=1;document.addEventListener("DOMContentLoaded",function(){var d=document.createElement("div");d.id="pidb";d.innerHTML="<div><h2>Navigateur trop ancien</h2><p>PokeIdleDex a besoin d'un navigateur récent (Chrome, Edge, Firefox ou Safari à jour).</p></div>";document.body.appendChild(d)})}})()</script><script>window.PID_BUILD="pid-v460-20261125b"</script><script>window.PID_API="https://api.pokeidledex.com";/* adresse du serveur en ligne */
 </script><script>/* Le jeu continue à pleine vitesse quand l'onglet est en arrière-plan : les minuteurs du navigateur y sont ralentis (jusqu'à 1 fois par minute),
  on les fait donc aussi battre par un Worker (non ralenti). Chaque minuteur garde un garde-fou pour ne jamais tourner deux fois d'affilée trop vite. */
 (function(){try{if(window.PID_BGT||typeof Worker!="function"||typeof Blob!="function"||!window.URL||!URL.createObjectURL)return;window.PID_BGT=1;
@@ -4435,7 +4435,7 @@ setTimeout(window.pidSpHide,10000)})()</script>
   var h=nsi(r.run,ms);R.set(h,r);return h};
  window.clearInterval=function(h){R.delete(h);return nci(h)};
  document.addEventListener("visibilitychange",sync);window.addEventListener("pagehide",function(){});sync()}catch(e){}})();
-</script><script src="shim.js?v=pid-v460-20261125a"></script><script>
+</script><script src="shim.js?v=pid-v460-20261125b"></script><script>
 /* ============ ICÔNES (SVG dessinées, aucun emoji) ============ */
 const IP={
 sword:'<path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/>',
@@ -10178,7 +10178,7 @@ BOOST.forEach(b=>{b.p*=70});
 /* ===== v104 : ascensions (étoiles automatiques selon les exemplaires obtenus, 5 étoiles max) ===== */
 var STOT=0;
 const STT=[15,40,100,250,600],STR=[1,.85,.7,.55],STMX=5;
-const EX_STAR_HW={"41":1,"42":2,"169":2,"172":1,"200":1,"292":1,"300":1,"301":1,"302":2,"353":1,"354":3,"355":1,"356":3,"425":1,"426":2,"429":2,"442":2,"477":3,"478":2,"479":1,"487":4,"491":4,"562":1,"563":2,"595":1,"596":2,"607":1,"608":2,"609":3,"622":1},EX_STAR_SPECIAL={90017:3,90011:1,90012:2,90013:3,90014:3,90015:4};
+const EX_STAR_HW={"41":1,"42":2,"169":2,"172":1,"200":1,"292":1,"300":1,"301":1,"302":2,"353":1,"354":3,"355":1,"356":3,"425":1,"426":2,"429":2,"442":2,"477":3,"478":2,"479":1,"487":4,"491":4,"562":1,"563":2,"595":1,"596":2,"607":1,"608":2,"609":3,"622":1},EX_STAR_SPECIAL={90017:3,90011:1,90012:2,90013:3,90014:3,90015:4,90032:3,90033:3};/* Lunala et Scarhino (4.5.0) : connus dès le démarrage, sinon leurs copies étaient ramenées à 1500 au chargement */
 function exclusiveStarTier(id){id=+id;if(id>=90000)return EX_STAR_SPECIAL[id]||1;return G.col[id]?.hf?(EX_STAR_HW[id]||1):0}
 function starFloorFarmable(id){id=+id;const species=({90001:448,90002:94,90003:149,90004:25,90005:208,90006:282,90007:249,90008:150,90009:500,90011:359,90012:386,90013:6,90014:130,90015:643,90017:608,90030:375})[id]||id;z22init();return pwWildFam(species)}
 function copyLimit(id){const tier=exclusiveStarTier(id);return tier?Math.max(1500*[0,1,1.5,2,3][tier],starT(id).at(-1)):NMX}
@@ -15951,7 +15951,7 @@ function vDxRew(){dxfSync();const en=SG.lang=="en",B=dexRewB();
 {const st=document.createElement("style");st.id="pid-dxr-css";st.textContent=`.dxrh{margin:18px 0 8px;font-size:15px}.dxrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.dxrtot{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.dxr{display:flex;gap:12px;align-items:center;border-radius:16px;border:2px solid #2a3352;background:#10162a;padding:10px}.dxr.on{border-color:var(--c);box-shadow:0 0 16px color-mix(in srgb,var(--c) 35%,transparent)}.dxrs{width:84px;height:84px;display:grid;place-items:end center;flex:none;overflow:visible}.dxrs img{max-width:80px;max-height:80px;image-rendering:pixelated}.dxrb{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}.dxrb b{font-size:15px;color:#fff}.dxrb small{color:#9aa6cf;font-size:11.5px}.dxrt{display:flex;justify-content:space-between;font-size:11px;color:#cbd5f5}.dxrc{display:flex;flex-wrap:wrap;gap:3px}.dxrc i{font-style:normal;font-size:9px;padding:1px 5px;border-radius:99px;background:#0b1236;border:1px solid #ffffff22;color:#7480a8}.dxrc i.on{background:var(--c);color:#101428;border-color:var(--c);font-weight:800}`;document.head.appendChild(st)}
 /*UPD_BEGIN*/
 const UPD=[
- {d:"2026-11-25",t:["Version 4.6.0 : la grande refonte des guildes","Version 4.6.0: the big guild rework"],e:[
+ {d:"2026-11-25",t:["Version 4.6.0 : la grande refonte des guildes","Version 4.6.0: the big guild rework"],e:[["fix","Copies de Scarhino et Lunala","Au rechargement, les copies de Scarhino Émeraude et de Lunala Aurore Boréale étaient ramenées à 1500. Elles sont maintenant gardées (jusqu’à 3000).","Heracross and Lunala copies","On reload, Emerald Heracross and Aurora Lunala copies were cut back to 1500. They are now kept (up to 3000)."],["imp","Méga-Perle de Scarhino","La Méga-Perle de Scarhino normale ne se vend plus et ne s’équipe plus sur Scarhino Émeraude : seule la Méga-Perle Émeraude (Prestige) le fait méga-évoluer.","Heracross Mega Pearl","The regular Heracross Mega Pearl is no longer sold and can’t be held by Emerald Heracross: only the Emerald Mega Pearl (Prestige) mega-evolves it."],["imp","Étoiles de Mimiqui Arlequin","Comme les autres exclusifs, Mimiqui Arlequin demande maintenant 1500 copies pour ses 5 étoiles (50, 150, 350, 750, 1500). Les étoiles déjà gagnées sont gardées.","Harlequin Mimikyu stars","Like other exclusives, Harlequin Mimikyu now needs 1500 copies for its 5 stars (50, 150, 350, 750, 1500). Stars already earned are kept."],["imp","Classement des guildes","Les guildes sont rangées par points de la saison (Trésor, Laboratoire et Boss), et plus par niveau.","Guild ranking","Guilds are ranked by season points (Treasury, Lab and Boss), no longer by level."],["fix","Classements Pièces et Meilleur Pokémon","Ils affichent « Chargement… » au lieu de te montrer seul, et réessaient tout seuls si la liste n’arrive pas.","Coins and Best Pokémon rankings","They show « Loading… » instead of showing you alone, and retry on their own if the list doesn’t arrive."],["fix","Étages bloqués","Si un combat reste figé (PV de l’ennemi qui ne bougent plus), il est relancé tout seul au bout d’une minute.","Stuck floors","If a fight freezes (enemy HP not moving), it restarts on its own after a minute."],
   ["new","La semaine de guilde","Du lundi au jeudi : dons, laboratoire et mini-boss. Du vendredi au dimanche : le boss mondial. Les jours suivent l'heure UTC (le vendredi commence à 1 h à Paris en hiver).","The guild week","Monday to Thursday: donations, lab and mini-boss. Friday to Sunday: the world boss. Days follow UTC time."],
   ["new","Trésor et quota","Donne au trésor des heures de ta production : 4 h par jour au maximum. Avec 12 h dans la semaine, tu as 100 points. Après un don, tu gagnes un peu moins de pièces pendant 2 h : −5 % par heure donnée dans la journée, 20 % au maximum.","Treasury and quota","Donate hours of your production to the treasury: 4 h a day at most. 12 h in a week gives you 100 points. After a donation you earn a bit less for 2 h: −5% coins per hour given that day, 20% at most."],
   ["new","Les 12 + 8","Dans chaque activité, les 12 meilleurs membres comptent à 100 % et les 8 suivants à 30 %. Dépasser son quota rapporte encore, mais beaucoup moins.","12 + 8","In each activity, the top 12 members count 100% and the next 8 count 30%. Going past your quota still helps, but much less."],
@@ -20089,6 +20089,8 @@ window.twConv=twConv;
   if(G.ko!==ko0){ko0=G.ko;t0=now;return}
   const other=(typeof PB!="undefined"&&PB&&!PB.over)||document.hidden||(typeof hwOn=="function"&&hwOn());
   if(!other&&now-t0>90000&&!E){fix("restart");busy=false;CAPU=0;t0=now;try{spawn()}catch(e){}}
+  /* ennemi présent mais ses PV ne bougent plus depuis 60 s (combat figé) : on le remplace */
+  if(E&&!other){const hp=+E.hp;if(window.__wdE!==E||window.__wdH!==hp){window.__wdE=E;window.__wdH=hp;window.__wdT=now}else if(now-(window.__wdT||now)>60000&&now-t0>90000){fix("frozen "+(G.fl|0));E=null;busy=false;CAPU=0;t0=now;window.__wdT=now;try{spawn()}catch(e){}}}
  }catch(e){}},5000)}
 
 
@@ -20466,6 +20468,30 @@ try{const HS="de810578a2089a16811e8413ec75ecacf8f5c48083d273bfa803fbe03298238c",
    setTimeout(()=>{try{alertFx(LS("SCARHINO ÉMERAUDE !","EMERALD HERACROSS!"),"#a3e635","shiny")}catch(e){}},200);
    return LS("Code accepté : Scarhino Émeraude"+(had?" (une copie de plus pour ses étoiles)":"")+" rejoint ta collection !","Code accepted: Emerald Heracross"+(had?" (one more copy for its stars)":"")+" joins your collection!")}
   return prev?prev(code):null}}catch(e){}
+
+/* la Méga-Perle de Scarhino normale ne se vend plus : seule la Méga-Perle Émeraude (Prestige) fait méga-évoluer Scarhino Émeraude */
+try{PRIV_MP.add(10047);if(IT["mp10047"])IT["mp10047"].noShop=1;
+ const o=hcItems;hcItems=function(id){const L=o.apply(this,arguments);return +id===SC_ID&&Array.isArray(L)?L.filter(k=>k!=="mp10047"):L}}catch(e){}
+
+/* Mimiqui Arlequin (exclusif) : ses 5 étoiles demandent 1 500 copies (50 / 150 / 350 / 750 / 1 500), comme les autres exclusifs ; les étoiles déjà gagnées sont gardées */
+try{const o=starT;starT=function(id){return +id===90031?[50,150,350,750,1500]:o.apply(this,arguments)};
+ pidLate(()=>{try{const c=G.col[90031];if(c&&!c.mqks){c.mqks=1;c.ks=Math.max(c.ks|0,c.st|0);save()}}catch(e){}})}catch(e){}
+
+/* classements Pièces et Meilleur Pokémon : liste plus légère (200), nouvel essai rapide si elle n'arrive pas, et « Chargement… » au lieu de te montrer seul */
+try{const mk=(S,ord,ok,paint)=>async function(force){if(S.busy||(!force&&S.got&&Date.now()-S.t<20000))return;if(!LB||!LB.ok||!LB.db)return;S.busy=1;let good=0;
+  for(const lim of [200,100]){try{const q=await LB.db.collection("lb").orderBy(ord,"desc").limit(lim).get();const R=q.docs.map(d=>Object.assign({id:d.id},d.data())).filter(ok);S.rows=R;S.got=1;S.ok=1;good=1;break}catch(e){}}
+  S.t=Date.now();S.busy=0;if(!good)setTimeout(()=>{try{S.t=0;paint(1)}catch(e){}},4000);try{paint(0)}catch(e){}};
+ rkbFetch=mk(RKB,"bpv",x=>x&&x.n&&typeof x.bpv=="number"&&Array.isArray(x.bp),r=>{if(r)return rkbFetch(1);if(tab=="rks"&&RKX.v=="bp"&&!document.hidden){const el=$("rkbl");if(el){const h=rkbList();if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}}});
+ rkmFetch=mk(RKM,"m",x=>x&&x.n&&typeof x.m=="number",r=>{if(r)return rkmFetch(1);if(tab=="rks"&&RKX.v=="m"&&!document.hidden){const el=$("rkml");if(el)el.innerHTML=rkmList()}});
+ const wait=()=>`<div class="box" style="text-align:center;padding:30px;font-weight:800">${LS("Chargement du classement…","Loading the ranking…")}</div>`;
+ const b0=rkbList;rkbList=function(){return LB&&LB.ok&&!RKB.got?wait():b0.apply(this,arguments)};
+ const m0=rkmList;rkmList=function(){return LB&&LB.ok&&!RKM.got?wait():m0.apply(this,arguments)}}catch(e){console.warn("rk",e)}
+
+/* classement des guildes : rangé par points de la saison (Trésor + Laboratoire + Boss), plus par niveau ou membres */
+try{const gp=()=>{const m=new Map();try{const G2=window.GDX;if(G2){const L=G2.standings(G2.season(G2.cyc()));L.forEach(x=>m.set(x.g,x.total))}}catch(e){}return m};
+ const r0=phRows;phRows=function(k){const R=r0.apply(this,arguments);if(k!=='gld')return R;const m=gp();R.forEach(r=>r.gp=Math.round(m.get(r.id)||0));return R.sort((a,b)=>b.gp-a.gp||(b.lv||0)-(a.lv||0)||(b.xp||0)-(a.xp||0))};
+ const v0=phValue;phValue=function(r,k){return k==='gld'?fmt(r.gp||0):v0.apply(this,arguments)};
+ const u0=phUnit;phUnit=function(k){return k==='gld'?LS('points de saison','season points'):u0.apply(this,arguments)}}catch(e){console.warn("gld rk",e)}
 }catch(e){console.warn("v4.0.0",e)}})()</script><style id="gdx-css">
 /* ===== Guildes : refonte (maquette A) ===== */
 .gdx,.gdx-two{--gi:#f2f9ff;--gs:#b9d4e8;--gl:#4d86ad;--gin:#0f2438;--gdp:#081624;--gy:#ffd23f;--gg:#7ef0a8}
